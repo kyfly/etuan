@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', function()
+Route::controller('user','UserController');
+
+Route::group(array('before'=>'auth'),function()
 {
-    echo App::environment();
+	Route::controller('userinfo','UserInfoController');
 });

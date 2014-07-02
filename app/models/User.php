@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'organization_user';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -18,6 +18,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password');
+
+	/**
+	*The primary key in the database;
+	*/
+	protected $primaryKey = 'org_uid';
 
 	/**
 	 * Get the unique identifier for the user.
@@ -28,6 +33,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->getKey();
 	}
+
 
 	/**
 	 * Get the password for the user.
@@ -47,6 +53,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getReminderEmail()
 	{
 		return $this->email;
+	}
+
+	public function getRememberToken()
+	{
+    	return $this->remember_token;
+	}
+
+	public function setRememberToken($value)
+	{
+    	$this->remember_token = $value;
+	}
+
+	public function getRememberTokenName()
+	{
+    	return 'remember_token';
 	}
 
 }
