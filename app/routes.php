@@ -16,4 +16,8 @@ Route::controller('user','UserController');
 Route::group(array('before'=>'auth'),function()
 {
 	Route::controller('userinfo','UserInfoController');
+
+	Route::controller('activity','ActivityController');
 });
+
+Route::controller('test','TestController');

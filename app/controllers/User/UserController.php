@@ -5,10 +5,13 @@
 
 		private $password;
 
-		public function __construct()
+		private $userHandle;
+
+		public function __construct(UserHandle $userHandle)
 		{
 			$this->email = Input::get('email');
 			$this->password = Input::get('password');
+			$this->userHandle = $userHandle;
 		}
 
 		public function getRegister()
@@ -16,37 +19,43 @@
 			return View::make('register');
 		}
 
-		public function postRegister()
-		{
-			$user = new User;
-			$user->email = $this->email;
-			$user->password = Hash::make($this->password);
-			$user->save();
-			//返回首页
-		}
-
 		public function getLogin()
 		{
 			return View::make('login');
 		}
 
+		public function postRegister()
+		{
+			$condition = $this->userHandle->register($this->email,$this->password);
+			if($condition)
+			{
+				//注册成功了
+				echo '注册成功了';
+			}
+			else
+			{
+				//email已经存在,返回首页
+                echo '注册失败';
+			}
+		}
+
 		public function postLogin()
 		{
-			$userInfo = ['email'=>$this->email,'password'=>$this->password];
-			if(Auth::attempt($userInfo))
+			$condition = $this->userHandle->login($this->email,$this->password);
+			if($condition)
 			{
+				//登陆成功
 				return Redirect::intended();
 			}
 			else
 			{
-				//输出错误信息
-				return View::make('login');
+				echo '登陆失败';
+				//登陆失败,返回登陆页面并附带密码错误的信息
 			}
 		}
 
 		public function getLogout()
 		{
-			Auth::logout();
-			//返回首页
+			$this->userHandle->logout();
 		}
 	}

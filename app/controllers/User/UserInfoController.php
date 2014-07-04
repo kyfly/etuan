@@ -1,16 +1,16 @@
 <?php
 	class UserInfoController extends BaseController
 	{
-		private $user;
+		private $userHandle;
 
 		private $oldPassword;
 
 		private $newPassword;
 
-		public function __construct()
+		public function __construct(UserHandle $userHandle)
 		{
 			$this->beforeFilter('csrf',array('on'=>'post'));
-			$this->user = Auth::user();
+			$this->userHandle = $userHandle;
 			$this->oldPassword = Input::get('oldPassword');
 			$this->newPassword = Input::get('newPassword');
 		}
@@ -22,15 +22,16 @@
 
 		public function postChangepassword()
 		{
-			if(Hash::check($this->oldPassword,$this->user->password))
+			$condition = $this->userHandle->changePassword($this->oldPassword,$this->newPassword);
+			if($condition)
 			{
-				$this->user->password = Hash::make($this->newPassword);
-				$this->user->save();
-				//返回修改密码页面提示密码修改成功;
+				echo '修改密码成功';
+				//修改密码成功
 			}
 			else
 			{
-				//返回修改密码的页面并提示旧密码错误
+				echo '修改密码失败';
+				//修改密码失败
 			}
 		}
 	}
