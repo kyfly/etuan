@@ -5,7 +5,7 @@ class LotteryHandle extends  ActivityHandle
 
 	public function createActivity($arr)
 	{
-
+		
 	}
 
 	public function updateActivity($arr)
@@ -13,12 +13,17 @@ class LotteryHandle extends  ActivityHandle
 
 	}
 
-    public function getActivityInfo($activityType, $activityId)
+    public function getActivityInfo($activityId)
     {
 
     }
 
-    public function getActivityResult($activityType, $activityId)
+    public function getActivityResult($activityId)
+    {
+
+    }
+
+    public function participateInActivitie($arr)
     {
 
     }

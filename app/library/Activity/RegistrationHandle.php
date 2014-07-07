@@ -3,23 +3,24 @@
 class RegistrationHandle extends  ActivityHandle
 {
 
-	public function createActivity($arr)
+	public function createActivity($org_id, $activityInfo)
 	{
-
+		
 	}
 
-	public function updateActivity($arr)
-	{
+    public function updateActivity($org_id, $activityId, $activityInfo){}
 
-	}
+    public function getActivityResult($org_id, $activityId){}
 
-    public function getActivityInfo($activityType, $activityId)
+    public function getActivityInfo($org_id, $activityId)
     {
 
     }
 
-    public function getActivityResult($activityType, $activityId)
-    {
+    public function participateInActivitie($org_id, $participatorInfo){}
 
+    public function getPrimaryKeyName()
+    {
+    	return 'reg_id';
     }
 }

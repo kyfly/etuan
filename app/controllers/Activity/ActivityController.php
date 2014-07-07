@@ -2,36 +2,29 @@
 
 class ActivityController extends BaseController
 {
-	private $activity;
+	private $activityHandle;
 
-	public function __construct(ActivityHandle $activity)
+	public function __construct(ActivityHandle $activityHandle)
 	{
-        $this->beforeFilter('csrf',array('on'=>'post'));
-		$this->activity = $activity;
+		$this->activityHandle = $activityHandle;
 	}
-
-    public function postCreateactivity()
-    {
-
-    }
-
-    public function postUpdateactivity()
-    {
-
-    }
-
-    public function postGetactivityresult()
-    {
-
-    }
 
     public function postDeleteactivity()
     {
-
+        
     }
 
-    public function postSelectactivity()
+    public function getActivitylist()
     {
-
+        
     }
+
+    public function postCreateactivity(){}
+
+    public function postUpdateactivity(){}
+
+    public function getActivityresult(){}
+
+    public function getActivityinfo(){}
+
 }
