@@ -6,29 +6,30 @@
     <link rel="stylesheet" href="../css/bootstrap.css"/>
     <title>“团团一家”管理后台</title>
     <style>
-        .body{
+        body{
             font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
         }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
-                <span class="sr-only">导航</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <span class="navbar-brand"><a><img src="../img/brand.png"></a></span>
-        </div>
-        <div class="collapse navbar-collapse" id="nav-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><img class="img-circle" src="../img/avatar.jpg"></li>
-                <li>用户名：USERNAME</li>
-                <li>退出</li>
-            </ul>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+                    <span class="sr-only">导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a><img src="../img/brand.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a><img class="img-circle" style="height: 20px; width: 20px" src="../img/avatar.jpg">用户</a></li>
+                    <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
@@ -36,10 +37,73 @@
 <div class="container">
 
     <div class="col-lg-3 col-md-3">
-
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#Home" data-toggle="pill">首页</a></li>
+            <li><a href="#Reg" data-toggle="pill">报名</a></li>
+            <li><a href="#Vote" data-toggle="pill">投票</a></li>
+            <li><a href="#Lottery" data-toggle="pill">抽奖</a></li>
+            <li><a href="#Ticket" data-toggle="pill">抢票</a></li>
+            <li><a href="#Weixin" data-toggle="pill">微信</a></li>
+            <li><a href="#Statistics" data-toggle="pill">统计</a></li>
+        </ul>
     </div>
     <div class="col-lg-9 col-md-9">
+        <div class="tab-content">
+            <div class="tab-pane active" id="Home">
+                <div>
+                    <div class="col-sm-4 bg-warning" style="height: 150px">
+                        <p style="font-size: 28px; color: gray; text-align:center; margin-top: 15px;"><span class="glyphicon glyphicon-user"></span> 参与人数</p>
+                        <p style="font-size: 56px; color: gray; text-align:center">100</p>
+                    </div>
+                    <div class="col-sm-4 bg-success" style="height: 150px">
+                        <p style="font-size: 28px; color: gray; text-align:center; margin-top: 15px;"><span class="glyphicon glyphicon-calendar"></span> 进行活动</p>
+                        <p style="font-size: 56px; color: gray; text-align:center">15</p>
+                    </div>
+                    <div class="col-sm-4 bg-danger" style="height: 150px">
+                        <p style="font-size: 28px; color: gray; text-align:center; margin-top: 15px;"><span class="glyphicon glyphicon-envelope"></span> 后台通知</p>
+                        <p style="font-size: 56px; color: gray; text-align:center">2</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>实时公告</th>
+                                    <th>发布时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>欢迎使用“团团一家”社团活动服务平台！</td>
+                                    <td>2014-07-08</td>
+                                </tr>
+                                <tr>
+                                    <td>报名系统全新上线，新学期招新必备神器！</td>
+                                    <td>2014-07-15</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Reg">
 
+            </div>
+            <div class="tab-pane" id="Vote">
+
+            </div>
+            <div class="tab-pane" id="Lottery">
+
+            </div>
+            <div class="tab-pane" id="Ticket">
+
+            </div>
+            <div class="tab-pane" id="Weixin">
+
+            </div>
+            <div class="tab-pane" id="Statistics">
+
+            </div>
+        </div>
     </div>
 
 </div>
