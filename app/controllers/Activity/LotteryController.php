@@ -2,13 +2,18 @@
 
 class LotteryController extends ActivityController
 {
-	private $lotteryHandle;
+	private $lotteryService;
 
-	public function __construct(LotteryHandle $lotteryHandle)
+	public function __construct(LotteryService $lotteryService, ActivityService $activityService)
 	{
-        $this->beforeFilter('csrf',array('on'=>'post'));
-		$this->lotteryHandle = $lotteryHandle;
+        parent::__construct($activityService);
+		$this->lotteryService = $lotteryService;
 	}
+
+    public function getDeleteactivity()
+    {
+
+    }
 
     public function postCreateactivity()
     {
@@ -28,5 +33,17 @@ class LotteryController extends ActivityController
     public function getActivityinfo()
     {
         
+    }
+
+    public function postParticipateinactivity(){}
+
+    public function getPrimaryKeyName()
+    {
+        return 'lottery_id';
+    }
+
+    public function getActivityType()
+    {
+        return 'Lottery';
     }
 }

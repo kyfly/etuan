@@ -2,27 +2,56 @@
 
 class RegistrationController extends ActivityController
 {
-	private $registrationHandle;
+	public $registrationService;
 
-	public function __construct(RegistrationHandle $registrationHandle)
+	public function __construct(RegistrationService $registrationService,ActivityService $activityService)
 	{
-        $this->beforeFilter('csrf',array('on'=>'post'));
-		$this->registrationHandle = $registrationHandle;
+        parent::__construct($activityService);
+		$this->registrationService = $registrationService;
 	}
-
-    public function postCreateactivity(){
-    	Input::get('sadkjhdkj');
-    	$this->registrationHandle->createActivity($dasd,%ad)
-    }
-
-    public function postUpdateactivity(){}
-
-    public function getActivityresult(){}
-
-    public function getActivityinfo(){}
 
     public function getDeleteactivity()
     {
-    	$this->registrationHandle->deleteActivity();
+        $activityId = Input::get('activityId');
+        return $this->registrationService->deleteActivity($this->org_uid, $activityId);
+    }
+
+    public function getCreateactivity() //暂时改为get请求方便测试,后需改为post;
+    {
+        $registrationActivityInfo = json_decode(Input::get('registrationActivityInfo'));
+        $condition = $this->registrationService->createActivity($this->org_uid, $registrationActivityInfo);
+        return $condition;
+   }
+
+    public function postUpdateactivity(){}
+
+    public function getActivityresult()
+    {
+
+    }
+
+    public function getActivityinfo()
+    {
+        $reg_id = Input::get('activityId');
+        $registrationActivityInfo = $this->registrationService->getActivityInfo($this->org_uid, $reg_id);
+        return $registrationActivityInfo;
+    }
+
+    public function getParticipateinactivity() //暂时改为get请求方便测试,后需改为post;
+    {
+        $participatorInfo = json_decode(Input::get('participatorInfo'));
+        $reg_id = Input::get('activityId');
+        $condition = $this->registrationService->participateInActivity($this->org_uid, $reg_id, $participatorInfo);
+        return $condition;
+    }
+
+    public function getPrimaryKeyName()
+    {
+        return 'reg_id';
+    }
+
+    public function getActivityType()
+    {
+        return 'Registration';
     }
 }

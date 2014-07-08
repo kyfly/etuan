@@ -2,13 +2,15 @@
 
 class VoteController extends ActivityController
 {
-	private $voteHandle;
+	private $voteService;
 
-	public function __construct(VoteHandle $voteHandle)
+	public function __construct(VoteService $voteService, ActivityService $activityService)
 	{
-        $this->beforeFilter('csrf',array('on'=>'post'));
-		$this->voteHandle = $voteHandle;
+		parent::__construct($activityService);
+		$this->voteService = $voteService;
 	}
+
+    public function getDeleteactivity(){}
 
     public function postCreateactivity(){}
 
@@ -17,4 +19,16 @@ class VoteController extends ActivityController
     public function getActivityresult(){}
 
     public function getActivityinfo(){}
+
+    public function postParticipateinactivity(){}
+
+    public function getPrimaryKeyName()
+    {
+    	return 'vote_id';
+    }
+
+    public function getActivityType()
+    {
+    	return 'Vote';
+    }
 }

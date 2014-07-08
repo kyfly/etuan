@@ -17,8 +17,6 @@ Route::group(array('before'=>'auth'),function()
 {
 	Route::controller('userinfo','UserInfoController');
 
-	Route::controller('activity','ActivityController');
-
 	Route::controller('lottery','LotteryController');
 
 	Route::controller('registration','RegistrationController');
@@ -26,4 +24,14 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('vote','VoteController');
 });
 
-Route::controller('test','TestController');
+
+Route::filter('acl',function()
+{
+	echo $uri = Request::getUri();
+	Atuh::user()->acl;
+});
+
+Route::get('/abc',array('before'=>'acl',function()
+{
+
+}));
