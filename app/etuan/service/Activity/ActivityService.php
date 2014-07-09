@@ -24,9 +24,9 @@ class ActivityService implements ActivityServiceInterface
 
     public function updateActivity($org_uid, $activityId, $activityInfo){}
 
-    public function getActivityResult($org_uid, $activityId){}
+        public function getActivityResult($org_uid ,$activityId){}
 
-    public function getActivityInfo($org_uid, $activityId){}
+    public function getActivityInfo($org_uid ,$activityId){}
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo){}
 }

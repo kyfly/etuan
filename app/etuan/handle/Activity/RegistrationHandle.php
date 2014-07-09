@@ -3,7 +3,7 @@
 class RegistrationHandle extends  ActivityHandle
 {
 
-    public function deleteActivity($org_uid, $activityId)
+    public function deleteActivity($activityId)
     {
 
         try {
@@ -11,7 +11,7 @@ class RegistrationHandle extends  ActivityHandle
             Reg_result::where('reg_id',$activityId)->delete();
             Reg_question::where('reg_id',$activityId)->delete();
             Registration_user::where('reg_id',$activityId)->delete();
-            Registration::where('org_uid',$org_uid)->where('reg_id',$activityId)->delete();
+            Registration::where('reg_id',$activityId)->delete();
             return true;
         } catch (Exception $e) {
             return false;
@@ -63,17 +63,37 @@ class RegistrationHandle extends  ActivityHandle
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
     {
-
+        try {
+            if($this->deleteActivity($activityId))
+            {
+                if($this->createActivity($org_uid, $activityInfo))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
-    public function getActivityResult($org_uid, $activityId)
+    public function getActivityResult($activityId)
     {
-
+        $registration_users = Registration_user::where('reg_id',$activityId)->
+            select('reg_serial','used_time','student_id')->get();
+        return $registration_users;
     }
 
-    public function getActivityInfo($org_uid, $activityId)
+    public function getActivityInfo($activityId)
     {
-    	$registration = Registration::where('org_uid',$org_uid)->where('reg_id',$activityId)->first();
+    	$registration = Registration::where('reg_id',$activityId)->first();
     	$questions = Reg_question::where('reg_id',$activityId)->
     		select('question_id','type','label','limit_type')->get()->toArray();
     	$choices = Reg_question_choice::where('reg_id',$activityId)->
@@ -91,7 +111,7 @@ class RegistrationHandle extends  ActivityHandle
     	return json_encode($registrationActivityInfo);
     }
 
-    public function participateInActivity($org_uid, $activityId, $participatorInfo)
+    public function participateInActivity($activityId, $participatorInfo)
     {
 		try {
             $results = $participatorInfo->results;

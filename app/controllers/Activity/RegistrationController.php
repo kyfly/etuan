@@ -23,11 +23,20 @@ class RegistrationController extends ActivityController
         return $condition;
    }
 
-    public function postUpdateactivity(){}
+    public function getUpdateactivity() //暂时改为get请求方便测试,后需改为post;
+    {
+        $activityId = Input::get('activityId');
+        $registrationActivityInfo = json_decode(Input::get('registrationActivityInfo'));
+        $condition = $this->registrationService->
+            updateActivity($this->org_uid, $activityId, $registrationActivityInfo);
+        return $condition;
+    }
 
     public function getActivityresult()
     {
-
+        $reg_id = Input::get('activityId');
+        $condition = $this->registrationService->getActivityResult($this->org_uid, $reg_id);
+        return $condition;
     }
 
     public function getActivityinfo()

@@ -12,7 +12,7 @@ class RegistrationService extends ActivityService
 
     public function deleteActivity($org_uid, $activityId)
     {
-        if($this->registrationHandle->deleteActivity($org_uid, $activityId))
+        if($this->registrationHandle->deleteActivity($activityId))
         {
             return "删除成功";
         }
@@ -48,17 +48,31 @@ class RegistrationService extends ActivityService
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
     {
-
+        if($this->registrationHandle->updateActivity($org_uid, $activityId, $activityInfo))
+        {
+            return "修改活动成功";
+        }
+        else
+        {
+            return "修改活动失败";
+        }
     }
 
-    public function getActivityResult($org_uid, $activityId)
+    public function getActivityResult($org_uid ,$activityId)
     {
-
+        if(Registration::where('org_uid',$org_uid)->where('reg_id',$activityId)->count()==1)
+        {
+            return $this->registrationHandle->getActivityResult($activityId);
+        }
+        else
+        {
+            return "您没有该报名活动";
+        }
     }
 
     public function getActivityInfo($org_uid, $activityId)
     {  	
-    	return $this->registrationHandle->getActivityInfo($org_uid, $activityId);
+    	return $this->registrationHandle->getActivityInfo($activityId);
     }
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo)
@@ -71,7 +85,7 @@ class RegistrationService extends ActivityService
         {
             if($userCount==0)
             {
-                if($this->registrationHandle->participateInActivity($org_uid, $activityId, $participatorInfo))
+                if($this->registrationHandle->participateInActivity($activityId, $participatorInfo))
                 {
                     return "参与活动成功";
                 }
