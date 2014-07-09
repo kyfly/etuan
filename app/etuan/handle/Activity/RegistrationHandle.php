@@ -87,8 +87,17 @@ class RegistrationHandle extends  ActivityHandle
     public function getActivityResult($activityId)
     {
         $registration_users = Registration_user::where('reg_id',$activityId)->
-            select('reg_serial','used_time','student_id')->get();
-        return $registration_users;
+            select('reg_serial','used_time','student_id')->get()->toArray();
+        $results = array();
+        $i = 0;
+        foreach ($registration_users as $key => $registration_user) {
+            $answers = Reg_result::where('reg_id',$activityId)->where('reg_serial',$registration_user['reg_serial'])->
+                select('question_id','answer')->get()->toArray();
+            $registrationUserInfo = new RegistrationUserInfo($registration_user['reg_serial'],
+                $registration_user['used_time'],$registration_user['student_id'],$answers);
+            $results = array_add($results, $i++, $registrationUserInfo);
+        }
+        return $results;
     }
 
     public function getActivityInfo($activityId)

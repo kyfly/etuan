@@ -1,0 +1,49 @@
+创建活动:
+http://localhost/etuan/public/registration/createactivity?
+registrationActivityInfo=
+{"start_time":"2014-7-7 19:00:00",
+"stop_time":"2014-7-7 19:00:00",
+"limit_type":1,
+"name":"wdehuodong",
+"theme":2,
+"url":"myurl",
+"questions":
+[{"question_id":1,"type":2,"label":"我的问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"这是我的选项1"},{"question_id":2,"choice_id":2,"label":"这是我的选项2"}]}
+
+
+更新活动:
+http://localhost/etuan/public/registration/updateactivity?
+activityId=17&
+registrationActivityInfo=
+{"start_time":"2014-7-7 19:00:00",
+"stop_time":"2014-7-7 19:00:00",
+"limit_type":1,
+"name":"活动",
+"theme":2,
+"url":"myurl",
+"questions":[{"question_id":1,"type":2,"label":"这是问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"哈哈"},{"question_id":2,"choice_id":2,"label":"xixi"}]}
+
+参与活动:
+http://localhost/etuan/public/registration/participateinactivity?
+activityId=9&
+participatorInfo=
+{"used_time":"2:40",
+"student_id":"12051728",
+"wx_uid":"123456",
+"results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
+
+查看报名活动结果:
+http://localhost/etuan/public/registration/activityresult?activityId=23
+
+查看一个报名活动详细信息:
+http://localhost/etuan/public/registration/activityinfo?activityId=23
+
+删除报名活动
+http://localhost/etuan/public/registration/deleteactivity?activityId=23
+
+获取用户所拥有的报名活动的一般信息：
+http://localhost/etuan/public/registration/activitylist
+
+用去用户各种活动的数量:
+http://localhost/etuan/public/registration/activitycount
+
