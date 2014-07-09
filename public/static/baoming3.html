@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <title>焦点摄影招新报名</title>
+    <style>
+        body{
+            font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+        }
+        .dark-blank{background-color:#444;}
+        .light-blank{background-color:#555;}
+        .single-line{height: 100px}
+        .double-line{height: 200px}
+        .triangle{
+            position:relative;
+            top:30px;
+            left:-40px;
+            width:0;height:0;
+            line-height:0;
+            border-color:transparent;
+            border-style:dashed solid dashed dashed;
+            border-width:20px
+        }
+        .right-tag{
+            margin-top:-10px;
+            color: #ffffff;
+            font-size:30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .intro-tag{
+            position:relative;
+            top:10px;
+            left:10px;
+            color:#cccccc;
+            font-size: 15px;
+        }
+        .intro-single-input{
+            position:relative;
+            top:10px;
+            left:10px;
+            height:50px;
+            width:80%;
+        }
+        .intro-double-input{
+            position:relative;
+            top:10px;
+            left:10px;
+            height:150px;
+            width:80%;
+        }
+        .no-padding{
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid no-padding">
+    <div class="col-xs-12 light-blank double-line no-padding">
+        <p class="right-tag" style="margin-top: 80px">这里应该有一个LOGO</p>
+    </div>
+    <div class="col-xs-9 no-padding">
+        <div class="dark-blank single-line">
+            <div class="form-group">
+                <p class="intro-tag">请输入您的姓名：</p>
+                <input class="intro-single-input form-control" type="text" id="name">
+            </div>
+        </div>
+        <div class="light-blank single-line">
+            <div class="form-group">
+                <p class="intro-tag">请输入您的学号：</p>
+                <input class="intro-single-input form-control" type="text" id="stuNum">
+            </div>
+
+        </div>
+        <div class="dark-blank double-line">
+            <div class="form-group">
+                <p class="intro-tag">你为什么要加入焦点摄影：</p>
+                <textarea class="intro-double-input form-control" rows="7"></textarea>
+            </div>
+        </div>
+        <div class="light-blank single-line">
+            <div class="form-group">
+                <p class="intro-tag">请选择你的性别：</p>
+                <select class="intro-single-input form-control">
+                    <option value="male">我是男生♂</option>
+                    <option value="female">我是女生♀</option>
+                </select>
+            </div>
+        </div>
+        <div class="dark-blank single-line">
+            <div class="form-group">
+                <p class="intro-tag">请选择你想加入的部门：</p>
+                <div class="btn-group btn-group-justified form-control intro-single-input">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">新闻部</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">组织部</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">技术部</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 no-padding">
+        <div class="single-line" style="background-color:#f66;">
+            <div class="triangle" style="border-right-color: #f66"></div>
+            <p class="right-tag">姓名</p>
+        </div>
+        <div class="single-line" style="background-color:#fc6;">
+            <div class="triangle" style="border-right-color: #fc6;"></div>
+            <p class="right-tag">学号</p>
+        </div>
+        <div class="double-line" style="background-color:#6cf;">
+            <div class="triangle" style="border-right-color: #6cf;"></div>
+            <p class="right-tag">问题</p>
+        </div>
+        <div class="single-line" style="background-color:#6f6;">
+            <div class="triangle" style="border-right-color: #6f6;"></div>
+            <p class="right-tag">性别</p>
+        </div>
+        <div class="single-line" style="background-color:#f6c;">
+            <div class="triangle" style="border-right-color: #f6c;"></div>
+            <p class="right-tag">部门</p>
+        </div>
+    </div>
+    <div class="col-xs-12 light-blank single-line no-padding text-center">
+        <button type="button" class="btn btn-danger btn-lg" style="width:60%;margin-top: 20px">
+            <h4>我要提交 <span class="glyphicon glyphicon-envelope"></span></h4>
+        </button>
+    </div>
+    <div class="col-xs-12 dark-blank single-line no-padding">
+        <p class="right-tag" style="margin-top: 30px">这里应该有版权信息</p>
+    </div>
+</div>
+</body>
+</html>
