@@ -10,6 +10,7 @@ class RegistrationController extends ActivityController
 		$this->registrationService = $registrationService;
 	}
 
+
     public function getDeleteactivity()
     {
         $activityId = Input::get('activityId');

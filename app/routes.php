@@ -24,14 +24,10 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('vote','VoteController');
 });
 
+Route::controller('test','TestController');
 
-Route::filter('acl',function()
-{
-	echo $uri = Request::getUri();
-	Atuh::user()->acl;
+Route::resource("wx/{id}","WeixinController");
+Route::get("test",function(){
+	return View::make('test.index');
 });
 
-Route::get('/abc',array('before'=>'acl',function()
-{
-
-}));
