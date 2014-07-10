@@ -8,9 +8,13 @@
     <style>
         body{
             font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-            background-image: url(../img/baoming1bg.jpg);
-            background-repeat:no-repeat;
-            background-position:center;
+        }
+        @media (min-width: 320px){
+            body {
+                background-image: url(../img/baoming1bg.jpg);
+                background-repeat:no-repeat;
+                background-position:center;
+            }
         }
     </style>
 </head>
@@ -22,26 +26,26 @@
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12" style="background-color: rgba(255,255,255,0.5)">
         <form class="form-horizontal" role="form">
             <div class="form-group">
-                <label for="stuName" class="col-xs-4 control-label">姓名</label>
-                <div class="col-xs-8">
+                <label for="stuName" class="col-sm-2 col-xs-4 control-label">姓名</label>
+                <div class="col-sm-10 col-xs-8">
                     <input type="text" class="form-control" id="stuName" placeholder="请输入您的姓名">
                 </div>
             </div>
             <div class="form-group">
-                <label for="stuNum" class="col-xs-4 control-label">学号</label>
-                <div class="col-xs-8">
+                <label for="stuNum" class="col-sm-2 col-xs-4 control-label">学号</label>
+                <div class="col-sm-10 col-xs-8">
                     <input type="text" class="form-control" id="stuNum" placeholder="请输入您的学号">
                 </div>
             </div>
             <div class="form-group">
-                <label for="question1" class="col-xs-4 control-label">问题</label>
-                <div class="col-xs-8">
+                <label for="question1" class="col-sm-2 col-xs-4 control-label">问题</label>
+                <div class="col-sm-10 col-xs-8">
                     <textarea class="intro-double-input form-control transparent-div" id="question1" rows="7" placeholder="你为什么要加入焦点摄影"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 control-label">性别</label>
-                <div class="col-xs-8">
+                <label class="col-sm-2 col-xs-4 control-label">性别</label>
+                <div class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="male">我是男生♂</option>
                         <option value="female">我是女生♀</option>
@@ -49,8 +53,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 control-label">第一志愿</label>
-                <div class="col-xs-8">
+                <label class="col-sm-2 col-xs-4 control-label">第一志愿</label>
+                <div class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="xinwen">新闻部</option>
                         <option value="zuzhi">组织部</option>
@@ -59,8 +63,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-4 control-label">第二志愿</label>
-                <div class="col-xs-8">
+                <label class="col-sm-2 col-xs-4 control-label">第二志愿</label>
+                <div class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="xinwen">新闻部</option>
                         <option value="zuzhi">组织部</option>
@@ -69,7 +73,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-xs-offset-4 col-xs-8">
+                <div class="col-sm-offset-2 col-sm-offset-10 col-xs-offset-4 col-xs-8">
                     <button type="submit" class="btn btn-lg btn-danger">我要提交 <span class="glyphicon glyphicon-envelope"></span></button>
                 </div>
             </div>
