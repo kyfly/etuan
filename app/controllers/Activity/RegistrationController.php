@@ -11,8 +11,8 @@ class RegistrationController extends ActivityController
 	}
 
     public function postCreateactivity(){
-    	Input::get('sadkjhdkj');
-    	$this->registrationHandle->createActivity($dasd,%ad)
+    	//Input::get('sadkjhdkj');
+    	//$this->registrationHandle->createActivity($dasd,%ad)
     }
 
     public function postUpdateactivity(){}
