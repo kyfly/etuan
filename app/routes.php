@@ -27,3 +27,8 @@ Route::group(array('before'=>'auth'),function()
 });
 
 Route::controller('test','TestController');
+
+Route::resource("wx/{id}","WeixinController");
+Route::get("test",function(){
+	return View::make('test.index');
+});

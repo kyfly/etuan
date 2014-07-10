@@ -78,3 +78,25 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+Route::filter('weixin', function()
+{
+    
+    $signature = Input::get('signature');
+    $timestamp = Input::get('timestamp');
+    $nonce     = Input::get('nonce');
+    if(Route::input("id")==12)
+    {
+    	$token = 'liuJD';
+    }else{
+    	return "请使用微信关注团团一家";
+    }
+    
+    
+    $our_signature = array($token, $timestamp, $nonce);
+    sort($our_signature, SORT_STRING);
+    $our_signature = implode($our_signature);
+    $our_signature = sha1($our_signature);
+    if ($our_signature != $signature) {
+        return "请使用微信关注团团一家";
+    }
+});
