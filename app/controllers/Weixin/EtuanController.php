@@ -2,7 +2,7 @@
 class EtuanController extends BaseController{
 	public function __construct()
 	    {
-	        //$this->beforeFilter('weixin', array('on' => 'get|post'));
+	        $this->beforeFilter('weixin', array('on' => 'get|post'));
 	    }
 	    public function index()
 	    {
