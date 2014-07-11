@@ -1,8 +1,14 @@
 $(document).ready(function(){
 	$(".blank").hide();
 
-	$(".input-combine").click(function(){
-		$(this).find(".blank").toggle();
-		$(this).find(".strip").toggle();
+	$(".strip").click(function(){
+		$(".blank").hide();
+		$(".cover").show();
+		$(this).find(".blank").show();
+		$(this).find(".cover").hide();
+		$(this).find(".blank").find("input").focus();
+		$(this).find(".blank").find("textarea").focus();
 	});
+	
+	
 });

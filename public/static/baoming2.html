@@ -13,13 +13,13 @@
         .no-padding {
             padding: 0;
         }
-        .strip {
+        .cover {
             font-size: 64px;
             text-align: center;
             color: #fff;
         }
 		.blank {
-			font-size: 28px;
+			font-size: 36px;
 			text-align:left;
 			color:#000;
 			background-color:#fff;
@@ -30,47 +30,90 @@
 		.double-line {
 			height: 200px;
 		}
-		
+		input {
+			border-width:0;
+			height: 100px;
+			width: 100%;
+		}
+		textarea {
+			border-width:0;
+			height: 200px;
+			width: 100%;
+		}
     </style>
 </head>
 <body>
 <div class="container no-padding">
-    <div class="col-xs-12 no-padding double-line strip" style="background-color: #f06">
+    <div class="col-xs-12 no-padding double-line cover" style="background-color: #f06">
         焦点摄影招新报名
     </div>
 	
 	
-	<div class="input-combine">
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #0c6">
-        姓名<span class="glyphicon glyphicon-ok"></span>
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #0c6">
+        姓名
     </div>
 	<div class="col-xs-12 no-padding single-line blank">
-		我的名字叫马越。
+		<input type="text" id="stuName">
+	</div>
+	</div>
+		
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #6f0">
+        学号
+    </div>
+	<div class="col-xs-12 no-padding single-line blank">
+		<input type="text" id="">
 	</div>
 	</div>
 	
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #c60">
+        手机号
+    </div>
+	<div class="col-xs-12 no-padding single-line blank">
+		<input type="text" id="">
+	</div>
+	</div>
 	
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #c6f">
+        意向部门
+    </div>
+	<div class="col-xs-12 no-padding single-line blank">
+		<input type="text" id="">
+	</div>
+	</div>
 	
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #6f0">
-        学号<span class="glyphicon glyphicon-remove"></span>
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #6cf">
+        性别
     </div>
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #c60">
-        手机号<span class="glyphicon glyphicon-remove"></span>
-    </div>
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #c6f">
-        意向部门<span class="glyphicon glyphicon-ok"></span>
-    </div>
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #6cf">
-        性别<span class="glyphicon glyphicon-ok"></span>
-    </div>
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #66c">
+	<div class="col-xs-12 no-padding single-line blank">
+		<input type="text" id="">
+	</div>
+	</div>
+	
+	<div class="strip">
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #66c">
         专业
     </div>
-    <div class="col-xs-12 no-padding double-line strip" style="background-color: #c0f">
-        你为什么要加焦点
+	<div class="col-xs-12 no-padding single-line blank">
+		<input type="text" id="">
+	</div>
+	</div>
+	
+	<div class="strip">
+    <div class="col-xs-12 no-padding double-line cover" style="background-color: #c0f">
+        你为什么想要加入焦点摄影工作室
     </div>
-    <div class="col-xs-12 no-padding single-line strip" style="background-color: #6fc">
-        我要提交
+	<div class="col-xs-12 no-padding double-line blank">
+		<textarea row="3"></textarea>
+	</div>
+	</div>
+	
+    <div class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#6f6">
+        <span class="glyphicon glyphicon-envelope"></span> 提交
     </div>
 </div>
 
