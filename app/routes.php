@@ -17,12 +17,15 @@ Route::group(array('before'=>'auth'),function()
 {
 	Route::controller('userinfo','UserInfoController');
 
+    Route::controller('activity','ActivityController');
+
 	Route::controller('lottery','LotteryController');
 
 	Route::controller('registration','RegistrationController');
 
 	Route::controller('vote','VoteController');
 });
+
 
 Route::resource("wx/{id}","EtuanController");
 //Route::resource("wx/{id}","UniversalController");

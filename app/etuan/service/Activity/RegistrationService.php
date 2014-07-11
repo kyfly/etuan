@@ -12,13 +12,20 @@ class RegistrationService extends ActivityService
 
     public function deleteActivity($org_uid, $activityId)
     {
-        if($this->registrationHandle->deleteActivity($activityId))
+        if(Registration::where('org_uid',$org_uid)->where('registration_id',$activityId)->count()==1)
         {
-            return "删除成功";
+            if($this->registrationHandle->deleteActivity($activityId))
+            {
+                return "删除成功";
+            }
+            else
+            {
+                return "删除失败";
+            }
         }
         else
         {
-            return "删除失败";
+            return "因为此用户没有此活动或者此活动存在但不属于该用户而无法删除";
         }
     }
 
@@ -26,9 +33,8 @@ class RegistrationService extends ActivityService
 	{
 		$questions = $activityInfo->questions;
 		$choices = $activityInfo->choices;
-		$activityCount = Registration::where('org_uid',$org_uid)->where('name',$activityInfo->name)->count();
 		// $urlCount = Registration::where('org_uid',$org_uid)->where('url',$activityInfo->url)->count(); url的验证条件
-		if($activityCount==0)
+		if(Registration::where('org_uid',$org_uid)->where('name',$activityInfo->name)->count()==0)
 		{
             if($this->registrationHandle->createActivity($org_uid, $activityInfo))
 			{
@@ -48,13 +54,20 @@ class RegistrationService extends ActivityService
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
     {
-        if($this->registrationHandle->updateActivity($org_uid, $activityId, $activityInfo))
+        if(Registration::where('org_uid',$org_uid)->where('name',$activityInfo->name)->count()==1)
         {
-            return "修改活动成功";
+            if($this->registrationHandle->updateActivity($org_uid, $activityId, $activityInfo))
+            {
+                return "修改活动成功";
+            }
+            else
+            {
+                return "修改活动失败";
+            }
         }
         else
         {
-            return "修改活动失败";
+            return "因为此用户没有此活动或者此活动存在但不属于该用户而无法更新";
         }
     }
 
@@ -71,8 +84,15 @@ class RegistrationService extends ActivityService
     }
 
     public function getActivityInfo($org_uid, $activityId)
-    {  	
-    	return $this->registrationHandle->getActivityInfo($activityId);
+    {
+        if(Registration::where('org_uid',$org_uid)->where('reg_id',$activityId)->count()==1)
+        {
+            return $this->registrationHandle->getActivityInfo($activityId);
+        }
+        else
+        {
+            return "您没有该报名活动";
+        }
     }
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo)

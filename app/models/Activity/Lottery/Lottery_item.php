@@ -1,19 +1,19 @@
 <?php
 
-class Vote extends Eloquent{
+class Lottery_item extends Eloquent{
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'vote';
+	protected $table = 'lottery_item';
 
 
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'vote_id';
+	protected $primaryKey = 'lottery_item_id';
 
     /**
      * Set primary key auto increment;

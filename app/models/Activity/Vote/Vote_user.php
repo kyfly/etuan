@@ -1,19 +1,19 @@
 <?php
 
-class Vote extends Eloquent{
+class Vote_user extends Eloquent{
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'vote';
+	protected $table = 'vote_user';
 
 
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'vote_id';
+	protected $primaryKey = 'user_serial';
 
     /**
      * Set primary key auto increment;

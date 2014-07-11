@@ -7,13 +7,16 @@ class RegistrationHandle extends  ActivityHandle
     {
 
         try {
+            DB::beginTransaction();
             Reg_question_choice::where('reg_id', $activityId)->delete();
             Reg_result::where('reg_id',$activityId)->delete();
             Reg_question::where('reg_id',$activityId)->delete();
             Registration_user::where('reg_id',$activityId)->delete();
             Registration::where('reg_id',$activityId)->delete();
+            DB::commit();
             return true;
         } catch (Exception $e) {
+            DB::rollback();
             return false;
         }
 
@@ -22,6 +25,7 @@ class RegistrationHandle extends  ActivityHandle
 	public function createActivity($org_uid, $activityInfo)
 	{
 		try {
+            DB::beginTransaction();
             $questions = $activityInfo->questions;
             $choices = $activityInfo->choices;
             $reg_id = Registration::insertGetId(
@@ -55,8 +59,10 @@ class RegistrationHandle extends  ActivityHandle
                         'reg_id' => $reg_id
                         ));
             }
+            DB::commit();
             return true;
         } catch (Exception $e) {
+            DB::rollback();
             return false;
         }
 	}
@@ -64,22 +70,27 @@ class RegistrationHandle extends  ActivityHandle
     public function updateActivity($org_uid, $activityId, $activityInfo)
     {
         try {
+            DB::beginTransaction();
             if($this->deleteActivity($activityId))
             {
                 if($this->createActivity($org_uid, $activityInfo))
                 {
+                    DB::commit();
                     return true;
                 }
                 else
                 {
+                    DB::rollback();
                     return false;
                 }
             }
             else
             {
+                DB::rollback();
                 return false;
             }
         } catch (Exception $e) {
+            DB::rollback();
             return false;
         }
     }
@@ -108,6 +119,7 @@ class RegistrationHandle extends  ActivityHandle
     	$choices = Reg_question_choice::where('reg_id',$activityId)->
     		select('question_id','choice_id','label')->get()->toArray();
     	$registrationActivityInfo = new RegistrationActivityInfo(
+            $activityId,
     		$registration->start_time,
     		$registration->stop_time,
     		$registration->limit_type,
@@ -123,6 +135,7 @@ class RegistrationHandle extends  ActivityHandle
     public function participateInActivity($activityId, $participatorInfo)
     {
 		try {
+            DB::beginTransaction();
             $results = $participatorInfo->results;
             $reg_serial = Registration_user::insertGetId(array(
                 'used_time' => $participatorInfo->used_time,
@@ -140,8 +153,10 @@ class RegistrationHandle extends  ActivityHandle
                     'reg_id' => $activityId
                     ));
             }
+            DB::commit();
             return true;        
         } catch (Exception $e) {
+            DB::rollback();
             return false;
         }
     }
