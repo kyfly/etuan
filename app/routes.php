@@ -17,6 +17,8 @@ Route::group(array('before'=>'auth'),function()
 {
 	Route::controller('userinfo','UserInfoController');
 
+    Route::controller('activity','ActivityController');
+
 	Route::controller('lottery','LotteryController');
 
 	Route::controller('registration','RegistrationController');
@@ -24,10 +26,12 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('vote','VoteController');
 });
 
-Route::controller('test','TestController');
 
-Route::resource("wx/{id}","WeixinController");
-Route::get("test",function(){
-	return View::make('test.index');
+Route::resource("wx/{id}","EtuanController");
+//Route::resource("wx/{id}","UniversalController");
+Route::get("/",function(){
+    return "欢迎关注团团一家";
 });
+
+Route::controller("build","WxbuilderController");
 

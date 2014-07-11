@@ -1,6 +1,8 @@
 <?php
 class RegistrationActivityInfo
 {
+    public $activityId;
+
 	public $start_time;
 
 	public $stop_time;
@@ -18,8 +20,9 @@ class RegistrationActivityInfo
 	public $choices;
 
 
-	public function __construct($start_time, $stop_time, $limit_type, $name, $theme, $url ,$questions, $choices)
+	public function __construct($activityId, $start_time, $stop_time, $limit_type, $name, $theme, $url ,$questions, $choices)
 	{
+        $this->activityId = $activityId;
 		$this->start_time = $start_time;
 		$this->stop_time = $stop_time;
 		$this->limit_type = $limit_type;

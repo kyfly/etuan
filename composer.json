@@ -13,7 +13,6 @@
 			"app/controllers/User",
 			"app/etuan",
 			"app/controllers/Weixin",
-			"app/interface",
 			"app/library",
 			"app/models",
 			"app/database/migrations",

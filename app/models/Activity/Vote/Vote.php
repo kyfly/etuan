@@ -7,7 +7,7 @@ class Vote extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table = 'Vote';
+	protected $table = 'vote';
 
 
 	/**

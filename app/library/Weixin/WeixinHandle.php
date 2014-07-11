@@ -1,7 +1,7 @@
 <?php
 class WeixinHandle
 {
-	
+
 	public function TextMessage($obj,$contentStr){
 		 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
@@ -13,7 +13,7 @@ class WeixinHandle
 							</xml>"; 
 		$time = time();            	
   		$msgType = "text";
-    	$resultStr = sprintf($textTpl, $obj->FromUsername, $obj->ToUsername, $time, $msgType, $contentStr);
+    	$resultStr = sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, $time, $msgType, $contentStr);
         return $resultStr;      	
 	}
 	
@@ -48,7 +48,7 @@ class WeixinHandle
 					$item_str</Articles>
 					</xml>";
 
-    $result = sprintf($xmlTpl, $obj->FromUsername, $obj->ToUsername, time(), count($newsArray));
+    $result = sprintf($xmlTpl, $obj->FromUserName, $obj->ToUserName, time(), count($newsArray));
     return $result;
     }
 }

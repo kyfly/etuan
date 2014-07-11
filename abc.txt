@@ -1,4 +1,13 @@
-创建活动:
+1.总
+获取一个用户各类活动参加的人数
+http://localhost/etuan/public/activity/allparticipatorcount
+
+获取用户各种活动的数量:
+http://localhost/etuan/public/activity/activitycount
+
+
+2:报名活动
+创建报名活动:
 http://localhost/etuan/public/registration/createactivity?
 registrationActivityInfo=
 {"start_time":"2014-7-7 19:00:00",
@@ -11,7 +20,7 @@ registrationActivityInfo=
 [{"question_id":1,"type":2,"label":"我的问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"这是我的选项1"},{"question_id":2,"choice_id":2,"label":"这是我的选项2"}]}
 
 
-更新活动:
+更新报名活动:
 http://localhost/etuan/public/registration/updateactivity?
 activityId=17&
 registrationActivityInfo=
@@ -23,7 +32,7 @@ registrationActivityInfo=
 "url":"myurl",
 "questions":[{"question_id":1,"type":2,"label":"这是问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"哈哈"},{"question_id":2,"choice_id":2,"label":"xixi"}]}
 
-参与活动:
+参与报名活动:
 http://localhost/etuan/public/registration/participateinactivity?
 activityId=9&
 participatorInfo=
@@ -44,6 +53,58 @@ http://localhost/etuan/public/registration/deleteactivity?activityId=23
 获取用户所拥有的报名活动的一般信息：
 http://localhost/etuan/public/registration/activitylist
 
-用去用户各种活动的数量:
-http://localhost/etuan/public/registration/activitycount
+
+3:抽奖活动
+
+
+创建抽奖活动:
+localhost/etuan/public/lottery/createactivity?activityInfo=
+{
+"name":"抽奖活动",
+"start_time":"2014-7-9 12:00:00",
+"stop_time":"2014-7-10 12:00:00",
+"theme":2,
+"limit_type":1,
+"activity_id":24,
+"description":"一等奖是xxx二等奖是xxx",
+"lottery_items":
+[
+{"name":"一等奖","probability":1,"item_total":100},
+{"name":"二等奖","probability":2,"item_total":200}
+]
+}
+
+更新抽奖活动:
+localhost/etuan/public/lottery/updateactivity?activityId=4&
+activityInfo=
+{
+"name":"hello",
+"start_time":"2014-7-9 12:00:00",
+"stop_time":"2014-7-10 12:00:00",
+"theme":2,
+"limit_type":1,
+"activity_id":24,
+"description":"一等奖是123二等奖是456",
+"lottery_items":
+[
+{"name":"123等奖","probability":1,"item_total":100},
+{"name":"456等奖","probability":2,"item_total":200}
+]
+}
+
+
+删除抽奖活动:
+localhost/etuan/public/lottery/deleteactivity?activityId=2
+
+获取一个抽奖活动的详细信息
+localhost/etuan/public/lottery/activityinfo?activityId=2
+
+获取用户所拥有的抽奖活动的一般信息：
+http://localhost/etuan/public/lottery/activitylist
+
+
+
+3:投票活动
+
+1:创建投票
 

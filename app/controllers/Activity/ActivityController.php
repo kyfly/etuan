@@ -40,4 +40,9 @@ class ActivityController extends BaseController
 
     public function getActivityType(){}
 
+    public function getAllparticipatorcount()
+    {
+        return $this->activityService->getAllParticipatorCount($this->org_uid);
+    }
+
 }

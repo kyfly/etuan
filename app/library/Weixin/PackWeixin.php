@@ -2,11 +2,12 @@
 	class PackWeixin 
 	{
 		//获取全局token；
-		public function gettoken($appid,$appsecret){
+		public function getToken($appid,$appsecret){
 			$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
 			$json = file_get_contents($url);
 			$jsoninfo = json_decode($json, true);
 			$access_token = $jsoninfo["access_token"];
+            return $access_token;
 		}
 		//创建菜单
 		public function createMenu($json,$token){
@@ -21,8 +22,7 @@
 		}
 		//获取OAuth2.0code；
 		public function getLicenseCode($appid,$callbackUrl,$scope,$state){
-			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid
-			&redirect_uri=$callbackUrl&response_type=code&scope=$scope&state=$state#wechat_redirect";
+			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$callbackUrl&response_type=code&scope=$scope&state=$state#wechat_redirect";
 			return $url;
 		}
 		//获取OAuth2.0token；
