@@ -24,10 +24,8 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('vote','VoteController');
 });
 
-Route::controller('test','TestController');
+Route::resource("wx/{id}","EtuanController");
 
-Route::resource("wx/{id}","WeixinController");
-Route::get("test",function(){
-	return View::make('test.index');
-});
+
+Route::controller("build","WxbuilderController");
 
