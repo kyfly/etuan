@@ -72,9 +72,13 @@ class EtuanController extends BaseController{
                 $scope = "snsapi_userinfo";
                 $state = 1;
                 $url = $obj->getLicenseCode($appid,$callbackUrl,$scope,$state);
-                $Content = "<a href =". $url.">请点击这里绑定</a>";
+                $Content ="<a href=\"".$url."\">点击这里绑定</a>";
                 $obj = new WeixinHandle;
                 return $obj->TextMessage($postObj,$Content);
+            }else{
+                $content = $postObj->Content;
+                $obj = new WeixinHandle;
+                return $obj->TextMessage($postObj,$content);
             }
         }
 }

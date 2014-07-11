@@ -13,7 +13,7 @@ class WeixinHandle
 							</xml>"; 
 		$time = time();            	
   		$msgType = "text";
-    	$resultStr = sprintf($textTpl, $obj->FromUsername, $obj->ToUsername, $time, $msgType, $contentStr);
+    	$resultStr = sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, $time, $msgType, $contentStr);
         return $resultStr;      	
 	}
 	

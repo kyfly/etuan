@@ -25,11 +25,11 @@
 
 		  			return $this->MpTextHandle($postObj);
 		  			break;
-		  	
+
 	  			case 'event':
 	  				return $this->MpEventHandle($postObj);
 	  				break;
-		  			
+
 		  		default:
 		  			$obj = new WeixinHandle;
 		  			$contentStr = "感谢你的关注，我们将继续努力!";
