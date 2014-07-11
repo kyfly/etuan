@@ -7,7 +7,6 @@
 			$json = file_get_contents($url);
 			$jsoninfo = json_decode($json, true);
 			$access_token = $jsoninfo["access_token"];
-            //dd($jsoninfo);
             return $access_token;
 		}
 		//创建菜单
@@ -23,8 +22,7 @@
 		}
 		//获取OAuth2.0code；
 		public function getLicenseCode($appid,$callbackUrl,$scope,$state){
-			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid
-			&redirect_uri=$callbackUrl&response_type=code&scope=$scope&state=$state#wechat_redirect";
+			$url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$callbackUrl&response_type=code&scope=$scope&state=$state#wechat_redirect";
 			return $url;
 		}
 		//获取OAuth2.0token；
