@@ -10,5 +10,5 @@ $(document).ready(function(){
 		$(this).find(".blank").find("textarea").focus();
 	});
 	
-	
+	$("input").blur();
 });
