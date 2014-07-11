@@ -27,7 +27,7 @@ Route::group(array('before'=>'auth'),function()
 Route::resource("wx/{id}","EtuanController");
 //Route::resource("wx/{id}","UniversalController");
 Route::get("/",function(){
-    return "欢迎关注团团一家";
+    return urlencode("http://linkew.net/build/oauth");
 });
 
 Route::controller("build","WxbuilderController");
