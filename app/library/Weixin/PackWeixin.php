@@ -2,11 +2,13 @@
 	class PackWeixin 
 	{
 		//获取全局token；
-		public function gettoken($appid,$appsecret){
+		public function getToken($appid,$appsecret){
 			$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
 			$json = file_get_contents($url);
 			$jsoninfo = json_decode($json, true);
 			$access_token = $jsoninfo["access_token"];
+            //dd($jsoninfo);
+            return $access_token;
 		}
 		//创建菜单
 		public function createMenu($json,$token){

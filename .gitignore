@@ -9,3 +9,5 @@ Thumbs.db
 /.idea
 /app/config/production
 /app/config/development
+
+test/
