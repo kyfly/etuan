@@ -28,4 +28,6 @@ interface ActivityHandleInterface
 
     public function participateInActivity($activityId, $participatorInfo);		//参与一次活动,继承实现;
 
+    public function getAllParticipatorCount($org_uid); //获取一个用户各个活动的参与者数量
+
 }

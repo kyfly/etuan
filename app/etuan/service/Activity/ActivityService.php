@@ -12,7 +12,7 @@ class ActivityService implements ActivityServiceInterface
 
 	public function getActivityList($org_uid, $activityType)
 	{
-		return 	$this->activityHandle->getActivityList($org_uid, $activityType);
+		return $this->activityHandle->getActivityList($org_uid, $activityType);
 	}
 
 	public function getActivityCount($org_uid)
@@ -29,4 +29,9 @@ class ActivityService implements ActivityServiceInterface
     public function getActivityInfo($org_uid ,$activityId){}
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo){}
+
+    public function getAllParticipatorCount($org_uid)
+    {
+    	return $this->activityHandle->getAllParticipatorCount($org_uid);
+    }
 }

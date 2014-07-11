@@ -1,23 +1,23 @@
 <?php
 
-class WxUser extends Eloquent{
+class Vote_item extends Eloquent{
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'wx_user';
+	protected $table = 'vote_item';
 
 
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'wx_uid';
+	protected $primaryKey = 'vote_item_id';
 
     /**
      * Set primary key auto increment;
      * @var bool
      */
-    public $incrementing = false;
+    public $incrementing = true;
 }

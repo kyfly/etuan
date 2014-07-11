@@ -17,4 +17,6 @@ interface ActivityServiceInterface
     public function getActivityInfo($org_uid, $activityId); //获取活动的详细信息,继承实现;
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo);		//参与一次活动,继承实现;
+
+    public function getAllParticipatorCount($org_uid); //获取一个用户各个活动的参与者数量
 }
