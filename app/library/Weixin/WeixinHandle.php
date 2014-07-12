@@ -1,4 +1,14 @@
 <?php
+/*该类主要存放一些共有方法，包括回复文本信息，回复图文信息，获取全局access_token等。
+ *TextMessage($obj,$contentStr) 需传入需要回复的内容和接收到的对象
+ * ArticlesMessage($obj, $newsArray)    需传入对象和数组，数组键为Title， Description， PicUrl，Url可传入多维数组（不超过10）
+ * getToken($appid,$appsecret)  参数为微信公众号的appid和appsecret；
+ * createMenu($json,$token)     参数为json数据包和全局access_token值
+ * getLicenseCode($appid,$callbackUrl,$scope,$state)    该函数用于oauth2.0时，用户同意授权，获取code
+ * getLicenseToken($appid,$secret,$code)    通过code换取网页授权access_token
+ *getUserinfo($token,$userid)       拉取用户信息(需scope为 snsapi_userinfo)，token为网页授权access_token
+ * https_request($url,$data = null)      实现get和post请求
+ * */
 class WeixinHandle
 {
 
@@ -30,12 +40,15 @@ class WeixinHandle
 				    	</item>
 						";
     $item_str = "";
+        $i = 0;
     if(isset($newsArray[0]))
     {
     	foreach ($newsArray as $item) {
     		$item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
+            $i++;
     	}
     } else{
+        $i++;
     	$item_str .= sprintf($itemTpl, $newsArray['Title'], $newsArray['Description'], $newsArray['PicUrl'], $newsArray['Url']);
     }
     $xmlTpl = "<xml>
@@ -48,7 +61,7 @@ class WeixinHandle
 					$item_str</Articles>
 					</xml>";
 
-    $result = sprintf($xmlTpl, $obj->FromUserName, $obj->ToUserName, time(), count($newsArray));
+    $result = sprintf($xmlTpl, $obj->FromUserName, $obj->ToUserName, time(),$i);
     return $result;
     }
     //获取全局token；
@@ -77,8 +90,7 @@ class WeixinHandle
     }
     //获取OAuth2.0token；
     public function getLicenseToken($appid,$secret,$code){
-        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid
-			&secret=$secret&code=$code&grant_type=authorization_code";
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$secret&code=$code&grant_type=authorization_code";
         $json = $this->https_request($url);
         if(!$json)
         {

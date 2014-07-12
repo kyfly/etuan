@@ -1,4 +1,9 @@
 <?php
+/*该类为通用接口处理类
+ *
+ *
+ *
+ * */
 class UniversalHandle
 {
     public function MpTextHandle($postObj)

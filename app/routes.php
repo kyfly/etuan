@@ -23,11 +23,14 @@ Route::group(array('before'=>'auth'),function()
 
 	Route::controller('vote','VoteController');
 });
+Route::get("wx/{id}","EtuanController@index");
+Route::post("wx/{id}","EtuanController@store");
 
-Route::resource("wx/{id}","EtuanController");
-//Route::resource("wx/{id}","UniversalController");
 Route::get("/",function(){
-    return urlencode("http://linkew.net/build/oauth");
+    $newsArray =[["Title"=>"好开心啊^_^，又多一个人关心我了。","Description"=>"",
+        "PicUrl"=>"http://img0.imgtn.bdimg.com/it/u=3662917374,1784824942&fm=116&gp=0.jpg","Url"=>""],["Title"=>"好开心啊^_^，又多一个人关心我了。",
+        "Description"=>"","PicUrl"=>"http://t10.baidu.com/it/u=3702716991,2970689908&fm=58","Url"=>""]];;
+    return count($newsArray);
 });
 
 Route::controller("build","WxbuilderController");

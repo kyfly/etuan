@@ -1,9 +1,13 @@
 <?php
+/*该类为通用微信接口类
+ *
+ *
+ * */
 	class UniversalController extends BaseController
 	{
 		 public function __construct()
 	    {
-	        //$this->beforeFilter('weixin', array('on' => 'get|post'));
+	        $this->beforeFilter('weixin', array('on' => 'get|post'));
 	    }
 	    public function index()
 	    {
@@ -12,11 +16,6 @@
 
 		public function store()
 		{
-           /* $post=["ToUserName"=>"hh","FromUserName"=>"haih","CreateTime"=>time(),
-            "MsgType"=>"text","Content"=>"d"];
-            $postobj= json_encode($post);
-            $postObj = json_decode($postobj);*/
-
 		    $message = file_get_contents('php://input');
 		    $postObj = simplexml_load_string($message, 'SimpleXMLElement', LIBXML_NOCDATA);
 		    $msgType = $postObj->MsgType;
