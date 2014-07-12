@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +25,8 @@ Route::group(array('before'=>'auth'),function()
 
 	Route::controller('vote','VoteController');
 });
-
-
-Route::resource("wx/{id}","EtuanController");
-//Route::resource("wx/{id}","UniversalController");
-Route::get("/",function(){
-    return urlencode("http://linkew.net/build/oauth");
-});
+Route::get("wx/{id}","EtuanController@index");
+Route::post("wx/{id}","EtuanController@store");
 
 Route::controller("build","WxbuilderController");
 

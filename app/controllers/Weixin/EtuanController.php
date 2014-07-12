@@ -1,4 +1,9 @@
 <?php
+/*该类为公众号“团团一家”所用接口，
+ *
+ *
+ *
+ * */
 class EtuanController extends BaseController{
 	public function __construct()
 	    {
@@ -8,7 +13,6 @@ class EtuanController extends BaseController{
 	    {
 	        return Input::get('echostr');
 	    }
-
 		public function store()
 		{
 		    $message = file_get_contents('php://input');
@@ -25,11 +29,11 @@ class EtuanController extends BaseController{
                     break;
 		  	 	
 		  	 	default:
+                    $arr =["Title"=>"come baby","Description"=>"Ladies and gentlemen how do you do Came here to talk about a thing so true ",
+                        "PicUrl"=>"http://img0.imgtn.bdimg.com/it/u=2080496200,918842870&fm=21&gp=0.jpg","Url"=>""];
                     $obj = new WeixinHandle;
-                    $contentStr = "感谢你的关注，我们将继续努力!";
-                    return $obj->TextMessage($postObj,$contentStr);
+                    return $obj->ArticlesMessage($postObj, $arr);
 		  	 		break;
-		  	 } 
+		  	 }
 		}
-
 }

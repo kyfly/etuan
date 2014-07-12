@@ -1,30 +1,40 @@
 <?php
+/*该类下边有getOauth()函数，用于获取用户数据；getmenu()函数，用于创建菜单；
+ * getDeletemenu()函数，用于删除菜单；
+ *
+ *
+ * */
 class WxbuilderController extends BaseController
 {
     public function getOauth(){
-        if(isset($_GET["code"]))
+       if(isset($_GET["code"]))
         {
             $code = $_GET["code"];
-            echo $code;
-            /*$appid = "wx809e719f43b30edf";
+            $appid = "wx809e719f43b30edf";
             $secret = "f46ac302ca95c53a928f12a183fe6bc5";
-            $json = getLicenseToken($appid,$secret,$code);
+            $obj = new WeixinHandle;
+            $json = $obj->getLicenseToken($appid,$secret,$code);
             $userid =$json["openid"];
             $token = $json["access_token"];
-            $userinfo = getUserinfo($token,$userid);
-            $user = new WxUser;
-            $user->wx_uid = $userinfo["openid"];
-            $user->nick_name = $userinfo["nickname"];
-            $user->sex = $userinfo["sex"];
-            $user->province = $userinfo["province"];
-            $user->city = $userinfo["city"];
-            $user->country = $userinfo["country"];
-            $user->headimgurl = $userinfo["headimgurl"];
-            $user->privilege = $userinfo["privilege"];
-            $user-save();*/
-           // return Redirect::to("/");
+            $userinfo =$obj->getUserinfo($token,$userid);
+            $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
+            if($result==NULL)
+            {
+                $user = new WxUser;
+                $user->wx_uid = $userinfo["openid"];
+                $user->nick_name = $userinfo["nickname"];
+                $user->sex = $userinfo["sex"];
+                $user->province = $userinfo["province"];
+                $user->city = $userinfo["city"];
+                $user->country = $userinfo["country"];
+                $user->headimgurl = $userinfo["headimgurl"];
+                if($userinfo["privilege"][0]!="")
+                {
+                    $user->privilege = $userinfo["privilege"];
+                }
+                $user->save();
+            }
         }
-
     }
     public function getCmenu(){
         $str='{
@@ -78,5 +88,13 @@ class WxbuilderController extends BaseController
         $token = $obj->getToken($appid,$appsecret);
         $retult = $obj->createMenu($str,$token);
         dd($retult);
+    }
+    public function getDeletemenu(){
+        $obj = new WeixinHandle;
+        $appid = "wx809e719f43b30edf";
+        $appsecret = "f46ac302ca95c53a928f12a183fe6bc5";
+        $token = $obj->getToken($appid,$appsecret);
+        $url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=".$token;
+        $obj->https_request($url);
     }
 }
