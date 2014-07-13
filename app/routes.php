@@ -26,6 +26,7 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('vote','VoteController');
 });
 Route::get("wx/{id}","EtuanController@index");
+
 Route::post("wx/{id}","EtuanController@store");
 
 Route::controller("build","WxbuilderController");

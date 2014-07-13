@@ -5,9 +5,11 @@
  * */
 	class UniversalController extends BaseController
 	{
-		 public function __construct()
+        private $MP;
+		 public function __construct(UniversalHandle $universal)
 	    {
 	        $this->beforeFilter('weixin', array('on' => 'get|post'));
+            $this->MP = $universal;
 	    }
 	    public function index()
 	    {
@@ -21,18 +23,14 @@
 		    $msgType = $postObj->MsgType;
 		  	switch ($msgType) {
 		  		case 'text':
-
 		  			return $this->MpTextHandle($postObj);
 		  			break;
-
 	  			case 'event':
 	  				return $this->MpEventHandle($postObj);
 	  				break;
-
 		  		default:
-		  			$obj = new WeixinHandle;
 		  			$contentStr = "感谢你的关注，我们将继续努力!";
-		  			return $obj->TextMessage($postObj,$contentStr);
+		  			return $this->TextMessage($postObj,$contentStr);
 		  			break;
 		  	}
 		}

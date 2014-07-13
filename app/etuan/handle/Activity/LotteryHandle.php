@@ -1,4 +1,4 @@
-<?php
+tr<?php
 
 class LotteryHandle extends  ActivityHandle
 {

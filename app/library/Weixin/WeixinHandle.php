@@ -8,7 +8,8 @@
  * getLicenseToken($appid,$secret,$code)    通过code换取网页授权access_token
  *getUserinfo($token,$userid)       拉取用户信息(需scope为 snsapi_userinfo)，token为网页授权access_token
  * https_request($url,$data = null)      实现get和post请求
- * */
+ * public function Autoreply($postObj)  自动回复关键字；
+ *  */
 class WeixinHandle
 {
 
@@ -44,12 +45,12 @@ class WeixinHandle
     if(isset($newsArray[0]))
     {
     	foreach ($newsArray as $item) {
-    		$item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
+    		$item_str .= sprintf($itemTpl, $item['title'], $item['description'], $item['pic_url'], $item['url']);
             $i++;
     	}
     } else{
         $i++;
-    	$item_str .= sprintf($itemTpl, $newsArray['Title'], $newsArray['Description'], $newsArray['PicUrl'], $newsArray['Url']);
+    	$item_str .= sprintf($itemTpl, $newsArray['title'], $newsArray['description'], $newsArray['pic_url'], $newsArray['url']);
     }
     $xmlTpl = "<xml>
 					<ToUserName><![CDATA[%s]]></ToUserName>
@@ -131,6 +132,44 @@ class WeixinHandle
         curl_close($ch);
         return $output;
     }
-
-
+    //自动回复关键字；
+    public function Autoreply($postObj){
+        $content = $postObj->Content;
+        $developerid = $postObj->ToUserName;
+        $result = Autoreply::where("keyword",$content)->select("msg_type","msg_id","mp_id")->first();
+        try{
+            $user = Wxdata::where("mp_id",$result->mp_id)->pluck("mp_origin_id");
+            if($developerid == $user)
+            {
+                if($result->msg_type=="text")
+                {
+                    $Tcontent = Textmsg::where("text_id",$result->msg_id)->pluck("content");
+                    $obj = new WeixinHandle;
+                    return $obj->TextMessage($postObj,$Tcontent);
+                }elseif($result->msg_type=="news")
+                {
+                    $contentObj = Newsmsg::where("news_id",$result->msg_id)->select("title","description","pic_url","url")->get();
+                    $i=0;
+                    foreach($contentObj as $content)
+                    {
+                        $arr[$i]['title']=$content->title;
+                        $arr[$i]['description']=$content->description;
+                        $arr[$i]['pic_url']=$content->pic_url;
+                        $arr[$i]['url']=$content->url;
+                        $i++;
+                    }
+                    $obj = new WeixinHandle;
+                    return $obj->ArticlesMessage($postObj, $arr);
+                }
+            }else{
+                $obj = new WeixinHandle;
+                $contentStr = "感谢你的关注，我们将继续努力!";
+                return $obj->TextMessage($postObj,$contentStr);
+            }
+        }catch (Exception $e){
+            $obj = new WeixinHandle;
+            $contentStr = "感谢你的关注，我们将继续努力!";
+            return $obj->TextMessage($postObj,$contentStr);
+        }
+    }
 }

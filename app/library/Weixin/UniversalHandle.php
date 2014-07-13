@@ -1,16 +1,15 @@
 <?php
-/*该类为通用接口处理类
+/*该类为通用接口处理类，继承于WeixinHandle类
  *
  *
  *
  * */
-class UniversalHandle
+class UniversalHandle extends WeixinHandle
 {
     public function MpTextHandle($postObj)
     {
         $Content = $postObj->Content;
-        $obj = new WeixinHandle;
-        return $obj->TextMessage($postObj,$Content);
+        return $this->TextMessage($postObj,$Content);
     }
     public function MpEventHandle($postObj)
     {

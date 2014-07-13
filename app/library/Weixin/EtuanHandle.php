@@ -1,11 +1,11 @@
 <?php
-/*该类为微信公众号“团团一家”消息处理和回复类
+/*该类为微信公众号“团团一家”消息处理和回复类,继承于WeixinHandle类
  *
  *
  *
  *
  * */
-class EtuanHandle
+class EtuanHandle extends WeixinHandle
 {
     public function EtuanTextHandle($postObj)
     {
@@ -14,14 +14,11 @@ class EtuanHandle
                 return $this->Bangding($postObj);
                 break;
            default:
-               $arr =["Title"=>"","Description"=>"",
-                   "PicUrl"=>"http://img4.imgtn.bdimg.com/it/u=1160650926,1988294740&fm=23&gp=0.jpg","Url"=>""];
-               $obj = new WeixinHandle;
-               return $obj->ArticlesMessage($postObj, $arr);
+               return $this->Autoreply($postObj);
                 break;
-
         }
     }
+
     public function EtuaneventHandle($postObj){
         $content = "";
         switch ($postObj->Event)
@@ -36,23 +33,19 @@ class EtuanHandle
                 break;
             default:
                 break;
-                $obj = new WeixinHandle;
-                return $obj->TextMessage($postObj,$content);
         }
         $obj = new WeixinHandle;
         return $obj->TextMessage($postObj,$content);
 
     }
-
     public function Bangding($postObj){
-        $obj = new WeixinHandle;
         $appid = "wx809e719f43b30edf";
         $callbackUrl = urlencode("http://linkew.net/build/oauth");
         $scope = "snsapi_userinfo";
         $state = 1;
-        $url = $obj->getLicenseCode($appid,$callbackUrl,$scope,$state);
+        $url = $this->getLicenseCode($appid,$callbackUrl,$scope,$state);
         $Content ="<a href=\"".$url."\">点击这里绑定</a>";
-        return $obj->TextMessage($postObj,$Content);
+        return $this->TextMessage($postObj,$Content);
     }
     public function Click($postObj)
     {
@@ -75,9 +68,8 @@ class EtuanHandle
         return $content;
     }
     public function Subscribe($postObj){
-        $arr =["Title"=>"好开心啊^_^，又多一个人关心我了。","Description"=>"",
-            "PicUrl"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","Url"=>""];
-        $obj = new WeixinHandle;
-        return $obj->ArticlesMessage($postObj, $arr);
+        $arr =["title"=>"好开心啊^_^，又多一个人关心我了。","description"=>"",
+            "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>""];
+        return $this->ArticlesMessage($postObj, $arr);
     }
 }

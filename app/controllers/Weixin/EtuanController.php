@@ -5,9 +5,11 @@
  *
  * */
 class EtuanController extends BaseController{
-	public function __construct()
+    private $etuan;
+	public function __construct(EtuanHandle $Etuan)
 	    {
 	        $this->beforeFilter('weixin', array('on' => 'get|post'));
+            $this->etuan = $Etuan;
 	    }
 	    public function index()
 	    {
@@ -20,19 +22,16 @@ class EtuanController extends BaseController{
 		  	$msgType = $postObj->MsgType;
 		  	switch ($msgType) {
 		  	 	case 'text':
-                    $handleobj = new EtuanHandle;
-                    return $handleobj->EtuanTextHandle($postObj);
+                    return $this->etuan->EtuanTextHandle($postObj);
 		  	 		break;
                 case 'event':
-                    $handleobj = new EtuanHandle;
-                    return $handleobj->EtuanEventHandle($postObj);
+                    return $this->etuan->EtuanEventHandle($postObj);
                     break;
 		  	 	
 		  	 	default:
-                    $arr =["Title"=>"come baby","Description"=>"Ladies and gentlemen how do you do Came here to talk about a thing so true ",
-                        "PicUrl"=>"http://img0.imgtn.bdimg.com/it/u=2080496200,918842870&fm=21&gp=0.jpg","Url"=>""];
-                    $obj = new WeixinHandle;
-                    return $obj->ArticlesMessage($postObj, $arr);
+                    $arr =["title"=>"come baby","description"=>"Ladies and gentlemen how do you do Came here to talk about a thing so true ",
+                        "pic_url"=>"http://img0.imgtn.bdimg.com/it/u=2080496200,918842870&fm=21&gp=0.jpg","url"=>""];
+                    return $this->etuan->ArticlesMessage($postObj, $arr);
 		  	 		break;
 		  	 }
 		}
