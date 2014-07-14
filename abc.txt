@@ -9,10 +9,10 @@ http://localhost/etuan/public/activity/activitycount
 2:报名活动
 创建报名活动:
 http://localhost/etuan/public/registration/createactivity?
-registrationActivityInfo=
+activityInfo=
 {"start_time":"2014-7-7 19:00:00",
 "stop_time":"2014-7-7 19:00:00",
-"limit_type":1,
+"limit_grade":1,
 "name":"wdehuodong",
 "theme":2,
 "url":"myurl",
@@ -22,8 +22,8 @@ registrationActivityInfo=
 
 更新报名活动:
 http://localhost/etuan/public/registration/updateactivity?
-activityId=17&
-registrationActivityInfo=
+activityId=7&
+activityInfo=
 {"start_time":"2014-7-7 19:00:00",
 "stop_time":"2014-7-7 19:00:00",
 "limit_type":1,
@@ -64,7 +64,7 @@ localhost/etuan/public/lottery/createactivity?activityInfo=
 "start_time":"2014-7-9 12:00:00",
 "stop_time":"2014-7-10 12:00:00",
 "theme":2,
-"limit_type":1,
+"limit_act":1,
 "activity_id":24,
 "description":"一等奖是xxx二等奖是xxx",
 "lottery_items":

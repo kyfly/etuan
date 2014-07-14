@@ -7,16 +7,24 @@ class ActivityController extends BaseController
 
     public $org_uid;
 
+    public $activityId;
+
+    public $activityType;
+
+    public $service;
+
 	public function __construct(ActivityService $activityService)
 	{
         $this->activityService = $activityService;
         $this->org_uid = Auth::user()->org_uid;
+        $this->activityId = Input::get('activityId');
+        $this->activityType = $this->activityType();
+        $this->service = $this->getService($this->serviceName());
 	}
 
     public function getActivitylist()
     {
-        $activityType = $this->getActivityType();
-        return $this->activityService->getActivityList($this->org_uid, $activityType);
+        return $this->activityService->getActivityList($this->org_uid, $this->activityType);
     }
 
     public function getActivitycount()
@@ -24,25 +32,64 @@ class ActivityController extends BaseController
         return $this->activityService->getActivityCount($this->org_uid);
     }
 
-    public function getDeleteactivity(){}
+    public function getDeleteactivity()
+    {
+        return $this->service->deleteActivity($this->org_uid, $this->activityId);
+    }
 
-    public function postCreateactivity(){}
+    public function getCreateactivity()
+    // public function postCreateactivity()
+    {
+        $activityInfo = json_decode(Input::get('activityInfo'));
 
-    public function postUpdateactivity(){}
+        return $this->service->createActivity($this->org_uid, $activityInfo);
+    }
 
-    public function getActivityresult(){}
+    public function getUpdateactivity()
+    // public function postUpdateactivity()
+    {
+        $activityInfo = json_decode(Input::get('activityInfo'));
+        return $this->service->updateActivity($this->org_uid, $this->activityId, $activityInfo);
+    }
 
-    public function getActivityinfo(){}
+    public function getActivityresult()
+    {
+        return $this->service->getActivityResult($this->org_uid, $this->activityId);
+    }
 
-    public function postParticipateinactivity(){}
+    public function getActivityinfo()
+    {
+        return $this->service->getActivityInfo($this->org_uid, $this->activityId);
+    }
 
-    public function getPrimaryKeyName(){}
+    public function getParticipateinactivity()
+    // public function postParticipateinactivity()
+    {
+        $participatorInfo = json_decode(Input::get('participatorInfo'));
+        return $this->service->participateInActivity($this->org_uid, $this->activityId, $participatorInfo);
+    }
 
-    public function getActivityType(){}
+    public function primaryKeyName(){}
+
+    public function activityType(){}
+
+    public function serviceName(){}
 
     public function getAllparticipatorcount()
     {
         return $this->activityService->getAllParticipatorCount($this->org_uid);
+    }
+
+    public function getService($serviceName)
+    {
+        switch ($serviceName) {
+            case 'lotteryService':
+                return isset($this->lotteryService)?$this->lotteryService:null;
+            case 'registrationService':
+                return isset($this->registrationService)?$this->registrationService:null;
+            case 'voteService':
+                return isset($this->voteService)?$this->lotteryService:null;
+        }
     }
 
 }

@@ -12,7 +12,7 @@ class RegistrationService extends ActivityService
 
     public function deleteActivity($org_uid, $activityId)
     {
-        if(Registration::where('org_uid',$org_uid)->where('registration_id',$activityId)->count()==1)
+        if(Registration::where('org_uid',$org_uid)->where('reg_id',$activityId)->count()==1)
         {
             if($this->registrationHandle->deleteActivity($activityId))
             {
@@ -67,7 +67,7 @@ class RegistrationService extends ActivityService
         }
         else
         {
-            return "因为此用户没有此活动或者此活动存在但不属于该用户而无法更新";
+            return "活动名重复";
         }
     }
 

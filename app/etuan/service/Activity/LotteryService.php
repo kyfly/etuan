@@ -86,32 +86,61 @@ class LotteryService extends ActivityService
 
     public function participateInActivity($org_uid, $activityId, $participatorInfo)
     {
-        $wx_uidCount = Wx_user::where('wx_uid', $participatorInfo->wx_uid)->count();
-        $userCount = Lottery_user::where('lottery_id',$activityId)->where('wx_uid',$participatorInfo->wx_uid)->count();
-        $registrationActivityTimeInfo = Lottery::where('org_uid',$org_uid)->
-            where('lottery_id',$activityId)->select('start_time','stop_time')->get();
-        if($wx_uidCount!=0)
-        {
-            if($userCount==0)
-            {
-                if($this->lotteryHandle->participateInActivity($activityId, $participatorInfo))
-                {
+        $lottery = Lottery::where('org_uid',$org_uid)->where('lottery_id',$activityId)->first();
+        $limit_act = $lottery->limit_act;
+        $activityType = $this->getActivityCount($limit_act);
+        $activityPrimaryKey = $this->getActivityPrimaryKey($limit_act);
 
-                    return "参与活动成功";
-                }
-                else
-                {
-                    return "参与活动失败";
-                }
-            }
-            else
+
+        $lottery_items = Lottery_item::where('lottery_id',$activityId)->whereRaw('item_out < item_total')->get();
+        dd($lottery_items);
+        $lottery_item_id = null;
+        $probability_sum = 100;
+        foreach($lottery_items as $lottery_item)
+        {
+            $random_num = mt(1,$probability_sum);
+            if($random_num<$lottery_item->probability)
             {
-                return "您的微信已经参与过本次报名活动";
+                $lottery_item_id = $lottery_item->lottery_item_id;
+                $probability_sum -= $lottery_item->probability;
+                break;
             }
+        }
+        $participatorInfo->lottery_item_id = $lottery_item_id;
+        if($this->lotteryHandle->participateInActivity($activityId, $participatorInfo))
+        {
+            return "参与抽奖活动成功";
         }
         else
         {
-            return "请关注团团一家再报名";
+            return "参与抽奖活动失败";
+        }
+
+    }
+
+    public function getActivityType($limit_act)
+    {
+        switch($limit_act)
+        {
+            case 'reg':
+                return 'Registration';
+            case 'vote':
+                return 'Vote';
+            case 'ticket':
+                return 'Ticket';
+        }
+    }
+
+    public function getActivityPrimaryKey($limit_act)
+    {
+        switch($limit_act)
+        {
+            case 'reg':
+                return 'reg_id';
+            case 'vote':
+                return 'vote_id';
+            case 'ticket':
+                return 'ticket_id';
         }
     }
 }
