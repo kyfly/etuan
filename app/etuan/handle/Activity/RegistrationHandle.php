@@ -32,10 +32,10 @@ class RegistrationHandle extends  ActivityHandle
                 array(
                     'start_time' => $activityInfo->start_time,
                     'stop_time' => $activityInfo->stop_time,
-                    'limit_type' => $activityInfo->limit_type,
+                    'limit_grade' => $activityInfo->limit_grade,
                     'name' => $activityInfo->name,
                     'theme' => $activityInfo->theme,
-                    // 'url' => $activityInfo->url,
+                    'url' => $activityInfo->url,
                     'org_uid' => $org_uid
                     ));
             foreach($questions as $question)

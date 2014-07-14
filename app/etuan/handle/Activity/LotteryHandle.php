@@ -20,15 +20,15 @@ class LotteryHandle extends  ActivityHandle
 
     public function createActivity($org_uid, $activityInfo)
     {
-        try{
-            DB::beginTransaction();
+//        try{
+//            DB::beginTransaction();
             $lottery_items = $activityInfo->lottery_items;
             $lottery_id = Lottery::insertGetId(array(
                 'name' => $activityInfo->name,
                 'start_time' => $activityInfo->start_time,
                 'stop_time' => $activityInfo->stop_time,
                 'theme' => $activityInfo->theme,
-                'limit_type' => $activityInfo->limit_type,
+                'limit_act' => $activityInfo->limit_act,
                 'activity_id' => $activityInfo->activity_id,
                 'description' => $activityInfo->description,
                 'org_uid'=> $org_uid
@@ -43,13 +43,13 @@ class LotteryHandle extends  ActivityHandle
                     'lottery_id' => $lottery_id
                 ));
             }
-            DB::commit();
+//            DB::commit();
             return true;
-        }catch (Exception $e)
-        {
-           DB::rollback();
-           return false;
-        }
+//        }catch (Exception $e)
+//        {
+////           DB::rollback();
+//           return false;
+//        }
     }
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
@@ -96,7 +96,7 @@ class LotteryHandle extends  ActivityHandle
             $lottery->start_time,
             $lottery->stop_time,
             $lottery->theme,
-            $lottery->limit_type,
+            $lottery->limit_act,
             $lottery->activity_id,
             $lottery->description,
             $lottery_items
@@ -106,6 +106,18 @@ class LotteryHandle extends  ActivityHandle
 
     public function participateInActivity($activityId, $participatorInfo)
     {
-
+        try{
+            DB::beginTransaction();
+            Lottery_user::insert(array(
+                'lottery_id' => $activityId,
+                'lottery_item_id' => $participatorInfo->lottery_item_id
+            ));
+            DB::commit();
+            return true;
+        }catch (Exception $e)
+        {
+            DB::rollback();
+            return false;
+        }
     }
 }

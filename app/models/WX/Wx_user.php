@@ -1,6 +1,6 @@
 <?php
 
-class WxUser extends Eloquent{
+class Wx_user extends Eloquent{
 
 	/**
 	 * The database table used by the model.
