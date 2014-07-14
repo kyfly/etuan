@@ -10,10 +10,7 @@
 		"classmap": [
 			"app/commands",
 			"app/controllers",
-			"app/controllers/User",
 			"app/etuan",
-			"app/controllers/Weixin",
-			"app/library",
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",

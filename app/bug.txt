@@ -1,0 +1,3 @@
+表: mp_auto_reply  mp_reply_id字段没自增；
+表：mp_weixin mp_id没自增
+表: mp_msg_news url长度

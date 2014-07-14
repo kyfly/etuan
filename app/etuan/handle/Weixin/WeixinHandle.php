@@ -134,10 +134,11 @@ class WeixinHandle
     }
     //自动回复关键字；
     public function Autoreply($postObj){
-        $content = $postObj->Content;
+       $content = $postObj->Content;
         $developerid = $postObj->ToUserName;
-        $result = Autoreply::where("keyword",$content)->select("msg_type","msg_id","mp_id")->first();
+       
         try{
+            $result = Autoreply::where("keyword",$content)->select("msg_type","msg_id","mp_id")->first();
             $user = Wxdata::where("mp_id",$result->mp_id)->pluck("mp_origin_id");
             if($developerid == $user)
             {

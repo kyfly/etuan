@@ -17,7 +17,6 @@ class UniversalHandle extends WeixinHandle
         switch($event){
             case "subscribe":
             if(!isset($postObj->EventKey))
-
             break;
             case "SCAN":
             $key = $postObj->EventKey;
@@ -34,6 +33,7 @@ class UniversalHandle extends WeixinHandle
             $contentStr = "感谢你的关注，我们将继续努力!";
             return $obj->TextMessage($postObj,$contentStr);
             break;
-    }
+         }
+        return 0;
     }
 }

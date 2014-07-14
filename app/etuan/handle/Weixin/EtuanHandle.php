@@ -9,6 +9,7 @@ class EtuanHandle extends WeixinHandle
 {
     public function EtuanTextHandle($postObj)
     {
+       
         switch($postObj->Content){
             case "授权":
                 return $this->Bangding($postObj);
@@ -39,8 +40,8 @@ class EtuanHandle extends WeixinHandle
 
     }
     public function Bangding($postObj){
-        $appid = "wx809e719f43b30edf";
-        $callbackUrl = urlencode("http://linkew.net/build/oauth");
+        $appid = APPID;
+        $callbackUrl = CALLBACKURL;
         $scope = "snsapi_userinfo";
         $state = 1;
         $url = $this->getLicenseCode($appid,$callbackUrl,$scope,$state);

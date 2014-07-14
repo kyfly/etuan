@@ -77,6 +77,9 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
-
+define("APPID","wx5d92b3c192f993e7");
+define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
+define("CALLBACKURL",urlencode("http://linkew.net/build/oauth"));
 require app_path().'/filters.php';
+
 require app_path().'/acl.php';

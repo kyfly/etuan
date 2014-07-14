@@ -15,7 +15,6 @@
 	    {
 	        return Input::get('echostr');
 	    }
-
 		public function store()
 		{
 		    $message = file_get_contents('php://input');
@@ -23,14 +22,14 @@
 		    $msgType = $postObj->MsgType;
 		  	switch ($msgType) {
 		  		case 'text':
-		  			return $this->MpTextHandle($postObj);
+		  			return $this->MP->MpTextHandle($postObj);
 		  			break;
 	  			case 'event':
-	  				return $this->MpEventHandle($postObj);
+	  				return $this->MP->MpEventHandle($postObj);
 	  				break;
 		  		default:
 		  			$contentStr = "感谢你的关注，我们将继续努力!";
-		  			return $this->TextMessage($postObj,$contentStr);
+		  			return $this->MP->TextMessage($postObj,$contentStr);
 		  			break;
 		  	}
 		}
