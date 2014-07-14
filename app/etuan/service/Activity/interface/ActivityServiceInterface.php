@@ -4,7 +4,7 @@ interface ActivityServiceInterface
 
 	public function deleteActivity($org_uid, $activityId); //删除活动,基类实现;
 
-	public function getActivityList($org_uid, $activityType);				//获取活动列表,基类实现;
+	public function getActivityList($org_uid);				//获取活动列表,基类实现;
 
 	public function getActivityCount($org_uid);	//获取一个用户的各类活动的数量,基类实现;
 

@@ -18,6 +18,13 @@ class VoteHandle extends  ActivityHandle
         }
     }
 
+        public function getActivityList($org_uid, $activityType)
+    {
+        $activityList = $activityType::where('org_uid',$org_uid)->
+            select('reg_id','start_time','stop_time','limit_grade','name','theme')->get();
+        return $activityList;
+    }
+
 	public function createActivity($org_uid, $activityInfo)
     {
         try {

@@ -4,21 +4,11 @@ class RegistrationController extends ActivityController
 {
 	public $registrationService;
 
-	public function __construct(RegistrationService $registrationService,ActivityService $activityService)
+	public function __construct(RegistrationService $registrationService)
 	{
         $this->registrationService = $registrationService;
-        parent::__construct($activityService);
+        parent::__construct();
 	}
-
-    public function primaryKeyName()
-    {
-        return 'reg_id';
-    }
-
-    public function activityType()
-    {
-        return 'Registration';
-    }
 
     public function serviceName()
     {

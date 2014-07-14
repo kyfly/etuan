@@ -4,23 +4,34 @@ class VoteService extends ActivityService
 
 	public $voteHandle;
 
-	public function __construct(VoteHandle $voteHandle, ActivityHandle $activityHandle)
+	public function __construct(VoteHandle $voteHandle)
 	{
-		parent::__construct($activityHandle);
 		$this->voteHandle = $voteHandle;
+		parent::__construct();
 	}
-
-	public function deleteActivity($org_uid, $activityId){}
-
-	public function createActivity($org_uid, $activityInfo){}
-
-    public function updateActivity($org_uid, $activityId, $activityInfo){}
 
     public function getActivityResult($org_uid ,$activityId)
     {
+          
     }
-    public function getActivityInfo($org_uid ,$activityId)
+
+    public function participateInActivity($org_uid, $activityId, $participatorInfo)
     {
+
+    }	
+
+    public function handleName()
+    {
+    	return 'voteHandle';
     }
-    public function participateInActivity($org_uid, $activityId, $participatorInfo){}	
+
+    public function primaryKey()
+    {
+    	return 'vote_id';
+    }
+
+    public function activityType()
+    {
+    	return 'Vote';
+    }
 }

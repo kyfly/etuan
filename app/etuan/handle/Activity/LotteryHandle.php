@@ -1,4 +1,4 @@
-tr<?php
+<?php
 
 class LotteryHandle extends  ActivityHandle
 {
@@ -18,16 +18,24 @@ class LotteryHandle extends  ActivityHandle
         }
     }
 
+    public function getActivityList($org_uid, $activityType)
+    {
+        $activityList = $activityType::where('org_uid',$org_uid)->
+            select('lottery_id','start_time','stop_time','limit_act','name','theme')->get();
+        return $activityList;
+    }
+
     public function createActivity($org_uid, $activityInfo)
     {
-//        try{
-//            DB::beginTransaction();
+       try{
+           DB::beginTransaction();
             $lottery_items = $activityInfo->lottery_items;
             $lottery_id = Lottery::insertGetId(array(
                 'name' => $activityInfo->name,
                 'start_time' => $activityInfo->start_time,
                 'stop_time' => $activityInfo->stop_time,
                 'theme' => $activityInfo->theme,
+                'url' => $activityInfo->url,
                 'limit_act' => $activityInfo->limit_act,
                 'activity_id' => $activityInfo->activity_id,
                 'description' => $activityInfo->description,
@@ -43,13 +51,13 @@ class LotteryHandle extends  ActivityHandle
                     'lottery_id' => $lottery_id
                 ));
             }
-//            DB::commit();
+           DB::commit();
             return true;
-//        }catch (Exception $e)
-//        {
-////           DB::rollback();
-//           return false;
-//        }
+       }catch (Exception $e)
+       {
+          DB::rollback();
+          return false;
+       }
     }
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
@@ -82,7 +90,11 @@ class LotteryHandle extends  ActivityHandle
 
     public function getActivityResult($activityId)
     {
-
+        return DB::table('lottery_user')
+        ->join('lottery_item', function($join)
+        {
+            $join->on('lottery_user.lottery_item_id', '=', 'lottery_item.lottery_item_id');
+        })->where('lottery_user.lottery_id',$activityId)->select('wx_uid','name')->get();
     }
 
     public function getActivityInfo($activityId)
@@ -110,7 +122,8 @@ class LotteryHandle extends  ActivityHandle
             DB::beginTransaction();
             Lottery_user::insert(array(
                 'lottery_id' => $activityId,
-                'lottery_item_id' => $participatorInfo->lottery_item_id
+                'lottery_item_id' => $participatorInfo->lottery_item_id,
+                'wx_uid' => $participatorInfo->wx_uid
             ));
             DB::commit();
             return true;

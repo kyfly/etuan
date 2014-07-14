@@ -4,21 +4,11 @@ class VoteController extends ActivityController
 {
 	private $voteService;
 
-	public function __construct(VoteService $voteService, ActivityService $activityService)
+	public function __construct(VoteService $voteService)
 	{
         $this->voteService = $voteService;
-		parent::__construct($activityService);
+		parent::__construct();
 	}
-
-    public function primaryKeyName()
-    {
-    	return 'vote_id';
-    }
-
-    public function activityType()
-    {
-    	return 'Vote';
-    }
 
     public function serviceName()
     {

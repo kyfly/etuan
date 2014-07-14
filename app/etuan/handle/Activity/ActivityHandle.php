@@ -2,17 +2,9 @@
 
 class ActivityHandle implements ActivityHandleInterface
 {
-    public function deleteActivity($activityId)
-    {
+    public function deleteActivity($activityId){}
 
-    }
-
-    public function getActivityList($org_uid, $activityType)
-	{
-		$activityList = $activityType::where('org_uid',$org_uid)->
-			select('reg_id','start_time','stop_time','limit_type','name','theme')->get();
-		return $activityList;
-	}
+    public function getActivityList($org_uid, $activityType){}
 
 	public function getActivityCount($org_uid)
 	{
@@ -47,6 +39,14 @@ class ActivityHandle implements ActivityHandleInterface
 							'lotteryParticipatorCount'=>$lotteryParticipatorCount,
 							'voteParticipatorCount'=>$voteParticipatorCount];
 		return $participatorCount;
+    }
+
+    public function checkActivityExist($org_uid, $activityType, $primaryKey, $activityId)
+    {
+    	if($activityType::where('org_uid',$org_uid)->where($primaryKey,$activityId)->count()==1)
+    		return true;
+    	else
+    		return false;
     }
 
 }

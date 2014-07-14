@@ -7,7 +7,7 @@ class RegistrationActivityInfo
 
 	public $stop_time;
 
-	public $limit_type;
+	public $limit_grade;
 
 	public $name;
 
@@ -17,19 +17,16 @@ class RegistrationActivityInfo
 
 	public $questions;
 
-	public $choices;
 
-
-	public function __construct($activityId, $start_time, $stop_time, $limit_type, $name, $theme, $url ,$questions, $choices)
+	public function __construct($activityId, $start_time, $stop_time, $limit_grade, $name, $theme, $url ,$questions)
 	{
         $this->activityId = $activityId;
 		$this->start_time = $start_time;
 		$this->stop_time = $stop_time;
-		$this->limit_type = $limit_type;
+		$this->limit_grade = $limit_grade;
 		$this->name = $name;
 		$this->theme = $theme;
 		$this->url = $url;
 		$this->questions = $questions;
-		$this->choices = $choices;
 	}
 }

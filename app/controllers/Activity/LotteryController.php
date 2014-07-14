@@ -2,23 +2,13 @@
 
 class LotteryController extends ActivityController
 {
-	private $lotteryService;
+	public $lotteryService;
 
-	public function __construct(LotteryService $lotteryService, ActivityService $activityService)
+	public function __construct(LotteryService $lotteryService)
 	{
         $this->lotteryService = $lotteryService;
-        parent::__construct($activityService);
+        parent::__construct();
 	}
-
-    public function primaryKeyName()
-    {
-        return 'lottery_id';
-    }
-
-    public function activityType()
-    {
-        return 'Lottery';
-    }
 
     public function serviceName()
     {

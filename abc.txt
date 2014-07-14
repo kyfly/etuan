@@ -1,38 +1,44 @@
 1.总
-获取一个用户各类活动参加的人数
+获取一个用户各类活动参加的人数  --- yes
 http://localhost/etuan/public/activity/allparticipatorcount
 
-获取用户各种活动的数量:
+获取用户各种活动的数量:  --- yes
 http://localhost/etuan/public/activity/activitycount
 
+注册用户
+http://localhost/etuan/public/user/register
 
-2:报名活动
-创建报名活动:
+登陆用户
+htpp://localhost/etuan/public/user/login
+
+
+2:报名活动  --- yes
+创建报名活动: 
 http://localhost/etuan/public/registration/createactivity?
 activityInfo=
 {"start_time":"2014-7-7 19:00:00",
 "stop_time":"2014-7-7 19:00:00",
 "limit_grade":1,
-"name":"wdehuodong",
+"name":"活动3",
 "theme":2,
-"url":"myurl",
-"questions":
-[{"question_id":1,"type":2,"label":"我的问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"这是我的选项1"},{"question_id":2,"choice_id":2,"label":"这是我的选项2"}]}
+"url":"myurl3",
+"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"选项1;选项2;选项3;选项4;"},{"question_id":2,"type":2,"label":"我的问题2","content":"选项1;选项2;选项3;选项4;"}]}
 
 
-更新报名活动:
+
+更新报名活动:  --- yes
 http://localhost/etuan/public/registration/updateactivity?
 activityId=7&
 activityInfo=
 {"start_time":"2014-7-7 19:00:00",
 "stop_time":"2014-7-7 19:00:00",
-"limit_type":1,
+"limit_grade":1,
 "name":"活动",
 "theme":2,
-"url":"myurl",
-"questions":[{"question_id":1,"type":2,"label":"这是问题1","limit_type":2},{"question_id":2,"type":2,"label":"我的问题2","limit_type":2}],"choices":[{"question_id":2,"choice_id":1,"label":"哈哈"},{"question_id":2,"choice_id":2,"label":"xixi"}]}
+"url":"url",
+"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"4;3;选项2;选项1;"},{"question_id":2,"type":2,"label":"问题2","content":"选项1;选项2;选项3;选项4;"}]}
 
-参与报名活动:
+参与报名活动:  ----  yes
 http://localhost/etuan/public/registration/participateinactivity?
 activityId=9&
 participatorInfo=
@@ -41,31 +47,32 @@ participatorInfo=
 "wx_uid":"123456",
 "results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
 
-查看报名活动结果:
+查看报名活动结果:  ----- yes
 http://localhost/etuan/public/registration/activityresult?activityId=23
 
-查看一个报名活动详细信息:
+查看一个报名活动详细信息: ---- yes
 http://localhost/etuan/public/registration/activityinfo?activityId=23
 
-删除报名活动
+删除报名活动   --- yes
 http://localhost/etuan/public/registration/deleteactivity?activityId=23
 
-获取用户所拥有的报名活动的一般信息：
+获取用户所拥有的报名活动的一般信息： ---- yes
 http://localhost/etuan/public/registration/activitylist
 
 
 3:抽奖活动
 
 
-创建抽奖活动:
+创建抽奖活动:   ----- yes
 localhost/etuan/public/lottery/createactivity?activityInfo=
 {
-"name":"抽奖活动",
+"name":"抽奖活动1",
 "start_time":"2014-7-9 12:00:00",
 "stop_time":"2014-7-10 12:00:00",
 "theme":2,
 "limit_act":1,
 "activity_id":24,
+"url":"hellour",
 "description":"一等奖是xxx二等奖是xxx",
 "lottery_items":
 [
@@ -74,33 +81,45 @@ localhost/etuan/public/lottery/createactivity?activityInfo=
 ]
 }
 
-更新抽奖活动:
-localhost/etuan/public/lottery/updateactivity?activityId=4&
+更新抽奖活动:   --- yes 
+localhost/etuan/public/lottery/updateactivity?activityId=2&
 activityInfo=
 {
-"name":"hello",
+"name":"抽奖活动2",
 "start_time":"2014-7-9 12:00:00",
 "stop_time":"2014-7-10 12:00:00",
 "theme":2,
-"limit_type":1,
+"limit_act":1,
 "activity_id":24,
-"description":"一等奖是123二等奖是456",
+"url":"helloursad",
+"description":"一等奖是xxx二等奖是xxx",
 "lottery_items":
 [
-{"name":"123等奖","probability":1,"item_total":100},
-{"name":"456等奖","probability":2,"item_total":200}
+{"name":"dsa一等奖","probability":1,"item_total":100},
+{"name":"二sadsa等奖","probability":2,"item_total":200}
 ]
 }
 
 
-删除抽奖活动:
+参与抽奖活动  --- no
+http://localhost/etuan/public/lottery/participateinactivity?
+activityId=5&
+participatorInfo=
+{
+"wx_uid":"123456"
+}
+
+删除抽奖活动:    ---- yes 
 localhost/etuan/public/lottery/deleteactivity?activityId=2
 
-获取一个抽奖活动的详细信息
+获取一个抽奖活动的详细信息   --- yes
 localhost/etuan/public/lottery/activityinfo?activityId=2
 
-获取用户所拥有的抽奖活动的一般信息：
+获取用户所拥有的抽奖活动的一般信息：--- yes
 http://localhost/etuan/public/lottery/activitylist
+
+获取结果 --- yes
+http://localhost/etuan/public/lottery/activityresult?activityId=5
 
 
 

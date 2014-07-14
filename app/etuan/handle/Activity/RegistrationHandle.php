@@ -8,7 +8,6 @@ class RegistrationHandle extends  ActivityHandle
 
         try {
             DB::beginTransaction();
-            Reg_question_choice::where('reg_id', $activityId)->delete();
             Reg_result::where('reg_id',$activityId)->delete();
             Reg_question::where('reg_id',$activityId)->delete();
             Registration_user::where('reg_id',$activityId)->delete();
@@ -19,7 +18,13 @@ class RegistrationHandle extends  ActivityHandle
             DB::rollback();
             return false;
         }
+    }
 
+    public function getActivityList($org_uid, $activityType)
+    {
+        $activityList = $activityType::where('org_uid',$org_uid)->
+            select('reg_id','start_time','stop_time','limit_grade','name','theme')->get();
+        return $activityList;
     }
 
 	public function createActivity($org_uid, $activityInfo)
@@ -27,7 +32,6 @@ class RegistrationHandle extends  ActivityHandle
 		try {
             DB::beginTransaction();
             $questions = $activityInfo->questions;
-            $choices = $activityInfo->choices;
             $reg_id = Registration::insertGetId(
                 array(
                     'start_time' => $activityInfo->start_time,
@@ -45,18 +49,8 @@ class RegistrationHandle extends  ActivityHandle
                         'question_id' => $question->question_id,
                         'type' => $question->type,
                         'label' => $question->label,
-                        'limit_type' => $question->limit_type,
+                        'content' => $question->content,
                         'reg_id' => $reg_id,
-                        ));
-            }
-            foreach($choices as $choice)
-            {
-                Reg_question_choice::insert(
-                    array(
-                        'question_id' => $choice->question_id,
-                        'choice_id' => $choice->choice_id,
-                        'label' => $choice->label,
-                        'reg_id' => $reg_id
                         ));
             }
             DB::commit();
@@ -115,19 +109,16 @@ class RegistrationHandle extends  ActivityHandle
     {
     	$registration = Registration::where('reg_id',$activityId)->first();
     	$questions = Reg_question::where('reg_id',$activityId)->
-    		select('question_id','type','label','limit_type')->get()->toArray();
-    	$choices = Reg_question_choice::where('reg_id',$activityId)->
-    		select('question_id','choice_id','label')->get()->toArray();
+    		select('question_id','type','label','content')->get()->toArray();
     	$registrationActivityInfo = new RegistrationActivityInfo(
             $activityId,
     		$registration->start_time,
     		$registration->stop_time,
-    		$registration->limit_type,
+    		$registration->limit_grade,
     		$registration->name,
     		$registration->theme,
     		$registration->url,
-    		$questions,
-    		$choices
+    		$questions
     		);   	
     	return json_encode($registrationActivityInfo);
     }

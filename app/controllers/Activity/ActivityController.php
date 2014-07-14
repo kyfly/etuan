@@ -3,33 +3,27 @@
 class ActivityController extends BaseController
 {
 
-    public $activityService;
-
     public $org_uid;
 
     public $activityId;
 
-    public $activityType;
-
     public $service;
 
-	public function __construct(ActivityService $activityService)
+	public function __construct()
 	{
-        $this->activityService = $activityService;
         $this->org_uid = Auth::user()->org_uid;
         $this->activityId = Input::get('activityId');
-        $this->activityType = $this->activityType();
         $this->service = $this->getService($this->serviceName());
 	}
 
-    public function getActivitylist()
+    public function getActivitylist()   //
     {
-        return $this->activityService->getActivityList($this->org_uid, $this->activityType);
+        return $this->service->getActivityList($this->org_uid);
     }
 
     public function getActivitycount()
     {
-        return $this->activityService->getActivityCount($this->org_uid);
+        return $this->service->getActivityCount($this->org_uid);
     }
 
     public function getDeleteactivity()
@@ -41,7 +35,6 @@ class ActivityController extends BaseController
     // public function postCreateactivity()
     {
         $activityInfo = json_decode(Input::get('activityInfo'));
-
         return $this->service->createActivity($this->org_uid, $activityInfo);
     }
 
@@ -69,15 +62,11 @@ class ActivityController extends BaseController
         return $this->service->participateInActivity($this->org_uid, $this->activityId, $participatorInfo);
     }
 
-    public function primaryKeyName(){}
-
-    public function activityType(){}
-
     public function serviceName(){}
 
     public function getAllparticipatorcount()
     {
-        return $this->activityService->getAllParticipatorCount($this->org_uid);
+        return $this->service->getAllParticipatorCount($this->org_uid);
     }
 
     public function getService($serviceName)
@@ -89,6 +78,8 @@ class ActivityController extends BaseController
                 return isset($this->registrationService)?$this->registrationService:null;
             case 'voteService':
                 return isset($this->voteService)?$this->lotteryService:null;
+            default:
+                return new ActivityService;
         }
     }
 
