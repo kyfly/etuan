@@ -10,24 +10,16 @@ class RegistrationService extends ActivityService
 		parent::__construct();
 	}
 
-    public function getActivityResult($org_uid ,$activityId)
-    {
-        if(!$this->handle->checkActivityExist($org_uid, $this->activityType, $this->primaryKey, $activityId))
-            return Lang::get('activity.not.exist');
-
-        return $this->handle->getActivityResult($activityId);
-    }
-
     public function participateInActivity($org_uid, $activityId, $participatorInfo)
     {
-        $activityTimeInfo = Registration::where('org_uid',$org_uid)->
-            where('reg_id',$activityId)->select('start_time','stop_time')->first();
+        $timeInfo = $this->handle->
+            getTimeInfo($this->org_uid, $this->tableName, $this->primaryKey, $activityId);
         $values = array(
             'time' => date('Y-m-d H:i:s',time()),
             'wx_uid'=>$participatorInfo->wx_uid);
         $rules = array(
-            'time' =>array('after:'.$activityTimeInfo->start_time,
-                            'before:'.$activityTimeInfo->stop_time),
+            'time' =>array('after:'.$timeInfo->start_time,
+                            'before:'.$timeInfo->stop_time),
             'wx_uid'=>'exists:wx_user');
         $messages = array(
             'exist'=>Lang::get('wx.qingguanzhu')
@@ -42,7 +34,9 @@ class RegistrationService extends ActivityService
             where('wx_uid',$participatorInfo->wx_uid)->count()>0)
             return Lang::get('activity.already.participate');
 
-        if($this->registrationHandle->participateInActivity($activityId, $participatorInfo))
+        $participatorInfo->ip = '127.0.0.1';
+
+        if($this->handle->participateInActivity($activityId, $participatorInfo))
             return Lang::get('activity.participate.success');
 
         return Lang::get('activity.already.participate');
@@ -58,7 +52,7 @@ class RegistrationService extends ActivityService
         return 'reg_id';
     }
 
-    public function activityType()
+    public function tableName()
     {
         return 'Registration';
     }

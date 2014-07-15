@@ -6,8 +6,8 @@ class VoteHandle extends  ActivityHandle
     {
         try {
             DB::beginTransaction();
-            Vote_user::where('vote_id',$activityId)->delete();
             Vote_result::where('vote_id',$activityId)->delete();
+            Vote_user::where('vote_id',$activityId)->delete();
             Vote_item::where('vote_id',$activityId)->delete();
             Vote::where('vote_id',$activityId)->delete();
             DB::commit();
@@ -18,10 +18,10 @@ class VoteHandle extends  ActivityHandle
         }
     }
 
-        public function getActivityList($org_uid, $activityType)
+    public function getActivityList($org_uid)
     {
-        $activityList = $activityType::where('org_uid',$org_uid)->
-            select('reg_id','start_time','stop_time','limit_grade','name','theme')->get();
+        $activityList = Vote::where('org_uid',$org_uid)->
+            select('vote_id','name','start_time','stop_time','theme','limit_grade','choice_num','description','url')->get();
         return $activityList;
     }
 
@@ -35,18 +35,18 @@ class VoteHandle extends  ActivityHandle
                     'name' => $activityInfo->name,
                     'start_time' => $activityInfo->start_time,
                     'stop_time' => $activityInfo->stop_time,
-                    'limit_type' => $activityInfo->limit_type,
-                    'choice_num' => $activityInfo->choice_num,
                     'theme' => $activityInfo->theme,
-                    'describion' => $activityInfo->describion,
-                    // 'url' => $activityInfo->url,
+                    'limit_grade' => $activityInfo->limit_grade,
+                    'choice_num' => $activityInfo->choice_num,
+                    'description' => $activityInfo->description,
+                    'url' => $activityInfo->url,
                     'org_uid' => $org_uid
                 ));
             foreach($vote_items as $vote_item)
             {
-                Reg_question::insert(
+                Vote_item::insert(
                     array(
-                        'pic_url' => $vote_item->pic_url, //要改
+                        'pic_url' => $vote_item->pic_url,
                         'label' => $vote_item->label,
                         'content' => $vote_item->content,
                         'vote_count' => 0,
@@ -91,25 +91,89 @@ class VoteHandle extends  ActivityHandle
 
     public function getActivityResult($activityId)
     {
-
+        return Vote_item::where('vote_id',$activityId)->select('pic_url','label','content','vote_count')->get();
     }
 
     public function getActivityInfo($activityId)
     {
         $vote = Vote::where('vote_id',$activityId)->first();
         $vote_items = Vote_item::where('vote_id',$activityId)->
-            select('vote_item_id','pic_url','content','vote_count')->get()->toArray();
+            select('pic_url','label','content')->get()->toArray();
         $voteActivityInfo = new VoteActivityInfo(
-
+            $vote->name,
+            $vote->start_time,
+            $vote->stop_time,
+            $vote->theme,
+            $vote->limit_grade,
+            $vote->choice_num,
+            $vote->description,
+            $vote->url,
+            $vote_items
         );
         return json_encode($voteActivityInfo);
     }
 
     public function participateInActivity($activityId, $participatorInfo)
     {
-
+        try{
+            DB::beginTransaction();
+            $choices = $participatorInfo->choices;
+            $vote_serial = Vote_user::insertGetId(array(
+                'used_time' => $participatorInfo->used_time,
+                'ip' => $participatorInfo->ip,
+                'vote_id' => $activityId,
+                'wx_uid' => $participatorInfo->wx_uid
+                ));
+            foreach($choices as $choice)
+            {
+                Vote_result::insert(
+                    array(
+                        'vote_id' => $activityId,
+                        'vote_serial' => $vote_serial,
+                        'vote_choice' => $choice,
+                        ));
+                Vote_item::where('vote_id',$activityId)->where('vote_item_id',$choice)->
+                    update(array(
+                        'vote_count' => 'vote_count' + 1
+                        ));
+            }
+            DB::commit();
+            return true;
+        }catch(Exception $e)
+        {
+            DB::rollback();
+            return false;
+        }
     }
 
+    public function addVoteItem($activityId, $vote_item)
+    {
+        try {
+            DB::beginTransaction();
+            Vote_item::insert(array(
+                'pic_url' => $vote_item->pic_url,
+                'label' => $vote_item->label,
+                'content' => $vote_item->content,
+                'vote_count' => 0,
+                'vote_id' => $activityId,
+                ));
+            DB::commit();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 
+    public function deleteVoteItem($activityId, $vote_item_id)
+    {
+        try {
+            DB::beginTransaction();
+            Vote_item::where('vote_id',$activityId)->where('vote_item_id',$vote_item_id)->delete();
+            DB::commit();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 
 }

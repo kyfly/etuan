@@ -1,0 +1,205 @@
+1.总
+	获取一个用户各类活动参加的人数  --- yes
+	http://localhost/etuan/public/activity/allparticipatorcount
+
+	获取用户各种活动的数量:  --- yes
+	http://localhost/etuan/public/activity/activitycount
+
+	注册用户
+	http://localhost/etuan/public/user/register
+
+	登陆用户
+	htpp://localhost/etuan/public/user/login
+
+
+2:报名活动
+	创建报名活动: 
+	http://localhost/etuan/public/registration/createactivity?
+	activityInfo=
+	{"start_time":"2014-7-7 19:00:00",
+	"stop_time":"2014-7-7 19:00:00",
+	"limit_grade":1,
+	"name":"2活1动4",
+	"theme":2,
+	"url":"my1u2rl4",
+	"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"选项1;选项2;选项3;选项4;"},{"question_id":2,"type":2,"label":"我的问题2","content":"选项1;选项2;选项3;选项4;"}]}
+
+
+
+	更新报名活动:  --- yes
+	http://localhost/etuan/public/registration/updateactivity?
+	activityId=21&
+	activityInfo=
+	{"start_time":"2014-7-7 19:00:00",
+	"stop_time":"2014-7-7 19:00:00",
+	"limit_grade":1,
+	"name":"活动1",
+	"theme":2,
+	"url":"myurl1",
+	"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"4;3;选项2;选项1;"},{"question_id":2,"type":2,"label":"问题2","content":"选项1;选项2;选项3;选项4;"}]}
+
+	参与报名活动:  ----  yes
+	http://localhost/etuan/public/registration/participateinactivity?
+	activityId=9&
+	participatorInfo=
+	{"used_time":"2:40",
+	"student_id":"12051728",
+	"wx_uid":"123456",
+	"results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
+
+	查看报名活动结果:  ----- yes
+	http://localhost/etuan/public/registration/activityresult?activityId=23
+
+	查看一个报名活动详细信息: ---- yes
+	http://localhost/etuan/public/registration/activityinfo?activityId=23
+
+	删除报名活动   --- yes
+	http://localhost/etuan/public/registration/deleteactivity?activityId=23
+
+	获取用户所拥有的报名活动的一般信息： ---- yes
+	http://localhost/etuan/public/registration/activitylist
+
+
+3:抽奖活动
+
+
+	创建抽奖活动:   ----- yes
+	localhost/etuan/public/lottery/createactivity?activityInfo=
+	{
+	"name":"抽奖活动1",
+	"start_time":"2014-7-9 12:00:00",
+	"stop_time":"2014-7-10 12:00:00",
+	"theme":2,
+	"limit_act":1,
+	"activity_id":24,
+	"url":"hellour",
+	"description":"一等奖是xxx二等奖是xxx",
+	"lottery_items":
+	[
+	{"name":"一等奖","probability":1,"item_total":100},
+	{"name":"二等奖","probability":2,"item_total":200}
+	]
+	}
+
+	更新抽奖活动:   --- yes 
+	localhost/etuan/public/lottery/updateactivity?activityId=2&
+	activityInfo=
+	{
+	"name":"抽奖活动2",
+	"start_time":"2014-7-9 12:00:00",
+	"stop_time":"2014-7-10 12:00:00",
+	"theme":2,
+	"limit_act":1,
+	"activity_id":24,
+	"url":"helloursad",
+	"description":"一等奖是xxx二等奖是xxx",
+	"lottery_items":
+	[
+	{"name":"dsa一等奖","probability":1,"item_total":100},
+	{"name":"二sadsa等奖","probability":2,"item_total":200}
+	]
+	}
+
+
+	参与抽奖活动  --- no
+	http://localhost/etuan/public/lottery/participateinactivity?
+	activityId=5&
+	participatorInfo=
+	{
+	"wx_uid":"123456"
+	}
+
+	删除抽奖活动:    ---- yes 
+	localhost/etuan/public/lottery/deleteactivity?activityId=2
+
+	获取一个抽奖活动的详细信息   --- yes
+	localhost/etuan/public/lottery/activityinfo?activityId=2
+
+	获取用户所拥有的抽奖活动的一般信息：--- yes
+	http://localhost/etuan/public/lottery/activitylist
+
+	获取结果 --- yes
+	http://localhost/etuan/public/lottery/activityresult?activityId=5
+
+
+
+3:投票活动
+
+	创建投票
+	localhost/etuan/public/vote/createactivity?
+	activityInfo=
+	{
+	"name":"我的2投2票活动",
+	"start_time":"2014-7-16 10:00:00",
+	"stop_time":"2014-7-18 10:00:00",
+	"theme":"1",
+	"limit_grade":"1110",
+	"choice_num":"2",
+	"description":"hello",
+	"url":"m2yurl12",
+	"vote_items":
+	[
+	{"pic_url":"pic_url1","label":"label1","content":"content1"},
+	{"pic_url":"pic_url2","label":"label2","content":"content2"}
+	]
+	}
+
+	更新投票:
+	localhost/etuan/public/vote/updateactivity?
+	activityId=1&
+	activityInfo=
+	{
+	"name":"我的投票活动2",
+	"start_time":"2014-7-16 10:00:00",
+	"stop_time":"2014-7-18 10:00:00",
+	"theme":"1",
+	"limit_grade":"1110",
+	"choice_num":"2",
+	"description":"hello",
+	"url":"myurl",
+	"vote_items":
+	[
+	{"pic_url":"pic_url12","label":"label12","content":"content12"},
+	{"pic_url":"pic_url22","label":"label22","content":"content22"}
+	]
+	}
+
+	参与投票活动:
+	localhost/etuan/public/vote/participateinactivity?
+	activityId=3&
+	participatorInfo=
+	{
+	"used_time":"3:00",
+	"wx_uid":"654321",
+	"choices":[5,6]
+	}
+
+	删除投票活动:
+	localhost/etuan/public/vote/deleteactivity?activityId=3
+
+	获取投票活动详细信息:
+	localhost/etuan/public/vote/activityinfo?activityId=3
+
+	获取某用户所有投票活动的简单信息
+	http://localhost/etuan/public/vote/activitylist
+
+	获取结果 --- yes
+	http://localhost/etuan/public/vote/activityresult?activityId=5
+
+	增加投票项
+	localhost/etuan/public/vote/addvoteitem?activityId=3&
+	voteItemInfo=
+	{
+	"label":"label1",
+	"content":"content1"
+	}
+
+	删除投票项
+	localhost/etuan/public/vote/deletevoteitem?activityId=3&voteItemId=13
+
+
+
+
+
+
+

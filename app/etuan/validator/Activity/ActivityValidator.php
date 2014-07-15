@@ -9,5 +9,17 @@ class ActivityValidator extends Validator {
         	return true;
         return false;
     }
+	
+	public function validateSpecialNotExist($attribute, $value, $parameters)
+    {
+        $tableName = $parameters[0];
+        $primaryKey = $parameters[1];
+        $activityId = $parameters[2];
+        if(DB::table($tableName)->where($primaryKey,'<>',$activityId)
+        		->where($attribute,$value)->count()==0)
+        	return true;
+        return false;
+    }
+
 
 }

@@ -4,7 +4,7 @@ class ActivityHandle implements ActivityHandleInterface
 {
     public function deleteActivity($activityId){}
 
-    public function getActivityList($org_uid, $activityType){}
+    public function getActivityList($org_uid){}
 
 	public function getActivityCount($org_uid)
 	{
@@ -41,12 +41,18 @@ class ActivityHandle implements ActivityHandleInterface
 		return $participatorCount;
     }
 
-    public function checkActivityExist($org_uid, $activityType, $primaryKey, $activityId)
+    public function checkActivityExist($org_uid, $tableName, $primaryKey, $activityId)
     {
-    	if($activityType::where('org_uid',$org_uid)->where($primaryKey,$activityId)->count()==1)
+    	if($tableName::where('org_uid',$org_uid)->where($primaryKey,$activityId)->count()==1)
     		return true;
     	else
     		return false;
+    }
+
+    public function getTimeInfo($org_uid, $tableName, $primaryKey, $activityId)
+    {
+        return $tableName::where('org_uid',$org_uid)->where($primaryKey, $activityId)->
+            select('start_time','stop_time')->first();
     }
 
 }

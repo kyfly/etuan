@@ -18,9 +18,9 @@ class LotteryHandle extends  ActivityHandle
         }
     }
 
-    public function getActivityList($org_uid, $activityType)
+    public function getActivityList($org_uid)
     {
-        $activityList = $activityType::where('org_uid',$org_uid)->
+        $activityList = Lottery::where('org_uid',$org_uid)->
             select('lottery_id','start_time','stop_time','limit_act','name','theme')->get();
         return $activityList;
     }
@@ -125,6 +125,8 @@ class LotteryHandle extends  ActivityHandle
                 'lottery_item_id' => $participatorInfo->lottery_item_id,
                 'wx_uid' => $participatorInfo->wx_uid
             ));
+            Lottery_item::where('lottery_item_id',$participatorInfo->lottery_item_id)->
+                update(array('item_out'=>'item_out'+1));
             DB::commit();
             return true;
         }catch (Exception $e)

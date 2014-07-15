@@ -20,9 +20,9 @@ class RegistrationHandle extends  ActivityHandle
         }
     }
 
-    public function getActivityList($org_uid, $activityType)
+    public function getActivityList($org_uid)
     {
-        $activityList = $activityType::where('org_uid',$org_uid)->
+        $activityList = Registration::where('org_uid',$org_uid)->
             select('reg_id','start_time','stop_time','limit_grade','name','theme')->get();
         return $activityList;
     }

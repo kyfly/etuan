@@ -14,5 +14,4 @@ class LotteryController extends ActivityController
     {
         return 'lotteryService';
     }
-
 }

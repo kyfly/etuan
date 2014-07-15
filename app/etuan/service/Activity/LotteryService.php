@@ -10,24 +10,17 @@ class LotteryService extends ActivityService
 		parent::__construct();
 	}
 
-    public function getActivityResult($org_uid, $activityId)
-    {
-        if(!$this->handle->checkActivityExist($org_uid, $this->activityType, $this->primaryKey, $activityId))
-            return Lang::get('activity.not.exist');
-
-        return $this->handle->getActivityResult($activityId);
-    }
-
     public function participateInActivity($org_uid, $activityId, $participatorInfo)
     {
-        $activityTimeInfo = Lottery::where('org_uid',$org_uid)->
-            where('lottery_id',$activityId)->select('start_time','stop_time')->first();
+        //验证时间和wx_uid
+        $timeInfo = $this->handle->
+            getTimeInfo($org_uid, $this->tableName, $this->primaryKey, $activityId);
         $values = array(
             'time' => date('Y-m-d H:i:s',time()),
             'wx_uid'=>$participatorInfo->wx_uid);
         $rules = array(
-            'time' =>array('after:'.$activityTimeInfo->start_time,
-                            'before:'.$activityTimeInfo->stop_time),
+            'time' =>array('after:'.$timeInfo->start_time,
+                            'before:'.$timeInfo->stop_time),
             'wx_uid'=>'exists:wx_user');
         $messages = array(
             'exists'=>Lang::get('wx.qingguanzhu')
@@ -39,10 +32,29 @@ class LotteryService extends ActivityService
         }
         if(Lottery_user::where('lottery_id',$activityId)->where('wx_uid',$participatorInfo->wx_uid)->count()>0)
             return Lang::get('activity.already.participate');
-        //抽奖的算法先放在一边把
-        $participatorInfo->lottery_item_id = 9;
-        //看抽到什么
-        if($this->lotteryHandle->participateInActivity($activityId, $participatorInfo))
+        
+        //简单抽奖算法
+        $lottert_items = Lottery_item::whereRaw('item_out < item_total')->get()->toArray();
+        $probabilitySum = 0;
+        $lottery_item_id = null; //代表不中奖
+        foreach($lottert_items as $lottery_item)
+        {
+            $probabilitySum += $lottery_item['probability'];
+        }
+        $probabilitySum = $probabilitySum<100?100:$probabilitySum;
+        foreach($lottert_items as $lottery_item)
+        {
+            if(mt_rand(1,$probabilitySum)<=$lottery_item['probability'])
+            {
+                $lottery_item_id = $lottery_item['lottery_item_id'];
+                break;
+            }
+            $probabilitySum -= $lottery_item['probability'];
+        }
+        $participatorInfo->lottery_item_id = $lottery_item_id;
+        // $participatorInfo->ip = '127.0.0.1';
+
+        if($this->handle->participateInActivity($activityId, $participatorInfo))
             return Lang::get('activity.participate.success');
 
         return Lang::get('activity.already.participate');
@@ -58,7 +70,7 @@ class LotteryService extends ActivityService
         return 'lottery_id';
     }
 
-    public function activityType()
+    public function tableName()
     {
         return 'Lottery';
     }
