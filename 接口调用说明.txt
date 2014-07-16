@@ -1,15 +1,15 @@
 ﻿1.总
 	获取一个社团各类活动参加的人数  --- yes
-	http://localhost/etuan/public/activity/allparticipatorcount
+	http://www.etuan.org/activity/allparticipatorcount
 
 	获取社团各种活动的数量:  --- yes
-	http://localhost/etuan/public/activity/activitycount
+	http://www.etuan.org/activity/activitycount
 
 	注册社团
-	http://localhost/etuan/public/user/register
+	http://www.etuan.org/user/register
 
 	登陆社团
-	htpp://localhost/etuan/public/user/login
+	htpp://www.etuan.org/user/login
 
 
 2:报名活动
@@ -47,11 +47,11 @@
 	不允许	允许	不允许	允许	不允许
 
 	url 允许社团管理员自定义，不能重复
-	http://localhost/etuan/public/baoming/xxxxx
+	http://www.etuan.org/baoming/xxxxx
 
 
 	创建报名活动: [POST]
-	http://localhost/etuan/public/registration/createactivity
+	http://www.etuan.org/registration/createactivity
 	activityInfo=
 	{"start_time":"",	//这次招新报名先留空，php自动完成，根据社团类型来开始
 	"stop_time":"2014-7-7 19:00:00",
@@ -63,7 +63,7 @@
 
 
 	更新报名活动: [POST]    --- yes
-	http://localhost/etuan/public/registration/updateactivity
+	http://www.etuan.org/registration/updateactivity
 	activityId=21&
 	activityInfo=
 	{"start_time":"",
@@ -75,7 +75,7 @@
 	"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"4;3;选项2;选项1;"},{"question_id":2,"type":2,"label":"问题2","content":"选项1;选项2;选项3;选项4;"}]}
 
 	用户参与报名活动: [POST]  ----  yes
-	http://localhost/etuan/public/registration/participateinactivity?
+	http://www.etuan.org/registration/participateinactivity?
 	activityId=9&
 	participatorInfo=
 	{"used_time":"2:40",
@@ -83,19 +83,19 @@
 	"results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
 
 	检查报名url是否已被使用（只检查baoming/后面的字符串，不是整个） [GET]
-	http://localhost/etuan/public/registration/checkurl?url=xxxx
+	http://www.etuan.org/registration/checkurl?url=xxxx
 
 	查看报名活动结果:  [GET] ----- yes
-	http://localhost/etuan/public/registration/activityresult?activityId=23
+	http://www.etuan.org/registration/activityresult?activityId=23
 
 	查看一个报名活动详细信息: [GET] ---- yes
-	http://localhost/etuan/public/registration/activityinfo?activityId=23	
+	http://www.etuan.org/registration/activityinfo?activityId=23	
 
 	删除报名活动  [GET] --- yes
-	http://localhost/etuan/public/registration/deleteactivity?activityId=23
+	http://www.etuan.org/registration/deleteactivity?activityId=23
 
 	获取社团所拥有的报名活动的一般信息： [GET] ---- yes
-	http://localhost/etuan/public/registration/activitylist
+	http://www.etuan.org/registration/activitylist
 
 
 3:抽奖活动
@@ -103,7 +103,7 @@
 	自定义url格式：www.etuan.org/jiang/xxxxx
 
 	创建抽奖活动:  [POST] ----- yes
-	localhost/etuan/public/lottery/createactivity
+	www.etuan.org/lottery/createactivity
 	activityInfo=
 	{
 	"name":"抽奖活动1",
@@ -122,7 +122,7 @@
 	}
 
 	更新抽奖活动:  [POST] --- yes 
-	localhost/etuan/public/lottery/updateactivity
+	www.etuan.org/lottery/updateactivity
 	activityId=2&
 	activityInfo=
 	{
@@ -143,22 +143,22 @@
 
 
 	参与抽奖活动 [GET]  --- no
-	http://localhost/etuan/public/lottery/participateinactivity?activityId=5
+	http://www.etuan.org/lottery/participateinactivity?activityId=5
 
 	检查报名url是否已被使用 [GET]
-	http://localhost/etuan/public/lottery/checkurl?url=xxxx
+	http://www.etuan.org/lottery/checkurl?url=xxxx
 
 	删除抽奖活动: [GET]    ---- yes 
-	localhost/etuan/public/lottery/deleteactivity?activityId=2
+	www.etuan.org/lottery/deleteactivity?activityId=2
 
 	获取一个抽奖活动的详细信息   [GET] --- yes
-	localhost/etuan/public/lottery/activityinfo?activityId=2
+	www.etuan.org/lottery/activityinfo?activityId=2
 
 	获取社团所拥有的抽奖活动的一般信息：[GET] --- yes
-	http://localhost/etuan/public/lottery/activitylist
+	http://www.etuan.org/lottery/activitylist
 
 	获取结果 [GET] --- yes
-	http://localhost/etuan/public/lottery/activityresult?activityId=5
+	http://www.etuan.org/lottery/activityresult?activityId=5
 
 
 
@@ -167,7 +167,7 @@
 	投票url格式：www.etuan.org/vote/xxxxx
 
 	创建投票
-	localhost/etuan/public/vote/createactivity?
+	www.etuan.org/vote/createactivity?
 	activityInfo=
 	{
 	"name":"我的2投2票活动",
@@ -186,7 +186,7 @@
 	}
 
 	更新投票:
-	localhost/etuan/public/vote/updateactivity?
+	www.etuan.org/vote/updateactivity?
 	activityId=1&
 	activityInfo=
 	{
@@ -206,7 +206,7 @@
 	}
 
 	参与投票活动:
-	localhost/etuan/public/vote/participateinactivity?
+	www.etuan.org/vote/participateinactivity?
 	activityId=3&
 	participatorInfo=
 	{
@@ -216,19 +216,19 @@
 	}
 
 	删除投票活动:
-	localhost/etuan/public/vote/deleteactivity?activityId=3
+	www.etuan.org/vote/deleteactivity?activityId=3
 
 	获取投票活动详细信息:
-	localhost/etuan/public/vote/activityinfo?activityId=3
+	www.etuan.org/vote/activityinfo?activityId=3
 
 	获取某社团所有投票活动的简单信息
-	http://localhost/etuan/public/vote/activitylist
+	http://www.etuan.org/vote/activitylist
 
 	获取结果 --- yes
-	http://localhost/etuan/public/vote/activityresult?activityId=5
+	http://www.etuan.org/vote/activityresult?activityId=5
 
 	增加投票项
-	localhost/etuan/public/vote/addvoteitem?activityId=3&
+	www.etuan.org/vote/addvoteitem?activityId=3&
 	voteItemInfo=
 	{
 	"label":"label1",
@@ -236,7 +236,7 @@
 	}
 
 	删除投票项
-	localhost/etuan/public/vote/deletevoteitem?activityId=3&voteItemId=13
+	www.etuan.org/vote/deletevoteitem?activityId=3&voteItemId=13
 
 
 
