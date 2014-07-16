@@ -1,79 +1,119 @@
-1.总
-	获取一个用户各类活动参加的人数  --- yes
+﻿1.总
+	获取一个社团各类活动参加的人数  --- yes
 	http://localhost/etuan/public/activity/allparticipatorcount
 
-	获取用户各种活动的数量:  --- yes
+	获取社团各种活动的数量:  --- yes
 	http://localhost/etuan/public/activity/activitycount
 
-	注册用户
+	注册社团
 	http://localhost/etuan/public/user/register
 
-	登陆用户
+	登陆社团
 	htpp://localhost/etuan/public/user/login
 
 
 2:报名活动
-	创建报名活动: 
-	http://localhost/etuan/public/registration/createactivity?
+
+	报名问题输入框的type定义：	
+	1 	文本输入框（text）
+	2 	文本输入区域（textarea)
+	3	下拉框(select)
+	4 	单选框（radio）
+	5	复选（checkbox）
+	6	数字（number）
+	7	链接（url）
+	8	电子邮件（email）
+	9	密码(password)
+
+	101		学号
+	102		姓名
+	103		性别
+	104		学院
+	105		专业
+	106		特长
+	107		电子邮箱
+	108		QQ
+	109		手机长号
+	110		手机短号
+	111		籍贯
+	112		第一意向部门
+	113		第二意向部门
+	114		第三意向部门
+	115		是否服从调剂
+			
+	limit_grade 年级限制，用5位二进制表示（字符串类型)，0表示不允许参与，1表示允许参与
+	0 		1 		0 		1 		0
+	研究生	大四	大三	大二	大一
+	不允许	允许	不允许	允许	不允许
+
+	url 允许社团管理员自定义，不能重复
+	http://localhost/etuan/public/baoming/xxxxx
+
+
+	创建报名活动: [POST]
+	http://localhost/etuan/public/registration/createactivity
 	activityInfo=
-	{"start_time":"2014-7-7 19:00:00",
+	{"start_time":"",	//这次招新报名先留空，php自动完成，根据社团类型来开始
 	"stop_time":"2014-7-7 19:00:00",
-	"limit_grade":1,
-	"name":"2活1动4",
+	"limit_grade":00001,
+	"name":"",	//先留空，php自动完成，格式为社团名称+招新报名
 	"theme":2,
 	"url":"my1u2rl4",
 	"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"选项1;选项2;选项3;选项4;"},{"question_id":2,"type":2,"label":"我的问题2","content":"选项1;选项2;选项3;选项4;"}]}
 
 
-
-	更新报名活动:  --- yes
-	http://localhost/etuan/public/registration/updateactivity?
+	更新报名活动: [POST]    --- yes
+	http://localhost/etuan/public/registration/updateactivity
 	activityId=21&
 	activityInfo=
-	{"start_time":"2014-7-7 19:00:00",
+	{"start_time":"",
 	"stop_time":"2014-7-7 19:00:00",
 	"limit_grade":1,
-	"name":"活动1",
+	"name":"",
 	"theme":2,
 	"url":"myurl1",
 	"questions":[{"question_id":1,"type":2,"label":"这是问题1","content":"4;3;选项2;选项1;"},{"question_id":2,"type":2,"label":"问题2","content":"选项1;选项2;选项3;选项4;"}]}
 
-	参与报名活动:  ----  yes
+	用户参与报名活动: [POST]  ----  yes
 	http://localhost/etuan/public/registration/participateinactivity?
 	activityId=9&
 	participatorInfo=
 	{"used_time":"2:40",
 	"student_id":"12051728",
-	"wx_uid":"123456",
 	"results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
 
-	查看报名活动结果:  ----- yes
+	检查报名url是否已被使用（只检查baoming/后面的字符串，不是整个） [GET]
+	http://localhost/etuan/public/registration/checkurl?url=xxxx
+
+	查看报名活动结果:  [GET] ----- yes
 	http://localhost/etuan/public/registration/activityresult?activityId=23
 
-	查看一个报名活动详细信息: ---- yes
-	http://localhost/etuan/public/registration/activityinfo?activityId=23
+	查看一个报名活动详细信息: [GET] ---- yes
+	http://localhost/etuan/public/registration/activityinfo?activityId=23	
 
-	删除报名活动   --- yes
+	删除报名活动  [GET] --- yes
 	http://localhost/etuan/public/registration/deleteactivity?activityId=23
 
-	获取用户所拥有的报名活动的一般信息： ---- yes
+	获取社团所拥有的报名活动的一般信息： [GET] ---- yes
 	http://localhost/etuan/public/registration/activitylist
 
 
 3:抽奖活动
 
+	自定义url格式：www.etuan.org/jiang/xxxxx
 
-	创建抽奖活动:   ----- yes
-	localhost/etuan/public/lottery/createactivity?activityInfo=
+	创建抽奖活动:  [POST] ----- yes
+	localhost/etuan/public/lottery/createactivity
+	activityInfo=
 	{
 	"name":"抽奖活动1",
 	"start_time":"2014-7-9 12:00:00",
 	"stop_time":"2014-7-10 12:00:00",
 	"theme":2,
-	"limit_act":1,
+	"limit_act":'reg','vote','ticket'三选一
 	"activity_id":24,
 	"url":"hellour",
-	"description":"一等奖是xxx二等奖是xxx",
+	"description":"本次活动奖品由xxx提供，请中奖者到xxx领奖……",
 	"lottery_items":
 	[
 	{"name":"一等奖","probability":1,"item_total":100},
@@ -81,18 +121,19 @@
 	]
 	}
 
-	更新抽奖活动:   --- yes 
-	localhost/etuan/public/lottery/updateactivity?activityId=2&
+	更新抽奖活动:  [POST] --- yes 
+	localhost/etuan/public/lottery/updateactivity
+	activityId=2&
 	activityInfo=
 	{
 	"name":"抽奖活动2",
 	"start_time":"2014-7-9 12:00:00",
 	"stop_time":"2014-7-10 12:00:00",
 	"theme":2,
-	"limit_act":1,
+	"limit_act":'reg','vote','ticket'三选一
 	"activity_id":24,
 	"url":"helloursad",
-	"description":"一等奖是xxx二等奖是xxx",
+	"description":"本次活动奖品由xxx提供，请中奖者到xxx领奖……",
 	"lottery_items":
 	[
 	{"name":"dsa一等奖","probability":1,"item_total":100},
@@ -101,29 +142,29 @@
 	}
 
 
-	参与抽奖活动  --- no
-	http://localhost/etuan/public/lottery/participateinactivity?
-	activityId=5&
-	participatorInfo=
-	{
-	"wx_uid":"123456"
-	}
+	参与抽奖活动 [GET]  --- no
+	http://localhost/etuan/public/lottery/participateinactivity?activityId=5
 
-	删除抽奖活动:    ---- yes 
+	检查报名url是否已被使用 [GET]
+	http://localhost/etuan/public/lottery/checkurl?url=xxxx
+
+	删除抽奖活动: [GET]    ---- yes 
 	localhost/etuan/public/lottery/deleteactivity?activityId=2
 
-	获取一个抽奖活动的详细信息   --- yes
+	获取一个抽奖活动的详细信息   [GET] --- yes
 	localhost/etuan/public/lottery/activityinfo?activityId=2
 
-	获取用户所拥有的抽奖活动的一般信息：--- yes
+	获取社团所拥有的抽奖活动的一般信息：[GET] --- yes
 	http://localhost/etuan/public/lottery/activitylist
 
-	获取结果 --- yes
+	获取结果 [GET] --- yes
 	http://localhost/etuan/public/lottery/activityresult?activityId=5
 
 
 
 3:投票活动
+
+	投票url格式：www.etuan.org/vote/xxxxx
 
 	创建投票
 	localhost/etuan/public/vote/createactivity?
@@ -180,7 +221,7 @@
 	获取投票活动详细信息:
 	localhost/etuan/public/vote/activityinfo?activityId=3
 
-	获取某用户所有投票活动的简单信息
+	获取某社团所有投票活动的简单信息
 	http://localhost/etuan/public/vote/activitylist
 
 	获取结果 --- yes
