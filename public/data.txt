@@ -1,0 +1,180 @@
+AtrplyController
+
+
+postCautoreply()
+        该接口为微信添加自动回复，关键字回复接口。
+            返回信息：
+                        $arr[]="关键字不能重复";
+                        $arr[]=$arr["keyword"][$i]."这个关键字已存在";
+                        $arr[]="你已经插入了相同的信息。";
+                        $arr[]="这个微信号已经创建了相同的消息，你可以对已添加的消息添加多个关键字";
+                        bool
+            网页需传回json数据格式如下(type为news时content为素材库图文消息的news_id)
+                    文本回复：    "{"mp_id":2,"type":"text","content":"fffffffffff","keyword":["ffffffffff","fffffffffff"]}"
+                    图文回复：    "{"mp_id":2,"type":"news","content":47,"keyword":["rrrrrrrrrr","rrrrrrrrr"]}"
+
+                    数组样式（非返回类型）：
+                                    $arr = ["mp_id"=>2,"type"=>"text","content"=>"fffffffffff","keyword"=>["ffffffffff","fffffffffff"]];
+                                    $arr = ["mp_id"=>2,"type"=>"news","content"=>47,"keyword"=>["rrrrrrrrrr","rrrrrrrrr"]];
+postUautoreply()
+        该接口为自动回复更新接口。
+        返回信息：
+                    $arr[]=$arr["keyword"][$i]."这个关键字已存在";
+                    $arr[] = "不存在该自动回复";
+                    $arr[]="关键字不能重复";
+                    bool
+        网页需传回json数据格式如下(type为news时content为素材库图文消息的news_id)
+                   文本回复：  "{"reply_id":45,"type":"text","content":"some string","keyword":["dffdghds","sdfgnjfd"]}"
+                   图文回复： "{"reply_id":44,"type":"news","content":17,"keyword":["fth","fg","f"]}"
+
+        数组样式（非返回类型）：
+                    //$arr = ["reply_id"=>45,"type"=>"text","content"=>17,"keyword"=>["dffdghds","sdfgnjfd"]];
+                    //$arr = ["reply_id"=>44,"type"=>"news","content"=>17,"keyword"=>["fth","fg","f"]];
+getSautoreply()
+
+        该接口为自动回复查询接口，包括所创建自动回复消息的所有信息。
+             此消息属于同一社团，不同微信公众号
+             例如：
+             //mp_id1：//
+                "[
+                    [
+                        {"keyword":["rrrrrr","tttttttt"],
+                        "0":{"news_id":47,"title":"test11","article_id":1,"description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":null}}
+                    ],
+           // mp_id2：//
+                    [
+                        {"text":{"mp_reply_id":48,"msg_id":4,"content":"dgfdfvd"},
+                        "keyword":["dfffdf","dxd"]},
+
+                        {"text":{"mp_reply_id":49,"msg_id":5,"content":"dhhhhhhhhhhh"},
+                        "keyword":["hhhhhhh","hhhhhhhh"]},
+
+                        {"text":{"mp_reply_id":50,"msg_id":6,"content":"fffffffffff"},
+                        "keyword":["ffffffffff","fffffffffff"]},
+
+                        {"keyword":["rrrrrrrrr","rrrrrrrrrr"],
+                        "0":{"news_id":47,"title":"test11","article_id":1,"description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":null}}
+                    ]
+                ]"
+
+
+        /*
+        数组样式（非返回类型）：
+        [0]=> array(2) {
+             ["keyword"]=> array(2) { [0]=> string(6) "rrrrrr" [1]=> string(8) "tttttttt" }
+            [0]=> array(7) { ["news_id"]=> int(47) ["title"]=> string(6) "test11" ["article_id"]=> int(1) ["description"]=> string(10) "dddddddddd" ["pic_url"]=> string(10) "kkkkkkkkkk" ["url"]=> string(8) "llllllll" ["content"]=> NULL } } }
+        [1]=> array(4) {
+            [0]=> array(2) {
+                    ["text"]=> array(3) { ["mp_reply_id"]=> int(48) ["msg_id"]=> int(4) ["content"]=> string(7) "dgfdfvd" }
+                    ["keyword"]=> array(2) { [0]=> string(6) "dfffdf" [1]=> string(3) "dxd" } }
+            [1]=> array(2) {
+                    ["text"]=> array(3) { ["mp_reply_id"]=> int(49) ["msg_id"]=> int(5) ["content"]=> string(12) "dhhhhhhhhhhh" }
+                    ["keyword"]=> array(2) { [0]=> string(7) "hhhhhhh" [1]=> string(8) "hhhhhhhh" } }
+            [2]=> array(2) {
+                     ["text"]=> array(3) { ["mp_reply_id"]=> int(50) ["msg_id"]=> int(6) ["content"]=> string(11) "fffffffffff" }
+                     ["keyword"]=> array(2) { [0]=> string(10) "ffffffffff" [1]=> string(11) "fffffffffff" } }
+            [3]=> array(2) {
+                    ["keyword"]=> array(2) { [0]=> string(9) "rrrrrrrrr" [1]=> string(10) "rrrrrrrrrr" }
+                    [0]=> array(7) { ["news_id"]=> int(47) ["title"]=> string(6) "test11" ["article_id"]=> int(1) ["description"]=> string(10) "dddddddddd" ["pic_url"]=> string(10) "kkkkkkkkkk" ["url"]=> string(8) "llllllll" ["content"]=> NULL } } } }
+        */
+getDautoreply()     删除自动回复
+        Input::get("reply_id");
+
+//NewsController
+
+postCnews()
+    该接口为图文消息创建接口：
+        返回值：
+            $arr[]="创建消息失败，请修改部分内容，可能该消息已存在。";
+            bool
+        接收数据：
+             "[{"title":"test11","description":"ddssnddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":"kk"},
+             {"title":"test22","description":"ffffffffff","pic_url":"rrrrrrrr","url":"222222222","content":"dd"},
+             {"title":"test33","description":"gggggggggg","pic_url":"fffffccffff","url":"333333333","content":"ddd"}]"
+
+        数组样式：
+            $arr =[ ["title"=>"test11","description"=>"ddssnddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"kk"],
+                ["title"=>"test22","description"=>"ffffffffff","pic_url"=>"rrrrrrrr","url"=>"222222222","content"=>"dd"],
+                ["title"=>"test33","description"=>"gggggggggg","pic_url"=>"fffffccffff","url"=>"333333333","content"=>"ddd"]];
+postUnews()
+ 该接口为图文消息更新接口：
+        返回值：bool
+
+         接收数据：
+            "[{"news_id":46,"article_id":1,"title":"test","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":"fffffffkk","news_from":"sucai"},
+            {"news_id":46,"article_id":2,"title":"test","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":"fffffdd","news_from":"sucai"},
+            {"news_id":46,"article_id":3,"title":"test","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":"iiifffffiiiii","news_from":"sucai"}]"
+
+         数组样式：
+            $arr =[ ["news_id"=>46,"article_id"=>1,"title"=>"test","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"fffffffkk","news_from"=>"sucai"],
+                ["news_id"=>46,"article_id"=>2,"title"=>"test","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"fffffdd","news_from"=>"sucai"],
+                ["news_id"=>46,"article_id"=>3,"title"=>"test","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"iiifffffiiiii","news_from"=>"sucai"]];
+
+postCactnews()
+    该接口为社团活动信息图文消息创建接口,在社团选择此图文消息时调用。
+        返回值：bool
+            "{"title":"test11","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","news_from":"vote"}"
+            $arr =["title"=>"test11","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","news_from"=>"vote"];
+
+getSactnews()
+    该接口为社团所有活动信息的图文消息,属于社团素材库调用。
+    返回信息：
+                "[[{"name":"\u62bd\u5956\u54e6","description":"\u98de\u4f60\u77e5\u9053\u5357\u65b9\u4f60\u7684\u65b9\u6cd5\u5206\u6790 \u4f60\u8d1f\u8d23","url":"hhhhhhh","pic_url":null,"news_from":"lottery"}
+                ,{"name":"\u53eb\u4f60\u6101","description":"\u6de1\u6de1\u7684\u6de1\u6de1\u7684\u6de1\u6de1\u7684\u6de1\u6de1\u7684\u6de1\u6de1","url":"ggggggggg","pic_url":null,"news_from":"lottery"}]
+                ,[{"name":"\u62a5\u540d\u5566","url":"kkk","pic_url":null,"description":"\u70b9\u51fb\u8fdb\u5165\u62a5\u540d\u5566>>","news_from":"registration"},
+                {"name":"\u62a5\u540d\u6765\u4e86","url":"ffffffffff","pic_url":null,"description":"\u70b9\u51fb\u8fdb\u5165\u62a5\u540d\u6765\u4e86>>","news_from":"registration"}],
+                [{"act_tittle":"grtnagn","url":"ghb","pic_url":null,"description":"\u70b9\u51fb\u8fdb\u5165grtnagn>>","news_from":"ticket"},
+                {"act_tittle":"\u62a2\u7968","url":"llllllllll","pic_url":null,"description":"\u70b9\u51fb\u8fdb\u5165\u62a2\u7968>>","news_from":"ticket"}
+                ,{"act_tittle":"\u62a2\u7968\u5443\u5443\u5443","url":"hhhhhhhh","pic_url":null,"description":"\u70b9\u51fb\u8fdb\u5165\u62a2\u7968\u5443\u5443\u5443>>","news_from":"ticket"}],
+                [{"name":"\u5965 \u5230\u4e86\u6ce2\u52a8","description":"\u5927\u53d1\u6148\u60b2\u3001\u5783\u573e\u554a\u3001\u554a\u5b9a\u8bba\uff1b\u554a","url":"lllllllll","pic_url":null,"news_from":"vote"}]]"
+
+/* * {
+    数组样式：
+                     [0]=> array(2) {
+                             [0]=> array(5) { ["name"]=> string(9) "抽奖哦" ["description"]=> string(46) "飞你知道南方你的方法分析 你负责" ["url"]=> string(7) "hhhhhhh" ["pic_url"]=> NULL ["news_from"]=> string(7) "lottery" }
+                              [1]=> array(5) { ["name"]=> string(9) "叫你愁" ["description"]=> string(42) "淡淡的淡淡的淡淡的淡淡的淡淡" ["url"]=> string(9) "ggggggggg" ["pic_url"]=> NULL ["news_from"]=> string(7) "lottery" } }
+                      [1]=> array(2) {
+                             [0]=> array(5) { ["name"]=> string(9) "报名啦" ["url"]=> string(3) "kkk" ["pic_url"]=> NULL ["description"]=> string(23) "点击进入报名啦>>" ["news_from"]=> string(12) "registration" }
+                              [1]=> array(5) { ["name"]=> string(12) "报名来了" ["url"]=> string(10) "ffffffffff" ["pic_url"]=> NULL ["description"]=> string(26) "点击进入报名来了>>" ["news_from"]=> string(12) "registration" } }
+                      [2]=> array(3) {
+                             [0]=> array(5) { ["act_tittle"]=> string(7) "grtnagn" ["url"]=> string(3) "ghb" ["pic_url"]=> NULL ["description"]=> string(21) "点击进入grtnagn>>" ["news_from"]=> string(6) "ticket" }
+                              [1]=> array(5) { ["act_tittle"]=> string(6) "抢票" ["url"]=> string(10) "llllllllll" ["pic_url"]=> NULL ["description"]=> string(20) "点击进入抢票>>" ["news_from"]=> string(6) "ticket" }
+                              [2]=> array(5) { ["act_tittle"]=> string(15) "抢票呃呃呃" ["url"]=> string(8) "hhhhhhhh" ["pic_url"]=> NULL ["description"]=> string(29) "点击进入抢票呃呃呃>>" ["news_from"]=> string(6) "ticket" } }
+                      [3]=> array(1) {
+                             [0]=> array(5) { ["name"]=> string(17) "奥 到了波动" ["description"]=> string(42) "大发慈悲、垃圾啊、啊定论；啊" ["url"]=> string(9) "lllllllll" ["pic_url"]=> NULL ["news_from"]=> string(4) "vote" } } }
+              */
+
+getDnews()          bool
+              Input::get("news_id");
+
+//QretuanController
+微信带参数二维码接口。
+//获取二维码方法还需要修改，appid，appsecret 都需要重写。
+ postCqrcode()          bool
+
+        Input::get("act_id");
+        Input::get("act_type");
+
+postUqrcode()           bool
+        Input::get("scene_id");
+        Input::get("act_id");
+        Input::get("act_type");
+
+postDqrcode()           bool
+        Input::get("scene_id");
+
+postSqrcode()        "[{"scene_id":1,"act_type":"ticket","act_id":1,"created_at":"2014-07-17 23:13:02",
+                    "updated_at":"2014-07-17 15:14:46","qrcode_url":"img\/ticket\/1405609982.jpg"}]"
+
+//WxinterfaceController
+微信公众号接口信息接口
+postCwx()       bool
+        Input::get("mp_origin_id");
+
+postUwx()       bool
+        Input::get("mp_id");
+        Input::get("mp_origin_id");
+
+getSwx()         "[{"mp_origin_id":"jjjjjjjjjjjjjjjjjjj","interface_url":"KPWHZJ71J1MJKPBRKAKHKMZQI6T4NSZ0","interface_token":"I1UV5VJAQQ04HVYWUCBANVKHAFD1IQNL"}
+                ,{"mp_origin_id":"kkkkkkkkkkkkkk","interface_url":"SCNO3FGG7LO6OI05PG30FYW284FSTSFJ","interface_token":"INHJNO4TEOV1U6F8SX5I8O28YSNX1P4T"}
+                ,{"mp_origin_id":"kkkkkkkkkkkkkk","interface_url":"STC9YJL2ON2TET8PKM6SHCD44FS20ZEB","interface_token":"ULT2IG6P527JJ26QEOKI1QN4N094ASZU"}]"

@@ -173,4 +173,35 @@ class WeixinHandle
             return $obj->TextMessage($postObj,$contentStr);
         }
     }
+    //获取二维码方法还需要修改，appid，appsecret 都需要重写。
+    public function getQrcodeUrl(){
+        $appid = APPID;
+        $appsecret = APPSECRET;
+        $token = $this->getToken($appid,$appsecret);
+        $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
+        $josn = '{"expire_seconds": 1800, "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}';
+        $re = $this->https_request($url,$josn);
+        $arr = json_decode($re,true);
+        $ticket = $arr["ticket"];
+        $url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=$ticket";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_NOBODY, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $body = curl_exec($ch);
+        curl_close($ch);
+        $filename = "img/ticket/".time().".jpg";
+        if($file = fopen($filename,"w")){
+            if(fwrite($file,$body)){
+                return $filename;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 }
