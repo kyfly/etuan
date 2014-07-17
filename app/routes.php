@@ -20,8 +20,3 @@
     Route::post("wx/{id}","EtuanController@store");
 
     Route::controller("build","WxbuilderController");
-    Route::controller("data","WxDataCreateController");
-
-Route::get("/",function(){
-   return View::make("test");
-});
