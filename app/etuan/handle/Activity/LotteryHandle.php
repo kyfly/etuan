@@ -123,6 +123,7 @@ class LotteryHandle extends  ActivityHandle
             Lottery_user::insert(array(
                 'lottery_id' => $activityId,
                 'lottery_item_id' => $participatorInfo->lottery_item_id,
+                'ip' => $participatorInfo->ip,
                 'wx_uid' => $participatorInfo->wx_uid
             ));
             Lottery_item::where('lottery_item_id',$participatorInfo->lottery_item_id)->

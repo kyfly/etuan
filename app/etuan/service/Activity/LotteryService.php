@@ -52,7 +52,7 @@ class LotteryService extends ActivityService
             $probabilitySum -= $lottery_item['probability'];
         }
         $participatorInfo->lottery_item_id = $lottery_item_id;
-        // $participatorInfo->ip = '127.0.0.1';
+        $participatorInfo->ip = UsefulTool::getIp();
 
         if($this->handle->participateInActivity($activityId, $participatorInfo))
             return Lang::get('activity.participate.success');

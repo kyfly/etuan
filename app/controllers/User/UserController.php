@@ -24,6 +24,11 @@
 			return View::make('login');
 		}
 
+		public function getChangepassword()
+		{
+			return View::make('changepassword');
+		}
+
 		public function postRegister()
 		{
 			$condition = $this->userHandle->register($this->email,$this->password);
@@ -51,6 +56,21 @@
 			{
 				echo '登陆失败';
 				//登陆失败,返回登陆页面并附带密码错误的信息
+			}
+		}
+
+		public function postChangepassword()
+		{
+			$condition = $this->userHandle->changePassword($this->oldPassword,$this->newPassword);
+			if($condition)
+			{
+				echo '修改密码成功';
+				//修改密码成功
+			}
+			else
+			{
+				echo '修改密码失败';
+				//修改密码失败
 			}
 		}
 

@@ -84,7 +84,3 @@ require app_path().'/filters.php';
 
 require app_path().'/acl.php';
 
-Validator::resolver(function($translator, $data, $rules, $messages)
-{
-    return new ActivityValidator($translator, $data, $rules, $messages);
-});

@@ -130,7 +130,7 @@ class RegistrationHandle extends  ActivityHandle
             $results = $participatorInfo->results;
             $reg_serial = Registration_user::insertGetId(array(
                 'used_time' => $participatorInfo->used_time,
-                'ip' => '127.0.0.1',
+                'ip' => $participatorInfo->ip,
                 'student_id' => $participatorInfo->student_id,
                 'reg_id' => $activityId,
                 'wx_uid' => $participatorInfo->wx_uid

@@ -34,7 +34,7 @@ class RegistrationService extends ActivityService
             where('wx_uid',$participatorInfo->wx_uid)->count()>0)
             return Lang::get('activity.already.participate');
 
-        $participatorInfo->ip = '127.0.0.1';
+        $participatorInfo->ip = UsefulTool::getIp();
 
         if($this->handle->participateInActivity($activityId, $participatorInfo))
             return Lang::get('activity.participate.success');
