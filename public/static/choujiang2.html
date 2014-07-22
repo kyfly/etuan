@@ -8,7 +8,7 @@
 <style>
 	body {
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
-		background-color: #ffcc99;
+		background-color: #cc6666;
 		}
 	#overDiv {
 		background-color: #000;
@@ -47,11 +47,6 @@
 		margin-top: 30px;
 		height: 50px;
 		}
-	#login3 {
-		position: absolute;
-		left: 43%;
-		top: 2.5%;
-		}
 	#closebtn {
 		cursor: pointer;
 		position: absolute;
@@ -62,22 +57,14 @@
 		margin-bottom: 0;
 	}
 	.jumbotron {
-		background: url(../img/choujiang-bg1.png) top repeat-x;
+		background: url(../img/choujiang2-bg1_1.png) right bottom no-repeat,
+		url(../img/choujiang2-bg1.png) top repeat-x;
+		height: 220px;
 		}
-
-	.jumbotron > .container > p {
-		color: #ffcc66;
-		font-size: 55px;
-		}
-	#main {
-		position: relative;
+	.jumbotron > p {
+		color: #fff;
 		text-align: center;
-		}
-	#title1-2 {
-		text-align: right;
-		}
-	.title2 {
-		text-align: center;
+		font-size: 60px;
 		}
 	#startbtn {
 		position: absolute;
@@ -93,35 +80,20 @@
 		top: 8%;
 		left: 33%;
 		}
-	#rule {
-		margin-top: 50px;
-		}
 @media screen and (min-width: 1400px) {
-	.jumbotron > .container > p {
+	.jumbotron > p {
 		font-size: 80px;
 		}
 }
-@media screen and (min-width: 600px) {
-	.jumbotron > .container {
-		width: 40%;
-		}
-}
 @media screen and (max-width: 600px) {
-		#loginbox {
+	#loginbox {
 		left: 50%;
 		top: 37%;
 		width: 300px;
 		height: 300px;
 		}
-		#login3 {
-		left: 31%;;
-		top: -14%;
-		}
 }
 @media screen and (max-width: 1200px) {
-	.img-bg {
-		width: 100%;
-		}
 	#startbtn {
 		width: 22%;
 		top: 17%;
@@ -133,14 +105,11 @@
 		top: 8%;
 		left: 30%;
 		}
-	#rule {
-		margin-top: 25px;
-		}
 }
 </style>
 </head>
 <body>
-<div id="overDiv"></div>
+<!--<div id="overDiv"></div>
 
 <div id="loginbox">
   <div class="container col-xs-12">
@@ -150,7 +119,7 @@
       <button id="login2" type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
     </div>
   </div>
-</div>
+</div>-->
 
 <header>
     <nav class="navbar navbar-default" role="navigation">
@@ -193,24 +162,13 @@
     </nav>
 </header>
 <div class="jumbotron">
-    <div class="container">
-        <p id="title1-1" class="hidden-xs">十佳歌手</p>
-        <p id="title1-2" class="hidden-xs">抽奖活动</p>
-        <p class="title2 visible-xs-block">十佳歌手</p>
-        <p class="title2 visible-xs-block">抽奖活动</p>
-    </div>
+        <p class="hidden-xs">十佳歌手抽奖活动</p>
+        <p class="visible-xs-block">十佳歌手<br>抽奖活动</p>
 </div>
 <div id="main" class="container">
-    <div>
-        <button id="login3" class="btn btn-success" onClick="show()">输入学号开始抽奖</button>
-        <img class="img-bg" src="../img/choujiang-bg2.png">
-        <img id="startbtn" src="../img/choujiang-zhizhen.png">
-        <img id="zhuanpan" src="../img/choujiang-zhuanpan.png">
-    </div>
-    <div id="rule">
-      <img class="img-bg" src="../img/choujiang-bg3.png">
-    </div>
+
 </div>
+
 <footer class="panel-footer">
     <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
