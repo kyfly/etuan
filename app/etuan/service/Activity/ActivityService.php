@@ -126,6 +126,8 @@ class ActivityService implements ActivityServiceInterface
                 return isset($this->registrationHandle)?$this->registrationHandle:null;
             case 'voteHandle':
                 return isset($this->voteHandle)?$this->voteHandle:null;
+            case 'ticketHandle':
+                return isset($this->ticketHandle)?$this->ticketHandle:null;
             default:
             	return new ActivityHandle;
         }

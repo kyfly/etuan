@@ -21,4 +21,11 @@ class DatabaseValidator extends Validator {
         return false;
     }
 
+    public function ValidateOldPassword($attribute, $value , $parameters)
+    {
+        if(Hash::check($value, $parameters[0]))
+            return true;
+        return false;
+    }
+
 }

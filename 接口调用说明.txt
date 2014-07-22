@@ -245,12 +245,14 @@
 
 	暂时只有超级管理员才能给用户发消息，不支持用户之间发消息和向超级管理员回复消息。所有消息的from（发件人）暂时固定为“团团一家”
 
-	获取用户消息：[GET] 
-	http://www.etuan.org/user/message?uid=xxx
+	获取用户消息：[POST] 
+	http://www.etuan.org/user/message?
+	messageInfo=
 	{
-		[{"message_id":1, "from":"团团一家"，"tittle":"消息标题"，"content":"消息内容......", "mark_read":"false", "created_time:424312(unix时间戳)"}]
+	"to_org_uid":"org_uid",
+	"title":"消息标题",
+	"content":"消息内容......"
 	}
-
 	标记某消息为已读(mark_read属性)：[GET]
 	http://www.etuan.org/user/message/set-read?message_id=123
 	需要验证是否登录，并且只能将to_org_uid为自己的消息标记为已读
@@ -276,6 +278,89 @@
 	获取公告，用于编辑：（需超级管理员权限）[GET]
 	http://http://www.etuan.org/notice/notice-content?noticeId=xxx
 	返回：{"notice_id":1, "tittle":"团团一家抽奖功能上线了"，"content":"一段html文本……"},
+
+5.抢票活动
+
+	创建抢票活动:
+	www.etuan.org/ticket/createticket : [POST]
+	activityInfo=
+	{
+		"name":"抢票活动",
+		"logo":"我的logo",
+		"theme":1,
+		"url":"myurl",
+		"verify":1,
+		"ticket_waves":
+		[
+		{
+			"arrange_id":1,
+			"start_time":"2014-7-23 00:00:00",
+			"ticket_total":5
+		},
+		{
+			"arrange_id":2,
+			"start_time":"2014-7-23 00:05:00",
+			"ticket_total":5
+		},
+		{
+			"arrange_id":3,
+			"start_time":"2014-7-23 00:10:00",
+			"ticket_total":5
+		}
+		]
+	}
+
+	更新抽奖活动:
+	www.etuan.org/ticket/createticket : [POST]
+	activityId=2&
+	activityInfo=
+activityInfo=
+{
+	"name":"抢票活动2",
+	"logo":"我的logo2",
+	"theme":1,
+	"url":"myurl2",
+	"verify":2,
+	"ticket_waves":
+	[
+	{
+		"arrange_id":1,
+		"start_time":"2014-7-23 00:00:00",
+		"ticket_total":50
+	},
+	{
+		"arrange_id":2,
+		"start_time":"2014-7-23 00:05:00",
+		"ticket_total":50
+	},
+	{
+		"arrange_id":3,
+		"start_time":"2014-7-23 00:10:00",
+		"ticket_total":50
+	}
+	]
+}
+
+	参与投票活动:
+	www.etuan.org/ticket/participateinactivity?
+	activityId=3&
+	participatorInfo=
+	{
+	"wx_uid":"123456",
+	"verify_info":"12051728"
+	}
+
+	删除投票活动:
+	www.etuan.org/ticket/deleteactivity?activityId=3
+
+	获取投票活动详细信息:
+	www.etuan.org/ticket/activityinfo?activityId=3
+
+	获取某社团所有投票活动的简单信息
+	http://www.etuan.org/ticket/activitylist
+
+	获取结果 --- yes
+	http://www.etuan.org/ticket/activityresult?activityId=5
 
 
 
