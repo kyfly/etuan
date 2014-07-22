@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>转盘抽奖</title>
+<link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	body {
+		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+		background-color: #ffcc99;
+		}
+	.navbar {
+		margin-bottom: 0;
+		}
+	.jumbotron {
+		background: url(../img/choujiang-bg1.png) top repeat-x;
+		}
+
+	.jumbotron > .container > p {
+		color: #ffcc66;
+		font-size: 55px;
+		}
+	#main {
+		position: relative;
+		text-align: center;
+		}
+	#title1-2 {
+		text-align: right;
+		}
+	.title2 {
+		text-align: center;
+		}
+	#startbtn {
+		position: absolute;
+		width: 18%;
+		top: 17%;
+		left: 44%;
+		z-index: 99;
+		cursor: pointer;
+		}
+	#zhuanpan {
+		position: absolute;
+		width: 40%;
+		top: 8%;
+		left: 33%;
+		}
+	#role {
+		margin-top: 50px;
+		}
+@media screen and (min-width: 1400px) {
+	.jumbotron > .container > p {
+		font-size: 80px;
+		}
+}
+@media screen and (min-width: 600px) {
+	.jumbotron > .container {
+		width: 40%;
+		}
+}
+@media screen and (max-width: 1200px) {
+	.img-bg {
+		width: 100%;
+		}
+	#startbtn {
+		width: 22%;
+		top: 17%;
+		left: 43.5%;
+		z-index: 99;
+		}
+	#zhuanpan {
+		width: 48%;
+		top: 8%;
+		left: 30%;
+		}
+	#role {
+		margin-top: 25px;
+		}
+}
+</style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+        <div class="container-fluid">
+        <div class="navbar-header">
+        <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+          <span class="sr-only">导航</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h5>
+        <a href="index.html">
+          <img src="../img/brand.png">
+        </a>
+        </h5>
+        </div>
+        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <li>
+         <a href="index.html">首页</a>
+        </li>
+        <li>
+         <a href="#">报名</a>
+        </li>
+        <li>
+         <a href="#">抢票</a>
+        </li>
+        <li>
+        <a href="#">投票</a>
+        </li>
+         <li>
+        <a href="#">抽奖</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+    </nav>
+</header>
+<div class="jumbotron">
+    <div class="container">
+        <p id="title1-1" class="hidden-xs">十佳歌手</p>
+        <p id="title1-2" class="hidden-xs">抽奖活动</p>
+        <p class="title2 visible-xs-block">十佳歌手</p>
+        <p class="title2 visible-xs-block">抽奖活动</p>
+    </div>
+</div>
+<div id="main" class="container">
+    <div>
+        <img class="img-bg" src="../img/choujiang-bg2.png">
+        <img id="startbtn" src="../img/choujiang-zhizhen.png">
+        <img id="zhuanpan" src="../img/choujiang-zhuanpan.png">
+    </div>
+    <div id="role">
+      <img class="img-bg" src="../img/choujiang-bg3.png">
+    </div>
+</div>
+<footer class="panel-footer">
+    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+</footer>
+
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script src="../js/jQueryRotate.2.2.js"></script>
+<script src="../js/jquery.easing.min.js"></script>
+<script>
+$(function(){ 
+    $("#startbtn").rotate({ 
+        bind:{ 
+            click:function(){//绑定click单击事件 
+                 var a = Math.floor(Math.random() * 360); //生成随机数 
+                 $(this).rotate({ 
+                         duration:3000,//转动时间间隔（转动速度） 
+                         angle: 0,  //开始角度 
+                        animateTo:3600+a, //转动角度，10圈+ 
+                        easing: $.easing.easeOutSine, //动画扩展 
+                        callback: function(){ //回调函数 
+                            alert('中奖了！'); 
+                        } 
+                 }); 
+            } 
+        } 
+    }); 
+}); 
+</script>
+</body>
+</html>
