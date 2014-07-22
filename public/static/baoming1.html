@@ -8,7 +8,10 @@
     <style>
         body{
             font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-        }
+        	}
+		.control-label {
+			font-weight: bold;
+			}
         @media (min-width: 320px){
             body {
                 background-image: url(../img/baoming1bg.jpg);
@@ -25,36 +28,46 @@
     </div>
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12" style="background-color: rgba(255,255,255,0.5)">
         <form class="form-horizontal" role="form">
-            <div class="form-group">
-                <label for="stuName" class="col-sm-2 col-xs-4 control-label">姓名</label>
-                <div class="col-sm-10 col-xs-8">
-                    <input type="text" class="form-control" id="stuName" placeholder="请输入您的姓名">
+            <div id="question1" class="form-group">
+                <div id="type1" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro1">姓名</p>
+                </div>
+                <div id="content1" class="col-sm-10 col-xs-8">
+                    <input type="text" class="form-control" placeholder="请输入您的姓名">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="stuNum" class="col-sm-2 col-xs-4 control-label">学号</label>
-                <div class="col-sm-10 col-xs-8">
-                    <input type="text" class="form-control" id="stuNum" placeholder="请输入您的学号">
+            <div id="question2" class="form-group">
+                <div id="type2" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro2">学号</p>
+                </div>
+                <div id="content2" class="col-sm-10 col-xs-8">
+                    <input type="text" class="form-control" placeholder="请输入您的学号">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="question1" class="col-sm-2 col-xs-4 control-label">问题</label>
-                <div class="col-sm-10 col-xs-8">
-                    <textarea class="intro-double-input form-control transparent-div" id="question1" rows="7" placeholder="你为什么要加入焦点摄影"></textarea>
+            <div id="question3" class="form-group">
+                <div id="type3" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro3">问题</p>
+                </div>
+                <div id="content3" class="col-sm-10 col-xs-8">
+                    <textarea class="intro-double-input form-control transparent-div" rows="7" placeholder="你为什么要加入焦点摄影"></textarea>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 col-xs-4 control-label">性别</label>
-                <div class="col-sm-10 col-xs-8">
+            <div id="question4" class="form-group">
+                <div id="type4" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro4">性别</p>
+                </div>
+                <div id="content4" class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="male">我是男生♂</option>
                         <option value="female">我是女生♀</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 col-xs-4 control-label">第一志愿</label>
-                <div class="col-sm-10 col-xs-8">
+            <div id="question5" class="form-group">
+                <div id="type5" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro5">第一志愿</p>
+                </div>
+                <div id="content5" class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="xinwen">新闻部</option>
                         <option value="zuzhi">组织部</option>
@@ -62,9 +75,11 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 col-xs-4 control-label">第二志愿</label>
-                <div class="col-sm-10 col-xs-8">
+            <div id="question6" class="form-group">
+                <div id="type6" class="col-sm-2 col-xs-4 control-label">
+                  <p id="intro6">第二志愿</p>
+                </div>
+                <div id="content6" class="col-sm-10 col-xs-8">
                     <select class="form-control">
                         <option value="xinwen">新闻部</option>
                         <option value="zuzhi">组织部</option>
