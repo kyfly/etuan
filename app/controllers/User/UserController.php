@@ -1,27 +1,11 @@
 <?php
 	class UserController extends BaseController
 	{
-		private $email;
-
-		private $password;
-
-		private $userHandle;
+		public $org_uid;
 
 		public function __construct(UserHandle $userHandle)
 		{
-			$this->email = Input::get('email');
-			$this->password = Input::get('password');
-			$this->userHandle = $userHandle;
-		}
-
-		public function getRegister()
-		{
-			return View::make('register');
-		}
-
-		public function getLogin()
-		{
-			return View::make('login');
+			$this->org_uid = Auth::user()->org_uid;
 		}
 
 		public function getChangepassword()
@@ -29,53 +13,59 @@
 			return View::make('changepassword');
 		}
 
-		public function postRegister()
-		{
-			$condition = $this->userHandle->register($this->email,$this->password);
-			if($condition)
-			{
-				//注册成功了
-				echo '注册成功了';
-			}
-			else
-			{
-				//email已经存在,返回首页
-                echo '注册失败';
-			}
-		}
-
-		public function postLogin()
-		{
-			$condition = $this->userHandle->login($this->email,$this->password);
-			if($condition)
-			{
-				//登陆成功
-				return Redirect::intended();
-			}
-			else
-			{
-				echo '登陆失败';
-				//登陆失败,返回登陆页面并附带密码错误的信息
-			}
-		}
-
 		public function postChangepassword()
 		{
-			$condition = $this->userHandle->changePassword($this->oldPassword,$this->newPassword);
-			if($condition)
-			{
-				echo '修改密码成功';
-				//修改密码成功
-			}
-			else
-			{
-				echo '修改密码失败';
-				//修改密码失败
+			$values = array(
+				'oldPassword' => Input::get('oldPassword'),
+				'newPassword' => Input::get('newPassword'),
+				'newPassword_confirmation' => Input::get('newPassword_confirmation')
+				);
+			$rules = array(
+				'oldPassword' => 'old_password:'.Auth::user()->password,
+				'newPassword' => 'confirmed'
+				);
+			$messages = array(
+				'old_password' => '旧密码错误',
+				'confirmed' => '两次密码输入不一致'
+				);
+			$validator = Validator::make($values, $rules, $messages);
+			if($validator->fails()){
+				return $validator->messages();
 			}
 		}
 
-		public function getLogout()
+		public function getMessage()
 		{
-			$this->userHandle->logout();
+			try {
+				$messageInfo = json_decode(Input::get('messageInfo'));
+				$message = new Message;
+				$message->from_org_uid = $this->org_uid;
+				$message->to_org_uid = $messageInfo->to_org_uid;
+				$message->title = $messageInfo->title;
+				$message->content = $messageInfo->content;
+				$message->mark_read = 0;
+				$message->save();
+				return Response::json(array(
+					'message_send_status' => 'success'
+					));
+			} catch (Exception $e) {
+				return Response::json(array(
+					'message_send_status' => 'fail'
+					));	
+			}
 		}
+
+		public function getSetRead()
+		{
+			$message_id = Input::get('message_id');
+			$message = Message::where('message_id',$message_id)->where('to_org_uid',$this->org_uid)->first();
+			$message->mark_read = 1;
+			$message->save();
+		}
+
+		public function getMessages()
+		{
+			return Message::where('to_org_uid',$this->org_uid)->get();
+		}
+
 	}

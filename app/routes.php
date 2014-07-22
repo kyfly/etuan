@@ -1,10 +1,12 @@
 ﻿<?php
 
-    Route::controller('user','UserController');
+    Route::controller('auth','AuthController');
 
     Route::group(array('before'=>'auth'),function()
     {
-        Route::controller('userinfo','UserInfoController');
+        Route::get('home','HomeController@showWelcome');
+
+        Route::controller('user','UserController');
 
         Route::controller('activity','ActivityController');
 
@@ -13,6 +15,8 @@
         Route::controller('registration','RegistrationController');
 
         Route::controller('vote','VoteController');
+
+        Route::controller('ticket','TicketController');
     });
 
     Route::get("wx/{id}","EtuanController@index");
