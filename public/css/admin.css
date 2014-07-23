@@ -117,6 +117,10 @@ body{
 	.custom-nav .menu-list.active ul {
 		display: block;
 	}
-	.navbar-right>li>a {
+	a {
 		cursor: pointer;
 	}
+	#home {
+		background-image: none;
+		color: #fff;
+		}
