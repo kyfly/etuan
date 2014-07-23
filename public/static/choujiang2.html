@@ -10,56 +10,17 @@
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 		background-color: #cc6666;
 		}
-	#overDiv {
-		background-color: #000;
-		width : 100%;
-		height : 100%;
-		left: 0;
-		top: 0;/*FF IE7*/
-		filter: alpha(opacity=40);/*IE*/
-		opacity: 0.4;/*FF*/
-		z-index: 2;
-		position: fixed!important;/*FF IE7*/
-		position: absolute;/*IE6*/
-		}
-	#loginbox {
-		background-color: #fff;
-		border: 3px solid #999;
-		z-index: 3;
-		width: 400px;
-		height: 300px;
-		left: 43%;/*FF IE7*/
-		top: 37%;/*FF IE7*/
-		margin-left: -150px!important;/*FF IE7 该值为本身宽的一半 */
-		margin-top: -60px!important;/*FF IE7 该值为本身高的一半*/
-		margin-top: 0px;
-		position: fixed!important;/*FF IE7*/
-		position: absolute;/*IE6*/
-		}
-	#login {
-		text-align: center;
-		}
-	#login1 {
-		margin-top: 70px;
-		height: 50px;
-		}
-	#login2 {
-		margin-top: 30px;
-		height: 50px;
-		}
-	#closebtn {
-		cursor: pointer;
-		position: absolute;
-		right: 10px;
-		top: 10px;
+	.loginbtn {
+		margin: 5px auto;
 		}
 	.navbar {
 		margin-bottom: 0;
-	}
+		}
 	.jumbotron {
 		background: url(../img/choujiang2-bg1_1.png) right bottom no-repeat,
 		url(../img/choujiang2-bg1.png) top repeat-x;
 		height: 220px;
+		margin-bottom: 0;
 		}
 	.jumbotron > p {
 		color: #fff;
@@ -68,20 +29,24 @@
 		}
 	#main {
 		margin: 5% 5%;
+		position: relative;
+		}
+	#content {
+		text-align: center;
 		}
 	#startbtn {
 		position: absolute;
-		width: 20%;
-		top: 54.5%;
-		left: 40.5%;
+		width: 25%;
+		top: 15%;
+		left: 37.4%;
 		cursor: pointer;
 		z-index: 1;
 		}
 	#zhuanpan {
 		position: absolute;
-		width: 35%;
-		top: 41%;
-		left: 33%;
+		width: 40%;
+		top: -8%;
+		left: 30%;
 		}
 	#img1 {
 		float: left;
@@ -95,64 +60,26 @@
 	.jumbotron > p {
 		font-size: 80px;
 		}
-	#zhuanpan {
-		position: absolute;
-		width: 35%;
-		top: 33%;
-		left: 33%;
-		}
-	#startbtn {
-		width: 21%;
-		top: 47%;
-		left: 40%;
-		}
-}
-
-@media screen and (max-width: 1200px) {
-	#startbtn {
-	width: 22%;
-		top: 40.52%;
-		left: 40%;
-		}
-	#zhuanpan {
-		width: 36%;
-		top: 33%;
-		left: 33%;
-		}
-}
-@media screen and (max-width: 600px) {
-	#loginbox {
-		left: 50%;
-		top: 37%;
-		width: 300px;
-		height: 300px;
-		}
-	#zhuanpan {
-		width: 36%;
-		top: 50%;
-		left: 33%;
-		}
-	#startbtn {
-		width: 21%;
-		top: 54.5%;
-		left: 40.5%;
-		}
 }
 </style>
 </head>
 <body>
-<div id="overDiv"></div>
-
-<div id="loginbox">
-  <div class="container col-xs-12">
-    <img id="closebtn" src="../img/close.png" alt="close" onClick="closeDiv()">
-    <div id="login">
-      <input id="login1" type="text" class="form-control" placeholder="请输入你的学号">
-      <button id="login2" type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">登录</h4>
+      </div>
+      <div class="modal-body">
+        <input id="login1" type="text" class="form-control" placeholder="请输入你的学号">
+      </div>
+      <div class="modal-footer">
+        <button id="login2" type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
+      </div>
     </div>
   </div>
 </div>
-
 <header>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -197,15 +124,19 @@
         <p class="hidden-xs">十佳歌手抽奖活动</p>
         <p class="visible-xs-block">十佳歌手<br>抽奖活动</p>
 </div>
-<div id="main" class="clearfix">
-   <img id="img1" src="../img/choujiang2-bg2.png">
-   <img id="startbtn" src="../img/choujiang2-zhizhen.png">
-   <img id="zhuanpan" src="../img/choujiang2-zhuanpan.png">
-   <img id="img2" src="../img/choujiang2-bg3.png">
+<div id="content">
+  <button class="btn btn-info loginbtn visible-xs-block" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+  <button class="btn btn-info loginbtn btn-lg hidden-xs" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+  <div id="main" class="clearfix">
+    <img id="img1" src="../img/choujiang2-bg2.png">
+    <img id="startbtn" src="../img/choujiang2-zhizhen.png">
+    <img id="zhuanpan" src="../img/choujiang2-zhuanpan.png">
+    <img id="img2" src="../img/choujiang2-bg3.png">
+  </div>
 </div>
 
 <footer class="panel-footer">
-    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+  <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>

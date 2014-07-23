@@ -10,67 +10,21 @@
 		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 		background-color: #ffcc99;
 		}
-	#overDiv {
-		background-color: #000;
-		width : 100%;
-		height : 100%;
-		left: 0;
-		top: 0;/*FF IE7*/
-		filter: alpha(opacity=40);/*IE*/
-		opacity: 0.4;/*FF*/
-		z-index: 2;
-		position: fixed!important;/*FF IE7*/
-		position: absolute;/*IE6*/
-		}
-	#loginbox {
-		background-color: #fff;
-		border: 3px solid #999;
-		z-index: 3;
-		width: 400px;
-		height: 300px;
-		left: 43%;/*FF IE7*/
-		top: 37%;/*FF IE7*/
-		margin-left: -150px!important;/*FF IE7 该值为本身宽的一半 */
-		margin-top: -60px!important;/*FF IE7 该值为本身高的一半*/
-		margin-top: 0px;
-		position: fixed!important;/*FF IE7*/
-		position: absolute;/*IE6*/
-		}
-	#login {
-		text-align: center;
-		}
-	#login1 {
-		margin-top: 70px;
-		height: 50px;
-		}
-	#login2 {
-		margin-top: 30px;
-		height: 50px;
-		}
-	#login3 {
-		position: absolute;
-		left: 43%;
-		top: 2.5%;
-		}
-	#closebtn {
-		cursor: pointer;
-		position: absolute;
-		right: 10px;
-		top: 10px;
+	.loginbtn {
+		margin: 5px auto;
 		}
 	.navbar {
 		margin-bottom: 0;
-	}
+	    }
 	.jumbotron {
 		background: url(../img/choujiang-bg1.png) top repeat-x;
+		margin-bottom: 0px;
 		}
-
 	.jumbotron > .container > p {
 		color: #ffcc66;
 		font-size: 55px;
 		}
 	#main {
-		position: relative;
 		text-align: center;
 		}
 	#title1-2 {
@@ -79,22 +33,28 @@
 	.title2 {
 		text-align: center;
 		}
+	#content {
+		position: relative;
+		}
 	#startbtn {
 		position: absolute;
-		width: 18%;
-		top: 17%;
-		left: 44%;
+		width: 25%;
+		top: 33.5%;
+		left: 42.3%;
 		cursor: pointer;
 		z-index: 1;
 		}
 	#zhuanpan {
 		position: absolute;
-		width: 40%;
-		top: 8%;
-		left: 33%;
+		width: 53%;
+		top: 16%;
+		left: 28%;
 		}
 	#rule {
 		margin-top: 50px;
+		}
+	.img-bg {
+		width: 100%;
 		}
 @media screen and (min-width: 1400px) {
 	.jumbotron > .container > p {
@@ -106,48 +66,22 @@
 		width: 40%;
 		}
 }
-@media screen and (max-width: 600px) {
-		#loginbox {
-		left: 50%;
-		top: 37%;
-		width: 300px;
-		height: 300px;
-		}
-		#login3 {
-		left: 31%;;
-		top: -14%;
-		}
-}
-@media screen and (max-width: 1200px) {
-	.img-bg {
-		width: 100%;
-		}
-	#startbtn {
-		width: 22%;
-		top: 17%;
-		left: 43.5%;
-		z-index: 1;
-		}
-	#zhuanpan {
-		width: 48%;
-		top: 8%;
-		left: 30%;
-		}
-	#rule {
-		margin-top: 25px;
-		}
-}
 </style>
 </head>
 <body>
-<div id="overDiv"></div>
-
-<div id="loginbox">
-  <div class="container col-xs-12">
-    <img id="closebtn" src="../img/close.png" alt="close" onClick="closeDiv()">
-    <div id="login">
-      <input id="login1" type="text" class="form-control" placeholder="请输入你的学号">
-      <button id="login2" type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">登录</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="请输入你的学号">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
+      </div>
     </div>
   </div>
 </div>
@@ -201,8 +135,9 @@
     </div>
 </div>
 <div id="main" class="container">
-    <div>
-        <button id="login3" class="btn btn-success" onClick="show()">输入学号开始抽奖</button>
+     <button class="btn btn-info loginbtn visible-xs-block" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+     <button class="btn btn-info loginbtn btn-lg hidden-xs" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+    <div id="content">
         <img class="img-bg" src="../img/choujiang-bg2.png">
         <img id="startbtn" src="../img/choujiang-zhizhen.png">
         <img id="zhuanpan" src="../img/choujiang-zhuanpan.png">
@@ -238,15 +173,6 @@ $(function(){
         } 
     }); 
 }); 
-
-function show(){
-		document.getElementById("overDiv").style.display = "block" ;
-		document.getElementById("loginbox").style.display = "block" ;
-	}
-	function closeDiv(){
-		document.getElementById("overDiv").style.display = "none" ;
-		document.getElementById("loginbox").style.display = "none" ;
-	}
 </script>
 </body>
 </html>

@@ -35,7 +35,7 @@
 <!--侧边栏-->
 <div class="col-lg-3 col-md-3">
     <ul class="nav nav-pills nav-stacked custom-nav" role="tablist">
-      <li class="menu-list"> <a id="home" href="#Home">首页</a> </li>
+      <li> <a onclick="history.go(0)">首页</a></li>
       <li class="menu-list"><a>报名</a>
               <ul class="sub-menu-list">
                 <li><a href="#reglist" data-toggle="pill"> 查看已有报名表</a></li>
@@ -76,7 +76,7 @@
 </div>
     <div class="col-lg-9 col-md-9">
         <div class="tab-content">
-            <div class="tab-pane fade active in" id="Home">
+            <div class="tab-pane fade active in">
                 <div>
                     <div class="col-sm-4 bg-warning" style="height: 150px">
                         <p style="font-size: 28px; color: gray; text-align:center; margin-top: 15px;"><span class="glyphicon glyphicon-user"></span> 参与人数</p>
@@ -120,13 +120,13 @@
             </div>
             <!--新建报名-->
             <div class="tab-pane fade" id="newReg">
-             <div class="container">
-    <form class="form-horizontal"  role="form">
+             <div>
+    <form role="form">
         <fieldset>
             <legend>新建报名表</legend>
             <div class="form-group">
-               <label class="col-sm-2 control-label">报名终止时间</label>
-               <div class="input-group date form_datetime col-sm-10" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
+               <label>报名终止时间</label>
+               <div class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
                   <input class="form-control" size="16" type="" value="2014-09-01 12:00" readonly>
                   <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                   <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
@@ -134,28 +134,28 @@
                <input type="hidden" id="dtp_input1" value="">
            </div>
            <div class="form-group">
-           <label class="col-sm-2 control-label">允许报名年级</label>
-            <div class="col-sm-10">
-                <label class="checkbox-inline col-sm-2">
+           <label>允许报名年级</label>
+            <div>
+                <label class="checkbox-inline">
                   <input type="checkbox" id="inlineCheckbox1" value="option1"> 大一
                 </label>
-                <label class="checkbox-inline col-sm-2">
+                <label class="checkbox-inline">
                   <input type="checkbox" id="inlineCheckbox2" value="option2"> 大二
                 </label>
-                <label class="checkbox-inline col-sm-2">
+                <label class="checkbox-inline">
                   <input type="checkbox" id="inlineCheckbox3" value="option3"> 大三
                 </label>
-                <label class="checkbox-inline col-sm-2">
+                <label class="checkbox-inline">
                   <input type="checkbox" id="inlineCheckbox3" value="option3"> 大四
                 </label>
-                <label class="checkbox-inline col-sm-2">
+                <label class="checkbox-inline">
                   <input type="checkbox" id="inlineCheckbox3" value="option3"> 研究生
                 </label>
             </div>
           </div>
           <div class="form-group">
-     		 <label class="col-sm-2 control-label">报名表主题</label>
-    		<div class="col-sm-10">
+     		 <label>报名表主题</label>
+    		<div>
               <select class="form-control">
                   <option>主题1</option>
                   <option>主题2</option>
@@ -164,20 +164,20 @@
             </div>
           </div>
           <div class="form-group">
-     		 <label class="col-sm-2 control-label">报名链接</label>
-             <div class="input-group col-sm-10">
+     		 <label>报名链接</label>
+             <div class="input-group">
               <span class="input-group-addon">http://www.etuan.org/baoming/</span>
               <input type="text" class="form-control" placeholder="请自定义该报名表的链接">
             </div>
           </div>
           <div class="form-group">
-     		<label class="col-sm-2 control-label">表中问题</label>
-            <div class=" col-sm-10">
+     		<label>表中问题</label>
+            <div>
               <input type="text" class="form-control" placeholder="请输入问题">
             </div>
           </div>
           <div class="form-group">
-           <div class="col-sm-offset-2 col-sm-10">
+           <div>
           <button type="button" class="btn btn-warning">预览</button>
           <button type="button" class="btn btn-success">提交</button>
           </div>
