@@ -66,23 +66,58 @@
 		text-align: center;
 		font-size: 60px;
 		}
+	#main {
+		margin: 5% 5%;
+		}
 	#startbtn {
 		position: absolute;
-		width: 18%;
-		top: 17%;
-		left: 44%;
+		width: 20%;
+		top: 54.5%;
+		left: 40.5%;
 		cursor: pointer;
 		z-index: 1;
 		}
 	#zhuanpan {
 		position: absolute;
-		width: 40%;
-		top: 8%;
+		width: 35%;
+		top: 41%;
 		left: 33%;
+		}
+	#img1 {
+		float: left;
+		width: 30%;
+		}
+	#img2 {
+		float: right;
+		width: 30%;
 		}
 @media screen and (min-width: 1400px) {
 	.jumbotron > p {
 		font-size: 80px;
+		}
+	#zhuanpan {
+		position: absolute;
+		width: 35%;
+		top: 33%;
+		left: 33%;
+		}
+	#startbtn {
+		width: 21%;
+		top: 47%;
+		left: 40%;
+		}
+}
+
+@media screen and (max-width: 1200px) {
+	#startbtn {
+	width: 22%;
+		top: 40.52%;
+		left: 40%;
+		}
+	#zhuanpan {
+		width: 36%;
+		top: 33%;
+		left: 33%;
 		}
 }
 @media screen and (max-width: 600px) {
@@ -92,24 +127,21 @@
 		width: 300px;
 		height: 300px;
 		}
-}
-@media screen and (max-width: 1200px) {
-	#startbtn {
-		width: 22%;
-		top: 17%;
-		left: 43.5%;
-		z-index: 1;
-		}
 	#zhuanpan {
-		width: 48%;
-		top: 8%;
-		left: 30%;
+		width: 36%;
+		top: 50%;
+		left: 33%;
+		}
+	#startbtn {
+		width: 21%;
+		top: 54.5%;
+		left: 40.5%;
 		}
 }
 </style>
 </head>
 <body>
-<!--<div id="overDiv"></div>
+<div id="overDiv"></div>
 
 <div id="loginbox">
   <div class="container col-xs-12">
@@ -119,7 +151,7 @@
       <button id="login2" type="submit" class="btn btn-block btn-danger btn-lg">输入学号开始抽奖</button>
     </div>
   </div>
-</div>-->
+</div>
 
 <header>
     <nav class="navbar navbar-default" role="navigation">
@@ -165,8 +197,11 @@
         <p class="hidden-xs">十佳歌手抽奖活动</p>
         <p class="visible-xs-block">十佳歌手<br>抽奖活动</p>
 </div>
-<div id="main" class="container">
-
+<div id="main" class="clearfix">
+   <img id="img1" src="../img/choujiang2-bg2.png">
+   <img id="startbtn" src="../img/choujiang2-zhizhen.png">
+   <img id="zhuanpan" src="../img/choujiang2-zhuanpan.png">
+   <img id="img2" src="../img/choujiang2-bg3.png">
 </div>
 
 <footer class="panel-footer">
