@@ -1,0 +1,221 @@
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>十佳歌手最佳人气投票</title>
+<link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	body {
+		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+		}
+	.navbar {
+		margin-bottom: 0;
+		}
+	.jumbotron {
+		background-color:#ff99cc;
+		padding: 20px;
+		}
+	.jumbotron > .container > h1 {
+		margin-top: 10px;
+		margin-bottom: 40px;
+		color: #fff;
+		}
+	.jumbotron > .container > ul {
+		font-size: 16px;
+		color: #fff;
+		list-style-type: none;
+		}
+	.jumbotron > .container > p {
+		color: #fff;
+		}
+	.thumbnail {
+		text-align: center;
+		}
+	.thumbnail > h3 {
+		color: #535454;
+		}
+	.thumbnail > p {
+		color: #818282;
+		font-size: 16px;
+		}
+	.rank {
+		cursor: pointer;
+		float: left;
+		width: 50%;
+		border-top: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		height: 50px;
+		}
+	.vote {
+		cursor: pointer;
+		float: left;
+		width: 50%;
+		border-top: 1px solid #ddd;
+		height: 50px;
+		}
+	.votebtn {
+		margin:20px -4px -4px -4px;
+		line-height: 0.8;
+		}
+	.number {
+		margin-top: 4px;
+		font-size: 20px;
+		color: #6eafe5;
+		}
+	.name {
+		color: #9b9c9c;
+		font-size: 16px;
+		}
+@media screen and (max-width: 600px) {
+	#headtext {
+		font-size: 26px;
+		font-weight: 600;
+		margin: -22px;
+		text-align: center;
+		}
+    .jumbotron > .container > p {
+		font-size: 15px;
+		}
+	#p1 {
+		margin-top: 45px;
+		}
+}
+</style>
+</head>
+<body>
+<!--头部-->
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+        <div class="container-fluid">
+        <div class="navbar-header">
+        <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+          <span class="sr-only">导航</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <h5>
+        <a href="index.html">
+          <img src="../img/brand.png">
+        </a>
+        </h5>
+        </div>
+        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <li>
+         <a href="index.html">首页</a>
+        </li>
+        <li>
+         <a href="#">报名</a>
+        </li>
+        <li>
+         <a href="#">抢票</a>
+        </li>
+        <li>
+        <a href="#">投票</a>
+        </li>
+         <li>
+        <a href="#">抽奖</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </div>
+    </nav>
+</header>
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="hidden-xs">十佳歌手最佳人气投票</h1>
+    <p id="headtext" class="visible-xs-block">十佳歌手最佳人气投票</p>
+       <p id="p1">投票时间：5月2日21：00——5月10日18：00。</p>
+       <p>每个微信号限投一次。</p>
+       <p>必须选择1名歌手，否则无法提交。</p>
+       <p>关注杭电学生会（微信号：hduxsh）即可参与投票。</p>
+  </div>
+</div>
+<!--内容-->
+<div class="container">
+  <div class="col-sm-4 col-md-3 col-xs-12">
+    <div class="thumbnail" onMouseOver="this.style.border='1px solid #6eafe5'"  onMouseOut="this.style.border='1px solid #ddd'">
+    	<img src="../img/example.png">
+        <h3>叶亮</h3>
+        <p>电子信息学院<br>指导老师：陈丹丹</p>
+        <div class="clearfix votebtn">
+          <div class="rank">
+          	<p class="number">01</p>
+            <p class="name">Rank</p>
+          </div>
+          <div class="vote">
+         	 <p class="number">389</p>
+             <p class="name">Vote</p>
+          </div>
+        </div>
+    </div>   
+    <!--thumbnail-->
+  </div>  
+  <div class="col-sm-4 col-md-3 col-xs-12">
+    <div class="thumbnail" onMouseOver="this.style.border='1px solid #6eafe5'"  onMouseOut="this.style.border='1px solid #ddd'">
+    	<img src="../img/example.png">
+        <h3>叶亮</h3>
+        <p>电子信息学院<br>指导老师：陈丹丹</p>
+        <div class="clearfix votebtn">
+          <div class="rank">
+          	<p class="number">01</p>
+            <p class="name">Rank</p>
+          </div>
+          <div class="vote">
+         	 <p class="number">389</p>
+             <p class="name">Vote</p>
+          </div>
+        </div>
+    </div>   
+    <!--thumbnail-->
+  </div>  
+  <div class="col-sm-4 col-md-3 col-xs-12">
+    <div class="thumbnail" onMouseOver="this.style.border='1px solid #6eafe5'"  onMouseOut="this.style.border='1px solid #ddd'">
+    	<img src="../img/example.png">
+        <h3>叶亮</h3>
+        <p>电子信息学院<br>指导老师：陈丹丹</p>
+        <div class="clearfix votebtn">
+          <div class="rank">
+          	<p class="number">01</p>
+            <p class="name">Rank</p>
+          </div>
+          <div class="vote">
+         	 <p class="number">389</p>
+             <p class="name">Vote</p>
+          </div>
+        </div>
+    </div>   
+    <!--thumbnail-->
+  </div>  
+  <div class="col-sm-4 col-md-3 col-xs-12">
+    <div class="thumbnail" onMouseOver="this.style.border='1px solid #6eafe5'"  onMouseOut="this.style.border='1px solid #ddd'">
+    	<img src="../img/example.png">
+        <h3>叶亮</h3>
+        <p>电子信息学院<br>指导老师：陈丹丹</p>
+        <div class="clearfix votebtn">
+          <div class="rank">
+          	<p class="number">01</p>
+            <p class="name">Rank</p>
+          </div>
+          <div class="vote">
+         	 <p class="number">389</p>
+             <p class="name">Vote</p>
+          </div>
+        </div>
+    </div>   
+    <!--thumbnail-->
+  </div>  
+</div>  <!--container-->
+
+<footer class="panel-footer">
+	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+</footer>
+
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+</body>
+</html>

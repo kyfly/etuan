@@ -3,9 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/admin.css" rel="stylesheet">
-    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <title>“团团一家”管理后台</title>
 </head>
 <body>
@@ -115,7 +114,7 @@
             <!--查看已有报名-->
             <div class="tab-pane fade" id="reglist">
               <div >
-              dfgdfgfgdf
+              查看已有报名
               </div>
             </div>
             <!--新建报名-->
@@ -125,65 +124,116 @@
         <fieldset>
             <legend>新建报名表</legend>
             <div class="form-group">
-               <label>报名终止时间</label>
-               <div class="input-group date form_datetime" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
-                  <input class="form-control" size="16" type="" value="2014-09-01 12:00" readonly>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-               </div>
-               <input type="hidden" id="dtp_input1" value="">
+               <label for="stoptime">报名终止时间</label>
+               <input class="form-control" id="stoptime" type="datetime-local" value="2014/09/01 00:00">
            </div>
            <div class="form-group">
-           <label>允许报名年级</label>
-            <div>
+     		   <label for="name">报名表名称</label>
+               <input type="text" class="form-control" id="name" placeholder="请输入名称">
+           </div>
+           <div class="form-group">
+              <label>允许报名年级</label>
+              <div>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="option1"> 大一
+                  <input type="checkbox" name="grade"> 大一
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="option2"> 大二
+                  <input type="checkbox" name="grade"> 大二
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3"> 大三
+                  <input type="checkbox" name="grade"> 大三
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3"> 大四
+                  <input type="checkbox" name="grade"> 大四
                 </label>
                 <label class="checkbox-inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3"> 研究生
+                  <input type="checkbox" name="grade"> 研究生
                 </label>
-            </div>
-          </div>
+              </div>
+           </div>
           <div class="form-group">
-     		 <label>报名表主题</label>
-    		<div>
-              <select class="form-control">
-                  <option>主题1</option>
-                  <option>主题2</option>
-                  <option>主题3</option>
+     		 <label for="theme">报名表主题</label>
+              <select id="theme" class="form-control">
+                  <option value="1">主题1</option>
+                  <option value="2">主题2</option>
+                  <option value="3">主题3</option>
               </select>	
-            </div>
           </div>
           <div class="form-group">
-     		 <label>报名链接</label>
+     		 <label for="url">报名链接</label>
              <div class="input-group">
-              <span class="input-group-addon">http://www.etuan.org/baoming/</span>
-              <input type="text" class="form-control" placeholder="请自定义该报名表的链接">
+                <span class="input-group-addon">http://www.etuan.org/baoming/</span>
+                <input id="url" type="text" class="form-control" placeholder="请自定义该报名表的链接">
             </div>
           </div>
           <div class="form-group">
      		<label>表中问题</label>
-            <div>
-              <input type="text" class="form-control" placeholder="请输入问题">
+            <div class="editlist form-control">
+           	 <p>属性以及注释</p>
+           	 <img class="edit1" src="../img/close.png">
+           	 <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
             </div>
           </div>
           <div class="form-group">
-           <div>
-          <button type="button" class="btn btn-warning">预览</button>
-          <button type="button" class="btn btn-success">提交</button>
+     		<label>表中问题</label>
+            <div class="editlist form-control">
+           	 <p>属性以及注释</p>
+           	 <img class="edit1" src="../img/close.png">
+           	 <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
+            </div>
           </div>
+          <div class="form-group">
+     		<label>表中问题</label>
+            <div class="editlist form-control">
+           	 <p>属性以及注释</p>
+           	 <img class="edit1" src="../img/close.png">
+           	 <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
+            </div>
+          </div>
+          <div class="form-group">
+            <button id="addquestion" class="btn btn-block btn-info">+</button>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-warning">预览</button>
+            <button type="button" class="btn btn-success">提交</button>
           </div>
         </fieldset>
     </form>
+<!-- editbox -->
+    <div class="modal fade" id="editbox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">编辑</h4>
+          </div>
+          <div class="modal-body">
+          	<form class="form-horizontal" role="form">
+                <div class="form-group">
+                 <label class="control-label col-sm-3">属性</label>
+                 <div class="col-sm-9">
+                   <select class="form-control">
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                   </select>	
+                 </div>
+                </div>
+                 <div class="form-group">
+                     <label class="control-label col-sm-3" for="name">注释</label>
+                     <div class="col-sm-9">
+                       <input type="text" class="form-control" id="name" placeholder="请输入注释">
+                     </div>
+           		  </div>
+             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
             </div>
@@ -211,14 +261,5 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.nicescroll.js"></script>
 <script src="../js/admin.js"></script>
-<script src="../js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: "yyyy-mm-dd hh:ii",
-        autoclose: true,
-        todayBtn: true,
-        pickerPosition: "bottom-left"
-    });
-</script>
 </body>
 </html>
