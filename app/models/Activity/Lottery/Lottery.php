@@ -13,7 +13,7 @@ class Lottery extends Eloquent{
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'lottery_id';
+	public $primaryKey = 'lottery_id';
 
     /**
      * Set primary key auto increment;

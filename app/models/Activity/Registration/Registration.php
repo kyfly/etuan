@@ -13,7 +13,7 @@ class Registration extends Eloquent{
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'reg_id';
+	public $primaryKey = 'reg_id';
 
     /**
      * Set primary key auto increment;

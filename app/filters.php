@@ -35,7 +35,17 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('user/login');
+	if (Auth::guest())
+     return Redirect::guest('user/login');
+});
+Route::filter('wxauth', function()
+{
+    $name = Session::get('name');
+    $id = Session::get('id');
+    $re = WxUser::where("wx_uid",$id)->where("nick_name",$name)->first();
+    if($re == NULL){
+        return Redirect::to('login');
+    }
 });
 
 
@@ -84,10 +94,10 @@ Route::filter('weixin', function()
     $signature = Input::get('signature');
     $timestamp = Input::get('timestamp');
     $nonce     = Input::get('nonce');
-    if(Route::input("id")==12)
+    $id = Route::input("id");
+    $token = Wxdata::where("interface_url",$id)->pluck("interface_token");
+    if(!$token)
     {
-    	$token = 'liuJD';
-    }else{
     	return "请使用微信关注团团一家";
     }
 
@@ -100,3 +110,18 @@ Route::filter('weixin', function()
         return "请使用微信关注团团一家";
     }
 });
+
+Route::filter('init', function()
+{
+    global $appid;
+    
+    $appid = "wx5d92b3c192f993e7";
+
+    define("APPID","wx5d92b3c192f993e7");
+
+    define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
+
+    define("CALLBACKURL",urlencode("http://weixin.linkew.net/build/oauth"));
+});
+
+

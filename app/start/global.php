@@ -77,10 +77,21 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
-define("APPID","wx5d92b3c192f993e7");
-define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
-define("CALLBACKURL",urlencode("http://linkew.net/build/oauth"));
+
 require app_path().'/filters.php';
 
 require app_path().'/acl.php';
 
+require app_path().'/Ioc.php';
+
+define("CALLBACKURL",urlencode("http://weixin.linkew.net/build/oauth"));
+
+define("APPID","wx5d92b3c192f993e7");
+
+define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
+
+define("_ROOT_","C:/xampp/htdocs/etuan/public");
+
+define("_WWW_","http://weixin.linkew.net/img/");
+
+define("AuthUrl",urlencode("http://weixin.linkew.net/login/check"));

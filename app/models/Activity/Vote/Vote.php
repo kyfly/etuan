@@ -13,7 +13,7 @@ class Vote extends Eloquent{
 	/**
 	*The primary key in the database;
 	*/
-	protected $primaryKey = 'vote_id';
+	public $primaryKey = 'vote_id';
 
     /**
      * Set primary key auto increment;

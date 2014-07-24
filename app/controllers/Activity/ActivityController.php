@@ -78,8 +78,6 @@ class ActivityController extends BaseController
                 return isset($this->registrationService)?$this->registrationService:null;
             case 'voteService':
                 return isset($this->voteService)?$this->voteService:null;
-            case 'ticketService':
-                return isset($this->ticketService)?$this->ticketService:null;
             default:
                 return new ActivityService;
         }

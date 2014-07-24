@@ -9,11 +9,23 @@ class EtuanHandle extends WeixinHandle
 {
     public function EtuanTextHandle($postObj)
     {
-       
+
         switch($postObj->Content){
             case "授权":
                 return $this->Bangding($postObj);
                 break;
+
+            case "tt":
+               $content = '<a href="http://weixin.linkew.net">点击这里</a>';
+                return $this->TextMessage($postObj,$content);
+                break;
+
+            case "info":
+                $from = $postObj->FromUserName;
+                $to = $postObj->ToUserName;
+                $content = $from.".....".$to;
+                return $this->TextMessage($postObj,$content);
+                break;   
            default:
                return $this->Autoreply($postObj);
                 break;
@@ -25,26 +37,37 @@ class EtuanHandle extends WeixinHandle
         switch ($postObj->Event)
         {
             case "subscribe":
-                return $this->Subscribe($postObj);
+                $content = "subscribe";
+                return $this->reply($postObj,$content);
                 break;
+
             case "unsubscribe":
                 break;
+
+            case "SCAN":
+                 $sence_id = $postObj->EventKey;
+                 $result = Etuan::where("scene_id",$sence_id)->select("act_type","act_id")->first();
+                 $re = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
+                 $obj =new $re;
+                 $key = $obj->primaryKey;
+                 $url = $re::where($key,$result->act_id)->select("url","name");
+                 $arr =["title"=>$url->name,"description"=>"",
+                        "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>$url];
+                 return $this->ArticlesMessage($postObj, $arr);
+            break;
+
             case "CLICK":
                 $content = $this->Click($postObj);
                 break;
             default:
                 break;
         }
-        $obj = new WeixinHandle;
-        return $obj->TextMessage($postObj,$content);
+        return $this->TextMessage($postObj,$content);
 
     }
     public function Bangding($postObj){
-        $appid = APPID;
-        $callbackUrl = CALLBACKURL;
         $scope = "snsapi_userinfo";
-        $state = 1;
-        $url = $this->getLicenseCode($appid,$callbackUrl,$scope,$state);
+        $url = $this->getauthurl($scope);
         $Content ="<a href=\"".$url."\">点击这里绑定</a>";
         return $this->TextMessage($postObj,$Content);
     }
@@ -68,9 +91,5 @@ class EtuanHandle extends WeixinHandle
         }
         return $content;
     }
-    public function Subscribe($postObj){
-        $arr =["title"=>"好开心啊^_^，又多一个人关心我了。","description"=>"",
-            "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>""];
-        return $this->ArticlesMessage($postObj, $arr);
-    }
+    
 }

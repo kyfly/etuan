@@ -1,7 +1,48 @@
-AtrplyController
+//两种方法得到得openid相同
+//添加sessions表
+//news表添加mp_id
+//news有关方法待修正
+//mp_weixin 添加appid,appsecret,redirect_uri.
+ 
+define("CALLBACKURL",urlencode("http://weixin.linkew.net/build/oauth"));
+
+define("APPID","wx5d92b3c192f993e7");
+
+define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
+
+define("_ROOT_","C:/xampp/htdocs/etuan/public");
+
+define("_WWW_","http://liu.c/img/");
+
+define("AuthUrl",urlencode("http://weixin.linkew.net/login"));
+路由：       请求方式              描述                                                        参数
+/login         get          请求得到登录页面，返回二维码地址。                                  无
+/login/check   get          带state请求获取认证，state为get请求到的token。                    state
+/reply/create  post         创建自动回复，                                                      1
+/reply/update  post         更新自动回复                                                        2
+/reply/show    get          请求的到该社团以创建的所有的自动回复信息                            3
+/reply/destory get          删除某条关键字回复，                                              reply_id
+
+/news/create   post         创建图文消息，                                                      4
+/news/update   post         更新图文消息，                                                      5
+/news/cact     post         创建关键字回复，选择系统根据活动信息创建的图文信息时创建该图文消息  6
+/news/sact     get                                                      7
+/news/destroy  get          删除某条存在的图文信息。                                            news_id                                        
 
 
-postCautoreply()
+/org/cwx       post          添加微信号创建社团微信基本相关信息，                                8
+/org/uwx       post         更新社团微信号基本相关信息                                          9
+/org/swx       get          查出社团所有微信号，及其信息。                                      10
+
+/qrcode/creat  post         带参数二维码，创建参数和相关活动信息                                11
+/qrcode/update post         带参数二维码，跟新参数和相关活动信息                                12
+/qrcode/destory get         删除某条信息                                                      scene_id
+/qrcode/show   get          查出所有信息                                                        13
+
+被添加自动回复   关键字 “subscribe”
+消息自动回复  关键字  “default”
+
+1./reply/create
         该接口为微信添加自动回复，关键字回复接口。
             返回信息：
                         $arr[]="关键字不能重复";
@@ -16,7 +57,7 @@ postCautoreply()
                     数组样式（非返回类型）：
                                     $arr = ["mp_id"=>2,"type"=>"text","content"=>"fffffffffff","keyword"=>["ffffffffff","fffffffffff"]];
                                     $arr = ["mp_id"=>2,"type"=>"news","content"=>47,"keyword"=>["rrrrrrrrrr","rrrrrrrrr"]];
-postUautoreply()
+2./reply/update
         该接口为自动回复更新接口。
         返回信息：
                     $arr[]=$arr["keyword"][$i]."这个关键字已存在";
@@ -30,7 +71,7 @@ postUautoreply()
         数组样式（非返回类型）：
                     //$arr = ["reply_id"=>45,"type"=>"text","content"=>17,"keyword"=>["dffdghds","sdfgnjfd"]];
                     //$arr = ["reply_id"=>44,"type"=>"news","content"=>17,"keyword"=>["fth","fg","f"]];
-getSautoreply()
+3./reply/show
 
         该接口为自动回复查询接口，包括所创建自动回复消息的所有信息。
              此消息属于同一社团，不同微信公众号
@@ -77,12 +118,9 @@ getSautoreply()
                     ["keyword"]=> array(2) { [0]=> string(9) "rrrrrrrrr" [1]=> string(10) "rrrrrrrrrr" }
                     [0]=> array(7) { ["news_id"]=> int(47) ["title"]=> string(6) "test11" ["article_id"]=> int(1) ["description"]=> string(10) "dddddddddd" ["pic_url"]=> string(10) "kkkkkkkkkk" ["url"]=> string(8) "llllllll" ["content"]=> NULL } } } }
         */
-getDautoreply()     删除自动回复
-        Input::get("reply_id");
 
-//NewsController
+4./news/create 
 
-postCnews()
     该接口为图文消息创建接口：
         返回值：
             $arr[]="创建消息失败，请修改部分内容，可能该消息已存在。";
@@ -96,7 +134,8 @@ postCnews()
             $arr =[ ["title"=>"test11","description"=>"ddssnddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"kk"],
                 ["title"=>"test22","description"=>"ffffffffff","pic_url"=>"rrrrrrrr","url"=>"222222222","content"=>"dd"],
                 ["title"=>"test33","description"=>"gggggggggg","pic_url"=>"fffffccffff","url"=>"333333333","content"=>"ddd"]];
-postUnews()
+5./news/update 
+
  该接口为图文消息更新接口：
         返回值：bool
 
@@ -110,13 +149,13 @@ postUnews()
                 ["news_id"=>46,"article_id"=>2,"title"=>"test","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"fffffdd","news_from"=>"sucai"],
                 ["news_id"=>46,"article_id"=>3,"title"=>"test","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"iiifffffiiiii","news_from"=>"sucai"]];
 
-postCactnews()
+6./news/cact
     该接口为社团活动信息图文消息创建接口,在社团选择此图文消息时调用。
         返回值：bool
             "{"title":"test11","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","news_from":"vote"}"
             $arr =["title"=>"test11","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","news_from"=>"vote"];
 
-getSactnews()
+7./news/sact
     该接口为社团所有活动信息的图文消息,属于社团素材库调用。
     返回信息：
                 "[[{"name":"\u62bd\u5956\u54e6","description":"\u98de\u4f60\u77e5\u9053\u5357\u65b9\u4f60\u7684\u65b9\u6cd5\u5206\u6790 \u4f60\u8d1f\u8d23","url":"hhhhhhh","pic_url":null,"news_from":"lottery"}
@@ -144,37 +183,37 @@ getSactnews()
                              [0]=> array(5) { ["name"]=> string(17) "奥 到了波动" ["description"]=> string(42) "大发慈悲、垃圾啊、啊定论；啊" ["url"]=> string(9) "lllllllll" ["pic_url"]=> NULL ["news_from"]=> string(4) "vote" } } }
               */
 
-getDnews()          bool
-              Input::get("news_id");
 
-//QretuanController
+
 微信带参数二维码接口。
-//获取二维码方法还需要修改，appid，appsecret 都需要重写。
- postCqrcode()          bool
+11./qrcode/creat
+                      bool
 
         Input::get("act_id");
         Input::get("act_type");
-
-postUqrcode()           bool
+12./qrcode/update
+                        bool
         Input::get("scene_id");
         Input::get("act_id");
         Input::get("act_type");
 
-postDqrcode()           bool
-        Input::get("scene_id");
 
-postSqrcode()        "[{"scene_id":1,"act_type":"ticket","act_id":1,"created_at":"2014-07-17 23:13:02",
+13./qrcode/show
+       "[{"scene_id":1,"act_type":"ticket","act_id":1,"created_at":"2014-07-17 23:13:02",
                     "updated_at":"2014-07-17 15:14:46","qrcode_url":"img\/ticket\/1405609982.jpg"}]"
 
-//WxinterfaceController
-微信公众号接口信息接口
-postCwx()       bool
-        Input::get("mp_origin_id");
 
-postUwx()       bool
+微信公众号接口信息接口
+8. /org/cwx       bool
+        Input::get("mp_origin_id");
+        $appid = Input::get("appid");
+        $secret = Input::get("secret");
+9. /org/uwx       bool
         Input::get("mp_id");
         Input::get("mp_origin_id");
+        $appid = Input::get("appid");
+        $secret = Input::get("secret");
 
-getSwx()         "[{"mp_origin_id":"jjjjjjjjjjjjjjjjjjj","interface_url":"KPWHZJ71J1MJKPBRKAKHKMZQI6T4NSZ0","interface_token":"I1UV5VJAQQ04HVYWUCBANVKHAFD1IQNL"}
+10. /org/swx        "[{"mp_origin_id":"jjjjjjjjjjjjjjjjjjj","interface_url":"KPWHZJ71J1MJKPBRKAKHKMZQI6T4NSZ0","interface_token":"I1UV5VJAQQ04HVYWUCBANVKHAFD1IQNL"}
                 ,{"mp_origin_id":"kkkkkkkkkkkkkk","interface_url":"SCNO3FGG7LO6OI05PG30FYW284FSTSFJ","interface_token":"INHJNO4TEOV1U6F8SX5I8O28YSNX1P4T"}
                 ,{"mp_origin_id":"kkkkkkkkkkkkkk","interface_url":"STC9YJL2ON2TET8PKM6SHCD44FS20ZEB","interface_token":"ULT2IG6P527JJ26QEOKI1QN4N094ASZU"}]"

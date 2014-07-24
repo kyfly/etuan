@@ -1,19 +1,13 @@
 <?php
-/*该类主要存放一些共有方法，包括回复文本信息，回复图文信息，获取全局access_token等。
- *TextMessage($obj,$contentStr) 需传入需要回复的内容和接收到的对象
- * ArticlesMessage($obj, $newsArray)    需传入对象和数组，数组键为Title， Description， PicUrl，Url可传入多维数组（不超过10）
- * getToken($appid,$appsecret)  参数为微信公众号的appid和appsecret；
- * createMenu($json,$token)     参数为json数据包和全局access_token值
- * getLicenseCode($appid,$callbackUrl,$scope,$state)    该函数用于oauth2.0时，用户同意授权，获取code
- * getLicenseToken($appid,$secret,$code)    通过code换取网页授权access_token
- *getUserinfo($token,$userid)       拉取用户信息(需scope为 snsapi_userinfo)，token为网页授权access_token
- * https_request($url,$data = null)      实现get和post请求
- * public function Autoreply($postObj)  自动回复关键字；
- *  */
+
 class WeixinHandle
 {
+    public function getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0){
+        $url = $this->getLicenseCode($appid,$callbackUrl,$scope,$state);
+        return $url;
+    }
 
-	public function TextMessage($obj,$contentStr){
+	public function TextMessage($postObj,$contentStr){
 		 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
 							<FromUserName><![CDATA[%s]]></FromUserName>
@@ -24,11 +18,11 @@ class WeixinHandle
 							</xml>"; 
 		$time = time();            	
   		$msgType = "text";
-    	$resultStr = sprintf($textTpl, $obj->FromUserName, $obj->ToUserName, $time, $msgType, $contentStr);
+    	$resultStr = sprintf($textTpl, $postObj->FromUserName, $postObj->ToUserName, $time, $msgType, $contentStr);
         return $resultStr;      	
 	}
 	
-    public function ArticlesMessage($obj, $newsArray)
+    public function ArticlesMessage($postObj, $newsArray)
 	{
     if(!is_array($newsArray)){
         return;
@@ -62,7 +56,7 @@ class WeixinHandle
 					$item_str</Articles>
 					</xml>";
 
-    $result = sprintf($xmlTpl, $obj->FromUserName, $obj->ToUserName, time(),$i);
+    $result = sprintf($xmlTpl, $postObj->FromUserName, $postObj->ToUserName, time(),$i);
     return $result;
     }
     //获取全局token；
@@ -109,8 +103,60 @@ class WeixinHandle
             return "something wrong";
         }
         $jsoninfo = json_decode($json,true);
+
         return $jsoninfo;
 
+    }
+    //创建微信用户
+    public function CreateUser($appid,$secret,$code){
+            $json = $this->getLicenseToken($appid,$secret,$code);
+            $userid =$json["openid"];
+            $token = $json["access_token"];
+            $userinfo =$this->getUserinfo($token,$userid);
+            if(isset($userinfo["openid"])){
+                $token = $this->getToken($appid,$secret);
+                $sub = $this->getSubscribe($token,$userid);
+            }
+            $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
+            if($result==NULL)
+            {
+                $user = new WxUser;
+                $user->wx_uid = $userinfo["openid"];
+                $user->nick_name = $userinfo["nickname"];
+                $user->sex = $userinfo["sex"];
+                $user->province = $userinfo["province"];
+                $user->city = $userinfo["city"];
+                $user->country = $userinfo["country"];
+                $user->headimgurl = $userinfo["headimgurl"];
+                if(isset($userinfo["privilege"][0]))
+                {
+                    $user->privilege = $userinfo["privilege"];
+                }
+               $re = $user->save();
+               if($re){
+                return $userinfo["openid"];
+               }else{
+                return false;
+               }
+           }elseif(isset($result->wx_uid)){
+                return $userinfo["openid"];
+           }
+           return false;
+     }
+     //判断是否关注
+     public function getSubscribe($token,$userid){
+        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$userid&lang=zh_CN";
+        $json = $this->https_request($url);
+        if(!$json)
+        {
+            return "something wrong";
+        }
+        $jsoninfo = json_decode($json,true);
+        if($jsoninfo["subscribe"] = 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     //curl提交post方法
     function https_request($url,$data = null){
@@ -132,55 +178,53 @@ class WeixinHandle
         curl_close($ch);
         return $output;
     }
+    public function reply($postObj,$content){
+        try{
+            $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
+            $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
+            if(!$reply_id){
+                $content = "default";
+                $this->reply($postObj,$content);
+            }
+            $result = Autoreply::where("mp_reply_id",$reply_id)->select("msg_type","msg_id")->first();
+           
+            if($result->msg_type=="text")
+            {
+                $Tcontent = Textmsg::where("text_id",$result->msg_id)->pluck("content");
+                return $this->TextMessage($postObj,$Tcontent);
+            }elseif($result->msg_type=="news")
+            {
+                $contentObj = Newsmsg::where("news_id",$result->msg_id)->select("title","description","pic_url","url")->get();
+                $i=0;
+                foreach($contentObj as $content)
+                {
+                    $arr[$i]['title']=$content->title;
+                    $arr[$i]['description']=$content->description;
+                    $arr[$i]['pic_url']=$content->pic_url;
+                    $arr[$i]['url']=$content->url;
+                    $i++;
+                }
+                return $this->ArticlesMessage($postObj, $arr);
+            }
+            $contentStr = "感谢你的关注，我们将继续努力!";
+            return $this->TextMessage($postObj,$contentStr);
+        }catch (Exception $e){
+            $contentStr = "感谢你的关注，我们将继续努力!";
+            return $this->TextMessage($postObj,$contentStr);
+        }
+    }
     //自动回复关键字；
     public function Autoreply($postObj){
        $content = $postObj->Content;
-        $developerid = $postObj->ToUserName;
-       
-        try{
-            $result = Autoreply::where("keyword",$content)->select("msg_type","msg_id","mp_id")->first();
-            $user = Wxdata::where("mp_id",$result->mp_id)->pluck("mp_origin_id");
-            if($developerid == $user)
-            {
-                if($result->msg_type=="text")
-                {
-                    $Tcontent = Textmsg::where("text_id",$result->msg_id)->pluck("content");
-                    $obj = new WeixinHandle;
-                    return $obj->TextMessage($postObj,$Tcontent);
-                }elseif($result->msg_type=="news")
-                {
-                    $contentObj = Newsmsg::where("news_id",$result->msg_id)->select("title","description","pic_url","url")->get();
-                    $i=0;
-                    foreach($contentObj as $content)
-                    {
-                        $arr[$i]['title']=$content->title;
-                        $arr[$i]['description']=$content->description;
-                        $arr[$i]['pic_url']=$content->pic_url;
-                        $arr[$i]['url']=$content->url;
-                        $i++;
-                    }
-                    $obj = new WeixinHandle;
-                    return $obj->ArticlesMessage($postObj, $arr);
-                }
-            }else{
-                $obj = new WeixinHandle;
-                $contentStr = "感谢你的关注，我们将继续努力!";
-                return $obj->TextMessage($postObj,$contentStr);
-            }
-        }catch (Exception $e){
-            $obj = new WeixinHandle;
-            $contentStr = "感谢你的关注，我们将继续努力!";
-            return $obj->TextMessage($postObj,$contentStr);
-        }
+       return $this->reply($postObj,$content);
     }
-    //获取二维码方法还需要修改，appid，appsecret 都需要重写。
-    public function getQrcodeUrl(){
-        $appid = APPID;
-        $appsecret = APPSECRET;
+
+    public function getQrcodeUrl($appid,$appsecret,$action= "QR_LIMIT_SCENE"){
         $token = $this->getToken($appid,$appsecret);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
-        $josn = '{"expire_seconds": 1800, "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}';
-        $re = $this->https_request($url,$josn);
+        $arr = [ "expire_seconds"=> 1800 ,"action_name" => $action ,"action_info" => ["scene" => [ "scene_id"=> 123]]];
+        $json = json_encode($arr);
+        $re = $this->https_request($url,$json);
         $arr = json_decode($re,true);
         $ticket = $arr["ticket"];
         $url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=$ticket";
@@ -204,4 +248,27 @@ class WeixinHandle
             return false;
         }
     }
+
+    public function Authcode($url,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 5){
+        QRcode::png($url,$QR, $errorCorrectionLevel, $matrixPointSize,0);
+        if ($logo !== FALSE) { 
+            $QR = imagecreatefromstring(file_get_contents($QR)); 
+            $logo = imagecreatefromstring(file_get_contents($logo)); 
+            $QR_width = imagesx($QR);//二维码图片宽度 
+            $QR_height = imagesy($QR);//二维码图片高度 
+            $logo_width = imagesx($logo);//logo图片宽度 
+            $logo_height = imagesy($logo);//logo图片高度 
+            $logo_qr_width = $QR_width / 4; 
+            $scale = $logo_width/$logo_qr_width; 
+            $logo_qr_height = $logo_height/$scale; 
+            $from_width = ($QR_width - $logo_qr_width) / 2; 
+            imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,  
+            $logo_qr_height, $logo_width, $logo_height); 
+        }
+        $imgname ="qrcode.png";
+        $imgurl = _ROOT_ ."/img/".$imgname;
+        imagepng($QR,$imgurl);
+        return $imgname;
+    }
+
 }
