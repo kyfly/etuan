@@ -19,31 +19,31 @@
         }
         public function postUpdate(){
 
-            $arr = json_decode($json,true);
+            $arr = json_decode($this->json,true);
 
             $re = $this->news->Updatenews($arr);
 
             return $re;
         }
+        public function getShow(){
+            $org_uid = Auth::user()->org_uid;
+
+            $new["act"] = $this->news->Selelteactnews($org_uid);
+
+            $new["new"] = $this->news->Selectnews($org_uid);
+
+            $json = json_encode($new);
+            
+            return $json;
+        }
         public function postCact(){
 
-            $arr = json_decode($json,true);
+            $arr = json_decode($this->json,true);
 
              $re = $this->news->Createactnews($arr);
 
             return $re;
             }
-
-        public function getSact(){
-
-            $org_uid = Auth::user()->org_uid;
-
-            $re = $this->news->Selelteactnews($org_uid);
-
-            $json = json_encode($new);
-
-            return $json;
-        }
         public function getDestory(){
 
             $news_id = Input::get("news_id");

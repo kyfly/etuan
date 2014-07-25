@@ -28,9 +28,8 @@ class EtuanController extends BaseController{
                     return $this->etuan->EtuanEventHandle($postObj);
                     break;
 		  	 	default:
-                    $arr =["title"=>"come baby","description"=>"Ladies and gentlemen how do you do Came here to talk about a thing so true ",
-                        "pic_url"=>"http://img0.imgtn.bdimg.com/it/u=2080496200,918842870&fm=21&gp=0.jpg","url"=>""];
-                    return $this->etuan->ArticlesMessage($postObj, $arr);
+                    $content = "default";
+                	return $this->etuan->reply($postObj,$content);
 		  	 		break;
 		  	 }
 		}

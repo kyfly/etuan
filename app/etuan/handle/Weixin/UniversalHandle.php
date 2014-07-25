@@ -12,7 +12,7 @@ class UniversalHandle extends WeixinHandle
     }
     public function MpEventHandle($postObj)
     {
-        $content = "";
+       
         $event = $postObj->Event;
         switch($event){
             case "subscribe":
@@ -20,13 +20,9 @@ class UniversalHandle extends WeixinHandle
                 return $this->reply($postObj,$content);
             break;
 
-            case "CLICK ":
-            $key = $postObj->EventKey;
-            break;
-
             default:
-            $contentStr = "感谢你的关注，我们将继续努力!";
-            return $this->TextMessage($postObj,$contentStr);
+            $content = "default";
+            return $this->MP->reply($postObj,$content);
             break;
          }
         return 0;

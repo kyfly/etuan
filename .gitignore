@@ -2,12 +2,7 @@
 /vendor
 composer.phar
 composer.lock
-.env.local.php
+.env.*.php
 .env.php
 .DS_Store
 Thumbs.db
-/.idea
-/app/config/production
-/app/config/development
-
-test/

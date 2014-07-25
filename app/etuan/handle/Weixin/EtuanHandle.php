@@ -14,12 +14,6 @@ class EtuanHandle extends WeixinHandle
             case "授权":
                 return $this->Bangding($postObj);
                 break;
-
-            case "tt":
-               $content = '<a href="http://weixin.linkew.net">点击这里</a>';
-                return $this->TextMessage($postObj,$content);
-                break;
-
             case "info":
                 $from = $postObj->FromUserName;
                 $to = $postObj->ToUserName;
@@ -50,9 +44,9 @@ class EtuanHandle extends WeixinHandle
                  $re = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
                  $obj =new $re;
                  $key = $obj->primaryKey;
-                 $url = $re::where($key,$result->act_id)->select("url","name");
+                 $url = $re::where($key,$result->act_id)->select("url","name")->first();
                  $arr =["title"=>$url->name,"description"=>"",
-                        "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>$url];
+                        "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>$url->url];
                  return $this->ArticlesMessage($postObj, $arr);
             break;
 
@@ -60,6 +54,7 @@ class EtuanHandle extends WeixinHandle
                 $content = $this->Click($postObj);
                 break;
             default:
+                    $content = "default";
                 break;
         }
         return $this->TextMessage($postObj,$content);

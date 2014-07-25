@@ -3,6 +3,7 @@ class AtrplyController extends BaseController
 {
     private $reply;
     private $json;
+    
     public function __construct(AutoreplyHandle $Autoreply){
 
         $this->reply = $Autoreply;

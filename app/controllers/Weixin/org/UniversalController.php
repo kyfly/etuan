@@ -28,8 +28,8 @@
 	  				return $this->MP->MpEventHandle($postObj);
 	  				break;
 		  		default:
-		  			$contentStr = "感谢你的关注，我们将继续努力!";
-		  			return $this->MP->TextMessage($postObj,$contentStr);
+		  			$content = "default";
+                	return $this->MP->reply($postObj,$content);
 		  			break;
 		  	}
 		}

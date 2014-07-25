@@ -4,8 +4,6 @@
 
     Route::group(array('before'=>'auth'),function()
     {
-        Route::controller('userinfo','UserInfoController');
-
         Route::controller('activity','ActivityController');
 
         Route::controller('lottery','LotteryController');
@@ -25,8 +23,6 @@
 
     Route::controller("login","WxloginController");
 
-    Route::controller("build","WxbuilderController");
-
     Route::controller('reply','AtrplyController');
 
     Route::controller('news','NewsController');
@@ -37,9 +33,7 @@
 
 
 Route::get("/",function(){
-    $mp_id = 1;
-    $re = Newsmsg::where("mp_id",$mp_id)->orderBy('news_id','asc')->paginate(1);
-    print_r($re);
+    
 });
 Route::get("x",function(){
    
