@@ -49,11 +49,11 @@
 		            		return "登录失败";
 		            	}else{
 		            		$token = WxSession::where("session_name",$user)->pluck("session_value");
-							if(!$token){
-							    WxSession::insert(["session_name"=>$user,"session_value"=>$state]);
-							}else{
-							    WxSession::where("session_name",$user)->update(["session_value"=>$state]);
-							}
+						    if(!$token){
+						        WxSession::insert(["session_name"=>$user,"session_value"=>$state,"session_started"=>time()]);
+						    }else{
+						        WxSession::where("session_name",$user)->update(["session_value"=>$state,"session_started"=>time()]);
+					    	}
 							return "授权成功";
 		            	}
 		            }elseif(!$user){
@@ -64,6 +64,11 @@
 		        }
 		    }else{
 		    	$user = WxSession::where("session_value",$state)->pluck("session_name");
+			    $time = WxSession::where("session_value",$state)->pluck("session_started");
+			    $gotime = time()-$time;
+			    if($gotime>35){
+			        return "登录验证超时,请刷新页面重新登录";
+			    }
 		    	if($user){
 		    		$name = WxUser::where("wx_uid",$user)->pluck("nick_name");
 		    		return $name;

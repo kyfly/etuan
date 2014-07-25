@@ -37,18 +37,11 @@
 
 
 Route::get("/",function(){
-    $obj = new WeixinHandle;
-   $callbackUrl = AuthUrl;
-   $appid = APPID;
-    $QR = _ROOT_."/img/qr.png";
-    $logo = _ROOT_."/img/logo.jpg";
-    $url = $obj->getauthurl($appid,$callbackUrl,"snsapi_userinfo",$state=0);
-    //dd($url);
-    $imgurl = $obj->Authcode($url,$QR,$logo);
-    $img = _WWW_.$imgurl;
-    return "<img src=$img>";
+    $mp_id = 1;
+    $re = Newsmsg::where("mp_id",$mp_id)->orderBy('news_id','asc')->paginate(1);
+    print_r($re);
 });
-Route::get("x",["before"=>"wxauth",function(){
-    return "login";
-}]);
+Route::get("x",function(){
+   
+});
 

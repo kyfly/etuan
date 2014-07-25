@@ -126,12 +126,33 @@ define("AuthUrl",urlencode("http://weixin.linkew.net/login"));
             $arr[]="创建消息失败，请修改部分内容，可能该消息已存在。";
             bool
         接收数据：
-             "[{"title":"test11","description":"ddssnddddd","pic_url":"kkkkkkkkkk","url":"llllllll","content":"kk"},
-             {"title":"test22","description":"ffffffffff","pic_url":"rrrrrrrr","url":"222222222","content":"dd"},
-             {"title":"test33","description":"gggggggggg","pic_url":"fffffccffff","url":"333333333","content":"ddd"}]"
+             "[
+                {
+                    "title": "test11",
+                    "description": "ddssnddddd",
+                    "pic_url": "kkkkkkkkkk",
+                    "url": "llllllll",
+                    "content": "kk",
+                    "mp_id": 1
+                },
+                {
+                    "title": "test22",
+                    "description": "ffffffffff",
+                    "pic_url": "rrrrrrrr",
+                    "url": "222222222",
+                    "content": "dd"
+                },
+                {
+                    "title": "test33",
+                    "description": "gggggggggg",
+                    "pic_url": "fffffccffff",
+                    "url": "333333333",
+                    "content": "ddd"
+                }
+            ]"
 
         数组样式：
-            $arr =[ ["title"=>"test11","description"=>"ddssnddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"kk"],
+            $arr =[ ["title"=>"test11","description"=>"ddssnddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","content"=>"kk",'mp_id'=>1],
                 ["title"=>"test22","description"=>"ffffffffff","pic_url"=>"rrrrrrrr","url"=>"222222222","content"=>"dd"],
                 ["title"=>"test33","description"=>"gggggggggg","pic_url"=>"fffffccffff","url"=>"333333333","content"=>"ddd"]];
 5./news/update 
@@ -152,8 +173,8 @@ define("AuthUrl",urlencode("http://weixin.linkew.net/login"));
 6./news/cact
     该接口为社团活动信息图文消息创建接口,在社团选择此图文消息时调用。
         返回值：bool
-            "{"title":"test11","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","news_from":"vote"}"
-            $arr =["title"=>"test11","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","news_from"=>"vote"];
+            "{"title":"test11","description":"dddddddddd","pic_url":"kkkkkkkkkk","url":"llllllll","news_from":"vote",'mp_id':1}"
+            $arr =["title"=>"test11","description"=>"dddddddddd","pic_url"=>"kkkkkkkkkk","url"=>"llllllll","news_from"=>"vote",'mp_id'=>1];
 
 7./news/sact
     该接口为社团所有活动信息的图文消息,属于社团素材库调用。

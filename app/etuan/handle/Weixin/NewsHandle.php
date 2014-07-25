@@ -3,10 +3,11 @@
     {
         public function Createnews($arr){
             if(isset($arr[0])){
-                $re = Newsmsg::where("title",$arr[0]["title"])->where("description",$arr[0]["description"])->where("pic_url",$arr[0]["pic_url"])->where("url",$arr[0]["url"])->pluck("news_id");
+                $re = Newsmsg::where("title",$arr[0]["title"])->where("description",$arr[0]["description"])->where("mp_id",$arr[0]['mp_id'])->pluck("news_id");
             }elseif(!isset($arr[0])){
-                $re = Newsmsg::where("title",$arr["title"])->where("description",$arr["description"])->where("pic_url",$arr["pic_url"])->where("url",$arr["url"])->pluck("news_id");
+                $re = Newsmsg::where("title",$arr["title"])->where("description",$arr["description"])->where("mp_id",$arr['mp_id'])->pluck("news_id");
             }
+            
             if($re != NULL){
                 return $arr[]="创建消息失败，请修改部分内容，可能该消息已存在。";
             }
@@ -24,24 +25,29 @@
                         );
                         $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
                     }else{
+                      
                         $news_id = DB::table('mp_msg_news')->insertGetId(
                                                         ["title" => $arr[$i]["title"],
                                                         "article_id" => $i+1,
                                                         "description" => $arr[$i]["description"],
                                                         "pic_url" => $arr[$i]["pic_url"],
                                                         "url" => $arr[$i]["url"],
-                                                        "news_from"=>"sucai"]
+                                                        "news_from"=>"sucai",
+                                                        'mp_id'=>$arr[$i]['mp_id']]
                                                     );
                         $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
                     }
                 }
             }else{
+             
                 $news_id = DB::table('mp_msg_news')->insertGetId(
                     ["title" => $arr["title"],
                         "article_id" => 1,
                         "description" => $arr["description"],
                         "pic_url" => $arr["pic_url"],
-                        "url" => $arr["url"]]
+                        "url" => $arr["url"],
+                        "news_from"=>"sucai",
+                       'mp_id'=>$arr['mp_id']]
                 );
                 $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => 1,"content"=>$arr["content"]]);
             }
@@ -94,40 +100,47 @@
                         "description" => $arr["description"],
                         "pic_url" => $arr["pic_url"],
                         "url" => $arr["url"],
-                        "news_from"=>$arr["news_from"]]
+                        "news_from"=>$arr["news_from"],
+                        'mp_id'=>$arr['mp_id']]
                 );
             return $re;
             }
-            public function Selelteactnews($org_uid){
-                $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
-                $news = Lottery::where("org_uid",$org_uid)->select("name","description","url")->get();
-                    for($i = 0;$i<count($news);$i++){
-                    $new[0][$i] = $news[$i]["original"];
-                    $new[0][$i]["pic_url"] = $pic_url;
-                    $new[0][$i]["news_from"] = "lottery";
-                }
+        public function Selectnews($org_uid){
+           $mp_ids = Wxdata::where('org_uid',$org_uid)->lists("mp_id");
+           for($i = 0;$i<count($mp_ids);$i++){
+                Newsmsg::where('mp_id',$mp_ids[$i])->lists();
+           }
+        }
+        public function Selelteactnews($org_uid){
+            $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
+            $news = Lottery::where("org_uid",$org_uid)->select("name","description","url")->get();
+                for($i = 0;$i<count($news);$i++){
+                $new[0][$i] = $news[$i]["original"];
+                $new[0][$i]["pic_url"] = $pic_url;
+                $new[0][$i]["news_from"] = "lottery";
+            }
 
-                $news = Registration::where("org_uid",$org_uid)->select("name","url")->get();
-                for($i = 0;$i<count($news);$i++){
-                    $new[1][$i] = $news[$i]["original"];
-                    $new[1][$i]["pic_url"] = $pic_url;
-                    $new[1][$i]["description"] = "点击进入".$news[$i]->name.">>";
-                    $new[1][$i]["news_from"] = "registration";
-                }
-                $news = Ticket::where("org_uid",$org_uid)->select("act_tittle","url")->get();
-                for($i = 0;$i<count($news);$i++){
-                    $new[2][$i] = $news[$i]["original"];
-                    $new[2][$i]["pic_url"] = $pic_url;
-                    $new[2][$i]["description"] = "点击进入".$news[$i]->act_tittle.">>";
-                    $new[2][$i]["news_from"] = "ticket";
-                }
-                $news = Vote::where("org_uid",$org_uid)->select("name","description","url")->get();
-                for($i = 0;$i<count($news);$i++){
-                    $new[3][$i] = $news[$i]["original"];
-                    $new[3][$i]["pic_url"] = $pic_url;
-                    $new[3][$i]["news_from"] = "vote";
-                }
-                return $new;
+            $news = Registration::where("org_uid",$org_uid)->select("name","url")->get();
+            for($i = 0;$i<count($news);$i++){
+                $new[1][$i] = $news[$i]["original"];
+                $new[1][$i]["pic_url"] = $pic_url;
+                $new[1][$i]["description"] = "点击进入".$news[$i]->name.">>";
+                $new[1][$i]["news_from"] = "registration";
+            }
+            $news = Ticket::where("org_uid",$org_uid)->select("act_tittle","url")->get();
+            for($i = 0;$i<count($news);$i++){
+                $new[2][$i] = $news[$i]["original"];
+                $new[2][$i]["pic_url"] = $pic_url;
+                $new[2][$i]["description"] = "点击进入".$news[$i]->act_tittle.">>";
+                $new[2][$i]["news_from"] = "ticket";
+            }
+            $news = Vote::where("org_uid",$org_uid)->select("name","description","url")->get();
+            for($i = 0;$i<count($news);$i++){
+                $new[3][$i] = $news[$i]["original"];
+                $new[3][$i]["pic_url"] = $pic_url;
+                $new[3][$i]["news_from"] = "vote";
+            }
+            return $new;
         }
         public function Deletenews($news_id){
                Newscontent::where("news_id",$news_id)->delete();

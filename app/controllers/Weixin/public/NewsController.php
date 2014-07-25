@@ -33,6 +33,7 @@
 
             return $re;
             }
+
         public function getSact(){
 
             $org_uid = Auth::user()->org_uid;
