@@ -136,3 +136,15 @@ body{
 		cursor: pointer;
 		height: 32px;
 		}
+	.editbtn {
+		height: 30px;
+		margin: -5px;
+		cursor: pointer;
+		}
+	.deletebtn {
+		height: 30px;
+		margin-top: -5px;
+		margin-bottom: -5px;
+		margin-left: 20px;
+		cursor: pointer;
+		}
