@@ -31,8 +31,9 @@ $(document).ready(function(){
 		//createActivityJson.theme = $("#theme").val();
 		var objTheme = document.getElementsByName("theme");
 		for(var j = 0; j <= objTheme.length-1; i++){
-			if(objLimit[i].checked === true || createActivityJson.theme === null){
-				createActivityJson.theme = objLimit[i].value; 
+			if(objTheme[i].checked === true || createActivityJson.theme === null){
+				createActivityJson.theme = objTheme[i].value;
+				break;
 			}
 		};
 		//未完成的获取关于问题项目的定义
