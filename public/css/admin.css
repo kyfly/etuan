@@ -148,3 +148,55 @@ body{
 		margin-left: 20px;
 		cursor: pointer;
 		}
+	.margintop {
+		margin-top: 15px;
+		}
+	.panel1 {
+		background-color: #fc8675;
+		}
+	.panel2 {
+		background-color: #5ab6df;
+		}
+	.panel3 {
+		background-color: #65cea7;
+		}
+	.panel4 {
+		background-color: #ebc85e;
+		}
+	.panel5 {
+		background-color: #6a8abe;
+		}
+	.panel6 {
+		background-color: #ff6633;
+		}
+	.onebox {
+		float: left;
+		padding: 3px;
+		width: 20%;
+		}
+	.p1 {
+		font-size: 28px;
+		color: #fff;
+		text-align: center;
+		margin-top: 15px;
+		}
+	.p2 {
+		font-size: 56px;
+		color: #fff;
+		text-align: center;
+		}
+	.p3 {
+		font-size: 15px;
+		color: #fff;
+		text-align: center;
+		margin-top: 15px;
+		}
+	.p4 {
+		font-size: 30px;
+		color: #fff;
+		text-align: center;
+		}
+	th , td {
+		text-align: center;
+		}
+	
