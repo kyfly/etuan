@@ -31,7 +31,7 @@ $(document).ready(function(){
 		//createActivityJson.theme = $("#theme").val();
 		var objTheme = document.getElementsByName("theme");
 		for(var j = 0; j <= objTheme.length-1; i++){
-			if(objTheme[j].checked === true || createActivityJson.theme === null){
+			if(objTheme[j].checked === true && createActivityJson.theme === null){
 				createActivityJson.theme = objTheme[j].value;
 				break;
 			}
