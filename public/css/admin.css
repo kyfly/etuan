@@ -14,14 +14,14 @@ body{
 		border-radius: 0px;
 		}
 	.nav-pills {
-		background-color: #424f63;
+		background-color: #3692c5;
 		}
 	a:focus, a:active, a:hover {
 		outline: none;
 		-webkit-transition: all 0.3s;
 		-moz-transition: all 0.3s;
 		transition: all 0.3s;
-		color: #353F4F;
+		color: #4387ac;
 		}
 	.custom-nav {
     	margin-bottom: 10px;
@@ -34,8 +34,8 @@ body{
 		}
 	.custom-nav > li > a:hover,
 	.custom-nav > li > a:active {
-		background-color: #353f4f;
-		color: #65cea7;
+		background-color: #4387ac;
+		color: #ccc;
 		border-radius: 0;
 		-webkit-border-radius: 0;
 		}
@@ -43,13 +43,13 @@ body{
 		background: transparent url(../img/plus-white.png) no-repeat 93% center;
 		}
 	.custom-nav > li.menu-list > a:hover {
-		background-color: #353f4f;
+		background-color: #4387ac;
 		background-image: url(../img/plus.png);
 		}
 	.custom-nav > li.nav-active > a {
-		background-color: #353f4f;
+		background-color: #4387ac;
 		background-image: url(../img/minus.png);
-		color: #65cea7;
+		color: #ccc;
  	   }
 	.custom-nav > li.nav-active > ul{
 		display: block;
@@ -60,8 +60,8 @@ body{
 	.custom-nav > li.active > a,
 	.custom-nav > li.active > a:hover,
 	.custom-nav > li.active > a:focus {
-		background-color: #353f4f;
-		color: #65cea7;
+		background-color: #4387ac;
+		color: #ccc;
 		}
 	.custom-nav > li.menu-list.active > a {
  	    background-image: url(../img/plus.png)
@@ -77,7 +77,7 @@ body{
 		display: none;
 		margin: 0;
 		padding: 0;
-		background: #353f4f;
+		background: #4387ac;
  		}
 	.custom-nav .sub-menu-list > li > a {
 		color: #fff;
@@ -92,12 +92,12 @@ body{
 	.custom-nav .sub-menu-list > li > a:active,
 	.custom-nav .sub-menu-list > li > a:focus {
 		text-decoration: none;
-		color: #65cea7;
-		background: #2a323f;
+		color: #ccc;
+		background: #3283b0;
 		}
 	.custom-nav .sub-menu-list > li.active > a {
-		color: #65CEA7;
-		background-color: #2A323F;
+		color: #ccc;
+		background-color: #3283b0;
 		}
 	.custom-nav .sub-menu-list ul {
 		margin-left: 12px;
@@ -199,4 +199,68 @@ body{
 	th , td {
 		text-align: center;
 		}
-	
+	#dantiao > dl > dt {
+		background-color: #f5f5f5;
+		height: 40px;
+		}
+	#dantiao > dl > dt > h3 {
+		line-height: 40px;
+		}
+	.td1 {
+		width: 80px;
+		}
+	.td2 {
+		width: 155px;
+		}
+	.td3 {
+		width: 100px;
+		}
+	.td4 {
+		width: 85px;
+		}
+	.td5 {
+		width: 45px;
+		}
+	.td6 {
+		width: 150px;
+		}
+	.td7 {
+		width: 280px;
+		}
+	.td8 {
+		width: 350px;
+		}
+	.td9 {
+		width: 230px;
+		}
+	.td10 {
+		width: 200px;
+		}
+	.td11 {
+		width: 200px;
+		}
+	.td12 {
+		width: 130px;
+		}
+	.td13 {
+		width: 3500px;
+		}
+	.table-responsive {
+		overflow: auto;
+		}
+	.table-responsive > table {
+		width: 5505px;
+		}
+	.table-responsive > table > tbody > tr >td{
+		text-align: left;
+		}
+	.pages {
+		text-align: center;
+		}
+	.pages > ul {
+		margin: 10px;
+		}
+	#xiazai > button {
+		display: block;
+		margin: 15px auto;
+		}
