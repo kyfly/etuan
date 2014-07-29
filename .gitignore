@@ -6,3 +6,7 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+/.idea
+/app/config/development
+/app/config/production
+/app/database/etuan.mwb.bak
