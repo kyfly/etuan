@@ -31,8 +31,8 @@ class ActivityController extends BaseController
         return $this->service->deleteActivity($this->org_uid, $this->activityId);
     }
 
-    public function getCreateactivity()
     // public function postCreateactivity()
+    public function getCreateactivity()
     {
         $activityInfo = json_decode(Input::get('activityInfo'));
         return $this->service->createActivity($this->org_uid, $activityInfo);

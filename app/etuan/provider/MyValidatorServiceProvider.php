@@ -2,7 +2,7 @@
 namespace etuan\provider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use DatabaseValidator;
+use \DatabaseValidator;
 class MyValidatorServiceProvider extends ServiceProvider
 {
     /**
