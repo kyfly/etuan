@@ -5,21 +5,30 @@
  *
  *
  * */
-class EtuanHandle extends WeixinHandle
+class EtuanHandle extends replyHandle
 {
     public function EtuanTextHandle($postObj)
     {
 
         switch($postObj->Content){
-            case "授权":
-                return $this->Bangding($postObj);
-                break;
             case "info":
-                $from = $postObj->FromUserName;
-                $to = $postObj->ToUserName;
-                $content = $from.".....".$to;
+                $info = Wxdata::lists('mp_origin_id');
+                $user = "";
+                foreach($info as $val){
+                    $uid = Wxdata::pluck('org_uid');
+                    $orgname = Organization::where("org_uid",$uid)->pluck('name');
+                    $url = "weixin://contacts/profile/$val";
+                    $user = $user."<a href=\"$url\">点击关注$orgname</a>";
+                    $user = $user.' | ';
+                }
+                $user = substr($user,0, strlen($user)-2);
+                $content = $user;
                 return $this->TextMessage($postObj,$content);
                 break;   
+            case "hh":
+                $content = '<a href="http://linkew.net/x">ggg</a>';
+                return $this->TextMessage($postObj,$content);
+                break;  
            default:
                return $this->Autoreply($postObj);
                 break;
@@ -59,12 +68,6 @@ class EtuanHandle extends WeixinHandle
         }
         return $this->TextMessage($postObj,$content);
 
-    }
-    public function Bangding($postObj){
-        $scope = "snsapi_userinfo";
-        $url = $this->getauthurl($scope);
-        $Content ="<a href=\"".$url."\">点击这里绑定</a>";
-        return $this->TextMessage($postObj,$Content);
     }
     public function Click($postObj)
     {

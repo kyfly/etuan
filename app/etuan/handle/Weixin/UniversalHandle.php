@@ -4,7 +4,7 @@
  *
  *
  * */
-class UniversalHandle extends WeixinHandle
+class UniversalHandle extends replyHandle
 {
     public function MpTextHandle($postObj)
     {
@@ -22,7 +22,7 @@ class UniversalHandle extends WeixinHandle
 
             default:
             $content = "default";
-            return $this->MP->reply($postObj,$content);
+            return $this->reply($postObj,$content);
             break;
          }
         return 0;
