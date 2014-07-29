@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/admin.css" rel="stylesheet">
+    <title>“团团一家”管理后台</title>
+</head>
+<body>
+<nav id="nav" class="navbar navbar-default" role="navigation">
+<div class="container">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+        <span class="sr-only">导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a><img src="../img/brand.png" id="brandpic"></a>
+      </div>
+    <div class="collapse navbar-collapse" id="nav-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a><img id="avatar" class="img-circle" src="../img/avatar.jpg"> 用户</a></li>
+        <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<!--侧边栏-->
+<div class="col-lg-3 col-md-3">
+  <ul class="nav nav-pills nav-stacked custom-nav" role="tablist">
+    <li> <a href="admin.html">首页</a></li>
+    <li class="menu-list nav-active"><a>报名</a>
+      <ul class="sub-menu-list">
+        <li><a href="admin-baoming1.html"> 查看报名</a></li>
+        <li class="active"><a href="admin-baoming2.html"> 新建报名</a></li>
+        <li><a href="admin-baoming3.html"> 查看结果</a></li>
+        </ul>
+      </li>
+    <li class="menu-list"><a>投票</a>
+      <ul class="sub-menu-list">
+        <li><a href="admin-toupiao1.html"> 查看投票</a></li>
+        <li><a href="admin-toupiao2.html"> 新建投票</a></li>
+        </ul>
+      </li>
+    <li class="menu-list"><a>抽奖</a>
+      <ul class="sub-menu-list">
+        <li><a href="admin-choujiang1.html"> 查看抽奖</a></li>
+        <li><a href="admin-choujiang2.html"> 新建抽奖</a></li>
+        </ul>
+      </li>
+    <li class="menu-list"><a>抢票</a>
+      <ul class="sub-menu-list">
+        <li><a href="admin-qiangpiao1.html"> 查看抢票</a></li>
+        <li><a href="admin-qiangpiao2.html"> 新建抢票</a></li>
+        </ul>
+      </li>
+    <li class="menu-list"><a>微信</a>
+      <ul class="sub-menu-list">
+        <li><a href="admin-weixin1.html">自动回复</a></li>
+        <li><a href="admin-weixin2.html">自定义菜单</a></li>
+        <li><a href="admin-weixin3.html">素材管理</a></li>
+        </ul>
+      </li>
+    <li class="menu-list"><a>统计</a>
+      <ul class="sub-menu-list">
+        <li><a href="#"> Dashboard 1</a></li>
+        <li><a href="#"> Dashboard 2</a></li>
+        </ul>
+      </li>
+  </ul>
+</div>
+<div id="main" class="col-lg-9 col-md-9">
+	<div class="tab-content">
+        <!--新建报名-->
+        <div class="tab-pane active in" id="newreg">
+          <form role="form">
+            <fieldset>
+              <legend>新建报名表</legend>
+              <div class="form-group">
+                <label for="stoptime">报名终止时间</label>
+                <input class="form-control" id="stoptime" type="datetime-local" value="2014/09/01 00:00">
+               </div>
+              <div class="form-group">
+                <label>允许报名年级</label>
+                <div>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大一
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大二
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大三
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大四
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 研究生
+                  </label>
+                 </div>
+               </div>
+              <div class="form-group">
+                <label for="url">报名链接</label>
+                <div class="input-group">
+                  <span class="input-group-addon">http://www.etuan.org/baoming/</span>
+                  <input id="url" type="text" class="form-control" placeholder="请自定义该报名表的链接">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="theme">报名表样式</label><br>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="1">
+                  <img src="../img/example.png">
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="2">
+                  <img src="../img/example.png">
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="3">
+                  <img src="../img/example.png">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>表中问题</label>
+                <div class="editlist form-control">
+                  <p>属性以及注释</p>
+                  <img class="edit1" src="../img/close.png">
+                  <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>表中问题</label>
+                <div class="editlist form-control">
+                  <p>属性以及注释</p>
+                  <img class="edit1" src="../img/close.png">
+                  <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>表中问题</label>
+                <div class="editlist form-control">
+                  <p>属性以及注释</p>
+                  <img class="edit1" src="../img/close.png">
+                  <img class="edit2" src="../img/editor.png" data-toggle="modal" data-target="#editbox">
+                </div>
+              </div>
+              <div class="form-group">
+                <button id="addquestion" class="btn btn-block btn-info">+</button>
+              </div>
+              <div class="form-group">
+                <button id="preview" type="button" class="btn btn-warning">预览</button>
+                <button id="submit" type="button" class="btn btn-success">提交</button>
+              </div>
+              </fieldset>
+          </form>
+          <!-- editbox -->
+          <div class="modal fade" id="editbox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title" id="myModalLabel">编辑</h4>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                      <label class="control-label col-sm-3">属性</label>
+                      <div class="col-sm-9">
+                        <select class="form-control">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                        </select>	
+                      </div>
+                      </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-3" for="name">注释</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="name" placeholder="请输入注释">
+                        </div>
+                      </div>
+                   </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary">确定</button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
+<footer id="footer" class="panel-footer">
+	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+</footer>
+
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script src="../js/jquery.json.js"></script>
+<script src="../js/admin.js"></script>
+<script src="../js/adminbaoming.js"></script>
+</body>
+</html>

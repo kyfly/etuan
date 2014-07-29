@@ -80,7 +80,7 @@
     </div>
   </div>
 </div>
-<header>
+<header id="nav">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
         <div class="container-fluid">
@@ -120,22 +120,24 @@
         </div>
     </nav>
 </header>
-<div class="jumbotron">
-        <p class="hidden-xs">十佳歌手抽奖活动</p>
-        <p class="visible-xs-block">十佳歌手<br>抽奖活动</p>
-</div>
-<div id="content">
-  <button class="btn btn-info loginbtn visible-xs-block" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
-  <button class="btn btn-info loginbtn btn-lg hidden-xs" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
-  <div id="main" class="clearfix">
-    <img id="img1" src="../img/choujiang2-bg2.png">
-    <img id="startbtn" src="../img/choujiang2-zhizhen.png">
-    <img id="zhuanpan" src="../img/choujiang2-zhuanpan.png">
-    <img id="img2" src="../img/choujiang2-bg3.png">
+<div id="mainHeight">
+  <div class="jumbotron">
+    <p class="hidden-xs">十佳歌手抽奖活动</p>
+    <p class="visible-xs-block">十佳歌手<br>抽奖活动</p>
+  </div>
+  <div id="content">
+    <button class="btn btn-info loginbtn visible-xs-block" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+    <button class="btn btn-info loginbtn btn-lg hidden-xs" data-toggle="modal" data-target="#myModal">输入学号开始抽奖</button>
+    <div id="main" class="clearfix">
+      <img id="img1" src="../img/choujiang2-bg2.png">
+      <img id="startbtn" src="../img/choujiang2-zhizhen.png">
+      <img id="zhuanpan" src="../img/choujiang2-zhuanpan.png">
+      <img id="img2" src="../img/choujiang2-bg3.png">
+    </div>
   </div>
 </div>
 
-<footer class="panel-footer">
+<footer id="footer" class="panel-footer">
   <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
 
@@ -144,24 +146,28 @@
 <script src="../js/jQueryRotate.2.2.js"></script>
 <script src="../js/jquery.easing.min.js"></script>
 <script>
-$(function(){ 
-    $("#startbtn").rotate({ 
-        bind:{ 
-            click:function(){//绑定click单击事件 
-                 var a = Math.floor(Math.random() * 360); //生成随机数 
-                 $(this).rotate({ 
-                         duration:3000,//转动时间间隔（转动速度） 
-                         angle: 0,  //开始角度 
-                        animateTo:3600+a, //转动角度，10圈+ 
-                        easing: $.easing.easeOutSine, //动画扩展 
-                        callback: function(){ //回调函数 
-                            alert('中奖了！'); 
-                        } 
-                 }); 
-            } 
-        } 
-    }); 
-});
+	$(function(){ 
+		$("#startbtn").rotate({ 
+			bind:{ 
+				click:function(){//绑定click单击事件 
+					 var a = Math.floor(Math.random() * 360); //生成随机数 
+					 $(this).rotate({ 
+							 duration:3000,//转动时间间隔（转动速度） 
+							 angle: 0,  //开始角度 
+							animateTo:3600+a, //转动角度，10圈+ 
+							easing: $.easing.easeOutSine, //动画扩展 
+							callback: function(){ //回调函数 
+								alert('中奖了！'); 
+							} 
+					 }); 
+				} 
+			} 
+		}); 
+	});
+	
+	$(document).ready(function () {
+			$('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+		});
 </script>
 </body>
 </html>

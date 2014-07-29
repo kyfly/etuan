@@ -90,7 +90,7 @@
 </head>
 <body>
 <!--头部-->
-<header>
+<header id="nav">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
         <div class="container-fluid">
@@ -130,69 +130,76 @@
         </div>
     </nav>
 </header>
-<div class="jumbotron">
-  <div class="container">
-    <h1 class="hidden-xs">十佳歌手最佳人气投票</h1>
-    <p id="headtext" class="visible-xs-block">十佳歌手最佳人气投票</p>
-       <p id="p1">投票时间：5月2日21：00——5月10日18：00。</p>
-       <p>每个微信号限投一次。</p>
-       <p>必须选择1名歌手，否则无法提交。</p>
-       <p>关注杭电学生会（微信号：hduxsh）即可参与投票。</p>
-   
-  </div>
-</div>
-<!--内容-->
-<div id="content" class="container">
-  <div class="votediv">
-    <h2>叶亮</h2>
-    <div class="inlinecontent">
-      <h3>票数：</h3>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-          50
-         </div>
-       </div>
+<div id="mainHeight">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="hidden-xs">十佳歌手最佳人气投票</h1>
+      <p id="headtext" class="visible-xs-block">十佳歌手最佳人气投票</p>
+      <p id="p1">投票时间：5月2日21：00——5月10日18：00。</p>
+      <p>每个微信号限投一次。</p>
+      <p>必须选择1名歌手，否则无法提交。</p>
+      <p>关注杭电学生会（微信号：hduxsh）即可参与投票。</p>
+      
     </div>
   </div>
-  <div class="votediv">
-    <h2>叶亮</h2>
-    <div class="inlinecontent">
-      <h3>票数：</h3>
-      <div class="progress">
-        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-          60
-         </div>
-       </div>
-    </div>
-  </div>
-  <div class="votediv">
+  <!--内容-->
+  <div id="content" class="container">
+    <div class="votediv">
       <h2>叶亮</h2>
       <div class="inlinecontent">
-       <h3>票数：</h3>
-       <div class="progress">
-         <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-           70
+        <h3>票数：</h3>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+            50
+           </div>
          </div>
-       </div>
+      </div>
     </div>
-  </div>
-  <div class="votediv">
-    <h2>叶亮</h2>
-    <div class="inlinecontent">
-      <h3>票数：</h3>
-      <div class="progress">
-        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-          80
+    <div class="votediv">
+      <h2>叶亮</h2>
+      <div class="inlinecontent">
+        <h3>票数：</h3>
+        <div class="progress">
+          <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+            60
+           </div>
          </div>
-       </div>
+      </div>
+    </div>
+    <div class="votediv">
+      <h2>叶亮</h2>
+      <div class="inlinecontent">
+        <h3>票数：</h3>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+            70
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="votediv">
+      <h2>叶亮</h2>
+      <div class="inlinecontent">
+        <h3>票数：</h3>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+            80
+           </div>
+         </div>
+      </div>
     </div>
   </div>
 </div>
-<footer class="panel-footer">
-    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+<footer id="footer" class="panel-footer">
+  <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function () {
+        $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+    });
+</script>
 </body>
 </html>

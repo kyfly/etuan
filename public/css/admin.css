@@ -163,16 +163,10 @@ body{
 	.panel4 {
 		background-color: #ebc85e;
 		}
-	.panel5 {
-		background-color: #6a8abe;
-		}
-	.panel6 {
-		background-color: #ff6633;
-		}
 	.onebox {
 		float: left;
 		padding: 3px;
-		width: 20%;
+		width: 25%;
 		}
 	.p1 {
 		font-size: 28px;
@@ -263,4 +257,65 @@ body{
 	#xiazai > button {
 		display: block;
 		margin: 15px auto;
+		}
+	.emotion_editor .edit_area {
+		padding: 14px 20px;
+		height: 188px;
+		}
+	.emotion_editor {
+		position: relative;
+		z-index: 1;
+		border: 1px solid #e7e7eb;
+		}
+	.msg_sender {
+		border: 1px solid #e7e7eb;
+		}
+	.tab_navs {
+		text-align: center;
+		line-height: 30px;
+		border-bottom: 1px solid #e7e7eb;
+		margin-top: 10px;
+		}
+	.tab_nav {
+		float: left;
+		font-size: 14px;
+		}
+	.tab_nav > a {
+		text-decoration: none;
+		color: #b2b2b2;
+		}
+	.tab_nav > a > span {
+		width: 90px;
+		font-size: 20px;
+		}
+	.tab_nav > a :hover {
+		color: #373636;
+		}
+	.msg_sender .tab_navs {
+		line-height: 38px;
+		height: 38px;
+		}
+	.tab_panel {
+		min-height: 216px;
+		}
+	.msg_sender .emotion_editor {
+		border-width: 0;
+		}
+	.emotion_editor {
+		position: relative;
+		z-index: 1;
+		border: 1px solid #e7e7eb;
+		border-radius: 0;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		}
+	.editor_toolbar {
+		padding: 0 20px;
+		line-height: 36px;
+		border-top: 1px solid #e7e7eb;
+		height: 36px;
+		}
+	.editor_tip {
+		float: right;
+		color: #8d8d8d;
 		}

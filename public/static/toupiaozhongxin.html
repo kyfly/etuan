@@ -64,7 +64,7 @@
 </head>
 <body>
 <!--头部-->
-<header>
+<header id="nav">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
         <div class="container-fluid">
@@ -104,60 +104,67 @@
         </div>
     </nav>
 </header>
-<div class="jumbotron">
+<div id="mainHeight">
+  <div class="jumbotron">
+    <div class="container">
+      <p id="title1" class="hidden-xs">投票中心</p>
+      <p id="title2" class="visible-xs-block">投票中心</p>
+      <h2>一票在手，天下我有！妈妈再也不用担心我投票啦！</h2>
+    </div>
+  </div>
+  <!--内容-->
   <div class="container">
-    <p id="title1" class="hidden-xs">投票中心</p>
-    <p id="title2" class="visible-xs-block">投票中心</p>
-    <h2>一票在手，天下我有！妈妈再也不用担心我投票啦！</h2>
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <a href="#">
+       <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
+         <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
+         <img src="../img/example.png">
+         <p class="status text-coming">即将开始</p>
+      </div>
+      </a>
+    </div>
+    
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <a href="#">
+       <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
+         <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
+         <img src="../img/example.png">
+         <p class="status text-over">已经结束</p>
+       </div>
+      </a>
+    </div>
+    
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <a href="#">
+      <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
+        <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
+        <img src="../img/example.png">
+        <p class="status text-on">正在进行</p>
+      </div>
+      </a>
+    </div>
+    
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <a href="#">
+      <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
+        <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
+        <img src="../img/example.png">
+        <p class="status text-over">已经结束</p>
+      </div>
+      </a>
+    </div>
   </div>
 </div>
-<!--内容-->
-<div class="container">
-  <div class="col-xs-12 col-sm-4 col-md-3">
-   <a href="#">
-     <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
-      <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
-      <img src="../img/example.png">
-      <p class="status text-coming">即将开始</p>
-    </div>
-   </a>
-  </div>
- 
-  <div class="col-xs-12 col-sm-4 col-md-3">
-    <a href="#">
-     <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
-      <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
-      <img src="../img/example.png">
-      <p class="status text-over">已经结束</p>
-     </div>
-    </a>
-  </div>
-  
-  <div class="col-xs-12 col-sm-4 col-md-3">
-   <a href="#">
-    <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
-      <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
-      <img src="../img/example.png">
-      <p class="status text-on">正在进行</p>
-    </div>
-   </a>
-  </div>
-  
-  <div class="col-xs-12 col-sm-4 col-md-3">
-   <a href="#">
-    <div class="thumbnail" onMouseOver="this.style.border='3px solid #66ccff'"  onMouseOut="this.style.border='1px solid #ddd'">
-      <p class="listhead">杭州电子科技大学<br>第十一届十佳大学生评选</p>
-      <img src="../img/example.png">
-      <p class="status text-over">已经结束</p>
-    </div>
-   </a>
-  </div>
-</div>
-<footer class="panel-footer">
-    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+<footer id="footer" class="panel-footer">
+  <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function () {
+        $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+    });
+</script>
 </body>
 </html>

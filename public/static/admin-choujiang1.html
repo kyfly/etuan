@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -47,9 +47,9 @@
         <li><a href="admin-toupiao2.html"> 新建投票</a></li>
         </ul>
       </li>
-    <li class="menu-list"><a>抽奖</a>
+    <li class="menu-list nav-active"><a>抽奖</a>
       <ul class="sub-menu-list">
-        <li><a href="admin-choujiang1.html"> 查看抽奖</a></li>
+        <li class="active"><a href="admin-choujiang1.html"> 查看抽奖</a></li>
         <li><a href="admin-choujiang2.html"> 新建抽奖</a></li>
         </ul>
       </li>
@@ -75,58 +75,14 @@
   </ul>
 </div>
 <div id="main" class="col-lg-9 col-md-9">
-  <div class="tab-content">
-    <!--首页-->
-    <div class="tab-pane active in">
-      <div class="col-md-4">
-        <div class="panel1 panel">
-          <div class="panel-body">
-            <p class="p1"><span class="glyphicon glyphicon-user"></span> 参与人数</p>
-            <p class="p2">100</p>
-            </div>
-          </div>
-        </div>
-      <div class="col-md-4">
-        <div class="panel2 panel">
-          <div class="panel-body">
-            <p class="p1"><span class="glyphicon glyphicon-calendar"></span> 进行活动</p>
-            <p class="p2">15</p>
-            </div>
-          </div>
-        </div>
-      <div class="col-md-4">
-        <div class="panel3 panel">
-          <div class="panel-body">
-            <p class="p1"><span class="glyphicon glyphicon-envelope"></span> 后台通知</p>
-            <p class="p2">2</p>
-            </div>
-          </div>
-        </div>
-      <div class="col-sm-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>实时公告</th>
-              <th>发布时间</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr>
-              <td>欢迎使用“团团一家”社团活动服务平台！</td>
-              <td>2014-07-08</td>
-              </tr>
-            <tr>
-              <td>报名系统全新上线，新学期招新必备神器！</td>
-              <td>2014-07-15</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+	<div class="tab-content">
+      <!--查看抽奖-->
+      <div class="tab-pane active in" id="lotterylist">
+      查看已有抽奖
       </div>
-    </div>	<!--tab-content-->
-  </div>	<!--col-md-9-->
-</div>		<!--container-->
-  
+    </div>
+</div>
+</div>
 <footer id="footer" class="panel-footer">
 	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
