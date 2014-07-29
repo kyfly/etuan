@@ -6,73 +6,78 @@
 		private $state;
 		
 		public function __construct(){
-			$this->state = $this->getRandStr(40);
-			$this->obj = new WeixinHandle;
+			$this->state = BS::getRandStr(40);
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
 		}
-		private function getRandStr($length)
-	    {
-	        $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-	        $randString = '';
-	        $len = strlen($str) - 1;
-	        for ($i = 0; $i < $length; $i++) {
-	            $num = mt_rand(0, $len);
-	            $randString .= $str[$num];
-	        }
-	        return $randString;
-	    }
-
 		public function getIndex(){
 			if(!$this->is_weixin){
 				$appid = APPID;
 				$callbackUrl = AuthUrl;
 				$QR = _ROOT_."/img/qr.png";
 				$logo = _ROOT_."/img/logo.jpg";
-				$url = $this->obj->getauthurl($appid,$callbackUrl,'snsapi_userinfo',$this->state);
-				$imgurl = $this->obj->Authcode($url,$QR,$logo,'L',4,2);
+				$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$this->state);
+				$imgurl = QrcodeHandle::Authcode($url,$QR,$logo,'L',4,2);
 				return View::make("login",["token"=>$this->state,"imgurl"=>_WWW_.$imgurl]);
 			}
-			
 		}
-		//网页post上面的到的token请求login,微信带着state插入数据库
-		public function getCheck(){
+	public function getCheck(){
+	/*$connect= new Memcached; 
+	$connect->setOption(Memcached::OPT_COMPRESSION, false); 
+	$connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+	$connect->addServer('xxxxxxxx.m.yyyyyyyy.ocs.aliyuncs.com', 11211);
+	$connect->setSaslAuthData('ocsname', 'ocspassword');*/
+			$connect = new Memcache;
+       	    $connect->connect("localhost",11211);
 			$appid = APPID;
 			$secret = APPSECRET;
 		    $state = Input::get("state");
-		    if($this->is_weixin){
+		    $obj = new wxUserHandle;
+		    if($this->is_weixin)
+		    {
 		        if(isset($_GET["code"])&&$_GET["code"] != "authdeny")
 		        {
 		        	$code = $_GET["code"];
-		            $user = $this->obj->CreateUser($appid,$secret,$code);
-		            if($user){
-		            	if(!Weixin::login($user)){
-		            		return "登录失败";
-		            	}else{
-		            		$token = WxSession::where("session_name",$user)->pluck("session_value");
-						    if(!$token){
-						        WxSession::insert(["session_name"=>$user,"session_value"=>$state,"session_started"=>time()]);
-						    }else{
-						        WxSession::where("session_name",$user)->update(["session_value"=>$state,"session_started"=>time()]);
-					    	}
-							return "授权成功";
-		            	}
-		            }elseif(!$user){
-		            	return "授权失败";
+		            $user = $obj->CreateUser($appid,$secret,$code);
+		            if($user)
+		            {
+	            		$userinfo=['user'=>$user,'token'=>$state,'start_time'=>time(),'check_id'=>''];
+	              		$this->check($connect->set($state,$userinfo,60),true,'真遗憾,服务器好像出差了,刷新页面再来吧');
+		                $info = $connect->get($state);
+		                $check = $info['check_id'];
+		                while($check!=1)
+		                {
+		                    $info = $connect->get($state);
+		                    $check = $info['check_id'];
+		                    if(time()-$info['start_time']>20)
+		                    {
+		                    	$connect->delete($state);
+		                        return '验证超时';
+		                    }
+		                };
+		                $connect->delete($state);
+		                Weixin::login($user);
+		                return '登录成功';
+		            }else{
+		            	return "验证失败";
 		            }
-		        }else{
-		        	return "授权失败";
-		        }
-		    }else{
-		    	$user = WxSession::where("session_value",$state)->pluck("session_name");
-			    $time = WxSession::where("session_value",$state)->pluck("session_started");
-			    $gotime = time()-$time;
-			    if($gotime>35){
-			        return "登录验证超时,请刷新页面重新登录";
-			    }
-		    	if($user){
-		    		$name = WxUser::where("wx_uid",$user)->pluck("nick_name");
-		    		return $name;
 		    	}
+			}elseif(!$this->is_weixin)
+			{
+		    	$userinfo = $connect->get($state);
+		        if($userinfo['token']== $state)
+		        {
+		            $userinfo['check_id'] = 1 ;
+		            $this->ckeck($connect->set($state,$userinfo,60),true,'真遗憾,服务器好像出差了.');
+		        }else{
+		            return 201;
+		        }
+		        return Session::get('name');
 		    }
-		}
 	}
+	public function check($val, $expect, $msg)
+	{  
+	    if($val!= $expect) {
+	    	throw new Exception($msg);
+	    }
+	}  
+}

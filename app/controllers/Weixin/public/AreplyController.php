@@ -4,7 +4,7 @@ class AtrplyController extends BaseController
     private $reply;
     private $json;
     
-    public function __construct(AutoreplyHandle $Autoreply){
+    public function __construct(AutoreplyService $Autoreply){
 
         $this->reply = $Autoreply;
 
@@ -14,7 +14,7 @@ class AtrplyController extends BaseController
 
         $arr = json_decode($this->json,true);
 
-        $re = $this->reply->Createautoreply($arr);
+        $re = $this->reply->create($arr);
 
         return $re;
     }
@@ -22,7 +22,7 @@ class AtrplyController extends BaseController
 
         $arr = json_decode($this->json,true);
 
-        $re = $this->reply->Updateautoreply($arr);
+        $re = $this->reply->update($arr);
 
         return $re;
     }
@@ -30,7 +30,7 @@ class AtrplyController extends BaseController
 
         $org_uid = Auth::user()->org_uid;
 
-        $$arr = $this->reply->Selectautoreply($org_uid);
+        $$arr = $this->reply->show($org_uid);
 
         $json = json_encode($arr);
 
@@ -39,7 +39,7 @@ class AtrplyController extends BaseController
     public function getDestory(){
         $reply_id = Input::get("reply_id");
 
-        $re = $this->reply->Deleteautoreply($reply_id);
+        $re = $this->reply->delete($reply_id);
 
         return $re;
     }

@@ -32,6 +32,7 @@ news_from
                     "pic_url": "kkkkkkkkkk",
                     "url": "llllllll",
                     "content": "kk",
+                  	"news_from":"sucai",
                     "mp_id": 1
                 },
                 {
@@ -40,6 +41,7 @@ news_from
                     "pic_url": "rrrrrrrr",
                     "url": "222222222",
                     "content": "dd",
+                  "news_from":"sucai",
                     "mp_id": 1
                 },
                 {
@@ -48,6 +50,7 @@ news_from
                     "pic_url": "fffffccffff",
                     "url": "333333333",
                     "content": "ddd",
+                  "news_from":"sucai",
                     "mp_id": 1
                 }
             ]"
@@ -59,6 +62,7 @@ news_from
 			    "pic_url": "kkkkkkkkkk", 
 			    "url": "llllllll", 
 			    "content": "kk", 
+			   	"news_from":"sucai",
 			    "mp_id": 1
 			}
 /news/update 
@@ -68,37 +72,40 @@ news_from
         参数：
           多图文：
             "[
-			    {
-			        "news_id": 19, 
-			        "article_id": 1, 
-			        "title": "test", 
-			        "description": "dddddddddd", 
-			        "pic_url": "kkkkkkkkkk", 
-			        "url": "llllllll", 
-			        "content": "fffffffkk", 
-			        "news_from": "sucai"
-			    }, 
-			    {
-			        "news_id": 19, 
-			        "article_id": 2, 
-			        "title": "test", 
-			        "description": "aaaaaaaaaaaaa", 
-			        "pic_url": "ddddddk", 
-			        "url": "llllllll", 
-			        "content": "fffffdd", 
-			        "news_from": "sucai"
-			    }, 
-			    {
-			        "news_id": 19, 
-			        "article_id": 3, 
-			        "title": "test", 
-			        "description": "ffffffff", 
-			        "pic_url": "ccccccccck", 
-			        "url": "llllllll", 
-			        "content": "iiifffffiiiii", 
-			        "news_from": "sucai"
-			    }
-			]"
+    {
+        "news_id": 10,
+        "article_id": 1,
+        "title": "test",
+        "description": "dddddddddd",
+        "pic_url": "kkkkkkkkkk",
+        "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185863912.html",
+        "content": "fffffffkk",
+        "act_id": "4",
+        "news_from": "url"
+    },
+    {
+        "news_id": 10,
+        "article_id": 2,
+        "title": "test1",
+        "description": "aaaaaaaaaaaaa",
+        "pic_url": "ddddddk",
+        "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185918355.html",
+        "content": "dggrdsr",
+        "act_id": "4",
+        "news_from": "url"
+    },
+    {
+        "news_id": 10,
+        "article_id": 3,
+        "title": "test",
+        "description": "ffffffff",
+        "pic_url": "ccccccccck",
+        "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185929300.html",
+        "content": "iiifffffiiiii",
+        "act_id": "4",
+        "news_from": "url"
+    }
+]"
 		单图文：
 			{
 			    "news_id": 19, 
@@ -108,6 +115,7 @@ news_from
 			    "pic_url": "555555555555", 
 			    "url": "llllllll", 
 			    "content": "fffffffkk", 
+			    "act_id": "4",
 			    "news_from": "sucai"
 			}
 /news/cact
@@ -120,7 +128,8 @@ news_from
 			    "pic_url": "kkkkkkkkkk", 
 			    "url": "llllllll", 
 			    "news_from": "vote", 
-			    "mp_id": 1
+			    "mp_id": 1,
+			    'act_id':3
 			}"
 		 返回值：bool
 
@@ -129,123 +138,118 @@ news_from
 	请求方式：get
 	参数：无
 	返回值：
-		{
-		act 第一种情况：	所有活动都没被添加	
-	    "act": {	//程序根据社团活动信息生成的图文消息，需要在社团添加自动回复选择该条图文时通过/news/cact中创建。
-	        "1": [	//这里1,2,3,4表示类型
-	            {	
-	                "title": "gggggggg", 
-	                "url": "ffffffffffffff", 
-	                "pic_url": null, 
-	                "description": "点击进入gggggggg>>", 
-	                "news_from": "registration"
-	            }, 
-	            {
-	                "title": "fffffffffffffffff", 
-	                "url": "dddddddddddddd", 
-	                "pic_url": null, 
-	                "description": "点击进入fffffffffffffffff>>", 
-	                "news_from": "registration"
-	            }
-	        ], 
-	        "2": [
-	            {
-	                "tittle": "kkkkkkkk", 
-	                "url": "kkkkkkkkkkkkk", 
-	                "pic_url": null, 
-	                "description": "点击进入kkkkkkkk>>", 
-	                "news_from": "ticket"
-	            }
-	        ]
-	    }, 
-		act 第二种情况：	已经有该类型活动被添加。
-				    "act": {
-				        "1": {  //不同点
-				            "1": {
-				                "title": "fffffffffffffffff", 
-				                "description": "点击进入fffffffffffffffff>>", 
-				                "pic_url": null, 
-				                "url": "dddddddddddddd", 
-				                "news_from": "registration"
-				            }
-				        }, 
-				        "2": [
-				            {
-				                "title": "kkkkkkkk", 
-				                "description": "点击进入kkkkkkkk>>", 
-				                "pic_url": null, 
-				                "url": "kkkkkkkkkkkkk", 
-				                "news_from": "ticket"
-				            }
-				        ]
-				    }, 
-
-
-	      mp_id|news_id
-	    "new": {
-	        "1": {
-	            "18": [
-	                {
-	                    "mp_id": 1, 
-	                    "news_id": 18, 
-	                    "article_id": 1, 
-	                    "title": "test11", 
-	                    "description": "ddssnddddd", 
-	                    "pic_url": "kkkkkkkkkk", 
-	                    "url": "llllllll", 
-	                    "news_from": "sucai"
-	                }, 
-	                {
-	                    "mp_id": 1, 
-	                    "news_id": 18, 
-	                    "article_id": 2, 
-	                    "title": "test22", 
-	                    "description": "ffffffffff", 
-	                    "pic_url": "rrrrrrrr", 
-	                    "url": "222222222", 
-	                    "news_from": "sucai"
-	                }, 
-	                {
-	                    "mp_id": 1, 
-	                    "news_id": 18, 
-	                    "article_id": 3, 
-	                    "title": "test33", 
-	                    "description": "gggggggggg", 
-	                    "pic_url": "fffffccffff", 
-	                    "url": "333333333", 
-	                    "news_from": "sucai"
-	                }
-	            ], 
-	            "19": [
-	                {
-	                    "mp_id": 1, 
-	                    "news_id": 19, 
-	                    "article_id": 1, 
-	                    "title": "test", 
-	                    "description": "5555555555555", 
-	                    "pic_url": "555555555555", 
-	                    "url": "llllllll", 
-	                    "news_from": "sucai"
-	                }
-	            ]
-	        }, 
-	        "2": {
-	            "21": [
-	                {
-	                    "mp_id": 2, 
-	                    "news_id": 21, 
-	                    "article_id": 1, 
-	                    "title": "test", 
-	                    "description": "ddssnddddd", 
-	                    "pic_url": "kkkkkkkkkk", 
-	                    "url": "llllllll", 
-	                    "news_from": "sucai"
-	                }
-	            ]
-	        }
-	    }
-	}
-
+{
+    "act": {
+        "1": [
+            {
+                "title": "gggggggg",
+                "description": "点击进入gggggggg>>",
+                "pic_url": null,
+                "url": "ffffffffffffff",
+                "news_from": "registration",
+                "act_id": "reg_id"
+            },
+            {
+                "title": "fffffffffffffffff",
+                "description": "点击进入fffffffffffffffff>>",
+                "pic_url": null,
+                "url": "dddddddddddddd",
+                "news_from": "registration",
+                "act_id": "reg_id"
+            }
+        ],
+        "2": [
+            {
+                "title": "kkkkkkkk",
+                "description": "点击进入kkkkkkkk>>",
+                "pic_url": null,
+                "url": "kkkkkkkkkkkkk",
+                "news_from": "ticket",
+                "act_id": "ticket_id"
+            }
+        ]
+    },
+    "new": {
+        "1": {
+            "10": [
+                {
+                    "mp_id": 1,
+                    "news_id": 10,
+                    "article_id": 1,
+                    "title": "test11",
+                    "description": "ddssnddddd",
+                    "pic_url": "kkkkkkkkkk",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185863912.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "kk"
+                },
+                {
+                    "mp_id": 1,
+                    "news_id": 10,
+                    "article_id": 2,
+                    "title": "test22",
+                    "description": "ffffffffff",
+                    "pic_url": "rrrrrrrr",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185918355.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "dd"
+                },
+                {
+                    "mp_id": 1,
+                    "news_id": 10,
+                    "article_id": 3,
+                    "title": "test33",
+                    "description": "gggggggggg",
+                    "pic_url": "fffffccffff",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185929300.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "ddd"
+                }
+            ],
+            "11": [
+                {
+                    "mp_id": 1,
+                    "news_id": 11,
+                    "article_id": 1,
+                    "title": "test",
+                    "description": "dddddddddd",
+                    "pic_url": "kkkkkkkkkk",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234414682.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "fffffffkk"
+                },
+                {
+                    "mp_id": 1,
+                    "news_id": 11,
+                    "article_id": 2,
+                    "title": "test",
+                    "description": "aaaaaaaaaaaaa",
+                    "pic_url": "ddddddk",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234412938.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "fffffdd"
+                },
+                {
+                    "mp_id": 1,
+                    "news_id": 11,
+                    "article_id": 3,
+                    "title": "test",
+                    "description": "ffffffff",
+                    "pic_url": "ccccccccck",
+                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234597052.html",
+                    "news_from": "sucai",
+                    "act_id": 0,
+                    "content": "iiifffffiiiii"
+                }
+            ]
+        }
+    }
+}
 /news/destory	
 	删除某条图文消息	
 	请求方式：get

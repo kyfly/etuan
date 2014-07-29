@@ -16,6 +16,14 @@ interface_token
         参数：mp_origin_id
 		      appid
 		      secret
+
+/org/check
+		请求方式：post
+		参数;
+			$appid
+		    $secret
+		返回值：bool
+			true说明输入正确，否者输入有错，在创建和更新时检查。   		      
 /org/uwx       
 	请求方式：post
 	返回值：bool

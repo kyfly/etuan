@@ -1,35 +1,23 @@
 <?php
 class QretuanController extends BaseController
 {
+    private $Qr;
+    public function __construct(sceneQrcodeService $Qr){
+            $this->Qr = $Qr;
+    }
     public function postCreate(){
-        $obj = new WeixinHandle;
         $id = Input::get("act_id");
         $type = Input::get("act_type");
         $action = Input::get("action");
-        $appid = APPID;
-        $appsecret = APPSECRET;
-        $re = $obj->getQrcodeUrl($appid,$appsecret,$action);
-        if($re){
-            $inre = Etuan::insert(["act_id"=>$id,"act_type"=>$type,"qrcode_url"=>$re]);
-        }else{
-            return false;
-        }
-        if($inre){
-            return true;
-        }else{
-            return false;
-        }
+        $result = $this->Qr->create($id,$type,$action);
+        return $result;
     }
     public function postUpdate(){
         $scene = Input::get("scene_id");
         $id = Input::get("act_id");
         $type = Input::get("act_type");
-        $inre = Etuan::where("scene_id",$scene)->update(["act_id"=>$id,"act_type"=>$type]);
-        if($inre){
-            return true;
-        }else{
-            return false;
-        }
+        $result = $this->Qr->update($scene,$id,$type);
+        return $result;
     }
     public function getDestory(){
         $scene = Input::get("scene_id");

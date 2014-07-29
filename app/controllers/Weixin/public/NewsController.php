@@ -3,7 +3,7 @@
     {
         private $news;
         private $json;
-        public function __construct(NewsHandle $news){
+        public function __construct(newsService $news){
 
             $this->news = $news;
 
@@ -13,7 +13,7 @@
 
             $arr = json_decode($this->json,true);
 
-            $re = $this->news->Createnews($arr);
+            $re = $this->news->create($arr);
             
             return $re;
         }
@@ -21,16 +21,16 @@
 
             $arr = json_decode($this->json,true);
 
-            $re = $this->news->Updatenews($arr);
+            $re = $this->news->update($arr);
 
             return $re;
         }
         public function getShow(){
             $org_uid = Auth::user()->org_uid;
 
-            $new["act"] = $this->news->Selelteactnews($org_uid);
+            $new["act"] = $this->news->show($org_uid);
 
-            $new["new"] = $this->news->Selectnews($org_uid);
+            $new["new"] = $this->news->showActNews($org_uid);
 
             $json = json_encode($new);
             
@@ -40,7 +40,7 @@
 
             $arr = json_decode($this->json,true);
 
-             $re = $this->news->Createactnews($arr);
+             $re = $this->news->createActNews($arr);
 
             return $re;
             }
@@ -48,7 +48,7 @@
 
             $news_id = Input::get("news_id");
 
-            $re = $this->news->Deletenews($news_id);
+            $re = $this->news->delete($news_id);
 
             return $re;
         }

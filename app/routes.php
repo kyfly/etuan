@@ -1,5 +1,14 @@
 <?php
 
+    Route::get("/",function(){
+
+      
+    });
+    Route::get("x",['before'=>'wxauth',function(){
+      echo 'nihao';
+    }]);
+
+
     Route::controller('user','UserController');
 
     Route::group(array('before'=>'auth'),function()
@@ -11,7 +20,16 @@
         Route::controller('registration','RegistrationController');
 
         Route::controller('vote','VoteController');
+
+       
     });
+     Route::controller('reply','AtrplyController');
+
+    Route::controller('news','NewsController');
+
+    Route::controller('org','WxinterfaceController');
+
+    Route::controller('qrcode','QretuanController');
 
     Route::get("wx/{id}","EtuanController@index");
 
@@ -23,19 +41,8 @@
 
     Route::controller("login","WxloginController");
 
-    Route::controller('reply','AtrplyController');
-
-    Route::controller('news','NewsController');
-
-    Route::controller('org','WxinterfaceController');
-
-    Route::controller('qrcode','QretuanController');
-
-
-Route::get("/",function(){
+    Route::controller("oauth","WxauthController");
     
-});
-Route::get("x",function(){
-   
-});
+
+
 

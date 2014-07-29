@@ -32,9 +32,10 @@
 		<p>
 		    <button id="closeWindow">WeixinApi.closeWindow</button>
 		</p>
-<a href="weixin://contacts/profile/gh_14a53f5b6e28">点击这里</a>
-		<script type="text/javascript">
 
+		<script type="text/javascript">
+	//Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B329 MicroMessenger/5.0.1
+//Mozilla/5.0 (Linux; U; Android 2.3.6; zh-cn; GT-S5660 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 MicroMessenger/4.5.255
 		    // 给按钮增加click事件：请不要太纠结这个写法，demo而已
 		    var addEvent = function(elId,listener){
 		        document.getElementById(elId)
@@ -82,6 +83,7 @@
 		            alert("当前网络类型：" + network);
 		        });
 		    });
+
 
 		    // 调起客户端的图片播放组件
 		    addEvent('imagePreview',function(el,e){
@@ -156,6 +158,14 @@
 		        elToolbar.click(); // 先隐藏
 		        elToolbar.click(); // 再显示
 		    });
+function viewProfile(){    
+    if (typeof WeixinJSBridge != "undefined" && WeixinJSBridge.invoke){    
+        WeixinJSBridge.invoke('profile',{    
+            'username':'gh_dd4b2c2ada8b',    /* 你的公众号原始ID */
+            'scene':'57'    
+        });    
+    }    
+}
 
 		</script>
 	</body>
