@@ -1,9 +1,11 @@
 <?php
 
-    Route::controller('user','UserController');
+    Route::controller('auth','AuthController');
 
     Route::group(array('before'=>'auth'),function()
     {
+        Route::controller('user','UserController');
+
         Route::controller('activity','ActivityController');
 
         Route::controller('lottery','LotteryController');
