@@ -1,9 +1,5 @@
 <?php
-/*该类为通用接口处理类，继承于WeixinHandle类
- *
- *
- *
- * */
+
 class UniversalHandle extends replyHandle
 {
     public function MpTextHandle($postObj)

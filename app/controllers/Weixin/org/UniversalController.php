@@ -1,8 +1,5 @@
 <?php
-/*该类为通用微信接口类
- *
- *
- * */
+
 	class UniversalController extends BaseController
 	{
         private $MP;

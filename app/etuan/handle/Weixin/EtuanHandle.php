@@ -1,10 +1,5 @@
 <?php
-/*该类为微信公众号“团团一家”消息处理和回复类,继承于WeixinHandle类
- *
- *
- *
- *
- * */
+
 class EtuanHandle extends replyHandle
 {
     public function EtuanTextHandle($postObj)
