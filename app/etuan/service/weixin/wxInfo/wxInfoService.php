@@ -1,10 +1,10 @@
 <?php
 class wxInfoService
 {
-	public function create($origin_id,$appid,$secret){
+	public function create($appid,$secret){
 		$result = WS::getToken($appid,$secret);
 		if($result){
-			return wxInfoHandle::create($origin_id,$appid,$secret);
+			return wxInfoHandle::create($appid,$secret);
 		}else{
 			return false;
 		}

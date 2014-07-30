@@ -19,6 +19,12 @@
 		{
 		    $message = file_get_contents('php://input');
 		    $postObj = simplexml_load_string($message, 'SimpleXMLElement', LIBXML_NOCDATA);
+		    $url = substr($_SERVER["REQUEST_URI"], 4,32);
+		    $result= $this->MP->check($postObj,$url);
+		    if(!$result){
+		    	$content = '好像哪里出错了';
+            	return $this->MP->TextMessage($postObj,$content);
+		    }
 		    $msgType = $postObj->MsgType;
 		  	switch ($msgType) {
 		  		case 'text':

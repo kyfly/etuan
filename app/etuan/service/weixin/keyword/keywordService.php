@@ -5,6 +5,12 @@ class AutoreplyService
             if($this->check($arr)){
                 return $this->check($arr);
             }
+            $org_uid = Auth::user()->org_uid;
+            $mp_id = Wxdata::where('org_uid',$org_uid)->pluck('mp_id');
+            if($mp_id!=$arr['mp_id'])
+            {
+                return 'dd';
+            }
 	        if($arr["type"]=="text"){
 	            $text_id = Textmsg::where("content",$arr["content"])->lists("text_id");
 	            for($i = 0;$i<count($text_id);$i++)
@@ -63,6 +69,7 @@ class AutoreplyService
                 return $arr[]=$arr["keyword"][$i]."这个关键字已存在";
             }
         }
+        
         return false;
     }
 }

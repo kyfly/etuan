@@ -18,7 +18,7 @@ class actNewHandle
             );
         return $result;
 	}
-	public function showNews($org_uid){
+	public static function showNews($org_uid){
             $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
             $news = Lottery::where("org_uid",$org_uid)->select("name","description","url","lottery_id")->get();
             for($i = 0;$i<count($news);$i++){

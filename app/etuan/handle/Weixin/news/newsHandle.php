@@ -5,30 +5,31 @@ class newsHandle
 
 	public static function updateNews($arr){}
 
-	public static function showNews($org_uid){
-	   $mp_ids = Wxdata::where('org_uid',$org_uid)->lists("mp_id");
-       for($k = 0;$k<count($mp_ids);$k++){
+	public static function showNews($mp_id){
             $re = 1;
             $i= 0;
+            $id = "";
             while($re!=NULL){
-              $news_id = Newsmsg::where("mp_id",$mp_ids[$k])->orderBy('news_id','asc')->skip($i)->take(1)->lists('news_id');
+              $news_id = Newsmsg::where("mp_id",$mp_id)->orderBy('news_id','asc')->skip($i)->take(1)->lists('news_id');
                 if(count($news_id)==1){
-                    $re = Newsmsg::where('news_id',$news_id[0])->select('mp_id',"news_id","article_id",'title','description','pic_url','url','news_from','act_id')->get();
-                      $j= 0;
-                    while(isset($re[$j])){
-                        $content = Newscontent::where('news_id',$re[$j]->news_id)->where('article_id',$re[$j]->article_id)->pluck('content');
-                        
-                        $new[$mp_ids[$k]][$news_id[0]][$j] = $re[$j]['original'];
-                        $new[$mp_ids[$k]][$news_id[0]][$j]['content'] = $content;
-                        $j++;
+                    if($news_id[0]!=$id){
+                        $id = $news_id[0];
+                        $re = Newsmsg::where('news_id',$news_id[0])->select('mp_id',"news_id","article_id",'title','description','pic_url','url','news_from','act_id')->get();
+                          $j= 0;
+                        while(isset($re[$j])){
+                            $content = Newscontent::where('news_id',$re[$j]->news_id)->where('article_id',$re[$j]->article_id)->pluck('content');
+                            $new[$j] = $re[$j]['original'];
+                            $new[$j]['content'] = $content;
+                            $j++;
+                        }
+                        $arr[$id] = $new;
                     }
-                }else{
+                }elseif(count($news_id)!=1){
                     $re = NULL;
                 }
-                $i++;
+                 $i++;
             }
-       }
-       return $new;
+            return $arr;
 	}
 
 	public static function deleteNews($news_id){

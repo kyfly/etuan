@@ -1,7 +1,7 @@
 <?php
-class Orginfo
+class OrgInfo
 {
-    public static function getappid($mp_id){
+    public static function getAppid($mp_id){
 
     	$appid = Wxdata::where("mp_id",$mp_id)->pluck("appid");
     	if($appid==NULL || !$appid){
@@ -10,7 +10,7 @@ class Orginfo
     	return $appid;
 
 	}
-	public static function getsecret($mp_id){
+	public static function getSecret($mp_id){
 
     	$appsecret = Wxdata::where("mp_id",$mp_id)->pluck("appsecret");
     	if($appsecret==NULL || !$appsecret){
@@ -26,4 +26,8 @@ class Orginfo
     	}
     	return $url;
 	}
+    public static function getMp_id($org_uid){
+        $mp_id = Wxdata::where('org_uid',$org_uid)->pluck('mp_id');
+        return $mp_id
+    }
 }
