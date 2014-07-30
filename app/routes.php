@@ -1,8 +1,5 @@
 <?php
 
-
-    Route::controller('auth','AuthController');
-
     Route::get("/",function(){
 
       $oss = new oss;
@@ -15,9 +12,9 @@
       echo 'nihao';
     }]);
 
+    Route::controller('auth','AuthController');
 
-    Route::controller('user','UserController');
-
+    Route::controller('notice','NoticeController');
 
     Route::group(array('before'=>'auth'),function()
     {
@@ -30,8 +27,6 @@
         Route::controller('registration','RegistrationController');
 
         Route::controller('vote','VoteController');
-
-       
     });
      Route::controller('reply','AtrplyController');
 

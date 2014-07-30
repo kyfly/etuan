@@ -5,15 +5,12 @@ class RegistrationUserInfo
 
 	public $used_time;
 
-	public $student_id;
-
 	public $answers;
 
-	public function __construct($reg_serial, $used_time, $student_id, $answers)
+	public function __construct($reg_serial, $used_time, $answers)
 	{
 		$this->reg_serial = $reg_serial;
 		$this->used_time = $used_time;
-		$this->student_id = $student_id;
 		$this->answers = $answers;
 	}
 }

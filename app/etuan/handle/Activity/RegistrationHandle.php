@@ -39,7 +39,6 @@ class RegistrationHandle extends  ActivityHandle
                     'limit_grade' => $activityInfo->limit_grade,
                     'name' => $activityInfo->name,
                     'theme' => $activityInfo->theme,
-                    'url' => $activityInfo->url,
                     'org_uid' => $org_uid
                     ));
             foreach($questions as $question)
@@ -92,14 +91,14 @@ class RegistrationHandle extends  ActivityHandle
     public function getActivityResult($activityId)
     {
         $registration_users = Registration_user::where('reg_id',$activityId)->
-            select('reg_serial','used_time','student_id')->get()->toArray();
+            select('reg_serial','used_time')->get()->toArray();
         $results = array();
         $i = 0;
         foreach ($registration_users as $key => $registration_user) {
             $answers = Reg_result::where('reg_id',$activityId)->where('reg_serial',$registration_user['reg_serial'])->
                 select('question_id','answer')->get()->toArray();
             $registrationUserInfo = new RegistrationUserInfo($registration_user['reg_serial'],
-                $registration_user['used_time'],$registration_user['student_id'],$answers);
+                $registration_user['used_time'],$answers);
             $results = array_add($results, $i++, $registrationUserInfo);
         }
         return $results;
@@ -131,7 +130,6 @@ class RegistrationHandle extends  ActivityHandle
             $reg_serial = Registration_user::insertGetId(array(
                 'used_time' => $participatorInfo->used_time,
                 'ip' => $participatorInfo->ip,
-                'student_id' => $participatorInfo->student_id,
                 'reg_id' => $activityId,
                 'wx_uid' => $participatorInfo->wx_uid
                 ));
