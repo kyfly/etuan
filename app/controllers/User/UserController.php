@@ -34,7 +34,7 @@
 			}
 		}
 
-		public function getMessage()
+		public function postMessage()
 		{
 			try {
 				$messageInfo = json_decode(Input::get('messageInfo'));
@@ -45,27 +45,28 @@
 				$message->content = $messageInfo->content;
 				$message->mark_read = 0;
 				$message->save();
-				return Response::json(array(
-					'message_send_status' => 'success'
-					));
+				return true;
 			} catch (Exception $e) {
-				return Response::json(array(
-					'message_send_status' => 'fail'
-					));	
+				return false;	
 			}
 		}
 
 		public function getSetRead()
 		{
-			$message_id = Input::get('message_id');
-			$message = Message::where('message_id',$message_id)->where('to_org_uid',$this->org_uid)->first();
-			$message->mark_read = 1;
-			$message->save();
+			try {
+				$message_id = Input::get('message_id');
+				$message = Message::where('message_id',$message_id)->where('to_org_uid',$this->org_uid)->first();
+				$message->mark_read = 1;
+				$message->save();
+				return true;
+			} catch (Exception $e) {
+				return false;
+			}	
 		}
 
 		public function getMessages()
 		{
-			return Message::where('to_org_uid',$this->org_uid)->get();
+			return Message::where('to_org_uid',$this->org_uid)->where('mark_read',0)->select('title','content','created_at')->get();
 		}
 
 	}

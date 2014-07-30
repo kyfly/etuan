@@ -1,3 +1,4 @@
+
 <?php
 
 class LotteryHandle extends  ActivityHandle
@@ -35,7 +36,6 @@ class LotteryHandle extends  ActivityHandle
                 'start_time' => $activityInfo->start_time,
                 'stop_time' => $activityInfo->stop_time,
                 'theme' => $activityInfo->theme,
-                'url' => $activityInfo->url,
                 'limit_act' => $activityInfo->limit_act,
                 'activity_id' => $activityInfo->activity_id,
                 'description' => $activityInfo->description,

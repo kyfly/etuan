@@ -79,7 +79,6 @@
 	activityId=9&
 	participatorInfo=
 	{"used_time":"2:40",
-	"student_id":"12051728",
 	"results":[{"question_id":2,"answer":"A"},{"question_id":1,"answer":"1dedaan"}]}
 
 	检查报名url是否已被使用（只检查baoming/后面的字符串，不是整个） [GET]

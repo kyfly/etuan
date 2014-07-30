@@ -20,7 +20,7 @@ class TicketHandle extends  ActivityHandle
     public function getActivityList($org_uid)
     {
         $activityList = Ticket::where('org_uid',$org_uid)->
-            select('ticket_id','name','arrange','start_time','logo','theme','url','verify','ticket_total','ticket_out','created_at')->get();
+            select('ticket_id','name','arrange','start_time','logo','theme','verify','ticket_total','ticket_out','created_at')->get();
         return $activityList;
     }
 

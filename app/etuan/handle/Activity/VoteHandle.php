@@ -21,7 +21,7 @@ class VoteHandle extends  ActivityHandle
     public function getActivityList($org_uid)
     {
         $activityList = Vote::where('org_uid',$org_uid)->
-            select('vote_id','name','start_time','stop_time','theme','limit_grade','choice_num','description','url')->get();
+            select('vote_id','name','start_time','stop_time','theme','limit_grade','choice_num','description')->get();
         return $activityList;
     }
 
@@ -39,7 +39,6 @@ class VoteHandle extends  ActivityHandle
                     'limit_grade' => $activityInfo->limit_grade,
                     'choice_num' => $activityInfo->choice_num,
                     'description' => $activityInfo->description,
-                    'url' => $activityInfo->url,
                     'org_uid' => $org_uid
                 ));
             foreach($vote_items as $vote_item)
