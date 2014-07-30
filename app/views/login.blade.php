@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="<?php echo URL::to('css/bootstrap.css');?>">
 </head>
 <body>
+	{{"<img src = $imgurl>"}}
 	<div class='container'>
 		<form method='post' action='login' role='form'>
 			<div class='form-group'>

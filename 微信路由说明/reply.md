@@ -1,0 +1,172 @@
+该接口主要作用为社团管理员对自动回复，关键字回复的增删改查。
+---
+被添加自动回复   关键字 “subscribe”
+
+消息自动回复  关键字  “default”
+
+这两个关键字为保留关键字。
+
+type
+	`text`和`news`两种
+content
+	`type`为`text`时表示内容，为`news`时表示该图文消息的`news_id`
+keyword
+	关键字，可多个。数组形式
+
+`reply_id`
+
+`/reply/create `
+----
+请求方式：`post`
+参数：
+	文本信息：
+~~~javascipt
+		{
+		    "mp_id": 2, 
+		    "type": "text", 
+		    "content": "fffffffffff", 
+		    "keyword": [
+		        "ffffffffff", 
+		        "fffffffffff"
+		    ]
+		}
+	图文信息：
+		{
+		    "mp_id": 2, 
+		    "type": "news", 
+		    "content": 47, 
+		    "keyword": [
+		        "rrrrrrrrrr", 
+		        "rrrrrrrrr"
+		    ]
+		}
+
+返回消息：
+	$arr[]="关键字不能重复";
+                    $arr[]=$arr["keyword"][$i]."这个关键字已存在";
+                    $arr[]="你已经插入了相同的信息。";
+                    $arr[]="这个微信号已经创建了相同的消息，你可以对已添加的消息添加多个关键字";
+                    $arr[]="请检查数据是否填写正确"
+                    bool
+~~~
+`/reply/update`
+---
+
+请求方式：  `post`
+
+~~~javascipt
+参数：
+文本信息：
+{
+    "reply_id": 45, 
+    "type": "text", 
+    "content": "some string", 
+    "keyword": [
+        "key1", 
+        "key2"
+    ]
+}
+图文消息：
+{
+    "reply_id": 44, 
+    "type": "news", 
+    "content": 17, 
+    "keyword": [
+        "key2", 
+        "key3", 
+        "key4"
+    ]
+}                      
+返回信息：
+        $arr[]=$arr["keyword"][$i]."这个关键字已存在";
+        $arr[] = "不存在该自动回复";
+        $arr[]="关键字不能重复";
+        bool
+~~~
+            
+`/reply/show`
+---
+
+请求方式：   `get`
+参数：无
+
+~~~javascipt
+返回值:
+[
+//mp_id 1//
+    [
+        {
+            "0": {
+                "news_id": 47, 
+                "title": "test11", 
+                "article_id": 1, 
+                "description": "dddddddddd", 
+                "pic_url": "kkkkkkkkkk", 
+                "url": "llllllll", 
+                "content": null
+            }, 
+            "keyword": [
+                "rrrrrr", 
+                "tttttttt"
+            ]
+        }
+    ],
+//mp_id 2// 
+    [
+        {
+            "text": {
+                "mp_reply_id": 48, 
+                "msg_id": 4, 
+                "content": "dgfdfvd"
+            }, 
+            "keyword": [
+                "dfffdf", 
+                "dxd"
+            ]
+        }, 
+        {
+            "text": {
+                "mp_reply_id": 49, 
+                "msg_id": 5, 
+                "content": "dhhhhhhhhhhh"
+            }, 
+            "keyword": [
+                "hhhhhhh", 
+                "hhhhhhhh"
+            ]
+        }, 
+        {
+            "text": {
+                "mp_reply_id": 50, 
+                "msg_id": 6, 
+                "content": "fffffffffff"
+            }, 
+            "keyword": [
+                "ffffffffff", 
+                "fffffffffff"
+            ]
+        }, 
+        {
+            "0": {
+                "news_id": 47, 
+                "title": "test11", 
+                "article_id": 1, 
+                "description": "dddddddddd", 
+                "pic_url": "kkkkkkkkkk", 
+                "url": "llllllll", 
+                "content": null
+            }, 
+            "keyword": [
+                "rrrrrrrrr", 
+                "rrrrrrrrrr"
+            ]
+        }
+    ]
+] 
+~~~
+
+`/reply/destory`
+---
+请求方式：`get`
+参数：`reply_id`
+返回值：`bool`		          

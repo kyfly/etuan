@@ -5,7 +5,11 @@
 
     Route::get("/",function(){
 
-      
+      $oss = new oss;
+      $bucket = 'liujiandong';
+      $object = '/hhh';
+      $re = $oss->is_object_exist($bucket,$object);
+      dd($re);
     });
     Route::get("x",['before'=>'wxauth',function(){
       echo 'nihao';

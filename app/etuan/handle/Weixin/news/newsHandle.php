@@ -39,10 +39,8 @@ class newsHandle
 	}
 
 	public static function newsContentfile($news_id,$article_id,$content,$title){
-        try{
-            DB::beginTransaction();
             $oss = new oss;
-            $bucket = 'liujiandong';
+            $bucket = BUCKET;
             $content = preg_replace("/<[^><]*script[^><]*>/i",'',$content); 
             $filepath =_ROOT_."/../app/etuan/service/weixin/";
             $head = file_get_contents($filepath.'head.php');
@@ -66,6 +64,7 @@ class newsHandle
                   if($result->status == 200)
                   {
                     Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->update(['url'=>$object]);
+                    return true;
                   }
             }else{
                   $oss->delete_object($bucket,$object);
@@ -75,16 +74,11 @@ class newsHandle
                   $result = $oss->upload_file_by_content($bucket,$object,$options);
                   if($result->status!= 200)
                   {
-                    DB::rollback();
                     return false;
+                  }else{
+                    return true;
                   }
             }
-            DB::commit();
-        }catch (Exception $e)
-        {
-            DB::rollback();
-            return false;
-        }
     }
 
 }

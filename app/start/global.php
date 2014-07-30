@@ -84,6 +84,8 @@ require app_path().'/acl.php';
 
 require app_path().'/Ioc.php';
 
+define('BUCKET','liujiandong');
+
 define("CALLBACKURL",urlencode("http://linkew.net/oauth"));
 
 define("APPID","wx5d92b3c192f993e7");
@@ -92,6 +94,6 @@ define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
 
 define("_ROOT_",$_SERVER['DOCUMENT_ROOT']);
 
-define("_WWW_","http://linkew.net/img/");
+define("_WWW_","http://liu.c/img/");
 
 define("AuthUrl",urlencode("http://linkew.net/login/check"));

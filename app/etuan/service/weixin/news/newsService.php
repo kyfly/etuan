@@ -30,6 +30,7 @@ class newsService
 		return newsHandle::deleteNews($news_id);
 	}
 	public function createActNews($arr){
+		
 		return actNewHandle::createNews($arr);
 	}
 	public function showActNews($org_uid){

@@ -5,14 +5,14 @@ class QretuanController extends BaseController
     public function __construct(sceneQrcodeService $Qr){
             $this->Qr = $Qr;
     }
-    public function postCreate(){
+    public function getCreate(){
         $id = Input::get("act_id");
         $type = Input::get("act_type");
         $action = Input::get("action");
         $result = $this->Qr->create($id,$type,$action);
         return $result;
     }
-    public function postUpdate(){
+    public function getUpdate(){
         $scene = Input::get("scene_id");
         $id = Input::get("act_id");
         $type = Input::get("act_type");
