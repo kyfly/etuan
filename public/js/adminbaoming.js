@@ -30,8 +30,8 @@ $(document).ready(function(){
 		//获得主题选择的值（老方法用于select的貌似不能用了）
 		//createActivityJson.theme = $("#theme").val();
 		var objTheme = document.getElementsByName("theme");
-		for(var j = 0; j <= objTheme.length-1; i++){
-			if(objTheme[j].checked === true || createActivityJson.theme === null){
+		for(var j = 0; j <= objTheme.length-1; j++){
+			if(objTheme[j].checked === true && createActivityJson.theme === null){
 				createActivityJson.theme = objTheme[j].value;
 				break;
 			}
