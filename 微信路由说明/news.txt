@@ -136,9 +136,87 @@ news_from
 /news/show
 	查出所有已存在的图文消息
 	请求方式：get
-	参数：无
+	参数：mp_id
 	返回值：
 {
+    "news": {
+        "63": [
+            {
+                "mp_id": 1,
+                "news_id": 63,
+                "article_id": 1,
+                "title": "1gdgfffggfgtgfhrffvff1",
+                "description": "ggfffffggdh",
+                "pic_url": "kkkkkkhkkkk",
+                "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072923111013636.html",
+                "news_from": "sucai",
+                "act_id": 0,
+                "content": "<script></script>"
+            },
+            {
+                "mp_id": 1,
+                "news_id": 63,
+                "article_id": 2,
+                "title": "tesdsgt22",
+                "description": "fffffffffffff",
+                "pic_url": "rrrrrrrr",
+                "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072923111163407.html",
+                "news_from": "sucai",
+                "act_id": 0,
+                "content": "dd"
+            },
+            {
+                "mp_id": 1,
+                "news_id": 63,
+                "article_id": 3,
+                "title": "testffdg33",
+                "description": "gggffggggggg",
+                "pic_url": "fffffccffff",
+                "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072923111242019.html",
+                "news_from": "sucai",
+                "act_id": 0,
+                "content": "ddd"
+            }
+        ],
+        "64": [
+            {
+                "mp_id": 1,
+                "news_id": 64,
+                "article_id": 1,
+                "title": "test",
+                "description": "dddddddddd",
+                "pic_url": "kkkkkkkkkk",
+                "url": "etuan/mp/url/gh_f53d79a8e7ce/14072923131527111.html",
+                "news_from": "url",
+                "act_id": 0,
+                "content": "ffffgnhdfffkk"
+            },
+            {
+                "mp_id": 1,
+                "news_id": 64,
+                "article_id": 2,
+                "title": "test1",
+                "description": "aaaaaaaaaaaaa",
+                "pic_url": "ddddddk",
+                "url": "etuan/mp/url/gh_f53d79a8e7ce/14072923131655590.html",
+                "news_from": "url",
+                "act_id": 0,
+                "content": "dgdngrdsr"
+            },
+            {
+                "mp_id": 1,
+                "news_id": 64,
+                "article_id": 3,
+                "title": "test",
+                "description": "ffffffff",
+                "pic_url": "ccccccccck",
+                "url": "etuan/mp/url/gh_f53d79a8e7ce/14072923131664678.html",
+                "news_from": "url",
+                "act_id": 0,
+                "content": "iiiffdfnjfffiiiii"
+            }
+        ]
+    },
     "act": {
         "1": [
             {
@@ -168,86 +246,6 @@ news_from
                 "act_id": "ticket_id"
             }
         ]
-    },
-    "new": {
-        "1": {
-            "10": [
-                {
-                    "mp_id": 1,
-                    "news_id": 10,
-                    "article_id": 1,
-                    "title": "test11",
-                    "description": "ddssnddddd",
-                    "pic_url": "kkkkkkkkkk",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185863912.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "kk"
-                },
-                {
-                    "mp_id": 1,
-                    "news_id": 10,
-                    "article_id": 2,
-                    "title": "test22",
-                    "description": "ffffffffff",
-                    "pic_url": "rrrrrrrr",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185918355.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "dd"
-                },
-                {
-                    "mp_id": 1,
-                    "news_id": 10,
-                    "article_id": 3,
-                    "title": "test33",
-                    "description": "gggggggggg",
-                    "pic_url": "fffffccffff",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913185929300.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "ddd"
-                }
-            ],
-            "11": [
-                {
-                    "mp_id": 1,
-                    "news_id": 11,
-                    "article_id": 1,
-                    "title": "test",
-                    "description": "dddddddddd",
-                    "pic_url": "kkkkkkkkkk",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234414682.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "fffffffkk"
-                },
-                {
-                    "mp_id": 1,
-                    "news_id": 11,
-                    "article_id": 2,
-                    "title": "test",
-                    "description": "aaaaaaaaaaaaa",
-                    "pic_url": "ddddddk",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234412938.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "fffffdd"
-                },
-                {
-                    "mp_id": 1,
-                    "news_id": 11,
-                    "article_id": 3,
-                    "title": "test",
-                    "description": "ffffffff",
-                    "pic_url": "ccccccccck",
-                    "url": "etuan/mp/sucai/gh_f53d79a8e7ce/14072913234597052.html",
-                    "news_from": "sucai",
-                    "act_id": 0,
-                    "content": "iiifffffiiiii"
-                }
-            ]
-        }
     }
 }
 /news/destory	

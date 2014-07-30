@@ -27,14 +27,20 @@
         }
         public function getShow(){
             $org_uid = Auth::user()->org_uid;
-
-            $new["act"] = $this->news->show($org_uid);
-
-            $new["new"] = $this->news->showActNews($org_uid);
-
-            $json = json_encode($new);
+            $mp_id = Input::get('mp_id');
+            $re = Wxdata::where('org_uid',$org_uid)->where('mp_id',$mp_id)->pluck('mp_id');
+            if($re)
+            {
+                $new["news"] = $this->news->show($mp_id);
             
-            return $json;
+                $new["act"] = $this->news->showActNews($org_uid);
+    
+                $json = json_encode($new);
+                
+                return $json;
+            }else{
+                return false;
+            }
         }
         public function postCact(){
 

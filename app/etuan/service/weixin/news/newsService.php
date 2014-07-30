@@ -23,8 +23,8 @@ class newsService
             return simpleImgHandle::updateNews($arr);
         }
 	}
-	public function show($org_uid){
-		return newsHandle::showNews($org_uid);
+	public function show($mp_id){
+		return newsHandle::showNews($mp_id);
 	}
 	public function delete($news_id){
 		return newsHandle::deleteNews($news_id);
@@ -33,6 +33,7 @@ class newsService
 		return actNewHandle::createNews($arr);
 	}
 	public function showActNews($org_uid){
+		
 		return actNewHandle::showNews($org_uid);
 	}
 }

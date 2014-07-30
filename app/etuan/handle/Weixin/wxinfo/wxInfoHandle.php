@@ -1,14 +1,9 @@
 <?php
 class wxInfoHandle
 {
-	public static function create($origin_id,$appid,$secret){
-		$re = Wxdata::where("mp_origin_id",$mp_org_id)->pluck("mp_id");
-        if($re != NULL){
-             return "插入失败";
-         }
+	public static function create($appid,$secret){
 
         $result = Wxdata::insert([
-        	'mp_origin_id'=>$origin_id,
         	'interface_url'=>BS::getRandStr(32),
         	'interface_token'=>BS::getRandStr(32),
         	'appid'=>$appid,

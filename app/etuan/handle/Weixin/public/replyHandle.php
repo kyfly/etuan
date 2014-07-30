@@ -1,6 +1,16 @@
 <?php
 class replyHandle
 {
+    public function check($postObj,$url){
+        $origin_id = Wxdata::where('interface_url',$url)->pluck('mp_origin_id');
+        if(!$origin_id){
+            Wxdata::where('interface_url',$url)->update(['mp_origin_id'=>$postObj->ToUserName]);
+        }elseif($postObj->ToUserName != $origin_id)
+        {
+            return false;
+        }
+        return true;
+    }
 	public function TextMessage($postObj,$contentStr){
 		 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
@@ -71,10 +81,11 @@ class replyHandle
     }
     private function reply($postObj,$content){
         try{
-
             $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
-            $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
-           
+            $reply_id = Event::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');
+            if(!$reply_id){
+                $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
+            }
             if(!$reply_id){
                 $content = "default";
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
