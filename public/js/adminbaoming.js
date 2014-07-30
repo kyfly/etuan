@@ -12,7 +12,7 @@ $(document).ready(function(){
 			questions:[],
 		};
 		//获得报名终止时间
-		createActivityJson.stop_time=$("#stoptime").val().toString().replace("T"," ")+":00";
+		createActivityJson.stop_time=$("#stoptime").val().toString().replace("/","-")+":00";
 		//获得年纪限制并且转换为五位二进制数
 		var objLimit = document.getElementsByName("grade");
 		for(var i = objLimit.length-1; i >= 0; i--){
