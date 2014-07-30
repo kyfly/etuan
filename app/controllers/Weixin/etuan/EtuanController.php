@@ -1,9 +1,5 @@
 <?php
-/*该类为公众号“团团一家”所用接口，
- *
- *
- *
- * */
+
 class EtuanController extends BaseController{
     private $etuan;
 	public function __construct(EtuanHandle $Etuan)

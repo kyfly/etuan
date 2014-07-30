@@ -19,6 +19,7 @@ reply_id
 	请求方式：post
 	参数：
 		文本信息：
+		
 			{
 			    "mp_id": 2, 
 			    "type": "text", 
