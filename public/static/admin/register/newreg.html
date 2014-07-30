@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../../../css/admin.css" rel="stylesheet">
+    <title>“团团一家”管理后台</title>
+</head>
+<body>
+<nav id="nav" class="navbar navbar-default" role="navigation">
+<div class="container">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+        <span class="sr-only">导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a><img src="../../../img/brand.png" id="brandpic"></a>
+      </div>
+    <div class="collapse navbar-collapse" id="nav-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a><img id="avatar" class="img-circle" src="../../../img/avatar.jpg"> 用户</a></li>
+        <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+<!--侧边栏-->
+<div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
+
+<div id="main" class="col-lg-9 col-md-9">
+	<div class="tab-content">
+        <!--新建报名-->
+        <div class="tab-pane active in" id="newreg">
+          <form role="form">
+            <fieldset>
+              <legend><h2>新建报名表</h2></legend>
+              <div class="form-group">
+                <label for="dtp_input1">报名结束时间</label>
+                <div class="input-group date form_datetime" data-date="2014-09-01T12:00:07Z"  data-link-field="dtp_input1">
+                    <input id="stoptime" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+           	  </div>
+              <div class="form-group">
+                <label>允许报名年级</label>
+                <div>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大一
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大二
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大三
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 大四
+                  </label>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="grade"> 研究生
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="url">报名链接</label>
+                <div class="input-group">
+                  <span class="input-group-addon">http://www.etuan.org/baoming/</span>
+                  <input id="url" type="text" class="form-control" placeholder="请自定义该报名表的链接">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="theme">报名表样式</label><br>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="1">
+                  <img src="../../../img/example.png">
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="2">
+                  <img src="../../../img/example.png">
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="theme" value="3">
+                  <img src="../../../img/example.png">
+                </label>
+              </div>
+            </fieldset>
+          </form>
+          <div id="addform" class="target">
+            <div class="col-md-9">
+              <h3>添加更多表单</h3><hr>
+              <form id="extraform" class="target">
+                <div id="studentID1" class="form-group">
+                  <label for="studentID">学号</label>
+                  <div class="input-group">
+                       <input type="text" class="form-control" id="studentID" placeholder="请输入你的学号">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete1" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="studentname1" class="form-group">
+                  <label for="studentname">姓名</label>
+                  <div class="input-group">
+                       <input type="text" class="form-control" id="studentname" placeholder="请输入你的姓名">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete2" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="sex1" class="form-group">
+                  <label for="sex">性别</label><br>
+                  <div class="input-group">
+                        <select class="form-control">
+                          <option>男</option>
+                          <option>女</option>
+                        </select>
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete3" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="xueyuan1" class="form-group">
+                  <label for="xueyuan">学院</label>
+                   <div class="input-group">
+                       <input type="text" class="form-control" id="xueyuan" placeholder="请输入你的学院">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete4" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="major1" class="form-group">
+                  <label for="major">专业</label>
+                  <div class="input-group">
+                       <input type="text" class="form-control" id="major" placeholder="请输入你的专业">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete5" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="specialty1" class="form-group">
+                  <label for="specialty">特长</label>
+                  <div class="input-group">
+                       <input type="text" class="form-control" id="specialty" placeholder="请输入你的特长">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete6" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="Email1" class="form-group">
+                  <label for="Email">电子邮箱</label>
+                  <div class="input-group">
+                       <input type="text" class="form-control" id="Email" placeholder="请输入你的Email">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete7" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="QQ1" class="form-group">
+                  <label for="QQ">QQ</label>
+                  <div class="input-group">
+                        <input type="text" class="form-control" id="QQ" placeholder="请输入你的QQ">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete8" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="phonenumlong1" class="form-group">
+                  <label for="phonenumlong">手机长号</label>
+                  <div class="input-group">
+                        <input type="text" class="form-control" id="phonenumlong" placeholder="请输入你的手机长号">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete9" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="phonenumshort1" class="form-group">
+                  <label for="phonenumshort">移动短号</label>
+                  <div class="input-group">
+                        <input type="text" class="form-control" id="phonenumshort" placeholder="请输入你的移动短号（可留空）">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete10" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="origin1" class="form-group">
+                  <label for="origin">籍贯</label>
+                  <div class="input-group">
+                        <input type="text" class="form-control" id="origin" placeholder="请输入你的籍贯">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete11" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="wish1" class="form-group">
+                  <label>第一志愿部门</label>
+                   <div class="input-group">
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a data-toggle="tooltip" data-placement="right" title="编辑"><span class="glyphicon glyphicon-wrench"></span></a></li>
+                          <li><a id="delete12" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="wish2" class="form-group">
+                  <label>第二志愿部门</label>
+                   <div class="input-group">
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a data-toggle="tooltip" data-placement="right" title="编辑"><span class="glyphicon glyphicon-wrench"></span></a></li>
+                          <li><a id="delete13" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="wish3" class="form-group">
+                  <label>第三志愿部门</label>
+                    <div class="input-group">
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a data-toggle="tooltip" data-placement="right" title="编辑"><span class="glyphicon glyphicon-wrench"></span></a></li>
+                          <li><a id="delete14" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div id="tiaoji1"  class="form-group">
+                  <label for="tiaoji">是否服从调剂</label><br>
+                    <div class="input-group">
+                        <select class="form-control">
+                          <option>是</option>
+                          <option>否</option>
+                        </select>
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-pencil"></span>&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width:30px;">
+                          <li><a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动"><span class="glyphicon glyphicon-arrow-up"></span></a></li>
+                          <li><a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动"><span class="glyphicon glyphicon-arrow-down"></span></a></li>
+                          <li><a id="delete15" data-toggle="tooltip" data-placement="right" title="删除"><span class="glyphicon glyphicon-trash"></span></a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                  </div>
+              </form>
+            </div>
+            <div class="col-md-3">
+              <h3>点击添加</h3><hr>
+              <form id="extralist" class="target">
+                <div id="studentID2" class="form-group">
+                  <h4>学号</h4>
+                </div>
+                <div id="studentname2" class="form-group">
+                  <h4>姓名</h4>
+                </div>
+                <div id="sex2" class="form-group">
+                  <h4>性别</h4>
+                </div>
+                <div id="xueyuan2" class="form-group">
+                  <h4>学院</h4>
+                </div>
+                <div id="major2" class="form-group">
+                  <h4>专业</h4>
+                </div>
+                <div id="specialty2" class="form-group">
+                  <h4>特长</h4>
+                </div>
+                <div id="Email2" class="form-group">
+                  <h4>电子邮箱</h4>
+                </div>
+                <div id="QQ2" class="form-group">
+                  <h4>QQ</h4>
+                </div>
+                <div id="phonenumlong2" class="form-group">
+                  <h4>手机长号</h4>
+                </div>
+                <div id="phonenumshort2" class="form-group">
+                  <h4>手机短号</h4>
+                </div>
+                <div id="origin2" class="form-group">
+                  <h4>籍贯</h4>
+                </div>
+                <div id="wish1-2" class="form-group">
+                  <h4>第一志愿部门</h4>
+                </div>
+                <div id="wish2-2" class="form-group">
+                  <h4>第二志愿部门</h4>
+                </div>
+                <div id="wish3-2" class="form-group">
+                  <h4>第三志愿部门</h4>
+                </div>
+                <div id="tiaoji2"  class="form-group">
+                  <h4>是否服从调剂</h4>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="form-group">
+            <button id="preview" type="button" class="btn btn-warning">预览</button>
+            <button id="submit" type="button" class="btn btn-success">提交</button>
+          </div>
+       </div>
+    </div>
+</div>
+</div>
+<footer id="footer" class="panel-footer">
+	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+</footer>
+
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script src="../../../js/jquery.json.js"></script>
+<script src="../../../js/bootstrap-datetimepicker.min.js"></script>
+<script src="../../../js/admin.js"></script>
+<script src="../../../js/adminbaoming.js"></script>
+</body>
+</html>
