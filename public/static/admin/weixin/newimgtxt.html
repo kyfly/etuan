@@ -21,9 +21,9 @@
       <a><img src="../../../img/brand.png" id="brandpic"></a>
       </div>
     <div class="collapse navbar-collapse" id="nav-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a><img id="avatar" class="img-circle" src="../../../img/avatar.jpg"> 用户</a></li>
-        <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a><img id="avatar" class="img-circle" src="../../../img/avatar.jpg"> 用户</a></li>
+            <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
         </ul>
       </div>
     </div>
@@ -43,11 +43,58 @@
             </ol>
             <div class="examplebox col-md-4">
             	<a>标题</a>
-                <div class="appmsg_thumb_wrp">
-                    <img class="js_appmsg_thumb appmsg_thumb" src="">
-                    <i class="appmsg_thumb default">封面图片</i>
+                <div class="greybox">
+                    <p>封面图片</p>
                 </div>
        	   </div>
+           <div class="paddingeditbox col-md-8">
+           		<div class="editbox">
+                	<i class="arrow arrow_out" style="margin-top: 0px;"></i>
+                    <i class="arrow arrow_in" style="margin-top: 0px;"></i>
+                    <form role="form">
+                      <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" placeholder="请输入标题">
+                      </div>
+                      <div class="form-group">
+                        <label for="author">作者</label>
+                        <input type="text" class="form-control" id="author" placeholder="请输入作者（选填）">
+                      </div>
+                      <div class="form-group">
+                        <label for="frontcover">封面<span style="color: #8d8d8d; font-weight: normal;">（大图片建议尺寸：900像素 * 500像素）</span></label>
+                        <input type="file" id="frontcover" value="上传">
+                        <p class="help-block">
+                            <label style="font-weight: normal;">
+                              <input type="checkbox"> 封面图片显示在正文中
+                            </label>
+                        </p>
+                      </div>
+                      <div id="addremark" class="form-group">
+                      		<a id="addremarkbtn">添加摘要</a>
+                      </div>
+                      <div id="remarkbox" class="form-group">
+                        <label for="remark">摘要</label>
+                        <textarea class="form-control" id="remark"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="maintext">正文</label>
+                        <div id="inputbox" style="width: 100%;"></div>
+                      </div>
+                       <div id="addoriginurl" class="form-group">
+                      		<a id="addoriginurlbtn">添加原文链接</a>
+                      </div>
+                      <div id="originurlbox" class="form-group">
+                        <label for="originurl">原文链接</label>
+                        <input type="text" class="form-control" id="originurl" placeholder="请输入原文链接">
+                      </div>
+                    </form>
+                </div>
+           </div>
+           <hr class="col-md-12">
+           <div class="form-group col-md-offset-4" style="padding-left: 20px;">
+               <button id="submit" type="button" class="btn btn-primary">保存</button>
+               <button id="preview" type="button" class="btn btn-default">预览</button>
+           </div>
       </div>
     </div>	<!--tab-content-->
   </div>	<!--col-md-9-->
@@ -60,5 +107,11 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../../../js/admin.js"></script>
+
+<script src="../../../js/ueditor/ueditor.config.js"></script>
+<script src="../../../js/ueditor/ueditor.all.min.js"></script>
+<script>
+	var ue = UE.getEditor('inputbox');
+</script>
 </body>
 </html>

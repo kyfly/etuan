@@ -54,6 +54,8 @@
 	 $(document).ready(function () {
         $('#main').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
 		$('#sidebar').load('../sidebar.html');
+		$("#remarkbox").hide();
+		$("#originurlbox").hide();
 		});
 		
 		originalheight();
@@ -138,7 +140,7 @@
 		function originalheight() {	
 			var height1 , height2 , maxheight;
 			height1 = $('#extraform').outerHeight(true);
-			height2 = $('#extralist').outerHeight(true);
+			height2 = $('.extralist').outerHeight(true);
 			if ( height1 > height2 ){ maxheight = height1; }
 				else { maxheight = height2; }
 			$('#addform').css('height', maxheight - 300 + "px");
@@ -146,7 +148,7 @@
 		function changeheight() {	
 			var height1 , height2 , maxheight;
 			height1 = $('#extraform').outerHeight(true);
-			height2 = $('#extralist').outerHeight(true);
+			height2 = $('.extralist').outerHeight(true);
 			if ( height1 > height2 ){ maxheight = height1; }
 				      		   else { maxheight = height2; }
 			$('#addform').css('height', maxheight + 200 + "px");
@@ -241,4 +243,15 @@
 			});
 		
 		$(function () { $("[data-toggle='tooltip']").tooltip(); });  //下标文字
-		 
+		
+		//添加摘要
+		$("#addremarkbtn").click(function(){
+			$(this).hide();
+			$("#remarkbox").show();
+			});
+		
+		//添加原文链接
+		$("#addoriginurlbtn").click(function(){
+			$(this).hide();
+			$("#originurlbox").show();
+			});
