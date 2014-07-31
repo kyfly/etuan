@@ -346,3 +346,90 @@ body{
 	#extralist > .form-group > h4 {
 		line-height: 50px;
 		}
+	.thumbnail {
+		border-radius: 0!important;
+		margin-right: 15px;
+		}
+	.thumbnail > a > h4 {
+		color: #535454;
+		margin: 5px;
+		}
+	.thumbnail > img {
+		width: 95%;
+		}
+	.thumbnail > p {
+		color: #818282;
+		margin-top: 15px;
+		font-size: 14px;
+		line-height: 1.5;
+		margin: 5px;
+		}
+	.edtbtn {
+		cursor: pointer;
+		float: left;
+		width: 50%;
+		border-top: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		height: 40px;
+		background-color: #f4f4f4;
+		text-align: center;
+		}
+	.delbtn {
+		cursor: pointer;
+		float: left;
+		width: 50%;
+		border-top: 1px solid #ddd;
+		height: 40px;
+		background-color: #f4f4f4;
+		text-align: center;
+		}
+	.botbtn {
+		margin:20px -4px -4px -4px;
+		}
+	.changablebtn {
+		line-height: 40px;
+		font-size: 18px;
+		color: #b2b2b2;
+		}
+	.botbtn :hover {
+		color: #373636;
+		}
+	.addimgtxt {
+		height: 70px;
+		border: 1px dotted #d9dadc;
+		text-align: center;
+		width: 30%;
+		margin: 10px 5px;
+		}
+	.addimgtxt :hover {
+		color: #373636;
+		}
+	.addimgtxt > a > span {
+		line-height: 70px;
+		font-size: 30px;
+		color: #b2b2b2;
+		}
+	.imgtxtlist {
+		padding: 5px;
+		}
+	.breadcrumb > li {
+		font-size: 18px;
+		}
+	.examplebox {
+		border: 1px solid #e7e7eb;
+		height: 223px;
+		}
+	.appmsg_thumb_wrp {
+		height: 160px;
+		overflow: hidden;
+		}
+	.appmsg_thumb {
+		color: #C0C0C0;
+		text-align: center;
+		line-height: 160px;
+		font-weight: 400;
+		font-style: normal;
+		background-color: #ECECEC;
+		font-size: 16px;
+		width: 100%;
+		}
