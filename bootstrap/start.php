@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'development' => array('hui-PC','liujiandong-PC','LENOVOV480','masf','matp','PC-20140426NFBB'),
+	'development' => array('hui-PC','liujiandong-PC','LenovoV480','masf','matp','PC-20140426NFBB'),
 
 ));
 

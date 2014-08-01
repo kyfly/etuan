@@ -37,6 +37,8 @@
 
     Route::controller('weixin/qrcode','QretuanController');
 
+Route::controller("weixin/login","WxloginController");
+
     Route::get("wx/{id}","EtuanController@index");
 
     Route::post("wx/{id}","EtuanController@store");
@@ -44,8 +46,6 @@
     Route::get("mp/{id}","UniversalController@index");
 
     Route::post("mp/{id}","UniversalController@store");
-
-    Route::controller("login","WxloginController");
 
     Route::controller("oauth","WxauthController");
     
