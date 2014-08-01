@@ -28,13 +28,14 @@
 
         Route::controller('vote','VoteController');
     });
-     Route::controller('reply','AtrplyController');
 
-    Route::controller('news','NewsController');
+    Route::controller('weixin/reply','AtrplyController');
 
-    Route::controller('org','WxinterfaceController');
+    Route::controller('weixin/news','NewsController');
 
-    Route::controller('qrcode','QretuanController');
+    Route::controller('weixin/org','WxinterfaceController');
+
+    Route::controller('weixin/qrcode','QretuanController');
 
     Route::get("wx/{id}","EtuanController@index");
 
