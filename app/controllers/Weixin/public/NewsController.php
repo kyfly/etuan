@@ -19,9 +19,9 @@
          }
         public function postCreate(){
             
-            $json = $this->dotran($this->json);
+           /* $json = $this->dotran($this->json);
              $arr = json_decode($json,true);
-            dd($arr);
+            dd($arr);*/
             $arr = json_decode($this->json,true);
             $re = $this->news->create($arr);
             

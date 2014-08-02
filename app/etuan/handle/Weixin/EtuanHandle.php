@@ -34,7 +34,7 @@ class EtuanHandle extends replyHandle
         switch ($postObj->Event)
         {
             case "subscribe":
-                $content = "subscribe";
+                $content = "mp_welcome_autoreply_messgae";
                 return $this->reply($postObj,$content);
                 break;
 
@@ -57,7 +57,7 @@ class EtuanHandle extends replyHandle
                 return $this->Click($postObj);
                 break;
             default:
-                    $content = "default";
+                    $content = "mp_default_autoreply_messgae";
                 break;
         }
         return $this->reply($postObj,$content);

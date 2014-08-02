@@ -8,17 +8,33 @@ class autoreplyHandle
                     $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$arr["content"]]);
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$text_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
             }elseif($arr["type"]=="news"){
-                    $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$arr["content"],"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
+                if($arr['news_from']=="sucai"){
+                    $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$arr["news_id"],"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
+                }elseif($arr['news_from']=="url"){
+                    $news_id = DB::table('mp_msg_news')->insertGetId(
+                        ["title" => $arr['title'],
+                            "article_id" => 1,
+                            "description" => $arr['description'],
+                            "pic_url" => $arr['pic_url'],
+                            "url" => $arr['url'],
+                            "news_from"=>$arr['news_from'],
+                           'mp_id'=>$arr['mp_id']]
+                    );
+                    $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$news_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }else{
-                    $reply_id = NULL;
+                    $news_id = actNewHandle::createNews($arr['news_from'],$arr['act_id'],$arr['mp_id']);
+                    $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$news_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }
+            }else{
+                $reply_id = NULL;
+            }
             if($reply_id){
                 for($i = 0;$i<count($arr["keyword"]);$i++)
                 {
                     Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$reply_id,"mp_id"=>$arr["mp_id"]]);
                 }
             }
-             DB::commit();
+            DB::commit();
             return true;
         } catch (Exception $e) {
             DB::rollback();
@@ -27,79 +43,122 @@ class autoreplyHandle
            
     }
     public static function  update($arr){
-        try {
-            DB::beginTransaction();
-            $mp_id = Autoreply::where("mp_reply_id",$arr["reply_id"])->pluck("mp_id");
-            $result = Autoreply::where("mp_reply_id",$arr["reply_id"])->select("msg_type","msg_id")->first();
+        /*try {
+            DB::beginTransaction();*/
+            $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
+            $result = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->select("msg_type","msg_id")->first();
             if($arr["type"]=="text"){
                 if($result->msg_type =="news")
                 {
                     $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$arr["content"]]);
-                    $re = Autoreply::where("mp_reply_id",$arr["reply_id"])->update(["msg_id"=>$text_id,"msg_type"=>$arr["type"]]);
+                    $re = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$text_id,"msg_type"=>$arr["type"]]);
                 }else{
                     Textmsg::where("text_id",$result->msg_id)->update(["content"=>$arr["content"]]);
                 }
             }elseif($arr["type"]=="news"){
-                $title = Newsmsg::where("news_id",$arr["content"])->pluck("title");
-                if(!$title){
-                    return false;
+                //更新类型为图文时分三种，sucai,url,act
+                if($arr['news_from']=='sucai'){
+                    $news_from = Newsmsg::where("news_id",$arr["news_id"])->pluck("news_from");
+                    if(!$news_from){
+                        return false;
+                    }elseif($news_from!="sucai"){   //如果原来为图文消息，且不属于sucai。则删除。
+                        Newsmsg::where("news_id",$arr["news_id"])->delete();
+                    }
+                    if($result->msg_type == "text"){    //若原来为文本，则删除原来的文本信息。
+                        Textmsg::where("text_id",$result->msg_id)->delete();
+                    }   //更新数据。
+                    Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$arr["news_id"],"msg_type"=>$arr["type"]]);
+                }elseif($arr['news_from']=='url'){
+                    if($result->msg_type=='text'){  
+                        Textmsg::where("text_id",$result->msg_id)->delete();
+                    }elseif($result->msg_type=='news'){
+                        $news_from = Newsmsg::where('news_id',$result->msg_id)->pluck('news_from');
+                        if($news_from!='sucai')     //若原来为图文，并且不为sucai，则直接删除。
+                        {
+                             Newsmsg::where('news_id',$result->msg_id)->delete();
+                        }
+                        $news_id = DB::table('mp_msg_news')->insertGetId(
+                                        ["title" => $arr['title'],
+                                            "article_id" => 1,
+                                            "description" => $arr['description'],
+                                            "pic_url" => $arr['pic_url'],
+                                            "url" => $arr['url'],
+                                            "news_from"=>$arr['news_from'],
+                                           'mp_id'=>$arr['mp_id']]
+                                    );
+                    }
+                    Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
+                }else{
+                    //其他活动
+                     $news_id = actNewHandle::updateNews($arr['news_from'],$arr['act_id'],$arr['mp_id'],$result);
+                     Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }
-                if($result->msg_type =="text"){
-                    Textmsg::where("text_id",$result->msg_id)->delete();
-                }
-                Autoreply::where("mp_reply_id",$arr["reply_id"])->update(["msg_id"=>$arr["content"],"msg_type"=>$arr["type"],"msg_id"=>$arr["content"]]);
             }
-            Keyword::where("mp_reply_id",$arr["reply_id"])->delete();
+            Keyword::where("mp_reply_id",$arr["mp_reply_id"])->delete();
             for($i = 0;$i<count($arr["keyword"]);$i++)
             {
-                $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["reply_id"],"mp_id"=>$mp_id]);
+                $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
-            DB::commit();
+           /* DB::commit();
             return true;
         } catch (Exception $e) {
             DB::rollback();
              return false;
-        }
+        }*/
     }
     public static function show($org_uid){
         $mp_ids = Wxdata::where("org_uid",$org_uid)->lists("mp_id");
         for($i = 0;$i<count($mp_ids);$i++){
-            $keyreply_id = clickEvent::where('mp_id',1)->lists('mp_reply_id');
+            $keyreply_id = clickEvent::where('mp_id',$mp_ids[$i])->lists('mp_reply_id');
+            //判断是否属于菜单事件
             if($keyreply_id){
                 $msgs = Autoreply::whereNotIn('mp_reply_id',$keyreply_id)->select('mp_reply_id','msg_type','msg_id')->get();
             }else{
                 $msgs = Autoreply::where("mp_id",$mp_ids[$i])->select("mp_reply_id","msg_type","msg_id")->get();
             }
+            //对不是菜单事件的自动回复进行处理
             for($j = 0;$j<count($msgs);$j++){
                 if($msgs[$j]->msg_type == "text"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
                     $content = Textmsg::where("text_id",$msgs[$j]->msg_id)->pluck("content");
-                    $arr[$mp_ids[$i]][$j]["text"]["mp_reply_id"] = $msgs[$j]->mp_reply_id;
-                    $arr[$mp_ids[$i]][$j]["keyword"] = $keyword;
-                    $arr[$mp_ids[$i]][$j]["text"]["msg_id"] = $msgs[$j]->msg_id;
-                    $arr[$mp_ids[$i]][$j]["text"]["content"] = $content;
+                    $arr[$j]['type'] = 'text';
+                    $arr[$j]["mp_reply_id"] = $msgs[$j]->mp_reply_id;
+                    $arr[$j]["keyword"] = $keyword;
+                    $arr[$j]["msg_id"] = $msgs[$j]->msg_id;
+                    $arr[$j]["content"] = $content;
                 }elseif($msgs[$j]->msg_type == "news"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
-                    $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("news_id","title","article_id","description","pic_url","url","act_id","news_from")->get();
-                    $arr[$mp_ids[$i]][$j]["keyword"] = $keyword;
-                   for($k = 0;$k<count($news);$k++){
-                         $new = $news[$k]["original"];
-                         $content = Newscontent::where("news_id",$news[$k]->news_id)->where("article_id",$news[$k]->article_id)->pluck("content");
-                          $new["content"] = $content;
-                       $arr[$mp_ids[$i]][$j][$k] = $new;
-                   }
+                    $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("news_id","title","description","pic_url","url","act_id","news_from")->get();
+                    $new = $news[0]["original"];
+                    $content = Newscontent::where("news_id",$news[0]->news_id)->where("article_id",$news[0]->article_id)->pluck("content");
+                    $new["content"] = $content;
+                    $time = Newsmsg::where("news_id",$news[0]->news_id)->select("created_at")->first();
+                    $time = strtotime($time['original']['created_at']);
+                    $new["CreateTime"]=$time;
+                    $new["keyword"] = $keyword;
+                    $new['type'] = 'news';
+                    $new['mp_reply_id'] = $msgs[$j]->mp_reply_id;
+                    $arr[]=$new;
+                  
                 }
             }
+            if(isset($arr))
+            {
+                $json[]=['mp_id'=>$mp_ids[$i],'message'=>$arr];
+                $arr = "";
+            }
         }
-       if(!isset($arr))
-       {
-        $i = 0;
-        while(isset($mp_ids[$i])){
-            $arr[] = ['mp_id'=>$mp_ids[$i]];
-            $i++;
+        //如果没创建任何消息，返回他的mp_id
+        if(!isset($json))
+        {
+            $i = 0;
+            while(isset($mp_ids[$i])){
+                $json[] = ['mp_id'=>$mp_ids[$i]];
+                $i++;
+            }
         }
-       }
-       return $arr;
+
+       return $json;
     }
     public function delete($reply_id){
         $re = Autoreply::where("mp_reply_id",$reply_id)->select("msg_id","msg_type")->first();

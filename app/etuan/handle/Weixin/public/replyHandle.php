@@ -103,7 +103,7 @@ class replyHandle
             }
 
             if(!$reply_id){
-                $content = "default";
+                $content = "mp_default_autoreply_messgae";
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
                 if($re){
                     $this->reply($postObj,$content);

@@ -1,23 +1,60 @@
 <?php
 class actNewHandle
 {
-	public static function createNews($arr){
-	   $re = Newsmsg::where("title",$arr["title"])->where('mp_id',$arr['mp_id'])->where("url",$arr["url"])->where("news_from",$arr["news_from"])->pluck("news_id");
-       if($re != NULL){
+	public static function createNews($news_from,$act_id,$mp_id){
+	     $org_uid = Wxdata::where('mp_id',$mp_id)->pluck('org_uid');
+         $re = strtoupper(substr($news_from,0,1)).substr($news_from,1,strlen($news_from));
+         $obj =new $re;
+         $key = $obj->primaryKey;
+         $url = $re::where($key,$act_id)->select("url","name")->first();
+         if($url)
+         {
+              $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
+              $news_id = DB::table('mp_msg_news')->insertGetId(
+                             ["title" => $url->name,
+                                 "article_id" => 1,
+                                 "description" => "点击进入".$url->name.">>",
+                                 "pic_url" => $pic_url,
+                                 "url" => $url->url,
+                                 "news_from"=>$news_from,
+                                'mp_id'=>$mp_id]
+                             );
+              return $news_id;
+        }else{
             return false;
         }
-        $result = Newsmsg::insert(
-                ["title" => $arr["title"],
-                    "article_id" => 1,
-                    "description" => $arr["description"],
-                    "pic_url" => $arr["pic_url"],
-                    "url" => $arr["url"],
-                    "news_from"=>$arr["news_from"],
-                    'mp_id'=>$arr['mp_id'],
-                    'act_id'=>$arr['act_id']]
-            );
-        return $result;
 	}
+    public static function updateNews($news_from,$act_id,$mp_id,$result){
+        
+        if($result->msg_type=='text'){
+            Textmsg::where("text_id",$result->msg_id)->delete();
+        }elseif($result->msg_type=='news'){
+            $newsfrom = Newsmsg::where('news_id',$result->msg_id)->pluck('news_from');
+            if($newsfrom!='sucai')
+            {
+                 Newsmsg::where('news_id',$result->msg_id)->delete();
+            }
+            $org_uid = Wxdata::where('mp_id',$mp_id)->pluck('org_uid');
+            
+            $re = strtoupper(substr($news_from,0,1)).substr($news_from,1,strlen($news_from));
+            $obj =new $re;
+            $key = $obj->primaryKey;
+            $url = $re::where($key,$act_id)->select("url","name")->first();
+            $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
+            if($url){
+                $news_id = DB::table('mp_msg_news')->insertGetId(
+                            ["title" => $url->name,
+                                    "article_id" => 1,
+                                    "description" => "点击进入".$url->name.">>",
+                                    "pic_url" => $pic_url,
+                                    "url" => $url->url,
+                                    "news_from"=>$news_from,
+                                   'mp_id'=>$mp_id]
+                            );
+                 return $news_id;
+            }
+        }
+    }
 	public static function showNews($org_uid){
             $pic_url = Organization::where("org_uid",$org_uid)->pluck('logo_url');
             $news = Lottery::where("org_uid",$org_uid)->select("name","description","url","lottery_id")->get();

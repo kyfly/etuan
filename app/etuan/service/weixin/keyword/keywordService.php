@@ -5,7 +5,7 @@ class AutoreplyService
         //$org_uid = Auth::user()->org_uid;
             $mp_id = Wxdata::where('org_uid',1)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
             if($this->check($arr,$mp_id)){
-                return $this->check($arr);
+                return $this->check($arr,$mp_id);
             }
             
            if(!$mp_id){
@@ -20,14 +20,18 @@ class AutoreplyService
 	                    return $arr[]="你已经插入了相同的信息。";
 	                }
 	            } 
-	        }elseif($arr["type"]=="news"){
-	            $title = Newsmsg::where("news_id",$arr["content"])->pluck("title");
+	        }elseif($arr["type"]=="news"&&$arr['news_from']=='sucai'){
+                
+	            $title = Newsmsg::where("news_id",$arr["news_id"])->pluck("title");
 	            if($title){
-	                $msg_ids = Autoreply::where("mp_id",$arr["mp_id"])->where("msg_id",$arr["content"])->where("msg_type","news")->lists("msg_id");
+	                $msg_ids = Autoreply::where("mp_id",$arr["mp_id"])->where("msg_id",$arr["news_id"])->where("msg_type","news")->lists("msg_id");
 	                if(count($msg_ids)>0){
 	                    return $arr[]="这个微信号已经创建了相同的消息，你可以对已添加的消息添加多个关键字";
 	                }
 	            }
+                if(!$title){
+                    return "false";
+                }
 	        }
 
 	       $result = autoreplyHandle::create($arr);
@@ -37,9 +41,9 @@ class AutoreplyService
          //$org_uid = Auth::user()->org_uid;
             $mp_id = Wxdata::where('org_uid',1)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
        if($this->check($arr,$mp_id)){
-                return $this->check($arr);
+                return $this->check($arr,$mp_id);
             }
-        $mp_id = Autoreply::where("mp_reply_id",$arr["reply_id"])->pluck("mp_id");
+        $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
         if($mp_id ==NULL){
             return $arr[] = "不存在该自动回复";
         }
@@ -56,6 +60,7 @@ class AutoreplyService
 	}
 
     private function check($arr,$mp_id){
+
         for($i = 0;$i<count($arr["keyword"])-1;$i++){
             for($j = $i+1;$j<count($arr["keyword"]);$j++){
                 if($arr["keyword"][$i] == $arr["keyword"][$j])
