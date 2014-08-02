@@ -2,6 +2,7 @@
 class newsService
 {
 	public function create($arr){
+		
 		if(isset($arr[0])){
                 $re = Newsmsg::where("title",$arr[0]["title"])->where("description",$arr[0]["description"])->where("mp_id",$arr[0]['mp_id'])->pluck("news_id");
             }elseif(!isset($arr[0])){

@@ -9,10 +9,20 @@
 
             $this->json = file_get_contents('php://input');
         }
+        private function dotran($str) {
+             $str = str_replace('"','<<<',$str);
+             $str = str_replace("/r/n",'//r//n',$str);
+             $str = str_replace("/t",'//t',$str);
+             $str = str_replace("//",'//',$str);
+             $str = str_replace("/b",'//b',$str);
+             return $str;
+         }
         public function postCreate(){
-
+            
+            $json = $this->dotran($this->json);
+             $arr = json_decode($json,true);
+            dd($arr);
             $arr = json_decode($this->json,true);
-
             $re = $this->news->create($arr);
             
             return $re;
@@ -20,7 +30,6 @@
         public function postUpdate(){
 
             $arr = json_decode($this->json,true);
-
             $re = $this->news->update($arr);
 
             return $re;
@@ -44,9 +53,11 @@
         }
         public function postCact(){
 
-            $arr = json_decode($this->json,true);
+            $json = Input::get('info');
 
-             $re = $this->news->createActNews($arr);
+            $arr = json_decode($json,true);
+
+            $re = $this->news->createActNews($arr);
 
             return $re;
             }

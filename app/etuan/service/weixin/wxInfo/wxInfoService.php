@@ -2,12 +2,16 @@
 class wxInfoService
 {
 	public function create($appid,$secret){
-		$result = WS::getToken($appid,$secret);
-		if($result){
-			return wxInfoHandle::create($appid,$secret);
-		}else{
-			return false;
+		if($appid&&$secret)
+		{
+			$result = WS::getToken($appid,$secret);
+			if($result){
+				return wxInfoHandle::create($appid,$secret);
+			}else{
+				return false;
+			}
 		}
+		return wxInfoHandle::create($appid,$secret);
 	}
 	public function update($mp_id,$mp_org_id,$appid,$secret)
 	{

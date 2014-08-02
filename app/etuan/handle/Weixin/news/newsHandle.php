@@ -40,45 +40,84 @@ class newsHandle
 
 	public static function newsContentfile($news_id,$article_id,$content,$title){
             $oss = new oss;
-            $bucket = BUCKET;
-            $content = preg_replace("/<[^><]*script[^><]*>/i",'',$content); 
-            $filepath =_ROOT_."/../app/etuan/service/weixin/";
-            $head = file_get_contents($filepath.'head.php');
-            $fool = file_get_contents($filepath.'fool.php');
-            $time = date('Y-m-d',time());
-            $title = "<h3>$title</h3><hr>
-                     <small id=\"time\">$time&nbsp;&nbsp;<a>团团一家</a></small><br>";
-            $content = $head.$title.$content.$fool;
-            $object = Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->pluck('url');
-            $result = $oss->is_object_exist($bucket,$object);
-            if($result->status != 200)
+            $bucket = HTMLBUCKET;
+            $content = preg_replace("/<[^><]*script[^><]*>/i",'',$content);
+            if(self::uploadImg($content))
             {
-                  $info = Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->select('mp_id','news_from')->first();
-                  $mp_origin_id = Wxdata::where('mp_id',$info->mp_id)->pluck('mp_origin_id');
-                  $news_from = $info->news_from;
-                  $object = 'etuan/mp/'.$news_from.'/'.$mp_origin_id.'/'.date('ymdHis',time()).rand(10000,99999).".html";
-                  $options = ['content'=>$content,
-                    'length'=>strlen($content),
-                    'content_type'=>'text/html'];
-                  $result = $oss->upload_file_by_content($bucket,$object,$options);
-                  if($result->status == 200)
-                  {
-                    Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->update(['url'=>$object]);
-                    return true;
-                  }
+                $filepath =_ROOT_."/../app/etuan/service/weixin/";
+                $head = file_get_contents($filepath.'head.php');
+                $fool = file_get_contents($filepath.'fool.php');
+                $time = date('Y-m-d',time());
+                $title = "<h3>$title</h3><hr>
+                         <small id=\"time\">$time&nbsp;&nbsp;<a>团团一家</a></small><br>";
+                $content = $head.$title.$content.$fool;
+                $object = Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->pluck('url');
+                $result = $oss->is_object_exist($bucket,$object);
+                if($result->status != 200)
+                {
+                      $info = Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->select('mp_id','news_from')->first();      
+                      $news_from = $info->news_from;
+                      $object = 'etuan/mp/'.$news_from.'/'.$info->mp_id.'/'.date('ymdHis',time()).rand(10000,99999).".html";
+                      $options = ['content'=>$content,
+                        'length'=>strlen($content),
+                        'content_type'=>'text/html'];
+                      $result = $oss->upload_file_by_content($bucket,$object,$options);
+                      if($result->status == 200)
+                      {
+                        Newsmsg::where('news_id',$news_id)->where('article_id',$article_id)->update(['url'=>$object]);
+                        return true;
+                      }
+                }else{
+                      $oss->delete_object($bucket,$object);
+                      $options = ['content'=>$content,
+                        'length'=>strlen($content),
+                        'content_type'=>'text/html'];
+                      $result = $oss->upload_file_by_content($bucket,$object,$options);
+                      if($result->status!= 200)
+                      {
+                        return false;
+                      }else{
+                        return true;
+                      }
+                }
             }else{
-                  $oss->delete_object($bucket,$object);
-                  $options = ['content'=>$content,
-                    'length'=>strlen($content),
-                    'content_type'=>'text/html'];
-                  $result = $oss->upload_file_by_content($bucket,$object,$options);
-                  if($result->status!= 200)
-                  {
-                    return false;
-                  }else{
-                    return true;
-                  }
+              return false;
             }
     }
+
+    private static function uploadImg($content){
+        preg_match_all('|<img\s+.*?'.'src'.'\s*=\s*[\'"]([^\'"]+).*?>|i',$content,$match);  
+        foreach($match[1] as $val){
+          $oss = new oss;
+          $bucket = IMGBUCKET;
+          if(strstr($val,IMGURL)){
+              $object = substr($val,DOMAINLENTH);
+              $file = _ROOT_.'/'.$object;
+              $result= $oss->upload_file_by_file($bucket,$object,$file);
+              $file = substr($file,0,-20);
+              return self::deldir($file);
+          }
+        }
+        return true;
+    }
+    private static function deldir($dir) {
+      $dh=opendir($dir);
+      while ($file=readdir($dh)) {
+          if($file!="." && $file!="..") {
+              $fullpath=$dir."/".$file;
+              if(!is_dir($fullpath)) {
+                  unlink($fullpath);
+              } else {
+                  deldir($fullpath);
+              }
+           }
+      }
+      closedir($dh);
+      if(rmdir($dir)) {
+          return true;
+      } else {
+          return false;
+      }
+  }
 
 }

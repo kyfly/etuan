@@ -28,6 +28,6 @@ class OrgInfo
 	}
     public static function getMp_id($org_uid){
         $mp_id = Wxdata::where('org_uid',$org_uid)->pluck('mp_id');
-        return $mp_id
+        return $mp_id;
     }
 }

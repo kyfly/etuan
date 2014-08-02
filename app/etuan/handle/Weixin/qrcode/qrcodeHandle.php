@@ -1,10 +1,10 @@
 <?php
 class QrcodeHandle
 {
-	public static function getUrl($appid,$appsecret,$action= "QR_LIMIT_SCENE"){
+	public static function getUrl($appid,$appsecret,$scene_id){
         $token = WS::getToken($appid,$appsecret);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
-        $arr = [ "expire_seconds"=> 1800 ,"action_name" => $action ,"action_info" => ["scene" => [ "scene_id"=> 123]]];
+        $arr = ["action_name" => "QR_LIMIT_SCENE" ,"action_info" => ["scene" => [ "scene_id"=> $scene_id]]];
         $json = json_encode($arr);
         $re = BS::https_request($url,$json);
         $arr = json_decode($re,true);
@@ -30,7 +30,7 @@ class QrcodeHandle
             return false;
         }
     }
-    public static function Authcode($url,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 5){
+    public static function Authcode($url,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
         //require _ROOT_.'/../app/qrcode/phpqrcode.php';
         QRcode::png($url,$QR, $errorCorrectionLevel, $matrixPointSize,0);
         if ($logo !== FALSE) { 

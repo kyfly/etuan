@@ -2,7 +2,7 @@
 class simpleImgHandle extends newsHandle
 {
 	public static function createNews($arr)
-	{
+	{ 
         try{
             DB::beginTransaction();
     		$news_id = DB::table('mp_msg_news')->insertGetId(
@@ -15,8 +15,11 @@ class simpleImgHandle extends newsHandle
                            'mp_id'=>$arr['mp_id']]
                     );
             $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => 1,"content"=>$arr["content"]]);
+           
             if($arr["content"]){
+
                 $result = self::newsContentfile($news_id,1,$arr['content'],$arr["title"]);
+
                 if(!$result){
                     return false;
                 }

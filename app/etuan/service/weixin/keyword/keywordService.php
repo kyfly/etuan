@@ -2,15 +2,15 @@
 class AutoreplyService
 {
     public function  create($arr){
-            if($this->check($arr)){
+        //$org_uid = Auth::user()->org_uid;
+            $mp_id = Wxdata::where('org_uid',1)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
+            if($this->check($arr,$mp_id)){
                 return $this->check($arr);
             }
-            $org_uid = Auth::user()->org_uid;
-            $mp_id = Wxdata::where('org_uid',$org_uid)->pluck('mp_id');
-            if($mp_id!=$arr['mp_id'])
-            {
-                return 'dd';
-            }
+            
+           if(!$mp_id){
+                return 'false';
+           }
 	        if($arr["type"]=="text"){
 	            $text_id = Textmsg::where("content",$arr["content"])->lists("text_id");
 	            for($i = 0;$i<count($text_id);$i++)
@@ -34,7 +34,9 @@ class AutoreplyService
 	       return $result;
     }
     public function  update($arr){
-       if($this->check($arr)){
+         //$org_uid = Auth::user()->org_uid;
+            $mp_id = Wxdata::where('org_uid',1)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
+       if($this->check($arr,$mp_id)){
                 return $this->check($arr);
             }
         $mp_id = Autoreply::where("mp_reply_id",$arr["reply_id"])->pluck("mp_id");
@@ -45,7 +47,7 @@ class AutoreplyService
 	    return $result;
     }
     public function show($org_uid){
-  		$result = autoreplyHandle::show($arr);
+  		$result = autoreplyHandle::show($org_uid);
 	    return $result;
     }
     public function delete($reply_id){
@@ -53,7 +55,7 @@ class AutoreplyService
 	    return $result;
 	}
 
-    private function check($arr){
+    private function check($arr,$mp_id){
         for($i = 0;$i<count($arr["keyword"])-1;$i++){
             for($j = $i+1;$j<count($arr["keyword"]);$j++){
                 if($arr["keyword"][$i] == $arr["keyword"][$j])
@@ -64,7 +66,7 @@ class AutoreplyService
         }
         for($i = 0;$i<count($arr["keyword"]);$i++)
         {
-            $re = Keyword::where("keyword",$arr["keyword"][$i])->pluck("mp_reply_id");
+            $re = Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->pluck("mp_reply_id");
             if($re){
                 return $arr[]=$arr["keyword"][$i]."这个关键字已存在";
             }
