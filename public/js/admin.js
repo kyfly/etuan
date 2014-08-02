@@ -255,3 +255,45 @@
 			$(this).hide();
 			$("#originurlbox").show();
 			});
+		
+		$(".addimgtxt a").hide();
+		$(".addimgtxt").mouseover(function(){
+			$("#plusbtn").hide();
+			$(".addimgtxt a").show();
+		});
+		$(".addimgtxt").mouseout(function(){
+			$("#plusbtn").show();
+			$(".addimgtxt a").hide();
+		});
+		
+		$(".bgcolorgrey").hide();	
+		$(".greybox2").mouseover(function(){
+			$(".bgcolorgrey").show();
+		});
+		$(".greybox2").mouseout(function(){
+			$(".bgcolorgrey").hide();
+		});
+		
+		$("#grey1").hide();	
+		$("#extrabox1").mouseover(function(){
+			$("#grey1").show();
+		});
+		$("#extrabox1").mouseout(function(){
+			$("#grey1").hide();
+		});
+		
+		$("#grey2").hide();	
+		$("#extrabox2").mouseover(function(){
+			$("#grey2").show();
+		});
+		$("#extrabox2").mouseout(function(){
+			$("#grey2").hide();
+		});
+		
+		$("#grey3").hide();	
+		$("#extrabox3").mouseover(function(){
+			$("#grey3").show();
+		});
+		$("#extrabox3").mouseout(function(){
+			$("#grey3").hide();
+		});

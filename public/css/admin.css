@@ -391,7 +391,7 @@ body{
 		font-size: 18px;
 		color: #b2b2b2;
 		}
-	.botbtn :hover {
+	.botbtn:hover {
 		color: #373636;
 		}
 	.addimgtxt {
@@ -401,13 +401,25 @@ body{
 		width: 30%;
 		margin: 10px 5px;
 		}
-	.addimgtxt :hover {
+	.addimgtxt2 {
+		height: 70px;
+		border: 1px dotted #d9dadc;
+		text-align: center;
+		width: 90%;
+		margin: 5%;;
+		}
+	.addimgtxt2 > span:hover {
 		color: #373636;
 		}
-	.addimgtxt > a > span {
+	.addimgtxt > span , .addimgtxt2 > span {
 		line-height: 70px;
 		font-size: 30px;
 		color: #b2b2b2;
+		cursor: pointer;
+		}
+	.addimgtxt > a {
+		color: #b2b2b2;
+		line-height: 70px;
 		}
 	.imgtxtlist {
 		padding: 5px;
@@ -417,20 +429,101 @@ body{
 		}
 	.examplebox {
 		border: 1px solid #e7e7eb;
-		height: 223px;
+		height: 200px;
 		padding: 15px;
+		}
+	.examplebox2 {
+		border: 1px solid #e7e7eb;
+		padding: 0px;
+		min-height: 500px;
+		}
+	.titlecover {
+		padding: 10px;
+		border-bottom: 1px solid #e7e7eb;
+		height: 180px;
+		}
+	.extrabox {
+		height: 120px;
+		border-bottom: 1px solid #e7e7eb;
+		padding: 20px 15px;
+		color: #8d8d8d;
+		position: relative;
+		}
+	.suoluetu {
+		height: 80px;
+		width: 80px;
+		float: right;
+		background-color: #ececec;
+		text-align: center;
+		line-height: 80px;
 		}
 	.examplebox > a {
 		color: #8d8d8d;
 		}
 	.greybox {
 		background-color: #ececec;
+		height: 150px;
+		text-align: center;
+		position: relative;
+		}
+	.greybox2 {
+		background-color: #ececec;
 		height: 160px;
+		text-align: center;
+		position: relative;
+		}
+	.titleline {
+		background-color: #5e5e5e;
+		height: 20%;
 		width: 100%;
-		margin-top: 10px;
+		position: absolute;
+		top: 80%;
+		text-align: left;
+		color: #fff;
+		padding: 5px;
+		}
+	.bgcolorgrey ,.bgcolorgrey2 {
+		background-color: #e6e6e6;
+		filter:alpha(opacity=8);  
+        -moz-opacity:0.8;  
+        -khtml-opacity: 0.8;  
+        opacity: 0.8;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		z-index: 99;
+	    }
+	.bgcolorgrey2 {
+		margin-left: -15px;
 		text-align: center;
 		}
-	.greybox > p {
+	.bgcolorgrey > span {
+		color: #b2b2b2;
+		font-size: 22px;
+		position: absolute;
+		top: 42%;
+		left: 45%
+		}
+	.bgcolorgrey2 > .span1 {
+		color: #b2b2b2;
+		font-size: 20px;
+		position: absolute;
+		top: 42%;
+		left: 37%
+		}
+	.bgcolorgrey2 > .span2 {
+		color: #b2b2b2;
+		font-size: 20px;
+		position: absolute;
+		top: 42%;
+		left: 53%
+		}
+	.bgcolorgrey > span:hover , .bgcolorgrey2 > span:hover{
+		color: #373636;
+		cursor: pointer;
+		}
+	.greybox > p  , .greybox2 > p{
 		line-height: 160px;
 		color: #c0c0c0;
 		font-size: 16px;
