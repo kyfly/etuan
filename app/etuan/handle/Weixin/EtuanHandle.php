@@ -14,13 +14,15 @@ class EtuanHandle extends replyHandle
                     $orgname = Organization::where("org_uid",$uid)->pluck('name');
                     $url = "weixin://contacts/profile/$val";
                     $user = $user."<a href=\"$url\">点击关注$orgname</a>";
-                    $user = $user.' | ';
+                    $user = $user."\n";
                 }
                 $user = substr($user,0, strlen($user)-2);
                 $content = $user;
                 return $this->TextMessage($postObj,$content);
                 break;   
-           
+           case "hh":
+                $content = "<a href=\"http://linkew.net\">dd</a>";
+                return $this->TextMessage($postObj,$content);
            default:
                return $this->Autoreply($postObj);
                 break;

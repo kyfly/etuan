@@ -42,9 +42,13 @@ Route::filter('wxauth', function()
 {
     $requesturl = "http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
     Session::put('requesturl',$requesturl);
-    $name = Session::get('name');
-    $id = Session::get('id');
-    $re = WxUser::where("wx_uid",$id)->where("nick_name",$name)->pluck('wx_uid');
+    $name = Session::get('nick_name');
+    $id = Session::get('wx_uid');
+    if($name&&$id){
+        $re = WxUser::where("wx_uid",$id)->where("nick_name",$name)->pluck('wx_uid');
+    }else{
+        $re = '';
+    }
     if(!$re){
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')){
             $appid= APPID;
@@ -52,7 +56,7 @@ Route::filter('wxauth', function()
             $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
             return Redirect::to($url);
         }else{
-            return Redirect::to('login');
+            return Redirect::to('weixin/login');
         }
     }
 });

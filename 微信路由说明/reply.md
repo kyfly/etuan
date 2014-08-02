@@ -92,77 +92,55 @@ keyword
 
 ~~~javascipt
 返回值:
-[
-//mp_id 1//
-    [
+{
+    "1": [
+        {
+            "text": {
+                "mp_reply_id": 3,
+                "msg_id": 2,
+                "content": null
+            },
+            "keyword": []
+        },
         {
             "0": {
-                "news_id": 47, 
-                "title": "test11", 
-                "article_id": 1, 
-                "description": "dddddddddd", 
-                "pic_url": "kkkkkkkkkk", 
-                "url": "llllllll", 
-                "content": null
-            }, 
+                "news_id": 22,
+                "title": "test",
+                "article_id": 1,
+                "description": "ddsgggsnddddd",
+                "pic_url": "kkkkkkkkkk",
+                "url": "etuan/mp/sucai/f/14073023515694270.html",
+                "act_id": null,
+                "news_from": "sucai",
+                "content": "kk"
+            },
             "keyword": [
-                "rrrrrr", 
-                "tttttttt"
-            ]
-        }
-    ],
-//mp_id 2// 
-    [
-        {
-            "text": {
-                "mp_reply_id": 48, 
-                "msg_id": 4, 
-                "content": "dgfdfvd"
-            }, 
-            "keyword": [
-                "dfffdf", 
-                "dxd"
-            ]
-        }, 
-        {
-            "text": {
-                "mp_reply_id": 49, 
-                "msg_id": 5, 
-                "content": "dhhhhhhhhhhh"
-            }, 
-            "keyword": [
-                "hhhhhhh", 
-                "hhhhhhhh"
-            ]
-        }, 
-        {
-            "text": {
-                "mp_reply_id": 50, 
-                "msg_id": 6, 
-                "content": "fffffffffff"
-            }, 
-            "keyword": [
-                "ffffffffff", 
-                "fffffffffff"
-            ]
-        }, 
-        {
-            "0": {
-                "news_id": 47, 
-                "title": "test11", 
-                "article_id": 1, 
-                "description": "dddddddddd", 
-                "pic_url": "kkkkkkkkkk", 
-                "url": "llllllll", 
-                "content": null
-            }, 
-            "keyword": [
-                "rrrrrrrrr", 
+                "rrrrrrrrr",
                 "rrrrrrrrrr"
             ]
         }
-    ]
-] 
+    ],
+    "2": {
+        "1": {
+            "text": {
+                "mp_reply_id": 6,
+                "msg_id": 4,
+                "content": null
+            },
+            "keyword": []
+        },
+        "2": {
+            "text": {
+                "mp_reply_id": 8,
+                "msg_id": 1,
+                "content": "ffffffff"
+            },
+            "keyword": [
+                "fffffffff"
+            ]
+        }
+    }
+}
 ~~~
 
 `/reply/destory`

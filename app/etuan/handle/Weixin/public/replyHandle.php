@@ -11,7 +11,7 @@ class replyHandle
         }
         return true;
     }
-	public function TextMessage($postObj,$contentStr){
+	public function TextMessage($postObj,$contentStr,$time=''){
 		 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
 							<FromUserName><![CDATA[%s]]></FromUserName>
@@ -20,12 +20,15 @@ class replyHandle
 							<Content><![CDATA[%s]]></Content>
 							<FuncFlag>0</FuncFlag>
 							</xml>"; 
-		$time = time();            	
+		      	
   		$msgType = "text";
+        if(!$time){
+            $time = time();
+        }
     	$resultStr = sprintf($textTpl, $postObj->FromUserName, $postObj->ToUserName, $time, $msgType, $contentStr);
         return $resultStr;      	
 	}
-	public function ArticlesMessage($postObj, $newsArray)
+	public function ArticlesMessage($postObj, $newsArray,$time='')
 	{
 	    if(!is_array($newsArray)){
 	        return;
@@ -58,8 +61,10 @@ class replyHandle
 						<Articles>
 						$item_str</Articles>
 						</xml>";
-
-	    $result = sprintf($xmlTpl, $postObj->FromUserName, $postObj->ToUserName, time(),$i);
+        if(!$time){
+            $time = time();
+        }
+	    $result = sprintf($xmlTpl, $postObj->FromUserName, $postObj->ToUserName, $time,$i);
 	    return $result;
     }
     private function Allorginfo(){
@@ -70,10 +75,20 @@ class replyHandle
             $orgname = Organization::where("org_uid",$uid)->pluck('name');
             $url = "weixin://contacts/profile/$val";
             $user = $user."<a href=\"$url\">点击关注$orgname</a>";
-            $user = $user.' | ';
+            $user = $user."\n";
         }
         $user = substr($user,0, strlen($user)-2);
         return $user;
+    }
+    private function toAndroid($postObj){
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') && strpos($_SERVER['HTTP_USER_AGENT'], 'Android'))
+        {
+            $content = $this->Allorginfo();
+            
+        }else{
+            $content = "感谢你的关注，我没将继续努力";
+        }
+        return $this->TextMessage($postObj,$content);
     }
     public function Autoreply($postObj){
        $content = $postObj->Content;
@@ -82,25 +97,28 @@ class replyHandle
     private function reply($postObj,$content){
         try{
             $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
-            $reply_id = Event::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');
+            $reply_id = clickEvent::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');
             if(!$reply_id){
                 $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
             }
+
             if(!$reply_id){
                 $content = "default";
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
                 if($re){
                     $this->reply($postObj,$content);
                 }else{
-                    $content = $this->Allorginfo();
-                    return $this->TextMessage($postObj,$content);
+                    return $this->toAndroid($postObj);
                 }
             }
+
             $result = Autoreply::where("mp_reply_id",$reply_id)->select("msg_type","msg_id")->first();
             if($result->msg_type=="text")
             {
                 $Tcontent = Textmsg::where("text_id",$result->msg_id)->pluck("content");
-                return $this->TextMessage($postObj,$Tcontent);
+                $time = Textmsg::where("text_id",$result->msg_id)->select("created_at")->first();
+                $time = strtotime($time['original']['created_at']);
+                return $this->TextMessage($postObj,$Tcontent,$time);
             }elseif($result->msg_type=="news")
             {
                 $contentObj = Newsmsg::where("news_id",$result->msg_id)->select("title","description","pic_url","url")->get();
@@ -113,14 +131,18 @@ class replyHandle
                     $arr[$i]['url']=$content->url;
                     $i++;
                 }
-                return $this->ArticlesMessage($postObj, $arr);
+
+
+                $time = Newsmsg::where("news_id",$result->msg_id)->select("created_at")->first();
+
+                $time = strtotime($time['original']['created_at']);
+
+                return $this->ArticlesMessage($postObj, $arr,$time);
             }
 
-            $content = $this->Allorginfo(); 
-            return $this->TextMessage($postObj,$content);
+            return $this->toAndroid($postObj);
         }catch (Exception $e){
-            $content = $this->Allorginfo();
-            return $this->TextMessage($postObj,$content);
+            return $this->toAndroid($postObj);
         }
     }
 }

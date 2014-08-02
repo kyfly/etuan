@@ -3,14 +3,18 @@ class wxUserHandle
 {
 	public function CreateUser($appid,$secret,$code){
             $json = $this->getLicenseToken($appid,$secret,$code);
-            if($json["openid"] = 40029)
+
+            if(isset($json["errcode"])&&$json["errcode"] == 40029)
             {
                 return false;
             }
             $userid =$json["openid"];
             $token = $json["access_token"];
+            
             $userinfo =$this->getUserinfo($token,$userid);
+           
             $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
+           
             if($result==NULL)
             {
                 $user = new WxUser;

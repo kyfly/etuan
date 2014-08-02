@@ -14,7 +14,6 @@ class WxinterfaceController extends BaseController
     
     public function postUwx(){
         $mp_id = Input::get("mp_id");
-        $mp_org_id = Input::get("mp_origin_id");
         $appid = Input::get("appid");
         $secret = Input::get("secret");
         $result = $this->wx->create($mp_id,$mp_org_id,$appid,$secret);

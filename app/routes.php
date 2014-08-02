@@ -1,17 +1,21 @@
 <?php
 
     Route::get("/",function(){
-
-      $oss = new oss;
-      $bucket = 'liujiandong';
-      $object = '/hhh';
-      $re = $oss->is_object_exist($bucket,$object);
-      dd($re);
+     $CONFIG['imagePathFormat'] = BS::getImagePathFormat();
     });
-    Route::get("x",['before'=>'wxauth',function(){
-      echo 'nihao';
+    Route::get("x",['before'=>"wxauth",function(){
+      echo "nihao";
     }]);
-
+    Route::group(array('before'=>'wxauth'),function()
+    {
+      Route::get("x",function(){
+        echo "nihao";
+      });
+      Route::get("v",function(){
+        echo "nihao";
+      });
+    });
+    
     Route::controller('auth','AuthController');
 
     Route::controller('notice','NoticeController');
@@ -37,7 +41,7 @@
 
     Route::controller('weixin/qrcode','QretuanController');
 
-Route::controller("weixin/login","WxloginController");
+    Route::controller("weixin/login","WxloginController");
 
     Route::get("wx/{id}","EtuanController@index");
 

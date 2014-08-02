@@ -74,23 +74,31 @@ class autoreplyHandle
                 if($msgs[$j]->msg_type == "text"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
                     $content = Textmsg::where("text_id",$msgs[$j]->msg_id)->pluck("content");
-                    $arr[$i][$j]["text"]["mp_reply_id"] = $msgs[$j]->mp_reply_id;
-                    $arr[$i][$j]["keyword"] = $keyword;
-                    $arr[$i][$j]["text"]["msg_id"] = $msgs[$j]->msg_id;
-                    $arr[$i][$j]["text"]["content"] = $content;
+                    $arr[$mp_ids[$i]][$j]["text"]["mp_reply_id"] = $msgs[$j]->mp_reply_id;
+                    $arr[$mp_ids[$i]][$j]["keyword"] = $keyword;
+                    $arr[$mp_ids[$i]][$j]["text"]["msg_id"] = $msgs[$j]->msg_id;
+                    $arr[$mp_ids[$i]][$j]["text"]["content"] = $content;
                 }elseif($msgs[$j]->msg_type == "news"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
                     $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("news_id","title","article_id","description","pic_url","url","act_id","news_from")->get();
-                    $arr[$i][$j]["keyword"] = $keyword;
+                    $arr[$mp_ids[$i]][$j]["keyword"] = $keyword;
                    for($k = 0;$k<count($news);$k++){
                          $new = $news[$k]["original"];
                          $content = Newscontent::where("news_id",$news[$k]->news_id)->where("article_id",$news[$k]->article_id)->pluck("content");
                           $new["content"] = $content;
-                       $arr[$i][$j][$k] = $new;
+                       $arr[$mp_ids[$i]][$j][$k] = $new;
                    }
                 }
             }
         }
+       if(!isset($arr))
+       {
+        $i = 0;
+        while(isset($mp_ids[$i])){
+            $arr[] = ['mp_id'=>$mp_ids[$i]];
+            $i++;
+        }
+       }
        return $arr;
     }
     public function delete($reply_id){

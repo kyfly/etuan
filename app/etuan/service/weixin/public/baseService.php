@@ -1,6 +1,11 @@
 <?php
 class BS
 {
+    public static function getImagePathFormat(){
+       // $org_uid = Auth::user()->org_uid;
+        $org_uid = 1;
+        return '/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999);
+    }
 	public static function getRandStr($length)
     {
         $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
