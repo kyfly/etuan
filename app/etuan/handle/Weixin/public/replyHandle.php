@@ -1,6 +1,7 @@
 <?php
 class replyHandle
 {
+    //判断该微信号原始id是否创建
     public function check($postObj,$url){
         $origin_id = Wxdata::where('interface_url',$url)->pluck('mp_origin_id');
         if(!$origin_id){
@@ -11,6 +12,7 @@ class replyHandle
         }
         return true;
     }
+    //发送文本信息
 	public function TextMessage($postObj,$contentStr,$time=''){
 		 $textTpl = "<xml>
 							<ToUserName><![CDATA[%s]]></ToUserName>
@@ -67,6 +69,7 @@ class replyHandle
 	    $result = sprintf($xmlTpl, $postObj->FromUserName, $postObj->ToUserName, $time,$i);
 	    return $result;
     }
+    //暂时没用
     private function Allorginfo(){
         $info = Wxdata::lists('mp_origin_id');
         $user = "";
@@ -80,6 +83,7 @@ class replyHandle
         $user = substr($user,0, strlen($user)-2);
         return $user;
     }
+    //好像也没用
     private function toAndroid($postObj){
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') && strpos($_SERVER['HTTP_USER_AGENT'], 'Android'))
         {
@@ -94,6 +98,7 @@ class replyHandle
        $content = $postObj->Content;
        return $this->reply($postObj,$content);
     }
+    //自动回复信息处理。
     private function reply($postObj,$content){
         try{
             $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
@@ -131,8 +136,6 @@ class replyHandle
                     $arr[$i]['url']=$content->url;
                     $i++;
                 }
-
-
                 $time = Newsmsg::where("news_id",$result->msg_id)->select("created_at")->first();
 
                 $time = strtotime($time['original']['created_at']);

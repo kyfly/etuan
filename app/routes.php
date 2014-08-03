@@ -1,19 +1,15 @@
 <?php
 
     Route::get("/",function(){
-     $CONFIG['imagePathFormat'] = BS::getImagePathFormat();
+       $re = Autoreply::where('msg_id',72)->get();
+       dd($re);
     });
     Route::get("x",['before'=>"wxauth",function(){
       echo "nihao";
     }]);
     Route::group(array('before'=>'wxauth'),function()
     {
-      Route::get("x",function(){
-        echo "nihao";
-      });
-      Route::get("v",function(){
-        echo "nihao";
-      });
+      
     });
     
     Route::controller('auth','AuthController');

@@ -90,7 +90,7 @@ define('DOMAINLENTH',13);
 define('IMGBUCKET','liujiandong');
 define('HTMLBUCKET','liujiandong');
 
-define("CALLBACKURL",urlencode("http://linkew.net/oauth"));
+define("CALLBACKURL",urlencode("http://60.176.43.59/oauth"));
 
 define("APPID","wx5d92b3c192f993e7");
 
@@ -100,4 +100,4 @@ define("_ROOT_",$_SERVER['DOCUMENT_ROOT']);
 
 define("_WWW_","http://www.etuan.local/img/");
 
-define("AuthUrl",urlencode("http://linkew.net/weixin/login/oauth"));
+define("AuthUrl",urlencode("http://60.176.43.59/weixin/login/oauth"));

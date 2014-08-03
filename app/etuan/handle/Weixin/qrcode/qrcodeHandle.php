@@ -1,6 +1,7 @@
 <?php
 class QrcodeHandle
 {
+    //生成带参数的二维码，暂时没用上，返回二维码的存放位置
 	public static function getUrl($appid,$appsecret,$scene_id){
         $token = WS::getToken($appid,$appsecret);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
@@ -30,6 +31,7 @@ class QrcodeHandle
             return false;
         }
     }
+    //一般二维码生成，调用该方法是，若$QR为false，则会直接在浏览器中显示图片
     public static function Authcode($url,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
         //require _ROOT_.'/../app/qrcode/phpqrcode.php';
         QRcode::png($url,$QR, $errorCorrectionLevel, $matrixPointSize,0);

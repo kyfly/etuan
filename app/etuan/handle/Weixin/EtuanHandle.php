@@ -21,7 +21,7 @@ class EtuanHandle extends replyHandle
                 return $this->TextMessage($postObj,$content);
                 break;   
            case "hh":
-                $content = "<a href=\"http://linkew.net\">dd</a>";
+                $content = "<a href=\"http://linkew.net/x\">dd</a>";
                 return $this->TextMessage($postObj,$content);
            default:
                return $this->Autoreply($postObj);

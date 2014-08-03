@@ -43,8 +43,8 @@ class autoreplyHandle
            
     }
     public static function  update($arr){
-        /*try {
-            DB::beginTransaction();*/
+        try {
+            DB::beginTransaction();
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
             $result = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->select("msg_type","msg_id")->first();
             if($arr["type"]=="text"){
@@ -99,12 +99,12 @@ class autoreplyHandle
             {
                 $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
-           /* DB::commit();
+            DB::commit();
             return true;
         } catch (Exception $e) {
             DB::rollback();
              return false;
-        }*/
+        }
     }
     public static function show($org_uid){
         $mp_ids = Wxdata::where("org_uid",$org_uid)->lists("mp_id");

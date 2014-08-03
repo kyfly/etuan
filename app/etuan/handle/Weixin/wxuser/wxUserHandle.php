@@ -1,6 +1,6 @@
 <?php
 class wxUserHandle
-{
+{   
 	public function CreateUser($appid,$secret,$code){
             $json = $this->getLicenseToken($appid,$secret,$code);
 

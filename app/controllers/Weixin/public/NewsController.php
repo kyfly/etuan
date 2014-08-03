@@ -40,27 +40,16 @@
             $re = Wxdata::where('org_uid',$org_uid)->where('mp_id',$mp_id)->pluck('mp_id');
             if($re)
             {
-                $new["news"] = $this->news->show($mp_id);
+                $news[] = $this->news->show($mp_id);
             
-                $new["act"] = $this->news->showActNews($org_uid);
-    
-                $json = json_encode($new);
+                $news[] = $this->news->showActNews($org_uid);
+                $json = json_encode($news);
                 
                 return $json;
             }else{
                 return false;
             }
         }
-        public function postCact(){
-
-            $json = Input::get('info');
-
-            $arr = json_decode($json,true);
-
-            $re = $this->news->createActNews($arr);
-
-            return $re;
-            }
         public function getDestory(){
 
             $news_id = Input::get("news_id");

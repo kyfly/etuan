@@ -228,36 +228,51 @@
             }
         ]
     },
-    "act": {
-        "1": [
+    "act"
+    [
+    {
+        "acttype": "Ticket",
+        "actcontent": [
             {
-                "title": "gggggggg",
-                "description": "点击进入gggggggg>>",
+                "title": "piao",
+                "description": "点击进入piao>>",
                 "pic_url": null,
-                "url": "ffffffffffffff",
-                "news_from": "registration",
-                "act_id": "reg_id"
+                "url": "",
+                "news_from": "ticket",
+                "act_id": "lottery_id"
             },
             {
-                "title": "fffffffffffffffff",
-                "description": "点击进入fffffffffffffffff>>",
+                "title": "g",
+                "description": "点击进入g>>",
                 "pic_url": null,
-                "url": "dddddddddddddd",
-                "news_from": "registration",
-                "act_id": "reg_id"
-            }
-        ],
-        "2": [
-            {
-                "title": "kkkkkkkk",
-                "description": "点击进入kkkkkkkk>>",
-                "pic_url": null,
-                "url": "kkkkkkkkkkkkk",
+                "url": "",
                 "news_from": "ticket",
-                "act_id": "ticket_id"
+                "act_id": "lottery_id"
+            }
+        ]
+    },
+    {
+        "acttype": "Vote",
+        "actcontent": [
+            {
+                "title": "niaho",
+                "description": "点击进入niaho>>",
+                "pic_url": null,
+                "url": null,
+                "news_from": "vote",
+                "act_id": "lottery_id"
+            },
+            {
+                "title": "henhao",
+                "description": "点击进入henhao>>",
+                "pic_url": null,
+                "url": null,
+                "news_from": "vote",
+                "act_id": "lottery_id"
             }
         ]
     }
+]
 }
 ~~~
 
