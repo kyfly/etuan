@@ -1,0 +1,48 @@
+[
+    {
+        "mp_id": "1",
+        "message":
+            [
+                {
+                    "type": "text",
+                    "mp_reply_id": 2,
+                    "msg_id": 2,
+                    "content": "欢迎关注",
+                    "keyword": ["mp_default_autoreply_message"]
+                },
+                {
+                    "type": "text",
+                    "mp_reply_id": 3,
+                    "msg_id": 23,
+                    "content": "关键字回复",
+                    "keyword": ["mp_welcome_autoreply_message"]
+                },
+                {
+                    "type": "news",
+                    "mp_reply_id": 4,
+                    "news_id": 22,
+                    "CreateTime": 1406811234567,
+                    "news_from": "sucai",
+                    "act_id": null,
+                    "keyword": ["kwd"],
+                    "title": "时光之书抢票",
+                    "description": "点击进入抢票页面",
+                    "pic_url": "http://i.kyfly.net/ticket/sgzs/pic/sgzs_wx_bg.jpg",
+                    "url": "http://www.baidu.com"
+                },
+                {
+                "type": "news",
+                "mp_reply_id": 5,
+                "news_id": 22,
+                "CreateTime": 1406811234567,
+                "news_from": "sucai",
+                "act_id": null,
+                "keyword": ["你好", "aaa"],
+                "title": "时光之书抢票",
+                "description": "点击进入抢票页面",
+                "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
+                "url": "http://i.kyfly.net"
+                }
+            ]
+    }
+]
