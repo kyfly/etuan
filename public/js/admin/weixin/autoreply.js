@@ -19,6 +19,9 @@ MessageModel.prototype.getAllKeywordMsg = function () {
         {keyword: {"!has": "mp_default_autoreply_message"}}).get();
 };
 
+MessageModel.prototype.delMsgByKeyword = function(keyword) {
+    this.messageDB({keyword: {has: keyword}}).remove();
+};
 
 //--- views --------------------------------
 
@@ -29,7 +32,7 @@ function MessageView(msg) {
 
 //获取获取图文消息的DIV
 MessageView.prototype.getNewsDiv = function () {
-    var newsTpl = '<div class="col-md-2">' +
+   /* var newsTpl = '<div class="col-md-2">' +
         '<img style="margin-top: 9px" src="{0}" width="80px" height="80px">' +
         '</div> ' +
         '<div class="col-md-8">' +
@@ -39,16 +42,64 @@ MessageView.prototype.getNewsDiv = function () {
     var newsMsg = this.message;
     var msgHtml = String.format(newsTpl, newsMsg.pic_url, newsMsg.url, newsMsg.title, newsMsg.description);
     return msgHtml;
+   */
+    if (this.message.content.length == 1)
+    {
+        var createTime = new Date(this.message.CreateTime);
+        with (createTime) {
+            createTime = getFullYear() + '-' + (getMonth() + 1) + '-' + getDay();
+        }
+        var msgHtml = String.format('<div class="col-md-6 margintop newsSingle">' +
+            '<a href="{0}" target="_blank"><h4 class="colorBlack"> {1} </h4></a>' +
+            '<p>{2}</p>' +
+            '<img height="100%" width="100%" src="{3}" >' +
+            '<p style="margin-top: 15px">{4}</p>' +
+            '</div>',
+            this.message.content[0].url, this.message.content[0].title, createTime,
+            this.message.content[0].pic_url, this.message.content[0].description);
+        return msgHtml;
+    }
+    else
+    {
+        var msgHtml = String.format(
+            '<div class="examplebox2 col-md-6 margintop">' +
+            '<div class="titlecover" style="padding: 15px; height: auto"><div class="greybox2" style="height: auto">' +
+            '<img height="100%" width="100%" src="{0}">' +
+            '<div class="titleline"><a href="{1}" class="colorWhite" target="_blank">{2}</a></div>'+
+            '</div></div>',
+           /* <div class="col-md-6 margintop imgtxtlist"><div class="thumbnail">' +
+            '<img src="{0}" height="132px" width="292px">' +
+            '<a href="{1}"><h4 style="margin: 8px!important;"> {2} </h4></a>' +
+            '</div>',*/
+            this.message.content[0].pic_url, this.message.content[0].url, this.message.content[0].title);
+        for (var i = 1; i < this.message.content.length; i++)
+        {
+            msgHtml += String.format(
+                '<div class="extrabox">' +
+                '<div class="newsSubtitle col-sm-8"><a href="{0}" target="_blank">{1}</a></div>'+
+                '<div class="col-sm-4"><img height="78px" width="78px" src="{2}"> </div>' +
+                '</div>',
+            /*'<div class="thumbnail">' +"
+                '<div class="row">' +
+                '<div class="col-sm-8"><a href="{0}"><h4>{1}</h4></div></a>' +
+                '<div class="col-sm-4"><img height="78px" width="78px" src="{2}"> </div>' +
+                '</div></div>',*/
+                this.message.content[i].url, this.message.content[i].title, this.message.content[i].pic_url
+            )
+        }
+        msgHtml += '</div>';
+        return msgHtml;
+    }
 };
 
 //--- controllers ---------------------------
 
 //控制界面元素的显示
-function MessageCtrl(msgData) {
-    this.msgData = msgData;
+function MessageCtrl(messageData) {
+    this.msgData = messageData;
 
-    this.loadMsg(msgData.getWelcomeMsg(), $("#welcomeMsgContent"));
-    this.loadMsg(msgData.getDefaultMsg(), $("#defaultMsgContent"));
+    this.loadMsg(this.msgData.getWelcomeMsg(), $("#welcomeMsgContent"));
+    this.loadMsg(this.msgData.getDefaultMsg(), $("#defaultMsgContent"));
     this.LoadKeywordRule();
 }
 
@@ -68,7 +119,7 @@ MessageCtrl.prototype.loadMsg = function (msg, targetDiv) {
 
 //载入自定义关键字消息，采用Add循环添加
 MessageCtrl.prototype.LoadKeywordRule = function () {
-    var msg = msgData.getAllKeywordMsg();
+    var msg = this.msgData.getAllKeywordMsg();
     for (var key in msg)
         this.AddKeywordRule(msg[key]);
 };
@@ -102,6 +153,11 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
     ruleDiv.show();
 };
 
+MessageCtrl.prototype.clearDiv = function(target, keyword) {
+    $(target).html('');
+    $(target).attr('contenteditable', true);
+    this.msgData.delMsgByKeyword(keyword);
+}
 
 //--- other ---------------------------------
 
@@ -118,6 +174,23 @@ function loadAutoReply() {
     });
 
 }
+
+//--- 事件响应 -------------------------------
+$('.glyphicon-pencil').click(function() {
+    if (!$(this).hasClass('colorBlack'))
+    {
+        $(this).addClass('colorBlack');
+        switch ($(this).parent().attr('id'))
+        {
+            case 'editTextWelcome':
+                msgCtrl.clearDiv('#welcomeMsgContent', 'mp_welcome_autoreply_message');
+                break;
+            case 'editTextDefault':
+                msgCtrl.clearDiv('#defaultMsgContent', 'mp_default_autoreply_message');
+                break;
+        }
+    }
+});
 
 //添加格式化字符串函数支持
 if (!String.format) {

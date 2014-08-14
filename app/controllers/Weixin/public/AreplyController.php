@@ -1,4 +1,6 @@
 <?php
+require_once("simple_html_dom.php");
+
 class AtrplyController extends BaseController
 {
     private $reply;
@@ -41,5 +43,30 @@ $org_uid=1;
         $re = $this->reply->delete($reply_id);
 
         return $re;
+    }
+
+    //抓取微信官方素材库图文消息
+    public function getSucai(){
+        //输入地址
+        $url = urldecode(Input::get('url'));
+        //判断http://有没有加，没有就补上
+        if (strpos($url, 'http://') !== 0)
+            $url = 'http://' . $url;
+        //下载html文件
+        $rawHtml = file_get_html($url);
+        //提取标题
+        $title = $rawHtml->find('title')[0]->innertext;
+        //从文本中提取摘要
+        $summary = $rawHtml->find('div[id=page-content]')[0]->innertext;
+        $summary = str_replace(' ', '', strip_tags($summary));
+        $summary = mb_substr($summary, 0, 50) . "...";
+        //提取图片，有的情况下src属性会找不到，所以用data-src代替。。如果两个都没有，就没办法了。。
+        $img = $rawHtml->find('img', 0)->src;
+        if (!$img && isset($rawHtml->find('img', 0)->attr["data-src"]))
+            $img = $rawHtml->find('img', 0)->attr["data-src"];
+        //构建json用的数组
+        $sucai = array('tittle'=>$title, 'summary'=>$summary, 'img'=>$img);
+        //return "tittle: " . $title . "<br> summary: " . $summary . "<br> <img src=\"" . $img . "\">";
+        return json_encode($sucai);
     }
 }

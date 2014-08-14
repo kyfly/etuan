@@ -48,33 +48,33 @@
         <div class="msg_tab">
             <ul class="tab_navs list-unstyled">
                 <li class="tab_nav">
-                    <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                   class="glyphicon glyphicon-pencil" style="color: #373636;"></span></a>
+                    <a id="editTextWelcome">&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
+                                   class="glyphicon glyphicon-pencil colorBlack"></span></a>
                 </li>
                 <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addreg1">&nbsp;<span data-toggle="tooltip"
-                                                                                       data-placement="bottom"
-                                                                                       title="报名"
-                                                                                       class="glyphicon glyphicon-user"></span></a>
+                    <a>&nbsp;<span data-toggle="tooltip"
+                                   data-placement="bottom"
+                                   title="报名"
+                                   class="glyphicon glyphicon-user"></span></a>
                 </li>
                 <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addimgtxt1">&nbsp;<span data-toggle="tooltip"
-                                                                                          data-placement="bottom"
-                                                                                          title="图文"
-                                                                                          class="glyphicon glyphicon-list-alt"></span></a>
+                    <a>&nbsp;<span data-toggle="tooltip"
+                                   data-placement="bottom"
+                                   title="图文"
+                                   class="glyphicon glyphicon-list-alt"></span></a>
                 </li>
             </ul>
 
 
             <!-- addreg1 -->
-            <div class="modal fade" id="addreg1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            <div class="modal fade" id="addReg" tabindex="-1" role="dialog" aria-labelledby="addRegLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span
                                     aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">选择报名</h4>
+                            <h4 class="modal-title" id="addRegLabel">选择报名</h4>
                         </div>
                         <div class="modal-body">
                             <form class="target extralist">
@@ -104,14 +104,14 @@
             </div>
 
             <!-- addimgtxt1 -->
-            <div class="modal fade" id="addimgtxt1" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews3"
+            <div class="modal fade" id="addNews" tabindex="-1" role="dialog" aria-labelledby="addNewsLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span
                                     aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectNews3">选择图文</h4>
+                            <h4 class="modal-title" id="addNewsLabel">选择图文</h4>
                         </div>
                         <div class="modal-body">
                             ...
@@ -133,7 +133,7 @@
 
                         </div>
                         <div class="editor_toolbar">
-                            <p class="editor_tip js_editorTip">还可以输入<em>527</em>&nbsp;字</p>
+                            <p class="editor_tip js_editorTip">字数不能超过600字</p>
                         </div>
                     </div>
                 </div>
@@ -149,81 +149,24 @@
         <div class="msg_tab">
             <ul class="tab_navs list-unstyled">
                 <li class="tab_nav">
-                    <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                   class="glyphicon glyphicon-pencil" style="color: #373636;"></span></a>
+                    <a id="editTextDefault">&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
+                                   class="glyphicon glyphicon-pencil colorBlack"></span></a>
                 </li>
                 <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addreg2">&nbsp;<span data-toggle="tooltip"
-                                                                                       data-placement="bottom"
-                                                                                       title="报名"
-                                                                                       class="glyphicon glyphicon-user"></span></a>
+                    <a id="editRegDefault">&nbsp;<span
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="报名"
+                            class="glyphicon glyphicon-user"></span></a>
                 </li>
                 <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addimgtxt2">&nbsp;<span data-toggle="tooltip"
-                                                                                          data-placement="bottom"
-                                                                                          title="图文"
-                                                                                          class="glyphicon glyphicon-list-alt"></span></a>
+                    <a id="editNewsDefault">&nbsp;<span
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="图文"
+                            class="glyphicon glyphicon-list-alt"></span></a>
                 </li>
             </ul>
-
-            <!-- addreg2 -->
-            <div class="modal fade" id="addreg2" tabindex="-1" role="dialog" aria-labelledby="labelSelectReg2"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectReg2">选择报名</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="target extralist">
-                                <div class="form-group">
-                                    <h4>报名1</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名2</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名3</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名4</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名5</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- addimgtxt2 -->
-            <div class="modal fade" id="addimgtxt2" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectNews">选择图文</h4>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
             <div class="tab_panel">
                 <div class="tab_content" style="display: block;">
@@ -232,7 +175,7 @@
                              style="overflow-y: auto; overflow-x: hidden;">
                         </div>
                         <div class="editor_toolbar">
-                            <p class="editor_tip js_editorTip">还可以输入<em>600</em>&nbsp;字</p>
+                            <p class="editor_tip js_editorTip">字数不能超过600字</p>
                         </div>
                     </div>
                 </div>
@@ -276,17 +219,18 @@
                                 <div class="msg_tab">
                                     <ul class="tab_navs list-unstyled">
                                         <li class="tab_nav">
-                                            <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                                           class="glyphicon glyphicon-pencil"
-                                                           style="color: #373636;"></span></a>
+                                            <a id="editTextRule">&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
+                                                           class="glyphicon glyphicon-pencil colorBlack"></span></a>
                                         </li>
                                         <li class="tab_nav">
-                                            <a href="#" data-toggle="modal" data-target="#addreg3">&nbsp;<span
+                                            <a id="editRegRule">
+                                                &nbsp;<span
                                                     data-toggle="tooltip" data-placement="bottom" title="报名"
                                                     class="glyphicon glyphicon-user"></span></a>
                                         </li>
                                         <li class="tab_nav">
-                                            <a href="#" data-toggle="modal" data-target="#addimgtxt3">&nbsp;<span
+                                            <a id="editNewsRule">
+                                                &nbsp;<span
                                                     data-toggle="tooltip" data-placement="bottom" title="图文"
                                                     class="glyphicon glyphicon-list-alt"></span></a>
                                         </li>
@@ -300,7 +244,7 @@
 
                                                 </div>
                                                 <div class="editor_toolbar">
-                                                    <p class="editor_tip js_editorTip">还可以输入<em>600</em>&nbsp;字</p>
+                                                    <p class="editor_tip js_editorTip">字数不能超过600字</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -345,60 +289,7 @@
 
 </div>
 
-<!-- addreg3 -->
-<div class="modal fade" id="addreg3" tabindex="-1" role="dialog" aria-labelledby="LabelSelectReg" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="LabelSelectReg">选择报名</h4>
-            </div>
-            <div class="modal-body">
-                <form class="target extralist">
-                    <div class="form-group">
-                        <h4>报名1</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名2</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名3</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名4</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名5</h4>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- addimgtxt3 -->
-<div class="modal fade" id="addimgtxt3" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews2" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="labelSelectNews2">选择图文</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 </div>
 </div>
