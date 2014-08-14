@@ -756,3 +756,7 @@ min-height: 188px;
 .colorWhite {
     color: #ffffff!important;
 }
+
+.colorGray {
+    color: gray;
+}

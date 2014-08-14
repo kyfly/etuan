@@ -6,21 +6,8 @@ function MessageModel(data) {
     this.mpId = data[0].mp_id;
 }
 
-MessageModel.prototype.getWelcomeMsg = function () {
-    return this.messageDB({keyword: {has: "mp_welcome_autoreply_message"} }).first();
-};
-
-MessageModel.prototype.getDefaultMsg = function () {
-    return this.messageDB({keyword: {has: "mp_default_autoreply_message"} }).first();
-};
-
 MessageModel.prototype.getAllKeywordMsg = function () {
-    return this.messageDB({keyword: {"!has": "mp_welcome_autoreply_message"}},
-        {keyword: {"!has": "mp_default_autoreply_message"}}).get();
-};
-
-MessageModel.prototype.delMsgByKeyword = function(keyword) {
-    this.messageDB({keyword: {has: keyword}}).remove();
+    return this.messageDB().get();
 };
 
 //--- views --------------------------------
@@ -32,19 +19,7 @@ function MessageView(msg) {
 
 //获取获取图文消息的DIV
 MessageView.prototype.getNewsDiv = function () {
-   /* var newsTpl = '<div class="col-md-2">' +
-        '<img style="margin-top: 9px" src="{0}" width="80px" height="80px">' +
-        '</div> ' +
-        '<div class="col-md-8">' +
-        '<h5><a href="{1}">[图文消息] {2}</a></h5>' +
-        '<p>{3}</p>' +
-        '</div>';
-    var newsMsg = this.message;
-    var msgHtml = String.format(newsTpl, newsMsg.pic_url, newsMsg.url, newsMsg.title, newsMsg.description);
-    return msgHtml;
-   */
-    if (this.message.content.length == 1)
-    {
+    if (this.message.content.length == 1) {
         var createTime = new Date(this.message.CreateTime);
         with (createTime) {
             createTime = getFullYear() + '-' + (getMonth() + 1) + '-' + getDay();
@@ -59,31 +34,20 @@ MessageView.prototype.getNewsDiv = function () {
             this.message.content[0].pic_url, this.message.content[0].description);
         return msgHtml;
     }
-    else
-    {
+    else {
         var msgHtml = String.format(
             '<div class="examplebox2 col-md-6 margintop">' +
-            '<div class="titlecover" style="padding: 15px; height: auto"><div class="greybox2" style="height: auto">' +
-            '<img height="100%" width="100%" src="{0}">' +
-            '<div class="titleline"><a href="{1}" class="colorWhite" target="_blank">{2}</a></div>'+
-            '</div></div>',
-           /* <div class="col-md-6 margintop imgtxtlist"><div class="thumbnail">' +
-            '<img src="{0}" height="132px" width="292px">' +
-            '<a href="{1}"><h4 style="margin: 8px!important;"> {2} </h4></a>' +
-            '</div>',*/
+                '<div class="titlecover" style="padding: 15px; height: auto"><div class="greybox2" style="height: auto">' +
+                '<img height="100%" width="100%" src="{0}">' +
+                '<div class="titleline"><a href="{1}" class="colorWhite" target="_blank">{2}</a></div>' +
+                '</div></div>',
             this.message.content[0].pic_url, this.message.content[0].url, this.message.content[0].title);
-        for (var i = 1; i < this.message.content.length; i++)
-        {
+        for (var i = 1; i < this.message.content.length; i++) {
             msgHtml += String.format(
                 '<div class="extrabox">' +
-                '<div class="newsSubtitle col-sm-8"><a href="{0}" target="_blank">{1}</a></div>'+
-                '<div class="col-sm-4"><img height="78px" width="78px" src="{2}"> </div>' +
-                '</div>',
-            /*'<div class="thumbnail">' +"
-                '<div class="row">' +
-                '<div class="col-sm-8"><a href="{0}"><h4>{1}</h4></div></a>' +
-                '<div class="col-sm-4"><img height="78px" width="78px" src="{2}"> </div>' +
-                '</div></div>',*/
+                    '<div class="newsSubtitle col-sm-8"><a href="{0}" target="_blank">{1}</a></div>' +
+                    '<div class="col-sm-4"><img height="78px" width="78px" src="{2}"> </div>' +
+                    '</div>',
                 this.message.content[i].url, this.message.content[i].title, this.message.content[i].pic_url
             )
         }
@@ -98,23 +62,11 @@ MessageView.prototype.getNewsDiv = function () {
 function MessageCtrl(messageData) {
     this.msgData = messageData;
 
-    this.loadMsg(this.msgData.getWelcomeMsg(), $("#welcomeMsgContent"));
-    this.loadMsg(this.msgData.getDefaultMsg(), $("#defaultMsgContent"));
     this.LoadKeywordRule();
 }
 
-//载入消息到欢迎消息或者默认消息框
-MessageCtrl.prototype.loadMsg = function (msg, targetDiv) {
-    if (!msg)  return;
-    if (msg.type == "text") {
-        targetDiv.text(msg.content);
-        targetDiv.attr('contenteditable', true);
-    }
-    else {
-        var view = new MessageView(msg);
-        targetDiv.html(view.getNewsDiv());
-        targetDiv.attr('contenteditable', false);
-    }
+MessageCtrl.prototype.isReserve = function (keyword) {
+    return keyword == 'mp_welcome_autoreply_message' || keyword == 'mp_default_autoreply_message';
 };
 
 //载入自定义关键字消息，采用Add循环添加
@@ -129,14 +81,23 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
     var ruleDivTpl = $('#ruleDivTpl');
     //拷贝模板，并修改id
     var ruleDiv = ruleDivTpl.clone().attr('id', "rule" + msg.msg_id);
-    //格式化关键字，用逗号隔开
-    var keywordStr = msg.keyword[0];
-    if (msg.keyword.length > 1)
-        for (var i = 1; i < msg.keyword.length; i++)
-            keywordStr += ", " + msg.keyword[i];
+    //格式化关键字，用空格隔开
+    var keywordStr = '';
+    for (var i = 0; i < msg.keyword.length; i++)
+        if (msg.keyword[i] == 'mp_welcome_autoreply_message')
+            var hasWelcome = true;
+        else if (msg.keyword[i] == 'mp_default_autoreply_message')
+            var hasDefault = true;
+        else
+            keywordStr += msg.keyword[i] + '&nbsp&nbsp';
+
+    if (hasWelcome)
+        keywordStr += '&nbsp&nbsp<code>★被添加自动回复</code>';
+    if (hasDefault)
+        keywordStr += '&nbsp&nbsp<code>★默认消息自动回复</code>';
     //加载关键字并修改id
     var ruleKey = ruleDiv.find('#ruleKeyTpl');
-    ruleKey.text(keywordStr);
+    ruleKey.html(keywordStr);
     ruleKey.attr('id', "ruleKey" + msg.msg_id);
     //加载自动回复内容并修改id
     var ruleContent = ruleDiv.find('#ruleContentTpl');
@@ -152,12 +113,6 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
     //模板有隐藏样式，需要改为显示
     ruleDiv.show();
 };
-
-MessageCtrl.prototype.clearDiv = function(target, keyword) {
-    $(target).html('');
-    $(target).attr('contenteditable', true);
-    this.msgData.delMsgByKeyword(keyword);
-}
 
 //--- other ---------------------------------
 
@@ -176,20 +131,55 @@ function loadAutoReply() {
 }
 
 //--- 事件响应 -------------------------------
-$('.glyphicon-pencil').click(function() {
-    if (!$(this).hasClass('colorBlack'))
-    {
+$('#addText').click(function () {
+    if (!$(this).hasClass('colorBlack')) {
         $(this).addClass('colorBlack');
-        switch ($(this).parent().attr('id'))
-        {
-            case 'editTextWelcome':
-                msgCtrl.clearDiv('#welcomeMsgContent', 'mp_welcome_autoreply_message');
-                break;
-            case 'editTextDefault':
-                msgCtrl.clearDiv('#defaultMsgContent', 'mp_default_autoreply_message');
-                break;
-        }
+        $('#addReg').removeClass('colorBlack');
+        $('#addNews').removeClass('colorBlack');
+        var editor = $('#msgEditor');
+        editor.html('请在此处输入文字');
+        editor.attr('contenteditable', 'true');
     }
+});
+
+$('#addReg').click(function () {
+    if (!$(this).hasClass('colorBlack')) {
+        $(this).addClass('colorBlack');
+        $('#addText').removeClass('colorBlack');
+        $('#addNews').removeClass('colorBlack');
+        var editor = $('#msgEditor');
+        editor.html('报名列表正在加载中...');
+        editor.attr('contenteditable', 'false');
+        $.get('reglist.json', function (data, status) {
+            if (status == 'success') {
+                data = eval(data);
+                var regHtml = '<div class="form-group">';
+                for (var i in data) {
+                    regHtml += String.format('<label class="control-label">' +
+                        '<input type="radio" id="reg{0}" value="reg{0}" name="regRadio"' +
+                        (i == 0 ? 'checked="true"' : '') +
+                        '>{1}</label><br>',
+                        data[i].reg_id, data[i].name);
+                }
+                regHtml += '</div>';
+                $('#msgEditor').html(regHtml);
+            }
+        })
+    }
+});
+
+$('#addNews').click(function() {
+    if (!$(this).hasClass('colorBlack')) {
+        $(this).addClass('colorBlack');
+        $('#addText').removeClass('colorBlack');
+        $('#addReg').removeClass('colorBlack');
+        var editor = $('#msgEditor');
+        editor.attr('contenteditable', 'false');
+        var newsHtml = '<label class="control-label" for="news1">图文素材网址：</label>' +
+            '<input class="form-control" id="news1" type="text" style="width:330px">';
+        editor.html(newsHtml);
+    }
+
 });
 
 //添加格式化字符串函数支持
