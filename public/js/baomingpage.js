@@ -1,4 +1,4 @@
-﻿//打开html文档，读到js部分
+//打开html文档，读到js部分
 $(document).ready(function(){
 	//--此模块尚未进行单元测试！-------------------------------------------接收json
 	//ajax发出请求，请求服务器端发送json文件
@@ -385,23 +385,19 @@ $(document).ready(function(){
 				alert(activityPageJson.questions[i-1].label+"，这一项你的输入有误哦！")
 				questionItemResult.answer = "这里有错->"+inputString;
 			};
-			participatorInfoJson.result += $.toJSON(questionItemResult);
+			participatorInfoJson.result[i-1] = questionItemResult;
 		};
 		//如果在这里发现很多斜杠请不要惊奇，因为在字符串里再放双引号就要用\"，所以内部result包含的对象就全部是\"了
-		var sendJson ="{activityId:"+activityPageJson.activityId.toString()+",participatorInfo:"+$.toJSON(participatorInfoJson)+"}";
+		var prepareJson = {activityId:activityPageJson.activityId,participatorInfo:participatorInfoJson,};
+        var sendJson = JSON.stringify(prepareJson);
 		//dev阶段采用alert形式表示数据
 		alert(sendJson);
-		//利用Ajax把Json用POST上去
-		/*
-		$.ajax ({
-			type:"POST";
-			url:"registration/participateinactivity?";
-			data:sendJson;
-			//成功提交的回调函数
-			success:
-			//失败的
-			error:
-		});
-		*/
+        //利用Ajax把Json用POST上去
+        $.ajax({
+             type:"POST",
+             url:"registration/participateinactivity",
+             data:sendJson,
+        });
+
 	});
 });

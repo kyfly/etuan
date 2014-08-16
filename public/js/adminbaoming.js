@@ -51,16 +51,16 @@ $(document).ready(function(){
 		};
 		*/
 		//打包好发送格式的Json
-		var sendJson = "{activityInfo:"+$.toJSON(createActivityJson)+"}";
+		var prepareJson = {activityInfo:createActivityJson,};
+        var sendJson = JSON.stringify(prepareJson);
 		//dev阶段采用alert形式表示数据
 		alert(sendJson);
-		/*
 		//利用Ajax把Json用POST上去
 		$.ajax({
-			type:"POST";
-			url:"registration/createactivity";
-			data:sendJson;
+			type:"POST",
+			url:"registration/createactivity",
+			data:sendJson,
 		});
-		*/
+
 	});
 });
