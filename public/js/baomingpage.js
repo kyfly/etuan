@@ -387,7 +387,6 @@ $(document).ready(function(){
 			};
 			participatorInfoJson.result[i-1] = questionItemResult;
 		};
-		//如果在这里发现很多斜杠请不要惊奇，因为在字符串里再放双引号就要用\"，所以内部result包含的对象就全部是\"了
 		var prepareJson = {activityId:activityPageJson.activityId,participatorInfo:participatorInfoJson,};
         var sendJson = JSON.stringify(prepareJson);
 		//dev阶段采用alert形式表示数据
