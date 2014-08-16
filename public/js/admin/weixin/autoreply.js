@@ -10,6 +10,30 @@ MessageModel.prototype.getAllKeywordMsg = function () {
     return this.messageDB().get();
 };
 
+MessageModel.prototype.getMessageById = function(id) {
+    return this.messageDB({mp_reply_id: id}).get();
+};
+
+MessageModel.prototype.insertMessage = function(msg) {
+    //将其他记录中的默认回复关键字删除
+    var keywordToFind = "mp_welcome_autoreply_message";
+    for (var i = 0; i < 2; i++ )
+    {
+        if (msg.keyword.indexOf(keywordToFind) > -1)
+        {
+            var KeywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword');
+            keywordTmp.removeByVal(keywordToFind);
+            this.messageDB({keyword: {has: keywordToFind}}).update('keyword', KeywordTmp);
+        }
+        keywordToFind = "mp_default_autoreply_message";
+    }
+    return this.messageDB.insert(msg);
+};
+
+MessageModel.prototype.removeMsgById = function(id) {
+    this.messageDB({mp_reply_id: id}).remove();
+};
+
 //--- views --------------------------------
 
 //获取界面相关的html代码
@@ -20,7 +44,10 @@ function MessageView(msg) {
 //获取获取图文消息的DIV
 MessageView.prototype.getNewsDiv = function () {
     if (this.message.content.length == 1) {
-        var createTime = new Date(this.message.CreateTime);
+        if (this.message.CreateTime)
+            var createTime = new Date(this.message.CreateTime);
+        else
+            var createTime = new Date();
         with (createTime) {
             createTime = getFullYear() + '-' + (getMonth() + 1) + '-' + getDay();
         }
@@ -72,15 +99,16 @@ MessageCtrl.prototype.isReserve = function (keyword) {
 //载入自定义关键字消息，采用Add循环添加
 MessageCtrl.prototype.LoadKeywordRule = function () {
     var msg = this.msgData.getAllKeywordMsg();
-    for (var key in msg)
-        this.AddKeywordRule(msg[key]);
+    for (var i = 0; i < msg.length; i++)
+        this.AddKeywordRule(msg[i]);
 };
 
 //添加关键字规则div
 MessageCtrl.prototype.AddKeywordRule = function (msg) {
     var ruleDivTpl = $('#ruleDivTpl');
     //拷贝模板，并修改id
-    var ruleDiv = ruleDivTpl.clone().attr('id', "rule" + msg.msg_id);
+    var ruleDivId = "rule" + msg.mp_reply_id;
+    var ruleDiv = ruleDivTpl.clone().attr('id', ruleDivId);
     //格式化关键字，用空格隔开
     var keywordStr = '';
     for (var i = 0; i < msg.keyword.length; i++)
@@ -92,13 +120,19 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
             keywordStr += msg.keyword[i] + '&nbsp&nbsp';
 
     if (hasWelcome)
-        keywordStr += '&nbsp&nbsp<code>★被添加自动回复</code>';
+    {
+        $('#welcomeMsgTag').remove();
+        keywordStr += '&nbsp&nbsp<code id="welcomeMsgTag">★被添加自动回复</code>';
+    }
     if (hasDefault)
-        keywordStr += '&nbsp&nbsp<code>★默认消息自动回复</code>';
+    {
+        $('#defaultMsgTag').remove();
+        keywordStr += '&nbsp&nbsp<code id="defaultMsgTag">★默认消息自动回复</code>';
+    }
     //加载关键字并修改id
     var ruleKey = ruleDiv.find('#ruleKeyTpl');
     ruleKey.html(keywordStr);
-    ruleKey.attr('id', "ruleKey" + msg.msg_id);
+    ruleKey.attr('id', "ruleKey" + msg.mp_reply_id);
     //加载自动回复内容并修改id
     var ruleContent = ruleDiv.find('#ruleContentTpl');
     if (msg.type == "text")
@@ -107,13 +141,83 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
         var view = new MessageView(msg);
         ruleContent.html(view.getNewsDiv())
     }
-    ruleContent.attr('id', 'ruleContent' + msg.msg_id);
+    ruleContent.attr('id', 'ruleContent' + msg.mp_reply_id);
+    //若该DIV已存在，则删除后再在同一位置添加
+    var ruleDivAlready = $('#' + ruleDivId);
+    if (ruleDivAlready.length)
+    {
+        nextDiv = ruleDivAlready.next();
+        ruleDivAlready.remove();
+        nextDiv.before(ruleDiv);
+    }
+    else
     //在隐藏的模板之前插入内容，不能在之后插入，否则会缺少margin-top:20px样式
-    ruleDivTpl.before(ruleDiv);
+        ruleDivTpl.before(ruleDiv);
     //模板有隐藏样式，需要改为显示
     ruleDiv.show();
 };
 
+//初始化添加/修改对话框
+MessageCtrl.prototype.initModal = function(replyId) {
+    //根据replyId获取消息
+    var msg = this.msgData.getMessageById(replyId)[0];
+    //添加关键字到TextArea中
+    var keywordStr = '';
+    for (var i = 0; i < msg.keyword.length; i++)
+    {
+        if (msg.keyword[i] != "mp_welcome_autoreply_message" && msg.keyword[i] != "mp_default_autoreply_message")
+            keywordStr += msg.keyword[i] + "\n";
+    }
+    keywordStr = keywordStr.substring(0, keywordStr.length-1);
+    $('#txtKeywords').val(keywordStr);
+    //根据消息类型设定消息内容编辑框
+    switch (msg.type)
+    {
+        case 'text':
+            $('#addText').click();
+            $('#msgEditor').text(msg.content);
+            break;
+        case 'news':
+            switch (msg.news_from)
+            {
+                case 'baoming':
+                    $('#addReg').click();
+                    $("input[name='regRadio']").attr('checked',msg.mp_reply_id);
+                    break;
+                case 'url':
+                    $("#addNews").click();
+                    var urlStr = msg.content[0].url;
+                    for (var i = 1; i < msg.content.length; i++)
+                        urlStr += "\n" + msg.content[i].url;
+                    $('#newsText').val(urlStr);
+                    break;
+            }
+            break;
+    }
+    if (msg.keyword.indexOf("mp_welcome_autoreply_message") > -1)
+    {
+        $('#setAsWelcome').prop('checked', true);
+    }
+    else
+    {
+        $('#setAsWelcome').prop('checked', false);
+    }
+    if (msg.keyword.indexOf("mp_default_autoreply_message") > -1)
+    {
+        $('#setAsDefault').prop('checked', true);
+    }
+    else
+    {
+        $('#setAsDefault').prop('checked', false);
+    }
+};
+
+MessageCtrl.prototype.clearModal = function() {
+    $('#txtKeywords').val('');
+    $('#addText').click();
+    $('#setAsWelcome').prop('checked', false);
+    $('#setAsDefault').prop('checked', false);
+};
 //--- other ---------------------------------
 
 //加载自动回复数据
@@ -154,9 +258,9 @@ $('#addReg').click(function () {
             if (status == 'success') {
                 data = eval(data);
                 var regHtml = '<div class="form-group">';
-                for (var i in data) {
+                for (var i = 0; i < data.length; i++) {
                     regHtml += String.format('<label class="control-label">' +
-                        '<input type="radio" id="reg{0}" value="reg{0}" name="regRadio"' +
+                        '<input type="radio" id="reg{0}" value="{0}" name="regRadio"' +
                         (i == 0 ? 'checked="true"' : '') +
                         '>{1}</label><br>',
                         data[i].reg_id, data[i].name);
@@ -168,7 +272,7 @@ $('#addReg').click(function () {
     }
 });
 
-$('#addNews').click(function() {
+$('#addNews').click(function () {
     if (!$(this).hasClass('colorBlack')) {
         $(this).addClass('colorBlack');
         $('#addText').removeClass('colorBlack');
@@ -176,9 +280,112 @@ $('#addNews').click(function() {
         var editor = $('#msgEditor');
         editor.attr('contenteditable', 'false');
         var newsHtml = '<label class="control-label" for="news1">图文素材网址：</label>' +
-            '<input class="form-control" id="news1" type="text" style="width:330px">';
+            '<textarea class="form-control" rows="4" id="newsText"></textarea>' +
+            '<p class="help-block">输入回车可添加多条图文网址</p>' +
+            '<a>如何获得图文网址 <span class="glyphicon glyphicon-question-sign"></span></a>';
         editor.html(newsHtml);
     }
+});
+
+$('#btnSave').click(function () {
+    var message = {};
+    message.mp_reply_id = mpReplyId;
+    message.mp_id = msgData.mpId;
+    var keywordStr = $('#txtKeywords').val();
+    if (keywordStr == '') {
+        alert("对不起，保存失败！关键字不能为空。");
+        return;
+    }
+    //去除多个连续的回车符
+    while (keywordStr != keywordStr.replace("\n\n", "\n")) {
+        keywordStr = keywordStr.replace("\n\n", "\n");
+    }
+    message.keyword = keywordStr.split("\n");
+    //删除最后一个回车导致的空项目
+    if (message.keyword[message.keyword.length - 1] == '')
+        message.keyword.splice(message.keyword.length - 1, 1);
+    //判断是否大于30字符
+    for (var i = 0; i < message.keyword.length; i++)
+        if (message.keyword[i].length > 30) {
+            alert("对不起，保存失败！\n关键词“" + message.keyword[i] + "”大于30个字符");
+            return;
+        }
+    if ($('#addText').hasClass('colorBlack')) {
+        message.content = $('#msgEditor').text();
+        message.type = "text";
+        if (message.content = "") {
+            alert("对不起，保存失败！\n文字回复内容不能为空。");
+            return;
+        }
+        if (message.content.length > 600) {
+            alert("对不起，保存失败！\n文字回复不能超过600字。");
+            return;
+        }
+        console.log(message.keyword);
+    }
+    else if ($('#addReg').hasClass('colorBlack')) {
+        message.type = "news";
+        message.news_from = "baoming";
+        message.act_id = Number($("input[name='regRadio']:checked").val());
+    }
+    else {
+        message.type = "news";
+        message.news_from = "url";
+        $(this).attr("disabled", "disabled");
+        //采用同步方式，将url传递给服务器，抓取微信素材库内容
+        $.ajax({
+            type: 'POST',
+            url: '/weixin/reply/sucai',
+            async: false,
+            data: 'url=' + encodeURIComponent($('#newsText').val()),
+            success: function (data) {
+                message.content = data;
+            }
+        });
+    }
+    //添加欢迎消息关键字
+    if ($('#setAsWelcome').is(":checked"))
+    {
+        message.keyword.push('mp_welcome_autoreply_message');
+    }
+    if ($('#setAsDefault').is(":checked"))
+    {
+        message.keyword.push('mp_default_autoreply_message');
+    }
+    $(this).attr("disabled", "disabled");
+    //向服务器发送数据，根据message.mp_reply_id是否定义判断目标接口
+    /*$.post(!message.mp_reply_id ? '/weixin/reply/create' : '/weixin/reply/update',
+        JSON.stringify(message),
+        function (data, status){
+            if (status == 'success')
+            {
+                if (data.status == 'success')
+                {
+                    if (!message.content)
+                        message.content = data.content;
+                    if (!message.mp_reply_id)
+                        message.mp_reply_id = data.mp_reply_id;
+                    else*/
+                        msgData.removeMsgById(message.mp_reply_id);
+                    msgData.insertMessage(message);
+                    $('#addrulebox').modal('hide');
+                /*}
+                else
+                {
+                    alert("对不起，未创建消息!\n错误信息" + data.message);
+                }
+            }
+            else
+            {
+                alert('对不起，未创建消息，与服务器通信失败！请重试');
+            }*/
+            $('#btnSave').removeAttr("disabled");
+    /*    }
+    )*/
+});
+
+$('#btnAddRule').click(function () {
+    msgCtrl.clearModal();
 
 });
 
@@ -192,7 +399,29 @@ if (!String.format) {
     };
 }
 
+Array.indexOf = function(val) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == val) return i;
+    }
+    return -1;
+};
+
+Array.removeByVal = function(val) {
+    var index = this.indexOf(val);
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+};
+
+
 $(document).ready(function () {
-    $('#ruleDivTpl').hide();
     loadAutoReply();
+    $('#main').on('click', '.btnEditReply', function() {
+        mpReplyId = $(this).parents('.bs-callout').attr('id').substring(4);
+        mpReplyId = Number(mpReplyId);
+        msgCtrl.initModal(mpReplyId);
+        $('#addrulebox').modal('show');
+    });
 });
+
+var mpReplyId;

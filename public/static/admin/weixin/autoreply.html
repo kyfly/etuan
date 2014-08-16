@@ -38,7 +38,7 @@
         <hr>
         <div>
             <button type="button" class="btn btn-primary btn-lg" style="letter-spacing: 2px"
-                    data-toggle="modal" data-target="#addrulebox">+添加规则
+                    data-toggle="modal" data-target="#addrulebox" id="btnAddRule">+添加规则
             </button>
             &nbsp;&nbsp;
             <button type="button" class="btn btn-warning btn-lg" >一键添加报名表</button>
@@ -56,10 +56,10 @@
                     <div class="modal-body">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label class="control-label col-sm-3" for="keywords">关键词</label>
+                                <label class="control-label col-sm-3" for="txtKeywords">关键词</label>
 
                                 <div class="col-sm-8">
-                                    <textarea type="text" class="form-control" id="keywords"
+                                    <textarea type="text" class="form-control" id="txtKeywords"
                                               placeholder="请输入关键词"></textarea>
 
                                     <p class="help-block">输入回车可添加多个关键词，每个关键词少于30个字符。</p>
@@ -112,17 +112,17 @@
                                     <input type="checkbox" id="setAsWelcome">
                                     <label class="control-label" for="setAsWelcome">被添加自动回复</label>
 
-                                    <p>用户关注微信公众号后，将收到该消息</p>
-                                    <input type="checkbox" id="setAsDefualt">
-                                    <label class="control-label" for="setAsDefualt">默认消息自动回复</label>
+                                    <p class="help-block">用户关注微信公众号后，将收到该消息</p>
+                                    <input type="checkbox" id="setAsDefault">
+                                    <label class="control-label" for="setAsDefault">默认消息自动回复</label>
 
-                                    <p>用户发送已定义的关键词以外的内容，将收到该消息</p>
+                                    <p class="help-block">用户发送已定义的关键词以外的内容，将收到该消息</p>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">保存</button>
+                        <button id="btnSave" type="button" class="btn btn-primary">保存</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
@@ -136,10 +136,11 @@
                         <h5>关键词</h5>
                     </div>
                     <div class="col-md-7">
-                        <h5 id="ruleKeyTpl">aaaaaa</h5>
+                        <h5 id="ruleKeyTpl"></h5>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a class="colorGray"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+                        <a class="colorGray btnEditReply"><span class="glyphicon glyphicon-pencil"></span>
+                        </a>&nbsp;&nbsp;
                         <a class="colorGray"><span class="glyphicon glyphicon-remove"></span></a>
                     </div>
                 </div>
@@ -148,7 +149,7 @@
                 <div class="col-md-12">
                     <div class="col-md-2 text-right"><h5>回复</h5></div>
                     <div class="col-md-10" id="ruleContentTpl">
-                        <h5>你好</h5>
+                        <h5></h5>
                     </div>
                 </div>
             </div>

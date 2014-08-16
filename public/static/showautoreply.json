@@ -1,6 +1,6 @@
 [
     {
-        "mp_id": "1",
+        "mp_id": 1,
         "message":
             [
                 {
@@ -22,7 +22,7 @@
                     "mp_reply_id": 4,
                     "msg_id": 22,
                     "CreateTime": 1406811234567,
-                    "news_from": "sucai",
+                    "news_from": "url",
                     "act_id": null,
                     "keyword": ["kwd"],
                     "content":
@@ -40,7 +40,7 @@
                     "mp_reply_id": 5,
                     "msg_id": 22,
                     "CreateTime": 1406811234567,
-                    "news_from": "sucai",
+                    "news_from": "url",
                     "act_id": null,
                     "keyword": ["mp_default_autoreply_message"],
                     "content":
