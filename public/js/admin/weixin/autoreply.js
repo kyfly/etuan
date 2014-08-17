@@ -21,9 +21,9 @@ MessageModel.prototype.insertMessage = function(msg) {
     {
         if (msg.keyword.indexOf(keywordToFind) > -1)
         {
-            var KeywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword');
+            var keywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword');
             keywordTmp.removeByVal(keywordToFind);
-            this.messageDB({keyword: {has: keywordToFind}}).update('keyword', KeywordTmp);
+            this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
         }
         keywordToFind = "mp_default_autoreply_message";
     }
@@ -118,7 +118,6 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
             var hasDefault = true;
         else
             keywordStr += msg.keyword[i] + '&nbsp&nbsp';
-
     if (hasWelcome)
     {
         $('#welcomeMsgTag').remove();
@@ -218,11 +217,19 @@ MessageCtrl.prototype.clearModal = function() {
     $('#setAsWelcome').prop('checked', false);
     $('#setAsDefault').prop('checked', false);
 };
+
+MessageCtrl.prototype.removeKeywordRule = function(id) {
+    $('#rule' + id).remove();
+    this.msgData.removeMsgById(id);
+    //TODO:增加对删除是否成功的判断
+    $.get('/weixin/reply/destory', {reply_id: id});
+};
+
 //--- other ---------------------------------
 
 //加载自动回复数据
 function loadAutoReply() {
-    var ajaxUrl = "/static/showautoreply.json";
+    var ajaxUrl = "/weixin/reply/show";
     $.getJSON(ajaxUrl, function (data, status) {
         if (status == "success") {
             msgData = new MessageModel(data);
@@ -254,6 +261,7 @@ $('#addReg').click(function () {
         var editor = $('#msgEditor');
         editor.html('报名列表正在加载中...');
         editor.attr('contenteditable', 'false');
+        //TODO:注意修改测试值
         $.get('reglist.json', function (data, status) {
             if (status == 'success') {
                 data = eval(data);
@@ -313,7 +321,7 @@ $('#btnSave').click(function () {
     if ($('#addText').hasClass('colorBlack')) {
         message.content = $('#msgEditor').text();
         message.type = "text";
-        if (message.content = "") {
+        if (message.content == "") {
             alert("对不起，保存失败！\n文字回复内容不能为空。");
             return;
         }
@@ -321,7 +329,6 @@ $('#btnSave').click(function () {
             alert("对不起，保存失败！\n文字回复不能超过600字。");
             return;
         }
-        console.log(message.keyword);
     }
     else if ($('#addReg').hasClass('colorBlack')) {
         message.type = "news";
@@ -354,7 +361,7 @@ $('#btnSave').click(function () {
     }
     $(this).attr("disabled", "disabled");
     //向服务器发送数据，根据message.mp_reply_id是否定义判断目标接口
-    /*$.post(!message.mp_reply_id ? '/weixin/reply/create' : '/weixin/reply/update',
+    $.post(!message.mp_reply_id ? '/weixin/reply/create' : '/weixin/reply/update',
         JSON.stringify(message),
         function (data, status){
             if (status == 'success')
@@ -365,11 +372,18 @@ $('#btnSave').click(function () {
                         message.content = data.content;
                     if (!message.mp_reply_id)
                         message.mp_reply_id = data.mp_reply_id;
-                    else*/
+                    else
                         msgData.removeMsgById(message.mp_reply_id);
                     msgData.insertMessage(message);
+                    msgCtrl.AddKeywordRule(message);
                     $('#addrulebox').modal('hide');
-                /*}
+                    $('#addSuccessAlert').fadeIn();
+                    fadeOutAlert = undefined;
+                    clearTimeout(fadeOutAlert);
+                    fadeOutAlert = setTimeout(function() {
+                            $('#addSuccessAlert').fadeOut();
+                        }, 5000);
+                }
                 else
                 {
                     alert("对不起，未创建消息!\n错误信息" + data.message);
@@ -378,15 +392,32 @@ $('#btnSave').click(function () {
             else
             {
                 alert('对不起，未创建消息，与服务器通信失败！请重试');
-            }*/
+            }
             $('#btnSave').removeAttr("disabled");
-    /*    }
-    )*/
+        }
+    )
 });
 
 $('#btnAddRule').click(function () {
     msgCtrl.clearModal();
 
+});
+
+$('#addrulebox').on('hidden.bs.modal', function () {
+    mpReplyId = undefined;
+});
+
+$('#btnConfirmDel').click(function () {
+    msgCtrl.removeKeywordRule(mpReplyId);
+    $('#delMsgModal').modal('hide');
+});
+
+$('#delMsgModal').on('hidden.bs.modal', function () {
+    mpReplyId = undefined;
+});
+
+$('#addSuccessAlertClose').click(function () {
+    $('#addSuccessAlert').fadeOut();
 });
 
 //添加格式化字符串函数支持
@@ -399,14 +430,14 @@ if (!String.format) {
     };
 }
 
-Array.indexOf = function(val) {
+Array.prototype.indexOf = function(val) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == val) return i;
     }
     return -1;
 };
 
-Array.removeByVal = function(val) {
+Array.prototype.removeByVal = function(val) {
     var index = this.indexOf(val);
     if (index > -1) {
         this.splice(index, 1);
@@ -415,12 +446,20 @@ Array.removeByVal = function(val) {
 
 
 $(document).ready(function () {
+    $('#addSuccessAlert').hide();
     loadAutoReply();
+    $('body').tooltip({
+        selector: '[rel=tooltip]'
+    });
+
     $('#main').on('click', '.btnEditReply', function() {
         mpReplyId = $(this).parents('.bs-callout').attr('id').substring(4);
         mpReplyId = Number(mpReplyId);
         msgCtrl.initModal(mpReplyId);
-        $('#addrulebox').modal('show');
+    });
+    $('#main').on('click', '.btnDelReply', function() {
+        mpReplyId = $(this).parents('.bs-callout').attr('id').substring(4);
+        mpReplyId = Number(mpReplyId);
     });
 });
 

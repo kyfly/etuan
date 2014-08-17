@@ -5,78 +5,48 @@
             [
                 {
                     "type": "text",
-                    "mp_reply_id": 2,
-                    "msg_id": 2,
-                    "content": "欢迎关注",
-                    "keyword": ["社团", "报名"]
-                },
-                {
-                    "type": "text",
                     "mp_reply_id": 3,
-                    "msg_id": 23,
                     "content": "关键字回复",
                     "keyword": ["时光", "mp_welcome_autoreply_message"]
                 },
                 {
                     "type": "news",
                     "mp_reply_id": 4,
-                    "msg_id": 22,
                     "CreateTime": 1406811234567,
-                    "news_from": "url",
-                    "act_id": null,
+                    "news_from": "baoming",
+                    "act_id": 3,
                     "keyword": ["kwd"],
                     "content":
-                    [
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/ticket/sgzs/pic/sgzs_wx_bg.jpg",
-                            "url": "http://www.baidu.com"
-                        }
-                    ]
+                        [
+                            {
+                                "title": "时光之书抢票",
+                                "description": "点击进入抢票页面",
+                                "pic_url": "http://i.kyfly.net/ticket/sgzs/pic/sgzs_wx_bg.jpg",
+                                "url": "http://www.baidu.com"
+                            }
+                        ]
                 },
                 {
                     "type": "news",
                     "mp_reply_id": 5,
-                    "msg_id": 22,
                     "CreateTime": 1406811234567,
                     "news_from": "url",
-                    "act_id": null,
                     "keyword": ["mp_default_autoreply_message"],
                     "content":
-                    [
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/ticket/sgzs/pic/sgzs_wx_bg.jpg",
-                            "url": "http://i.kyfly.net"
-                        },
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
-                            "url": "http://i.kyfly.net"
-                        },
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
-                            "url": "http://i.kyfly.net"
-                        },
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
-                            "url": "http://i.kyfly.net"
-                        },
-                        {
-                            "title": "时光之书抢票",
-                            "description": "点击进入抢票页面",
-                            "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
-                            "url": "http://i.kyfly.net"
-                        }
-
-                    ]
+                        [
+                            {
+                                "title": "时光之书抢票",
+                                "description": "点击进入抢票页面",
+                                "pic_url": "http://i.kyfly.net/ticket/sgzs/pic/sgzs_wx_bg.jpg",
+                                "url": "http://i.kyfly.net"
+                            },
+                            {
+                                "title": "时光之书抢票",
+                                "description": "点击进入抢票页面",
+                                "pic_url": "http://i.kyfly.net/pic/sqzbs_min.jpg",
+                                "url": "http://i.kyfly.net"
+                            }
+                        ]
                 }
             ]
     }
