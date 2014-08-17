@@ -3,14 +3,29 @@
     Route::get("/",function(){
        $re = '{
         "mp_id": 2,
+        "mp_reply_id": 54,
         "type": "news",
-        "news_from":"registration",
-        "act_id": 1,
-        "keyword": ["..."]
+        "news_from": "url",
+        "keyword": ["..."],
+        "content":
+        [
+            {
+            "title": "时光之书抢票",
+            "description": "点击进入抢票页面",
+            "pic_url": "http://mmbiz.qpic.cn/mmbiz/RgEEKtKqV2ODibq",
+            "url": "http://mp.weixin.qq.com/s?__biz=MjkzOQ==&mid=201"
+            },
+            {
+            "title": "时光之书抢票",
+            "description": "点击进入抢票页面",
+            "pic_url": "http://mmbiz.qpic.cn/mmbiz/RgEEKtKqV2ODibq",
+            "url": "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ1"
+            }
+        ]
     }';
     //$re = json_decode($re,true);
     //$re['content'][0]['news_from'] = 'url';
-    $re = BS::https_request('http://www.etuan.local/weixin/reply/create',$re);
+    $re = BS::https_request('http://www.etuan.local/weixin/reply/update',$re);
     return $re;
     });
     Route::get("x",function(){

@@ -45,6 +45,8 @@ class autoreplyHandle
             if($arr['news_from']=="registration"){
                 $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
                 $content=[$reg[0]['original']];
+            }else{
+                $content= "";
             }
             $arr = ['status'=>'success',"mp_reply_id"=>$reply_id,'content'=>$content];
             return $arr;
@@ -55,6 +57,7 @@ class autoreplyHandle
            
     }
     public static function  update($arr){
+        $news = new newsService;
         try {
             DB::beginTransaction();
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
@@ -89,15 +92,19 @@ class autoreplyHandle
                         {
                              Newsmsg::where('news_id',$result->msg_id)->delete();
                         }
-                        $news_id = DB::table('mp_msg_news')->insertGetId(
-                                        ["title" => $arr['title'],
-                                            "article_id" => 1,
-                                            "description" => $arr['description'],
-                                            "pic_url" => $arr['pic_url'],
-                                            "url" => $arr['url'],
-                                            "news_from"=>$arr['news_from'],
-                                           'mp_id'=>$arr['mp_id']]
-                                    );
+                        if(isset($arr['content'][0])){
+                            for($i=0;$i<count($arr['content']);$i++){
+                                $arr['content'][$i]['mp_id'] = $arr["mp_id"];
+                                $arr['content'][$i]['news_from'] =  $arr['news_from'];
+                            }
+                        }else{
+                            $arr['content']['mp_id'] = $arr["mp_id"];
+                            $arr['content']['news_from'] =  $arr['news_from'];
+                        }
+                        $news_id = $news->create($arr['content']);
+                        if(!is_numeric($news_id)){
+                            return $news_id;
+                        }
                     }
                     Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }else{
@@ -112,10 +119,17 @@ class autoreplyHandle
                 $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
             DB::commit();
-            return true;
+            if($arr['news_from']=="registration"){
+                $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
+                $content=[$reg[0]['original']];
+            }else{
+                $content= "";
+            }
+            $arr = ['status'=>'success',"mp_reply_id"=>$arr["mp_reply_id"],'content'=>$content];
+            return $arr;
         } catch (Exception $e) {
             DB::rollback();
-             return false;
+            return false;
         }
     }
     public static function show($org_uid){
