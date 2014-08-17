@@ -8,9 +8,10 @@ class AutoreplyService
             if($this->check($arr,$mp_id)){
                 return $this->check($arr,$mp_id);
             }
-           if(!$mp_id){
+
+            if(!$mp_id){
                 return 'false';
-           }
+            }
             if($arr["type"]=="text"){
                 $text_id = Textmsg::where("content",$arr["content"])->lists("text_id");
                 for($i = 0;$i<count($text_id);$i++)
@@ -34,8 +35,8 @@ class AutoreplyService
                 }
         }
 
-       $result = autoreplyHandle::create($arr);
-       return $result;
+        $result = autoreplyHandle::create($arr);
+        return $result;
     }
 
     public function  update($arr){

@@ -1,12 +1,23 @@
 <?php
 
     Route::get("/",function(){
-       $re = Autoreply::where('msg_id',72)->get();
-       dd($re);
+       $re = '{
+        "mp_id": 2,
+        "type": "news",
+        "news_from":"registration",
+        "act_id": 1,
+        "keyword": ["..."]
+    }';
+    //$re = json_decode($re,true);
+    //$re['content'][0]['news_from'] = 'url';
+    $re = BS::https_request('http://www.etuan.local/weixin/reply/create',$re);
+    return $re;
     });
-    Route::get("x",['before'=>"wxauth",function(){
-      echo "nihao";
-    }]);
+    Route::get("x",function(){
+      $reg = Newsmsg::where('news_id',107)->select("title","description","pic_url","url")->get();
+                $content=[$reg[0]['original']];
+                dd($content);
+    });
     Route::group(array('before'=>'wxauth'),function()
     {
       

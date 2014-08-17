@@ -1,7 +1,9 @@
 <?php
 class autoreplyHandle
 {
+
     public static function  create($arr){
+        $news = new newsService;
         try {
             DB::beginTransaction();
             if($arr["type"]=="text"){
@@ -11,15 +13,20 @@ class autoreplyHandle
                 if($arr['news_from']=="sucai"){
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$arr["news_id"],"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }elseif($arr['news_from']=="url"){
-                    $news_id = DB::table('mp_msg_news')->insertGetId(
-                        ["title" => $arr['title'],
-                            "article_id" => 1,
-                            "description" => $arr['description'],
-                            "pic_url" => $arr['pic_url'],
-                            "url" => $arr['url'],
-                            "news_from"=>$arr['news_from'],
-                           'mp_id'=>$arr['mp_id']]
-                    );
+                    if(isset($arr['content'][0])){
+
+                        for($i=0;$i<count($arr['content']);$i++){
+                            $arr['content'][$i]['mp_id'] = $arr["mp_id"];
+                            $arr['content'][$i]['news_from'] =  $arr['news_from'];
+                        }
+                    }else{
+                        $arr['content']['mp_id'] = $arr["mp_id"];
+                        $arr['content']['news_from'] =  $arr['news_from'];
+                    }
+                    $news_id = $news->create($arr['content']);
+                    if(!is_numeric($news_id)){
+                        return $news_id;
+                    }
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$news_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }else{
                     $news_id = actNewHandle::createNews($arr['news_from'],$arr['act_id'],$arr['mp_id']);
@@ -35,10 +42,15 @@ class autoreplyHandle
                 }
             }
             DB::commit();
-            return true;
+            if($arr['news_from']=="registration"){
+                $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
+                $content=[$reg[0]['original']];
+            }
+            $arr = ['status'=>'success',"mp_reply_id"=>$reply_id,'content'=>$content];
+            return $arr;
         } catch (Exception $e) {
             DB::rollback();
-             return "请检查数据是否填写正确";
+            return "请检查数据是否填写正确";
         }
            
     }
@@ -128,16 +140,17 @@ class autoreplyHandle
                     $arr[$j]["content"] = $content;
                 }elseif($msgs[$j]->msg_type == "news"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
-                    $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("news_id","title","description","pic_url","url","act_id","news_from")->get();
-                    $new = $news[0]["original"];
-                    $content = Newscontent::where("news_id",$news[0]->news_id)->where("article_id",$news[0]->article_id)->pluck("content");
-                    $new["content"] = $content;
-                    $time = Newsmsg::where("news_id",$news[0]->news_id)->select("created_at")->first();
+                    $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("title","description","pic_url","url")->get();
+                    $content = $news[0]["original"];
+                    $time = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("created_at")->first();
                     $time = strtotime($time['original']['created_at']);
                     $new["CreateTime"]=$time;
                     $new["keyword"] = $keyword;
                     $new['type'] = 'news';
                     $new['mp_reply_id'] = $msgs[$j]->mp_reply_id;
+                    $new['news_from'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('news_from');
+                    $new['act_id'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('act_id');
+                    $new["content"] = [$content];
                     $arr[]=$new;
                   
                 }

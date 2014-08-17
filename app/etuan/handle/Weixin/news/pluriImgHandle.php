@@ -21,9 +21,8 @@ class pluriImgHandle extends newsHandle
                             "news_from"=>$arr[$i]["news_from"],
                             'mp_id'=>$arr[$i]['mp_id']]
                     );
-                    
-                    $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
-                    if($arr[$i]["content"]){
+                    if(isset($arr[$i]["content"])){
+                        $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
                         $result = self::newsContentfile($news_id,$i+1,$arr[$i]["content"],$arr[$i]["title"]);
                     }
                 }else{
@@ -37,8 +36,8 @@ class pluriImgHandle extends newsHandle
                                                     "news_from"=>$arr[$i]['news_from'],
                                                     'mp_id'=>$arr[$i]['mp_id']]
                                                 );
-                    $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
-                    if($arr[$i]["content"]){
+                    if(isset($arr[$i]["content"])){
+                        $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => $i+1,"content"=>$arr[$i]["content"]]);
                         $result = self::newsContentfile($news_id,$i+1,$arr[$i]["content"],$arr[$i]["title"]);
                     }
                 }
@@ -51,7 +50,7 @@ class pluriImgHandle extends newsHandle
                 }
             }
             DB::commit();
-            return true;
+            return $news_id;
         }catch (Exception $e)
         {
             DB::rollback();
@@ -73,8 +72,9 @@ class pluriImgHandle extends newsHandle
                                                                                                 "url" => $arr[$i]["url"],
                                                                                                 "news_from"=>$arr[$i]["news_from"]]
                                                                                         );
-                    $re = Newscontent::where("news_id" ,$arr[$i]["news_id"])->where("article_id",$arr[$i]["article_id"])->update(["content"=>$arr[$i]["content"]]);
-                    if($arr[$i]["content"]){
+                    
+                    if(isset($arr[$i]["content"])){
+                        $re = Newscontent::where("news_id" ,$arr[$i]["news_id"])->where("article_id",$arr[$i]["article_id"])->update(["content"=>$arr[$i]["content"]]);
                         $result = self::newsContentfile($arr[$i]["news_id"],$arr[$i]["article_id"],$arr[$i]["content"],$arr[$i]["title"]);
                     }
                 }else{
@@ -90,8 +90,9 @@ class pluriImgHandle extends newsHandle
                                         "url" => $arr[$i]["url"],
                                         "news_from"=>$arr[$i]["news_from"]]
                                     );
-                    $re = Newscontent::insert(["news_id"=>$arr[$i]["news_id"],"article_id"=>$arr[$i]["article_id"],"content"=>$arr[$i]["content"]]);
-                    if($arr[$i]["content"]){
+                    
+                    if(isset($arr[$i]["content"])){
+                        $re = Newscontent::insert(["news_id"=>$arr[$i]["news_id"],"article_id"=>$arr[$i]["article_id"],"content"=>$arr[$i]["content"]]);
                         $result = self::newsContentfile($arr[$i]["news_id"],$arr[$i]["article_id"],$arr[$i]["content"],$arr[$i]["title"]);
                     }
                 }
