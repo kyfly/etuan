@@ -1,0 +1,18 @@
+[
+    {
+        "reg_id": 1,
+        "start_time": "",
+        "stop_time": "2014-7-7 19:00:00",
+        "limit_grade": "1",
+        "name": "杭州电子科技大学学生会2014招新报名",
+        "theme": 2
+    },
+    {
+        "reg_id": 2,
+        "start_time": "",
+        "stop_time": "2014-7-7 19:00:00",
+        "limit_grade": "1",
+        "name": "学生会2014招新报名",
+        "theme": 2
+    }
+]

@@ -30,384 +30,164 @@
     </div>
 </nav>
 <div class="container">
-<!--侧边栏-->
-<div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
+    <!--侧边栏-->
+    <div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
 
-<div id="main" class="col-lg-9 col-md-9">
-<div class="tab-content">
-<!--自动回复-->
-<div class="tab-pane active in">
-<ul id="myTab" class="nav nav-tabs" role="tablist">
-    <li class="active"><a href="#nowresponse" role="tab" data-toggle="tab">被添加自动回复</a></li>
-    <li><a href="#mesresponse" role="tab" data-toggle="tab">消息自动回复</a></li>
-    <li><a href="#keyresponse" role="tab" data-toggle="tab">关键词自动回复</a></li>
-</ul>
-<div id="myTabContent" class="tab-content">
-<div class="tab-pane fade in active" id="nowresponse">
-    <div class="msg_sender margintop" id="js_msgSender">
-        <div class="msg_tab">
-            <ul class="tab_navs list-unstyled">
-                <li class="tab_nav">
-                    <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                   class="glyphicon glyphicon-pencil" style="color: #373636;"></span></a>
-                </li>
-                <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addreg1">&nbsp;<span data-toggle="tooltip"
-                                                                                       data-placement="bottom"
-                                                                                       title="报名"
-                                                                                       class="glyphicon glyphicon-user"></span></a>
-                </li>
-                <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addimgtxt1">&nbsp;<span data-toggle="tooltip"
-                                                                                          data-placement="bottom"
-                                                                                          title="图文"
-                                                                                          class="glyphicon glyphicon-list-alt"></span></a>
-                </li>
-            </ul>
-
-
-            <!-- addreg1 -->
-            <div class="modal fade" id="addreg1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">选择报名</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="target extralist">
-                                <div class="form-group">
-                                    <h4>报名1</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名2</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名3</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名4</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名5</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- addimgtxt1 -->
-            <div class="modal fade" id="addimgtxt1" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews3"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectNews3">选择图文</h4>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="tab_panel">
-                <div class="tab_content" style="display: block;">
-                    <div class="emotion_editor">
-                        <div class="edit_area js_editorArea" id="welcomeMsgContent" contenteditable="true"
-                             style="overflow-y: auto; overflow-x: hidden;">
-
-                        </div>
-                        <div class="editor_toolbar">
-                            <p class="editor_tip js_editorTip">还可以输入<em>527</em>&nbsp;字</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div id="main" class="col-lg-9 col-md-9">
+        <div class="alert alert-success alert-dismissible" id="addSuccessAlert" role="alert">
+            <button type="button" class="close" id="addSuccessAlertClose">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            微信自动回复设置成功！
         </div>
-    </div>
-    <button type="button" class="btn btn-primary" style="margin-top: 15px; margin-right: 10px; width: 100px;">保存
-    </button>
-    <button type="button" class="btn btn-default" style="margin-top: 15px; width: 100px;">清除内容</button>
-</div>
-<div class="tab-pane fade" id="mesresponse">
-    <div class="msg_sender margintop" id="js_msgSender2">
-        <div class="msg_tab">
-            <ul class="tab_navs list-unstyled">
-                <li class="tab_nav">
-                    <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                   class="glyphicon glyphicon-pencil" style="color: #373636;"></span></a>
-                </li>
-                <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addreg2">&nbsp;<span data-toggle="tooltip"
-                                                                                       data-placement="bottom"
-                                                                                       title="报名"
-                                                                                       class="glyphicon glyphicon-user"></span></a>
-                </li>
-                <li class="tab_nav">
-                    <a href="#" data-toggle="modal" data-target="#addimgtxt2">&nbsp;<span data-toggle="tooltip"
-                                                                                          data-placement="bottom"
-                                                                                          title="图文"
-                                                                                          class="glyphicon glyphicon-list-alt"></span></a>
-                </li>
-            </ul>
+        <h2>微信自动回复</h2>
+        <hr>
 
-            <!-- addreg2 -->
-            <div class="modal fade" id="addreg2" tabindex="-1" role="dialog" aria-labelledby="labelSelectReg2"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectReg2">选择报名</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="target extralist">
-                                <div class="form-group">
-                                    <h4>报名1</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名2</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名3</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名4</h4>
-                                </div>
-                                <div class="form-group">
-                                    <h4>报名5</h4>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- addimgtxt2 -->
-            <div class="modal fade" id="addimgtxt2" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span
-                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="labelSelectNews">选择图文</h4>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="tab_panel">
-                <div class="tab_content" style="display: block;">
-                    <div class="emotion_editor">
-                        <div id="defaultMsgContent" class="edit_area js_editorArea" contenteditable="true"
-                             style="overflow-y: auto; overflow-x: hidden;">
-                        </div>
-                        <div class="editor_toolbar">
-                            <p class="editor_tip js_editorTip">还可以输入<em>600</em>&nbsp;字</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg" style="letter-spacing: 2px"
+                    data-toggle="modal" data-target="#addrulebox" id="btnAddRule">+添加规则
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning btn-lg" >一键添加报名表</button>
         </div>
-    </div>
-    <button type="button" class="btn btn-primary" style="margin-top: 15px; margin-right: 10px; width: 100px;">保存
-    </button>
-    <button type="button" class="btn btn-default" style="margin-top: 15px; width: 100px;">清除内容</button>
-</div>
-<div class="tab-pane fade" id="keyresponse">
-    <button type="button" class="btn btn-primary btn-lg" style="margin-top: 15px; letter-spacing: 2px"
-            data-toggle="modal" data-target="#addrulebox">+添加规则
-    </button>
 
 
-    <div class="modal fade" id="addrulebox">
-        <div class="modal-dialog">
-            <div class="modal-content margintop">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">添加/修改规则</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="keywords">关键字</label>
+        <div class="modal fade" id="addrulebox">
+            <div class="modal-dialog">
+                <div class="modal-content margintop">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title">添加/修改规则</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="txtKeywords">关键词</label>
 
-                            <div class="col-sm-8">
-                                <textarea type="text" class="form-control" id="keywords"
-                                          placeholder="请输入关键字"></textarea>
+                                <div class="col-sm-8">
+                                    <textarea type="text" class="form-control" id="txtKeywords"
+                                              placeholder="请输入关键词"></textarea>
 
-                                <p class="help-block">输入回车可添加多个关键字，每个关键字少于30个字符。</p>
+                                    <p class="help-block">输入回车可添加多个关键词，每个关键词少于30个字符。</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="response">回复</label>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="response">回复</label>
 
-                            <div class="msg_sender margintop col-md-8" id="response" style="margin-left: 2%;">
-                                <div class="msg_tab">
-                                    <ul class="tab_navs list-unstyled">
-                                        <li class="tab_nav">
-                                            <a>&nbsp;<span data-toggle="tooltip" data-placement="bottom" title="文字"
-                                                           class="glyphicon glyphicon-pencil"
-                                                           style="color: #373636;"></span></a>
-                                        </li>
-                                        <li class="tab_nav">
-                                            <a href="#" data-toggle="modal" data-target="#addreg3">&nbsp;<span
-                                                    data-toggle="tooltip" data-placement="bottom" title="报名"
-                                                    class="glyphicon glyphicon-user"></span></a>
-                                        </li>
-                                        <li class="tab_nav">
-                                            <a href="#" data-toggle="modal" data-target="#addimgtxt3">&nbsp;<span
-                                                    data-toggle="tooltip" data-placement="bottom" title="图文"
-                                                    class="glyphicon glyphicon-list-alt"></span></a>
-                                        </li>
-                                    </ul>
+                                <div class="msg_sender margintop col-md-8" id="response" style="margin-left: 2%;">
+                                    <div class="msg_tab">
+                                        <ul class="tab_navs list-unstyled">
+                                            <li class="tab_nav">
+                                                <a id="addText" class="colorBlack">&nbsp;
+                                                    <span data-toggle="tooltip" data-placement="bottom" title="文字"
+                                                          class="glyphicon glyphicon-pencil"></span>
+                                                </a>
+                                            </li>
+                                            <li class="tab_nav">
+                                                <a id="addReg">&nbsp;<span
+                                                        data-toggle="tooltip" data-placement="bottom" title="报名"
+                                                        class="glyphicon glyphicon-user"></span></a>
+                                            </li>
+                                            <li class="tab_nav">
+                                                <a id="addNews">&nbsp;<span
+                                                        data-toggle="tooltip" data-placement="bottom" title="图文"
+                                                        class="glyphicon glyphicon-list-alt"></span></a>
+                                            </li>
+                                        </ul>
 
-                                    <div class="tab_panel">
-                                        <div class="tab_content" style="display: block;">
-                                            <div class="emotion_editor">
-                                                <div class="edit_area js_editorArea" contenteditable="true"
-                                                     style="overflow-y: auto; overflow-x: hidden;">
-
-                                                </div>
-                                                <div class="editor_toolbar">
-                                                    <p class="editor_tip js_editorTip">还可以输入<em>600</em>&nbsp;字</p>
+                                        <div class="tab_panel">
+                                            <div class="tab_content" style="display: block;">
+                                                <div class="emotion_editor">
+                                                    <div class="edit_area js_editorArea" contenteditable="true"
+                                                         style="overflow-y: auto; overflow-x: hidden;" id="msgEditor">
+                                                        请在此处输入文字
+                                                    </div>
+                                                    <div class="editor_toolbar">
+                                                        <p class="editor_tip js_editorTip">文字回复不超过600字</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">保存</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="setMsg">设置为</label>
+
+                                <div class="col-sm-8" id="setMsg">
+                                    <input type="checkbox" id="setAsWelcome">
+                                    <label class="control-label" for="setAsWelcome">被添加自动回复</label>
+
+                                    <p class="help-block">用户关注微信公众号后，将收到该消息</p>
+                                    <input type="checkbox" id="setAsDefault">
+                                    <label class="control-label" for="setAsDefault">默认消息自动回复</label>
+
+                                    <p class="help-block">用户发送已定义的关键词以外的内容，将收到该消息</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnSave" type="button" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="bs-callout bs-callout-warning col-md-12" id="ruleDivTpl">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2 text-right">
+                        <h5>关键词</h5>
+                    </div>
+                    <div class="col-md-7">
+                        <h5 id="ruleKeyTpl"></h5>
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a class="colorGray btnEditReply" data-toggle="modal" data-target="#addrulebox"
+                           rel="tooltip" data-placement="bottom" title="编辑">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>&nbsp;&nbsp;
+                        <a class="colorGray btnDelReply" data-toggle="modal" data-target="#delMsgModal"
+                           rel="tooltip" data-placement="bottom" title="删除">
+                            <span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2 text-right"><h5>回复</h5></div>
+                    <div class="col-md-10" id="ruleContentTpl">
+                        <h5></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 删除确认-->
+        <div class="modal fade" id="delMsgModal" tabindex="-1" role="dialog" aria-labelledby="delMsgModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="delMsgModalLabel">确认删除？</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>自动回复删除后，用户将不能收到该消息，确认删除？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnConfirmDel">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="bs-callout bs-callout-warning col-md-12" id="ruleDivTpl">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-2 text-right">
-                    <h5>关键字</h5>
-                </div>
-                <div class="col-md-7">
-                    <h5 id="ruleKeyTpl"></h5>
-                </div>
-                <div class="col-md-3 text-right">
-                    <span class="glyphicon glyphicon-pencil"></span><a href="javascript:void(0)"> 编辑</a>&nbsp;&nbsp;
-                    <span class="glyphicon glyphicon-remove"></span><a href="javascript:void(0)"> 删除</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-2 text-right"><h5>回复</h5></div>
-                <div class="col-md-10 row" id="ruleContentTpl">
-                    <h5>你好</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-
-<!-- addreg3 -->
-<div class="modal fade" id="addreg3" tabindex="-1" role="dialog" aria-labelledby="LabelSelectReg" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="LabelSelectReg">选择报名</h4>
-            </div>
-            <div class="modal-body">
-                <form class="target extralist">
-                    <div class="form-group">
-                        <h4>报名1</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名2</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名3</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名4</h4>
-                    </div>
-                    <div class="form-group">
-                        <h4>报名5</h4>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- addimgtxt3 -->
-<div class="modal fade" id="addimgtxt3" tabindex="-1" role="dialog" aria-labelledby="labelSelectNews2" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="labelSelectNews2">选择图文</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!--tab-pane-->
-</div>
-<!--tab-content-->
-</div>    <!--col-md-9-->
-</div>    <!--container-->
 
 <footer id="footer" class="panel-footer margintop">
     <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>

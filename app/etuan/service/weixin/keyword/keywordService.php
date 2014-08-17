@@ -2,7 +2,8 @@
 class AutoreplyService
 {
     public function  create($arr){
-            $org_uid = Auth::user()->org_uid;
+            //$org_uid = Auth::user()->org_uid;
+            $org_uid = 1;
             $mp_id = Wxdata::where('org_uid',$org_uid)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
             if($this->check($arr,$mp_id)){
                 return $this->check($arr,$mp_id);
