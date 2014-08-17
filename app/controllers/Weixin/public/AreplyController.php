@@ -15,7 +15,11 @@ class AtrplyController extends BaseController
         $arr = json_decode($this->json,true);
 
         $re = $this->reply->create($arr);
-
+        if(!is_array($re)){
+            $arr = ['status'=>'fail',"message"=>$re];
+            $re = json_encode($arr);
+        }
+        
         return $re;
     }
     public function  postUpdate(){

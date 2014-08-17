@@ -15,10 +15,10 @@ class simpleImgHandle extends newsHandle
                             "news_from"=>$arr['news_from'],
                            'mp_id'=>$arr['mp_id']]
                     );
-            $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => 1,"content"=>$arr["content"]]);
+            
            
-            if($arr["content"]){
-
+            if(isset($arr["content"])){
+                $re = Newscontent::insert( ["news_id" => $news_id,"article_id" => 1,"content"=>$arr["content"]]);
                 $result = self::newsContentfile($news_id,1,$arr['content'],$arr["title"]);
 
                 if(!$result){
@@ -32,7 +32,7 @@ class simpleImgHandle extends newsHandle
                 }
             }
             DB::commit();
-            return true;
+            return $news_id;
         }catch (Exception $e)
         {
             DB::rollback();
@@ -52,8 +52,9 @@ class simpleImgHandle extends newsHandle
                     "news_from"=>$arr["news_from"]]
                 );
                  
-                $re = Newscontent::where("news_id" ,$arr["news_id"])->where("article_id",$arr["article_id"])->update(["content"=>$arr["content"]]);
-                if($arr["content"]){
+                
+                if(isset($arr["content"])){
+                    $re = Newscontent::where("news_id" ,$arr["news_id"])->where("article_id",$arr["article_id"])->update(["content"=>$arr["content"]]);
                     $result = self::newsContentfile($arr["news_id"],$arr["article_id"],$arr["content"],$arr["title"]);
                     if(!$result){
                         return false;
