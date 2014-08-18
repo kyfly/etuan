@@ -21,10 +21,12 @@ class AtrplyController extends BaseController
 
         $re = $this->reply->create($arr);
         if(!is_array($re)){
-            $re = ['status'=>'fail',"message"=>$re];
+            $re = ['status'=>'fail',"message"=>urlencode($re)];
         }
-        
-        $re = json_encode($re);
+        if(isset($re['content']))
+            foreach ($re['content'] as & $content)
+                $content = urlencode($content);
+        $re = urldecode(json_encode($re));
         return $re;
     }
 
@@ -35,16 +37,20 @@ class AtrplyController extends BaseController
 
         $re = $this->reply->update($arr);
         if(!is_array($re)){
-            $re = ['status'=>'fail',"message"=>$re];
+            $re = ['status'=>'fail',"message"=>urlencode($re)];
         }
-        $re = json_encode($re);
+        if(isset($re['content']))
+            foreach ($re['content'] as & $content)
+                $content = urlencode($content);
+        $re = urldecode(json_encode($re));
         return $re;
     }
 
     public function getShow()
     {
-        
-        $org_uid = Auth::user()->org_uid;
+        //TODO: 发布时需要修改！！！
+        //$org_uid = Auth::user()->org_uid;
+        $org_uid = 1;
         $arr = $this->reply->show($org_uid);
 
         $json = json_encode($arr);
