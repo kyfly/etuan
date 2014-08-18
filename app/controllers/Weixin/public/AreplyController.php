@@ -18,15 +18,13 @@ class AtrplyController extends BaseController
     {
 
         $arr = json_decode($this->json, true);
-
         $re = $this->reply->create($arr);
         if(!is_array($re)){
             $re = ['status'=>'fail',"message"=>urlencode($re)];
         }
-        if(isset($re['content']))
-            foreach ($re['content'] as & $content)
-                $content = urlencode($content);
-        $re = urldecode(json_encode($re));
+        $re = json_encode($re);
+        $re = urldecode($re);
+        //file_put_contents("test.txt",$re);
         return $re;
     }
 
@@ -39,9 +37,6 @@ class AtrplyController extends BaseController
         if(!is_array($re)){
             $re = ['status'=>'fail',"message"=>urlencode($re)];
         }
-        if(isset($re['content']))
-            foreach ($re['content'] as & $content)
-                $content = urlencode($content);
         $re = urldecode(json_encode($re));
         return $re;
     }

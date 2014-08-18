@@ -179,7 +179,7 @@ MessageCtrl.prototype.initModal = function(replyId) {
         case 'news':
             switch (msg.news_from)
             {
-                case 'baoming':
+                case 'text/html':
                     $('#addReg').click();
                     $("input[name='regRadio']").attr('checked',msg.mp_reply_id);
                     break;
@@ -225,7 +225,13 @@ MessageCtrl.prototype.removeKeywordRule = function(id) {
         function (data, status) {
             if (status == 'success')
             {
-                if (data != 'true')
+                if (data == 'true')
+                {
+                    $('#rule'+id).remove();
+                    msgData.removeMsgById(id);
+                   
+                }
+                else
                     alert("哎呀呀，删除失败了！");
             }
         }
@@ -337,7 +343,7 @@ $('#btnSave').click(function () {
     }
     else if ($('#addReg').hasClass('colorBlack')) {
         message.type = "news";
-        message.news_from = "baoming";
+        message.news_from = "registration";
         message.act_id = Number($("input[name='regRadio']:checked").val());
     }
     else {

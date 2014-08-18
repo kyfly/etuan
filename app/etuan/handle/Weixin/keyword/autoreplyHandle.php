@@ -42,7 +42,7 @@ class autoreplyHandle
                 }
             }
             DB::commit();
-            if($arr['news_from']=="registration"){
+            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
                 $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
                 $content=[$reg[0]['original']];
             }else{
@@ -65,8 +65,11 @@ class autoreplyHandle
             if($arr["type"]=="text"){
                 if($result->msg_type =="news")
                 {
+                    $news_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck('msg_id');
+                    Newsmsg::where("news_id",$news_id)->delete();
                     $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$arr["content"]]);
                     $re = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$text_id,"msg_type"=>$arr["type"]]);
+
                 }else{
                     Textmsg::where("text_id",$result->msg_id)->update(["content"=>$arr["content"]]);
                 }
@@ -109,7 +112,9 @@ class autoreplyHandle
                     Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }else{
                     //其他活动
+                    Textmsg::insert(['content'=>$arr['news_from']]); 
                      $news_id = actNewHandle::updateNews($arr['news_from'],$arr['act_id'],$arr['mp_id'],$result);
+
                      Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }
             }
@@ -119,7 +124,7 @@ class autoreplyHandle
                 $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
             DB::commit();
-            if($arr['news_from']=="registration"){
+            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
                 $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
                 $content=[$reg[0]['original']];
             }else{
@@ -187,7 +192,7 @@ class autoreplyHandle
 
        return $json;
     }
-    public function delete($reply_id){
+    public static function delete($reply_id){
         $re = Autoreply::where("mp_reply_id",$reply_id)->select("msg_id","msg_type")->first();
         if($re!=NULL){
             if($re->msg_type == "text"){
@@ -196,6 +201,6 @@ class autoreplyHandle
             Keyword::where("mp_reply_id",$reply_id)->delete();
             Autoreply::where("mp_reply_id",$reply_id)->delete();
         }
-        return true;
+        return 'true';
     }
 }
