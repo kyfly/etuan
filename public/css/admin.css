@@ -768,3 +768,12 @@ min-height: 188px;
 .btnEditReply:hover {
     text-decoration: none;
 }
+
+.textToCopy {
+    border: #eee solid 1px;
+    padding: 3px 10px 3px 10px;
+}
+
+.textToCopyLabel {
+    padding: 3px;
+}
