@@ -221,8 +221,15 @@ MessageCtrl.prototype.clearModal = function() {
 MessageCtrl.prototype.removeKeywordRule = function(id) {
     $('#rule' + id).remove();
     this.msgData.removeMsgById(id);
-    //TODO:增加对删除是否成功的判断
-    $.get('/weixin/reply/destory', {reply_id: id});
+    $.get('/weixin/reply/destory', {reply_id: id},
+        function (data, status) {
+            if (status == 'success')
+            {
+                if (data != 'true')
+                    alert("哎呀呀，删除失败了！");
+            }
+        }
+    );
 };
 
 //--- other ---------------------------------
@@ -235,8 +242,6 @@ function loadAutoReply() {
             msgData = new MessageModel(data);
             msgCtrl = new MessageCtrl(msgData);
         }
-        else
-            alert("获取自动回复数据失败！");
     });
 
 }
@@ -301,7 +306,7 @@ $('#btnSave').click(function () {
     message.mp_id = msgData.mpId;
     var keywordStr = $('#txtKeywords').val();
     if (keywordStr == '') {
-        alert("对不起，保存失败！关键字不能为空。");
+        alert("啊哦，保存失败了！关键字不能为空哦！");
         return;
     }
     //去除多个连续的回车符
@@ -315,18 +320,18 @@ $('#btnSave').click(function () {
     //判断是否大于30字符
     for (var i = 0; i < message.keyword.length; i++)
         if (message.keyword[i].length > 30) {
-            alert("对不起，保存失败！\n关键词“" + message.keyword[i] + "”大于30个字符");
+            alert("啊哦，保存失败了！\n关键词“" + message.keyword[i] + "”大于30个字符了呀！");
             return;
         }
     if ($('#addText').hasClass('colorBlack')) {
         message.content = $('#msgEditor').text();
         message.type = "text";
         if (message.content == "") {
-            alert("对不起，保存失败！\n文字回复内容不能为空。");
+            alert("啊哦，保存失败了！\n文字回复内容不能为空哦！");
             return;
         }
         if (message.content.length > 600) {
-            alert("对不起，保存失败！\n文字回复不能超过600字。");
+            alert("啊哦，保存失败了！\n文字回复不能超过600字哦！");
             return;
         }
     }
@@ -366,6 +371,7 @@ $('#btnSave').click(function () {
         function (data, status){
             if (status == 'success')
             {
+                data = JSON.parse(data);
                 if (data.status == 'success')
                 {
                     if (!message.content)
@@ -388,10 +394,6 @@ $('#btnSave').click(function () {
                 {
                     alert("对不起，未创建消息!\n错误信息" + data.message);
                 }
-            }
-            else
-            {
-                alert('对不起，未创建消息，与服务器通信失败！请重试');
             }
             $('#btnSave').removeAttr("disabled");
         }
@@ -460,6 +462,18 @@ $(document).ready(function () {
     $('#main').on('click', '.btnDelReply', function() {
         mpReplyId = $(this).parents('.bs-callout').attr('id').substring(4);
         mpReplyId = Number(mpReplyId);
+    });
+    $.ajaxSetup({
+        complete: function(XMLResponse,status) {
+            if (status != "success")
+            {
+                if (status=='error') {
+                    alert("啊呀呀，出错了，5555555...再试一遍吧。。\n错误码：" + XMLResponse.status);
+                }
+                else
+                    alert("哎呀呀，出错了！再试一遍吧 T_T\n错误信息: " + status);
+            }
+        }
     });
 });
 
