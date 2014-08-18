@@ -179,7 +179,7 @@ MessageCtrl.prototype.initModal = function(replyId) {
         case 'news':
             switch (msg.news_from)
             {
-                case 'text/html':
+                case 'registration':
                     $('#addReg').click();
                     $("input[name='regRadio']").attr('checked',msg.mp_reply_id);
                     break;
@@ -219,8 +219,6 @@ MessageCtrl.prototype.clearModal = function() {
 };
 
 MessageCtrl.prototype.removeKeywordRule = function(id) {
-    $('#rule' + id).remove();
-    this.msgData.removeMsgById(id);
     $.get('/weixin/reply/destory', {reply_id: id},
         function (data, status) {
             if (status == 'success')
@@ -272,7 +270,6 @@ $('#addReg').click(function () {
         var editor = $('#msgEditor');
         editor.html('报名列表正在加载中...');
         editor.attr('contenteditable', 'false');
-        //TODO:注意修改测试值
         $.get('reglist.json', function (data, status) {
             if (status == 'success') {
                 data = eval(data);

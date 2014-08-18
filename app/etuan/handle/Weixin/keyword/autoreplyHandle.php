@@ -112,7 +112,6 @@ class autoreplyHandle
                     Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }else{
                     //其他活动
-                    Textmsg::insert(['content'=>$arr['news_from']]); 
                      $news_id = actNewHandle::updateNews($arr['news_from'],$arr['act_id'],$arr['mp_id'],$result);
 
                      Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
