@@ -74,7 +74,7 @@
     Route::post("mp/{id}","UniversalController@store");
 
     Route::controller("oauth","WxauthController");
-    
+
 
 
 

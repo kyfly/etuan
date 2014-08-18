@@ -43,26 +43,47 @@ class AuthController extends BaseController
 			with('message','您已经成功登出,欢迎使用!');
 	}
 
+	// public function getRegister()
+	// {
+	// 	return View::make('register');
+	// }
+
 	public function getRegister()
 	{
-		return View::make('register');
-	}
+		$userInfo = json_decode(Input::get('userInfo'));
 
-	public function postRegister()
-	{
-		$email = Input::get('email');
-		$password = Input::get('password');
-		if(User::where('email',$email)->count()==0)
+		$values = array(
+			'email'=>$userInfo->email,
+			'password'=>$userInfo->password,
+			'phone_long'=>$userInfo->phone_long,
+			'phone_short'=>$userInfo->phone_short
+			);
+		$rules = array(
+			'email' => array('not_exist:organization_user','required'),
+			'password' => array('required'),
+			'phone_long' => array('integer','required')
+			);
+		$messages = array(
+			'not_exist' => '该用户名已经存在了',
+			'numeric' => '电话号码不是一个数字',
+			'required' => '必须输入'
+			);
+		$validator = Validator::make($values, $rules,$messages);
+		if($validator->fails())
 		{
-			$user = new User;
-			$user->email = $email;
-			$user->password = Hash::make($password);
-			$user->save();
-			return Response::json(array(
-				'register_status' => 'success',
-				'redirect_url'    => URL::previous()
-				));
+			return $validator->messages();
 		}
+
+		$user = new User;
+		$user->email = $userInfo->email;
+		$user->password = Hash::make($userInfo->password);
+		$user->phone_long = $userInfo->phone_long;
+		$user->phone_short = $userInfo->phone_short;
+		$user->save();
+		return Response::json(array(
+			'register_status' => 'success',
+			'redirect_url'    => URL::previous()
+			));
 
 		return Response::json(array(
 			'register_status' => 'fail'

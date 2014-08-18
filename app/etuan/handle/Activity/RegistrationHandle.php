@@ -5,7 +5,6 @@ class RegistrationHandle extends  ActivityHandle
 
     public function deleteActivity($activityId)
     {
-
         try {
             DB::beginTransaction();
             Reg_result::where('reg_id',$activityId)->delete();
@@ -64,24 +63,37 @@ class RegistrationHandle extends  ActivityHandle
     {
         try {
             DB::beginTransaction();
-            if($this->deleteActivity($activityId))
+
+            //删除活动结果,报名问题,和参与报名的人的信息。更新活动之后,之前的结果自动作废.
+            Reg_result::where('reg_id',$activityId)->delete();
+            Reg_question::where('reg_id',$activityId)->delete();
+            Registration_user::where('reg_id',$activityId)->delete();
+
+            //覆盖原来的信息
+            $questions = $activityInfo->questions;
+            Registration::where('reg_id',$activityId)->update(
+                array(
+                    'start_time' => $activityInfo->start_time,
+                    'stop_time' => $activityInfo->stop_time,
+                    'limit_grade' => $activityInfo->limit_grade,
+                    'name' => $activityInfo->name,
+                    'theme' => $activityInfo->theme,
+                    'org_uid' => $org_uid
+                ));
+            foreach($questions as $question)
             {
-                if($this->createActivity($org_uid, $activityInfo))
-                {
-                    DB::commit();
-                    return true;
-                }
-                else
-                {
-                    DB::rollback();
-                    return false;
-                }
+                Reg_question::insert(
+                    array(
+                        'question_id' => $question->question_id,
+                        'type' => $question->type,
+                        'label' => $question->label,
+                        'content' => $question->content,
+                        'reg_id' => $activityId,
+                    ));
             }
-            else
-            {
-                DB::rollback();
-                return false;
-            }
+
+            DB::commit();
+            return true;
         } catch (Exception $e) {
             DB::rollback();
             return false;

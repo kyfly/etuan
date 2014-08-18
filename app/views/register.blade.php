@@ -16,6 +16,14 @@
 				<label for='password'>密码</label>
 				<input type='text' class='form-control' name='password' placehodler='please enter your password!'/>
 			</div>
+			<div class='form-group'>
+				<label for='phone_long'>长号</label>
+				<input type='text' class='form-control' name='phone_long' placehodler='please enter your password!'/>
+			</div>
+			<div class='form-group'>
+				<label for='phone_short'>短号</label>
+				<input type='text' class='form-control' name='phone_short' placehodler='please enter your password!'/>
+			</div>
 			<input type='submit' value='注册' class='btn btn-default'/>
 		</form>
 	</div>

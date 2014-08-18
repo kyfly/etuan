@@ -60,6 +60,9 @@ class ActivityService implements ActivityServiceInterface
 
     public function updateActivity($org_uid, $activityId, $activityInfo)
     {
+        if(!$this->handle->checkActivityExist($org_uid, $this->tableName, $this->primaryKey, $activityId))
+            return Lang::get('activity.not.exist');
+
         $timeInfo = $this->handle->
             getTimeInfo($org_uid, $this->tableName, $this->primaryKey, $activityId);
         $values = array(
@@ -81,9 +84,6 @@ class ActivityService implements ActivityServiceInterface
         {
             return $validator->messages();
         }
-
-        if(!$this->handle->checkActivityExist($org_uid, $this->tableName, $this->primaryKey, $activityId))
-            return Lang::get('activity.not.exist');
 
         if($this->handle->updateActivity($org_uid, $activityId, $activityInfo))
             return Lang::get('activity.update.success');
