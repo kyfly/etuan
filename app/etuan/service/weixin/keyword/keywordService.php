@@ -36,6 +36,12 @@ class AutoreplyService
                     return "false";
                 }
         }
+        if(isset($arr['act_id'])){
+            $re = Registration::where('reg_id',$arr['act_id'])->pluck('reg_id');
+            if(!$re){
+                return "false";
+            }
+        }
 
         $result = autoreplyHandle::create($arr);
         return $result;
@@ -77,10 +83,16 @@ class AutoreplyService
             }
             for($i = 0;$i<count($arr["keyword"]);$i++)
             {
+                if($arr["keyword"][$i] == "mp_welcome_autoreply_message"||$arr["keyword"][$i] == "mp_default_autoreply_message")
+                {
+                    Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->delete();
+                }
                 $re = Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->pluck("mp_reply_id");
-                if($re){
+                
+                if($re && !isset($arr["mp_reply_id"])){
                     return $arr[]=$arr["keyword"][$i]."这个关键字已存在";
                 }
+                return false;
             }
             return false;
     }
