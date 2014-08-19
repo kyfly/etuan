@@ -85,7 +85,7 @@ class AtrplyController extends BaseController
             if (!$img && isset($rawHtml->find('img', 0)->attr["data-src"]))
                 $img = $rawHtml->find('img', 0)->attr["data-src"];
             //构建json用的数组
-            $sucai = array('tittle' => $title, 'description' => $summary, 'pic_url' => $img, 'url' => $url);
+            $sucai = array('title' => $title, 'description' => $summary, 'pic_url' => $img, 'url' => $url);
             //return "tittle: " . $title . "<br> summary: " . $summary . "<br> <img src=\"" . $img . "\">";
             foreach ($sucai as $key => $value) {
                 $sucai[$key] = urlencode($value);
