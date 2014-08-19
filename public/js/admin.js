@@ -1,7 +1,7 @@
 
 (function() {
     // Toggle Left Menu
-   jQuery('.menu-list > a').click(function() {
+   jQuery('#sidebar').on('click', '.menu-list > a', function() {
       
       var parent = jQuery(this).parent();
       var sub = parent.find('> ul');
