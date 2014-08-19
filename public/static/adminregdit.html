@@ -30,6 +30,10 @@
 		-moz-transition: all 0.3s;
 		transition: all 0.3s;
 		}
+	.errorspan {
+		padding-top: 7px;
+		color: #bb4442;
+		}
 </style>
 <body>
 <!--头部-->
@@ -89,44 +93,54 @@
           	<form class="form-horizontal" role="form">
               <div class="form-group" id="inputbox1">
                 <label for="inputEmail" class="col-sm-2 control-label">电子邮箱</label>
-                <span id="span1" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputEmail">
+                  <span id="span1" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
+                  <span id="span1-1" class="glyphicon glyphicon-ok form-control-feedback sr-only"></span>
                 </div>
+                <span id="span1-2" class="col-sm-4 errorspan  sr-only">邮箱格式不正确</span>
               </div>
               <div class="form-group" id="inputbox2">
                 <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                   <input type="password" class="form-control" id="inputPassword">
                   <span id="span2" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
+                  <span id="span2-1" class="glyphicon glyphicon-ok form-control-feedback sr-only"></span>
                   <span class="help-block">请输入6-16位非空格字符</span>
                 </div>
+                <span id="span2-2" class="col-sm-4 errorspan  sr-only">密码格式不正确</span>
               </div>
               <div class="form-group" id="inputbox3">
                 <label for="inputPassword2" class="col-sm-2 control-label">确认密码</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                   <input type="password" class="form-control" id="inputPassword2" >
                   <span id="span3" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
+                  <span id="span3-1" class="glyphicon glyphicon-ok form-control-feedback sr-only"></span>
                 </div>
+                <span id="span3-2" class="col-sm-4 errorspan  sr-only">两次输入密码不一致</span>
               </div>
               <div class="form-group" id="inputbox4">
                 <label for="inputPhone" class="col-sm-2 control-label">手机号码</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputPhone">
                   <span id="span4" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
+                  <span id="span4-1" class="glyphicon glyphicon-ok form-control-feedback sr-only"></span>
                   <span class="help-block">请输入11位手机号码</span>
                 </div>
+                <span id="span4-2" class="col-sm-4 errorspan  sr-only">手机号码格式不正确</span>
               </div>
               <div class="form-group" id="inputbox5">
                 <label for="inputPhone2" class="col-sm-2 control-label">移动短号</label>
-                <div class="col-sm-10">
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputPhone2">
                   <span id="span5" class="glyphicon glyphicon-remove form-control-feedback sr-only"></span>
+                  <span id="span5-1" class="glyphicon glyphicon-ok form-control-feedback sr-only"></span>
                   <span class="help-block">移动用户请输入6位短号（选填）</span>
                 </div>
+                <span id="span5-2" class="col-sm-4 errorspan  sr-only">短号格式不正确</span>
               </div>
                <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-6">
                   <button type="button" class="btn btn-primary btn-lg">下一步</button>
                 </div>
               </div>
@@ -277,17 +291,23 @@
     });
 
 $(function(){
+	var flag = new Array(5);
 	//验证邮箱
 	$('form :input').blur(function(){
 	if($(this).is('#inputEmail')){
 		if(this.value=='' || (this.value!='' && !/.+@.+\.[a-zA-z]{2,4}$/.test(this.value))){
 			$('#span1').removeClass("sr-only");
+			$('#span1-2').removeClass("sr-only");
 			$('#inputbox1').addClass("has-error");
 			$('#inputbox1').addClass("has-feedback");
+			flag[0] = false;
 		}else{
 			$('#span1').addClass("sr-only");
+			$('#span1-1').removeClass("sr-only");
+			$('#span1-2').addClass("sr-only");
 			$('#inputbox1').removeClass("has-error");
-			$('#inputbox1').removeClass("has-feedback");
+			$('#inputbox1').addClass("has-success");
+			flag[0] = true;
 			}
 		}
 	}).focus(function(){
@@ -298,12 +318,17 @@ $(function(){
 	if($(this).is('#inputPassword')){
 		if(this.value=='' || (this.value!='' && !/^[^\s]{6,16}$/.test(this.value))){
 			$('#span2').removeClass("sr-only");
+			$('#span2-2').removeClass("sr-only");
 			$('#inputbox2').addClass("has-error");
 			$('#inputbox2').addClass("has-feedback");
+			flag[1] = false;
 		}else{
 			$('#span2').addClass("sr-only");
+			$('#span2-2').addClass("sr-only");
+			$('#span2-1').removeClass("sr-only");
 			$('#inputbox2').removeClass("has-error");
-			$('#inputbox2').removeClass("has-feedback");
+			$('#inputbox2').addClass("has-success");
+			flag[1] = true;
 			}
 		}
 	}).focus(function(){
@@ -314,14 +339,19 @@ $(function(){
         if(!$(this).val || $(this).val() != $("#inputPassword").val() )
         {  
             $('#span3').removeClass("sr-only");
+			$('#span3-2').removeClass("sr-only");
 			$('#inputbox3').addClass("has-error");
-			$('#inputbox3').addClass("has-feedback");  
+			$('#inputbox3').addClass("has-feedback");
+			flag[2] = false; 
         }  
         else  
         {  
             $('#span3').addClass("sr-only");
+			$('#span3-2').addClass("sr-only");
+			$('#span3-1').removeClass("sr-only");
 			$('#inputbox3').removeClass("has-error");
-			$('#inputbox3').removeClass("has-feedback");  
+			$('#inputbox3').addClass("has-success");
+			flag[2] = true;
         }  
      });
 	 //验证手机号
@@ -329,12 +359,17 @@ $(function(){
 	if($(this).is('#inputPhone')){
 		if(this.value=='' || (this.value!='' && !/^0{0,1}[0-9]{11}$/.test(this.value))){
 			$('#span4').removeClass("sr-only");
+			$('#span4-2').removeClass("sr-only");
 			$('#inputbox4').addClass("has-error");
 			$('#inputbox4').addClass("has-feedback");
+			flag[3] = false;
 		}else{
 			$('#span4').addClass("sr-only");
+			$('#span4-2').addClass("sr-only");
+			$('#span4-1').removeClass("sr-only");
 			$('#inputbox4').removeClass("has-error");
-			$('#inputbox4').removeClass("has-feedback");
+			$('#inputbox4').addClass("has-success");
+			flag[3] = true;
 			}
 		}
 	}).focus(function(){
@@ -345,12 +380,17 @@ $(function(){
 	if($(this).is('#inputPhone2')){
 		if(this.value=='' || (this.value!='' && !/^0{0,1}[0-9]{6}$/.test(this.value))){
 			$('#span5').removeClass("sr-only");
+			$('#span5-2').removeClass("sr-only");
 			$('#inputbox5').addClass("has-error");
 			$('#inputbox5').addClass("has-feedback");
+			flag[4] = false;
 		}else{
 			$('#span5').addClass("sr-only");
+			$('#span5-2').addClass("sr-only");
+			$('#span5-1').removeClass("sr-only");
 			$('#inputbox5').removeClass("has-error");
-			$('#inputbox5').removeClass("has-feedback");
+			$('#inputbox5').addClass("has-success");
+			flag[4] = true;
 			}
 		}
 	}).focus(function(){
