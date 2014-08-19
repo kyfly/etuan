@@ -86,6 +86,9 @@ class AutoreplyService
                 if($arr["keyword"][$i] == "mp_welcome_autoreply_message"||$arr["keyword"][$i] == "mp_default_autoreply_message")
                 {
                     Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->delete();
+                    if ($i = count($arr["keyword"]) - 1){
+                        return false;
+                    }
                 }
                 $re = Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->pluck("mp_reply_id");
                 

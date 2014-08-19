@@ -354,7 +354,7 @@ $('#btnSave').click(function () {
             async: false,
             data: 'url=' + encodeURIComponent($('#newsText').val()),
             success: function (data) {
-                message.content = data;
+                message.content = JSON.parse(data);
             }
         });
     }
