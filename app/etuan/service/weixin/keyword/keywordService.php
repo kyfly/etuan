@@ -51,9 +51,10 @@ class AutoreplyService
         $org_uid = 1;
             //$org_uid = Auth::user()->org_uid;
             $mp_id = Wxdata::where('org_uid',$org_uid)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
+
             if($this->check($arr,$mp_id)){
-                    return $this->check($arr,$mp_id);
-                }
+                    return '$this->check($arr,$mp_id)';
+            }
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
             if($mp_id ==NULL){
                 return $arr[] = "不存在该自动回复";

@@ -113,7 +113,6 @@ class autoreplyHandle
                 }else{
                     //其他活动
                      $news_id = actNewHandle::updateNews($arr['news_from'],$arr['act_id'],$arr['mp_id'],$result);
-
                      Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }
             }
@@ -133,7 +132,7 @@ class autoreplyHandle
             return $arr;
         } catch (Exception $e) {
             DB::rollback();
-            return false;
+            return '更新消息失败';
         }
     }
     public static function show($org_uid){
@@ -170,7 +169,6 @@ class autoreplyHandle
                     $new['act_id'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('act_id');
                     $new["content"] = [$content];
                     $arr[]=$new;
-                  
                 }
             }
             if(isset($arr))
@@ -188,7 +186,6 @@ class autoreplyHandle
                 $i++;
             }
         }
-
        return $json;
     }
     public static function delete($reply_id){
@@ -196,6 +193,8 @@ class autoreplyHandle
         if($re!=NULL){
             if($re->msg_type == "text"){
                 Textmsg::where("text_id",$re->msg_id)->delete();
+            }else{
+                Newsmsg::where("news_id",$re->msg_id)->delete();
             }
             Keyword::where("mp_reply_id",$reply_id)->delete();
             Autoreply::where("mp_reply_id",$reply_id)->delete();

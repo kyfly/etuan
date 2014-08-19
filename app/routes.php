@@ -1,12 +1,11 @@
 <?php
 
     Route::get("/",function(){
-       $re = Registration::where('reg_id',1)->pluck('reg_id');
-       if(!$re){
-                return "false";
-            }
-    return $re;
+        $result = Autoreply::where("mp_reply_id",65)->select("msg_type","msg_id")->first();
+        return $result->msg_id;
     });
+
+
     Route::get("x",function(){
       $reg = Newsmsg::where('news_id',107)->select("title","description","pic_url","url")->get();
                 $content=[$reg[0]['original']];
