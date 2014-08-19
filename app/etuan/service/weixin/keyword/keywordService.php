@@ -86,7 +86,7 @@ class AutoreplyService
                 if($arr["keyword"][$i] == "mp_welcome_autoreply_message"||$arr["keyword"][$i] == "mp_default_autoreply_message")
                 {
                     Keyword::where("keyword",$arr["keyword"][$i])->where('mp_id',$mp_id)->delete();
-                    if ($i = count($arr["keyword"]) - 1){
+                    if ($i == count($arr["keyword"]) - 1){
                         return false;
                     }
                 }
@@ -95,7 +95,6 @@ class AutoreplyService
                 if($re && !isset($arr["mp_reply_id"])){
                     return $arr[]=$arr["keyword"][$i]."这个关键字已存在";
                 }
-                return false;
             }
             return false;
     }
