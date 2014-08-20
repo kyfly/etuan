@@ -42,7 +42,11 @@ class autoreplyHandle
             }
             DB::commit();
             $replyObj = new autoreplyHandle;
-            return $replyObj->successMsg($arr['news_from'],$news_id);
+            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
+                return $replyObj->successMsg($reply_id,$arr['news_from'],$news_id);
+            }
+            $msg = $replyObj->successMsg($reply_id);
+            return $msg;
         } catch (Exception $e) {
             DB::rollback();
             return "请检查数据是否填写正确";
