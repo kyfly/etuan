@@ -161,4 +161,50 @@ class RegistrationHandle extends  ActivityHandle
             return false;
         }
     }
+
+    public function tongjiXuehao($activityId,$question_id)
+    {
+        $Xuehao = Reg_result::whereRaw('reg_id = ? and question_id = ?',array($activityId,$question_id))->lists('answer');
+        $data = array();
+        foreach($Xuehao as $xuehao)
+        {
+            switch(strlen($xuehao))
+            {
+                case 8:
+                    $flag = (int)($xuehao/1000000);
+                    $data[$flag] = isset($data[$flag])?$data[$flag]+1:1;
+                    break;
+                case 9:
+                    $flag = (int)($xuehao/10000000);
+                    $data[$flag] = isset($data[$flag])?$data[$flag]+1:1;
+                    break;
+            }
+        }
+        return $data;
+    }
+
+    public function tongji($activityId,$question_id)
+    {
+        $data = Reg_result::whereRaw('reg_id = ? and question_id = ?',array($activityId,$question_id))
+            ->select('answer',DB::raw('count(*) as count'))
+            ->groupBy('answer')
+            ->get();
+        $sum = Reg_result::whereRaw('reg_id = ? and question_id = ?',array($activityId,$question_id))->count();
+        foreach($data as $key=>$value)
+        {
+            $data[$key]->percent = $value->count*100/$sum.'%';
+        }
+        return $data;
+    }
+
+    public function tongjiLiulanliang($activityId)
+    {
+        $baomingrenshu = Registration_user::where('reg_id',$activityId)->count();
+        $liulanliang = Registration::where('reg_id',$activityId)->pluck('page_view');
+        $tianxielv = $liulanliang!=0?$baomingrenshu*100/$liulanliang.'%':'0.00%';
+        $pingjuyongshi = Registration_user::where('reg_id',$activityId)->avg('used_time');
+        $pingjuyongshi = date('H:i:s',$pingjuyongshi);
+        return array($baomingrenshu,$liulanliang,$tianxielv,$pingjuyongshi);
+    }
+
 }

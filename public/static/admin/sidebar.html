@@ -1,32 +1,48 @@
 <ul class="nav nav-pills nav-stacked custom-nav" role="tablist">
-    <li><a href="index.html">首页</a></li>
-    <li class="menu-list nav-active"><a>报名</a>
+    <li id="sidebar1"><a>首页</a></li>
+    <li class="menu-list"><a>报名</a>
         <ul class="sub-menu-list">
-            <li><a href="register/viewreg.html"> 查看报名</a></li>
-            <li class="active"><a href="register/newreg.html"> 新建报名</a></li>
-            <li><a href="register/regresult.html"> 统计结果</a></li>
+            <li id="sidebar2-1"><a> 查看报名</a></li>
+            <li id="sidebar2-2"><a> 新建报名</a></li>
+            <li id="sidebar2-3"><a> 统计结果</a></li>
         </ul>
     </li>
     <li class="menu-list"><a>微信</a>
         <ul class="sub-menu-list">
-            <li><a href="weixin/interface.html">微信接口</a></li>
-            <li><a href="weixin/autoreply.html">自动回复</a></li>
+            <li id="sidebar3-1"><a>微信接口</a></li>
+            <li id="sidebar3-2"><a>自动回复</a></li>
         </ul>
     </li>
     <li class="menu-list"><a>设置</a>
         <ul class="sub-menu-list">
-            <li><a href="#">帐号信息</a></li>
-            <li><a href="#">社团信息</a></li>
-            <li><a href="#">报名简介</a></li>
+            <li id="sidebar4-1"><a>帐号信息</a></li>
+            <li id="sidebar4-2"><a>社团信息</a></li>
+            <li id="sidebar4-3"><a>报名简介</a></li>
         </ul>
     </li>
     <li class="menu-list"><a>帮助</a>
         <ul class="sub-menu-list">
-            <li><a href="#">帮助中心</a></li>
-            <li><a href="#">联系我们</a></li>
-            <li><a href="#">关于团团</a></li>
+            <li id="sidebar5-1"><a>帮助中心</a></li>
+            <li id="sidebar5-2"><a>联系我们</a></li>
+            <li id="sidebar5-3"><a>关于团团</a></li>
         </ul>
     </li>
 </ul>
 
+<script>
+    sidebarHref = {
+        'sidebar1': '/static/admin/index.html',
+        'sidebar2-1': '/static/admin/register/viewreg.html',
+        'sidebar2-2': '/static/admin/register/newreg.html',
+        'sidebar2-3': '/static/admin/register/regresult.html',
+        'sidebar3-1': '/static/admin/weixin/interface.html',
+        'sidebar3-2': '/static/admin/weixin/autoreply.html',
+        'sidebar4-1': 'javascript:void(0)',
+        'sidebar4-2': 'javascript:void(0)',
+        'sidebar4-3': 'javascript:void(0)',
+        'sidebar5-1': 'javascript:void(0)',
+        'sidebar5-2': 'javascript:void(0)',
+        'sidebar5-3': 'javascript:void(0)'
+    }
+</script>
 
