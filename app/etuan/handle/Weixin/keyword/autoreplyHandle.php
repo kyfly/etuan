@@ -14,7 +14,6 @@ class autoreplyHandle
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$arr["news_id"],"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }elseif($arr['news_from']=="url"){
                     if(isset($arr['content'][0])){
-
                         for($i=0;$i<count($arr['content']);$i++){
                             $arr['content'][$i]['mp_id'] = $arr["mp_id"];
                             $arr['content'][$i]['news_from'] =  $arr['news_from'];
@@ -42,43 +41,52 @@ class autoreplyHandle
                 }
             }
             DB::commit();
-            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
-                $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
-                $content=[$reg[0]['original']];
-            }else{
-                $content= "";
-            }
-            $arr = ['status'=>'success',"mp_reply_id"=>$reply_id,'content'=>$content];
-            return $arr;
+            $replyObj = new autoreplyHandle;
+            return $replyObj->successMsg($arr['news_from'],$news_id);
         } catch (Exception $e) {
             DB::rollback();
             return "请检查数据是否填写正确";
         }
            
     }
+    public function ChangeToText($mp_reply_id,$content){
+        $result = Autoreply::where("mp_reply_id",$mp_reply_id)->select("msg_type","msg_id")->first();
+        try {
+            DB::beginTransaction();
+            if($result->msg_type =="news")
+            {
+                $news_id = Autoreply::where("mp_reply_id",$mp_reply_id)->pluck('msg_id');
+                Newsmsg::where("news_id",$news_id)->delete();
+                $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$content]);
+                Autoreply::where("mp_reply_id",$mp_reply_id)->update(["msg_id"=>$text_id,"msg_type"=>'text']);
+            }else{
+                Textmsg::where("text_id",$result->msg_id)->update(["content"=>$content]);
+            }
+            DB::commit();
+            return true;
+        } catch (Exception $e) {
+            DB::rollback();
+            return false;
+        }
+    }
     public static function  update($arr){
+        $replyObj = new autoreplyHandle;
         $news = new newsService;
         try {
             DB::beginTransaction();
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
             $result = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->select("msg_type","msg_id")->first();
             if($arr["type"]=="text"){
-                if($result->msg_type =="news")
-                {
-                    $news_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck('msg_id');
-                    Newsmsg::where("news_id",$news_id)->delete();
-                    $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$arr["content"]]);
-                    $re = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$text_id,"msg_type"=>$arr["type"]]);
-
-                }else{
-                    Textmsg::where("text_id",$result->msg_id)->update(["content"=>$arr["content"]]);
+                $re = $replyObj->ChangeToText($arr['mp_reply_id'],$arr['content']);
+                if(!$re){
+                    return "更新为文本信息失败";
                 }
             }elseif($arr["type"]=="news"){
                 //更新类型为图文时分三种，sucai,url,act
                 if($arr['news_from']=='sucai'){
                     $news_from = Newsmsg::where("news_id",$arr["news_id"])->pluck("news_from");
                     if(!$news_from){
-                        return false;
+                        return '该消息不存在';
                     }elseif($news_from!="sucai"){   //如果原来为图文消息，且不属于sucai。则删除。
                         Newsmsg::where("news_id",$arr["news_id"])->delete();
                     }
@@ -119,21 +127,30 @@ class autoreplyHandle
             Keyword::where("mp_reply_id",$arr["mp_reply_id"])->delete();
             for($i = 0;$i<count($arr["keyword"]);$i++)
             {
-                $re = Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
+                Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
             DB::commit();
-            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
-                $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
-                $content=[$reg[0]['original']];
-            }else{
-                $content= "";
+            if(isset($news_from)&&$news_from=="registration"){
+                return $replyObj->successMsg($arr['mp_reply_id'],$arr['news_from'],$news_id);
             }
-            $arr = ['status'=>'success',"mp_reply_id"=>$arr["mp_reply_id"],'content'=>$content];
-            return $arr;
-        } catch (Exception $e) {
+            $msg = $replyObj->successMsg($arr['mp_reply_id']);
+
+            
+            return $msg;
+        }catch (Exception $e) {
             DB::rollback();
             return '更新消息失败';
         }
+    }
+    public function successMsg($mp_reply_id,$news_from="",$news_id=""){
+        if(isset($news_from)&&$news_from=="registration"){
+            $reg = Newsmsg::where('news_id',$news_id)->select("title","description","pic_url","url")->get();
+            $content=[$reg[0]['original']];
+        }else{
+            $content= "";
+        }
+        $arr = ['status'=>"success","mp_reply_id"=>$mp_reply_id,'content'=>$content];
+        return $arr;
     }
     public static function show($org_uid){
         $mp_ids = Wxdata::where("org_uid",$org_uid)->lists("mp_id");

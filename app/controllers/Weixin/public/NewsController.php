@@ -47,7 +47,7 @@
                 
                 return $json;
             }else{
-                return false;
+                return '查询失败';
             }
         }
         public function getDestory(){
