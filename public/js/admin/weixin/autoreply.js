@@ -45,12 +45,10 @@ function MessageView(msg) {
 MessageView.prototype.getNewsDiv = function () {
     if (this.message.content.length == 1) {
         if (this.message.CreateTime)
-            var createTime = new Date(this.message.CreateTime);
+            var createTime = new Date(this.message.CreateTime * 1000);
         else
             var createTime = new Date();
-        with (createTime) {
-            createTime = getFullYear() + '-' + (getMonth() + 1) + '-' + getDay();
-        }
+        createTime = createTime.getFullYear() + '-' + (createTime.getMonth() + 1) + '-' + createTime.getDate();
         var msgHtml = String.format('<div class="col-md-6 margintop newsSingle">' +
             '<a href="{0}" target="_blank"><h4 class="colorBlack"> {1} </h4></a>' +
             '<p>{2}</p>' +
