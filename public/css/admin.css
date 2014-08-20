@@ -777,3 +777,9 @@ min-height: 188px;
 .textToCopyLabel {
     padding: 3px;
 }
+
+#plusbtn {
+	font-size: 30px;
+	line-height: 70px;
+	color: #b2b2b2;
+	}
