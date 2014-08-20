@@ -5,14 +5,13 @@ class AutoreplyService
             //TODO:发布时修改！！！！
             //$org_uid = Auth::user()->org_uid;
             $org_uid = 1;
-            
             $mp_id = Wxdata::where('org_uid',$org_uid)->where('mp_id',$arr['mp_id'])->pluck('mp_id');
             if($this->check($arr,$mp_id)){
                 return $this->check($arr,$mp_id);
             }
 
             if(!$mp_id){
-                return 'false';
+                return '创建消息失败...';
             }
             if($arr["type"]=="text"){
                 $text_id = Textmsg::where("content",$arr["content"])->lists("text_id");
@@ -33,16 +32,15 @@ class AutoreplyService
                     }
                 }
                 if(!$title){
-                    return "false";
+                    return "不存在该消息";
                 }
         }
         if(isset($arr['act_id'])){
             $re = Registration::where('reg_id',$arr['act_id'])->pluck('reg_id');
             if(!$re){
-                return "false";
+                return "不是正确的活动id";
             }
         }
-
         $result = autoreplyHandle::create($arr);
         return $result;
     }
@@ -58,6 +56,12 @@ class AutoreplyService
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
             if($mp_id ==NULL){
                 return $arr[] = "不存在该自动回复";
+            }
+            if(isset($arr['act_id'])){
+                $re = Registration::where('reg_id',$arr['act_id'])->pluck('reg_id');
+                if(!$re){
+                    return "不是正确的活动id";
+                }
             }
     		$result = autoreplyHandle::update($arr);
     	    return $result;

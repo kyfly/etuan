@@ -28,6 +28,7 @@ class autoreplyHandle
                     }
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$news_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }else{
+
                     $news_id = actNewHandle::createNews($arr['news_from'],$arr['act_id'],$arr['mp_id']);
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$news_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
                 }
@@ -176,17 +177,21 @@ class autoreplyHandle
                     $arr[$j]["content"] = $content;
                 }elseif($msgs[$j]->msg_type == "news"){
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
-                    $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("title","description","pic_url","url")->get();
-                    $content = $news[0]["original"];
-                    $time = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("created_at")->first();
-                    $time = strtotime($time['original']['created_at']);
+                    $article_ids = Newsmsg::where("news_id",$msgs[$j]->msg_id)->lists('article_id');
+                    for($k = 0;$k<count($article_ids);$k++){
+                        $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("title","description","pic_url","url")->get();
+                        $content[] = $news[0]["original"];
+                    }
+                    $time = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck("created_at");
+                    $time = strtotime($time);
                     $new["CreateTime"]=$time;
                     $new["keyword"] = $keyword;
                     $new['type'] = 'news';
                     $new['mp_reply_id'] = $msgs[$j]->mp_reply_id;
                     $new['news_from'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('news_from');
                     $new['act_id'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('act_id');
-                    $new["content"] = [$content];
+                    $new["content"] = $content;
+                    $content = "";
                     $arr[]=$new;
                 }
             }
@@ -205,7 +210,7 @@ class autoreplyHandle
                 $i++;
             }
         }
-       return $json;
+        return $json;
     }
     public static function delete($reply_id){
         $re = Autoreply::where("mp_reply_id",$reply_id)->select("msg_id","msg_type")->first();

@@ -1,8 +1,26 @@
 <?php
 
     Route::get("/",function(){
-        $result = Autoreply::where("mp_reply_id",65)->select("msg_type","msg_id")->first();
-        return $result->msg_id;
+        $json = '{
+    "mp_id": 1,
+    "keyword": [
+        "v"
+    ],
+    "type": "news",
+    "news_from": "url",
+    "content": [
+        {
+            "title": "杭电社团组织官方报名系统",
+            "description": "杭电社团组织官方报名系统将在9月开启，可以通过以下方式参与报名：1.红色家园网站：登录join.re...",
+            "pic_url": "http://mmbiz.qpic.cn/mmbiz/RgEEKtKqV2ODibqOqNGaibiaMsyrhwTgUJhZ3f0iahgvBic15JMMfzyTZqy8QmJHQeZ62MYPDmdibovjToEpd5P3ibjWw/0",
+            "url": "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=201560865&idx=1&sn=5dd494ab9696b01f3a4d455090a31b21#rd"
+        }
+    ]
+}';
+
+        $result = json_decode($json,true);
+
+        return $result;
     });
 
 

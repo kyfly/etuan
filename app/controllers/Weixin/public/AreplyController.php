@@ -18,13 +18,14 @@ class AtrplyController extends BaseController
     {
 
         $arr = json_decode($this->json, true);
+        file_put_contents("test.txt",$this->json);
         $re = $this->reply->create($arr);
         if(!is_array($re)){
             $re = ['status'=>'fail',"message"=>urlencode($re)];
         }
         $re = json_encode($re);
         $re = urldecode($re);
-        //file_put_contents("test.txt",$re);
+        
         return $re;
     }
 

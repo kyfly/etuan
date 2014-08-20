@@ -1,1 +1,1 @@
-{"status":"success","mp_reply_id":24,"content":[{"title":"ggg","description":"\u70b9\u51fb\u8fdb\u5165ggg>>","pic_url":null,"url":"gggggggggg"}]}
+{"mp_id":1,"keyword":["gg","mp_welcome_autoreply_message","mp_default_autoreply_message"],"type":"news","news_from":"registration","act_id":1}
