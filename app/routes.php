@@ -1,26 +1,12 @@
 <?php
 
     Route::get("/",function(){
-        $json = '{
-    "mp_id": 1,
-    "keyword": [
-        "v"
-    ],
-    "type": "news",
-    "news_from": "url",
-    "content": [
-        {
-            "title": "杭电社团组织官方报名系统",
-            "description": "杭电社团组织官方报名系统将在9月开启，可以通过以下方式参与报名：1.红色家园网站：登录join.re...",
-            "pic_url": "http://mmbiz.qpic.cn/mmbiz/RgEEKtKqV2ODibqOqNGaibiaMsyrhwTgUJhZ3f0iahgvBic15JMMfzyTZqy8QmJHQeZ62MYPDmdibovjToEpd5P3ibjWw/0",
-            "url": "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=201560865&idx=1&sn=5dd494ab9696b01f3a4d455090a31b21#rd"
-        }
-    ]
-}';
-
-        $result = json_decode($json,true);
-
-        return $result;
+        $article_ids = Newsmsg::where("news_id",39)->lists('article_id');
+                    for($k = 0;$k<count($article_ids);$k++){
+                        $news = Newsmsg::where("news_id",39)->where('article_id',$article_ids[$k])->select("title","description","pic_url","url")->get();
+                        $content[] = $news[0]["original"];
+                    }
+        return $content;
     });
 
 
