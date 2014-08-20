@@ -43,20 +43,20 @@ class AuthController extends BaseController
 			with('message','您已经成功登出,欢迎使用!');
 	}
 
-	// public function getRegister()
-	// {
-	// 	return View::make('register');
-	// }
+	 public function getRegister()
+	 {
+	 	return View::make('register');
+	 }
 
-	public function getRegister()
+	public function postRegister()
 	{
-		$userInfo = json_decode(Input::get('userInfo'));
+		$userInfo = Input::all();
 
 		$values = array(
-			'email'=>$userInfo->email,
-			'password'=>$userInfo->password,
-			'phone_long'=>$userInfo->phone_long,
-			'phone_short'=>$userInfo->phone_short
+			'email'=>$userInfo['email'],
+			'password'=>$userInfo['password'],
+			'phone_long'=>$userInfo['phone_long'],
+			'phone_short'=>$userInfo['phone_short']
 			);
 		$rules = array(
 			'email' => array('not_exist:organization_user','required'),
@@ -75,10 +75,10 @@ class AuthController extends BaseController
 		}
 
 		$user = new User;
-		$user->email = $userInfo->email;
-		$user->password = Hash::make($userInfo->password);
-		$user->phone_long = $userInfo->phone_long;
-		$user->phone_short = $userInfo->phone_short;
+		$user->email = $userInfo['email'];
+		$user->password = Hash::make($userInfo['password']);
+		$user->phone_long = $userInfo['phone_long'];
+		$user->phone_short = $userInfo['phone_short'];
 		$user->save();
 		return Response::json(array(
 			'register_status' => 'success',

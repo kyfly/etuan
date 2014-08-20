@@ -39,11 +39,11 @@ class ActivityService implements ActivityServiceInterface
 	public function createActivity($org_uid, $activityInfo)
 	{
         $values = array(
-            'name'=>$activityInfo->name,
-            'url'=>$activityInfo->url);
+            'name'=>$activityInfo->name
+        );
         $rules = array(
             'name'=>'not_exist:'.strtolower($this->tableName),
-            'url'=>'not_exist:'.strtolower($this->tableName));
+            );
         $messages = array(
             'not_exist'=>Lang::get('activity.already.exist')
             );
@@ -67,13 +67,11 @@ class ActivityService implements ActivityServiceInterface
             getTimeInfo($org_uid, $this->tableName, $this->primaryKey, $activityId);
         $values = array(
             'time' => date('Y-m-d H:i:s',time()),
-            'name' => $activityInfo->name,
-            'url'  => $activityInfo->url
+            'name' => $activityInfo->name
         );
         $rules = array(
             'time' => array('before:'.$timeInfo->start_time),
-            'name' => 'special_not_exist:'.$this->tableName.','.$this->primaryKey.','.$activityId,
-            'url'  => 'special_not_exist:'.$this->tableName.','.$this->primaryKey.','.$activityId
+            'name' => 'special_not_exist:'.$this->tableName.','.$this->primaryKey.','.$activityId
         );
         $messages = array(
             'before' => '活动已经开始了,不得更改.',

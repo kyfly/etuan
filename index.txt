@@ -1,6 +1,6 @@
 创建活动:
 http://localhost/etuan/public/registration/createactivity?
-registrationActivityInfo=
+activityInfo=
 {"start_time":"2014-7-7 19:00:00",
 "stop_time":"2014-7-7 19:00:00",
 "limit_type":1,
