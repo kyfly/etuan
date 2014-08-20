@@ -80,7 +80,7 @@ class actNewHandle
                         ["title" => $url->name,
                                 "article_id" => 1,
                                 "description" => "点击进入".$url->name.">>",
-                                "pic_url" => $pic_url,
+                                "pic_url" => '$pic_url',
                                 "url" => $acturl,
                                 "news_from"=>$news_from,
                                'mp_id'=>$mp_id]

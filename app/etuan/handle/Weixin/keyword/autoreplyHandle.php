@@ -130,12 +130,10 @@ class autoreplyHandle
                 Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
             DB::commit();
-            if(isset($news_from)&&$news_from=="registration"){
+            if(isset($arr['news_from'])&&$arr['news_from']=="registration"){
                 return $replyObj->successMsg($arr['mp_reply_id'],$arr['news_from'],$news_id);
             }
             $msg = $replyObj->successMsg($arr['mp_reply_id']);
-
-            
             return $msg;
         }catch (Exception $e) {
             DB::rollback();
