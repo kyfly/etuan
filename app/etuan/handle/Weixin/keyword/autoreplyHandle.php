@@ -168,6 +168,7 @@ class autoreplyHandle
             //对不是菜单事件的自动回复进行处理
             for($j = 0;$j<count($msgs);$j++){
                 if($msgs[$j]->msg_type == "text"){
+                    $content = "";
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
                     $content = Textmsg::where("text_id",$msgs[$j]->msg_id)->pluck("content");
                     $arr[$j]['type'] = 'text';
