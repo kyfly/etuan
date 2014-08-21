@@ -5,19 +5,19 @@ class QR
 		$appid = APPID;
 		$secrect = APPSECRET;
 		$scene_id = DB::table('mp_qr_etuan')->insertGetId(['act_type'=>$type,'act_id'=>$id]);
-		$qrurlpath = QrcodeHandle::getUrl($appid,$secrect,$scene_id,$id,$type);
-		if($qrurlpath)
+		$result = QrcodeHandle::getUrl($appid,$secrect,$scene_id,$id,$type);
+		if($result)
 		{
-			return $qrurlpath;
+			return "创建成功";
 		}
-		return '创建二维码失败';
+		return '创建失败';
 	}
 	public static function update($scene,$id,$type){
 		$re = Etuan::where("scene_id",$scene)->update(["act_id"=>$id,"act_type"=>$type]);
         if($re){
-            return true;
+            return '更新成功';
         }else{
-            return false;
+            return '更新失败';
         }
 	}
 }

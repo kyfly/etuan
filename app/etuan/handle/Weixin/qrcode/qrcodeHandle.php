@@ -5,7 +5,7 @@ class QrcodeHandle
         
     //生成带参数的二维码，暂时没用上，返回二维码的存放位置
 	public static function getUrl($appid,$appsecret,$scene_id,$id,$type){
-        $activity = ['Lottery','Registration','Ticket','Vote'];
+        $activity = ['lottery','registration','ticket','vote'];
         $route = ['jiang','baoming','qiang','tou'];
         $token = WS::getToken($appid,$appsecret);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
@@ -29,16 +29,16 @@ class QrcodeHandle
                 $filedir = $route[$i];
             }
         }
-        dd($filedir);
-        $subject = 'etuan/weixin/qrcode/'.$filedir.'/'.$id.'.jpg';
-        return $subject;
-        $filename = "img/ticket/".time().".jpg";
-        if($file = fopen($filename,"w")){
-            if(fwrite($file,$body)){
-                return $filename;
-            }else{
-                return false;
-            }
+        $oss = new oss;
+        $bucket = QRIMGBUCKET;
+        $object = 'etuan/weixin/qrcode/'.$filedir.'/'.$id.'.jpg';
+        $options = ['content'=>$body,
+                'length'=>strlen($body),
+                'content_type'=>'image/jpeg'];
+        $result = $oss->upload_file_by_content($bucket,$object,$options);
+        if($result->status == 200)
+        {
+            return true;
         }else{
             return false;
         }
