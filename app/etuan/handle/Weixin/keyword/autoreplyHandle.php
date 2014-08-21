@@ -176,18 +176,14 @@ class autoreplyHandle
                     $arr[$j]["msg_id"] = $msgs[$j]->msg_id;
                     $arr[$j]["content"] = $content;
                 }elseif($msgs[$j]->msg_type == "news"){
+                    $content = "";
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
                     $article_ids = Newsmsg::where("news_id",$msgs[$j]->msg_id)->lists('article_id');
-                    if(count($article_ids)>1){
-                        for($k = 0;$k<count($article_ids);$k++){
-                            $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->where('article_id',$article_ids[$k])->select("title","description","pic_url","url")->get();
-                            $content[] = $news[0]["original"];
-                        }
-                        $new["content"] = $content;
-                    }elseif(count($article_ids)==1){
-                        $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->select("title","description","pic_url","url")->get();
-                        $new["content"] = [$news[0]["original"]];
+                    for($k = 0;$k<count($article_ids);$k++){
+                        $news = Newsmsg::where("news_id",$msgs[$j]->msg_id)->where('article_id',$article_ids[$k])->select("title","description","pic_url","url")->get();
+                        $content[] = $news[0]["original"];
                     }
+                    $new["content"] = $content;
                     $time = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck("created_at");
                     $time = strtotime($time);
                     $new["CreateTime"]=$time;
@@ -196,8 +192,6 @@ class autoreplyHandle
                     $new['mp_reply_id'] = $msgs[$j]->mp_reply_id;
                     $new['news_from'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('news_from');
                     $new['act_id'] = Newsmsg::where("news_id",$msgs[$j]->msg_id)->pluck('act_id');
-                    
-                    $content = "";
                     $arr[]=$new;
                 }
             }

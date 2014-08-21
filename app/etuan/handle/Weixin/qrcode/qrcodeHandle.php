@@ -1,8 +1,12 @@
 <?php
 class QrcodeHandle
 {
+    
+        
     //生成带参数的二维码，暂时没用上，返回二维码的存放位置
-	public static function getUrl($appid,$appsecret,$scene_id){
+	public static function getUrl($appid,$appsecret,$scene_id,$id,$type){
+        $activity = ['Lottery','Registration','Ticket','Vote'];
+        $route = ['jiang','baoming','qiang','tou'];
         $token = WS::getToken($appid,$appsecret);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
         $arr = ["action_name" => "QR_LIMIT_SCENE" ,"action_info" => ["scene" => [ "scene_id"=> $scene_id]]];
@@ -20,6 +24,14 @@ class QrcodeHandle
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $body = curl_exec($ch);
         curl_close($ch);
+        for($i=0;$i<count($activity);$i++){
+            if($activity[$i] == $type){
+                $filedir = $route[$i];
+            }
+        }
+        dd($filedir);
+        $subject = 'etuan/weixin/qrcode/'.$filedir.'/'.$id.'.jpg';
+        return $subject;
         $filename = "img/ticket/".time().".jpg";
         if($file = fopen($filename,"w")){
             if(fwrite($file,$body)){

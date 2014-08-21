@@ -6,7 +6,7 @@ class actNewHandle
     public function __construct()
     {
         $this->activity = ['Lottery','Registration','Ticket','Vote'];
-        $this->route = ['jiang','baoming','qiang','vote'];
+        $this->route = ['jiang','baoming','qiang','tou'];
     }
     //创建自动回复，图文类型为活动时，创建图文消息。
   	public static function createNews($news_from,$act_id,$mp_id){

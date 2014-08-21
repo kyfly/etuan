@@ -86,10 +86,14 @@ require app_path().'/Ioc.php';
 
 define('IMGURL','http://www.etuan.local/image');
 
+
 define('DOMAINLENTH',13);
 define('IMGBUCKET','liujiandong');
+//'/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999);html中图片地址
+define('QRIMGBUCKET','liujiandong');
+//'qr/'.$org_uid.'/'.$activity.'/'.$act_id.'.png'; 二维码图片地址
 define('HTMLBUCKET','liujiandong');
-
+//'etuan/mp/'.$news_from.'/'.$info->mp_id.'/'.date('ymdHis',time()).rand(10000,99999).".html";html地址。
 define("CALLBACKURL",urlencode("http://60.176.43.59/oauth"));
 
 define("APPID","wx5d92b3c192f993e7");

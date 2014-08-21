@@ -6,10 +6,11 @@ class QretuanController extends BaseController
             $this->Qr = $Qr;
     }
     public function getCreate(){
-        $id = Input::get("act_id");
-        $type = Input::get("act_type");
-        $action = Input::get("action");
-        $result = $this->Qr->create($id,$type,$action);
+        // $id = Input::get("act_id");
+        // $type = Input::get("act_type");
+        $id = 1;
+        $type = 'vote';
+        $result = $this->Qr->create($id,$type);
         return $result;
     }
     public function getUpdate(){
