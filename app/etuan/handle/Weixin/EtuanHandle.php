@@ -43,13 +43,17 @@ class EtuanHandle extends replyHandle
 
             case "SCAN":
                  $sence_id = $postObj->EventKey;
+                 $mp_origin_id = $postObj->ToUserName;
                  $result = Etuan::where("scene_id",$sence_id)->select("act_type","act_id")->first();
                  $re = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
                  $obj =new $re;
                  $key = $obj->primaryKey;
-                 $url = $re::where($key,$result->act_id)->select("url","name")->first();
-                 $arr =["title"=>$url->name,"description"=>"",
-                        "pic_url"=>"http://img1.imgtn.bdimg.com/it/u=174549535,3268375638&fm=23&gp=0.jpg","url"=>$url->url];
+                 $url = $re::where($key,$result->act_id)->select("name")->first();
+                 $org_uid = Wxdata::where('mp_origin_id',$mp_origin_id)->pluck('org_uid');
+                 $actObj = new actNewHandle;
+                 $acturl = $actObj->getactUrl($activity,$act_id);
+                 $arr =["title"=>$url->name,"description"=>"点击进入".$act[$j]->name.">>",
+                        "pic_url"=>Organization::where("org_uid",$org_uid)->pluck('logo_url'),"url"=>$acturl];
                  return $this->ArticlesMessage($postObj, $arr);
             break;
 
