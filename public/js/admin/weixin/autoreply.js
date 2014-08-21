@@ -22,8 +22,11 @@ MessageModel.prototype.insertMessage = function(msg) {
         if (msg.keyword.indexOf(keywordToFind) > -1)
         {
             var keywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword')[0];
-            keywordTmp.removeByVal(keywordToFind);
-            this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
+            if (keywordTmp)
+            {
+                keywordTmp.removeByVal(keywordToFind);
+                this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
+            }
         }
         keywordToFind = "mp_default_autoreply_message";
     }
@@ -191,10 +194,10 @@ MessageCtrl.prototype.initModal = function(replyId) {
                     break;
                 case 'url':
                     $("#addNews").click();
-                    var urlStr = msg.content[0].url;
+                    prevNewsText = msg.content[0].url;
                     for (var i = 1; i < msg.content.length; i++)
-                        urlStr += "\n" + msg.content[i].url;
-                    $('#newsText').val(urlStr);
+                         prevNewsText += "\n" + msg.content[i].url;
+                    $('#newsText').val(prevNewsText);
                     break;
             }
             break;
@@ -352,17 +355,31 @@ $('#btnSave').click(function () {
     else {
         message.type = "news";
         message.news_from = "url";
+        var newsText = $('#newsText').val();
+        if (newsText == '')
+        {
+            alert("啊哦，保存失败了！\n图文地址不能为空哦！");
+            return;
+        }
         $(this).attr("disabled", "disabled");
+        //优化性能，当图文url未改变时，不向服务器发起请求
+        if (newsText != prevNewsText)
         //采用同步方式，将url传递给服务器，抓取微信素材库内容
-        $.ajax({
-            type: 'POST',
-            url: '/weixin/reply/sucai',
-            async: false,
-            data: 'url=' + encodeURIComponent($('#newsText').val()),
-            success: function (data) {
-                message.content = JSON.parse(data);
-            }
-        });
+            $.ajax({
+                type: 'POST',
+                url: '/weixin/reply/sucai',
+                async: false,
+                data: 'url=' + encodeURIComponent(newsText),
+                success: function (data) {
+                    message.content = JSON.parse(data);
+                }
+            });
+        else
+        {
+            var tmpMsg = msgData.getMessageById(message.mp_reply_id)[0];
+            message.content = tmpMsg.content;
+        }
+        prevNewsText = "";
     }
     //添加欢迎消息关键字
     if ($('#setAsWelcome').is(":checked"))
