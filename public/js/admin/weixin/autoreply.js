@@ -21,7 +21,7 @@ MessageModel.prototype.insertMessage = function(msg) {
     {
         if (msg.keyword.indexOf(keywordToFind) > -1)
         {
-            var keywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword');
+            var keywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword')[0];
             keywordTmp.removeByVal(keywordToFind);
             this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
         }
@@ -133,7 +133,15 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
     //加载自动回复内容并修改id
     var ruleContent = ruleDiv.find('#ruleContentTpl');
     if (msg.type == "text")
-        ruleContent.html('<h5>' + msg.content + '</h5');
+    {
+        var textContent = msg.content;
+        if (textContent.length > 50)
+        {
+            textContent = textContent.substring(0, 50);
+            textContent += "...";
+        }
+        ruleContent.html('<h5>' + textContent.textToHtml() + '</h5');
+    }
     else {
         var view = new MessageView(msg);
         ruleContent.html(view.getNewsDiv())
@@ -172,7 +180,7 @@ MessageCtrl.prototype.initModal = function(replyId) {
     {
         case 'text':
             $('#addText').click();
-            $('#msgEditor').text(msg.content);
+            $('#msgEditor').html(msg.content.textToHtml());
             break;
         case 'news':
             switch (msg.news_from)
@@ -255,7 +263,7 @@ $('#addText').click(function () {
         $('#addReg').removeClass('colorBlack');
         $('#addNews').removeClass('colorBlack');
         var editor = $('#msgEditor');
-        editor.html('请在此处输入文字');
+        editor.html('请在此处输入文字消息');
         editor.attr('contenteditable', 'true');
     }
 });
@@ -325,7 +333,7 @@ $('#btnSave').click(function () {
             return;
         }
     if ($('#addText').hasClass('colorBlack')) {
-        message.content = $('#msgEditor').text();
+        message.content = $('#msgEditor').html().htmlToText();
         message.type = "text";
         if (message.content == "") {
             alert("啊哦，保存失败了！\n文字回复内容不能为空哦！");
@@ -433,6 +441,19 @@ if (!String.format) {
     };
 }
 
+String.prototype.htmlToText = function() {
+    var text = this.replace("<br>", "\n");
+    text = text.replace("&nbsp;", " ");
+    return text;
+};
+
+
+String.prototype.textToHtml = function() {
+    var html = this.replace("\n", "<br>");
+    html = html.replace(" ", "&nbsp;");
+    return html;
+};
+
 Array.prototype.indexOf = function(val) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == val) return i;
@@ -447,14 +468,60 @@ Array.prototype.removeByVal = function(val) {
     }
 };
 
+function enterKeyPressHandler(evt) {
+    var sel, range, br, addedBr = false;
+    evt = evt || window.event;
+    var charCode = evt.which || evt.keyCode;
+    if (charCode == 13) {
+        if (typeof window.getSelection != "undefined") {
+            sel = window.getSelection();
+            if (sel.getRangeAt && sel.rangeCount) {
+                range = sel.getRangeAt(0);
+                range.deleteContents();
+                br = document.createElement("br");
+                range.insertNode(br);
+                range.setEndAfter(br);
+                range.setStartAfter(br);
+                sel.removeAllRanges();
+                sel.addRange(range);
+                addedBr = true;
+            }
+        } else if (typeof document.selection != "undefined") {
+            sel = document.selection;
+            if (sel.createRange) {
+                range = sel.createRange();
+                range.pasteHTML("<br>");
+                range.select();
+                addedBr = true;
+            }
+        }
+
+        // If successful, prevent the browser's default handling of the keypress
+        if (addedBr) {
+            if (typeof evt.preventDefault != "undefined") {
+                evt.preventDefault();
+            } else {
+                evt.returnValue = false;
+            }
+        }
+    }
+}
+
 
 $(document).ready(function () {
     $('#addSuccessAlert').hide();
     loadAutoReply();
+
+    var el = document.getElementById("msgEditor");
+    if (typeof el.addEventListener != "undefined") {
+        el.addEventListener("keypress", enterKeyPressHandler, false);
+    } else if (typeof el.attachEvent != "undefined") {
+        el.attachEvent("onkeypress", enterKeyPressHandler);
+    }
+
     $('body').tooltip({
         selector: '[rel=tooltip]'
     });
-
     $('#main').on('click', '.btnEditReply', function() {
         mpReplyId = $(this).parents('.bs-callout').attr('id').substring(4);
         mpReplyId = Number(mpReplyId);
