@@ -94,12 +94,13 @@ class replyHandle
         }
         return $this->TextMessage($postObj,$content);
     }
+
     public function Autoreply($postObj){
        $content = $postObj->Content;
        return $this->reply($postObj,$content);
     }
     //自动回复信息处理。
-    private function reply($postObj,$content){
+    public function reply($postObj,$content){
         try{
             $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
             $reply_id = clickEvent::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');

@@ -35,6 +35,11 @@ class EtuanHandle extends replyHandle
         {
             case "subscribe":
                 $content = "mp_welcome_autoreply_messgae";
+                if(isset($postObj->EventKey)){
+                    $eventkey = $postObj->EventKey;
+                    $scene_id = substr($eventkey,8);
+                    return $this->sceneReply($postObj,$scene_id);
+                }
                 return $this->reply($postObj,$content);
                 break;
 
@@ -42,19 +47,8 @@ class EtuanHandle extends replyHandle
                 break;
 
             case "SCAN":
-                 $sence_id = $postObj->EventKey;
-                 $mp_origin_id = $postObj->ToUserName;
-                 $result = Etuan::where("scene_id",$sence_id)->select("act_type","act_id")->first();
-                 $re = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
-                 $obj =new $re;
-                 $key = $obj->primaryKey;
-                 $url = $re::where($key,$result->act_id)->select("name")->first();
-                 $org_uid = Wxdata::where('mp_origin_id',$mp_origin_id)->pluck('org_uid');
-                 $actObj = new actNewHandle;
-                 $acturl = $actObj->getactUrl($activity,$act_id);
-                 $arr =["title"=>$url->name,"description"=>"点击进入".$act[$j]->name.">>",
-                        "pic_url"=>Organization::where("org_uid",$org_uid)->pluck('logo_url'),"url"=>$acturl];
-                 return $this->ArticlesMessage($postObj, $arr);
+                 $scene_id = $postObj->EventKey;
+                 return $this->sceneReply($postObj,$scene_id);
             break;
 
             case "CLICK":
@@ -66,6 +60,20 @@ class EtuanHandle extends replyHandle
         }
         return $this->reply($postObj,$content);
 
+    }
+    private function sceneReply($postObj,$scene_id){
+         $mp_origin_id = $postObj->ToUserName;
+         $result = Etuan::where("scene_id",$scene_id)->select("act_type","act_id")->first();
+         $activity = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
+         $obj =new $activity;
+         $key = $obj->primaryKey;
+         $url = $activity::where($key,$result->act_id)->select("name")->first();
+         $org_uid = Wxdata::where('mp_origin_id',$mp_origin_id)->pluck('org_uid');
+         $actObj = new actNewHandle;
+         $acturl = $actObj->getactUrl($activity,$result->act_id);
+         $arr =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
+                "pic_url"=>Organization::where("org_uid",$org_uid)->pluck('logo_url'),"url"=>$acturl];
+         return $this->ArticlesMessage($postObj, $arr);
     }
     public function Click($postObj)
     {

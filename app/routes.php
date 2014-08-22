@@ -1,12 +1,16 @@
 <?php
 
     Route::get("/",function(){
-        $article_ids = Newsmsg::where("news_id",39)->lists('article_id');
-                    for($k = 0;$k<count($article_ids);$k++){
-                        $news = Newsmsg::where("news_id",39)->where('article_id',$article_ids[$k])->select("title","description","pic_url","url")->get();
-                        $content[] = $news[0]["original"];
-                    }
-        return $content;
+        $xml = '<xml>
+                            <ToUserName><![CDATA[liu]]></ToUserName>
+                            <FromUserName><![CDATA[jd]]></FromUserName>
+                            <CreateTime>1234567</CreateTime>
+                            <MsgType><![CDATA[event]]></MsgType>
+                            <Event><![CDATA[SCAN]]></Event>
+                            <EventKey><![CDATA[5]]></EventKey>
+                            </xml>';
+        $content = BS::https_request('http://www.etuan.local/wx/liu',$xml);
+        dd($content);
     });
 
 
