@@ -242,7 +242,13 @@ $(function(){
     });
 
     $('#addelement').click(function () {
-        var createSelect='<div class="form-group"><label class="col-sm-2 control-label">部门名称</label><div class="col-sm-6"><input type="text" class="form-control"></div></div><div class="form-group"><label class="col-sm-2 control-label">部门介绍</label><div class="col-sm-6"><textarea class="form-control"></textarea><span class="help-block">50字以内</span></div></div>'
+        var createSelect='<div class="form-group">' +
+            '<label class="col-sm-2 control-label">部门名称</label>' +
+            '<div class="col-sm-6"><input type="text" class="form-control" name="departmentName[]"></div></div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-2 control-label">部门介绍</label>' +
+            '<div class="col-sm-6"><textarea class="form-control" name="departmentDesc[]" rows="3"></textarea>' +
+            '<span class="help-block">50字以内</span></div></div>';
         $('#addablebox').append(createSelect);
     })
 
