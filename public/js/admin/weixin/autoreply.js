@@ -14,6 +14,10 @@ MessageModel.prototype.getMessageById = function(id) {
     return this.messageDB({mp_reply_id: id}).get();
 };
 
+MessageModel.prototype.getRegMsgById = function(reg_id) {
+    return this.messageDB({act_id: reg_id}).get();
+};
+
 MessageModel.prototype.insertMessage = function(msg) {
     //将其他记录中的默认回复关键字删除
     var keywordToFind = "mp_welcome_autoreply_message";
@@ -22,8 +26,11 @@ MessageModel.prototype.insertMessage = function(msg) {
         if (msg.keyword.indexOf(keywordToFind) > -1)
         {
             var keywordTmp = this.messageDB({keyword: {has: keywordToFind}}).select('keyword')[0];
-            keywordTmp.removeByVal(keywordToFind);
-            this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
+            if (keywordTmp)
+            {
+                keywordTmp.removeByVal(keywordToFind);
+                this.messageDB({keyword: {has: keywordToFind}}).update('keyword', keywordTmp);
+            }
         }
         keywordToFind = "mp_default_autoreply_message";
     }
@@ -187,14 +194,14 @@ MessageCtrl.prototype.initModal = function(replyId) {
             {
                 case 'registration':
                     $('#addReg').click();
-                    $("input[name='regRadio']").attr('checked',msg.mp_reply_id);
+                    $("input[name=regRadio][value=" + msg.act_id + "]")[0].checked = true;
                     break;
                 case 'url':
                     $("#addNews").click();
-                    var urlStr = msg.content[0].url;
+                    prevNewsText = msg.content[0].url;
                     for (var i = 1; i < msg.content.length; i++)
-                        urlStr += "\n" + msg.content[i].url;
-                    $('#newsText').val(urlStr);
+                         prevNewsText += "\n" + msg.content[i].url;
+                    $('#newsText').val(prevNewsText);
                     break;
             }
             break;
@@ -224,7 +231,7 @@ MessageCtrl.prototype.clearModal = function() {
     $('#setAsDefault').prop('checked', false);
 };
 
-MessageCtrl.prototype.removeKeywordRule = function(id) {
+MessageCtrl.prototype.removeKeywordRule = function (id) {
     $.get('/weixin/reply/destory', {reply_id: id},
         function (data, status) {
             if (status == 'success')
@@ -233,13 +240,61 @@ MessageCtrl.prototype.removeKeywordRule = function(id) {
                 {
                     $('#rule'+id).remove();
                     msgData.removeMsgById(id);
-                   
+                    msgCtrl.showAlert('自动回复删除成功！');
                 }
                 else
                     alert("哎呀呀，删除失败了！");
             }
         }
     );
+};
+
+MessageCtrl.prototype.uploadMessage = function (message) {
+    $.post(!message.mp_reply_id ? '/weixin/reply/create' : '/weixin/reply/update',
+        JSON.stringify(message),
+        function (data, status){
+            if (status == 'success')
+            {
+                data = JSON.parse(data);
+                if (data.status == 'success')
+                {
+                    if (!message.content)
+                        message.content = data.content;
+                    if (!message.mp_reply_id)
+                        message.mp_reply_id = data.mp_reply_id;
+                    else
+                        msgData.removeMsgById(message.mp_reply_id);
+                    msgData.insertMessage(message);
+                    msgCtrl.AddKeywordRule(message);
+                    $('#addrulebox').modal('hide');
+                    msgCtrl.showAlert('微信自动回复设置成功！');
+                }
+                else
+                {
+                    alert("对不起，未创建消息!\n错误信息：" + data.message);
+                }
+            }
+            $('#btnSave').removeAttr("disabled");
+        }
+    )
+};
+
+MessageCtrl.prototype.showAlert = function (alertStr, type) {
+    if (!type)  type = 'info';
+    var alert = $('#topAlert');
+    if (closeAlertTimer)
+    {
+        clearTimeout(closeAlertTimer);
+        alert.removeClass();
+        alert.addClass('alert alert-dismissible');
+    }
+    alert.addClass('alert-' + type);
+    $('#topAlertStr').text(alertStr);
+    alert.slideDown();
+    closeAlertTimer = setTimeout(function() {
+        alert.slideUp();
+        alert.removeClass('alert-' + type);
+    }, 5000);
 };
 
 //--- other ---------------------------------
@@ -270,14 +325,19 @@ $('#addText').click(function () {
 
 $('#addReg').click(function () {
     if (!$(this).hasClass('colorBlack')) {
-        $(this).addClass('colorBlack');
-        $('#addText').removeClass('colorBlack');
-        $('#addNews').removeClass('colorBlack');
-        var editor = $('#msgEditor');
-        editor.html('报名列表正在加载中...');
-        editor.attr('contenteditable', 'false');
+        //TODO:发布时需要修改地址！！
         $.get('reglist.json', function (data, status) {
             if (status == 'success') {
+                if (data.length == 0)
+                {
+                    alert("您未创建任何报名表，请前往报名模块创建！");
+                    return;
+                }
+                $('#addReg').addClass('colorBlack');
+                $('#addText').removeClass('colorBlack');
+                $('#addNews').removeClass('colorBlack');
+                var editor = $('#msgEditor');
+                editor.attr('contenteditable', 'false');
                 data = eval(data);
                 var regHtml = '<div class="form-group">';
                 for (var i = 0; i < data.length; i++) {
@@ -288,7 +348,7 @@ $('#addReg').click(function () {
                         data[i].reg_id, data[i].name);
                 }
                 regHtml += '</div>';
-                $('#msgEditor').html(regHtml);
+                editor.html(regHtml);
             }
         })
     }
@@ -352,17 +412,31 @@ $('#btnSave').click(function () {
     else {
         message.type = "news";
         message.news_from = "url";
+        var newsText = $('#newsText').val();
+        if (newsText == '')
+        {
+            alert("啊哦，保存失败了！\n图文地址不能为空哦！");
+            return;
+        }
         $(this).attr("disabled", "disabled");
+        //优化性能，当图文url未改变时，不向服务器发起请求
+        if (newsText != prevNewsText)
         //采用同步方式，将url传递给服务器，抓取微信素材库内容
-        $.ajax({
-            type: 'POST',
-            url: '/weixin/reply/sucai',
-            async: false,
-            data: 'url=' + encodeURIComponent($('#newsText').val()),
-            success: function (data) {
-                message.content = JSON.parse(data);
-            }
-        });
+            $.ajax({
+                type: 'POST',
+                url: '/weixin/reply/sucai',
+                async: false,
+                data: 'url=' + encodeURIComponent(newsText),
+                success: function (data) {
+                    message.content = JSON.parse(data);
+                }
+            });
+        else
+        {
+            var tmpMsg = msgData.getMessageById(message.mp_reply_id)[0];
+            message.content = tmpMsg.content;
+        }
+        prevNewsText = "";
     }
     //添加欢迎消息关键字
     if ($('#setAsWelcome').is(":checked"))
@@ -375,38 +449,42 @@ $('#btnSave').click(function () {
     }
     $(this).attr("disabled", "disabled");
     //向服务器发送数据，根据message.mp_reply_id是否定义判断目标接口
-    $.post(!message.mp_reply_id ? '/weixin/reply/create' : '/weixin/reply/update',
-        JSON.stringify(message),
-        function (data, status){
-            if (status == 'success')
+    msgCtrl.uploadMessage(message);
+});
+
+$('#btnOneKeyReg').click(function() {
+    $(this).attr("disabled", "disabled");
+    //获取报名表
+    $.get('reglist.json', function (data, status) {
+        if (status == 'success') {
+            if (data.length == 0)
             {
-                data = JSON.parse(data);
-                if (data.status == 'success')
-                {
-                    if (!message.content)
-                        message.content = data.content;
-                    if (!message.mp_reply_id)
-                        message.mp_reply_id = data.mp_reply_id;
-                    else
-                        msgData.removeMsgById(message.mp_reply_id);
-                    msgData.insertMessage(message);
-                    msgCtrl.AddKeywordRule(message);
-                    $('#addrulebox').modal('hide');
-                    $('#addSuccessAlert').fadeIn();
-                    fadeOutAlert = undefined;
-                    clearTimeout(fadeOutAlert);
-                    fadeOutAlert = setTimeout(function() {
-                            $('#addSuccessAlert').fadeOut();
-                        }, 5000);
-                }
-                else
-                {
-                    alert("对不起，未创建消息!\n错误信息" + data.message);
-                }
+                alert("您未创建任何报名表，请前往报名模块创建！");
+                return;
             }
-            $('#btnSave').removeAttr("disabled");
+            data = eval(data);
+            var i = 0;
+            while (i < data.length && msgData.getRegMsgById(data[i].reg_id)[0]) i++;
+            if (data[i])
+            {
+                var message = {};
+                message.mp_id = msgData.mpId;
+                message.type = "news";
+                message.news_from = "registration";
+                message.act_id = data[i].reg_id;
+                if (i == 0)
+                    message.keyword = ["报名"];
+                else
+                    message.keyword = ["报名" + data[i].reg_id];
+                msgCtrl.uploadMessage(message);
+            }
+            else
+            {
+                msgCtrl.showAlert('没有新的报名可以添加。', 'warning');
+            }
+            $('#btnOneKeyReg').removeAttr("disabled");
         }
-    )
+    });
 });
 
 $('#btnAddRule').click(function () {
@@ -427,8 +505,10 @@ $('#delMsgModal').on('hidden.bs.modal', function () {
     mpReplyId = undefined;
 });
 
-$('#addSuccessAlertClose').click(function () {
-    $('#addSuccessAlert').fadeOut();
+$('#topAlertClose').click(function () {
+    $('#topAlert').slideUp();
+    alert.removeClass();
+    alert.addClass('alert alert-dismissible');
 });
 
 //添加格式化字符串函数支持
@@ -509,7 +589,7 @@ function enterKeyPressHandler(evt) {
 
 
 $(document).ready(function () {
-    $('#addSuccessAlert').hide();
+    $('#topAlert').hide();
     loadAutoReply();
 
     var el = document.getElementById("msgEditor");
@@ -546,3 +626,4 @@ $(document).ready(function () {
 });
 
 var mpReplyId;
+var closeAlertTimer;
