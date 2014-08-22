@@ -783,3 +783,8 @@ min-height: 188px;
 	line-height: 70px;
 	color: #b2b2b2;
 	}
+
+#divShare {
+    margin-top: 10px;
+    display: none;
+}

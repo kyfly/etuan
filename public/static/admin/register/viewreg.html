@@ -98,14 +98,23 @@
             </h3>
             <hr>
             <div class="row">
-                <div class="col-sm-4 col-md-3">
+                <div class="col-md-3">
                     <div class="thumbnail">
                         <img src="../../../img/qrcode_etuan_344.jpg">
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-3" style="margin-top: 20px">
+                <div class="col-md-3" style="margin-top: 20px">
                     <p class="listhead">杭州电子科技大学学生会2014招新报名</p>
                     <button class="btn btn-warning">下载二维码</button>
+                    <button class="btn btn-success" id="btnShare"> 分享</button>
+                    <div class="bdsharebuttonbox" id="divShare" data-tag="share_1">
+                        <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                        <a class="bds_tsina" data-cmd="tsina"></a>
+                        <a class="bds_renren" data-cmd="renren"></a>
+                        <a class="bds_sqq" data-cmd="sqq"></a>
+                        <a class="bds_more" data-cmd="more"></a>
+                        <a class="bds_count" data-cmd="count"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,5 +127,22 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../../../js/admin.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnShare').click(function () {
+            $('#divShare').slideToggle();
+        })
+    });
+    window._bd_share_config = {
+        share : [{
+            tag: 'share_1',
+            bdText: '分享的内容',
+            bdDesc: '分享的摘要',
+            bdUrl: 'http://i.kyfly.net',
+            bdPic: 'http://www.etuan.local/img/qrcode_etuan_344.jpg'
+        }]
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
 </body>
 </html>
