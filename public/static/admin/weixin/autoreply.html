@@ -34,11 +34,11 @@
     <div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
 
     <div id="main" class="col-lg-9 col-md-9">
-        <div class="alert alert-success alert-dismissible" id="addSuccessAlert" role="alert">
-            <button type="button" class="close" id="addSuccessAlertClose">
+        <div class="alert alert-dismissible" id="topAlert" role="alert">
+            <button type="button" class="close" id="topAlertClose">
                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
             </button>
-            微信自动回复设置成功！
+            <span id="topAlertStr"></span>
         </div>
         <h2>微信自动回复</h2>
         <hr>
@@ -48,7 +48,7 @@
                     data-toggle="modal" data-target="#addrulebox" id="btnAddRule">+添加规则
             </button>
             &nbsp;&nbsp;
-            <button type="button" class="btn btn-warning btn-lg" >一键添加报名表</button>
+            <button type="button" class="btn btn-warning btn-lg" id="btnOneKeyReg">一键添加报名表</button>
         </div>
 
 
