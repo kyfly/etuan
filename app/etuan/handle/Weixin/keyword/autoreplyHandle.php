@@ -176,6 +176,7 @@ class autoreplyHandle
                     $arr[$j]["keyword"] = $keyword;
                     $arr[$j]["msg_id"] = $msgs[$j]->msg_id;
                     $arr[$j]["content"] = $content;
+                    $content = "";
                 }elseif($msgs[$j]->msg_type == "news"){
                     $content = "";
                     $keyword = Keyword::where("mp_reply_id",$msgs[$j]->mp_reply_id)->lists("keyword");
