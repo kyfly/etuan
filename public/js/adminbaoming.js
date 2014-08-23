@@ -9,7 +9,7 @@ $(document).ready(function(){
 			name:"",
 			theme:"",
 			url:"",
-			questions:[],
+			questions:[]
 		};
 		//获得报名终止时间
 		createActivityJson.stop_time=$("#stoptime").val().toString().replace("/","-")+":00";
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			else{
 				createActivityJson.limit_grade += "0";
 			}
-		};
+		}
 		//获得活动标题（貌似暂时不用，囧）
 		//createActivityJson.name = $("#name").val();
 		//获得地址链接的值
@@ -35,7 +35,7 @@ $(document).ready(function(){
 				createActivityJson.theme = objTheme[j].value;
 				break;
 			}
-		};
+		}
 		//未完成的获取关于问题项目的定义
 		/*
 		var objQuestion = documnt.getElementsByName("question");
@@ -51,16 +51,14 @@ $(document).ready(function(){
 		};
 		*/
 		//打包好发送格式的Json
-		var prepareJson = {activityInfo:createActivityJson,};
-        var sendJson = JSON.stringify(prepareJson);
+        var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
 		//dev阶段采用alert形式表示数据
 		alert(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
 			url:"registration/createactivity",
-			data:sendJson,
+			data:sendJson
 		});
-
 	});
 });

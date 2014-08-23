@@ -40,9 +40,8 @@ $(document).ready(function(){
 				{"question_id":11,"type":108,"label":"这是问题11","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
 				{"question_id":12,"type":109,"label":"这是问题12","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
 				{"question_id":13,"type":110,"label":"这是问题13","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-				{"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-				
-			],
+				{"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}}
+			]
 		};
 		var pjBack = function(){
 			return pageJSON;
@@ -93,12 +92,12 @@ $(document).ready(function(){
 		var n = 0;
 		for (var key in newQuestionItem){
 			n++;
-		};
+		}
 		if (typeof(newQuestionItem)==="object" && n===4 && typeof(newQuestionItem.question_id)==="number" 
 			&& typeof(newQuestionItem.type)==="number" && typeof(newQuestionItem.label)==="string" 
 			&& typeof(newQuestionItem.content)==="object"){	
 			questionItem = newQuestionItem;
-		};
+		}
 		var divQuestion = document.createElement("div");
 		divQuestion.setAttribute("id","question"+questionItem.question_id.toString());
 		
@@ -128,7 +127,7 @@ $(document).ready(function(){
 				var contentList = questionItem.content;
 				for(var contentItem in contentList){
 					elementFilling.options.add(new Option(contentList[contentItem].toString(),contentItem.toString()));
-				};
+				}
 				introText = document.createTextNode(questionItem.label);
 				break;
 			case 101:
@@ -219,7 +218,7 @@ $(document).ready(function(){
 				elementFilling = document.createElement("div");
 				introText = document.createTextNode("");
 				break;
-		};	
+		}
 		elementFilling.setAttribute("id","answer"+questionItem.question_id.toString());
 		pType.appendChild(introText);
 		divType.appendChild(pType);
@@ -235,7 +234,7 @@ $(document).ready(function(){
 		var n = 0;
 		for (var key in newPageJson){
 			n++;
-		};
+		}
 		if (typeof(newPageJson)==="object" && n===7 && typeof(newPageJson.activityId)==="number"
 			&& typeof(newPageJson.start_time)==="string" && typeof(newPageJson.stop_time)==="string" 
 			&& typeof(newPageJson.limit_grade)==="string" && newPageJson.limit_grade.length===5
@@ -354,7 +353,7 @@ $(document).ready(function(){
 	//用户表单数据格式
 	var participatorInfoJson = {
 		used_time:"",
-		result:[],
+		result:[]
 	};	
 			//jQuery对每一次input失去焦点的变化都进行各自不同的检查
 			//$("input,select,textarea").blur();
@@ -373,7 +372,7 @@ $(document).ready(function(){
 		for (var i = 1; i <= activityPageJson.questions.length; i++){
 			var questionItemResult ={
 				question_id:"",
-				answer:"",
+				answer:""
 			};
 			questionItemResult.question_id = activityPageJson.questions[i-1].question_id.toString();
 			//未考虑复选框CHECKBOX的情况，谁让那是个异类呢。
@@ -382,20 +381,19 @@ $(document).ready(function(){
 				questionItemResult.answer = inputString;
 			}
 			else{
-				alert(activityPageJson.questions[i-1].label+"，这一项你的输入有误哦！")
+				alert(activityPageJson.questions[i-1].label+"，这一项你的输入有误哦！");
 				questionItemResult.answer = "这里有错->"+inputString;
 			};
 			participatorInfoJson.result[i-1] = questionItemResult;
-		};
-		var prepareJson = {activityId:activityPageJson.activityId,participatorInfo:participatorInfoJson,};
-        var sendJson = JSON.stringify(prepareJson);
+		}
+        var sendJson = {activityId:activityPageJson.activityId,participatorInfo:JSON.stringify(participatorInfoJson)};
 		//dev阶段采用alert形式表示数据
 		alert(sendJson);
         //利用Ajax把Json用POST上去
         $.ajax({
              type:"POST",
              url:"registration/participateinactivity",
-             data:sendJson,
+             data:sendJson
         });
 
 	});
