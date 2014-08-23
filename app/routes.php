@@ -15,9 +15,12 @@
 
 
     Route::get("x",function(){
-      $reg = Newsmsg::where('news_id',107)->select("title","description","pic_url","url")->get();
-                $content=[$reg[0]['original']];
-                dd($content);
+      $re = Weixin::login("jjj");
+      return $re;
+    });
+    Route::get("y",function(){
+      $re = Weixin::user();
+      return $re;
     });
     Route::group(array('before'=>'wxauth'),function()
     {

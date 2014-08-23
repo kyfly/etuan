@@ -33,7 +33,6 @@
 		}
 
 	public function getCheck(){
-	
 		$state = Input::get("state");
     	$userinfo = $this->cache->get($state);
         if($userinfo['token']== $state)
