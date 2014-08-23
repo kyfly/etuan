@@ -48,29 +48,9 @@ class RegistrationController extends ActivityController
         }
 
         $data['liulan'] = $this->registrationHandle->tongjiLiulanliang($this->activityId);
-       return View::make('regresult')->with('data',$data);
-    }
+        dd($data['liulan']);
 
-    public function getDownloadpdf()
-    {
-        $html = "";
-        $results = $this->registrationHandle->getActivityResult($this->activityId);
-        foreach($results as $result)
-        {
-            $html .= "
-            <html>
-            <head>
-            </head>
-            <body>";
-            foreach($result->questions as $key=>$question)
-            {
-                $html .= "<strong>".$question."</strong>:<br/>".$result->answers[$key]."<hr/>";
-            }
-            $html .= "
-            </body>
-            ";
-        }
-        return PDF::load($html, 'A4', 'portrait')->show();
+//        return View::make('destination')->with('data',$data);
     }
 
     public function serviceName()

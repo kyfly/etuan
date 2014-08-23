@@ -225,7 +225,6 @@ $(function(){
             return false;
         }
         if ($("input[name='pic2']").val() == ""){
-
             alert("对不起，请上传展示照片2！")
             $("input[name='pic2']").focus();
             return false;
@@ -245,10 +244,10 @@ $(function(){
     $('#addelement').click(function () {
         var createSelect='<div class="form-group">' +
             '<label class="col-sm-2 control-label">部门名称</label>' +
-            '<div class="col-sm-6"><input type="text" class="form-control" name="department_name[]"></div></div>' +
+            '<div class="col-sm-6"><input type="text" class="form-control" name="departmentName[]"></div></div>' +
             '<div class="form-group">' +
             '<label class="col-sm-2 control-label">部门介绍</label>' +
-            '<div class="col-sm-6"><textarea class="form-control" name="department_description[]" rows="3"></textarea>' +
+            '<div class="col-sm-6"><textarea class="form-control" name="departmentDesc[]" rows="3"></textarea>' +
             '<span class="help-block">50字以内</span></div></div>';
         $('#addablebox').append(createSelect);
     })

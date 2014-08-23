@@ -45,65 +45,48 @@ class AuthController extends BaseController
 
 	 public function getRegister()
 	 {
-	 	return View::make('adminregdit');
+	 	return View::make('register');
 	 }
 
 	public function postRegister()
 	{
 		$userInfo = Input::all();
-//        $logo = Input::file('logo');
-//        return $logo;
 
 		$values = array(
-			'email'=>$userInfo['email']
+			'email'=>$userInfo['email'],
+			'password'=>$userInfo['password'],
+			'phone_long'=>$userInfo['phone_long'],
+			'phone_short'=>$userInfo['phone_short']
 			);
 		$rules = array(
 			'email' => array('not_exist:organization_user','required'),
+			'password' => array('required'),
+			'phone_long' => array('integer','required')
 			);
 		$messages = array(
 			'not_exist' => '该用户名已经存在了',
+			'numeric' => '电话号码不是一个数字',
+			'required' => '必须输入'
 			);
 		$validator = Validator::make($values, $rules,$messages);
 		if($validator->fails())
 		{
-            echo '验证失败';
-//			return View::make('register')->with('error',$validator->messages());
+			return $validator->messages();
 		}
 
-//        try {
-//            DB::beginTransaction();
-            $org_uid = User::insertGetId(array(
-                'email' => $userInfo['email'],
-                'password' => Hash::make($userInfo['password']),
-                'phone_long' => $userInfo['phone_long'],
-                'phone_short' => $userInfo['phone_short'],
-                'user_group' => 'org'
-            ));
-            $oss = new oss;
-//            $oss->upload_file_by_file();
-            $org_id = Organization::insertGetId(array(
-                'name' => $userInfo['name'],
-                'type' => $userInfo['type'],
-                'school' => $userInfo['school'],
-                'logo_url' => 'url',
-                'description' => $userInfo['description'],
-                'org_uid' => $org_uid
-            ));
-            foreach($userInfo['department_name'] as $key=>$department_name)
-            {
-                $department = new Department;
-                $department->name = $department_name;
-                $department->description = $userInfo['department_description'][$key];
-                $department->org_id = $org_id;
-                $department->save();
-            }
-//            DB::commit();
-//            dd('注册成功');
-//            return View::make('home');
-//        } catch (Exception $e) {
-//            DB::rollback();
-//            dd('注册失败');
-//            return View::make('register');
-//        }
+		$user = new User;
+		$user->email = $userInfo['email'];
+		$user->password = Hash::make($userInfo['password']);
+		$user->phone_long = $userInfo['phone_long'];
+		$user->phone_short = $userInfo['phone_short'];
+		$user->save();
+		return Response::json(array(
+			'register_status' => 'success',
+			'redirect_url'    => URL::previous()
+			));
+
+		return Response::json(array(
+			'register_status' => 'fail'
+			));
 	}
 }

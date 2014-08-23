@@ -62,18 +62,6 @@
     Route::controller("oauth","WxauthController");
 
 
-    Route::get('pdftest',function()
-    {
-        for ($i=1;$i<=2;$i++)
-        {
-            $pdf = new \Thujohn\Pdf\Pdf();
-            $content = $pdf->load(View::make('login'))->output();
-            File::put(public_path('test'.$i.'.pdf'), $content);
-        }
-        PDF::clear();
-    });
-
-
 
 
 
