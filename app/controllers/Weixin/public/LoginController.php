@@ -33,7 +33,6 @@
 		}
 
 	public function getCheck(){
-	
 		$state = Input::get("state");
     	$userinfo = $this->cache->get($state);
         if($userinfo['token']== $state)
@@ -42,7 +41,7 @@
             $userinfo['check_id'] = 1 ;
 
             $this->cache->set($state,$userinfo,60);
-
+            
             Weixin::login($userinfo['user']);
 
             if(Session::get('requesturl')){

@@ -61,6 +61,19 @@ Route::filter('wxauth', function()
     }
 });
 
+Route::filter('stuinfo', function()
+{
+    $requesturl = "http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
+    Session::put('fromUrl',$requesturl);
+    $wx_uid = Weixin::user();
+    if(!$wx_uid){
+        return Redirect::to('weixin/login');
+    }
+    $stu_id = WxUser::where('wx_uid',$wx_uid)->pluck("stu_id");
+    if(!$stu_id){
+        return Redirect::to('weixin/stuinfo');
+    }
+});
 
 Route::filter('auth.basic', function()
 {
