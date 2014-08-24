@@ -388,7 +388,7 @@ $(document).ready(function(){
 		}
         var sendJson = {activityId:activityPageJson.activityId,participatorInfo:JSON.stringify(participatorInfoJson)};
 		//dev阶段采用alert形式表示数据
-		alert(sendJson);
+		console.log(sendJson);
         //利用Ajax把Json用POST上去
         $.ajax({
              type:"POST",
