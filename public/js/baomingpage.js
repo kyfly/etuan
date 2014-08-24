@@ -8,7 +8,7 @@ $(document).ready(function(){
 			activityId = newActivityId;
 		};
 		var pageJSON;
-		/*$.ajax ({
+		$.ajax ({
 			type:"get",
 			dataType:"json",
 			url:"registration/activityinfo?activityId="+activityId.toString(),
@@ -18,7 +18,8 @@ $(document).ready(function(){
 				}
 			}
 		});
-		*/
+        //备用对象
+		/*！！！！！！！！！！！！！！！！
 		pageJSON = {
 			"activityId":1,
 			"start_time":"2014-07-10 19:00:00",
@@ -43,49 +44,10 @@ $(document).ready(function(){
 				{"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}}
 			]
 		};
-		var pjBack = function(){
-			return pageJSON;
-		};
-		return pjBack();
+		*/
+		return pageJSON;
 	};
-			/*
-			//本意是用于获取一段表示主题的html，但是基于后台的开发情况，此功能已不需要
-			var getTheme = function(newTheme){
-				var theme;
-				var themeHtml;
-				functioncheckTheme(){
-				};
-				$.ajax({
-					type:"get",
-					dataType:"html",
-					url:"",
-					error:function(){};
-					success:function(msg){
-						if (themeHtml === undefined){
-							themeHtml = msg;
-						}
-					}
-				});
-				var thBack = function(){
-					return themeHtml;
-				};
-				return thBack();
-			};
-			*/
 	//-----此模块已通过单元测试BINGO!---------------------------------------------------------根据json文件生成报名页面
-	//创建通用单项createCommonListItem,其中html部分格式如下
-			/*
-			<div id="question1">
-				<div id="type1">
-					<p id="intro1"></p>
-				</div>
-				<div id="content1">
-					<input placeholder="接口中question里的label部分，实际上放在placeholder里" type="接口中的type属性"> 
-					<!--<textarea placeholder="同理">>-->
-					<!--<select></select>-->
-				</div>
-			</div>
-			*/
 	var createCommonListItem = function(newQuestionItem){
 		var questionItem;
 		//辨析输入
@@ -251,39 +213,17 @@ $(document).ready(function(){
 		document.title = pageJson.name;
 	};
 	//--此模块通过单元测试BINGO!-----------------------------------------------获得json，绘制页面
-			//json格式摘自项目wiki
-			/*
-			{"activityId":"1",
-			"start_time":"",
-			"stop_time":"2014-7-7 19:00:00",
-			"limit_grade":"1",
-			"name":"xxx",
-			"theme":2,
-			"url":"my1u2rl4",
-			"questions":
-			[
-			{"question_id":1,"type":1,"label":"xx","content":"xxx"},
-			{"question_id":2,"type":2,"label":"xx","content":"xxx;xxx"}]}
-			*/
-			//前提是页面中已经包含以下js
-			//控制每个页面的动画js,放在网页里
-			//var actionpageisstillnothingatall = function(){}
-			//每个页面的特定的生成js,放在网页里，主要功能为根据id添加class。
-			//var drawThemeCss = function(question){}
 	var urlpatt = new RegExp("^[0-9]*");
 	//此行仅作测试使用，实际应用请替换成下行
-		//var activityIdPredefined = urlpatt.exec(window.location.href.replace("http://www.etuan.org/baoming/",""));
-	var activityIdPredefined = 1;
+    //var activityIdPredefined = 1;
+    var activityIdPredefined = urlpatt.exec(window.location.href.replace("http://www.etuan.org/baoming/",""));
 	var activityPageJson;
 	if (typeof(activityIdPredefined)==="number"){
 		activityPageJson = getPageJSON(activityIdPredefined);
 	};
-			//!!!!!!!!要在这里实现对时间的检验，是否在start_time和stop_time之间
-			//!!!!!!!!暂未实现该功能
+	//!!!!!!!!要在这里实现对时间的检验，是否在start_time和stop_time之间
+	//!!!!!!!!暂未实现该功能
 	createCommonList(activityPageJson);
-			//绘制css，暂未实现该功能
-			//drawThemeCss();
-
 	//-----------------------------------------------------------------------开始整个报名表的运作部分
 	//检查是否属于允许报名的学号
 	var isAtRightGrade = function(newStuId,newLimitGrade){
@@ -342,25 +282,18 @@ $(document).ready(function(){
 		};
 		return matchResult;
 	};
-	
 	//--此模块已通过单元测试---------------------------------------------页面开始计时
 	var usedTime = 0;
 	function timedCount(){
 		usedTime++;
 	};
 	setInterval(timedCount,1000);
-	
 	//--此模块已经通过单元测试--------------------------------------------提交内容
 	//用户表单数据格式
 	var participatorInfoJson = {
 		used_time:"",
 		result:[]
-	};	
-			//jQuery对每一次input失去焦点的变化都进行各自不同的检查
-			//$("input,select,textarea").blur();
-			//COMMENT ON 2014-07-30 16:47
-			//我突然觉得实现这个功能很麻烦，而且很BUGGY，改为点击提交的时候一并检查
-	
+	};
 	//点击提交按钮时停止计时，并且打包数据，发送数据
 	$("#submit").click(function(){
 		//完成用时的记录和格式的转换
@@ -388,7 +321,7 @@ $(document).ready(function(){
 			participatorInfoJson.result[i-1] = questionItemResult;
 		}
         var sendJson = {activityId:activityPageJson.activityId,participatorInfo:JSON.stringify(participatorInfoJson)};
-		//dev阶段采用alert形式表示数据
+		//！！！！！！！！！！！！dev阶段采用alert形式表示数据
 		console.log(sendJson);
         //利用Ajax把Json用POST上去
         $.ajax({
@@ -396,6 +329,5 @@ $(document).ready(function(){
              url:"registration/participateinactivity",
              data:sendJson
         });
-
 	});
 });

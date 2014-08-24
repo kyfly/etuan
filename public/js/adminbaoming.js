@@ -12,7 +12,7 @@ $(document).ready(function(){
 			questions:[]
 		};
         //获得报名终止时间
-        createActivityJson.stop_time=$("#starttime").val().toString().replace("/","-")+":00";
+        createActivityJson.start_time=$("#starttime").val().toString().replace("/","-")+":00";
 		//获得报名终止时间
 		createActivityJson.stop_time=$("#stoptime").val().toString().replace("/","-")+":00";
 		//获得年纪限制并且转换为五位二进制数
@@ -113,7 +113,7 @@ $(document).ready(function(){
 		};
 		//打包好发送格式的Json
         var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
-		//dev阶段采用alert形式表示数据
+		//！！！！！！dev阶段采用alert形式表示数据
 		console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
