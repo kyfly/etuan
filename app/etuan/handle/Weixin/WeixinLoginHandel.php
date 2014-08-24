@@ -16,6 +16,9 @@ class Weixin
 	}
 	public static function user(){
 		$user = Session::get("wx_uid");
+		if(!$user){
+			return Redirect::to('weixin/login');
+		}
 		return $user;
 	}
 }

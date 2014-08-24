@@ -1,6 +1,6 @@
 <?php
 
-    Route::get("/",function(){
+    Route::get("/x",function(){
         $xml = '<xml>
                             <ToUserName><![CDATA[liu]]></ToUserName>
                             <FromUserName><![CDATA[jd]]></FromUserName>
@@ -12,19 +12,23 @@
         $content = BS::https_request('http://www.etuan.local/wx/liu',$xml);
         dd($content);
     });
-
-
-    Route::get("x",function(){
-      $re = Weixin::login("jjj");
+    Route::get("/",function(){
+        $lot = new choujiangHandle;
+        return $lot->getwx_uid();
+    });
+    Route::get("z",function(){
+      $re = Weixin::login('liu');
       return $re;
     });
-    Route::get("y",function(){
-      $re = Weixin::user();
+    Route::get("y",["before"=>'stuinfo',function(){
+      $re = rand(0,1000);
       return $re;
-    });
-    Route::group(array('before'=>'wxauth'),function()
+    }]);
+
+    Route::group(array('before'=>'wxauth|stuinfo'),function()
     {
-      
+        //抽奖，获取某次抽奖结果
+        Route::get("jiang/get/{lottery_id}","choujiangController@get");
     });
     
     Route::controller('auth','AuthController');
@@ -64,7 +68,10 @@
 
     Route::controller("oauth","WxauthController");
 
-
+    //抽奖，获取该抽奖活动中奖名单。
+    Route::get("jiang/result/{lottery_id}","choujiangController@result");
+    //微信登录后，进行学号和姓名的绑定。
+    Route::resource("weixin/stuinfo","Stu_infoController");
 
 
 
