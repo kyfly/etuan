@@ -1,0 +1,1 @@
+{{$orgInfo->name}}

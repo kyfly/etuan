@@ -64,6 +64,8 @@
 
     Route::controller("oauth","WxauthController");
 
+    Route::get("shetuan/{id}", "organizationController@orgIntroduce");
+
 
 
 
