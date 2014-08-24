@@ -68,10 +68,27 @@
 
     Route::controller("oauth","WxauthController");
 
+
     //抽奖，获取该抽奖活动中奖名单。
     Route::get("jiang/result/{lottery_id}","choujiangController@result");
     //微信登录后，进行学号和姓名的绑定。
     Route::resource("weixin/stuinfo","Stu_infoController");
+
+    Route::get("shetuan/{id}", "organizationController@orgIntroduce");
+
+
+    Route::get('pdftest',function()
+    {
+        for ($i=1;$i<=2;$i++)
+        {
+            $pdf = new \Thujohn\Pdf\Pdf();
+            $content = $pdf->load(View::make('login'))->output();
+            File::put(public_path('test'.$i.'.pdf'), $content);
+        }
+        PDF::clear();
+    });
+
+
 
 
 

@@ -9,7 +9,7 @@
 <style>
     body {
         font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
-		background-color: #e7e8ec;
+        background: url(<?php echo URL::to('img/bg.gif')?>);
     }
 
     .navbar {
@@ -125,7 +125,7 @@
         <li><a href="#bumeninfo" role="pill" data-toggle="pill" id="next1-3">3. 部门简介</a></li>
     </ul>
 </div>
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" method="post" action="register" enctype="multipart/form-data">
 <div class="tab-content col-xs-9">
 <!--创建账号-->
 <div class="tab-pane fade active in" id="newid">
@@ -133,7 +133,7 @@
         <label for="inputEmail" class="col-sm-2 control-label">电子邮箱</label>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="inputEmail">
+            <input type="text" class="form-control" id="inputEmail" name="email">
             <span id="span1" class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
             <span id="span1-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
         </div>
@@ -143,7 +143,7 @@
         <label for="inputPassword" class="col-sm-2 control-label">密码</label>
 
         <div class="col-sm-6">
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" class="form-control" id="inputPassword" name="password">
             <span id="span2" class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
             <span id="span2-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">请输入6-16位非空格字符</span>
@@ -164,7 +164,7 @@
         <label for="inputPhone" class="col-sm-2 control-label">手机号码</label>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="inputPhone">
+            <input type="text" class="form-control" id="inputPhone" name="phone_long">
             <span id="span4" class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
             <span id="span4-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">请输入11位手机号码</span>
@@ -175,7 +175,7 @@
         <label for="inputPhone2" class="col-sm-2 control-label">移动短号</label>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="inputPhone2">
+            <input type="text" class="form-control" id="inputPhone2" name="phone_short">
             <span id="span5" class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
             <span id="span5-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">移动用户请输入6位短号（选填）</span>
@@ -194,7 +194,7 @@
         <label for="inputShetuan" class="col-sm-2 control-label">社团名称</label>
 
         <div class="col-sm-6">
-            <input name="shetuanmingcheng" type="text" class="form-control" id="inputShetuan">
+            <input name="name" type="text" class="form-control" id="inputShetuan">
             <span id="span6-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
         </div>
     </div>
@@ -202,7 +202,7 @@
         <label for="inputType" class="col-sm-2 control-label">类别</label>
 
         <div class="col-sm-6">
-            <select class="form-control" id="inputType">
+            <select class="form-control" id="inputType" name="type">
                 <option id="xiaojioption" value="1">校级组织</option>
                 <option value="2">院级组织</option>
                 <option value="3">校级社团</option>
@@ -214,7 +214,7 @@
         <label for="inputXueyuan" class="col-sm-2 control-label">所属学院</label>
 
         <div class="col-sm-6">
-            <select name="suoshuxueyuan" class="form-control" id="inputXueyuan">
+            <select name="school" class="form-control" id="inputXueyuan">
                 <option value="1"></option>
                 <option value="全校">全校</option>
                 <option value="机械工程学院">机械工程学院</option>
@@ -244,7 +244,7 @@
         <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
 
         <div class="col-sm-6">
-            <textarea id="inputIntro" name="shetuanjieshao" class="form-control" rows="7"></textarea>
+            <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">200字以内</span>
         </div>
@@ -304,14 +304,14 @@
             <label class="col-sm-2 control-label">部门名称</label>
 
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="departmentName[]">
+                <input type="text" class="form-control" name="department_name[]">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">部门介绍</label>
 
             <div class="col-sm-6">
-                <textarea class="form-control"  name="departmentDesc[]" rows="3"></textarea>
+                <textarea class="form-control"  name="department_description[]" rows="3"></textarea>
                 <span class="help-block">50字以内</span>
             </div>
         </div>
@@ -347,6 +347,6 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="../js/adminregdit.js"></script>
+<script src="<?php echo URL::to('js/adminregdit.js');?>"></script>
 </body>
 </html>
