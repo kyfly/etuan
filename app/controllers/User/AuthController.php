@@ -66,12 +66,12 @@ class AuthController extends BaseController
 		$validator = Validator::make($values, $rules,$messages);
 		if($validator->fails())
 		{
-            echo '验证失败';
+            dd('fail');
 //			return View::make('register')->with('error',$validator->messages());
 		}
 
-//        try {
-//            DB::beginTransaction();
+        try {
+            DB::beginTransaction();
             $org_uid = User::insertGetId(array(
                 'email' => $userInfo['email'],
                 'password' => Hash::make($userInfo['password']),
@@ -80,7 +80,6 @@ class AuthController extends BaseController
                 'user_group' => 'org'
             ));
             $oss = new oss;
-//            $oss->upload_file_by_file();
             $org_id = Organization::insertGetId(array(
                 'name' => $userInfo['name'],
                 'type' => $userInfo['type'],
@@ -97,14 +96,30 @@ class AuthController extends BaseController
                 $department->org_id = $org_id;
                 $department->save();
             }
-            $oss->upload_file_by_file(IMGBUCKET,'/etuan/shetuan/logo/'.$org_uid.'jpg',$userInfo['logo']);
-//            DB::commit();
-//            dd('注册成功');
-//            return View::make('home');
-//        } catch (Exception $e) {
-//            DB::rollback();
-//            dd('注册失败');
-//            return View::make('register');
-//        }
+//            $oss->upload_file_by_file(IMGBUCKET,'/etuan/shetuan/logo/'.$org_uid.'jpg',$userInfo['logo']);
+            DB::commit();
+            dd('success');
+            return View::make('home');
+        } catch (Exception $e) {
+            DB::rollback();
+            dd('fail');
+            return View::make('register');
+        }
 	}
+
+    //注册中,一些项用ajax判断是否存在
+    public function postCheck()
+    {
+        $values = array(
+            Input::get('key') => Input::get('value')
+        );
+
+        $rules = array(
+            Input::get('key') => 'not_exist:organization_user'
+        );
+
+        $validator = Validator::make($values,$rules);
+
+        return $validator->fails()==false?1:0;
+    }
 }

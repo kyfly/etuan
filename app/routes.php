@@ -86,6 +86,7 @@
 
     Route::get("shetuan/{id}", "organizationController@orgIntroduce");
 
+    Route::controller('organization',"organizationController");
 
     Route::get('pdftest',function()
     {

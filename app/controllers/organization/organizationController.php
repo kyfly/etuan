@@ -17,4 +17,16 @@ class organizationController extends BaseController
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
             ->with('regUrl', $regUrl);
     }
+
+    public function getDepartment()
+    {
+        $org_uid = Input::get('org_uid');
+        $org_id = Organization::where('org_uid',$org_uid)
+            ->pluck('org_id');
+        $deparment = Department::where('org_id',$org_id)
+            ->lists('name');
+        return $deparment;
+    }
+
+
 }
