@@ -104,15 +104,20 @@ class RegistrationHandle extends  ActivityHandle
     {
         $reg_serial = Registration_user::where('reg_id',$activityId)
                         ->lists('reg_serial');
-        $answers = Reg_result::where('reg_result.reg_id',$activityId)
-                     ->whereIn('reg_result.reg_serial',$reg_serial)
-                     ->join('reg_question','reg_result.question_id','=','reg_question.question_id')
-                     ->select('reg_question.question_id','reg_question.label','reg_result.reg_serial','reg_result.answer')
+
+        $answers = Reg_result::where('reg_id',$activityId)
+                     ->whereIn('reg_serial',$reg_serial)
+                     ->select('question_id','reg_serial','answer')
                      ->orderBy('reg_serial','asc')
                      ->orderBy('question_id','asc')
                      ->get();
+
+        $questions = Reg_question::where('reg_id',$activityId)
+                       ->orderBy('question_id','asc')
+                       ->lists('label');
+
         $results = array();
-        $result = new result;
+        $result = array();
         $j = 0;
         $i = 0;
         $reg_serial = $answers[0]->reg_serial;
@@ -120,22 +125,21 @@ class RegistrationHandle extends  ActivityHandle
         {
             if($reg_serial==$answer->reg_serial)
             {
-                $result->questions[$i] = $answer->label;
-                $result->answers[$i++] = $answer->answer;
+                $result[$i++] = $answer->answer;
                 if($key==(count($answers)-1))
                     $results[$j++] = $result;
             }
             else
             {
                 $results[$j++] = $result;
-                $result = new result;
+                $result = array();
                 $i = 0;
                 $reg_serial = $answer->reg_serial;
-                $result->questions[$i] = $answer->label;
-                $result->answers[$i++] = $answer->answer;
+                $result[$i++] = $answer->answer;
             }
         }
-        return $results;
+
+        return array($questions,$results);
     }
 
 
@@ -229,20 +233,6 @@ class RegistrationHandle extends  ActivityHandle
         $pingjuyongshi = Registration_user::where('reg_id',$activityId)->avg('used_time');
         $pingjuyongshi = date('H:i:s',$pingjuyongshi);
         return array($baomingrenshu,$liulanliang,$tianxielv,$pingjuyongshi);
-    }
-
-}
-
-class result
-{
-    public $questions;
-
-    public $answers;
-
-    public function construct()
-    {
-        $this->questions = array();
-        $this->answers = array();
     }
 
 }

@@ -55,22 +55,40 @@ class RegistrationController extends ActivityController
     {
         $html = "";
         $results = $this->registrationHandle->getActivityResult($this->activityId);
-        foreach($results as $result)
+        foreach($results[1] as $result)
         {
             $html .= "
             <html>
             <head>
             </head>
             <body>";
-            foreach($result->questions as $key=>$question)
+            foreach($result as $key=>$answer)
             {
-                $html .= "<strong>".$question."</strong>:<br/>".$result->answers[$key]."<hr/>";
+                $html .= "<strong>".$results[0][$key]."</strong>:<br/>".$answer."<hr/>";
             }
             $html .= "
             </body>
             ";
         }
         return PDF::load($html, 'A4', 'portrait')->show();
+    }
+
+    public function getDownloadxls()
+    {
+        $results = $this->registrationHandle->getActivityResult($this->activityId);
+        Excel::create('Filename', function($excel) use($results) {
+
+//            $excel->row(1,$results[0]);
+
+            $excel->sheet('Sheetname', function($sheet) use($results){
+
+                $sheet->fromArray($results[1]);
+
+                $sheet->row(1,$results[0]);
+
+            });
+
+        })->export('xls');
     }
 
     public function serviceName()
