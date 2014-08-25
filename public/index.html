@@ -1,8 +1,174 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css"/>
+    <title>团团一家 - 杭电社团服务平台</title>
+    <style>
+        .myft {
+            font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?18a33d5e0bee3d92c20e7173809e5cb4";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
-<body>
-	<img src="http://qiangying.oss-cn-hangzhou.aliyuncs.com/30new.jpg">
+
+<body class="myft" style="background-color: #f4f4f4">
+<header id="nav">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                        <span class="sr-only">导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h5>
+                        <a href="index.html">
+                            <img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@60h.png" height="30px">
+                        </a>
+                    </h5>
+                </div>
+                <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="shetuan.html">社团</a>
+                        </li>
+                        <li>
+                            <a href="baoming.html">报名</a>
+                        </li>
+                        <li>
+                            <a href="qiang.html">疯抢</a>
+                        </li>
+                        <li>
+                            <a href="tou.html">投票</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<section id="background" style="background-color: rgb(18,0,0);margin-top: -20px">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9" style="margin-left: -15px; margin-right: -15px">
+                <div id="carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel" data-slide-to="1"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="http://i.kyfly.net/ticket/sjgsHDU">
+                                <img src="http://i.kyfly.net/pic/sqzbs_min.jpg" alt="“十佳歌手”十强争霸赛" style="width:100%;height:100%">
+
+                                <div class="carousel-caption">
+                                    <h3>“十佳歌手”总决赛抢票</h3>
+
+                                    <p>最棒的声音！点击进入>></p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="http://i.kyfly.net//ticket/sgzsNew">
+                                <img src="http://i.kyfly.net/pic/sgzs_min.jpg" alt="“时光之书”晚会" style="width:100%;height:100%">
+
+                                <div class="carousel-caption">
+                                    <h3>“时光之书”晚会抢票</h3>
+
+                                    <p>来自计算机学院的“时光之书”晚会！点击进入>></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="visible-md" style="height: 20px"></div>
+                    <div class="visible-lg" style="height: 50px"></div>
+                    <div class="col-sm-12 col-md-11 col-md-offset-1 well" id="loginDiv">
+                        <div><h4>社团登录</h4></div>
+                        <form method="post" action="/auth/login">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </div>
+                                    <input type="text" id="username"  name="email" class="form-control" placeholder="用户名"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    </div>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="密码"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary myft">登录
+                                </button>
+                                <button type="button" class="btn btn-info myft"
+                                        onclick="window.location.href='/auth/register'">注册
+                                </button>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6">
+                                <img src="img/qrcode_etuan_100.gif" height="100px">
+                            </div>
+                            <div class="col-xs-6 col-md-6" style="margin: 20px 0 0 -20px">
+                                <p>扫码关注<br>团团一家<br>微信号</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="panel-footer">
+    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+</footer>
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script>
+    var count = 0;
+    var color = new Array("rgb(18,0,0)","rgb(141,112,89)");
+    $(document).ready(function () {
+        $("#background").css('background-color', color[0]);
+    });
+    $('#carousel').bind('slide.bs.carousel', function () {
+        count++;
+        if (count > 1)  count = 0;
+        $("#background").css('background-color', color[count]);
+    });
+</script>
 </body>
 </html>

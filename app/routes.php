@@ -1,30 +1,5 @@
 <?php
 
-    Route::get("/x",function(){
-        $xml = '<xml>
-                            <ToUserName><![CDATA[liu]]></ToUserName>
-                            <FromUserName><![CDATA[jd]]></FromUserName>
-                            <CreateTime>1234567</CreateTime>
-                            <MsgType><![CDATA[event]]></MsgType>
-                            <Event><![CDATA[SCAN]]></Event>
-                            <EventKey><![CDATA[5]]></EventKey>
-                            </xml>';
-        $content = BS::https_request('http://www.etuan.local/wx/liu',$xml);
-        dd($content);
-    });
-    Route::get("/",function(){
-        $lot = new choujiangHandle;
-        return $lot->getwx_uid();
-    });
-    Route::get("z",function(){
-      $re = Weixin::login('liu');
-      return $re;
-    });
-    Route::get("y",["before"=>'stuinfo',function(){
-      $re = rand(0,1000);
-      return $re;
-    }]);
-
     Route::group(array('before'=>'wxauth|stuinfo'),function()
     {
         //抽奖，获取某次抽奖结果
