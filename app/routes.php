@@ -69,6 +69,8 @@
     Route::controller("oauth","WxauthController");
 
 
+
+
     //抽奖，获取该抽奖活动中奖名单。
     Route::get("jiang/result/{lottery_id}","choujiangController@result");
     //微信登录后，进行学号和姓名的绑定。
@@ -87,7 +89,6 @@
         }
         PDF::clear();
     });
-
 
 
 

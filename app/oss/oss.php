@@ -9,7 +9,7 @@
 		public  function create_bucket($bucket,$acl = 'public-read'){
 			
 			$response = $this->oss->create_bucket($bucket,$acl);
-			
+
 			return $response;
 		}
 		public  function list_bucket(){

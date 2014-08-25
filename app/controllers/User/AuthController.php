@@ -50,9 +50,9 @@ class AuthController extends BaseController
 
 	public function postRegister()
 	{
+
 		$userInfo = Input::all();
-//        $logo = Input::file('logo');
-//        return $logo;
+        $oss = new oss;
 
 		$values = array(
 			'email'=>$userInfo['email']
@@ -97,6 +97,7 @@ class AuthController extends BaseController
                 $department->org_id = $org_id;
                 $department->save();
             }
+            $oss->upload_file_by_file(IMGBUCKET,'/etuan/shetuan/logo/'.$org_uid.'jpg',$userInfo['logo']);
 //            DB::commit();
 //            dd('注册成功');
 //            return View::make('home');
