@@ -31,12 +31,12 @@
 
 <script>
     sidebarHref = {
-        'sidebar1': '/static/admin/index.html',
-        'sidebar2-1': '/static/admin/register/viewreg.html',
-        'sidebar2-2': '/static/admin/register/newreg.html',
-        'sidebar2-3': '/static/admin/register/regresult.html',
-        'sidebar3-1': '/static/admin/weixin/interface.html',
-        'sidebar3-2': '/static/admin/weixin/autoreply.html',
+        'sidebar1': '/admin/index',
+        'sidebar2-1': '/admin/register/viewreg',
+        'sidebar2-2': '/admin/register/newreg',
+        'sidebar2-3': '/admin/register/regresult',
+        'sidebar3-1': '/admin/weixin/interface',
+        'sidebar3-2': '/admin/weixin/autoreply',
         'sidebar4-1': 'javascript:void(0)',
         'sidebar4-2': 'javascript:void(0)',
         'sidebar4-3': 'javascript:void(0)',

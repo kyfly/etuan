@@ -48,6 +48,14 @@
         Route::controller('vote','VoteController');
     });
 
+    Route::get('admin/{page}', function($page){
+        return View::make('admin.'.$page);
+    });
+
+    Route::get('admin/{dir}/{page}', function($dir, $page){
+        return View::make('admin.'. $dir. '.'. $page);
+    });
+
     Route::controller('weixin/reply','AtrplyController');
 
     Route::controller('weixin/news','NewsController');
@@ -89,6 +97,7 @@
         }
         PDF::clear();
     });
+
 
 
 

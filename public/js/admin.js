@@ -52,7 +52,7 @@
 
 function loadSidebar() {
     var sidebarDiv = $('#sidebar');
-    sidebarDiv.load('/static/admin/sidebar.html',
+    sidebarDiv.load('/admin/sidebar',
         function () {
             //判断当前页面地址，然后对导航栏进行展开和高亮
             var path = window.location.pathname;
