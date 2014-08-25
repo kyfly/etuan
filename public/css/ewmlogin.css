@@ -90,7 +90,7 @@ p {
 html,
 body {
   height: 100%;
-  min-height: 755px;
+  min-height: 640px;
   background: #4e5359 url(../img/bg_universal.png) repeat 0 0;
   color: #666;
   font: 14px/1.5 Helvetica, "微软雅黑", "黑体", Arial, Tahoma;

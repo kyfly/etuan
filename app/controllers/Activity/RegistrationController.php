@@ -48,7 +48,7 @@ class RegistrationController extends ActivityController
         }
 
         $data['liulan'] = $this->registrationHandle->tongjiLiulanliang($this->activityId);
-       return View::make('regresult')->with('data',$data);
+       return View::make('admin.register.regresult')->with('data',$data);
     }
 
     public function getDownloadpdf()
