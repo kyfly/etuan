@@ -30,8 +30,10 @@
   </div>
 </nav>
 <div class="container">
+
+<div class="adminField clearfix">
 <!--侧边栏-->
-<div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
+<div id="sidebar" class="col-lg-3 col-md-3"></div>
 
 <div id="main" class="col-lg-9 col-md-9">
   <div class="tab-content">
@@ -85,6 +87,7 @@
     </div>	<!--tab-content-->
   </div>	<!--col-md-9-->
 </div>		<!--container-->
+</div>
   
 <footer id="footer" class="panel-footer">
 	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>

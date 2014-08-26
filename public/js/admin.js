@@ -69,6 +69,8 @@ function loadSidebar() {
                             navItem.addClass('nav-active');
                     }
             }
+            //设定侧边栏高度
+            $('#sidebar').height($('#main').outerHeight(true));
         });
     //点击转跳到对应的页面
     sidebarDiv.on('click', "li", function () {
@@ -79,7 +81,9 @@ function loadSidebar() {
 };
 
 $(document).ready(function () {
-    $('#main').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+    var minHeight = $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px";
+    $('#main').css('min-height', minHeight);
+    $('#sidebar').height($('#main').outerHeight(true));
     loadSidebar();
     $("#remarkbox").hide();
     $("#originurlbox").hide();

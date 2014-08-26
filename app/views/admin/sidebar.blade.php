@@ -1,3 +1,4 @@
+<div id="sidebarInner">
 <ul class="nav nav-pills nav-stacked custom-nav" role="tablist">
     <li id="sidebar1"><a>首页</a></li>
     <li class="menu-list"><a>报名</a>
@@ -28,6 +29,7 @@
         </ul>
     </li>
 </ul>
+</div>
 
 <script>
     sidebarHref = {
@@ -37,9 +39,9 @@
         'sidebar2-3': '/admin/register/regresult',
         'sidebar3-1': '/admin/weixin/interface',
         'sidebar3-2': '/admin/weixin/autoreply',
-        'sidebar4-1': 'javascript:void(0)',
-        'sidebar4-2': 'javascript:void(0)',
-        'sidebar4-3': 'javascript:void(0)',
+        'sidebar4-1': '/admin/setting/account',
+        'sidebar4-2': '/admin/setting/organization',
+        'sidebar4-3': '/admin/setting/department',
         'sidebar5-1': 'javascript:void(0)',
         'sidebar5-2': 'javascript:void(0)',
         'sidebar5-3': 'javascript:void(0)'

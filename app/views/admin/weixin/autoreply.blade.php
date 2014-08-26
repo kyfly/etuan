@@ -30,8 +30,9 @@
     </div>
 </nav>
 <div class="container">
+    <div class="adminField clearfix">
     <!--侧边栏-->
-    <div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
+    <div id="sidebar" class="col-lg-3 col-md-3"></div>
 
     <div id="main" class="col-lg-9 col-md-9">
         <div class="alert alert-dismissible" id="topAlert" role="alert">
@@ -184,6 +185,7 @@
             </div>
         </div>
 
+    </div>
     </div>
 
 </div>

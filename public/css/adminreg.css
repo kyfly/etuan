@@ -20,7 +20,7 @@ body {
     background-color: #fff;
 }
 
-.nav-pills > li > a {
+.regNav > li > a {
     border-radius: 0;
     text-align: center;
 }

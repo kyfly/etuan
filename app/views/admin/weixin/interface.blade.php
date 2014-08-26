@@ -30,8 +30,9 @@
     </div>
 </nav>
 <div class="container">
+    <div class="adminField clearfix">
     <!--侧边栏-->
-    <div id="sidebar" class="col-lg-3 col-md-3" style="min-height: 300px;"></div>
+    <div id="sidebar" class="col-lg-3 col-md-3"></div>
 
     <div id="main" class="col-lg-9 col-md-9">
         <h3>微信接口</h3>
@@ -63,7 +64,7 @@
             只要按照下面的提示绑定接口，就可以<strong>一键添加报名表</strong>到公众号，然后用户就可以通过你的公众号报名了！
         </p>
     </div>
-
+</div>
 </div>
 
 <footer id="footer" class="panel-footer margintop">
