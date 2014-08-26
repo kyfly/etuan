@@ -33,7 +33,7 @@
 
 <script>
     sidebarHref = {
-        'sidebar1': '/admin/index',
+        'sidebar1': '/admin/home',
         'sidebar2-1': '/admin/register/viewreg',
         'sidebar2-2': '/admin/register/newreg',
         'sidebar2-3': '/admin/register/regresult',
