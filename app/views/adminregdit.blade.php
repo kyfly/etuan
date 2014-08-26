@@ -5,72 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>社团管理员注册</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{URL::to('/css/adminreg.css')}}" rel="stylesheet">
 </head>
-<style>
-    body {
-        font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
-        background: url(<?php echo URL::to('img/bg.gif')?>);
-    }
-
-    .navbar {
-        margin-bottom: 0;
-    }
-
-    .headtitle {
-        color: #7f8c8d;
-        font-size: 30px;
-    }
-
-    .field {
-        margin: 30px;
-        padding: 30px;
-        border: 1px solid #e5e5e5;
-        background-color: #fff;
-    }
-
-    .nav-pills > li > a {
-        border-radius: 0;
-        text-align: center;
-    }
-
-    a:focus, a:active, a:hover {
-        outline: none;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-
-    .errorspan {
-        padding-top: 7px;
-        color: #bb4442;
-    }
-
-    .form-control-feedback {
-        right: -20px !important;
-    }
-
-    .glyphicon-ok {
-        top: 0 !important;
-    }
-
-    .addimgtxt {
-        height: 70px;
-        border: 2px dotted #ddd;
-        text-align: center;
-        font-size: 50px;
-        line-height: 65px;
-        color: #b2b2b2;
-        cursor: pointer;
-    }
-
-    .addimgtxt:hover {
-        color: #373636;
-    }
-
-    .hidespan {
-        display: none;
-    }
-</style>
 <body>
 <!--头部-->
 <header id="nav">
@@ -347,6 +283,6 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="<?php echo URL::to('js/adminregdit.js');?>"></script>
+<script src="{{URL::to('js/adminregdit.js')}}"></script>
 </body>
 </html>
