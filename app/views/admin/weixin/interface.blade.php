@@ -39,16 +39,16 @@
         <hr>
         <div class="col-sm-1 textToCopyLabel">URL</div>
         <div class="col-sm-8 textToCopy" id="interfaceUrl">
-            http://www.etuan.local/static/admin/weixin/index.html
+            加载中...
         </div>
         <div class="col-sm-2">
             <button id="btnCopyUrl" class="btn btn-primary btn-sm">复制</button>
         </div>
         <br>
         <br>
-        <div class="col-sm-1 textToCopyLabel">URL</div>
+        <div class="col-sm-1 textToCopyLabel">Token</div>
         <div class="col-sm-8 textToCopy" id="interfaceToken">
-            ADLKSFJAWEIJ123K234JLJ23LJ1K
+            加载中...
         </div>
         <div class="col-sm-2">
             <button id="btnCopyToken" class="btn btn-primary btn-sm">复制</button>
@@ -74,5 +74,17 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../../../js/admin.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON('/weixin/org/show-mp', function(data, status) {
+            if (status == 'success')
+            {
+                data = data[0];
+                $('#interfaceUrl').text(data.interface_url);
+                $('#interfaceToken').text(data.interface_token);
+            }
+        })
+    })
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@ class WxinterfaceController extends BaseController
         return $result;
     }
 
-    public function getSwx(){
+    public function getShowMp(){
         $org_uid = Auth::user()->org_uid;
         $re =  Wxdata::where("org_uid",$org_uid)->select("mp_origin_id","interface_url","interface_token","appid","appsecret","redirect_uri")->get();
         for($i= 0;$i<count($re);$i++){
