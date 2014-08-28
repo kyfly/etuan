@@ -103,35 +103,52 @@ $(document).ready(function () {
         $('#addform').css('height', maxheight + 130 + "px");
     };
     function configExtraForm(){
+        //每次绑定事件前首先释放所有的click以免造成过度绑定
+        $(".delete").off("click");
+        $(".moveup").off("click");
+        $(".movedown").off("click");
+        $(".delete").off("mouseover");
+        $(".moveup").off("mouseover");
+        $(".movedown").off("mouseover");
         //删除按钮
-        $(document).on('click','.delete',function () {
+        $(".delete").on('click',function () {
             var content0;
-            content0 = $(this).parents(".form-group");
+            content0 = $(this).parent();
             content0.remove();
         });
-        //置顶按钮
-        $(document).on('click','.moveup',function () {
+        $(".delete").on("mouseover",function(){
+            $(this).tooltip("show");
+        });
+        //上移按钮
+        $(".moveup").on("click",function () {
             var content1;
-            content1 = $(this).parents(".form-group");
+            content1 = $(this).parent();
             content1.insertBefore(content1.prev());
         });
-        //置底按钮
-        $(document).on('click','.movedown',function () {
+        $(".moveup").on("mouseover",function(){
+            $(this).tooltip("show");
+        });
+        //下移按钮
+        $(".movedown").on("click",function () {
             var content2;
-            content2 = $(this).parents(".form-group");
+            content2 = $(this).parent();
             content2.insertAfter(content2.next());
+        });
+        $(".movedown").on("mouseover",function(){
+            $(this).tooltip("show");
         });
     };
     setHeight();
+    configExtraForm();
     //添加元素到左边
     $(".target .extralist h4:not(:contains(\"自定义\"))").click(function (e) {
-        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label><a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"置顶\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a><a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"置底\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a><a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
         $("#extraform").append(content);
         setHeight();
         configExtraForm();
     });
     $("#zidingyishort2,#zidingyilong2").click(function(e){
-        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label><input type=\"text\" placeholder=\"请输入问题描述\"><a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"置顶\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a><a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"置底\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a><a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<input type=\"text\" placeholder=\"请输入问题描述\"><a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
         $("#extraform").append(content);
         setHeight();
         configExtraForm();
