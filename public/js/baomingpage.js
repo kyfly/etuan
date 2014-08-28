@@ -8,6 +8,8 @@ $(document).ready(function(){
 			activityId = newActivityId;
 		};
 		var pageJSON;
+		//备用对象
+        /*！！！！！！！！！！！！！！！！
 		$.ajax ({
 			type:"get",
 			dataType:"json",
@@ -18,8 +20,7 @@ $(document).ready(function(){
 				}
 			}
 		});
-        //备用对象
-		/*！！！！！！！！！！！！！！！！
+        */
 		pageJSON = {
 			"activityId":1,
 			"start_time":"2014-07-10 19:00:00",
@@ -44,7 +45,7 @@ $(document).ready(function(){
 				{"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}}
 			]
 		};
-		*/
+
 		return pageJSON;
 	};
 	//-----此模块已通过单元测试BINGO!---------------------------------------------------------根据json文件生成报名页面
@@ -215,8 +216,8 @@ $(document).ready(function(){
 	//--此模块通过单元测试BINGO!-----------------------------------------------获得json，绘制页面
 	var urlpatt = new RegExp("^[0-9]*");
 	//此行仅作测试使用，实际应用请替换成下行
-    //var activityIdPredefined = 1;
-    var activityIdPredefined = urlpatt.exec(window.location.href.replace("http://www.etuan.org/baoming/",""));
+    var activityIdPredefined = 1;
+    //var activityIdPredefined = urlpatt.exec(window.location.href.replace("http://www.etuan.org/baoming/",""));
 	var activityPageJson;
 	if (typeof(activityIdPredefined)==="number"){
 		activityPageJson = getPageJSON(activityIdPredefined);
