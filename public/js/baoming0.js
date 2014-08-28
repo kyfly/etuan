@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //随机颜色生成器
     function randomColorPick(num){
         var pickPool = ["rgb(204, 204, 102)","rgb(204, 102, 102)","rgb(204, 102, 204)","rgb(102, 102, 204)","rgb(102, 204, 204)","rgb(102, 204, 102)"];
         var rdm = parseInt(Math.random()*1000);
@@ -11,9 +12,11 @@ $(document).ready(function(){
         }
         return a;
     }
+    //奇偶行判断
     function IsLight(num){
         return (num%2 === 0);
     }
+    //单双行判断
     function IsSingle(tn){
         return (tn !== "textarea");
     }
