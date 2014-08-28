@@ -14,7 +14,7 @@
 			}
         @media (min-width: 320px){
             body {
-                background-image: url(../img/baoming1bg.jpg);
+                background-image: url(../imgre23/baoming1bg.jpg);
                 background-repeat:no-repeat;
                 background-position:center;
             }
@@ -24,68 +24,14 @@
 <body>
 <div class="container">
     <div class="col-lg-6 col-lg-of6fset-3 col-md-6 col-md-offset-3 col-xs-12 text-center" style="background-color: rgba(255,255,255,0.5)">
-        <img src="../img/avatar.jpg" class="img-circle" style="width:200px; height:200px; margin-top:20px;margin-bottom:20px">
+        <img id="logo" src="../img/avatar.jpg" class="img-circle" style="width:100px; height:100px; margin-top:20px;margin-bottom:20px">
+        <h3 id="title"></h3>
+        <hr>
     </div>
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12" style="background-color: rgba(255,255,255,0.5)">
         <form class="form-horizontal" role="form">
-            <div id="question1" class="form-group">
-                <div id="type1" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro1">姓名</p>
-                </div>
-                <div id="content1" class="col-sm-10 col-xs-8">
-                    <input type="text" class="form-control" placeholder="请输入您的姓名">
-                </div>
-            </div>
-            <div id="question2" class="form-group">
-                <div id="type2" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro2">学号</p>
-                </div>
-                <div id="content2" class="col-sm-10 col-xs-8">
-                    <input type="text" class="form-control" placeholder="请输入您的学号">
-                </div>
-            </div>
-            <div id="question3" class="form-group">
-                <div id="type3" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro3">问题</p>
-                </div>
-                <div id="content3" class="col-sm-10 col-xs-8">
-                    <textarea class="intro-double-input form-control transparent-div" rows="7" placeholder="你为什么要加入焦点摄影"></textarea>
-                </div>
-            </div>
-            <div id="question4" class="form-group">
-                <div id="type4" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro4">性别</p>
-                </div>
-                <div id="content4" class="col-sm-10 col-xs-8">
-                    <select class="form-control">
-                        <option value="male">我是男生♂</option>
-                        <option value="female">我是女生♀</option>
-                    </select>
-                </div>
-            </div>
-            <div id="question5" class="form-group">
-                <div id="type5" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro5">第一志愿</p>
-                </div>
-                <div id="content5" class="col-sm-10 col-xs-8">
-                    <select class="form-control">
-                        <option value="xinwen">新闻部</option>
-                        <option value="zuzhi">组织部</option>
-                        <option value="jishu">技术部</option>
-                    </select>
-                </div>
-            </div>
-            <div id="question6" class="form-group">
-                <div id="type6" class="col-sm-2 col-xs-4 control-label">
-                  <p id="intro6">第二志愿</p>
-                </div>
-                <div id="content6" class="col-sm-10 col-xs-8">
-                    <select class="form-control">
-                        <option value="xinwen">新闻部</option>
-                        <option value="zuzhi">组织部</option>
-                        <option value="jishu">技术部</option>
-                    </select>
-                </div>
+            <div id="regform">
+            <!--表项-->
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-offset-10 col-xs-offset-4 col-xs-8">
@@ -98,5 +44,7 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script src="../js/baomingpage.js"></script>
+<script src="../js/baoming1.js"></script>
 </body>
 </html>
