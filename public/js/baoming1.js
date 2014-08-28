@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#title")[0].innerText = document.title;
+    $("#regform").addClass("clearfix");
     var n = $("#regform").children().length;
     for(var i = 1; i <= n; i++){
         var questionid = "#question" + i.toString();

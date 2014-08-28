@@ -30,12 +30,12 @@
 		.double-line {
 			height: 200px;
 		}
-		input {
+		.intro-single-input {
 			border-width:0;
 			height: 100px;
 			width: 100%;
 		}
-		textarea {
+        .intro-double-input {
 			border-width:0;
 			height: 200px;
 			width: 100%;
@@ -45,81 +45,20 @@
 <body>
 <div class="container no-padding">
     <div class="col-xs-12 no-padding double-line cover" style="background-color: #f06">
-        <p>焦点摄影招新报名</p>
+        <p id="title">焦点摄影招新报名</p>
     </div>
-	
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #0c6">
-        <p>姓名</p>
+    <div id="regform">
+    <!--表项-->
     </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="stuName">
-	</div>
-	</div>
-		
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #6f0">
-        <p>学号</p>
-    </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="">
-	</div>
-	</div>
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #c60">
-        <p>手机号</p>
-    </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="">
-	</div>
-	</div>
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #c6f">
-        <p>意向部门</p>
-    </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="">
-	</div>
-	</div>
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #6cf">
-        <p>性别</p>
-    </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="">
-	</div>
-	</div>
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #66c">
-        <p>专业</p>
-    </div>
-	<div class="col-xs-12 no-padding single-line blank">
-		<input type="text" id="">
-	</div>
-	</div>
-	
-	<div class="strip">
-    <div class="col-xs-12 no-padding double-line cover" style="background-color: #c0f">
-        <p>你为什么想要加入焦点摄影工作室</p>
-    </div>
-	<div class="col-xs-12 no-padding double-line blank">
-		<textarea row="3"></textarea>
-	</div>
-	</div>
-	
-    <div class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#6f6">
-        <span class="glyphicon glyphicon-envelope"></span> 
+    <div id="submit" class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#6f6">
+        <span class="glyphicon glyphicon-envelope"></span>
         提交
     </div>
 </div>
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script src="../js/baomingpage.js"></script>
 <script src="../js/baoming2.js"></script>
 
 </body>

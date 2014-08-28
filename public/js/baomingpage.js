@@ -84,6 +84,7 @@ $(document).ready(function(){
 			case 2:
 				elementFilling = document.createElement("textarea");
                 elementFilling.setAttribute("rows","6");
+                elementFilling.setAttribute("style","resize:none");
 				introText = document.createTextNode(questionItem.label);
 				break;
 			case 3:
@@ -146,7 +147,9 @@ $(document).ready(function(){
 				elementFilling = document.createElement("textarea");
 				elementFilling.setAttribute("placeholder","请说说您的特长");
 				elementFilling.setAttribute("rows","6");
+                elementFilling.setAttribute("style","resize:none");
 				introText = document.createTextNode("特长");
+
 				break;
 			case 107:
 				elementFilling = document.createElement("input");
