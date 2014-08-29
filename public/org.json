@@ -1,0 +1,26 @@
+[
+    {
+        "org_id":1,
+        "org_name":"团团一家1",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"校级组织",
+        "school":"全校",
+        "internal_order":1
+    },
+    {
+        "org_id":1,
+        "org_name":"团团一家",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"校级组织",
+        "school":"全校",
+        "internal_order":"null"
+    },
+    {
+        "org_id":1,
+        "org_name":"团团一家",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"院级组织",
+        "school":"计算机学院",
+        "internal_order":1
+    }
+]
