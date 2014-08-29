@@ -41,17 +41,11 @@
         <div class="col-sm-8 textToCopy" id="interfaceUrl">
             加载中...
         </div>
-        <div class="col-sm-2">
-            <button id="btnCopyUrl" class="btn btn-primary btn-sm">复制</button>
-        </div>
         <br>
         <br>
         <div class="col-sm-1 textToCopyLabel">Token</div>
         <div class="col-sm-8 textToCopy" id="interfaceToken">
             加载中...
-        </div>
-        <div class="col-sm-2">
-            <button id="btnCopyToken" class="btn btn-primary btn-sm">复制</button>
         </div>
         <br>
         <br>

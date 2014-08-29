@@ -281,13 +281,9 @@ MessageCtrl.prototype.uploadMessage = function (message) {
 
 MessageCtrl.prototype.showAlert = function (alertStr, type) {
     if (!type)  type = 'info';
-    var alert = $('#topAlert');
-    if (closeAlertTimer)
-    {
-        clearTimeout(closeAlertTimer);
-        alert.removeClass();
-        alert.addClass('alert alert-dismissible');
-    }
+    var alert = $('#topAlert');clearTimeout(closeAlertTimer);
+    alert.removeClass();
+    alert.addClass('alert alert-dismissible');
     alert.addClass('alert-' + type);
     $('#topAlertStr').text(alertStr);
     alert.slideDown();
@@ -306,6 +302,9 @@ function loadAutoReply() {
         if (status == "success") {
             msgData = new MessageModel(data);
             msgCtrl = new MessageCtrl(msgData);
+            $('#btnAddRule').removeAttr("disabled");
+            $('#btnOneKeyReg').removeAttr("disabled");
+            $('#loadingAlert').slideUp();
         }
     });
 

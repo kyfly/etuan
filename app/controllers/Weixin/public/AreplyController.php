@@ -43,9 +43,7 @@ class AtrplyController extends BaseController
 
     public function getShow()
     {
-        //TODO: 发布时需要修改！！！
-        //$org_uid = Auth::user()->org_uid;
-        $org_uid = 1;
+        $org_uid = Auth::user()->org_uid;
         $arr = $this->reply->show($org_uid);
 
         $json = json_encode($arr);
