@@ -58,6 +58,11 @@ body {
     color: #cc3300;
 }
 
+.text-view-more {
+    color: #a8d154;
+    font-size: 16px;
+}
+
 a:link {
     text-decoration: none;
 }
