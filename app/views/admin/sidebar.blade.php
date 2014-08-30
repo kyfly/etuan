@@ -39,9 +39,9 @@
         'sidebar2-3': '/admin/register/regresult',
         'sidebar3-1': '/admin/weixin/interface',
         'sidebar3-2': '/admin/weixin/autoreply',
-        'sidebar4-1': '/admin/setting/account',
-        'sidebar4-2': '/admin/setting/organization',
-        'sidebar4-3': '/admin/setting/department',
+        'sidebar4-1': '/user/set-organization-user',
+        'sidebar4-2': '/user/set-organization',
+        'sidebar4-3': '/user/set-department',
         'sidebar5-1': 'javascript:void(0)',
         'sidebar5-2': 'javascript:void(0)',
         'sidebar5-3': 'javascript:void(0)'
