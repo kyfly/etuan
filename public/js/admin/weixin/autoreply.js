@@ -52,7 +52,7 @@ function MessageView(msg) {
 MessageView.prototype.getNewsDiv = function () {
     if (this.message.content.length == 1) {
         if (this.message.CreateTime)
-            var createTime = new Date(this.message.CreateTime * 1000);
+            var createTime = new Date(this.message.CreateTime * 1000 - 480 * 60000);
         else
             var createTime = new Date();
         createTime = createTime.getFullYear() + '-' + (createTime.getMonth() + 1) + '-' + createTime.getDate();
