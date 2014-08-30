@@ -107,8 +107,7 @@
                                                     <div class="emotion_editor">
                                                         <div class="edit_area js_editorArea" contenteditable="true"
                                                              style="overflow-y: auto; overflow-x: hidden;"
-                                                             id="msgEditor">请在此处输入文字
-                                                        </div>
+                                                             id="msgEditor">请在此处输入文字</div>
                                                         <div class="editor_toolbar">
                                                             <p class="editor_tip js_editorTip">文字回复不超过600字</p>
                                                         </div>

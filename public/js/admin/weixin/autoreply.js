@@ -289,7 +289,6 @@ MessageCtrl.prototype.showAlert = function (alertStr, type) {
     alert.slideDown();
     closeAlertTimer = setTimeout(function() {
         alert.slideUp();
-        alert.removeClass('alert-' + type);
     }, 5000);
 };
 
@@ -324,8 +323,7 @@ $('#addText').click(function () {
 
 $('#addReg').click(function () {
     if (!$(this).hasClass('colorBlack')) {
-        //TODO:发布时需要修改地址！！
-        $.get('/static/admin/weixn/reglist.json', function (data, status) {
+        $.get('/registration/activitylist', function (data, status) {
             if (status == 'success') {
                 if (data.length == 0)
                 {
@@ -454,7 +452,7 @@ $('#btnSave').click(function () {
 $('#btnOneKeyReg').click(function() {
     $(this).attr("disabled", "disabled");
     //获取报名表
-    $.get('/static/admin/weixn/reglist.json', function (data, status) {
+    $.get('/registration/activitylist', function (data, status) {
         if (status == 'success') {
             if (data.length == 0)
             {
@@ -479,7 +477,7 @@ $('#btnOneKeyReg').click(function() {
             }
             else
             {
-                msgCtrl.showAlert('没有新的报名可以添加。', 'warning');
+                msgCtrl.showAlert('没有新的报名可以添加。', 'danger');
             }
             $('#btnOneKeyReg').removeAttr("disabled");
         }
@@ -626,3 +624,4 @@ $(document).ready(function () {
 
 var mpReplyId;
 var closeAlertTimer;
+var prevNewsText = "";

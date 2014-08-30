@@ -74,7 +74,7 @@
             if (status == 'success')
             {
                 data = data[0];
-                $('#interfaceUrl').text(data.interface_url);
+                $('#interfaceUrl').text('http://' + document.domain + '/mp/' + data.interface_url);
                 $('#interfaceToken').text(data.interface_token);
             }
         })
