@@ -17,7 +17,7 @@
     <div id="outercont">
         <div id="outer-cont">
             <div id="outer" style="-webkit-transform: rotate(0deg);"><img src="../img/activity-lottery-1.png"
-                                                                             width="310px"></div>
+                                                                          width="310px"></div>
         </div>
         <div id="inner-cont">
             <div id="inner"><img src="../img/activity-lottery-2.png"></div>
@@ -75,30 +75,34 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="../js/jQueryRotate.2.2.js"></script>
 <script>
-$(function () {
-	function random(min,max){
-    return Math.floor(min+Math.random()*(max-min));
-	}
-	var rotateDeg = [15, 45, 75, 105, 135, 165, 195, 225, 255, 285, 315, 345];
-	$("#inner").rotate({ 
-		bind:{ 
-			click:function(){
-				var i = 11;		//通过改变这个数字0到11改变区间
-				if(i < 11){
-					var a = random(rotateDeg[i]+4,rotateDeg[i+1]-1);
-					}
-				else{
-					a = random(-11,14);		//一等奖i == 11
-					}
-				$("#outer").rotate({ 
-					duration: 3000,
-					angle: 0,
-					animateTo: 3600 + a,
-				 }); 
-			} 
-		} 
-	}); 
-});
+    $(function () {
+        function random(min, max) {
+            return Math.floor(min + Math.random() * (max - min));
+        }
+
+        var rotateDeg = [15, 45, 75, 105, 135, 165, 195, 225, 255, 285, 315, 345];
+        $("#inner").click( function () {
+                    var i = 11;		//通过改变这个数字0到11改变区间
+                    if (i < 11) {
+                        var a = random(rotateDeg[i] + 4, rotateDeg[i + 1] - 1);
+                    }
+                    else {
+                        a = random(-11, 14);		//一等奖i == 11
+                    }
+                    $("#outer").rotate({
+                        duration: 10000,
+                        angle: 0,
+                        animateTo: 2160 + a
+                    });
+                    $('#inner').unbind('click');
+                    setTimeout(function () {
+                        $('#inner').click(function() {
+                            alert("您已经抽过奖了亲~~");
+                        })
+                    }, 10000);
+                }
+        );
+    });
 </script>
 
 
