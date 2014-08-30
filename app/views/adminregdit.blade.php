@@ -66,7 +66,7 @@
 <!--创建账号-->
 <div class="tab-pane fade active in" id="newid">
     <div class="form-group has-feedback" id="inputbox1">
-        <label for="inputEmail" class="col-sm-2 control-label">电子邮箱</label>
+        <label for="inputEmail" class="col-sm-2 control-label">电子邮箱</label><?php echo isset($error)?$error:null ?>
 
         <div class="col-sm-6">
             <input type="text" class="form-control" id="inputEmail" name="email">

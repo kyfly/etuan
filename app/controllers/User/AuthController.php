@@ -66,8 +66,7 @@ class AuthController extends BaseController
 		$validator = Validator::make($values, $rules,$messages);
 		if($validator->fails())
 		{
-            dd('fail');
-//			return View::make('register')->with('error',$validator->messages());
+			return View::make('adminregdit')->with('error','用户名已经存在');
 		}
 
         try {
@@ -79,12 +78,19 @@ class AuthController extends BaseController
                 'phone_short' => $userInfo['phone_short'],
                 'user_group' => 'org'
             ));
-            $oss = new oss;
+            $oss->upload_file_by_file('kyfly-img','etuan/shetuan/logo/'.$org_uid.'.jpg',$userInfo['logo']);
+            $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_1.jpg',$userInfo['pic1']);
+            $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_2.jpg',$userInfo['pic2']);
+            $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_3.jpg',$userInfo['pic3']);
+
             $org_id = Organization::insertGetId(array(
                 'name' => $userInfo['name'],
                 'type' => $userInfo['type'],
                 'school' => $userInfo['school'],
-                'logo_url' => 'url',
+                'logo_url' => 'etuan/shetuan/logo/'.$org_uid.'.jpg',
+                'pic_url1' => 'etuan/shetuan/jianjie/'.$org_uid.'_1.jpg',
+                'pic_url2' => 'etuan/shetuan/jianjie/'.$org_uid.'_2.jpg',
+                'pic_url3' => 'etuan/shetuan/jianjie/'.$org_uid.'_3.jpg',
                 'description' => $userInfo['description'],
                 'org_uid' => $org_uid
             ));
@@ -96,14 +102,12 @@ class AuthController extends BaseController
                 $department->org_id = $org_id;
                 $department->save();
             }
-//            $oss->upload_file_by_file(IMGBUCKET,'/etuan/shetuan/logo/'.$org_uid.'jpg',$userInfo['logo']);
             DB::commit();
             dd('success');
             return View::make('home');
         } catch (Exception $e) {
             DB::rollback();
-            dd('fail');
-            return View::make('register');
+            return View::make('adminregdit');
         }
 	}
 

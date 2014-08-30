@@ -28,5 +28,11 @@ class organizationController extends BaseController
         return $deparment;
     }
 
-
+    public function getOrganizationRegistration()
+    {
+        $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
+                    ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.logo_url','organization.type','organization.school','organization.internal_order')
+                    ->get();
+        return $infos;
+    }    
 }

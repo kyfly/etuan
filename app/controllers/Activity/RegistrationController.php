@@ -91,14 +91,6 @@ class RegistrationController extends ActivityController
         })->export('xls');
     }
 
-    public function getOrganizationRegistration()
-    {
-        $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
-                                    ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.type','organization.logo_url')
-                                    ->get();
-        return $infos;
-    }
-
     public function serviceName()
     {
         return 'registrationService';
