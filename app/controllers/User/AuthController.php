@@ -87,6 +87,8 @@ class AuthController extends BaseController
                 'name' => $userInfo['name'],
                 'type' => $userInfo['type'],
                 'school' => $userInfo['school'],
+                'internal_order' => 2147483647,
+                'wx' => $userInfo['wx'],
                 'logo_url' => 'etuan/shetuan/logo/'.$org_uid.'.jpg',
                 'pic_url1' => 'etuan/shetuan/jianjie/'.$org_uid.'_1.jpg',
                 'pic_url2' => 'etuan/shetuan/jianjie/'.$org_uid.'_2.jpg',

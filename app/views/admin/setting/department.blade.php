@@ -9,80 +9,86 @@
     <title>“团团一家”管理后台</title>
 </head>
 <body>
-<nav id="nav" class="navbar navbar-default" role="navigation">
-    <div class="container">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
-                    <span class="sr-only">导航</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a><img src="../../img/brand.png" id="brandpic"></a>
-            </div>
-            <div class="collapse navbar-collapse" id="nav-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a><img id="avatar" class="img-circle" src="../../img/avatar.jpg"> 用户</a></li>
-                    <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
-                </ul>
+    <nav id="nav" class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+                        <span class="sr-only">导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a><img src="../../img/brand.png" id="brandpic"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a><img id="avatar" class="img-circle" src="../../img/avatar.jpg"> 用户</a></li>
+                        <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
-<div class="container">
-    <div class="adminField clearfix">
-        <!--侧边栏-->
-        <div id="sidebar" class="col-lg-3 col-md-3"></div>
-        <!--主体-->
+    </nav>
+    <div class="container">
+        <div class="adminField clearfix">
+            <!--侧边栏-->
+            <div id="sidebar" class="col-lg-3 col-md-3"></div>
+            <!--主体-->
 
-        <div id="main" class="col-lg-9 col-md-9">
-            <div class="tab-content">
-                <form method="post" class="form-horizontal">
-                    <div id="addablebox">
-                        <div class="form-group">
+            <div id="main" class="col-lg-9 col-md-9">
+                <div class="tab-content">
+                    <form method="post" class="form-horizontal" action="change-department">
+                        <?php 
+                        foreach ($departments as $department) {
+                            echo '
+                            <div id="addablebox">
+                            <div class="form-group">
                             <label class="col-sm-2 control-label">部门名称</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="department_name[]">
+                            <input type="text" class="form-control" name="department_name[]" value="'.$department->name.'">
                             </div>
-                        </div>
-                        <div class="form-group">
+                            </div>
+                            <div class="form-group">
                             <label class="col-sm-2 control-label">部门介绍</label>
 
                             <div class="col-sm-6">
-                                <textarea class="form-control" name="department_description[]" rows="3"></textarea>
-                                <span class="help-block">50字以内</span>
+                            <textarea class="form-control" name="department_description[]" rows="3">'.$department->description.'</textarea>
+                            <span class="help-block">50字以内</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <div class="col-sm-6">
-                            <div id="minuselement" class="addimgtxt col-sm-5"
-                                 onMouseOver="this.style.border='2px dotted #ccc'"
-                                 onMouseOut="this.style.border='2px dotted #ddd'">
+                            </div>
+                            </div>
+                            ';
+                        }
+                        ?>
+                        <div class="form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-6">
+                                <div id="minuselement" class="addimgtxt col-sm-5"
+                                onMouseOver="this.style.border='2px dotted #ccc'"
+                                onMouseOut="this.style.border='2px dotted #ddd'">
                                 -
                             </div>
                             <div id="addelement" class="addimgtxt col-sm-5 col-sm-offset-2"
-                                 onMouseOver="this.style.border='2px dotted #ccc'"
-                                 onMouseOut="this.style.border='2px dotted #ddd'">
-                                +
-                            </div>
+                            onMouseOver="this.style.border='2px dotted #ccc'"
+                            onMouseOut="this.style.border='2px dotted #ddd'">
+                            +
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-6">
-                            <button type="submit" class="btn btn-warning btn-lg">提交</button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button type="submit" class="btn btn-warning btn-lg">提交</button>
                     </div>
-                </form>
-            </div>
-            <!--tab-content-->
+                </div>
+            </form>
         </div>
-        <!--col-md-9-->
+        <!--tab-content-->
     </div>
-    <!--container-->
+    <!--col-md-9-->
+</div>
+<!--container-->
 
 </div>
 <footer id="footer" class="panel-footer">

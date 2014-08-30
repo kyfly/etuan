@@ -38,12 +38,12 @@
 
         <div id="main" class="col-lg-9 col-md-9">
             <div class="tab-content">
-                <form method="post" class="form-horizontal">
+                <form method="post" class="form-horizontal" action="change-organization">
                     <div class="form-group has-feedback" id="inputbox6">
                         <label for="inputShetuan" class="col-sm-2 control-label">社团名称</label>
 
                         <div class="col-sm-6">
-                            <input name="name" type="text" class="form-control" id="inputShetuan">
+                            <input name="name" type="text" class="form-control" id="inputShetuan" value="<?php echo $organization->name ?>">
                             <span id="span6-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
                         </div>
                     </div>
@@ -52,10 +52,7 @@
 
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
-                                <option id="xiaojioption" value="1">校级组织</option>
-                                <option value="2">院级组织</option>
-                                <option value="3">校级社团</option>
-                                <option value="4">院级社团</option>
+                                <option id="xiaojioption" value="1"><?php echo $organization->type;?></option>
                             </select>
                         </div>
                     </div>
@@ -64,8 +61,8 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="1"></option>
-                                <option value="全校">全校</option>
+                                <option value="1"><?php echo $organization->school;?></option>
+<!--                            <option value="全校">全校</option>
                                 <option value="机械工程学院">机械工程学院</option>
                                 <option value="电子信息学院">电子信息学院</option>
                                 <option value="通信工程学院">通信工程学院</option>
@@ -85,7 +82,7 @@
                                 <option value="卓越学院">卓越学院</option>
                                 <option value="信息工程学院">信息工程学院</option>
                                 <option value="国际教育学院">国际教育学院</option>
-                                <option value="继续教育学院">继续教育学院</option>
+                                <option value="继续教育学院">继续教育学院</option>  -->
                             </select>
                         </div>
                     </div>
@@ -93,7 +90,7 @@
                         <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
 
                         <div class="col-sm-6">
-                            <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
+                            <textarea id="inputIntro" name="description" class="form-control" rows="7"><?php echo $organization->description; ?></textarea>
                             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
                             <span class="help-block">200字以内</span>
                         </div>
@@ -102,7 +99,7 @@
                         <label for="inputWeixin" class="col-sm-2 control-label">微信公众号</label>
 
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="inputWeixin">
+                            <input type="text" class="form-control" id="inputWeixin" name="wx" value="<?php echo $organization->wx; ?>">
                             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
                             <span class="help-block">（选填）</span>
                         </div>

@@ -38,13 +38,13 @@
 
         <div id="main" class="col-lg-9 col-md-9">
             <div class="tab-content">
-                <form method="post" class="form-horizontal">
+                <form method="post" class="form-horizontal" action="change-organization-user">
                     <div class="tab-pane fade active in" id="newid">
                         <div class="form-group has-feedback" id="inputbox1">
                             <label for="inputEmail" class="col-sm-2 control-label">电子邮箱</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputEmail" name="email" disabled="disabled">
+                                <input type="text" class="form-control" id="inputEmail" name="email" disabled="disabled" value="<?php echo $organization_user->email; ?>">
                                     <span id="span1"
                                           class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
                                     <span id="span1-1"
@@ -81,7 +81,7 @@
                             <label for="inputPhone" class="col-sm-2 control-label">手机号码</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputPhone" name="phone_long">
+                                <input type="text" class="form-control" id="inputPhone" name="phone_long" value="<?php echo $organization_user->phone_long; ?>">
                                     <span id="span4"
                                           class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
                                     <span id="span4-1"
@@ -94,7 +94,7 @@
                             <label for="inputPhone2" class="col-sm-2 control-label">移动短号</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputPhone2" name="phone_short">
+                                <input type="text" class="form-control" id="inputPhone2" name="phone_short" value="<?php echo $organization_user->phone_short; ?>">
                                     <span id="span5"
                                           class="glyphicon glyphicon-exclamation-sign form-control-feedback hidespan"></span>
                                     <span id="span5-1"

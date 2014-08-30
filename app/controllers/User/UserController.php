@@ -16,75 +16,83 @@
 			return View::make('changepassword');
 		}
 
-        public function getOrganizationInfo()
+        public function getSetOrganization()
         {
-            return Organization::where('org_uid',$this->org_uid)
-                    ->select('logo_url','description','pic_url1','pic_url2','pic_url3')
+            $organization =  Organization::where('org_uid',$this->org_uid)
                     ->first();
+            return View::make('admin.setting.organization')->with('organization',$organization);
         }
 
-        public function getOrganizationUserInfo()
+        public function getSetOrganizationUser()
         {
-            return Organization_user::where('org_uid',$this->org_uid)
-                    ->select('phone_long','phone_short')
+            $organization_user =  User::where('org_uid',$this->org_uid)
+                    ->select('email','phone_long','phone_short')
                     ->first();
+            return View::make('admin.setting.account')->with('organization_user',$organization_user);
         }
 
-        public function getDepartmentInfo()
+        public function getSetDepartment()
         {
             $org_id = Organization::where('org_uid',$this->org_uid)
                         ->pluck('org_id');
-            return Department::where('org_id',$org_id)
+            $departments = Department::where('org_id',$org_id)
                     ->select('name','description')
                     ->orderBy('depart_id','asc')
                     ->get();
+            return View::make('admin.setting.department')->with('departments',$departments);
         }
 
-        public function postChangeOrganizationInfo()
+        public function postChangeOrganization()
         {
             $oss = new oss;
-            if(Input::file('logo')==null)
+            if(Input::file('logo')!=null)
             {
                 $oss->delete_object('kyfly-img','etuan/shetuan/logo/'.$this->org_uid.'.jpg');
                 $oss->upload_file_by_file('kyfly-img','etuan/shetuan/logo/'.$this->org_uid.'.jpg',Input::get('logo'));
             }
-            if(Input::file('pic1')==null)
+            if(Input::file('pic1')!=null)
             {
                 $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg');
                 $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg',Input::get('pic1'));
             }
-            if(Input::file('pic2')==null)
+            if(Input::file('pic2')!=null)
             {
                 $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg');
                 $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg',Input::get('pic2'));
             }
-            if(Input::file('pic3')==null)
+            if(Input::file('pic3')!=null)
             {
                 $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg');
                 $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg',Input::get('pic3'));
             }
             Organization::where('org_uid',$this->org_uid)
                 ->update(array(
-                    'description' => Input::get('description')
+                    'description' => Input::get('description'),
+                    'wx' => Input::get('wx')
                 ));
             return Response::json(array(
                 'status' => 'success'
             ));
         }
 
-        public function postChangeOrganizationUserInfo()
+        public function postChangeOrganizationUser()
         {
-            Organization_user::where('org_uid',$this->org_uid)
+            User::where('org_uid',$this->org_uid)
                  ->update(array(
                     'phone_long' => Input::get('phone_long'),
                     'phone_short' => Input::get('phone_short')
                 ));
+            if(Input::get('password')!=null)
+            {
+                $user = User::find($this->org_uid);
+                $user->password = Hask::make(Input::get('password'));
+            }
             return Response::json(array(
                 'status' => 'success'
             ));
         }
 
-        public function postChangeDepartmentInfo()
+        public function postChangeDepartment()
         {
             $org_id = Organization::where('org_uid',$this->org_uid)
                ->pluck('org_id');
