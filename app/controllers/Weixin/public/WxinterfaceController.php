@@ -1,8 +1,7 @@
 <?php
-class WxinterfaceController extends BaseController
+class WxinterfaceController
 {
-    public function getWxinfo(){
-        $org_uid = Input::get('org_uid');
+    public static function getWxinfo($org_uid){
         $url = BS::getRandStr(18).date('Ymdhms',time());
         $token = BS::getRandStr(18).date('HmsYmd',time());
         $result = Wxdata::insert([

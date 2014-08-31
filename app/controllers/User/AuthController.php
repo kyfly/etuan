@@ -110,6 +110,7 @@ class AuthController extends BaseController
                 $department->org_id = $org_id;
                 $department->save();
             }
+            WxinterfaceController::getWxinfo($org_uid);
             DB::commit();
             dd('注册成功');
             return View::make('home');
