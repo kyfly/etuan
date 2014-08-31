@@ -32,10 +32,10 @@
 
         Route::controller('weixin/reply','AtrplyController');
 
-        Route::controller('weixin/org','WxinterfaceController');
+        
 
     });
-
+Route::controller('weixin/org','WxinterfaceController');
     Route::controller('weixin/news','NewsController');
 
     Route::controller('weixin/qrcode','QretuanController');
