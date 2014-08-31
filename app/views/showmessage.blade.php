@@ -163,21 +163,17 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script>
-    (function ($) {
-        $.getUrlParam = function (name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return decodeURIComponent(r[2]);
-            return null;
-        }
-    })(jQuery);
+    var messageArr = {};
+    @foreach($messageArr as $msgKey => $msgValue)
+        messageArr.{{$msgKey}} = '{{$msgValue}}';
+    @endforeach
     $(document).ready(function () {
         $('.mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
-        $('.msg-title').text($.getUrlParam('title'));
-        $('.msg-body').text($.getUrlParam('body'));
+        $('.msg-title').text(messageArr.title);
+        $('.msg-body').text(messageArr.body);
         var msgBtn = $('.msg-btn');
         var msgStatus = $('.msg-status');
-        if ($.getUrlParam('status') == '1')
+        if (messageArr.status == 'ok')
         {
             msgStatus.removeClass('glyphicon-exclamation-sign');
             msgStatus.addClass('glyphicon-ok');
@@ -187,33 +183,34 @@
             msgStatus.removeClass('glyphicon-ok');
             msgStatus.addClass('glyphicon-exclamation-sign');
         }
-        if ($.getUrlParam('btn') == '0')
+        if (messageArr.btn == 'false')
             msgBtn.hide();
-        if ($.getUrlParam('url'))
+        if (messageArr.url)
         {
             setTimeout(function(){
-                window.location = $.getUrlParam('url');
+                window.location = messageArr.url;
             }, 5000);
 
-            $('.msg-btn').click(function() {
-                window.location = $.getUrlParam('url');
+            msgBtn.click(function() {
+                window.location = messageArr.url;
             });
         }
-        switch ($.getUrlParam('action') && !$.getUrlParam('url'))
-        {
-            case 'back':
-                msgBtn.click(function() {
-                    history.back();
-                });
-                msgBtn.text('返回');
-                break;
-            case 'close':
-                msgBtn.click(function() {
-                    window.close();
-                });
-                msgBtn.text('关闭');
-                break;
-        }
+        else
+            switch (messageArr.action)
+            {
+                case 'back':
+                    msgBtn.click(function() {
+                        history.back();
+                    });
+                    msgBtn.text('返回');
+                    break;
+                case 'wclose':
+                    msgBtn.click(function() {
+                        WeixinJSBridge.call('closeWindow');
+                    });
+                    msgBtn.text('关闭');
+                    break;
+            }
     });
 </script>
 </body>
