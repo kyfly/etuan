@@ -13,7 +13,7 @@ $(function(){
             $('#span1-2').removeClass("hidespan");
             $('#inputbox1').addClass("has-error");
             $('#inputbox1').removeClass("has-success");
-            $('#span1-1').addeClass("hidespan");
+            $('#span1-1').addClass("hidespan");
             flag[0] = 0;
         }else{
             $('#span1-1').removeClass("hidespan");
@@ -31,7 +31,7 @@ $(function(){
             $('#span2-2').removeClass("hidespan");
             $('#inputbox2').addClass("has-error");
             $('#inputbox2').removeClass("has-success");
-            $('#span2-1').addeClass("hidespan");
+            $('#span2-1').addClass("hidespan");
             flag[1] = 0;
         }else{
             $('#span2-1').removeClass("hidespan");
@@ -50,7 +50,7 @@ $(function(){
             $('#span3-2').removeClass("hidespan");
             $('#inputbox3').addClass("has-error");
             $('#inputbox3').removeClass("has-success");
-            $('#span3-1').addeClass("hidespan");
+            $('#span3-1').addClass("hidespan");
             flag[2] = 0;
         }
         else
@@ -70,7 +70,7 @@ $(function(){
             $('#span4-2').removeClass("hidespan");
             $('#inputbox4').addClass("has-error");
             $('#inputbox4').addClass("has-feedback");
-            $('#span4-1').addeClass("hidespan");
+            $('#span4-1').addClass("hidespan");
             flag[3] = 0;
         }else{
             $('#span4-1').removeClass("hidespan");
