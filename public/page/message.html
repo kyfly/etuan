@@ -199,21 +199,22 @@
                 window.location = $.getUrlParam('url');
             });
         }
-        switch ($.getUrlParam('action') && !$.getUrlParam('url'))
-        {
-            case 'back':
-                msgBtn.click(function() {
-                    history.back();
-                });
-                msgBtn.text('返回');
-                break;
-            case 'close':
-                msgBtn.click(function() {
-                    window.close();
-                });
-                msgBtn.text('关闭');
-                break;
-        }
+        else
+            switch ($.getUrlParam('action'))
+            {
+                case 'back':
+                    msgBtn.click(function() {
+                        history.back();
+                    });
+                    msgBtn.text('返回');
+                    break;
+                case 'wclose':
+                    msgBtn.click(function() {
+                        WeixinJSBridge.call('closeWindow');
+                    });
+                    msgBtn.text('关闭');
+                    break;
+            }
     });
 </script>
 </body>
