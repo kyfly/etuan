@@ -1,6 +1,14 @@
 //获得创建报名的各项参数数据
 $(document).ready(function(){
 	$("#submit").click(function(){
+        //检查时间前后的对比，时间格式"2014/09/25 08:05".replace(" ","/").replace(":","/"),split("/");
+        var IsTimeBefore = function(strTimeA,strTimeB){
+            var timeA = strTimeA.split(/[\s/:]/);
+            var timeB = strTimeB.split(/[\s/:]/);
+
+            return ;
+        };
+
 		//预定义一个创建活动对象
 		var createActivityJson={
 			start_time:"",
