@@ -70,9 +70,13 @@ public function postChangeOrganization()
         'description' => Input::get('description'),
         'wx' => Input::get('wx')
         ));
-    return Response::json(array(
-        'status' => 'success'
-        ));
+    $msgArr = array(
+        'title' => '更改成功',
+        'status' => 'ok', 
+        'action' => 'back',
+        'btn' => 'true',
+        );
+    return View::make('showmessage')->with('messageArr', $msgArr);
 }
 
 public function postChangeOrganizationUser()
@@ -87,9 +91,13 @@ public function postChangeOrganizationUser()
         $user = User::find($this->org_uid);
         $user->password = Hash::make(Input::get('password'));
     }
-    return Response::json(array(
-        'status' => 'success'
-        ));
+    $msgArr = array(
+        'title' => '更改成功',
+        'status' => 'ok', 
+        'action' => 'back',
+        'btn' => 'true',
+        );
+    return View::make('showmessage')->with('messageArr', $msgArr);
 }
 
 public function postChangeDepartment()
@@ -106,6 +114,13 @@ public function postChangeDepartment()
         $department->org_id = $org_id;
         $department->save();
     }
+    $msgArr = array(
+        'title' => '更改成功',
+        'status' => 'ok', 
+        'action' => 'back',
+        'btn' => 'true',
+        );
+    return View::make('showmessage')->with('messageArr', $msgArr);    
 }
 
 public function postChangepassword()
@@ -124,8 +139,21 @@ public function postChangepassword()
     'confirmed' => '两次密码输入不一致'
     );
  $validator = Validator::make($values, $rules, $messages);
- if($validator->fails()){
-    return $validator->messages();
+ if($validator->fails())
+ {
+    $messages = '';
+    foreach ($validator->messages()->all() as $message)
+    {
+        $messages.=$message.';';
+    }
+    $msgArr = array(
+        'title' => '失败',
+        'content' => $messages,
+        'status' => 'error', 
+        'action' => 'back',
+        'btn' => 'true',
+        );
+    return View::make('showmessage')->with('messageArr', $msgArr);
 }
 }
 
