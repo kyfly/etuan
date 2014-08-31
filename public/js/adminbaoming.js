@@ -118,7 +118,7 @@ $(document).ready(function(){
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
-			url:"registration/createactivity",
+			url:"/registration/createactivity",
 			data:sendJson
 		});
 	});

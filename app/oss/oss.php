@@ -1,5 +1,6 @@
 <?php
 	require_once 'sdk.class.php';
+
 	class oss
 	{
 		private $oss;

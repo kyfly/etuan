@@ -36,7 +36,7 @@ class ActivityController extends BaseController
     }
 
     //创建活动
-    public function getCreateactivity()
+    public function postCreateactivity()
     {
         $activityInfo = json_decode(Input::get('activityInfo'));
         return $this->service->createActivity($this->org_uid, $activityInfo);

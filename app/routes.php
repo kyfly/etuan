@@ -66,7 +66,14 @@
 
     Route::get('test',function()
     {
-        return Organization::all();
+        // $oss = new oss;
+        // $response = $oss->list_bucket();
+        // dd($response);
+
+        $oss = new oss;
+        $response = $oss->list_object('kyfly-img');
+        dd($response);
+
     });
 
 
