@@ -43,7 +43,7 @@ public function getLogout()
   $msgArr = array(
     'title' => '退出成功',
     'status' => 'ok', 
-    'url' => '/admin/home',
+    'url' => '/',
     'btn' => 'true',
     );
   return View::make('showmessage')->with('messageArr', $msgArr);
