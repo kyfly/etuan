@@ -1,39 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/admin.css" rel="stylesheet">
-    <title>“团团一家”管理后台</title>
-</head>
+@include('admin.layout.head')
 <body>
-<nav id="nav" class="navbar navbar-default" role="navigation">
-<div class="container">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
-        <span class="sr-only">导航</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-      <a><img src="../../img/brand.png" id="brandpic"></a>
-      </div>
-    <div class="collapse navbar-collapse" id="nav-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a><img id="avatar" class="img-circle" src="../../img/avatar.jpg"> 用户</a></li>
-        <li><a><span class="glyphicon glyphicon-off"></span>退出</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
+@include('admin.layout.nav')
 <div class="container">
 
 <div class="adminField clearfix">
 <!--侧边栏-->
-<div id="sidebar" class="col-lg-3 col-md-3"></div>
+@include('admin.layout.sidebar')
 
 <div id="main" class="col-lg-9 col-md-9">
   <div class="tab-content">
@@ -89,9 +63,7 @@
 </div>		<!--container-->
 </div>
   
-<footer id="footer" class="panel-footer">
-	<p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
-</footer>
+@include('admin.layout.footer')
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
