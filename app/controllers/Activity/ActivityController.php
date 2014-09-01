@@ -12,7 +12,7 @@ class ActivityController extends BaseController
     //构造函数,初始化org_uid,activityId,service等变量.
 	public function __construct()
 	{
-        $this->org_uid = Auth::user()->org_uid;
+        $this->org_uid = isset(Auth::user()->org_uid)?Auth::user()->org_uid:null;
         $this->activityId = Input::get('activityId');
         $this->service = $this->getService($this->serviceName());
 	}

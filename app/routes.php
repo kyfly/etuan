@@ -64,6 +64,9 @@
 
     Route::controller('organization',"organizationController");
 
+    Route::get('baoming/{id}','RegistrationController@reg_info');
+
+
 
 
 

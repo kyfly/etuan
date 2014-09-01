@@ -175,6 +175,90 @@ $(function(){
     });
 
     $('#next1').click(function(){
+		//验证邮箱
+		if($("#inputEmail").val()=='' || ($("#inputEmail").val()!='' && !/.+@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))){
+            $('#span1').removeClass("hidespan");
+            $('#span1-2').removeClass("hidespan");
+            $('#inputbox1').addClass("has-error");
+            $('#inputbox1').removeClass("has-success");
+            $('#span1-1').addClass("hidespan");
+            flag[0] = 0;
+        }else{
+            $('#span1-1').removeClass("hidespan");
+            $('#span1-2').addClass("hidespan");
+            $('#inputbox1').removeClass("has-error");
+            $('#inputbox1').addClass("has-success");
+            $('#span1').addClass("hidespan");
+            flag[0] = 1;
+			}
+		//验证密码
+        if($("#inputPassword").val()=='' || ($("#inputPassword").val()!='' && !/^[^\s]{6,16}$/.test($("#inputPassword").val()))){
+            $('#span2').removeClass("hidespan");
+            $('#span2-2').removeClass("hidespan");
+            $('#inputbox2').addClass("has-error");
+            $('#inputbox2').removeClass("has-success");
+            $('#span2-1').addClass("hidespan");
+            flag[1] = 0;
+        }else{
+            $('#span2-1').removeClass("hidespan");
+            $('#span2-2').addClass("hidespan");
+            $('#inputbox2').removeClass("has-error");
+            $('#inputbox2').addClass("has-success");
+            $('#span2').addClass("hidespan");
+            flag[1] = 1;
+        }
+    //验证密码一致
+        if(!$("#inputPassword2").val() || $("#inputPassword2").val() != $("#inputPassword2").val() )
+        {
+            $('#span3').removeClass("hidespan");
+            $('#span3-2').removeClass("hidespan");
+            $('#inputbox3').addClass("has-error");
+            $('#inputbox3').removeClass("has-success");
+            $('#span3-1').addClass("hidespan");
+            flag[2] = 0;
+        }
+        else
+        {
+            $('#span3-1').removeClass("hidespan");
+            $('#span3-2').addClass("hidespan");
+            $('#inputbox3').removeClass("has-error");
+            $('#inputbox3').addClass("has-success");
+            $('#span3').addClass("hidespan");
+            flag[2] = 1;
+        }
+    //验证手机号
+        if($("#inputPhone").val()=='' || ($("#inputPhone").val()!='' && !/^0{0,1}[0-9]{11}$/.test($("#inputPhone").val()))){
+            $('#span4').removeClass("hidespan");
+            $('#span4-2').removeClass("hidespan");
+            $('#inputbox4').addClass("has-error");
+            $('#inputbox4').addClass("has-feedback");
+            $('#span4-1').addClass("hidespan");
+            flag[3] = 0;
+        }else{
+            $('#span4-1').removeClass("hidespan");
+            $('#span4-2').addClass("hidespan");
+            $('#inputbox4').removeClass("has-error");
+            $('#inputbox4').addClass("has-success");
+            $('#span4').addClass("hidespan");
+            flag[3] = 1;
+        }
+    //验证手机短号
+        if($("#inputPhone2").val()=='' || ($("#inputPhone2").val()!='' && !/^0{0,1}[0-9]{6}$/.test($("#inputPhone2").val()))){
+            $('#span5').removeClass("hidespan");
+            $('#span5-2').removeClass("hidespan");
+            $('#inputbox5').removeClass("has-success");
+            $('#inputbox5').addClass("has-error");
+            $('#span5-1').addClass("hidespan");
+            flag[4] = 0;
+        }else{
+            $('#span5-1').removeClass("hidespan");
+            $('#span5-2').addClass("hidespan");
+            $('#inputbox5').removeClass("has-error");
+            $('#inputbox5').addClass("has-success");
+            $('#span5').addClass("hidespan");
+            flag[4] = 1;
+        }
+		
         var sig = true;
         for(var i = 0;i < 4; i++){
             if(flag[i] != flag2[i]){
@@ -194,24 +278,24 @@ $(function(){
     });
 
     $('#next3').click(function(){
-        if ($("input[name='shetuanmingcheng']").val() == ""){
+        if ($("input[name='name']").val() == ""){
             alert("对不起，请填写社团名称！")
-            $("input[name='shetuanmingcheng']").focus();
+            $("input[name='name']").focus();
             return false;
         }
         if ($("#inputXueyuan").find("option:selected").text() == ""){
             alert("对不起，请选择所属学院！")
-            $("input[name='suoshuxueyuan']").focus();
+            $("input[name='school']").focus();
             return false;
         }
-        if ($("textarea[name='shetuanjieshao']").val() == ""){
+        if ($("textarea[name='description']").val() == ""){
             alert("对不起，请填写社团介绍！")
-            $("textarea[name='shetuanjieshao']").focus();
+            $("textarea[name='description']").focus();
             return false;
         }
-        if ($("textarea[name='shetuanjieshao']").val().length > 200){
+        if ($("textarea[name='description']").val().length > 200){
             alert("对不起，社团介绍超过200个字符限制！")
-            $("textarea[name='shetuanjieshao']").focus();
+            $("textarea[name='description']").focus();
             return false;
         }
         if ($("input[name='logo']").val() == ""){

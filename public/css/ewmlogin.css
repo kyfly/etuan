@@ -17,22 +17,12 @@
     position:static;
  }
 #login_container .loginPanel .title {
-    border-radius: 4px 4px 0 0;
-    font-size: 32px;
-    line-height: 50px;
+    font-size: 28px;
+    line-height: 120px;
     margin: 0 auto 10px;
-    text-indent: -9999px;
-    text-shadow: 0 2px 0 #333;
-    height: 78px;
-    width: 60px;
+    text-shadow: 0 5px 0 #333;
+	color: #CCD4D7;
 }
-#login_container .loginPanel .logoTitle {
-    	background: url(../img/logo_login.png) no-repeat scroll 0px 32px transparent;
-	}
-#login_container .loginPanel .enlogoTitle {
-    	background: url(../img/logo_login.png) no-repeat scroll 0px 32px transparent;
-		width: 108px;
-	}
 #login_container .loginPanel .panelContent {
     padding:50px;
 }

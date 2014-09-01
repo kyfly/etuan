@@ -46,7 +46,6 @@ class RegistrationController extends ActivityController
                     break;
             }
         }
-
         $data['liulan'] = $this->registrationHandle->tongjiLiulanliang($this->activityId);
        return View::make('admin.register.regresult')->with('data',$data);
     }
@@ -89,6 +88,11 @@ class RegistrationController extends ActivityController
             });
 
         })->export('xls');
+    }
+
+    public function reg_info($id)
+    {
+        return $this->registrationHandle->getActivityInfo($id);
     }
 
     public function serviceName()
