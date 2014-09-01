@@ -808,7 +808,7 @@ th, td {
     color: #b2b2b2;
 }
 
-#divShare {
+.divShare {
     margin-top: 10px;
     display: none;
 }
