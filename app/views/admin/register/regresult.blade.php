@@ -468,6 +468,6 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="../../../js/admin.js"></script>
+<script src="/js/admin.js"></script>
 </body>
 </html>

@@ -175,8 +175,8 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="../../../js/admin.js"></script>
-<script src="../../../js/taffy-min.js"></script>
-<script src="../../../js/admin/weixin/autoreply.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/taffy-min.js"></script>
+<script src="/js/admin/weixin/autoreply.js"></script>
 </body>
 </html>

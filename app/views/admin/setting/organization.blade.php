@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-@include('admin.layout.head')
+@include('admin.layout.head', array('css'=>['css/adminreg.css']))
 <body>
 @include('admin.layout.nav')
 <div class="container">

@@ -72,15 +72,15 @@
                                 <label>报名表样式</label><br>
                                 <label class="radio-inline">
                                     <input type="radio" name="theme" value="1">
-                                    <img src="../../../img/example.png">
+                                    <img src="/img/example.png">
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="theme" value="2">
-                                    <img src="../../../img/example.png">
+                                    <img src="/img/example.png">
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="theme" value="3">
-                                    <img src="../../../img/example.png">
+                                    <img src="/img/example.png">
                                 </label>
                             </div>
                         </fieldset>
@@ -185,9 +185,9 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="../../../js/bootstrap-datetimepicker.min.js"></script>
-<script src="../../../js/admin.js"></script>
-<script src="../../../js/adminbaoming.js"></script>
+<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/adminbaoming.js"></script>
 <script>
     $('.form_datetime').datetimepicker({
         language: 'en',

@@ -4,5 +4,10 @@
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
+    @if (isset($css))
+        @foreach($css as $cssFile)
+            {{HTML::style($cssFile)}}
+        @endforeach
+    @endif
     <title>团团一家 - 管理后台</title>
 </head>

@@ -32,7 +32,7 @@
                                 <td>{{$reglist[$i]['start_time']}}</td>
                                 <td>{{$reglist[$i]['stop_time']}}</td>
                                 <td><img class="editbtn" src="/img/editor.png"><img class="deletebtn"
-                                                                                            src="../../../img/close.png">
+                                                                                            src="/img/close.png">
                                 </td>
                             </tr>
                         @endfor
