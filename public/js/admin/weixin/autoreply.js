@@ -167,6 +167,7 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
         ruleDivTpl.before(ruleDiv);
     //模板有隐藏样式，需要改为显示
     ruleDiv.show();
+    $('#sidebar').height($('#main').outerHeight(true));
 };
 
 //初始化添加/修改对话框
@@ -241,6 +242,7 @@ MessageCtrl.prototype.removeKeywordRule = function (id) {
                     $('#rule'+id).remove();
                     msgData.removeMsgById(id);
                     msgCtrl.showAlert('自动回复删除成功！');
+                    $('#sidebar').height($('#main').outerHeight(true));
                 }
                 else
                     alert("哎呀呀，删除失败了！");
