@@ -96,24 +96,24 @@
 
             <h3 class="msg-body"></h3>
             <br>
-            <button type="button" class="btn btn-primary btn-lg msg-btn">页面转跳中...</button>
+            <button type="button" class="btn btn-primary btn-lg msg-btn">页面跳转中...</button>
         </div>
     </div>
 </div>
 
 <div class="container mainHeight visible-xs-block visible-in-xs">
     <div class="centerclass">
-        <span class="glyphicon glyphicon-ok col-xs-12 msg-status"></span>
+        <span class="glyphicon glyphicon-exclamation-sign col-xs-12 msg-status"></span>
     </div>
     <br>
     <div class="texts col-xs-12">
         <br>
 
-        <p class="p1 msg-title">！</p>
+        <p class="p1 msg-title"></p>
 
         <p class="msg-body"></p>
         <br>
-        <button type="button" class="btn btn-primary btn-lg msg-btn">页面转跳中...</button>
+        <button type="button" class="btn btn-primary btn-lg msg-btn">页面跳转中...</button>
     </div>
 </div>
 <footer id="footer" class="panel-footer">
