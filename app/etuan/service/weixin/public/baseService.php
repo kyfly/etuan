@@ -70,4 +70,18 @@ class BS
             } else
                 return $output;
         }
+        
+        public static function getWxinfo($org_uid){
+            $url = BS::getRandStr(18).date('Ymdhms',time());
+            $token = BS::getRandStr(18).date('HmsYmd',time());
+            $result = Wxdata::insert([
+                'interface_url'=>$url,
+                'interface_token'=>$token,
+                'appid'=>'',
+                'appsecret'=>'',
+                'redirect_uri'=>'',
+                'org_uid'=>$org_uid]);
+            $info = ['url'=>$url,'token'=>$token];
+            return json_encode($info);
+        }
 }

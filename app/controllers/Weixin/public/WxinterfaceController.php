@@ -1,20 +1,7 @@
 <?php
-class WxinterfaceController
+class WxinterfaceController extends BaseController
 {
-    public static function getWxinfo($org_uid){
-        $url = BS::getRandStr(18).date('Ymdhms',time());
-        $token = BS::getRandStr(18).date('HmsYmd',time());
-        $result = Wxdata::insert([
-            'interface_url'=>$url,
-            'interface_token'=>$token,
-            'appid'=>'',
-            'appsecret'=>'',
-            'redirect_uri'=>'',
-            'org_uid'=>$org_uid]);
-        $info = ['url'=>$url,'token'=>$token];
-        return json_encode($info);
-    }
-    /*private $wx;
+    private $wx;
     public function __construct(wxInfoService $wx){
         $this->wx = $wx;
     }
@@ -45,6 +32,6 @@ class WxinterfaceController
             $json = "";
         }
         return $json;
-    }*/
+    }
 
 }

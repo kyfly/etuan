@@ -13,6 +13,7 @@ class Weixin
 	public static function logout(){
 		Session::forget('nick_name');
 		Session::forget('wx_uid');
+		return '退出成功';
 	}
 	public static function user(){
 		$user = Session::get("wx_uid");

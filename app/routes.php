@@ -64,18 +64,6 @@ Route::controller('weixin/org','WxinterfaceController');
 
     Route::controller('organization',"organizationController");
 
-    Route::get('test',function()
-    {
-        // $oss = new oss;
-        // $response = $oss->list_bucket();
-        // dd($response);
-
-        $oss = new oss;
-        $response = $oss->list_object('kyfly-img');
-        dd($response);
-
-    });
-
 
 
 

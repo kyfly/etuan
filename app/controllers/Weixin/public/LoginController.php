@@ -31,7 +31,9 @@
 				return View::make("qrlogin",["token"=>$state]);
 			}
 		}
-
+		public function getQuit(){
+			return Weixin::logout();
+		}
 	public function getCheck(){
 		$state = Input::get("state");
     	$userinfo = $this->cache->get($state);
