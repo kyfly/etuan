@@ -5,21 +5,20 @@ class WxinterfaceController extends BaseController
     public function __construct(wxInfoService $wx){
         $this->wx = $wx;
     }
-    public function postCwx(){
+    public function getCwx(){
         $appid = Input::get("appid");
         $secret = Input::get("secret");
         $result = $this->wx->create($appid,$secret);
         return $result;
     }
     
-    public function postUwx(){
+    public function getUwx(){
         $mp_id = Input::get("mp_id");
         $appid = Input::get("appid");
         $secret = Input::get("secret");
         $result = $this->wx->create($mp_id,$mp_org_id,$appid,$secret);
         return $result;
     }
-
     public function getShowMp(){
         $org_uid = Auth::user()->org_uid;
         $re =  Wxdata::where("org_uid",$org_uid)->select("mp_origin_id","interface_url","interface_token","appid","appsecret","redirect_uri")->get();

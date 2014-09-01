@@ -12,12 +12,12 @@ class UniversalHandle extends replyHandle
         $event = $postObj->Event;
         switch($event){
             case "subscribe":
-                $content = "mp_welcome_autoreply_messgae";
+                $content = "mp_welcome_autoreply_message";
                 return $this->reply($postObj,$content);
             break;
 
             default:
-            $content = "mp_default_autoreply_messgae";
+            $content = "mp_default_autoreply_message";
             return $this->reply($postObj,$content);
             break;
          }

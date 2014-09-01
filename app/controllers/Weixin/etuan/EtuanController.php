@@ -30,7 +30,7 @@ class EtuanController extends BaseController{
                     return $this->etuan->EtuanEventHandle($postObj);
                     break;
 		  	 	default:
-                    $content = "mp_default_autoreply_messgae";
+                    $content = "mp_default_autoreply_message";
                 	return $this->etuan->reply($postObj,$content);
 		  	 		break;
 		  	 }

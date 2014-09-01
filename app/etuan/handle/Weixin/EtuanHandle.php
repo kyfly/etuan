@@ -34,7 +34,7 @@ class EtuanHandle extends replyHandle
         switch ($postObj->Event)
         {
             case "subscribe":
-                $content = "mp_welcome_autoreply_messgae";
+                $content = "mp_welcome_autoreply_message";
                 if(isset($postObj->EventKey)){
                     $eventkey = $postObj->EventKey;
                     $scene_id = substr($eventkey,8);
@@ -55,7 +55,7 @@ class EtuanHandle extends replyHandle
                 return $this->Click($postObj);
                 break;
             default:
-                    $content = "mp_default_autoreply_messgae";
+                    $content = "mp_default_autoreply_message";
                 break;
         }
         return $this->reply($postObj,$content);

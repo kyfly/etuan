@@ -1,5 +1,4 @@
 <?php
-
     Route::group(array('before'=>'wxauth|stuinfo'),function()
     {
         //抽奖，获取某次抽奖结果
@@ -35,7 +34,8 @@
         
 
     });
-Route::controller('weixin/org','WxinterfaceController');
+    Route::controller('weixin/org','WxinterfaceController');
+    
     Route::controller('weixin/news','NewsController');
 
     Route::controller('weixin/qrcode','QretuanController');
