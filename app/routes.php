@@ -67,6 +67,10 @@
     Route::get('baoming/{id}','RegistrationController@reg_info');
 
 
+    Route::get('xuehao', function(){
+        return View::make('stuinfo');
+    });
+
 
 
 
