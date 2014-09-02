@@ -95,6 +95,15 @@ class RegistrationController extends ActivityController
         return $this->registrationHandle->getActivityInfo($id);
     }
 
+    public function reg_list()
+    {
+        $reg_list =  $this->registrationHandle->getActivityList($this->org_uid);
+        foreach ($reg_list as $key => $reg) {
+                $reg_list[$key] = $reg->toArray();
+        }
+        return View::make('admin.register.viewreg')->with('reglist', $reg_list);
+    }
+
     public function serviceName()
     {
         return 'registrationService';

@@ -1,4 +1,5 @@
 <?php
+
 class AuthController extends BaseController
 {
     public $oss;
@@ -46,6 +47,7 @@ public function getLogout()
     'url' => '/',
     'btn' => 'true',
     );
+
   return View::make('showmessage')->with('messageArr', $msgArr);
 }
 
@@ -82,12 +84,20 @@ public function postRegister()
  }
  try {
     DB::beginTransaction();
+ 
+    $rsa = new Crypt_RSA();
+    $rsa->loadKey(PUBLICKEY);
+    $plaintext = $userInfo['password'];
+    $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+    $login_token = $rsa->encrypt($plaintext);
+
     $org_uid = User::insertGetId(array(
         'email' => $userInfo['email'],
         'password' => Hash::make($userInfo['password']),
         'phone_long' => $userInfo['phone_long'],
         'phone_short' => $userInfo['phone_short'],
-        'user_group' => 'org'
+        'user_group' => 'org',
+        'login_token' => $login_token
         ));
     $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['logo']);
     $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic1']);
@@ -115,7 +125,7 @@ public function postRegister()
         $department->org_id = $org_id;
         $department->save();
     }
-    WxinterfaceController::getWxinfo($org_uid);
+    // WxinterfaceController::getWxinfo($org_uid);
     DB::commit();
     $msgArr = array(
         'title' => '注册成功',

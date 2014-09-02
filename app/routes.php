@@ -30,6 +30,8 @@
 
         Route::controller('vote','VoteController');
 
+        Route::get("admin/register/viewreg",'RegistrationController@reg_list');
+
         Route::get('admin/{page}', function($page){
             return View::make('admin.'.$page);
         });
@@ -74,6 +76,18 @@
     Route::controller('organization',"organizationController");
 
     Route::get('baoming/{id}','RegistrationController@reg_info');
+
+    
+    include('Crypt/RSA.php');
+
+    Route::get('rsa',function()
+    {
+        $rsa = new Crypt_RSA();
+        $password = User::find(34)->login_token;
+        $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+        $rsa->loadKey(PRIVATEKEY);
+        echo $rsa->decrypt($password);
+    });
 
 
     Route::get('xuehao', function(){
