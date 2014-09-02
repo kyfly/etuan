@@ -204,4 +204,17 @@ public function getMessages()
  return Message::where('to_org_uid',$this->org_uid)->where('mark_read',0)->select('title','content','created_at')->get();
 }
 
+public function getHomeInfo()
+{
+    $reg_list = Registration::where('org_uid',$this->org_uid)->lists('reg_id');
+    $reg_user_number = Registration_user::whereIn('reg_id',
+        Registration::where('org_uid',$this->org_uid)->lists('reg_id'))->count();
+    $reg_number = Registration::whereRaw('org_uid = ? and stop_time > ?',array($this->org_uid,date('Y-m-d H:i:s',time())))
+                    ->count();
+    $reg_page_view = Registration::where('org_uid',$this->org_uid)->sum('page_view');
+    return Response::json(array(
+        'reg_user_number' => $reg_user_number,
+        'reg_number' => $reg_number,
+        'reg_page_view' =>$reg_page_view));
+}
 }
