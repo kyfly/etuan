@@ -9,47 +9,7 @@
 </head>
 <body>
 <!--头部-->
-<header id="nav">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
-                            type="button">
-                        <span class="hidespan">导航</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <h5>
-                        <a href="index.html">
-                            <img src="../img/brand.png">
-                        </a>
-                    </h5>
-                </div>
-                <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="index.html">首页</a>
-                        </li>
-                        <li>
-                            <a href="#">报名</a>
-                        </li>
-                        <li>
-                            <a href="#">抢票</a>
-                        </li>
-                        <li>
-                            <a href="#">投票</a>
-                        </li>
-                        <li>
-                            <a href="#">抽奖</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
+@include('layout.nav')
 <div class="container" id="mainHeight">
 <div class="field clearfix">
 <p class="headtitle">社团管理员注册</p>
