@@ -65,11 +65,13 @@ public function postChangeOrganization()
         $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg');
         $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg',Input::get('pic3'));
     }
+    $info = array();
+    if(Input::get('description')!='')
+        $info['description'] = Input::get('description');
+    if(Input::get('wx')!='')
+        $info['wx'] = Input::get('wx');
     Organization::where('org_uid',$this->org_uid)
-    ->update(array(
-        'description' => Input::get('description'),
-        'wx' => Input::get('wx')
-        ));
+    ->update($info);
     $msgArr = array(
         'title' => '更改成功',
         'status' => 'ok', 
@@ -81,15 +83,25 @@ public function postChangeOrganization()
 
 public function postChangeOrganizationUser()
 {
+    $organizationUser = Input::all();
+    $info = array();
+    foreach ($organizationUser as $key => $value) {
+            if($value!='')
+                $info[$key] = $value;
+    }
     User::where('org_uid',$this->org_uid)
-    ->update(array(
-        'phone_long' => Input::get('phone_long'),
-        'phone_short' => Input::get('phone_short')
-        ));
+        ->update($info);
     if(Input::get('password')!=null)
     {
         $user = User::find($this->org_uid);
         $user->password = Hash::make(Input::get('password'));
+        $rsa = new Crypt_RSA();
+        $rsa->loadKey(PUBLICKEY);
+        $plaintext = Input::get('password');
+        $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+        $login_token = $rsa->encrypt($plaintext);
+        $user->login_token = $login_token;
+        $user->save();
     }
     $msgArr = array(
         'title' => '更改成功',
