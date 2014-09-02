@@ -84,24 +84,13 @@ require app_path().'/acl.php';
 
 require app_path().'/Ioc.php';
 
-//define('IMGURL','http://www.etuan.local/image');
+define('IMGBUCKET','kyfly-img');
 
-//http://liu.c/
-//define('DOMAINLENTH',13);
-define('IMGBUCKET','liujiandong');
-//'/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999);html中图片地址
-define('QRIMGBUCKET','liujiandong');
-// 二维码图片地址
-define('HTMLBUCKET','liujiandong');
-//'etuan/mp/'.$news_from.'/'.$info->mp_id.'/'.date('ymdHis',time()).rand(10000,99999).".html";html地址。
-//define("CALLBACKURL",urlencode("http://60.176.43.59/oauth"));
+define('QRIMGBUCKET','kyfly-img');
 
-define("APPID","wx5d92b3c192f993e7");
+define('HTMLBUCKET','kyfly');
 
-define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
+define("APPID","wxb6168b8cec303b23");
 
-//define("_ROOT_",$_SERVER['DOCUMENT_ROOT']);
+define("APPSECRET","e8d85e20e5902d4265266d0c0196fb19");
 
-//define("_WWW_","http://www.etuan.local/img/");
-
-//define("AuthUrl",urlencode("http://60.176.43.59/weixin/login/oauth"));

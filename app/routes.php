@@ -8,6 +8,10 @@
     {
         //抽奖，获取某次抽奖结果
         Route::get("jiang/get/{lottery_id}","choujiangController@get");
+
+        Route::get('/hello', function(){
+            return View::make('hello');
+        });
     });
     
     Route::controller('auth','AuthController');

@@ -1,16 +1,15 @@
 <?php
-/*$connect= new Memcached; 
-	$connect->setOption(Memcached::OPT_COMPRESSION, false); 
-	$connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-	$connect->addServer('xxxxxxxx.m.yyyyyyyy.ocs.aliyuncs.com', 11211);
-	$connect->setSaslAuthData('ocsname', 'ocspassword');*/
 	class WxloginController extends BaseController
 	{
 		private $is_weixin;
 		private $state;
 		private $cache;
 		public function __construct(){
-			$connect = new Memcache;
+            $connect= new Memcached;
+            $connect->setOption(Memcached::OPT_COMPRESSION, false);
+            $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+            $connect->addServer('7825a1060cbf11e4.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
+            $connect->setSaslAuthData('7825a1060cbf11e4', 'OSCKyfly___123');
        		$connect->connect("localhost",11211);
        		$this->cache = $connect;
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
@@ -21,8 +20,6 @@
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
 			QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
-        
-	        return $imgname;
 		}
 		public function getIndex(){
 			if(!$this->is_weixin){
