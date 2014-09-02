@@ -10,6 +10,8 @@ class Stu_infoController extends BaseController
 		$stu_name = Input::get('stu_name');
 		$stu_id = Input::get('stu_id');
 		//添加判断学号方法
+		if (!preg_match('/^((0[8-9])|(1[0-4]))(\d{6}|\d{7})$/', $stu_id))
+		  return View::make('stuinfo');
 		if($stu_name && $stu_id){
 			$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 			if($re){

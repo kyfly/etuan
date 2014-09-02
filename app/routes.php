@@ -1,6 +1,7 @@
 <?php
     Route::get('/',function(){
-        return urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
+        //return urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
+       return  Weixin::login('liu');
     });
 
 
