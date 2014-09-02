@@ -105,10 +105,13 @@
 	    }else{
 	    	//表示登录成功
 	    	$info = $this->cache->delete($token);
-	    	$msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
-                'status' => 'ok', 'action' => 'wclose');
-    		return View::make('showmessage')->with('messageArr', $msgArr);
+	    	return 'true';
 	    }
+	}
+	public function getSuc(){
+		$msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
+                'status' => 'ok', 'action' => 'wclose');
+    	return View::make('showmessage')->with('messageArr', $msgArr);
 	}
 
 }

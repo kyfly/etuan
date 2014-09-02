@@ -14,10 +14,8 @@
         $.get("/weixin/login/wcheck", {state : token,user : user}, function (data, status) {
             if (data == "true" && status == "success")
             {
-                alert(data);  //该视图作为微信客户端登陆成功后显示页面。这里只实现功能，其他请前段完成。
-                clearInterval(timer);
-            }
-                
+                window.location.href='/weixin/login/suc'; 
+            } 
         });
     }
 
