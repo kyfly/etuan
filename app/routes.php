@@ -4,6 +4,10 @@
        return  Weixin::login('liu');
     });
 
+        //可以测试，登录的是否为不同用户。
+        Route::get('/wxuser',function(){
+           return  Weixin::user();
+        });
 
     Route::group(array('before'=>'wxauth|stuinfo'),function()
     {

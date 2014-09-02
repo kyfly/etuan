@@ -30,9 +30,12 @@
 		public function getQuit(){
 			return Weixin::logout();
 		}
+		//电脑端带回state来请求登录
 	public function getCheck(){
 		$state = Input::get("state");
+		//通过唯一token值获取登录信息，（当微信端进入时会保存，否者为空）
     	$userinfo = $this->cache->get($state);
+    	//取得token时 把 check_id值为一；并再次放入缓存
         if($userinfo['token']== $state)
         {
         	
@@ -50,6 +53,7 @@
         	return 'false';
         }
 	}
+	//微信端进入该函数，
 	public function getOauth(){
 		$appid = APPID;
 		$secret = APPSECRET;
@@ -63,31 +67,43 @@
 	        	$this->cache->set($code,1);
         	}else{
         		$user = $obj->CreateUser($appid,$secret,$code);
+        		//根据是否有openid执行以下程序。
 	            if($user)
 	            {
             		$userinfo=['user'=>$user,'token'=>$state,'start_time'=>time(),'check_id'=>''];
+            		//把该次登录信息放入缓存，
               		$this->cache->set($state,$userinfo,60);
 	                $info = $this->cache->get($state);
 	                $check = $info['check_id'];
 	                if($check!=1){
+	                	//带state和openid到phone模板供js带回给下边的函数。
 	                	return View::make('phone',['token'=>$state,'user'=>$user]);
 	                }
-	                return View::make('phone',['token'=>$state,'user'=>$user,'value'=>'true']);
+	                //表示登录成功（基本不可能）
+	                $msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
+                'status' => 'ok', 'action' => 'wclose');
+    				return View::make('showmessage')->with('messageArr', $msgArr);
 	            }else{
-	            	return View::make('phone',['token'=>$state,'user'=>$user,'value'=>"false"]);
+	            	//表示授权失败，登录失败；
+	            	$msgArr = array('title' => '登录失败', 'body' => '微信登录失败，请重新登录。现在您可以关闭本页面。',
+                'status' => 'error', 'action' => 'wclose');
+    				return View::make('showmessage')->with('messageArr', $msgArr);
 	            }
         	}
         	
     	}
 	}
+	//通过js等待电脑端登陆成功，成功后会把check_id值为1.
 	public function getWcheck(){
 		$token = Input::get('state');
 		$user = Input::get('user');
        	$info = $this->cache->get($token);
 		$check = $info['check_id'];
 		if($check!=1){
-	    	return View::make('phone',['token'=>$token,'user'=>$user,'value'=>"false"]);
+			//表示电脑端还没登陆成功，继续请求。
+	    	return View::make('phone',['token'=>$token,'user'=>$user]);
 	    }else{
+	    	//表示登录成功
 	    	$info = $this->cache->delete($token);
 	    	$msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
                 'status' => 'ok', 'action' => 'wclose');
