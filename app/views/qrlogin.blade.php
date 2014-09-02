@@ -7,7 +7,7 @@
 <body>
 
 
-<img src= "http://www.etuan.local/weixin/login/code">
+<img src= "/weixin/login/code">
 {{$token}}
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script>
