@@ -1,8 +1,10 @@
 
+
+
 $(document).ready(function () {
     $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
 });
-
+ 
 $(function(){
     var flag = new Array(5);
     var flag2 = ["1","1","1","1","1"];
@@ -325,28 +327,19 @@ $(function(){
     $('#next4').click(function(){
         $('#next1-2').trigger("click")
     });
-
+	
     $('#addelement').click(function () {
-        var createSelect='<div class="form-group">' +
+        var createSelect='<div class="addedbox"><div class="form-group">' +
             '<label class="col-sm-2 control-label">部门名称</label>' +
-            '<div class="col-sm-6"><input type="text" class="form-control" name="department_name[]"></div></div>' +
+            '<div class="col-sm-6"><input type="text" class="form-control" name="department_name[]"></div>' +
+            '<button onclick="delspan(this)" class="deletespan btn btn-danger col-sm-1" type="button">&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;</button></div>'+
             '<div class="form-group">' +
             '<label class="col-sm-2 control-label">部门介绍</label>' +
             '<div class="col-sm-6"><textarea class="form-control" name="department_description[]" rows="3"></textarea>' +
-            '<span class="help-block">50字以内</span></div></div>';
+            '<span class="help-block">50字以内</span></div></div></div>';
         $('#addablebox').append(createSelect);
     })
-
-    $('#minuselement').click(function () {
-        if ( $("#addablebox .form-group").size() > 2 ) {
-            $("#addablebox .form-group:last-child").remove();
-            $("#addablebox .form-group:last-child").remove();
-        }
-        else{
-            alert("请至少填写一个部门！");
-        }
-    })
-
+	
     $("#inputXueyuan").empty();
     $("#inputXueyuan").prepend("<option value='全校' selected>全校</option>");
     $("#inputType").change(function(){
@@ -365,3 +358,7 @@ $(function(){
         }
     });
 })
+
+function delspan(delbtn){
+	$(delbtn).parents(".addedbox").remove();
+};
