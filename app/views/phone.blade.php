@@ -5,9 +5,6 @@
     <title>d</title>
 </head>
 <body>
-
-
-{{$value}}
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script>
     var token = "{{$token}}";

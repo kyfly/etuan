@@ -72,9 +72,9 @@
 	                if($check!=1){
 	                	return View::make('phone',['token'=>$state,'user'=>$user]);
 	                }
-	                return View::make('phone',['token'=>$state,'user'=>$user,'value'=>'验证成功']);
+	                return View::make('phone',['token'=>$state,'user'=>$user,'value'=>'true']);
 	            }else{
-	            	return View::make('phone',['token'=>$state,'user'=>$user,'value'=>"验证失败"]);
+	            	return View::make('phone',['token'=>$state,'user'=>$user,'value'=>"false"]);
 	            }
         	}
         	
@@ -86,10 +86,12 @@
        	$info = $this->cache->get($token);
 		$check = $info['check_id'];
 		if($check!=1){
-	    	return View::make('phone',['token'=>$token,'user'=>$user]);
+	    	return View::make('phone',['token'=>$token,'user'=>$user,'value'=>"false"]);
 	    }else{
 	    	$info = $this->cache->delete($token);
-	    	return "true";
+	    	$msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
+                'status' => 'ok', 'action' => 'wclose');
+    		return View::make('showmessage')->with('messageArr', $msgArr);
 	    }
 	}
 
