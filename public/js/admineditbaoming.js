@@ -62,6 +62,21 @@ $(document).ready(function () {
         setHeight();
         configExtraForm();
     });
+    function loadExistContent(activityInfoJson){
+        document.getElementById("starttime").value = activityInfoJson.start_time;
+        document.getElementById("stoptime").value = activityInfoJson.stop_time;
+        document.getElementById("regname").value = activityInfoJson.name;
+        var objLimit = document.getElementsByName("grade");
+        var limitGrade = activityInfoJson.limit_grade.split("");
+        for(var i = objLimit.length-1; i >= 0; i--){
+            if(limitGrade[i]==="1"){
+                objLimit[i].checked === true;
+            }
+            else{
+                objLimit[i].checked === false;
+            }
+        }
+    }
 });
 
 //获得创建报名的各项参数数据
@@ -201,13 +216,13 @@ $(document).ready(function(){
 			createActivityJson.questions[j] = questionItem;
 		};
 		//打包好发送格式的Json
-        var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
+        var sendJson = {activityId:1,activityInfo:JSON.stringify(createActivityJson)};
 		//！！！！！！dev阶段采用alert形式表示数据
 		console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
-			url:"/registration/createactivity",
+			url:"registration/createactivity",
 			data:sendJson
 		});
 	});
