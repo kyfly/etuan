@@ -130,7 +130,7 @@ $(document).ready(function(){
     $("#preview").click(function(){
         var previewWindow = window.open("about:blank");
         previewWindow.document.title = $("#regname").val();
-        previewWindow.document.write("哈哈");
+        previewWindow.document.write("预览功能正在开发中~");
     });
 	$("#submit").click(function(){
         //检查时间前后的对比
@@ -169,16 +169,15 @@ $(document).ready(function(){
 				createActivityJson.limit_grade += "0";
 			}
 		}
-		//获得地址链接的值
+		//获得报名标题的值
 		createActivityJson.name = $("#regname").val();
-		//获得主题选择的值（老方法用于select的貌似不能用了）
-		var objTheme = document.getElementsByName("theme");
-		for(var j = 0; j <= objTheme.length-1; j++){
-			if(objTheme[j].checked === true && createActivityJson.theme === null){
-				createActivityJson.theme = objTheme[j].value;
-				break;
-			}
-		}
+        //获得主题选择的值
+        var objTheme = document.getElementsByName("theme");
+        for(var j = 0; j < objTheme.length; j++){
+            if(objTheme[j].checked === true){
+                createActivityJson.theme = objTheme[j].value;
+            }
+        }
         //将问题依次添加进其中
  		var objQuestion = document.getElementsByClassName("baomingitem");
 		for(var j = 0; j < objQuestion.length; j++){
@@ -202,7 +201,7 @@ $(document).ready(function(){
 		};
 		//打包好发送格式的Json
         var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
-		//！！！！！！dev阶段采用alert形式表示数据
+		//dev阶段采用alert形式表示数据
 		console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({

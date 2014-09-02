@@ -62,25 +62,122 @@ $(document).ready(function () {
         setHeight();
         configExtraForm();
     });
+    //函数将标签转化为类型
+    var type2label = function(typenum){
+        var labelback = "";
+        switch(typenum){
+            case 101:
+                labelback = "学号";
+                break;
+            case 102:
+                labelback = "姓名";
+                break;
+            case 103:
+                labelback = "性别";
+                break;
+            case 104:
+                labelback = "学院";
+                break;
+            case 105:
+                labelback = "专业";
+                break;
+            case 106:
+                labelback = "特长";
+                break;
+            case 107:
+                labelback = "电子邮箱";
+                break;
+            case 108:
+                labelback = "QQ";
+                break;
+            case 109:
+                labelback = "手机长号";
+                break;
+            case 110:
+                labelback = "手机短号";
+                break;
+            case 111:
+                labelback = "籍贯";
+                break;
+            case 112:
+                labelback = "第一意向部门";
+                break;
+            case 113:
+                labelback = "第二意向部门";
+                break;
+            case 114:
+                labelback = "第三意向部门";
+                break;
+            case 115:
+                labelback = "是否服从调剂";
+                break;
+            case 1:
+                labelback = "自定义短问题";
+                break;
+            case 2:
+                labelback = "自定义长问题";
+                break;
+            default:
+                labelback = "";
+                break;
+        };
+        return labelback;
+    };
     function loadExistContent(activityInfoJson){
-        document.getElementById("starttime").value = activityInfoJson.start_time;
-        document.getElementById("stoptime").value = activityInfoJson.stop_time;
+        document.getElementById("starttime").value = activityInfoJson.start_time.replace(/\:00$/,"");
+        document.getElementById("stoptime").value = activityInfoJson.stop_time.replace(/\:00$/,"");
         document.getElementById("regname").value = activityInfoJson.name;
         var objLimit = document.getElementsByName("grade");
         var limitGrade = activityInfoJson.limit_grade.split("");
-        for(var i = objLimit.length-1; i >= 0; i--){
+        for(var i = 0; i < objLimit.length ; i++){
             if(limitGrade[i]==="1"){
-                objLimit[i].checked === true;
+                objLimit[objLimit.length-1-i].checked = true;
             }
             else{
-                objLimit[i].checked === false;
+                objLimit[objLimit.length-1-i].checked = false;
+            }
+        }
+        document.getElementsByName("theme")[activityInfoJson.theme].checked = true;
+        for(var j=0;j<activityInfoJson.questions.length;j++){
+            var e = activityInfoJson.questions[j];
+            if(e.type===101 || e.type===102){}
+            else if(e.type===1 || e.type===2){
+                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">自定义问题</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\" value=\""+ e.label+"\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+                $("#extraform").append(content);
+                setHeight();
+                configExtraForm();
+            }
+            else{
+                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + type2label(e.type) + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+                $("#extraform").append(content);
+                setHeight();
+                configExtraForm();
             }
         }
     }
-});
-
-//获得创建报名的各项参数数据
-$(document).ready(function(){
+    loadExistContent({
+        "activityId":1,
+        "start_time":"2014-09-10 19:00:00",
+        "stop_time":"2014-10-10 19:00:00",
+        "limit_grade":"00111",
+        "name":"团团一家报名系统",
+        "theme":2,
+        "questions":[
+            {"question_id":1,"type":1,"label":"这是问题1","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":2,"type":2,"label":"这是问题2","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":4,"type":101,"label":"这是问题4","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":5,"type":102,"label":"这是问题5","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":6,"type":103,"label":"这是问题6","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":7,"type":104,"label":"这是问题7","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":8,"type":105,"label":"这是问题8","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":9,"type":106,"label":"这是问题9","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":10,"type":107,"label":"这是问题10","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":11,"type":108,"label":"这是问题11","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":12,"type":109,"label":"这是问题12","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":13,"type":110,"label":"这是问题13","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
+            {"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}}
+        ]
+    });
     //函数将标签转化为类型
     var label2type = function(labelstr){
         var typeback = 0;
@@ -142,10 +239,11 @@ $(document).ready(function(){
         };
         return typeback;
     };
+    //获得创建报名的各项参数数据
     $("#preview").click(function(){
         var previewWindow = window.open("about:blank");
         previewWindow.document.title = $("#regname").val();
-        previewWindow.document.write("哈哈");
+        previewWindow.document.write("预览功能正在开发中~");
     });
 	$("#submit").click(function(){
         //检查时间前后的对比
@@ -184,14 +282,13 @@ $(document).ready(function(){
 				createActivityJson.limit_grade += "0";
 			}
 		}
-		//获得地址链接的值
+		//获得报名标题的值
 		createActivityJson.name = $("#regname").val();
-		//获得主题选择的值（老方法用于select的貌似不能用了）
+		//获得主题选择的值
 		var objTheme = document.getElementsByName("theme");
-		for(var j = 0; j <= objTheme.length-1; j++){
-			if(objTheme[j].checked === true && createActivityJson.theme === null){
+		for(var j = 0; j < objTheme.length; j++){
+			if(objTheme[j].checked === true){
 				createActivityJson.theme = objTheme[j].value;
-				break;
 			}
 		}
         //将问题依次添加进其中
@@ -217,7 +314,7 @@ $(document).ready(function(){
 		};
 		//打包好发送格式的Json
         var sendJson = {activityId:1,activityInfo:JSON.stringify(createActivityJson)};
-		//！！！！！！dev阶段采用alert形式表示数据
+		//dev阶段采用alert形式表示数据
 		console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
