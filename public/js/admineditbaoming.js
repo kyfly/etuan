@@ -142,7 +142,14 @@ $(document).ready(function () {
             var e = activityInfoJson.questions[j];
             if(e.type===101 || e.type===102){}
             else if(e.type===1 || e.type===2){
-                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">自定义问题</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\" value=\""+ e.label+"\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+                var zdylabel="";
+                if(e.type===1){
+                    zdylabel="自定义短问题";
+                }
+                else{
+                    zdylabel="自定义长问题";
+                }
+                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">"+zdylabel+"</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\" value=\""+ e.label+"\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
                 $("#extraform").append(content);
                 setHeight();
                 configExtraForm();
@@ -155,28 +162,22 @@ $(document).ready(function () {
             }
         }
     }
-    loadExistContent({
-        "activityId":1,
-        "start_time":"2014-09-10 19:00:00",
-        "stop_time":"2014-10-10 19:00:00",
-        "limit_grade":"00111",
-        "name":"团团一家报名系统",
-        "theme":2,
-        "questions":[
-            {"question_id":1,"type":1,"label":"这是问题1","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":2,"type":2,"label":"这是问题2","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":4,"type":101,"label":"这是问题4","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":5,"type":102,"label":"这是问题5","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":6,"type":103,"label":"这是问题6","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":7,"type":104,"label":"这是问题7","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":8,"type":105,"label":"这是问题8","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":9,"type":106,"label":"这是问题9","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":10,"type":107,"label":"这是问题10","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":11,"type":108,"label":"这是问题11","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":12,"type":109,"label":"这是问题12","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":13,"type":110,"label":"这是问题13","content":{"A":"选项1", "B":"选项2", "C":"选项3"}},
-            {"question_id":14,"type":111,"label":"这是问题14","content":{"A":"选项1", "B":"选项2", "C":"选项3"}}
-        ]
+    var pageJSON;
+    //备用对象
+    $.ajax ({
+        type:"get",
+        dataType:"json",
+        url:"http://www.etuan.local/js/activityInfo.json",
+        //url:"registration/activityinfo?activityId="+activityId.toString(),
+        success:function(msg){
+            if (pageJSON === undefined){
+                pageJSON = msg;
+                loadExistContent(pageJSON);
+            }
+        },
+        error:function(){
+            alert("当前网络不佳，暂时无法加载报名表信息");
+        }
     });
     //函数将标签转化为类型
     var label2type = function(labelstr){
