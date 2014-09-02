@@ -10,7 +10,7 @@ class choujiangService
 		$this->wx_uid = $this->lot->getWx_uid();
 	}
 	public function getInfo(){
-		/*$content1 = $this->checkReg();
+		$content1 = $this->checkReg();
 		$content2 = $this->checkLot();
 		$content3 = $this->checkSub();
 		$content = [$content1,$content2,$content3];
@@ -19,7 +19,7 @@ class choujiangService
 				$content[$i] = urlencode($content[$i]);
 				return ['status'=>'fail','message'=>$content[$i]];
 			}
-		}*/
+		}
 		$result = $this->lot->LotteryInfo($this->lottery_id);
 		if(!is_array($result)){
 			$result = urlencode($result);
