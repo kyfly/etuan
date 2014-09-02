@@ -17,7 +17,7 @@
 		}
 		public function getCode(){
 			$appid = APPID;
-			$callbackUrl = AuthUrl;
+			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth');
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
 			QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);

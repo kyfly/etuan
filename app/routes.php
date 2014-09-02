@@ -1,4 +1,9 @@
 <?php
+    Route::get('/',function(){
+        return urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
+    });
+
+
     Route::group(array('before'=>'wxauth|stuinfo'),function()
     {
         //抽奖，获取某次抽奖结果

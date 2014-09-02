@@ -58,7 +58,7 @@ class newsHandle
             //上传html中的图片信息。上传成功则继续上传html
             if(self::uploadImg($content))
             {
-                $filepath =_ROOT_."/../app/etuan/service/weixin/";
+                $filepath =$_SERVER['DOCUMENT_ROOT']."/../app/etuan/service/weixin/";
                 $head = file_get_contents($filepath.'head.php');
                 $fool = file_get_contents($filepath.'fool.php');
                 //以上三条为得到html的头和尾。
@@ -117,9 +117,10 @@ class newsHandle
           $bucket = IMGBUCKET;
           if(strstr($val,IMGURL)){
               //'/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999)
-              $object = substr($val,DOMAINLENTH);
+              $domainlenth = strlen('http://'.$_SERVER['HTTP_HOST'].'/');
+              $object = substr($val,$domainlenth);
               //获取图片的本地文件名， _ROOT_.'/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999);
-              $file = _ROOT_.'/'.$object;
+              $file = $_SERVER['DOCUMENT_ROOT'].'/'.$object;
               $result= $oss->upload_file_by_file($bucket,$object,$file);
               //20为$org_uid.'/'.time().rand(10000,99999);的长度
               $file = substr($file,0,-20); 
