@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-@include('amdin.layout.head')
+@include('admin.layout.head')
 <body>
 @include('admin.layout.nav')
 <div class="container">
