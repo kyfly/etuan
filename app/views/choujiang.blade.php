@@ -97,6 +97,7 @@ $(function () {
     } while (found);
     itemToDeg.push(thanks);
     $("#inner").click(function () {
+        $('#inner').unbind('click');
         $.getJSON('/jiang/get/1', function(data, status) {
             if (status == 'success')
             {
@@ -129,7 +130,6 @@ $(function () {
 
                         }
                     });
-                    $('#inner').unbind('click');
                     setTimeout(function () {
                         $('#inner').click(function () {
                             alert("您已经抽过奖了亲~~");
