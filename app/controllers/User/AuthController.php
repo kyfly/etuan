@@ -82,8 +82,8 @@ public function postRegister()
   {
      return View::make('adminregdit')->with('error','用户名已经存在');
  }
- // try {
- //    DB::beginTransaction();
+ try {
+    DB::beginTransaction();
  
     $rsa = new Crypt_RSA();
     $rsa->loadKey(PUBLICKEY);
@@ -125,9 +125,9 @@ public function postRegister()
         $department->org_id = $org_id;
         $department->save();
     }
-    // WxinterfaceController::getWxinfo($org_uid);
     Auth::loginUsingId($org_uid);
-    // DB::commit();
+    wxInfoHandle::createWx();
+    DB::commit();
     $msgArr = array(
         'title' => '注册成功',
         'status' => 'ok', 
@@ -135,16 +135,16 @@ public function postRegister()
         'btn' => 'true',
         );
     return View::make('showmessage')->with('messageArr', $msgArr);
-// } catch (Exception $e) {
-//     DB::rollback();
-//     $msgArr = array(
-//         'title' => '注册失败',
-//         'status' => 'error', 
-//         'action' => 'back',
-//         'btn' => 'true',
-//         );
-//     return View::make('showmessage')->with('messageArr', $msgArr);
-// }
+} catch (Exception $e) {
+    DB::rollback();
+    $msgArr = array(
+        'title' => '注册失败',
+        'status' => 'error', 
+        'action' => 'back',
+        'btn' => 'true',
+        );
+    return View::make('showmessage')->with('messageArr', $msgArr);
+}
 }
 
     //注册中,一些项用ajax判断是否存在
