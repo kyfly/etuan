@@ -14,7 +14,11 @@
                 <div class="tab-pane active in" id="newreg">
                     <form role="form">
                         <fieldset>
-                            <legend><h2>新建报名表</h2></legend>
+                            <legend><h2>新建/修改报名表</h2></legend>
+                            <div class="form-group">
+                                <label for="regname">报名标题</label>
+                                <input id="regname" type="text" class="form-control" placeholder="请自定义该报名表的标题">
+                            </div>
                             <div class="form-group">
                                 <label for="dtp_input0">报名开始时间</label>
 
@@ -25,7 +29,7 @@
                                             class="glyphicon glyphicon-remove"></span></span>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                 </div>
-                                <input type="hidden" id="dtp_input0" value=""/><br/>
+                                <input type="hidden" id="dtp_input0" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="dtp_input1">报名结束时间</label>
@@ -37,7 +41,7 @@
                                             class="glyphicon glyphicon-remove"></span></span>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                 </div>
-                                <input type="hidden" id="dtp_input1" value=""/><br/>
+                                <input type="hidden" id="dtp_input1" value=""/>
                             </div>
                             <div class="form-group">
                                 <label>允许报名年级</label>
@@ -58,14 +62,6 @@
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name="grade"> 研究生
                                     </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="url">报名链接</label>
-
-                                <div class="input-group">
-                                    <span class="input-group-addon">http://www.etuan.org/baoming/</span>
-                                    <input id="url" type="text" class="form-control" placeholder="请自定义该报名表的链接">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -191,7 +187,7 @@
 <script>
     $('.form_datetime').datetimepicker({
         language: 'en',
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii',
         weekStart: 1,
         todayBtn: 1,
         autoclose: 1,
@@ -200,6 +196,9 @@
         forceParse: 0,
         showMeridian: 1
     });
+</script>
+<script>
+    _activityId = 0;
 </script>
 </body>
 </html>
