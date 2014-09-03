@@ -1,7 +1,13 @@
 <?php
     Route::get('/',function(){
-        //return urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
-       return  Weixin::login('liu');
+        
+       $user = 'liu';
+        if($user){
+            $info = WxUser::where('wx_uid',$user)->select('headimgurl','stu_id','stu_name')->get();
+            print_r($info[0]['original']);
+        }else{
+            return false;
+        }
     });
 
         //可以测试，登录的是否为不同用户。

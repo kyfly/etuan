@@ -13,7 +13,9 @@ class choujiangService
 		$content1 = $this->checkReg();
 		$content2 = $this->checkLot();
 		$content3 = $this->checkSub();
-		$content = [$content1,$content2,$content3];
+		$content4 = $this->checkStart();
+		$content5 = $this->checkStop();
+		$content = [$content1,$content2,$content3,$content4,$content5];
 		for($i = 0;$i < count($content);$i++){
 			if(!is_bool($content[$i])){
 				$content[$i] = urlencode($content[$i]);
@@ -52,6 +54,22 @@ class choujiangService
 		$result = WS::checkSubscribe($token,$this->wx_uid);
 		if(!$result){
 			return "扫二维码关注团团一家后抽奖";
+		}
+		return true;
+	}
+	private function checkStart(){
+		$time = Lottery::where('lottery_id',$this->lottery_id)->pluck('start_time');
+		$time = strtotime($time);
+		if(time()<$time){
+			return "还没到时间呢亲,抽奖将于date('Y-m-d H-i-s',$time)开始!";
+		}
+		return true;
+	}
+	private function checkStop(){
+		$time = Lottery::where('lottery_id',$this->lottery_id)->pluck('stop_time');
+		$time = strtotime($time);
+		if(time()>$time){
+			return "抽奖已于date('Y-m-d H-i-s',$time)结束,您来晚了亲!";
 		}
 		return true;
 	}

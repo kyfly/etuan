@@ -22,4 +22,13 @@ class Weixin
 		}
 		return $user;
 	}
+	public static function info(){
+		$user = Session::get("wx_uid");
+		if($user){
+            $info = WxUser::where('wx_uid',$user)->select('headimgurl','stu_id','stu_name')->get();
+            return $info[0]['original'];
+        }else{
+            return false;
+        }
+	}
 }
