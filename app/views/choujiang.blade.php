@@ -75,7 +75,7 @@
 
 </div>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
-<script src="/public/js/jQueryRotate.2.2.js"></script>
+<script src="/js/jQueryRotate.2.2.js"></script>
 <script>
 $(function () {
     function random(min, max) {
