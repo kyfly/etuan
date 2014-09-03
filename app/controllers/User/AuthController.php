@@ -125,7 +125,8 @@ public function postRegister()
         $department->org_id = $org_id;
         $department->save();
     }
-    // WxinterfaceController::getWxinfo($org_uid);
+    Auth::loginUsingId($org_uid);
+    wxInfoHandle::createWx();
     DB::commit();
     $msgArr = array(
         'title' => '注册成功',

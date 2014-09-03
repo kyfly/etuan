@@ -66,6 +66,9 @@
                             <a class="bds_count" data-cmd="count"></a>
                         </div>
                     </div>
+                    @if ($i % 2)
+                        <div class="clearfix"></div>
+                    @endif
                     @endfor
                 </div>
             </div>

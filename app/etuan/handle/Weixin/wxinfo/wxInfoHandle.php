@@ -16,6 +16,23 @@ class wxInfoHandle
             return "插入失败";
         }
 	}
+
+    public static function createWx()
+    {
+        $result = Wxdata::insert([
+            'interface_url'=>BS::getRandStr(32),
+            'interface_token'=>BS::getRandStr(32),
+            'appid'=>'',
+            'appsecret'=>'',
+            'redirect_uri'=>urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth'),
+            'org_uid'=>Auth::user()->org_uid]);
+        if($result){
+            return "插入成功";
+        }else{
+            return "插入失败";
+        }        
+    }
+
 	public static function update($mp_id,$mp_org_id,$appid,$secret){
         $url = BS::getRandStr(32);
         $token = BS::getRandStr(32);

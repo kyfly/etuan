@@ -237,3 +237,8 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
 }
 input::-moz-placeholder, textarea::-moz-placeholder { color: #999;}
+
+#lotteryResult {
+    min-height: 50px;
+    max-height: 200px;
+}

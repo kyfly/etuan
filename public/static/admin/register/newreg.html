@@ -41,6 +41,10 @@
                     <fieldset>
                         <legend><h2>新建报名表</h2></legend>
                         <div class="form-group">
+                            <label for="regname">报名标题</label>
+                            <input id="regname" type="text" class="form-control" placeholder="请自定义该报名表的标题">
+                        </div>
+                        <div class="form-group">
                             <label for="dtp_input0">报名开始时间</label>
                             <div class="input-group date form_datetime" data-date="2014-09-01T12:00:07Z"
                                  data-link-field="dtp_input1">
@@ -48,7 +52,7 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                             </div>
-                            <input type="hidden" id="dtp_input0" value=""/><br/>
+                            <input type="hidden" id="dtp_input0" value=""/>
                         </div>
                         <div class="form-group">
                             <label for="dtp_input1">报名结束时间</label>
@@ -59,7 +63,7 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                             </div>
-                            <input type="hidden" id="dtp_input1" value=""/><br/>
+                            <input type="hidden" id="dtp_input1" value=""/>
                         </div>
                         <div class="form-group">
                             <label>允许报名年级</label>
@@ -83,21 +87,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="regname">报名标题</label>
-                            <input id="regname" type="text" class="form-control" placeholder="请自定义该报名表的标题">
-                        </div>
-                        <div class="form-group">
                             <label>报名表样式</label><br>
+                            <label class="radio-inline">
+                                <input type="radio" name="theme" value="0">
+                                <img src="../../../img/example.png" style="height: 80px;width: 80px">
+                            </label>
                             <label class="radio-inline">
                                 <input type="radio" name="theme" value="1">
                                 <img src="../../../img/example.png" style="height: 80px;width: 80px">
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="theme" value="2">
-                                <img src="../../../img/example.png" style="height: 80px;width: 80px">
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="theme" value="3">
                                 <img src="../../../img/example.png" style="height: 80px;width: 80px">
                             </label>
                         </div>
