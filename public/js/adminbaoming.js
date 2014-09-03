@@ -10,6 +10,7 @@ $(document).ready(function () {
             maxheight = height2;
         }
         $('#addform').css('height', maxheight + 130 + "px");
+        $('#sidebar').height($('#main').outerHeight(true));
     };
     function configExtraForm(){
         //每次绑定事件前首先释放所有的click以免造成过度绑定

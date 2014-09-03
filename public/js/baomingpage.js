@@ -194,9 +194,9 @@ $(document).ready(function(){
 		document.title = pageJson.name;
 	};
 	//--此模块通过单元测试BINGO!-----------------------------------------------获得json，绘制页面
-	var urlpatt = new RegExp("^[0-9]*");
+	//var urlpatt = new RegExp("^[0-9]*");
 	//此行仅作测试使用，实际应用请替换成下行
-    var activityIdPredefined = 1;
+    var activityIdPredefined = _activityId;
     //var activityIdPredefined = urlpatt.exec(window.location.href.replace("http://www.etuan.org/baoming/",""));
 	var activityPageJson;
 	if (typeof(activityIdPredefined)==="number"){

@@ -10,6 +10,7 @@ $(document).ready(function () {
             maxheight = height2;
         }
         $('#addform').css('height', maxheight + 130 + "px");
+        $('#sidebar').height($('#main').outerHeight(true));
     };
     function configExtraForm(){
         //每次绑定事件前首先释放所有的click以免造成过度绑定
@@ -25,6 +26,7 @@ $(document).ready(function () {
             content0 = $(this).parent();
             content0.remove();
         });
+        $(".delete").on('click',setHeight());
         $(".delete").on("mouseover",function(){
             $(this).tooltip("show");
         });
@@ -167,8 +169,8 @@ $(document).ready(function () {
     $.ajax ({
         type:"get",
         dataType:"json",
-        url:"http://www.etuan.local/js/activityInfo.json",
-        //url:"registration/activityinfo?activityId="+activityId.toString(),
+        //url:"http://www.etuan.local/js/activityInfo.json",
+        url:"registration/activityinfo?activityId="+_activityId,
         success:function(msg){
             if (pageJSON === undefined){
                 pageJSON = msg;
@@ -320,7 +322,7 @@ $(document).ready(function () {
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
-			url:"registration/createactivity",
+			url:"registration/updateactivity",
 			data:sendJson
 		});
 	});
