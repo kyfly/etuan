@@ -44,8 +44,8 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="../js/baomingpage.js"></script>
-<script src="../js/baoming1.js"></script>
+<script src="/js/baomingpage.js"></script>
+<script src="/js/baoming1.js"></script>
 <script>_activityId = 0;</script>
 </body>
 </html>
