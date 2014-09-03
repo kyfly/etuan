@@ -12,6 +12,7 @@ class QR
 		}
 		return '创建失败';
 	}
+	
 	public static function update($scene,$id,$type){
 		$re = Etuan::where("scene_id",$scene)->update(["act_id"=>$id,"act_type"=>$type]);
         if($re){

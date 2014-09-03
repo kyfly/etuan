@@ -15,18 +15,31 @@ class organizationController extends BaseController
         if (count($regId))
             $regUrl .= $regId[0];
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
-            ->with('regUrl', $regUrl);
+        ->with('regUrl', $regUrl);
     }
 
+    //获取一个用户的所有部门信息
     public function getDepartment()
     {
         $org_uid = Input::get('org_uid');
         $org_id = Organization::where('org_uid',$org_uid)
-            ->pluck('org_id');
+        ->pluck('org_id');
         $deparment = Department::where('org_id',$org_id)
-            ->lists('name');
+        ->lists('name');
         return $deparment;
     }
 
+    //获取所有用户的报名活动信息
+    public function getOrganizationRegistration()
+    {
+        $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
+        ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.logo_url','organization.type','organization.school','organization.internal_order')
+        ->get();
+        return $infos;
+    }    
 
+    public function getOrganizationInfo()
+    {
+        return Organization::select('org_id','name','logo_url','type','school','internal_order')->get();
+    }
 }

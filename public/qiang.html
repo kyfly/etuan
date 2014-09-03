@@ -1,69 +1,11 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>投票中心</title>
-<link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
-<style>
-	body {
-		font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
-		}
-	.navbar {
-		margin-bottom:0;
-		}
-	.jumbotron {
-		background-color: #ff6666;
-		}
-	.jumbotron > .container > p {
-		font-weight: 500;
-		color: #fff;
-		}
-	#title1 {
-		font-size: 85px;
-		}
-	#title2 {
-		font-size: 57px;
-		}
-	.jumbotron > .container > h2 {
-		color: #fff;
-		letter-spacing: 2px;
-		}
-	.listhead {
-		color: #666;
-		font-size: 16px;
-		}
-	.thumbnail {
-		padding: 13px;
-		}
-	.status {
-		margin-top: 10px;
-		margin-bottom: -5px;
-		text-align: right;
-		font-size: 22px;
-		}
-	.text-on {
-		color: #33cc33;
-		}
-	.text-coming {
-		color: #ffcc33;
-		}
-	.text-over {
-		color: #cc3300;
-		}
-	a:link {
-		text-decoration: none;
-		}
-@media screen and (min-width: 1400px) {
-	#title1 {
-		margin-top: 100px;
-		font-size: 110px;
-		}
-	.panel-footer {
-		margin-top: 50px;
-		}
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>投票中心</title>
+    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/staticList.css" rel="stylesheet">
 </head>
 <body>
 <!--头部-->
@@ -72,7 +14,8 @@
         <div class="container">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
+                            type="button">
                         <span class="sr-only">导航</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -108,65 +51,77 @@
     </nav>
 </header>
 <div id="mainHeight">
-  <div class="jumbotron">
-    <div class="container">
-      <p id="title1" class="hidden-xs">全民疯抢</p>
-      <p id="title2" class="visible-xs-block">全民疯抢</p>
-      <h2>没有想不到，只有抢不到！抢票就上团团一家！</h2>
+    <div class="jumbotron" style="background-color: #ff6666;">
+        <div class="container">
+            <p id="title1" class="hidden-xs">全民疯抢</p>
+
+            <p id="title2" class="visible-xs-block">全民疯抢</p>
+
+            <h2>没有想不到，只有抢不到！抢票就上团团一家！</h2>
+        </div>
     </div>
-  </div>
-  <!--内容-->
-  <div id="main" class="container">
-    <div class="col-xs-12 col-sm-4 col-md-3">
-      <a href="#">
-       <div class="thumbnail" onMouseOver="this.style.border='3px solid #ff6666'"  onMouseOut="this.style.border='1px solid #ddd'">
-         <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
-         <img src="img/example.png">
-         <p class="status text-coming">即将开始</p>
-      </div>
-      </a>
+    <!--内容-->
+    <div id="main" class="container">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <a href="#">
+                <div class="thumbnail borderDiv">
+                    <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
+                    <img src="img/example.png">
+
+                    <p class="status text-coming">即将开始</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <a href="#">
+                <div class="thumbnail borderDiv">
+                    <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
+                    <img src="img/example.png">
+
+                    <p class="status text-over">已经结束</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <a href="#">
+                <div class="thumbnail borderDiv">
+                    <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
+                    <img src="img/example.png">
+
+                    <p class="status text-on">正在进行</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <a href="#">
+                <div class="thumbnail borderDiv">
+                    <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
+                    <img src="img/example.png">
+
+                    <p class="status text-over">已经结束</p>
+                </div>
+            </a>
+        </div>
     </div>
-    
-    <div class="col-xs-12 col-sm-4 col-md-3">
-      <a href="#">
-       <div class="thumbnail" onMouseOver="this.style.border='3px solid #ff6666'"  onMouseOut="this.style.border='1px solid #ddd'">
-         <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
-         <img src="img/example.png">
-         <p class="status text-over">已经结束</p>
-       </div>
-      </a>
-    </div>
-    
-    <div class="col-xs-12 col-sm-4 col-md-3">
-      <a href="#">
-      <div class="thumbnail" onMouseOver="this.style.border='3px solid #ff6666'"  onMouseOut="this.style.border='1px solid #ddd'">
-        <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
-        <img src="img/example.png">
-        <p class="status text-on">正在进行</p>
-      </div>
-      </a>
-    </div>
-    
-    <div class="col-xs-12 col-sm-4 col-md-3">
-      <a href="#">
-      <div class="thumbnail" onMouseOver="this.style.border='3px solid #ff6666'"  onMouseOut="this.style.border='1px solid #ddd'">
-        <p class="listhead">杭州电子科技大学<br>第十一届十佳歌手总决赛</p>
-        <img src="img/example.png">
-        <p class="status text-over">已经结束</p>
-      </div>
-      </a>
-    </div>
-  </div>
 </div>
 <footer id="footer" class="panel-footer">
-  <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
 </footer>
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script>
-	$(document).ready(function () {
+    $(document).ready(function () {
         $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+        $('.borderDiv').mouseover(function () {
+            $(this).css('border', '1px solid #ff6666');
+        });
+        $('.borderDiv').mouseout(function () {
+            $(this).css('border', '1px solid #ddd');
+        });
     });
 </script>
 </body>

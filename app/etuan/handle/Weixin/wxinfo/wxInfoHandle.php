@@ -8,7 +8,7 @@ class wxInfoHandle
         	'interface_token'=>BS::getRandStr(32),
         	'appid'=>$appid,
         	'appsecret'=>$secret,
-        	'redirect_uri'=>CALLBACKURL,
+        	'redirect_uri'=>urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth'),
         	'org_uid'=>Auth::user()->org_uid]);
         if($result){
             return "插入成功";

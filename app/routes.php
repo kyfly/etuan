@@ -1,9 +1,22 @@
 <?php
+    Route::get('/',function(){
+        //return urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
+       return  Weixin::login('liu');
+    });
+
+        //可以测试，登录的是否为不同用户。
+        Route::get('/wxuser',function(){
+           return  Weixin::user();
+        });
 
     Route::group(array('before'=>'wxauth|stuinfo'),function()
     {
         //抽奖，获取某次抽奖结果
         Route::get("jiang/get/{lottery_id}","choujiangController@get");
+
+        Route::get('/hello', function(){
+            return View::make('hello');
+        });
     });
     
     Route::controller('auth','AuthController');
@@ -21,21 +34,25 @@
         Route::controller('registration','RegistrationController');
 
         Route::controller('vote','VoteController');
+
+        Route::get("admin/register/viewreg",'RegistrationController@reg_list');
+
+        Route::get('admin/{page}', function($page){
+            return View::make('admin.'.$page);
+        });
+
+        Route::get('admin/{dir}/{page}', function($dir, $page){
+            return View::make('admin.'. $dir. '.'. $page);
+        });
+
+        Route::controller('weixin/reply','AtrplyController');
+
+        
+
     });
-
-    Route::get('admin/{page}', function($page){
-        return View::make('admin.'.$page);
-    });
-
-    Route::get('admin/{dir}/{page}', function($dir, $page){
-        return View::make('admin.'. $dir. '.'. $page);
-    });
-
-    Route::controller('weixin/reply','AtrplyController');
-
-    Route::controller('weixin/news','NewsController');
-
     Route::controller('weixin/org','WxinterfaceController');
+    
+    Route::controller('weixin/news','NewsController');
 
     Route::controller('weixin/qrcode','QretuanController');
 
@@ -63,15 +80,23 @@
 
     Route::controller('organization',"organizationController");
 
-    Route::get('pdftest',function()
+    Route::get('baoming/{id}','RegistrationController@reg_info');
+
+    
+    include('Crypt/RSA.php');
+
+    Route::get('rsa',function()
     {
-        for ($i=1;$i<=2;$i++)
-        {
-            $pdf = new \Thujohn\Pdf\Pdf();
-            $content = $pdf->load(View::make('login'))->output();
-            File::put(public_path('test'.$i.'.pdf'), $content);
-        }
-        PDF::clear();
+        $rsa = new Crypt_RSA();
+        $password = User::find(34)->login_token;
+        $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
+        $rsa->loadKey(PRIVATEKEY);
+        echo $rsa->decrypt($password);
+    });
+
+
+    Route::get('xuehao', function(){
+        return View::make('stuinfo');
     });
 
 

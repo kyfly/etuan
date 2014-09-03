@@ -43,9 +43,7 @@ class AtrplyController extends BaseController
 
     public function getShow()
     {
-        //TODO: 发布时需要修改！！！
-        //$org_uid = Auth::user()->org_uid;
-        $org_uid = 1;
+        $org_uid = Auth::user()->org_uid;
         $arr = $this->reply->show($org_uid);
 
         $json = json_encode($arr);
@@ -79,7 +77,7 @@ class AtrplyController extends BaseController
             //从文本中提取摘要
             $summary = $rawHtml->find('div[id=page-content]')[0]->innertext;
             $summary = str_replace(' ', '', strip_tags($summary));
-            $summary = mb_substr($summary, 0, 50) . "...";
+            $summary = mb_substr($summary, 0, 25) . "...";
             //提取图片，有的情况下src属性会找不到，所以用data-src代替。。如果两个都没有，就没办法了。。
             $img = $rawHtml->find('img', 0)->src;
             if (!$img && isset($rawHtml->find('img', 0)->attr["data-src"]))

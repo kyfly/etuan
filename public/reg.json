@@ -1,0 +1,57 @@
+[
+    {
+        "reg_id":1,
+        "name":"团团一家招新报名",
+        "start_time":"2014-7-7 19:00:00",
+        "stop_time":"2014-7-7 19:00:00",
+        "org_name":"xxx",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"校级组织",
+        "school":"全校",
+        "internal_order":12
+    },
+    {
+        "reg_id":2,
+        "name":"团团一家招新报名",
+        "start_time":"2014-8-7 19:00:00",
+        "stop_time":"2014-10-7 19:00:00",
+        "org_name":"xxx",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"院级组织",
+        "school":"计算机学院",
+        "internal_order":12
+    },
+    {
+        "reg_id":3,
+        "name":"团团一家招新报名",
+        "start_time":"2014-9-7 19:00:00",
+        "stop_time":"2014-9-7 19:00:00",
+        "org_name":"xxx",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"院级组织",
+        "school":"计算机学院",
+        "internal_order":3
+    },
+    {
+        "reg_id":4,
+        "name":"团团一家招新报名1",
+        "start_time":"2014-7-7 19:00:00",
+        "stop_time":"2014-7-7 19:00:00",
+        "org_name":"xxx",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"院级组织",
+        "school":"计算机学院",
+        "internal_order":1
+    },
+    {
+        "reg_id":5,
+        "name":"团团一家招新报名",
+        "start_time":"2014-7-7 19:00:00",
+        "stop_time":"2014-7-7 19:00:00",
+        "org_name":"xxx",
+        "logo_url":"http://img.kyfly.net/common/logo/etuan-logo.png",
+        "org_type":"院级组织",
+        "school":"计算机学院",
+        "internal_order":2
+    }
+]

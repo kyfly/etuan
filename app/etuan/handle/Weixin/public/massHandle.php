@@ -10,7 +10,7 @@ class massHandle
         if(isset($news[0]))
         {    for($i = 0;$i<count($news);$i++){  
                 $content = Newscontent::where('news_id',$news_id)->where('article_id',$news[$i]['article_id'])->pluck('content'); 
-                $source =_ROOT_.$news[$i]['pic_url'];
+                $source =$_SERVER['DOCUMENT_ROOT'].$news[$i]['pic_url'];
                 $file[] =new CURLFile($source);
                 $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$token&type=$type";
                 $json = BS::https_request($url,$file);
@@ -19,7 +19,7 @@ class massHandle
                 $article[$i] = ['thumb_media_id' => $media_id ,'author' => $auther,'title' =>  $news[$i]['title'] ,'content_source_url'=>$news[$i]['url'],'content' => $content ,'digest' =>$news[$i]['description'], 'show_cover_pic' => 1 ];
               }
         }else{
-            $source =_ROOT_.$news['pic_url'];
+            $source =$_SERVER['DOCUMENT_ROOT'].$news['pic_url'];
             $file[] =new CURLFile($source);
             $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$token&type=$type";
             $json = BS::https_request($url,$file);

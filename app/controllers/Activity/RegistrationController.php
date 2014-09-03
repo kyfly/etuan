@@ -6,49 +6,66 @@ class RegistrationController extends ActivityController
 
     public $registrationHandle;
 
-	public function __construct(RegistrationService $registrationService,RegistrationHandle $registrationHandle)
-	{
+    public function __construct(RegistrationService $registrationService,RegistrationHandle $registrationHandle)
+    {
         $this->registrationService = $registrationService;
         $this->registrationHandle = $registrationHandle;
         parent::__construct();
-	}
+    }
 
     public function getTongjibaobiao()
     {
         $questions = Reg_question::where('reg_id',$this->activityId)->
-            whereIn('type',array(101,103,104,112,113,114,115))->
-                select('question_id','type')->get();
+        whereIn('type',array(101,103,104,112,113,114,115))->
+        select('question_id','type')->get();
         $data = [];
         foreach($questions as $question)
         {
             switch($question->type)
             {
                 case 101 :
-                    $data['xuehao'] = $this->registrationHandle->tongjiXuehao($this->activityId,$question->question_id);
-                    break;
+                $data['xuehao'] = $this->registrationHandle->tongjiXuehao($this->activityId,$question->question_id);
+                break;
                 case 103 :
-                    $data['sex'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['sex'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                if(!isset($data['sex'][0]))
+                {
+                    $data['sex'][0] = array('count'=>0,'percent'=>'0%');
+                }
+                if(!isset($data['sex'][1]))
+                {
+                    $data['sex'][1] = array('count'=>0,'percent'=>'0%');
+                }
+                break;
                 case 104 :
-                    $data['xueyuan'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['xueyuan'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                break;
                 case 112 :
-                    $data['diyibumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['diyibumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                break;
                 case 113 :
-                    $data['dierbumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['dierbumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                break;
                 case 114 :
-                    $data['disanbumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['disanbumen'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                break;
                 case 115 :
-                    $data['tiaoji'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
-                    break;
+                $data['tiaoji'] = $this->registrationHandle->tongji($this->activityId,$question->question_id);
+                // if(!isset($data['sex'][0]))
+                // {
+                //     $data['tiaoji'][0]['count'] = 0;
+                //     $data['tiaoji'][0]['percent'] = '0%';
+                // }
+                // if(!isset($data['tiaoji'][1]))
+                // {
+                //     $data['tiaoji'][1]['count'] = 0;
+                //     $data['tiaoji'][1]['percent'] = '0%';
+                // }
+                break;
             }
         }
-
         $data['liulan'] = $this->registrationHandle->tongjiLiulanliang($this->activityId);
-       return View::make('admin.register.regresult')->with('data',$data);
+        return View::make('admin.register.regresult')->with('data',$data);
     }
 
     public function getDownloadpdf()
@@ -91,12 +108,18 @@ class RegistrationController extends ActivityController
         })->export('xls');
     }
 
-    public function getOrganizationRegistration()
+    public function reg_info($id)
     {
-        $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
-                                    ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.type','organization.logo_url')
-                                    ->get();
-        return $infos;
+        return $this->registrationHandle->getActivityInfo($id);
+    }
+
+    public function reg_list()
+    {
+        $reg_list =  $this->registrationHandle->getActivityList($this->org_uid);
+        foreach ($reg_list as $key => $reg) {
+            $reg_list[$key] = $reg->toArray();
+        }
+        return View::make('admin.register.viewreg')->with('reglist', $reg_list);
     }
 
     public function serviceName()

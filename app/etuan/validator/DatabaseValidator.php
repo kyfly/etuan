@@ -15,17 +15,19 @@ class DatabaseValidator extends Validator {
         $tableName = $parameters[0];
         $primaryKey = $parameters[1];
         $activityId = $parameters[2];
-        if(DB::table($tableName)->where($primaryKey,'<>',$activityId)
-        		->where($attribute,$value)->count()==0)
-        	return true;
-        return false;
+        return DB::table($tableName)->where($primaryKey,'<>',$activityId)
+        		->where($attribute,$value)->count();
     }
 
     public function ValidateOldPassword($attribute, $value , $parameters)
     {
-        if(Hash::check($value, $parameters[0]))
-            return true;
-        return false;
+        return Hash::check($value, $parameters[0]);
+    }
+
+    public function ValidateGeshi($attribute, $value , $parameters)
+    {
+        $geshi = array('jpeg','png','gif','jpg');
+        return in_array($parameters[0], $geshi);
     }
 
 }

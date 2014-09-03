@@ -52,7 +52,7 @@ function MessageView(msg) {
 MessageView.prototype.getNewsDiv = function () {
     if (this.message.content.length == 1) {
         if (this.message.CreateTime)
-            var createTime = new Date(this.message.CreateTime * 1000);
+            var createTime = new Date(this.message.CreateTime * 1000 - 480 * 60000);
         else
             var createTime = new Date();
         createTime = createTime.getFullYear() + '-' + (createTime.getMonth() + 1) + '-' + createTime.getDate();
@@ -167,6 +167,7 @@ MessageCtrl.prototype.AddKeywordRule = function (msg) {
         ruleDivTpl.before(ruleDiv);
     //模板有隐藏样式，需要改为显示
     ruleDiv.show();
+    $('#sidebar').height($('#main').outerHeight(true));
 };
 
 //初始化添加/修改对话框
@@ -241,6 +242,7 @@ MessageCtrl.prototype.removeKeywordRule = function (id) {
                     $('#rule'+id).remove();
                     msgData.removeMsgById(id);
                     msgCtrl.showAlert('自动回复删除成功！');
+                    $('#sidebar').height($('#main').outerHeight(true));
                 }
                 else
                     alert("哎呀呀，删除失败了！");
@@ -281,19 +283,14 @@ MessageCtrl.prototype.uploadMessage = function (message) {
 
 MessageCtrl.prototype.showAlert = function (alertStr, type) {
     if (!type)  type = 'info';
-    var alert = $('#topAlert');
-    if (closeAlertTimer)
-    {
-        clearTimeout(closeAlertTimer);
-        alert.removeClass();
-        alert.addClass('alert alert-dismissible');
-    }
+    var alert = $('#topAlert');clearTimeout(closeAlertTimer);
+    alert.removeClass();
+    alert.addClass('alert alert-dismissible');
     alert.addClass('alert-' + type);
     $('#topAlertStr').text(alertStr);
     alert.slideDown();
     closeAlertTimer = setTimeout(function() {
         alert.slideUp();
-        alert.removeClass('alert-' + type);
     }, 5000);
 };
 
@@ -306,6 +303,9 @@ function loadAutoReply() {
         if (status == "success") {
             msgData = new MessageModel(data);
             msgCtrl = new MessageCtrl(msgData);
+            $('#btnAddRule').removeAttr("disabled");
+            $('#btnOneKeyReg').removeAttr("disabled");
+            $('#loadingAlert').slideUp();
         }
     });
 
@@ -325,8 +325,7 @@ $('#addText').click(function () {
 
 $('#addReg').click(function () {
     if (!$(this).hasClass('colorBlack')) {
-        //TODO:发布时需要修改地址！！
-        $.get('/static/admin/weixn/reglist.json', function (data, status) {
+        $.get('/registration/activitylist', function (data, status) {
             if (status == 'success') {
                 if (data.length == 0)
                 {
@@ -455,7 +454,7 @@ $('#btnSave').click(function () {
 $('#btnOneKeyReg').click(function() {
     $(this).attr("disabled", "disabled");
     //获取报名表
-    $.get('/static/admin/weixn/reglist.json', function (data, status) {
+    $.get('/registration/activitylist', function (data, status) {
         if (status == 'success') {
             if (data.length == 0)
             {
@@ -480,7 +479,7 @@ $('#btnOneKeyReg').click(function() {
             }
             else
             {
-                msgCtrl.showAlert('没有新的报名可以添加。', 'warning');
+                msgCtrl.showAlert('没有新的报名可以添加。', 'danger');
             }
             $('#btnOneKeyReg').removeAttr("disabled");
         }
@@ -627,3 +626,4 @@ $(document).ready(function () {
 
 var mpReplyId;
 var closeAlertTimer;
+var prevNewsText = "";

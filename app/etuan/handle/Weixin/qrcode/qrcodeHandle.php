@@ -62,7 +62,7 @@ class QrcodeHandle
             $logo_qr_height, $logo_width, $logo_height); 
         }
         $imgname ="qrcode.png";
-        $imgurl = _ROOT_ ."/img/".$imgname;
+        $imgurl = $_SERVER['DOCUMENT_ROOT']."/img/".$imgname;
         imagepng($QR,$imgurl);
         return $imgname;
     }

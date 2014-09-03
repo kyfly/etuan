@@ -90,7 +90,7 @@ class replyHandle
             $content = $this->Allorginfo();
             
         }else{
-            $content = "感谢你的关注，我没将继续努力";
+            $content = "感谢你的关注，我们将继续努力";
         }
         return $this->TextMessage($postObj,$content);
     }
@@ -107,9 +107,8 @@ class replyHandle
             if(!$reply_id){
                 $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
             }
-
             if(!$reply_id){
-                $content = "mp_default_autoreply_messgae";
+                $content = "mp_default_autoreply_message";
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
                 if($re){
                     $this->reply($postObj,$content);
@@ -133,7 +132,7 @@ class replyHandle
                 {
                     $arr[$i]['title']=$content->title;
                     $arr[$i]['description']=$content->description;
-                    $arr[$i]['pic_url']=$content->pic_url;
+                    $arr[$i]['pic_url']=$this->UrlGifToJpg($content->pic_url);
                     $arr[$i]['url']=$content->url;
                     $i++;
                 }
@@ -149,4 +148,12 @@ class replyHandle
             return $this->toAndroid($postObj);
         }
     }
+    private function UrlGifToJpg($picurl){
+        if(strstr($picurl, 'http://img.kyfly.net'))
+            if(substr($picurl,strlen($picurl)-4,4) == '.gif')
+            {
+                $picurl = $picurl.'@360w_200h.png';
+            }
+        return $picurl;
+    } 
 }

@@ -36,7 +36,7 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	if (Auth::guest())
-     return Redirect::guest('user/login');
+     return Redirect::guest('/');
 });
 Route::filter('wxauth', function()
 {
@@ -52,7 +52,7 @@ Route::filter('wxauth', function()
     if(!$re){
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')){
             $appid= APPID;
-            $callbackUrl = CALLBACKURL;
+            $callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
             $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
             return Redirect::to($url);
         }else{
@@ -135,19 +135,6 @@ Route::filter('weixin', function()
     if ($our_signature != $signature) {
         return "请使用微信关注团团一家";
     }
-});
-
-Route::filter('init', function()
-{
-    global $appid;
-    
-    $appid = "wx5d92b3c192f993e7";
-
-    define("APPID","wx5d92b3c192f993e7");
-
-    define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
-
-    define("CALLBACKURL",urlencode("http://weixin.linkew.net/build/oauth"));
 });
 
 

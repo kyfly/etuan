@@ -31,7 +31,7 @@
 	  				return $this->MP->MpEventHandle($postObj);
 	  				break;
 		  		default:
-		  			$content = "mp_default_autoreply_messgae";
+		  			$content = "mp_default_autoreply_message";
                 	return $this->MP->reply($postObj,$content);
 		  			break;
 		  	}

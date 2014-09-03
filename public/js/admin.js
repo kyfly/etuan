@@ -52,24 +52,23 @@
 
 function loadSidebar() {
     var sidebarDiv = $('#sidebar');
-    sidebarDiv.load('/admin/sidebar',
-        function () {
-            //判断当前页面地址，然后对导航栏进行展开和高亮
-            var path = window.location.pathname;
-            for (var id in sidebarHref) {
-                if (sidebarHref.hasOwnProperty(id))
-                    if (sidebarHref[id] == path) {
-                        var navItem = $('#' + id);
-                        var parent = navItem.parents('.menu-list');
-                        if (parent) {
-                            parent.addClass('nav-active');
-                            navItem.addClass('active');
-                        }
-                        else
-                            navItem.addClass('nav-active');
-                    }
+    //判断当前页面地址，然后对导航栏进行展开和高亮
+    var path = window.location.pathname;
+    for (var id in sidebarHref) {
+        if (sidebarHref.hasOwnProperty(id))
+            if (sidebarHref[id] == path) {
+                var navItem = $('#' + id);
+                var parent = navItem.parents('.menu-list');
+                if (parent) {
+                    parent.addClass('nav-active');
+                    navItem.addClass('active');
+                }
+                else
+                    navItem.addClass('nav-active');
             }
-        });
+    }
+    //设定侧边栏高度
+            $('#sidebar').height($('#main').outerHeight(true));
     //点击转跳到对应的页面
     sidebarDiv.on('click', "li", function () {
         if ($(this).prop('id'))
@@ -79,10 +78,20 @@ function loadSidebar() {
 };
 
 $(document).ready(function () {
-    $('#main').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
+    var minHeight = $(window).outerHeight(true) - $('#nav').outerHeight(true)
+        - $('#footer').outerHeight(true) - 62 + "px";
+    $('#main').css('min-height', minHeight);
+    $('#sidebar').height($('#main').outerHeight(true));
     loadSidebar();
     $("#remarkbox").hide();
     $("#originurlbox").hide();
+
+    $(window).resize(function() {
+        var minHeight = $(window).outerHeight(true) - $('#nav').outerHeight(true)
+            - $('#footer').outerHeight(true) - 62 + "px";
+        $('#main').css('min-height', minHeight);
+        $('#sidebar').height($('#main').outerHeight(true));
+    });
 });
 
 $(function () {
