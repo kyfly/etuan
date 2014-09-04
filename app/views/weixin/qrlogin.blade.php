@@ -84,6 +84,9 @@
 
     $(document).ready(
         setInterval("checkStatus()", 1000)
+        setInterval(function() {
+            document.location.reload(true);
+        }, 60000);
     )
 </script>
 </body>
