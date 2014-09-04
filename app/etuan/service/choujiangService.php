@@ -9,7 +9,9 @@ class choujiangService
 		$this->lottery_id = $lottery_id;
 		$this->wx_uid = $this->lot->getWx_uid();
 	}
+	//获取某用户参与抽奖结果
 	public function getInfo(){
+		//验证用户是否满足活动要求
 		$content1 = $this->checkReg();
 		$content2 = $this->checkLot();
 		$content3 = $this->checkSub();
@@ -22,14 +24,17 @@ class choujiangService
 				return ['status'=>'fail','message'=>$content[$i]];
 			}
 		}
+		//获取结果
 		$result = $this->lot->LotteryInfo($this->lottery_id);
 		if(!is_array($result)){
 			$result = urlencode($result);
 			return ['status'=>'fail','message'=>$result];
 		}
+		//返回成功信息
 		$result['item_name'] = urlencode($result['item_name']);
 		return ["status"=>"success", "item_id"=>$result['item_id'], "item_name"=>$result['item_name']];
 	}
+	//获取该抽奖活动已经中奖用户，
 	public function getLotInfo(){
 		return $this->lot->allLotteryer($this->lottery_id);
 	}

@@ -18,7 +18,7 @@ class Weixin
 	public static function user(){
 		$user = Session::get("wx_uid");
 		if(!$user){
-			return Redirect::to('weixin/login');
+			return 'false';
 		}
 		return $user;
 	}
@@ -28,7 +28,7 @@ class Weixin
             $info = WxUser::where('wx_uid',$user)->select('headimgurl','stu_id','stu_name')->get();
             return $info[0]['original'];
         }else{
-            return false;
+            return 'false';
         }
 	}
 }
