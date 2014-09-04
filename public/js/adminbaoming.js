@@ -63,6 +63,13 @@ $(document).ready(function () {
         setHeight();
         configExtraForm();
     });
+    //主题选择动画
+    $(".theme").mouseover(function(){
+        $(this).prop("src",$(this).prop("src").toString().replace("0.png","1.png"));
+    });
+    $("img").mouseout(function(){
+        $(this).prop("src",$(this).prop("src").toString().replace("1.png","0.png"));
+    });
 });
 
 //获得创建报名的各项参数数据
