@@ -12,7 +12,7 @@
 @include('layout.nav')
 <div class="container" id="mainHeight">
 <div class="field clearfix">
-<p class="headtitle">社团管理员注册</p>
+<h2 class="text-center">社团管理员注册</h2>
 <hr>
 <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked" role="tablist">

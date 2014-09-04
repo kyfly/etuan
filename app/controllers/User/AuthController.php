@@ -128,17 +128,13 @@ public function postRegister()
     Auth::loginUsingId($org_uid);
     wxInfoHandle::createWx();
     DB::commit();
-    $msgArr = array(
-        'title' => '注册成功',
-        'status' => 'ok', 
-        'url'=> '/admin/home',
-        'btn' => 'true',
-        );
-    return View::make('showmessage')->with('messageArr', $msgArr);
+    return View::make('admin.regsuccess')->with('org_id',
+        Organization::where('org_uid', Auth::user()->org_uid)->pluck('org_id'));
 } catch (Exception $e) {
     DB::rollback();
     $msgArr = array(
         'title' => '注册失败',
+        'body' => '对不起，您的注册提交失败，请检查信息填写是否正确。如有必要，请与网站管理员联系。',
         'status' => 'error', 
         'action' => 'back',
         'btn' => 'true',

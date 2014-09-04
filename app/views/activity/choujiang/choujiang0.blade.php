@@ -143,11 +143,12 @@ $(function () {
         if (status == 'success') {
             data = eval(data);
             var list = '';
-            for (var i = 0; i < data.length; i++)
-            {
-                if (data[i].item_name != '谢谢惠顾')
-                    list += '<p>' + data[i].name + ' 抽中了 ' + data[i].item_name + '</p>'
-            }
+            if (data != '')
+                for (var i = 0; i < data.length; i++)
+                {
+                    if (data[i].item_name != '谢谢惠顾')
+                        list += '<p>' + data[i].name + ' 抽中了 ' + data[i].item_name + '</p>'
+                }
             if (list == '')
                 list = '<p>现在还没有人中奖呢！快来吧，也许第一个中奖的就是你！</p>';
             $('#lotteryResult').html(list);

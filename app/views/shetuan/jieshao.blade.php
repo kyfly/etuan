@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$orgInfo->name}}社团介绍</title>
+    <title>{{$orgInfo->name}} 社团介绍 - 团团一家 - 杭电社团服务平台 </title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
