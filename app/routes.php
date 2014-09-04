@@ -89,14 +89,6 @@ Route::get('rsa', function () {
 });
 
 
-Route::get('xuehao', function () {
-    return View::make('stuinfo');
-});
-    Route::get('xuehao', function(){
-        return View::make('stuinfo');
-    });
-
-
 
 
 

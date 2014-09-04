@@ -5,10 +5,10 @@ class choujiangHandle
 	public function __construct(){
 		$this->wx_uid = $this->getWx_uid();
 	}
+	//获取该抽奖活动已经中奖用户，
 	public function allLotteryer($lottery_id){
 		$i = 0;
 		$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
-		
 		while($result){
 			$item_name = Lottery_item::where('lottery_item_id',$result->lottery_item_id)->pluck('name');
 			$stu_name = $this->getStu_name($result->wx_uid);
@@ -18,8 +18,12 @@ class choujiangHandle
 			$i++;
 			$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
 		}
+		if(!isset($info)){
+			return '';
+		}
 		return $info;
 	}
+	//
 	public function LotteryInfo($lottery_id){
 		$item_id = $this->lotteryRand($lottery_id);
 		if(!is_numeric($item_id)){
@@ -30,6 +34,11 @@ class choujiangHandle
 		Lottery_item::where('lottery_item_id',$item_id)->update(['item_out'=>"$item_out"]);
 		$lotname = Lottery_item::where('lottery_item_id',$item_id)->pluck('name');
 		$arr = ['item_id'=>$item_id,'item_name'=>$lotname];
+		//发送客服消息
+		if($lotname != '谢谢惠顾'){
+			$content = "哇啊~~恭喜您抽中了$lotname！我们将在近期统一发放奖品，凭一卡通领取，具体时间请留意本公众号通知。"
+			WS::sendCustomMsg('text',$content,$this->wx_uid);
+		}
 		return $arr;
 	}
 	private function addLttery_user_Info($item_id){
@@ -58,7 +67,11 @@ class choujiangHandle
 	    return $remain = ['prob'=>$pro,'item_ids'=>$item_ids];
 	}
 	public function getWx_uid(){
-		return $wx_uid = Weixin::user();
+		$wx_uid = Weixin::user();
+		if($wx_uid == 'false'){
+			return ' ';
+		}
+		return $wx_uid;
 	}
 	private function getStu_name($wx_uid){
 		return WxUser::where('wx_uid',$wx_uid)->pluck('stu_name');

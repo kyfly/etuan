@@ -34,4 +34,13 @@ class WS
             return false;
         }
     }
+    public static function sendCustomMsg($type,$content,$touser){
+        $appsecret = APPSECRET;
+        $appid = APPID;
+        $token = self::getToken($appid,$appsecret);
+        $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>$content]];
+        $data = json_encode($arr);
+        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+        return BS::https_request($url,$data);
+    }
 }

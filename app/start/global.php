@@ -90,9 +90,9 @@ define('QRIMGBUCKET','kyfly-img');
 
 define('HTMLBUCKET','kyfly');
 
-define("APPID","wxb6168b8cec303b23");
+define("APPID","wx5d92b3c192f993e7");
 
-define("APPSECRET","e8d85e20e5902d4265266d0c0196fb19");
+define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
 
 define("_ROOT_",$_SERVER['DOCUMENT_ROOT']);
 
