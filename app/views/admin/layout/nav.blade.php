@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/user/set-organization"><img id="avatar"
-                                                              src="{{$orgInfo->logo_url@20w_20h.png}}">
+                                                              src="{{$orgInfo->logo_url}}@20w_20h.png">
                             {{$orgInfo->name}}
                         </a>
                     </li>
