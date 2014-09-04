@@ -1,9 +1,6 @@
 <?php
 class QrcodeHandle
 {
-    
-        
-    //生成带参数的二维码，暂时没用上，返回二维码的存放位置
 	public static function getUrl($appid,$appsecret,$scene_id,$id,$type){
         $activity = ['lottery','registration','ticket','vote'];
         $route = ['jiang','baoming','qiang','tou'];
@@ -44,7 +41,7 @@ class QrcodeHandle
         }
     }
     //一般二维码生成，调用该方法是，若$QR为false，则会直接在浏览器中显示图片
-    public static function Authcode($url,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
+    public static function Authcode($url,$filename="",$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
         //require _ROOT_.'/../app/qrcode/phpqrcode.php';
         QRcode::png($url,$QR, $errorCorrectionLevel, $matrixPointSize,0);
         if ($logo !== FALSE) { 
@@ -61,8 +58,10 @@ class QrcodeHandle
             imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,  
             $logo_qr_height, $logo_width, $logo_height); 
         }
-        $imgname ="qrcode.png";
-        $imgurl = $_SERVER['DOCUMENT_ROOT']."/img/".$imgname;
+        if(!$imgname){
+            $imgname ="qrcode.png";
+        }
+        $imgurl = $_SERVER['DOCUMENT_ROOT']."/".$imgname;
         imagepng($QR,$imgurl);
         return $imgname;
     }

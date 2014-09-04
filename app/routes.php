@@ -2,7 +2,10 @@
 
 //可以测试，登录的是否为不同用户。
 Route::get('/wxuser', function () {
-    return Weixin::user();
+    return Weixin::user('nick_name');
+});
+Route::get('/', function () {
+    return Weixin::login('liu');
 });
 
 Route::group(array('before' => 'wxauth|stuinfo'), function () {

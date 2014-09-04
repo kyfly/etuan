@@ -11,9 +11,9 @@ class wxInfoHandle
         	'redirect_uri'=>urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth'),
         	'org_uid'=>Auth::user()->org_uid]);
         if($result){
-            return "插入成功";
+            return "true";
         }else{
-            return "插入失败";
+            return "false";
         }
 	}
 
@@ -27,25 +27,24 @@ class wxInfoHandle
             'redirect_uri'=>urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth'),
             'org_uid'=>Auth::user()->org_uid]);
         if($result){
-            return "插入成功";
+            return true;
         }else{
-            return "插入失败";
+            return false;
         }        
     }
 
-	public static function update($mp_id,$mp_org_id,$appid,$secret){
+	public static function update($mp_id,$appid,$secret){
         $url = BS::getRandStr(32);
         $token = BS::getRandStr(32);
         $result = Wxdata::where("mp_id",$mp_id)->update([
-        	"mp_origin_id"=>$mp_org_id,
         	"appid"=>$appid,
         	"appsecret"=>$secret,
         	"interface_url"=>$url,
         	"interface_token"=>$token]);
         if($result){
-            return true;
+            return 'true';
         }else{
-            return false;
+            return 'false';
         }
 	}
 }

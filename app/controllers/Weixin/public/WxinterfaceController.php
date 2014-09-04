@@ -16,7 +16,7 @@ class WxinterfaceController extends BaseController
         $mp_id = Input::get("mp_id");
         $appid = Input::get("appid");
         $secret = Input::get("secret");
-        $result = $this->wx->create($mp_id,$mp_org_id,$appid,$secret);
+        $result = $this->wx->create($mp_id,$appid,$secret);
         return $result;
     }
     public function getShowMp(){

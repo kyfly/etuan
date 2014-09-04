@@ -10,17 +10,29 @@ class Weixin
 		Session::put("wx_uid", $user);
 		return 'true';
 	}
+	public static function islogin(){
+		$user = Session::get('wx_uid');
+		if($user){
+			return 'true';
+		}
+		return 'false';
+	}
 	public static function logout(){
 		Session::forget('nick_name');
 		Session::forget('wx_uid');
-		return '退出成功';
+		return 'true';
 	}
-	public static function user(){
+	public static function user($val=""){
 		$user = Session::get("wx_uid");
-		if(!$user){
-			return 'false';
+		if($val){
+			return WxUser::where('wx_uid',$user)->pluck($val);
+		}else{
+			if(!$user){
+				return 'false';
+			}
+			return $user;
 		}
-		return $user;
+		return 'false';
 	}
 	public static function info(){
 		$user = Session::get("wx_uid");
