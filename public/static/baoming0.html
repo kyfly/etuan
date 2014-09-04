@@ -60,7 +60,7 @@
                 height: 200px;
             }
 
-            #logo {
+            #titlelogo {
                 width: 60px;
                 height: 60px;
                 vertical-align: middle
@@ -82,7 +82,7 @@
             }
 
             #infoarea {
-                height: 150px;
+                height: 100px;
             }
 
             #title {
@@ -93,7 +93,15 @@
                 height: 100px;
             }
 
-            #logo {
+            #userinfo {
+                margin-top: 10px;
+            }
+
+            #timeinfo:{
+                margin-top: 10px;
+            }
+
+            #titlelogo {
                 width: 40px;
                 height: 40px;
                 vertical-align: middle;
@@ -128,7 +136,7 @@
 
         .transparent-div {
             background-color: rgba(0, 0, 0, 0);
-            color: #cccccc;
+            color: #ccc;
         }
     </style>
 </head>
@@ -138,8 +146,15 @@
         <p id="title" class="left-tag"></p>
     </div>
     <div id="infoarea" class="col-xs-12 light-blank">
-        <p id="userinfo" class="left-tag"><img id="useravatar" src="../img/avatar.jpg" class="img-circle"/> 团团 12345678</p>
-        <p id="timeinfo" class="left-tag">0000-00-00 00:00 ~ 1111-11-11 11:11</p>
+        <p id="userinfo" class="left-tag">
+            <img id="useravatar" src="../img/avatar.jpg" class="img-circle"/>
+            &ensp;团团&ensp;12345678&ensp;
+            <a id="logout" class="btn btn-default transparent-div" href="javascript:void(0)">
+                <span class="glyphicon glyphicon-log-out"></span>
+                退出
+            </a>
+        </p>
+        <p id="timeinfo" class="left-tag"></p>
     </div>
     <div id="regform" class="clearfix">
     <!--表项-->

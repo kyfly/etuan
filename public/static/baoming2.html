@@ -56,7 +56,7 @@
                 height: 200px;
             }
             #infoarea {
-                font-size:50px;
+                font-size:25px;
             }
 
             #title {
@@ -66,15 +66,15 @@
 
             #userinfo{margin-top: 5px}
 
-            #logo {
-                width: 60px;
-                height: 60px;
+            #titlelogo {
+                width: 70px;
+                height: 70px;
                 vertical-align: middle
             }
 
             #useravatar {
-                width: 60px;
-                height: 60px;
+                width: 35px;
+                height:35px;
                 vertical-align: middle
             }
         }
@@ -110,16 +110,17 @@
                 width: 100%;
             }
             #infoarea {
-                font-size: 20px;
+                font-size: 15px;
             }
 
             #title {
+                margin-top: 25px;
                 font-size: 30px;
             }
 
-            #userinfo{margin-top: 10px}
+            #userinfo{margin-top: 5px;margin-bottom: 0px}
 
-            #logo {
+            #titlelogo {
                 width: 40px;
                 height: 40px;
                 vertical-align: middle;
@@ -138,11 +139,17 @@
     <div id="titlearea" class="col-xs-12 no-padding double-line cover" style="background-color: #f06">
         <p id="title"></p>
     </div>
-    <div id="infoarea" class="col-xs-12 no-padding double-line cover" style="background-color: #fff;color:#000">
+    <div id="infoarea" class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#000">
 
-        <p id="userinfo"><img id="useravatar" src="../img/avatar.jpg" class="img-circle"/> 团团 12345678</p>
-
-        <p id="timeinfo">0000-00-00 00:00 ~ 1111-11-11 11:11</p>
+        <p id="userinfo">
+            <img id="useravatar" src="../img/avatar.jpg" class="img-circle"/>
+            &ensp;团团&ensp;12345678&ensp;
+            <a id="logout" href="javascript:void(0)">
+                <span class="glyphicon glyphicon-log-out"></span>
+                退出
+            </a>
+        </p>
+        <p id="timeinfo"></p>
 
     </div>
     <div id="regform">

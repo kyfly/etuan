@@ -22,7 +22,7 @@ $(document).ready(function(){
     }
     var titletext = document.createTextNode(" "+document.title);
     var titlelogo = document.createElement("img");
-    titlelogo.setAttribute("id","logo");
+    titlelogo.setAttribute("id","titlelogo");
     titlelogo.setAttribute("class","img-rounded");
     titlelogo.setAttribute("src","../img/avatar.jpg");
     titlelogo.setAttribute("alt",document.title);
