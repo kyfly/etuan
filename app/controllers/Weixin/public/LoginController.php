@@ -24,7 +24,7 @@
 			if(!$this->is_weixin){
 				$state = BS::getRandStr(40);
 				Session::set('state',$state);
-				return View::make("qrlogin",["token"=>$state]);
+				return View::make("weixin.qrlogin",["token"=>$state]);
 			}
 		}
 		public function getQuit(){
@@ -76,8 +76,8 @@
 	                $info = $this->cache->get($state);
 	                $check = $info['check_id'];
 	                if($check!=1){
-	                	//带state和openid到phone模板供js带回给下边的函数。
-	                	return View::make('phone',['token'=>$state,'user'=>$user]);
+	                	//带state和openid到weixin.phone模板供js带回给下边的函数。
+	                	return View::make('weixin.phone',['token'=>$state,'user'=>$user]);
 	                }
 	                //表示登录成功（基本不可能）
 	                $msgArr = array('title' => '登录成功', 'body' => '微信登录成功，请在电脑端继续操作。现在您可以关闭本页面。',
@@ -101,7 +101,7 @@
 		$check = $info['check_id'];
 		if($check!=1){
 			//表示电脑端还没登陆成功，继续请求。
-	    	return View::make('phone',['token'=>$token,'user'=>$user]);
+	    	return View::make('weixin.phone',['token'=>$token,'user'=>$user]);
 	    }else{
 	    	//表示登录成功
 	    	$info = $this->cache->delete($token);

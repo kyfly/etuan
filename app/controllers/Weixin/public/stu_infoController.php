@@ -2,7 +2,7 @@
 class Stu_infoController extends BaseController
 {
 	public function index(){
-		return View::make('stuinfo');
+		return View::make('weixin.stuinfo');
 	}
 	public function store(){
 		$url = Session::get('fromUrl');

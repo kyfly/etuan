@@ -10,7 +10,7 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     Route::get("jiang/get/{lottery_id}", "choujiangController@get");
 
     Route::get("jiang/{id}", function($id) {
-       return View::make('choujiang')->with('lotteryId', $id);
+       return View::make('activity.choujiang.choujiang0')->with('lotteryId', $id);
     });
 
     Route::get('hello', function () {
@@ -87,16 +87,6 @@ Route::get('rsa', function () {
     $rsa->loadKey(PRIVATEKEY);
     echo $rsa->decrypt($password);
 });
-
-
-Route::get('xuehao', function () {
-    return View::make('stuinfo');
-});
-    Route::get('xuehao', function(){
-        return View::make('stuinfo');
-    });
-
-
 
 
 

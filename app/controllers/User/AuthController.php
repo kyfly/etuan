@@ -53,7 +53,7 @@ public function getLogout()
 
 public function getRegister()
 {
- return View::make('adminregdit');
+ return View::make('admin.register');
 }
 
 public function postRegister()
@@ -80,7 +80,7 @@ public function postRegister()
   $validator = Validator::make($values, $rules,$messages);
   if($validator->fails())
   {
-     return View::make('adminregdit')->with('error','用户名已经存在');
+     return View::make('admin.register')->with('error','用户名已经存在');
  }
  try {
     DB::beginTransaction();
