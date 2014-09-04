@@ -84,12 +84,6 @@ require app_path().'/acl.php';
 
 require app_path().'/Ioc.php';
 
-define('IMGBUCKET','kyfly-img');
-
-define('QRIMGBUCKET','kyfly-img');
-
-define('HTMLBUCKET','kyfly');
-
 define("APPID","wx5d92b3c192f993e7");
 
 define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");

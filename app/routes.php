@@ -5,7 +5,7 @@ Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
 Route::get('/', function () {
-  
+  return BS::getWxinfo(1);
 });
 
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
