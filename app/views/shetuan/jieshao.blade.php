@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$orgInfo->name}} 社团介绍 - 团团一家 - 杭电社团服务平台 </title>
+    <title>{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台 </title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -99,7 +99,7 @@
 <body>
 <div class="box1">
     <div class="container" style="padding: 20px 10px">
-        <p><img src="{{$orgInfo->logo_url}}">&nbsp;{{$orgInfo->name}}</p>
+        <p><img src="{{{$orgInfo->logo_url}}}@50w_50h.png" height="50px" width="50px">&nbsp;{{{$orgInfo->name}}}</p>
     </div>
 </div>
 
@@ -107,13 +107,13 @@
     <div class="container">
         <h3>社团介绍</h3>
 
-        <p>{{$orgInfo->description}}</p>
+        <p>{{{$orgInfo->description}}}</p>
 
         <h3>社团属性</h3>
 
-        <p class="intro">类别：{{$orgInfo->type}}</p>
+        <p class="intro">类别：{{{$orgInfo->type}}}</p>
 
-        <p class="intro">所属学院：{{$orgInfo->school}}</p>
+        <p class="intro">所属学院：{{{$orgInfo->school}}}</p>
     </div>
 </div>
 
@@ -122,9 +122,9 @@
         <h3>部门简介</h3>
         <dl class="dl-horizontal">
             @foreach ($department as $depart)
-            <p class="intro">{{$depart->name}}</p>
+            <p class="intro">{{{$depart->name}}}</p>
 
-            <p>{{$depart->description}}</p>
+            <p>{{{$depart->description}}}</p>
             <hr>
             @endforeach
         </dl>
@@ -134,15 +134,15 @@
 <div class="box4">
     <div class="container">
         <h3>个性展区</h3>
-        <a href="{{$orgInfo->pic_url1}}"><img src="{{$orgInfo->pic_url1}}"></a>
-        <a href="{{$orgInfo->pic_url2}}"><img src="{{$orgInfo->pic_url2}}"></a>
-        <a href="{{$orgInfo->pic_url3}}"><img src="{{$orgInfo->pic_url3}}"></a>
+        <a href="{{{$orgInfo->pic_url1}}}"><img src="{{{$orgInfo->pic_url1}}}@1000w_80Q.jpg"></a>
+        <a href="{{{$orgInfo->pic_url2}}}"><img src="{{{$orgInfo->pic_url2}}}@1000w_80Q.jpg"></a>
+        <a href="{{{$orgInfo->pic_url3}}}"><img src="{{{$orgInfo->pic_url3}}}@1000w_80Q.jpg"></a>
     </div>
 </div>
 
-<a href="{{$regUrl}}" target="_blank" style="text-decoration: none">
+<a href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
     <div class="box5 text-center">
-        <h2>我要报名！<img src="{{URL::to('/img/arrow.png');}}"></h2>
+        <h2>我要报名！<img src="/img/arrow.png"></h2>
     </div>
 </a>
 
@@ -153,10 +153,10 @@
 <script>
     window._bd_share_config = {
         common: {
-            bdText: '{{$orgInfo->name}}社团介绍',
-            bdDesc: '{{$orgInfo->description}}',
-            bdUrl: 'http://www.etuan.org/shetuan/{{$orgInfo->org_id}}',
-            bdPic: '{{$orgInfo->logo_url}}',
+            bdText: '{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台',
+            bdDesc: '{{{str_replace(PHP_EOL, " ", $orgInfo->description)}}}',
+            bdUrl: 'http://www.etuan.org/shetuan/{{{$orgInfo->org_id}}}',
+            bdPic: '{{{$orgInfo->logo_url}}}',
             bdMiniList: ['tsina', 'qzone', 'weixin', 'sqq', 'tqq', 'renren', 'tieba', 'hi', 'mail', 'copy']
         },
         share: [
