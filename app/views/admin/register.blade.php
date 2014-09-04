@@ -12,6 +12,9 @@
 @include('layout.nav')
 <div class="container" id="mainHeight">
 <div class="field clearfix">
+<div class="alert alert-info" role="alert" style="display: none" id="topAlert">
+    <img src="/img/waiting.gif">&nbsp;&nbsp;正在上传图片并创建帐号，请稍等...
+</div>
 <h2 class="text-center">社团管理员注册</h2>
 <hr>
 <div class="col-sm-3">
@@ -21,7 +24,7 @@
         <li><a href="#bumeninfo" role="pill" data-toggle="pill" id="next1-3">3. 部门简介</a></li>
     </ul>
 </div>
-<form class="form-horizontal" role="form" method="post" action="register" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" method="post" action="register" enctype="multipart/form-data" id="regForm">
 <div class="tab-content col-xs-9">
 <!--创建账号-->
 <div class="tab-pane fade active in" id="newid">
@@ -229,7 +232,7 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-6">
             <button id="next4" type="button" class="btn btn-primary btn-lg">上一步</button>
-            <button type="submit" class="btn btn-warning btn-lg col-sm-offset-1">完成注册</button>
+            <button type="submit" class="btn btn-warning btn-lg col-sm-offset-1" id="btnSubmit">完成注册</button>
         </div>
     </div>
 </div>
