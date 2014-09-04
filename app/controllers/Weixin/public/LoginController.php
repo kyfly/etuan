@@ -5,17 +5,20 @@
 		private $state;
 		private $cache;
 		public function __construct(){
-            $connect= new Memcached;
+            /*$connect= new Memcached;
             $connect->setOption(Memcached::OPT_COMPRESSION, false);
             $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
             $connect->addServer('7825a1060cbf11e4.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
-            $connect->setSaslAuthData('7825a1060cbf11e4', 'OSCKyfly___123');
+            $connect->setSaslAuthData('7825a1060cbf11e4', 'OSCKyfly___123');*/
+            $connect = new Memcache;
+       		$connect->connect("localhost",11211);
        		$this->cache = $connect;
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
 		}
 		public function getCode(){
 			$appid = APPID;
-			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth');
+			$time = Session::get('start_time');
+			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
 			QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
@@ -62,7 +65,13 @@
 		$appid = APPID;
 		$secret = APPSECRET;
 	    $state = Input::get("state");
+	    $time = Input::get('time');
 	    $obj = new wxUserHandle;
+		if(time()-$time >= 60){
+			$msgArr = array('title' => '验证超时', 'body' => '微信登录失败，请重新登录。现在您可以关闭本页面。',
+                'status' => 'error', 'action' => 'wclose');
+    		return View::make('showmessage')->with('messageArr', $msgArr);
+		}
 		if(isset($_GET["code"])&&$_GET["code"] != "authdeny")
         {
         	$code = $_GET["code"];
@@ -79,6 +88,7 @@
               		$this->cache->set($state,$userinfo,60);
 	                $info = $this->cache->get($state);
 	                $check = $info['check_id'];
+	                dd($info);
 	                if($check!=1){
 	                	//带state和openid到weixin.phone模板供js带回给下边的函数。
 	                	return View::make('weixin.phone',['token'=>$state,'user'=>$user]);
@@ -103,11 +113,6 @@
 		$user = Input::get('user');
        	$info = $this->cache->get($token);
 		$check = $info['check_id'];
-		if(time()-$info['start_time'] >= 15){
-			$msgArr = array('title' => '登录失败', 'body' => '微信登录失败，请重新登录。现在您可以关闭本页面。',
-                'status' => 'error', 'action' => 'wclose');
-    		return View::make('showmessage')->with('messageArr', $msgArr);
-		}
 		if($check!=1){
 			//表示电脑端还没登陆成功，继续请求。
 	    	return View::make('weixin.phone',['token'=>$token,'user'=>$user]);
