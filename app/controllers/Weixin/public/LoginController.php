@@ -23,6 +23,7 @@
 		public function getIndex(){
 			if(!$this->is_weixin){
 				$state = BS::getRandStr(40);
+				Session::set('start_time',time());
 				Session::set('state',$state);
 				return View::make("weixin.qrlogin",["token"=>$state]);
 			}
@@ -35,6 +36,9 @@
 		$state = Input::get("state");
 		//通过唯一token值获取登录信息，（当微信端进入时会保存，否者为空）
     	$userinfo = $this->cache->get($state);
+		if(time()-Session::get('start_time') >= 60){
+			$this->cache->delete($token);
+		}
     	//取得token时 把 check_id值为一；并再次放入缓存
         if($userinfo['token']== $state)
         {
@@ -99,6 +103,11 @@
 		$user = Input::get('user');
        	$info = $this->cache->get($token);
 		$check = $info['check_id'];
+		if(time()-$info['start_time'] >= 15){
+			$msgArr = array('title' => '登录失败', 'body' => '微信登录失败，请重新登录。现在您可以关闭本页面。',
+                'status' => 'error', 'action' => 'wclose');
+    		return View::make('showmessage')->with('messageArr', $msgArr);
+		}
 		if($check!=1){
 			//表示电脑端还没登陆成功，继续请求。
 	    	return View::make('weixin.phone',['token'=>$token,'user'=>$user]);

@@ -5,7 +5,7 @@ Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
 Route::get('/', function () {
-    return Weixin::login('liu');
+   return BS::https_request("http://go.redhome.cc/newvote/2013lfqs/validate.php?num=13055120&name=刘建东");
 });
 
 Route::group(array('before' => 'wxauth|stuinfo'), function () {

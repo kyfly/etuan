@@ -112,8 +112,11 @@ class replyHandle
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
                 if($re){
                     $this->reply($postObj,$content);
-                }else{
+                }elseif($content == 'mp_welcome_autoreply_message'){
                     return $this->toAndroid($postObj);
+                }else{
+                    $content = '';
+                    return $this->TextMessage($postObj,$content);
                 }
             }
 
@@ -142,10 +145,11 @@ class replyHandle
 
                 return $this->ArticlesMessage($postObj, $arr,$time);
             }
-
-            return $this->toAndroid($postObj);
+            $content = '';
+            return $this->TextMessage($postObj,$content);
         }catch (Exception $e){
-            return $this->toAndroid($postObj);
+            $content = '';
+            return $this->TextMessage($postObj,$content);
         }
     }
     private function UrlGifToJpg($picurl){
