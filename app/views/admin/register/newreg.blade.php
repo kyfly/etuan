@@ -89,20 +89,20 @@
                             <form id="extraform" class="target">
                                 <div style="display: inline" class="form-group">
                                     <label class="baomingitem">学号</label>
-                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="置顶">
+                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动">
                                         <span class="glyphicon glyphicon-arrow-up"></span>
                                     </a>
-                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="置底">
+                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动">
                                         <span class="glyphicon glyphicon-arrow-down"></span>
                                     </a>
                                     <hr>
                                 </div>
                                 <div style="display: inline" class="form-group">
                                     <label class="baomingitem">姓名</label>
-                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="置顶">
+                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动">
                                         <span class="glyphicon glyphicon-arrow-up"></span>
                                     </a>
-                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="置底">
+                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动">
                                         <span class="glyphicon glyphicon-arrow-down"></span>
                                     </a>
                                     <hr>
