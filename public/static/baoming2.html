@@ -13,46 +13,148 @@
         .no-padding {
             padding: 0;
         }
-        .cover {
-            font-size: 64px;
-            text-align: center;
-            color: #fff;
+        .intro-single-input {
+            border-width:0;
+            height: 100px;
+            width: 100%;
         }
-		.blank {
-			font-size: 36px;
-			text-align:left;
-			color:#000;
-			background-color:#fff;
-		}
-		.single-line {
-			height: 100px;
-		}
-		.double-line {
-			height: 200px;
-		}
-		.intro-single-input {
-			border-width:0;
-			height: 100px;
-			width: 100%;
-		}
         .intro-double-input {
-			border-width:0;
-			height: 200px;
-			width: 100%;
-		}
+            border-width:0;
+            height: 200px;
+            width: 100%;
+        }
+
+        @media (min-width: 1366px) {
+            .intro-single-input {
+                border-width:0;
+                height: 100px;
+                width: 100%;
+            }
+            .intro-double-input {
+                border-width:0;
+                height: 200px;
+                width: 100%;
+            }
+            .cover {
+                font-size: 60px;
+                text-align: center;
+                color: #fff;
+            }
+
+            .blank {
+                font-size: 40px;
+                text-align: left;
+                color: #000;
+                background-color: #fff;
+            }
+
+            .single-line {
+                height: 100px;
+            }
+
+            .double-line {
+                height: 200px;
+            }
+            #infoarea {
+                font-size:50px;
+            }
+
+            #title {
+                margin-top: 60px;
+                font-size: 50px;
+            }
+
+            #userinfo{margin-top: 5px}
+
+            #logo {
+                width: 60px;
+                height: 60px;
+                vertical-align: middle
+            }
+
+            #useravatar {
+                width: 60px;
+                height: 60px;
+                vertical-align: middle
+            }
+        }
+        @media (max-width: 1365px){
+            .cover {
+                font-size: 30px;
+                text-align: center;
+                color: #fff;
+            }
+
+            .blank {
+                font-size: 20px;
+                text-align: left;
+                color: #000;
+                background-color: #fff;
+            }
+
+            .single-line {
+                height: 50px;
+            }
+
+            .double-line {
+                height: 100px;
+            }
+            .intro-single-input {
+                border-width:0;
+                height: 50px;
+                width: 100%;
+            }
+            .intro-double-input {
+                border-width:0;
+                height: 100px;
+                width: 100%;
+            }
+            #infoarea {
+                font-size: 20px;
+            }
+
+            #title {
+                font-size: 30px;
+            }
+
+            #userinfo{margin-top: 10px}
+
+            #logo {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+
+            #useravatar {
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container no-padding">
-    <div class="col-xs-12 no-padding double-line cover" style="background-color: #f06">
-        <p id="title">焦点摄影招新报名</p>
+    <div id="titlearea" class="col-xs-12 no-padding double-line cover" style="background-color: #f06">
+        <p id="title"></p>
+    </div>
+    <div id="infoarea" class="col-xs-12 no-padding double-line cover" style="background-color: #fff;color:#000">
+
+        <p id="userinfo"><img id="useravatar" src="../img/avatar.jpg" class="img-circle"/> 团团 12345678</p>
+
+        <p id="timeinfo">0000-00-00 00:00 ~ 1111-11-11 11:11</p>
+
     </div>
     <div id="regform">
     <!--表项-->
     </div>
-    <div id="submit" class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#6f6">
-        <span class="glyphicon glyphicon-envelope"></span>
-        提交
+    <div id="regbutton" class="col-xs-12 no-padding single-line cover" style="background-color: #000;color:#ff0">
+        <div id="submit">
+            <span class="glyphicon glyphicon-envelope"></span>提交
+        </div>
+    </div>
+    <div id="regfooter" class="col-xs-12 no-padding single-line cover" style="background-color: #fff;color:#000">
+        <p style="font-size: 25px">团团一家|红色家园 联合出品</p>
     </div>
 </div>
 
@@ -60,6 +162,6 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../js/baomingpage.js"></script>
 <script src="../js/baoming2.js"></script>
-
+<script>_activityId=0;</script>
 </body>
 </html>

@@ -12,20 +12,20 @@
 		.control-label {
 			font-weight: bold;
 			}
-        @media (min-width: 320px){
-            body {
-                background-image: url(../imgre23/baoming1bg.jpg);
-                background-repeat:no-repeat;
-                background-position:center;
-            }
-        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="col-lg-6 col-lg-of6fset-3 col-md-6 col-md-offset-3 col-xs-12 text-center" style="background-color: rgba(255,255,255,0.5)">
-        <img id="logo" src="../img/avatar.jpg" class="img-circle" style="width:100px; height:100px; margin-top:20px;margin-bottom:20px">
-        <h3 id="title"></h3>
+        <div id="titlearea">
+            <img id="titlelogo" src="../img/avatar.jpg" class="img-rounded" style="width:100px; height:100px; margin-top:20px;">
+            <h2 id="title"></h2>
+        </div>
+        <hr>
+        <div id="infoarea">
+            <p id="userinfo"><img id="useravatar" src="../img/avatar.jpg" class="img-circle"/> 团团 12345678</p>
+            <p id="timeinfo">0000-00-00 00:00 ~ 1111-11-11 11:11</p>
+        </div>
         <hr>
     </div>
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12" style="background-color: rgba(255,255,255,0.5)">
@@ -34,8 +34,13 @@
             <!--表项-->
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-offset-10 col-xs-offset-4 col-xs-8">
+                <div id="regbutton" class="col-sm-offset-2 col-sm-offset-10 col-xs-offset-4 col-xs-8" style="">
                     <button id="submit" type="submit" class="btn btn-lg btn-danger">我要提交 <span class="glyphicon glyphicon-envelope"></span></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="regfooter">
+                    <p style="text-align: center">团团一家|红色家园 联合出品</p>
                 </div>
             </div>
         </form>
@@ -46,5 +51,6 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../js/baomingpage.js"></script>
 <script src="../js/baoming1.js"></script>
+<script>_activityId=0;</script>
 </body>
 </html>

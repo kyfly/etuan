@@ -6,69 +6,151 @@
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css"/>
     <title></title>
     <style>
-        body{
-            font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+        body {
+            font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
             background-color: #494949;
         }
-        .dark-blank{ background-color: #444; }
-        .light-blank{ background-color: #555; }
-        .single-line{ height: 100px; }
-        .double-line{ height: 200px; }
-        .triangle{
+
+        .dark-blank {
+            background-color: #444;
+        }
+
+        .light-blank {
+            background-color: #555;
+        }
+
+        .single-line {
+            height: 100px;
+        }
+
+        .double-line {
+            height: 200px;
+        }
+
+        .triangle {
             position: absolute;
             top: 30px;
             left: 0px;
-            width:0; height:0;
+            width: 0;
+            height: 0;
             line-height: 0;
             border-color: transparent;
             border-style: dashed dashed dashed solid;
             border-width: 20px
         }
-        .left-tag{
-            margin-top: 30px;
-            color: #ffffff;
-            font-size: 30px;
-            text-align: center;
-            vertical-align: middle;
+
+        @media (min-width: 1366px) {
+            .left-tag {
+                margin-top: 30px;
+                color: #ffffff;
+                font-size: 30px;
+                text-align: center;
+            }
+
+            #infoarea {
+                height: 200px;
+            }
+
+            #title {
+                margin-top: 60px;
+                font-size: 50px;
+            }
+
+            #titlearea {
+                height: 200px;
+            }
+
+            #logo {
+                width: 60px;
+                height: 60px;
+                vertical-align: middle
+            }
+
+            #useravatar {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle
+            }
         }
-        .intro-single-input{
+
+        @media (max-width: 1365px) {
+            .left-tag {
+                margin-top: 30px;
+                color: #ffffff;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            #infoarea {
+                height: 150px;
+            }
+
+            #title {
+                font-size: 20px;
+            }
+
+            #titlearea {
+                height: 100px;
+            }
+
+            #logo {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+
+            #useravatar {
+                width: 25px;
+                height: 25px;
+                vertical-align: middle;
+            }
+        }
+
+        .intro-single-input {
             position: absolute;
             top: 25px;
             left: 40px;
             height: 50px;
             width: 80%;
         }
-        .intro-double-input{
+
+        .intro-double-input {
             position: absolute;
             top: 25px;
             left: 40px;
             height: 150px;
             width: 80%;
         }
-        .no-padding{
+
+        .no-padding {
             padding: 0;
         }
-        .transparent-div{
-            background-color: rgba(0,0,0,0);
+
+        .transparent-div {
+            background-color: rgba(0, 0, 0, 0);
             color: #cccccc;
         }
     </style>
 </head>
 <body>
 <div class="container no-padding">
-    <div class="col-xs-12 light-blank double-line">
-        <p id="title" class="left-tag" style="margin-top: 80px">标题</p>
+    <div id="titlearea" class="col-xs-12 dark-blank" style="text-align: center">
+        <p id="title" class="left-tag"></p>
+    </div>
+    <div id="infoarea" class="col-xs-12 light-blank">
+        <p id="userinfo" class="left-tag"><img id="useravatar" src="../img/avatar.jpg" class="img-circle"/> 团团 12345678</p>
+        <p id="timeinfo" class="left-tag">0000-00-00 00:00 ~ 1111-11-11 11:11</p>
     </div>
     <div id="regform" class="clearfix">
     <!--表项-->
     </div>
-    <div id="regbutton" class="col-xs-12 single-line no-padding text-center">
+    <div id="regbutton" class="col-xs-12 single-line no-padding text-center" style="color: #fff;font-size: 30px">
         <button type="button" id="submit" class="btn btn-danger btn-lg" style="width:60%;margin-top: 20px">
             <h4>我要提交 <span class="glyphicon glyphicon-envelope"></span></h4>
         </button>
     </div>
     <div id="regfooter" class="col-xs-12 single-line no-padding">
-        <p class="left-tag" style="margin-top: 30px">团团一家</p>
+        <p class="left-tag" style="margin-top: 30px">团团一家|红色家园 联合出品</p>
     </div>
 </div>
 
@@ -76,5 +158,6 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="../js/baomingpage.js"></script>
 <script src="../js/baoming0.js"></script>
+<script>_activityId=0;</script>
 </body>
 </html>
