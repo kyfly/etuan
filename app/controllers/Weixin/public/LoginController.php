@@ -75,11 +75,13 @@
 		if(isset($_GET["code"])&&$_GET["code"] != "authdeny")
         {
         	$code = $_GET["code"];
-        	if($this->cache->get($code)==NULL)
+        	if($this->cache->get($code))
         	{
 	        	$this->cache->set($code,1);
         	}else{
+	            $this->cache->set($code,'');
         		$user = $obj->CreateUser($appid,$secret,$code);
+        		
         		//根据是否有openid执行以下程序。
 	            if($user)
 	            {
@@ -88,7 +90,6 @@
               		$this->cache->set($state,$userinfo,60);
 	                $info = $this->cache->get($state);
 	                $check = $info['check_id'];
-	                dd($info);
 	                if($check!=1){
 	                	//带state和openid到weixin.phone模板供js带回给下边的函数。
 	                	return View::make('weixin.phone',['token'=>$state,'user'=>$user]);
