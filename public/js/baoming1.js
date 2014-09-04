@@ -9,8 +9,8 @@ $(document).ready(function(){
         var contentid = "#content" + i.toString();
         var answerid = "#answer" + i.toString();
         $(questionid).addClass("form-group");
-        $(typeid).addClass("col-sm-2").addClass("col-xs-4").addClass("control-label");
-        $(contentid).addClass("col-sm-10").addClass("col-xs-8");
+        $(typeid).addClass("bold-label");
+        //$(contentid).addClass("col-sm-9").addClass("col-xs-9");
         $(answerid).addClass("form-control");
     }
 });

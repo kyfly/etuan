@@ -65,23 +65,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>报名表样式</label><br>
+                                <label>报名表主题样式</label><br>
+                                <label class="radio-inline">
+                                    <input type="radio" name="theme" value="0">
+                                    <img class="theme" src="/img/admin/register/theme/00.png" alt="黯矩">
+                                </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="theme" value="1">
-                                    <img src="/img/example.png">
+                                    <img class="theme" src="/img/admin/register/theme/10.png" alt="清雅">
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="theme" value="2">
-                                    <img src="/img/example.png">
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="theme" value="3">
-                                    <img src="/img/example.png">
+                                    <img class="theme" src="/img/admin/register/theme/20.png" alt="六彩">
                                 </label>
                             </div>
                         </fieldset>
                     </form>
-
+                    <br>
                     <div id="addform" class="target">
                         <div class="col-md-9">
                             <h3>添加更多表单</h3>
@@ -89,20 +89,20 @@
                             <form id="extraform" class="target">
                                 <div style="display: inline" class="form-group">
                                     <label class="baomingitem">学号</label>
-                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="置顶">
+                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动">
                                         <span class="glyphicon glyphicon-arrow-up"></span>
                                     </a>
-                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="置底">
+                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动">
                                         <span class="glyphicon glyphicon-arrow-down"></span>
                                     </a>
                                     <hr>
                                 </div>
                                 <div style="display: inline" class="form-group">
                                     <label class="baomingitem">姓名</label>
-                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="置顶">
+                                    <a class="moveup" data-toggle="tooltip" data-placement="right" title="向上移动">
                                         <span class="glyphicon glyphicon-arrow-up"></span>
                                     </a>
-                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="置底">
+                                    <a class="movedown" data-toggle="tooltip" data-placement="right" title="向下移动">
                                         <span class="glyphicon glyphicon-arrow-down"></span>
                                     </a>
                                     <hr>

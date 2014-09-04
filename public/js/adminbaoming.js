@@ -63,6 +63,13 @@ $(document).ready(function () {
         setHeight();
         configExtraForm();
     });
+    //主题选择动画
+    $(".theme").mouseover(function(){
+        $(this).prop("src",$(this).prop("src").toString().replace("0.png","1.png"));
+    });
+    $("img").mouseout(function(){
+        $(this).prop("src",$(this).prop("src").toString().replace("1.png","0.png"));
+    });
 });
 
 //获得创建报名的各项参数数据
@@ -150,9 +157,9 @@ $(document).ready(function(){
 		};
         var arrayStartTime = $("#starttime").val().toString().split(/[\s:-]/);
         var arrayStopTime = $("#stoptime").val().toString().split(/[\s:-]/);
-        var dateStartTime = new Date(parseInt(arrayStartTime[0]),parseInt(arrayStartTime[1]),parseInt(arrayStartTime[2]),parseInt(arrayStartTime[3]),parseInt(arrayStartTime[4]),0);
-        var dateStopTime = new Date(parseInt(arrayStopTime[0]),parseInt(arrayStopTime[1]),parseInt(arrayStopTime[2]),parseInt(arrayStopTime[3]),parseInt(arrayStopTime[4]),0);
-        var IsTimeOutOfBound = IsTimeLater(new Date(2014,9,4,0,0,0),dateStartTime);
+        var dateStartTime = new Date(parseInt(arrayStartTime[0]),parseInt(arrayStartTime[1])-1,parseInt(arrayStartTime[2]),parseInt(arrayStartTime[3]),parseInt(arrayStartTime[4]),0);
+        var dateStopTime = new Date(parseInt(arrayStopTime[0]),parseInt(arrayStopTime[1])-1,parseInt(arrayStopTime[2]),parseInt(arrayStopTime[3]),parseInt(arrayStopTime[4]),0);
+        var IsTimeOutOfBound = IsTimeLater(new Date(2014,8,4,0,0,0),dateStartTime);
         var IsStopTimeBeforeStartTime = IsTimeLater(dateStartTime,dateStopTime);
         if (IsStopTimeBeforeStartTime && IsTimeOutOfBound){
             //获得报名终止时间

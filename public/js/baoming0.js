@@ -20,7 +20,14 @@ $(document).ready(function(){
     function IsSingle(tn){
         return (tn !== "textarea");
     }
-    $("#title")[0].innerText = document.title;
+    var titletext = document.createTextNode(" "+document.title);
+    var titlelogo = document.createElement("img");
+    titlelogo.setAttribute("id","titlelogo");
+    titlelogo.setAttribute("class","img-rounded");
+    titlelogo.setAttribute("src","../img/avatar.jpg");
+    titlelogo.setAttribute("alt",document.title);
+    document.getElementById("title").appendChild(titlelogo);
+    document.getElementById("title").appendChild(titletext);
     $("#regform").addClass("clearfix");
     var n = $("#regform").children().length;
     if(IsLight(n+1)){
