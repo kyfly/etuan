@@ -160,23 +160,23 @@ $(document).ready(function () {
                 break;
             case 112:
                 elementFilling = document.createElement("select");
-                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
-                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
-                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                for(var department1 in questionItem.content){
+                    elementFilling.options.add(new Option(department1,questionItem.content[department1]));
+                }
                 introText = document.createTextNode("第一意向部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
-                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
-                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
-                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                for(var department2 in questionItem.content){
+                    elementFilling.options.add(new Option(department2,questionItem.content[department2]));
+                }
                 introText = document.createTextNode("第二意向部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
-                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
-                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
-                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                for(var department3 in questionItem.content){
+                    elementFilling.options.add(new Option(department3,questionItem.content[department3]));
+                }
                 introText = document.createTextNode("第三意向部门");
                 break;
             case 115:
@@ -271,7 +271,7 @@ $(document).ready(function () {
         $("#submit").remove();
         var contentbefore = "<p>报名还未开始</p>";
         $("#regbutton").append(contentbefore);
-        alert("客官稍安勿躁，还没到开门的时间哦~");
+        alert("客官稍安勿躁，还没开门~");
     }
 
     //开始整个报名表的运作部分
