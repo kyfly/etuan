@@ -132,7 +132,7 @@ $(document).ready(function () {
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "email");
                 elementFilling.setAttribute("placeholder", "其输入您的电子邮箱地址");
-                introText = document.createTextNode("电邮");
+                introText = document.createTextNode("电子邮箱");
                 break;
             case 108:
                 elementFilling = document.createElement("input");
@@ -144,19 +144,46 @@ $(document).ready(function () {
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "number");
                 elementFilling.setAttribute("placeholder", "请输入您的手机长号");
-                introText = document.createTextNode("长号");
+                introText = document.createTextNode("手机长号");
                 break;
             case 110:
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "number");
                 elementFilling.setAttribute("placeholder", "请输入您的校园网手机短号");
-                introText = document.createTextNode("短号");
+                introText = document.createTextNode("手机短号");
                 break;
             case 111:
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "text");
                 elementFilling.setAttribute("placeholder", "请填写您的籍贯");
                 introText = document.createTextNode("籍贯");
+                break;
+            case 112:
+                elementFilling = document.createElement("select");
+                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
+                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
+                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                introText = document.createTextNode("第一意向部门");
+                break;
+            case 113:
+                elementFilling = document.createElement("select");
+                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
+                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
+                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                introText = document.createTextNode("第二意向部门");
+                break;
+            case 114:
+                elementFilling = document.createElement("select");
+                elementFilling.options.add(new Option("呵呵部", "呵呵部"));
+                elementFilling.options.add(new Option("哈哈部", "哈哈部"));
+                elementFilling.options.add(new Option("吼吼部", "吼吼部"));
+                introText = document.createTextNode("第三意向部门");
+                break;
+            case 115:
+                elementFilling = document.createElement("select");
+                elementFilling.options.add(new Option("是", "是"));
+                elementFilling.options.add(new Option("否", "否"));
+                introText = document.createTextNode("是否服从调剂");
                 break;
             default:
                 elementFilling = document.createElement("div");
@@ -202,9 +229,20 @@ $(document).ready(function () {
     if (typeof(activityIdPredefined) === "number") {
         activityPageJson = getPageJSON(activityIdPredefined);
     }
-
     //创建报名列表
     createCommonList(activityPageJson);
+    //判断微信环境并且决定是否保留退出按钮
+    function is_weixn(){
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if(is_weixn()){
+        $("#logout").remove();
+    }
     //时间变量准备
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
@@ -212,10 +250,8 @@ $(document).ready(function () {
     var startDate = new Date(checkStartTime[0], parseInt(checkStartTime[1]) - 1, checkStartTime[2], checkStartTime[3], checkStartTime[4], 0);
     var stopDate = new Date(checkStopTime[0], parseInt(checkStopTime[1]) - 1, checkStopTime[2], checkStopTime[3], checkStopTime[4], 0);
     //输入具体时间
-    $("#timeinfo")[0].innerText = "" +
-        checkStartTime[0] + "-" + checkStartTime[1] + "-" + checkStartTime[2] + " " + checkStartTime[3] + ":" + checkStartTime[4] +
-        "~" +
-        checkStopTime[0] + "-" + checkStopTime[1] + "-" + checkStopTime[2] + " " + checkStopTime[3] + ":" + checkStopTime[4];
+    $("#timeinfo")[0].innerText = "报名时间：" + checkStartTime[1] + "-" + checkStartTime[2] + " " + checkStartTime[3] + ":" + checkStartTime[4] +
+        "~" + checkStopTime[1] + "-" + checkStopTime[2] + " " + checkStopTime[3] + ":" + checkStopTime[4];
     //检查时间
     if (nowDate > stopDate) {
         $("div").attr("disabled", "true");
