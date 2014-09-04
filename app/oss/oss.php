@@ -7,6 +7,11 @@
 		public function __construct(){
 			$this->oss = new ALIOSS;
 		}
+		public function set_bucket_cors($bucket, $cors_rules){
+			$response = $this->oss->set_bucket_cors($bucket, $cors_rules);
+
+			return $response;
+		}
 		public  function create_bucket($bucket,$acl = 'public-read'){
 			
 			$response = $this->oss->create_bucket($bucket,$acl);
