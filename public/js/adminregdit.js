@@ -193,6 +193,22 @@ $(function () {
         });
 
         $('#next1').click(function () {
+            $('#next1-2').trigger("click");
+        });
+
+        $('#next2').click(function () {
+            $('#next1-1').trigger("click")
+        });
+
+        $('#next3').click(function () {
+            $('#next1-3').trigger("click")
+        });
+
+        $('#next4').click(function () {
+            $('#next1-2').trigger("click");
+        });
+		
+		$('#submit').click(function () {
             //验证邮箱
             if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/.+@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
                 $('#span1').removeClass("hidespan");
@@ -281,65 +297,52 @@ $(function () {
                     sig = false;
                 }
             }
-            if (sig == true) {
-                $('#next1-2').trigger("click")
+            if (sig != true) {
+                alert("对不起，请确认帐号信息填写正确！");
+				$('#next1-1').trigger("click");
+				return false;
             }
-            else {
-                alert("对不起，请确认填写正确！");
-            }
-        });
-
-        $('#next2').click(function () {
-            $('#next1-1').trigger("click")
-        });
-
-        $('#next3').click(function () {
-            if ($("input[name='name']").val() == "") {
-                alert("对不起，请填写社团名称！")
-                $("input[name='name']").focus();
+			
+			if ($("input[name='name']").val() == "") {
+                alert("对不起，请填写社团名称！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("#inputXueyuan").find("option:selected").text() == "") {
-                alert("对不起，请选择所属学院！")
-                $("input[name='school']").focus();
+                alert("对不起，请选择所属学院！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("textarea[name='description']").val() == "") {
-                alert("对不起，请填写社团介绍！")
-                $("textarea[name='description']").focus();
+                alert("对不起，请填写社团介绍！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("textarea[name='description']").val().length > 200) {
-                alert("对不起，社团介绍超过200个字符限制！")
-                $("textarea[name='description']").focus();
+                alert("对不起，社团介绍超过200个字符限制！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("input[name='logo']").val() == "") {
-                alert("对不起，请上传logo！")
-                $("input[name='logo']").focus();
+                alert("对不起，请上传logo！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("input[name='pic1']").val() == "") {
-                alert("对不起，请上传展示照片1！")
-                $("input[name='pic1']").focus();
+                alert("对不起，请上传展示照片1！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("input[name='pic2']").val() == "") {
-
-                alert("对不起，请上传展示照片2！")
-                $("input[name='pic2']").focus();
+                alert("对不起，请上传展示照片2！");
+				$('#next1-2').trigger("click");
                 return false;
             }
             if ($("input[name='pic3']").val() == "") {
-                alert("对不起，请上传展示照片3！")
-                $("input[name='pic3']").focus();
+                alert("对不起，请上传展示照片3！");
+				$('#next1-2').trigger("click");
                 return false;
             }
-            $('#next1-3').trigger("click")
-        });
-
-        $('#next4').click(function () {
-            $('#next1-2').trigger("click")
         });
 
         $('#addelement').click(function () {
