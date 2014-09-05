@@ -3,10 +3,10 @@
 App::singleton('memcached', function()
 {
     $connect= new Memcached;
-    $host = Config::get('memcached_host');
-    $port = Config::get('memcached_port');
-    $id = Config::get('memcached_id');
-    $key = Config::get('memcached_key')
+    $host = Config::get('etuan.memcached_host');
+    $port = Config::get('etuan.memcached_port');
+    $id = Config::get('etuan.memcached_id');
+    $key = Config::get('etuan.memcached_key');
     $connect->setOption(Memcached::OPT_COMPRESSION, false);
     $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
     $connect->addServer($host,$port);
