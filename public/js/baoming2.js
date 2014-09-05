@@ -54,7 +54,8 @@ $(document).ready(function(){
             $(answerid).addClass("intro-double-input");
         }
     }
-
+    $("#regbutton").mouseover(function(){$(this).css("background-color","#f66")});
+    $("#regbutton").mouseout(function(){$(this).css("background-color","#66f")});
     //控制覆盖层面
 	$(".blank").hide();
 	$(".strip").click(function(){

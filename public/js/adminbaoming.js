@@ -48,14 +48,27 @@ $(document).ready(function () {
             $(this).tooltip("show");
         });
     };
+
+    function checkDuplicate(o){
+        for (var i = 0; i < $("#extraform").children().length; i++) {
+            if ($("#extraform").find("label")[i].innerText === o) {
+                alert("已经包含项目【" + o + "】，请勿重复添加。");
+                return false;
+            }
+        }
+        return true;
+    }
+
     setHeight();
     configExtraForm();
     //添加元素到左边
     $(".target .extralist h4:not(:contains(\"自定义\"))").click(function (e) {
-        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
-        $("#extraform").append(content);
-        setHeight();
-        configExtraForm();
+        if (checkDuplicate(e.target.innerText)) {
+            var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+            $("#extraform").append(content);
+            setHeight();
+            configExtraForm();
+        }
     });
     $("#zidingyishort2,#zidingyilong2").click(function(e){
         var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
@@ -67,7 +80,7 @@ $(document).ready(function () {
     $(".theme").mouseover(function(){
         $(this).prop("src",$(this).prop("src").toString().replace("0.png","1.png"));
     });
-    $("img").mouseout(function(){
+    $(".theme").mouseout(function(){
         $(this).prop("src",$(this).prop("src").toString().replace("1.png","0.png"));
     });
 });
@@ -209,13 +222,46 @@ $(document).ready(function(){
 		};
 		//打包好发送格式的Json
         var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
+        //禁用按钮防止错误提交
+        $("#preview").prop("disabled",true);
+        $("#submit").prop("disabled",true);
 		//dev阶段采用alert形式表示数据
-		console.log(sendJson);
+		//console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
 			url:"/registration/createactivity",
-			data:sendJson
+			data:sendJson,
+            dataType:"json",
+            success:function(e){
+                if(e.status === "success"){
+                    //创建成功提示
+                    alert(e.content);
+                    //跳转至查看报名界面
+                    window.location.href = "/admin/register/viewreg";
+                }
+                else if (e.status === "fail"){
+                    //成功发送到后台，但是失败了
+                    alert(e.content);
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                };
+            },
+            error:function(xhr,ts,e){
+                if(ts === "timeout"){
+                    alert("连接超时，请检查网络");
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                }
+                else if(ts === "error" || ts === "parseerror"){
+                    alert("提交失败："+ts+e.toString());
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                }
+            }
 		});
 	});
 });
