@@ -42,7 +42,7 @@ public function getLogout()
   Auth::logout();
 
   $msgArr = array(
-    'title' => '退出成功',
+    'title' => '退出成功啦,欢迎下次光临!',
     'status' => 'ok', 
     'url' => '/',
     'btn' => 'true',
@@ -53,7 +53,7 @@ public function getLogout()
 
 public function getRegister()
 {
- return View::make('admin.register');
+  return View::make('admin.register');
 }
 
 public function postRegister()
@@ -116,10 +116,10 @@ public function postRegister()
         ));
 
     //上传图片
-    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['logo']);
-    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic1']);
-    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic2']);
-    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic3']);
+    $this->oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['logo']);
+    $this->oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic1']);
+    $this->oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic2']);
+    $this->oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic3']);
 
     //插入社团信息
     $org_id = Organization::insertGetId(array(
@@ -128,10 +128,10 @@ public function postRegister()
         'school' => $userInfo['school'],
         'internal_order' => 2147483647,
         'wx' => isset($userinfo['wx'])?$userInfo['wx']:'',
-        'logo_url' => 'http://'._IMGHOST.'/etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url1' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url2' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url3' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'logo_url' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url1' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url2' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url3' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],
         'description' => $userInfo['description'],
         'org_uid' => $org_uid
         ));
