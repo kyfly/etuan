@@ -1,5 +1,4 @@
 <?php
-
 class WxauthController extends BaseController
 {
     public function getIndex(){
@@ -17,8 +16,20 @@ class WxauthController extends BaseController
                 Session::forget("requesturl");
                 return Redirect::to($url);
             }
-            echo '授权失败';
         }
        Redirect::to('/');
+    }
+
+    public function getChecksub(){
+        $wx_uid = Weixin::user();
+        $appid = Config::get('etuan.wxAppId');
+        $appsecret = Config::get('etuan.wxAppSecret');
+        $token = WS::getToken($appid,$appsecret);
+        $result = WS::checkSubscribe($token,$wx_uid);
+        //返回信息待确定；
+        if(!$result){
+            return 0;
+        }
+        return 1;
     }
 }

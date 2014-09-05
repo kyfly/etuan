@@ -41,7 +41,7 @@ class QrcodeHandle
         }
     }
     //一般二维码生成，调用该方法是，若$QR为false，则会直接在浏览器中显示图片
-    public static function Authcode($url,$filename="",$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
+    public static function Authcode($url,$filename=false,$QR = false,$logo = false,$errorCorrectionLevel='L',$matrixPointSize = 4){
         //require _ROOT_.'/../app/qrcode/phpqrcode.php';
         QRcode::png($url,$QR, $errorCorrectionLevel, $matrixPointSize,0);
         if ($logo !== FALSE) { 
