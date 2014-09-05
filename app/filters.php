@@ -51,7 +51,7 @@ Route::filter('wxauth', function()
     }
     if(!$re){
         if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')){
-            $appid= APPID;
+            $appid= Config::get('etuan.wxAppId');
             $callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
             $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
             return Redirect::to($url);

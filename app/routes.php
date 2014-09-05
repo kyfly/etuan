@@ -4,7 +4,9 @@
 Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
-
+Route::get('/', function () {
+    new oss;
+});
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
     Route::get("jiang/get/{lottery_id}", "choujiangController@get");

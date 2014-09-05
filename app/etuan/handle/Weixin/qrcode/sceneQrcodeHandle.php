@@ -2,8 +2,8 @@
 class QR
 {
 	public static function create($id,$type){
-		$appid = APPID;
-		$secrect = APPSECRET;
+		$appid = Config::get('etuan.wxAppId');
+		$secrect = Config::get('etuan.wxAppSecret');
 		$scene_id = DB::table('mp_qr_etuan')->insertGetId(['act_type'=>$type,'act_id'=>$id]);
 		$result = QrcodeHandle::getUrl($appid,$secrect,$scene_id,$id,$type);
 		if($result)

@@ -16,7 +16,7 @@
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
 		}
 		public function getCode(){
-			$appid = APPID;
+			$appid = Config::get('etuan.wxAppId');
 			$time = Session::get('start_time');
 			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
 			$state = Session::get('state');
@@ -62,8 +62,8 @@
 	}
 	//微信端进入该函数，
 	public function getOauth(){
-		$appid = APPID;
-		$secret = APPSECRET;
+		$appid = Config::get('etuan.wxAppId');
+		$secret = Config::get('etuan.wxAppSecret');
 	    $state = Input::get("state");
 	    $time = Input::get('time');
 	    $obj = new wxUserHandle;

@@ -53,8 +53,8 @@ class choujiangService
 		return true;
 	}
 	private function checkSub(){
-		$appid = APPID;
-		$appsecret = APPSECRET;
+		$appid = Config::get('etuan.wxAppId');
+		$appsecret = Config::get('etuan.wxAppSecret');
 		$token = WS::getToken($appid,$appsecret);
 		$result = WS::checkSubscribe($token,$this->wx_uid);
 		if(!$result){

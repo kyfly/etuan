@@ -35,8 +35,8 @@ class WS
         }
     }
     public static function sendCustomMsg($type,$content,$touser){
-        $appsecret = APPSECRET;
-        $appid = APPID;
+        $appsecret = Config::get('etuan.wxAppSecret');
+        $appid = Config::get('etuan.wxAppId');
         $token = self::getToken($appid,$appsecret);
         $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>$content]];
         $data = json_encode($arr);

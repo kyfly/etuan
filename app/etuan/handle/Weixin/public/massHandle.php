@@ -2,8 +2,8 @@
 class massHandle 
 {
 	public function getMedia_id($news_id,$auther){
-        $appid = APPID;
-        $appsecret = APPSECRET;
+        $appid = Config::get('etuan.wxAppId');
+        $appsecret = Config::get('etuan.wxAppSecret');
         $token = WS::getToken($appid,$appsecret);
         $type = 'thumb';
         $news = Newsmsg::where('news_id',$news_id)->select('article_id','title','description','pic_url','url')->get();
@@ -77,8 +77,8 @@ class massHandle
                 $arr = json_encode($content); 
                 break;
         }
-        $appid = APPID;
-        $appsecret = APPSECRET;
+        $appid = Config::get('etuan.wxAppId');
+        $appsecret = Config::get('etuan.wxAppSecret');
         $token = WS::getToken($appid,$appsecret);
         if( $target == 'touser'){
             $url = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=$token";

@@ -5,8 +5,8 @@ class WxauthController extends BaseController
     public function getIndex(){
         $state = Input::get("state");
         $obj = new wxUserHandle;
-        $appid = APPID;
-        $secret = APPSECRET;
+        $appid = Config::get('etuan.wxAppId');
+        $secret = Config::get('etuan.wxAppSecret');
        if(isset($_GET["code"])&&$_GET["code"] != "authdeny")
         {
             $code = $_GET["code"];
