@@ -48,14 +48,27 @@ $(document).ready(function () {
             $(this).tooltip("show");
         });
     };
+
+    function checkDuplicate(o){
+        for (var i = 0; i < $("#extraform").children().length; i++) {
+            if ($("#extraform").find("label")[i].innerText === o) {
+                alert("已经包含项目【" + o + "】，请勿重复添加。");
+                return false;
+            }
+        }
+        return true;
+    }
+
     setHeight();
     configExtraForm();
     //添加元素到左边
     $(".target .extralist h4:not(:contains(\"自定义\"))").click(function (e) {
-        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
-        $("#extraform").append(content);
-        setHeight();
-        configExtraForm();
+        if (checkDuplicate(e.target.innerText)) {
+            var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+            $("#extraform").append(content);
+            setHeight();
+            configExtraForm();
+        }
     });
     $("#zidingyishort2,#zidingyilong2").click(function(e){
         var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
@@ -67,7 +80,7 @@ $(document).ready(function () {
     $(".theme").mouseover(function(){
         $(this).prop("src",$(this).prop("src").toString().replace("0.png","1.png"));
     });
-    $("img").mouseout(function(){
+    $(".theme").mouseout(function(){
         $(this).prop("src",$(this).prop("src").toString().replace("1.png","0.png"));
     });
 });
