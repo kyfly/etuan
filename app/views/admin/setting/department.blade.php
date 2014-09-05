@@ -38,18 +38,13 @@
                         <div class="form-group">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-6">
-                                <div id="minuselement" class="addimgtxt col-sm-5"
-                                onMouseOver="this.style.border='2px dotted #ccc'"
-                                onMouseOut="this.style.border='2px dotted #ddd'">
-                                -
+                                <div id="addelement" class="addimgtxt col-sm-12"
+                                     onMouseOver="this.style.border='2px dotted #ccc'"
+                                     onMouseOut="this.style.border='2px dotted #ddd'">
+                                    +
+                                </div>
                             </div>
-                            <div id="addelement" class="addimgtxt col-sm-5 col-sm-offset-2"
-                            onMouseOver="this.style.border='2px dotted #ccc'"
-                            onMouseOut="this.style.border='2px dotted #ddd'">
-                            +
                         </div>
-                    </div>
-                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-6">
                         <button type="submit" class="btn btn-warning btn-lg">提交</button>
