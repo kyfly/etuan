@@ -5,7 +5,9 @@ Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
 Route::get('/', function () {
-    new oss;
+
+ $re = QRcode::png('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d92b3c192f993e7&redirect_uri=http%3A%2F%2Fwww.etuan.local%2Fweixin%2Flogin%2Foauth%3Ftime%3D1409907914&response_type=code&scope=snsapi_userinfo&state=p66HOWOqWMB3KchSB0KTUzN2kQtpVsS3DPuB89TQ#wechat_redirect',false, $errorCorrectionLevel='L',$matrixPointSize = 4);
+ imagepng($re);
 });
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
