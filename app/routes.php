@@ -16,6 +16,10 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     Route::get('hello', function () {
         return View::make('hello');
     });
+
+    Route::get('/baoming/success', function(){
+        return View::make('activity.baoming.success');
+    });
 });
 
 Route::controller('auth', 'AuthController');
