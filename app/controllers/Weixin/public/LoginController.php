@@ -5,11 +5,7 @@
 		private $state;
 		private $cache;
 		public function __construct(){
-            $connect= new Memcached;
-            $connect->setOption(Memcached::OPT_COMPRESSION, false);
-            $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-            $connect->addServer('7825a1060cbf11e4.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
-            $connect->setSaslAuthData('7825a1060cbf11e4', 'OSCKyfly___123');
+            $connect= App::make('memcached');
             //$connect = new Memcache;
        		//$connect->connect("localhost",11211);
        		$this->cache = $connect;
@@ -18,7 +14,6 @@
 		public function getCode(){
 			$appid = Config::get('etuan.wxAppId');
 			$time = Session::get('start_time');
-			header('Content-type:image/png');  
 			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
