@@ -11,8 +11,8 @@ $(document).ready(function () {
         }
         $('#addform').css('height', maxheight + 130 + "px");
         $('#sidebar').height($('#main').outerHeight(true));
-    };
-    function configExtraForm(){
+    }
+    function configExtraForm() {
         //每次绑定事件前首先释放所有的click以免造成过度绑定
         $(".delete").off("click");
         $(".moveup").off("click");
@@ -21,35 +21,35 @@ $(document).ready(function () {
         $(".moveup").off("mouseover");
         $(".movedown").off("mouseover");
         //删除按钮
-        $(".delete").on('click',function () {
+        $(".delete").on('click', function () {
             var content0;
             content0 = $(this).parent();
             content0.remove();
         });
-        $(".delete").on("mouseover",function(){
+        $(".delete").on("mouseover", function () {
             $(this).tooltip("show");
         });
         //上移按钮
-        $(".moveup").on("click",function () {
+        $(".moveup").on("click", function () {
             var content1;
             content1 = $(this).parent();
             content1.insertBefore(content1.prev());
         });
-        $(".moveup").on("mouseover",function(){
+        $(".moveup").on("mouseover", function () {
             $(this).tooltip("show");
         });
         //下移按钮
-        $(".movedown").on("click",function () {
+        $(".movedown").on("click", function () {
             var content2;
             content2 = $(this).parent();
             content2.insertAfter(content2.next());
         });
-        $(".movedown").on("mouseover",function(){
+        $(".movedown").on("mouseover", function () {
             $(this).tooltip("show");
         });
-    };
+    }
 
-    function checkDuplicate(o){
+    function checkDuplicate(o) {
         for (var i = 0; i < $("#extraform").children().length; i++) {
             if ($("#extraform").find("label")[i].innerText === o) {
                 alert("已经包含项目【" + o + "】，请勿重复添加。");
@@ -70,27 +70,27 @@ $(document).ready(function () {
             configExtraForm();
         }
     });
-    $("#zidingyishort2,#zidingyilong2").click(function(e){
+    $("#zidingyishort2,#zidingyilong2").click(function (e) {
         var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
         $("#extraform").append(content);
         setHeight();
         configExtraForm();
     });
     //主题选择动画
-    $(".theme").mouseover(function(){
-        $(this).prop("src",$(this).prop("src").toString().replace("0.png","1.png"));
+    $(".theme").mouseover(function () {
+        $(this).prop("src", $(this).prop("src").toString().replace("0.png", "1.png"));
     });
-    $(".theme").mouseout(function(){
-        $(this).prop("src",$(this).prop("src").toString().replace("1.png","0.png"));
+    $(".theme").mouseout(function () {
+        $(this).prop("src", $(this).prop("src").toString().replace("1.png", "0.png"));
     });
 });
 
 //获得创建报名的各项参数数据
-$(document).ready(function(){
+$(document).ready(function () {
     //函数将标签转化为类型
-    var label2type = function(labelstr){
+    var label2type = function (labelstr) {
         var typeback = 0;
-        switch(labelstr){
+        switch (labelstr) {
             case "学号":
                 typeback = 101;
                 break;
@@ -145,123 +145,171 @@ $(document).ready(function(){
             default:
                 typeback = 0;
                 break;
-        };
+        }
         return typeback;
     };
-    $("#preview").click(function(){
+    $("#preview").click(function () {
         var previewWindow = window.open("about:blank");
         previewWindow.document.title = $("#regname").val();
         previewWindow.document.write("预览功能正在开发中~");
     });
-	$("#submit").click(function(){
+    $("#submit").click(function () {
+        var IsAllowSend = true;
         //检查时间前后的对比
-        var IsTimeLater = function(dateA,dateB){
-            return dateA < dateB ? true : false;
+        var IsTimeLater = function (dateA, dateB) {
+            return dateA < dateB;
         };
-		//预定义一个创建活动对象
-		var createActivityJson={
-			start_time:"",
-			stop_time:"",
-			limit_grade:"",
-			name:"",
-			theme:"",
-			url:"",
-			questions:[]
-		};
-        var arrayStartTime = $("#starttime").val().toString().split(/[\s:-]/);
-        var arrayStopTime = $("#stoptime").val().toString().split(/[\s:-]/);
-        var dateStartTime = new Date(parseInt(arrayStartTime[0]),parseInt(arrayStartTime[1])-1,parseInt(arrayStartTime[2]),parseInt(arrayStartTime[3]),parseInt(arrayStartTime[4]),0);
-        var dateStopTime = new Date(parseInt(arrayStopTime[0]),parseInt(arrayStopTime[1])-1,parseInt(arrayStopTime[2]),parseInt(arrayStopTime[3]),parseInt(arrayStopTime[4]),0);
-        var IsTimeOutOfBound = IsTimeLater(new Date(2014,8,4,0,0,0),dateStartTime);
-        var IsStopTimeBeforeStartTime = IsTimeLater(dateStartTime,dateStopTime);
-        if (IsStopTimeBeforeStartTime && IsTimeOutOfBound){
-            //获得报名终止时间
-            createActivityJson.start_time=""+dateStartTime.getFullYear()+"-"+dateStartTime.getMonth()+"-"+dateStartTime.getDate()+" "+dateStartTime.getHours()+":"+dateStartTime.getMinutes()+":"+dateStartTime.getSeconds();
-		    //获得报名终止时间
-		    createActivityJson.stop_time=""+dateStopTime.getFullYear()+"-"+dateStopTime.getMonth()+"-"+dateStopTime.getDate()+" "+dateStopTime.getHours()+":"+dateStopTime.getMinutes()+":"+dateStopTime.getSeconds();
+        //预定义一个创建活动对象
+        var createActivityJson = {
+            start_time: "",
+            stop_time: "",
+            limit_grade: "",
+            name: "",
+            theme: "",
+            url: "",
+            questions: []
+        };
+        //获得报名标题的值
+        var regnameval = $("#regname").val();
+        if (regnameval === "") {
+            alert("这么好的一张报名表你怎么能不起个响亮的标题呢？");
+            IsAllowSend = false;
+        }
+        else {
+            createActivityJson.name = regnameval;
+        }
+        //判断是否选择日期
+        var starttimeval = $("#starttime").val();
+        var stoptimeval = $("#stoptime").val();
+        if (starttimeval === "") {
+            alert("亲，选个报名开始的时间呗~");
+            IsAllowSend = false;
+        }
+        else if (stoptimeval === "") {
+            alert("怎么说也得有个结束的时间吧~");
+            IsAllowSend = false;
+        }
+        else {
+            var arrayStartTime = starttimeval.split(/[\s:-]/);
+            var arrayStopTime = stoptimeval.split(/[\s:-]/);
+            var dateStartTime = new Date(parseInt(arrayStartTime[0]), parseInt(arrayStartTime[1]) - 1, parseInt(arrayStartTime[2]), parseInt(arrayStartTime[3]), parseInt(arrayStartTime[4]), 0);
+            var dateStopTime = new Date(parseInt(arrayStopTime[0]), parseInt(arrayStopTime[1]) - 1, parseInt(arrayStopTime[2]), parseInt(arrayStopTime[3]), parseInt(arrayStopTime[4]), 0);
+            var IsTimeOutOfBound = IsTimeLater(new Date(2014, 8, 4, 0, 0, 0), dateStartTime);
+            var IsStopTimeBeforeStartTime = IsTimeLater(dateStartTime, dateStopTime);
+            if (IsStopTimeBeforeStartTime && IsTimeOutOfBound) {
+                //获得报名终止时间
+                createActivityJson.start_time = dateStartTime.getFullYear() + "-" + dateStartTime.getMonth() + "-" + dateStartTime.getDate() + " " + dateStartTime.getHours() + ":" + dateStartTime.getMinutes() + ":" + dateStartTime.getSeconds();
+                //获得报名终止时间
+                createActivityJson.stop_time = dateStopTime.getFullYear() + "-" + dateStopTime.getMonth() + "-" + dateStopTime.getDate() + " " + dateStopTime.getHours() + ":" + dateStopTime.getMinutes() + ":" + dateStopTime.getSeconds();
+            }
+            else if (!IsTimeOutOfBound) {
+                alert("选择的开始时间太早了哦");
+                IsAllowSend = false;
+            }
+            else if (!IsStopTimeBeforeStartTime) {
+                alert("结束时间怎么能比开始时间早呢");
+                IsAllowSend = false;
+            }
         }
         //获得年纪限制并且转换为五位二进制数
-		var objLimit = document.getElementsByName("grade");
-		for(var i = objLimit.length-1; i >= 0; i--){
-			if(objLimit[i].checked === true){
-				createActivityJson.limit_grade += "1";
-			}
-			else{
-				createActivityJson.limit_grade += "0";
-			}
-		}
-		//获得报名标题的值
-		createActivityJson.name = $("#regname").val();
-        //获得主题选择的值
-        var objTheme = document.getElementsByName("theme");
-        for(var j = 0; j < objTheme.length; j++){
-            if(objTheme[j].checked === true){
-                createActivityJson.theme = objTheme[j].value;
+        var objLimit = document.getElementsByName("grade");
+        var gradeLimit = "";
+        for (var i = objLimit.length - 1; i >= 0; i--) {
+            if (objLimit[i].checked === true) {
+                gradeLimit += "1";
+            }
+            else {
+                gradeLimit += "0";
             }
         }
+        if (gradeLimit === "00000") {
+            alert("请选择允许参加这次报名的年级哦~");
+            IsAllowSend = false;
+        }
+        else {
+            createActivityJson.limit_grade = gradeLimit;
+        }
+        //获得主题选择的值
+        var objTheme = document.getElementsByName("theme");
+        var themeval = "";
+        for (var k = 0; k < objTheme.length; k++) {
+            if (objTheme[k].checked === true) {
+                themeval = objTheme[k].value;
+            }
+        }
+        if (themeval === "") {
+            alert("给你的报名表选择一个漂亮的样式吧！");
+            IsAllowSend = false;
+        }
+        else {
+            createActivityJson.theme = themeval;
+        }
         //将问题依次添加进其中
- 		var objQuestion = document.getElementsByClassName("baomingitem");
-		for(var j = 0; j < objQuestion.length; j++){
-			var questionItem = {
-				question_id:"",
-				type:"",
-				label:"",
-				content:""
-			};
-			questionItem.question_id = j + 1;
+        var objQuestion = document.getElementsByClassName("baomingitem");
+        for (var j = 0; j < objQuestion.length; j++) {
+            var questionItem = {
+                question_id: "",
+                type: "",
+                label: "",
+                content: ""
+            };
+            questionItem.question_id = j + 1;
             var thisType = label2type(objQuestion[j].innerText);
             questionItem.type = thisType;
-            if(thisType===1 || thisType===2 || thisType===3){
+            if (thisType === 1 || thisType === 2 || thisType === 3) {
                 questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
             }
-            else{
+            else {
                 questionItem.label = objQuestion[j].innerText;
             }
             questionItem.content = "";
-			createActivityJson.questions[j] = questionItem;
-		};
-		//打包好发送格式的Json
-        var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
-        //禁用按钮防止错误提交
-        $("#preview").prop("disabled",true);
-        $("#submit").prop("disabled",true);
-		//dev阶段采用alert形式表示数据
-		//console.log(sendJson);
-		//利用Ajax把Json用POST上去
-		$.ajax({
-			type:"POST",
-			url:"/registration/createactivity",
-			data:sendJson,
-            dataType:"json",
-            success:function(e){
-                if(e.status === "success"){
-                    //创建成功提示
-                    alert(e.content);
-                    //跳转至查看报名界面
-                    window.location.href = "/admin/register/viewreg";
+            createActivityJson.questions[j] = questionItem;
+        }
+        if (IsAllowSend) {
+            //打包好发送格式的Json
+            var sendJson = {activityInfo: JSON.stringify(createActivityJson)};
+            //禁用按钮防止错误提交
+            $("#preview").prop("disabled", true);
+            $("#submit").prop("disabled", true);
+            //dev阶段采用alert形式表示数据
+            //console.log(sendJson);
+            //利用Ajax把Json用POST上去
+            $.ajax({
+                type: "POST",
+                url: "/registration/createactivity",
+                data: sendJson,
+                dataType: "json",
+                success: function (e) {
+                    if (e.status === "success") {
+                        //创建成功提示
+                        alert(e.content);
+                        //跳转至查看报名界面
+                        window.location.href = "/admin/register/viewreg";
+                    }
+                    else if (e.status === "fail") {
+                        //成功发送到后台，但是失败了
+                        alert(e.content);
+                        //解除对按钮的限制
+                        $("#preview").prop("disabled", false);
+                        $("#submit").prop("disabled", false);
+                    }
+
+                },
+                error: function (xhr, ts, e) {
+                    if (ts === "timeout") {
+                        alert("连接超时，请检查网络");
+                        //解除对按钮的限制
+                        $("#preview").prop("disabled", false);
+                        $("#submit").prop("disabled", false);
+                    }
+                    else if (ts === "error" || ts === "parseerror") {
+                        alert("提交失败：" + ts + e.toString());
+                        //解除对按钮的限制
+                        $("#preview").prop("disabled", false);
+                        $("#submit").prop("disabled", false);
+                    }
                 }
-                else if (e.status === "fail"){
-                    //成功发送到后台，但是失败了
-                    alert(e.content);
-                    //解除对按钮的限制
-                    $("#preview").prop("disabled",false);
-                    $("#submit").prop("disabled",false);
-                };
-            },
-            error:function(xhr,ts,e){
-                if(ts === "timeout"){
-                    alert("连接超时，请检查网络");
-                    //解除对按钮的限制
-                    $("#preview").prop("disabled",false);
-                    $("#submit").prop("disabled",false);
-                }
-                else if(ts === "error" || ts === "parseerror"){
-                    alert("提交失败："+ts+e.toString());
-                    //解除对按钮的限制
-                    $("#preview").prop("disabled",false);
-                    $("#submit").prop("disabled",false);
-                }
-            }
-		});
-	});
+            });
+        }
+    });
 });
