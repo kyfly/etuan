@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	define('OSS_ACCESS_ID', Config::get('oss.ossAccessId'));
 
