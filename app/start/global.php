@@ -84,8 +84,4 @@ require app_path().'/acl.php';
 
 require app_path().'/Ioc.php';
 
-define("APPID","wx5d92b3c192f993e7");
-
-define("APPSECRET","d5d284eb92f6d96554aeb92d679640e7");
-
 define('PUBLICKEY','MIGIAoGAZeQUaUjP6Ax/AnJaI8DybD2wk+wZ+KUjEmwEhXcOTWg5s3x74RMJNXKX QHCBxdwiFysHZBSDDp2v3r+ti0oI/CCulwNxCz81QoN6zX1BEDYt6zppgXs7vy8w u9H3b7Iom4yWDy7TDFsSy8nhulRihdzn1nKlEVywaha3Y5zo7m0CAwEAAQ==');
