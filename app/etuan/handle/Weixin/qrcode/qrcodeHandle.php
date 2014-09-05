@@ -1,6 +1,9 @@
 <?php
 class QrcodeHandle
 {
+    
+        
+    //生成带参数的二维码，暂时没用上，返回二维码的存放位置
 	public static function getUrl($appid,$appsecret,$scene_id,$id,$type){
         $activity = ['lottery','registration','ticket','vote'];
         $route = ['jiang','baoming','qiang','tou'];
@@ -58,10 +61,8 @@ class QrcodeHandle
             imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,  
             $logo_qr_height, $logo_width, $logo_height); 
         }
-        if(!$imgname){
-            $imgname ="qrcode.png";
-        }
-        $imgurl = $_SERVER['DOCUMENT_ROOT']."/".$imgname;
+        $imgname ="qrcode.png";
+        $imgurl = $_SERVER['DOCUMENT_ROOT']."/img/".$imgname;
         imagepng($QR,$imgurl);
         return $imgname;
     }
