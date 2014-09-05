@@ -59,7 +59,18 @@ public function getRegister()
 public function postRegister()
 {
   $userInfo = Input::all();
+  foreach ($userInfo as $key => $value) {
+    if(is_string($userInfo[$key]))
+      $userInfo[$key] = strip_tags($userInfo[$key]);
+  }
+  foreach ($userInfo['department_name'] as $key => $value) {
+    $userInfo['department_name'][$key] = strip_tags($userInfo['department_name'][
+      $key]);
+    $userInfo['department_description'][$key] = strip_tags($userInfo['department_description'][
+      $key]);    
+  }
 
+  //验证email是否重复,图片大小和格式
   $values = array(
      'email'=>$userInfo['email'],
      'logo' =>$userInfo['logo'],
@@ -78,19 +89,23 @@ public function postRegister()
      'not_exist' => '该用户名已经存在了'
      );
   $validator = Validator::make($values, $rules,$messages);
+  // 如果验证失败返回错误信息
   if($validator->fails())
   {
      return View::make('admin.register')->with('error','用户名已经存在');
- }
+  }
+
  try {
     DB::beginTransaction();
  
+    //生成RSA密码
     $rsa = new Crypt_RSA();
     $rsa->loadKey(PUBLICKEY);
     $plaintext = $userInfo['password'];
     $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
     $login_token = $rsa->encrypt($plaintext);
 
+    //插入社团用户信息
     $org_uid = User::insertGetId(array(
         'email' => $userInfo['email'],
         'password' => Hash::make($userInfo['password']),
@@ -99,24 +114,29 @@ public function postRegister()
         'user_group' => 'org',
         'login_token' => $login_token
         ));
-    $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['logo']);
-    $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic1']);
-    $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic2']);
-    $this->oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic3']);
 
+    //上传图片
+    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['logo']);
+    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic1']);
+    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic2']);
+    $this->oss->upload_file_by_file(IMGBUCKET,'etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],$userInfo['pic3']);
+
+    //插入社团信息
     $org_id = Organization::insertGetId(array(
         'name' => $userInfo['name'],
         'type' => $userInfo['type'],
         'school' => $userInfo['school'],
         'internal_order' => 2147483647,
         'wx' => isset($userinfo['wx'])?$userInfo['wx']:'',
-        'logo_url' => 'etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url1' => 'etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url2' => 'etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],
-        'pic_url3' => 'etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'logo_url' => 'http://'._IMGHOST.'/etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url1' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url2' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],
+        'pic_url3' => 'http://'._IMGHOST.'/etuan/shetuan/jianjie/'.$org_uid.'_3.'.explode('/', $userInfo['logo']->getMimeType())[1],
         'description' => $userInfo['description'],
         'org_uid' => $org_uid
         ));
+
+    //插入部门信息
     foreach($userInfo['department_name'] as $key=>$department_name)
     {
         $department = new Department;
@@ -125,6 +145,8 @@ public function postRegister()
         $department->org_id = $org_id;
         $department->save();
     }
+
+    //注册成功手动登陆用户,创建微信,转跳到登陆成功界面
     Auth::loginUsingId($org_uid);
     wxInfoHandle::createWx();
     DB::commit();
@@ -143,7 +165,7 @@ public function postRegister()
 }
 }
 
-    //注册中,一些项用ajax判断是否存在
+//注册中,一些项用ajax判断是否存在
 public function postCheck()
 {
     $values = array(

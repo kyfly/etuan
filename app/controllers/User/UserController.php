@@ -67,9 +67,9 @@ public function postChangeOrganization()
     }
     $info = array();
     if(Input::get('description')!='')
-        $info['description'] = Input::get('description');
+        $info['description'] = strip_tags(Input::get('description'));
     if(Input::get('wx')!='')
-        $info['wx'] = Input::get('wx');
+        $info['wx'] = strip_tags(Input::get('wx'));
     Organization::where('org_uid',$this->org_uid)
     ->update($info);
     $msgArr = array(
@@ -87,14 +87,14 @@ public function postChangeOrganizationUser()
     $info = array();
     foreach ($organizationUser as $key => $value) {
             if($value!='')
-                $info[$key] = $value;
+                $info[$key] = strip_tags($value);
     }
     User::where('org_uid',$this->org_uid)
         ->update($info);
     if(Input::get('password')!=null)
     {
         $user = User::find($this->org_uid);
-        $user->password = Hash::make(Input::get('password'));
+        $user->password = Hash::make(strip_tags(Input::get('password')));
         $rsa = new Crypt_RSA();
         $rsa->loadKey(PUBLICKEY);
         $plaintext = Input::get('password');
@@ -121,8 +121,8 @@ public function postChangeDepartment()
     foreach(Input::get('department_name') as $key=>$department_name)
     {
         $department = new Department;
-        $department->name = $department_name;
-        $department->description = Input::get('department_description')[$key];
+        $department->name = strip_tags($department_name);
+        $department->description = strip_tags(Input::get('department_description')[$key]);
         $department->org_id = $org_id;
         $department->save();
     }
