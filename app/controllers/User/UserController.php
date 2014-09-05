@@ -47,23 +47,23 @@ public function postChangeOrganization()
     $oss = new oss;
     if(Input::file('logo')!=null)
     {
-        $oss->delete_object('kyfly-img','etuan/shetuan/logo/'.$this->org_uid.'.jpg');
-        $oss->upload_file_by_file('kyfly-img','etuan/shetuan/logo/'.$this->org_uid.'.jpg',Input::get('logo'));
+        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/logo/'.$this->org_uid.'.jpg');
+        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/logo/'.$this->org_uid.'.jpg',Input::get('logo'));
     }
     if(Input::file('pic1')!=null)
     {
-        $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg');
-        $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg',Input::get('pic1'));
+        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg');
+        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg',Input::get('pic1'));
     }
     if(Input::file('pic2')!=null)
     {
-        $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg');
-        $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg',Input::get('pic2'));
+        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg');
+        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg',Input::get('pic2'));
     }
     if(Input::file('pic3')!=null)
     {
-        $oss->delete_object('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg');
-        $oss->upload_file_by_file('kyfly-img','etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg',Input::get('pic3'));
+        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg');
+        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg',Input::get('pic3'));
     }
     $info = array();
     if(Input::get('description')!='')
@@ -73,7 +73,7 @@ public function postChangeOrganization()
     Organization::where('org_uid',$this->org_uid)
     ->update($info);
     $msgArr = array(
-        'title' => '更改成功',
+        'title' => '修改成功啦!',
         'status' => 'ok', 
         'action' => 'back',
         'btn' => 'true',
@@ -104,7 +104,7 @@ public function postChangeOrganizationUser()
         $user->save();
     }
     $msgArr = array(
-        'title' => '更改成功',
+        'title' => '修改成功啦!',
         'status' => 'ok', 
         'action' => 'back',
         'btn' => 'true',
@@ -127,7 +127,7 @@ public function postChangeDepartment()
         $department->save();
     }
     $msgArr = array(
-        'title' => '更改成功',
+        'title' => '修改成功啦!',
         'status' => 'ok', 
         'action' => 'back',
         'btn' => 'true',
