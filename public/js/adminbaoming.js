@@ -209,13 +209,46 @@ $(document).ready(function(){
 		};
 		//打包好发送格式的Json
         var sendJson = {activityInfo:JSON.stringify(createActivityJson)};
+        //禁用按钮防止错误提交
+        $("#preview").prop("disabled",true);
+        $("#submit").prop("disabled",true);
 		//dev阶段采用alert形式表示数据
-		console.log(sendJson);
+		//console.log(sendJson);
 		//利用Ajax把Json用POST上去
 		$.ajax({
 			type:"POST",
 			url:"/registration/createactivity",
-			data:sendJson
+			data:sendJson,
+            dataType:"json",
+            success:function(e){
+                if(e.status === "success"){
+                    //创建成功提示
+                    alert(e.content);
+                    //跳转至查看报名界面
+                    window.location.href = "/admin/register/viewreg";
+                }
+                else if (e.status === "fail"){
+                    //成功发送到后台，但是失败了
+                    alert(e.content);
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                };
+            },
+            error:function(xhr,ts,e){
+                if(ts === "timeout"){
+                    alert("连接超时，请检查网络");
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                }
+                else if(ts === "error" || ts === "parseerror"){
+                    alert("提交失败："+ts+e.toString());
+                    //解除对按钮的限制
+                    $("#preview").prop("disabled",false);
+                    $("#submit").prop("disabled",false);
+                }
+            }
 		});
 	});
 });
