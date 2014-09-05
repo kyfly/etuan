@@ -5,6 +5,7 @@ class QretuanController extends BaseController
     public function __construct(sceneQrcodeService $Qr){
             $this->Qr = $Qr;
     }
+
     public function getCreate(){
         $id = Input::get("act_id");
         $type = Input::get("act_type");
@@ -20,23 +21,17 @@ class QretuanController extends BaseController
     }
     public function getDestory(){
         $scene = Input::get("scene_id");
+        //添加删除oss上的图片。
+        $act = Etuan::where("scene_id",$scene)->select('act_type','act_id')->first();
+        $oss = new oss;
+        $bucket = QRIMGBUCKET;
+        $object = 'etuan/weixin/qrcode/'.$act->act_type.'/'.$act->act_id.'.jpg';
+        $oss->delete_object($bucket,$object);
         $inre = Etuan::where("scene_id",$scene)->delete();
         if($inre){
-            return true;
+            return 1;
         }else{
-            return false;
-        }
-    }
-    public function getShow(){
-        $re = Etuan::all();
-        for($i=0;$i<count($re);$i++){
-            $arr[]=$re[$i]["original"];
-        }
-        if(is_array($arr)){
-            $json = json_encode($arr);
-            return $json;
-        }else{
-            return $arr = "";
+            return 0;
         }
     }
 }
