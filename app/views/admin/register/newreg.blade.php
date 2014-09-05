@@ -1,6 +1,9 @@
 <!doctype html>
 <html>
 @include('admin.layout.head')
+<style>
+    @media(max-width: 1199px){.theme{width:180px}};
+</style>
 <body>
 @include('admin.layout.nav')
 <div class="container">
