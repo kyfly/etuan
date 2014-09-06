@@ -12,14 +12,13 @@
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
 		}
 		public function getCode(){
+			header('Content-Type: image/png');
 		    $appid = Config::get('etuan.wxAppId');
 			$time = Session::get('start_time');
 			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
-			$url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx5d92b3c192f993e7&redirect_uri=http%3A%2F%2Fwww.etuan.local%2Fweixin%2Flogin%2Foauth%3Ftime%3D1409907914&response_type=code&scope=snsapi_userinfo&s';
-			$img = QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
-			return imagepng($img);
+			QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
 		}
 		public function getIndex(){
 			if(!$this->is_weixin){
@@ -51,7 +50,7 @@
 	        	
 	            $userinfo['check_id'] = 1 ;
 
-	            $this->cache->set($state,$userinfo,60);
+	            $this->cache->set($state,$userinfo,0,60);
 	            
 	            Weixin::login($userinfo['user']);
 
@@ -90,7 +89,7 @@
 		            {
 	            		$userinfo=['user'=>$user,'token'=>$state,'start_time'=>time(),'check_id'=>''];
 	            		//把该次登录信息放入缓存，
-	              		$this->cache->set($state,$userinfo,60);
+	              		$this->cache->set($state,$userinfo,0,60);
 		                $info = $this->cache->get($state);
 		                $check = $info['check_id'];
 		                if($check!=1){
