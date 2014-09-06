@@ -33,7 +33,7 @@ class organizationController extends BaseController
     public function getOrganizationRegistration()
     {
         $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
-        ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.logo_url','organization.type','organization.school','organization.internal_order')
+        ->select('organization.wx',DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
         ->get();
         return $infos;
     }    

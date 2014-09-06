@@ -29,6 +29,7 @@ class RegistrationHandle extends  ActivityHandle
     public function createActivity($org_uid, $activityInfo)
     {
       try {
+
         DB::beginTransaction();
         $questions = $activityInfo->questions;
         $reg_id = Registration::insertGetId(
