@@ -35,6 +35,7 @@ Route::group(array(),function(){
     Route::controller("oauth", "WxauthController");
     //得到中奖名单的控制器,无需auth验证.
     Route::get("jiang/result/{lottery_id}", "choujiangController@result");
+    Route::get("jiang/sendmsg/{lottery_id}", "choujiangController@sendmsg");
     //微信登录后，进行学号和姓名的绑定。
     Route::resource("weixin/stuinfo", "Stu_infoController");
 });

@@ -34,11 +34,6 @@ class choujiangHandle
 		Lottery_item::where('lottery_item_id',$item_id)->update(['item_out'=>"$item_out"]);
 		$lotname = Lottery_item::where('lottery_item_id',$item_id)->pluck('name');
 		$arr = ['item_id'=>$item_id,'item_name'=>$lotname];
-		//发送客服消息
-		if($lotname != '谢谢惠顾'){
-			$content = "哇啊~~恭喜您抽中了$lotname！我们将在近期统一发放奖品，凭一卡通领取，具体时间请留意本公众号通知。"
-			WS::sendCustomMsg('text',$content,$this->wx_uid);
-		}
 		return $arr;
 	}
 	private function addLttery_user_Info($item_id){
