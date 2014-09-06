@@ -12,7 +12,7 @@ $(document).ready(function () {
             async: false,
             type: "get",
             dataType: "json",
-            url: "registration/activityinfo?activityId=" + activityId.toString(),
+            url: "/registration/activityinfo?activityId=" + activityId.toString(),
             success: function (msg) {
                 if (pageJSON === undefined) {
                     pageJSON = msg;
@@ -26,17 +26,8 @@ $(document).ready(function () {
     };
     //根据json文件生成报名页面
     var createCommonListItem = function (newQuestionItem) {
-        var questionItem;
-        //辨析输入
-        var n = 0;
-        for (var key in newQuestionItem) {
-            n++;
-        }
-        if (typeof(newQuestionItem) === "object" && n === 4 && typeof(newQuestionItem.question_id) === "number"
-            && typeof(newQuestionItem.type) === "number" && typeof(newQuestionItem.label) === "string"
-            && typeof(newQuestionItem.content) === "object") {
-            questionItem = newQuestionItem;
-        }
+        var questionItem = newQuestionItem;
+
         var divQuestion = document.createElement("div");
         divQuestion.setAttribute("id", "question" + questionItem.question_id.toString());
 
@@ -199,20 +190,7 @@ $(document).ready(function () {
     };
     //通用的表单创建的调用函数createCommonList
     var createCommonList = function (newPageJson) {
-        var pageJson;
-        //辨析输入
-        var n = 0;
-        for (var key in newPageJson) {
-            n++;
-        }
-        if (typeof(newPageJson) === "object" && n === 7 && typeof(newPageJson.activityId) === "number"
-            && typeof(newPageJson.start_time) === "string" && typeof(newPageJson.stop_time) === "string"
-            && typeof(newPageJson.limit_grade) === "string" && newPageJson.limit_grade.length === 5
-            && typeof(newPageJson.name) === "string" && typeof(newPageJson.theme) === "number"
-            && typeof(newPageJson.questions) === "object") {
-            pageJson = newPageJson;
-        }
-
+        var pageJson = newPageJson;
         //顺次添加各个项目
         for (var questionItem in pageJson.questions) {
             createCommonListItem(pageJson.questions[questionItem]);
@@ -250,7 +228,7 @@ $(document).ready(function () {
         async: false,
         type: "get",
         dataType: "json",
-        url: "organization/org-info?activityId=" + activityId.toString(),
+        url: "/organization/org-info?activityId=" + activityPageJson.activityId,
         success: function (msg) {
             if (orgJSON === undefined) {
                 orgJSON = msg;
@@ -264,7 +242,7 @@ $(document).ready(function () {
     var titlelogo = document.createElement("img");
     titlelogo.setAttribute("id","titlelogo");
     titlelogo.setAttribute("class","img-rounded");
-    titlelogo.setAttribute("src",logo_url);
+    titlelogo.setAttribute("src",orgJSON.logo_url);
     titlelogo.setAttribute("alt",activityPageJson.name);
     if(activityPageJson.theme === "1"){
         document.getElementById("titlearea").appendChild(titlelogo);
