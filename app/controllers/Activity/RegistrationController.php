@@ -108,9 +108,11 @@ class RegistrationController extends ActivityController
         })->export('xls');
     }
 
+    //通过activity获得theme返回到相应页面
     public function reg_info($id)
     {
-        return $this->registrationHandle->getActivityInfo($id);
+        $theme = Registration::where('reg_id',$id)->pluck('theme');
+        return View::make('activity.baoming.baoming'.$theme)->with('activityId',$id);
     }
 
     public function reg_list()

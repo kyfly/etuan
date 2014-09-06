@@ -200,8 +200,10 @@
         showMeridian: 1
     });
 </script>
+<!--
 <script>
     _activityId = 0;
 </script>
+-->
 </body>
 </html>

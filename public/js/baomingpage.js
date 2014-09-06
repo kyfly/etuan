@@ -6,14 +6,13 @@ $(document).ready(function () {
         if (typeof(newActivityId) === "number") {
             activityId = newActivityId;
         }
-        ;
+
         var pageJSON;
         $.ajax({
             async: false,
             type: "get",
             dataType: "json",
-            url: "http://www.etuan.local/js/activityInfo.json",
-            //url:"registration/activityinfo?activityId="+activityId.toString(),
+            url: "/registration/activityinfo?activityId=" + activityId.toString(),
             success: function (msg) {
                 if (pageJSON === undefined) {
                     pageJSON = msg;
@@ -27,17 +26,8 @@ $(document).ready(function () {
     };
     //根据json文件生成报名页面
     var createCommonListItem = function (newQuestionItem) {
-        var questionItem;
-        //辨析输入
-        var n = 0;
-        for (var key in newQuestionItem) {
-            n++;
-        }
-        if (typeof(newQuestionItem) === "object" && n === 4 && typeof(newQuestionItem.question_id) === "number"
-            && typeof(newQuestionItem.type) === "number" && typeof(newQuestionItem.label) === "string"
-            && typeof(newQuestionItem.content) === "object") {
-            questionItem = newQuestionItem;
-        }
+        var questionItem = newQuestionItem;
+
         var divQuestion = document.createElement("div");
         divQuestion.setAttribute("id", "question" + questionItem.question_id.toString());
 
@@ -160,22 +150,22 @@ $(document).ready(function () {
                 break;
             case 112:
                 elementFilling = document.createElement("select");
-                for(var department1 in questionItem.content){
-                    elementFilling.options.add(new Option(department1,questionItem.content[department1]));
+                for (var department1 in questionItem.content) {
+                    elementFilling.options.add(new Option(department1, questionItem.content[department1]));
                 }
                 introText = document.createTextNode("第一意向部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
-                for(var department2 in questionItem.content){
-                    elementFilling.options.add(new Option(department2,questionItem.content[department2]));
+                for (var department2 in questionItem.content) {
+                    elementFilling.options.add(new Option(department2, questionItem.content[department2]));
                 }
                 introText = document.createTextNode("第二意向部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
-                for(var department3 in questionItem.content){
-                    elementFilling.options.add(new Option(department3,questionItem.content[department3]));
+                for (var department3 in questionItem.content) {
+                    elementFilling.options.add(new Option(department3, questionItem.content[department3]));
                 }
                 introText = document.createTextNode("第三意向部门");
                 break;
@@ -200,20 +190,7 @@ $(document).ready(function () {
     };
     //通用的表单创建的调用函数createCommonList
     var createCommonList = function (newPageJson) {
-        var pageJson;
-        //辨析输入
-        var n = 0;
-        for (var key in newPageJson) {
-            n++;
-        }
-        if (typeof(newPageJson) === "object" && n === 7 && typeof(newPageJson.activityId) === "number"
-            && typeof(newPageJson.start_time) === "string" && typeof(newPageJson.stop_time) === "string"
-            && typeof(newPageJson.limit_grade) === "string" && newPageJson.limit_grade.length === 5
-            && typeof(newPageJson.name) === "string" && typeof(newPageJson.theme) === "number"
-            && typeof(newPageJson.questions) === "object") {
-            pageJson = newPageJson;
-        }
-
+        var pageJson = newPageJson;
         //顺次添加各个项目
         for (var questionItem in pageJson.questions) {
             createCommonListItem(pageJson.questions[questionItem]);
@@ -232,17 +209,50 @@ $(document).ready(function () {
     //创建报名列表
     createCommonList(activityPageJson);
     //判断微信环境并且决定是否保留退出按钮
-    function is_weixn(){
+    function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
             return true;
         } else {
             return false;
         }
     }
-    if(is_weixn()){
+
+    if (is_weixn()) {
         $("#logout").remove();
     }
+
+    //添加标题区域
+    var orgJSON;
+    $.ajax({
+        async: false,
+        type: "get",
+        dataType: "json",
+        url: "/organization/org-info?activityId=" + activityPageJson.activityId,
+        success: function (msg) {
+            if (orgJSON === undefined) {
+                orgJSON = msg;
+            }
+        },
+        error: function () {
+            alert("当前网络不佳，暂时无法获取社团信息");
+        }
+    });
+    var titletext = document.createTextNode(" " + activityPageJson.name);
+    var titlelogo = document.createElement("img");
+    titlelogo.setAttribute("id", "titlelogo");
+    titlelogo.setAttribute("class", "img-rounded");
+    titlelogo.setAttribute("src", orgJSON.logo_url);
+    titlelogo.setAttribute("alt", activityPageJson.name);
+    if (activityPageJson.theme === 1) {
+        document.getElementById("titlearea").insertBefore(titlelogo,document.getElementById("title"));
+    }
+    else {
+        document.getElementById("title").appendChild(titlelogo);
+    }
+    document.getElementById("title").appendChild(titletext);
+    //给社团链接添加链接
+    $("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
     //时间变量准备
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
@@ -351,6 +361,8 @@ $(document).ready(function () {
     };
     //点击提交按钮时停止计时，并且打包数据，发送数据
     $("#submit").click(function () {
+        //设立发送标志
+        var IsAllowSend = true;
         //完成用时的记录和格式的转换
         var finalTime = usedTime;
         participatorInfoJson.used_time += parseInt(finalTime / 3600).toString() + ":";
@@ -364,26 +376,57 @@ $(document).ready(function () {
                 answer: ""
             };
             questionItemResult.question_id = activityPageJson.questions[i - 1].question_id.toString();
-            //未考虑复选框CHECKBOX的情况，谁让那是个异类呢。
             var inputString = document.getElementById("answer" + i.toString()).value;
             if (isMatchFormat(inputString, activityPageJson.questions[i - 1].type)) {
                 questionItemResult.answer = inputString;
             }
             else {
-                alert(activityPageJson.questions[i - 1].label + "，这一项你的输入有误哦！");
-                questionItemResult.answer = "这里有错->" + inputString;
+                alert("【" + activityPageJson.questions[i - 1].label + "】这一项你的输入有误哦！");
+                IsAllowSend = false;
             }
 
             participatorInfoJson.result[i - 1] = questionItemResult;
         }
-        var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
-        //dev阶段采用alert形式表示数据
-        console.log(sendJson);
-        //利用Ajax把Json用POST上去
-        $.ajax({
-            type: "POST",
-            url: "registration/participateinactivity",
-            data: sendJson
-        });
+        if (IsAllowSend) {
+            //禁用按钮防止错误提交
+            $("#submit").prop("disabled", true);
+            //打包好所需数据
+            var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
+            //dev阶段采用alert形式表示数据
+            console.log(sendJson);
+            //利用Ajax把Json用POST上去
+            $.ajax({
+                type: "POST",
+                url: "registration/participateinactivity",
+                data: sendJson,
+                dataType: "json",
+                success: function (e) {
+                    if (e.status === "success") {
+                        //创建成功提示
+                        alert(e.content);
+                        //跳转至成功页面
+                        window.location.href = "/baoming/success";
+                    }
+                    else if (e.status === "fail") {
+                        //成功发送到后台，但是失败了
+                        alert(e.content);
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                },
+                error: function (xhr, ts, e) {
+                    if (ts === "timeout") {
+                        alert("连接超时，请检查网络");
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                    else if (ts === "error" || ts === "parseerror") {
+                        alert("提交失败：" + ts + e.toString());
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                }
+            });
+        }
     });
 });

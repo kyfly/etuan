@@ -10,10 +10,10 @@ class organizationController extends BaseController
             App::abort(404, '找不到页面，请检查网址是否正确');
         }
         $department = Department::where("org_id", $id)->get();
-        $regId = Registration::where("org_uid", $orgInfo->org_uid)->lists('reg_id');
-        $regUrl = 'http://www.etuan.local/baoming/';
-        if (count($regId))
-            $regUrl .= $regId[0];
+        $regId = Registration::where("org_uid", $orgInfo->org_uid)->pluck('reg_id');
+        $regUrl = '/baoming/';
+        if ($regId)
+            $regUrl .= $regId;
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
         ->with('regUrl', $regUrl);
     }
@@ -33,7 +33,7 @@ class organizationController extends BaseController
     public function getOrganizationRegistration()
     {
         $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
-        ->select('registration.reg_id','registration.start_time','registration.stop_time','organization.name','organization.logo_url','organization.type','organization.school','organization.internal_order')
+        ->select('organization.wx',DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
         ->get();
         return $infos;
     }    
