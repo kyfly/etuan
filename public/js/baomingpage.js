@@ -244,8 +244,8 @@ $(document).ready(function () {
     titlelogo.setAttribute("class", "img-rounded");
     titlelogo.setAttribute("src", orgJSON.logo_url);
     titlelogo.setAttribute("alt", activityPageJson.name);
-    if (activityPageJson.theme === "1") {
-        document.getElementById("titlearea").appendChild(titlelogo);
+    if (activityPageJson.theme === 1) {
+        document.getElementById("titlearea").insertBefore(titlelogo,document.getElementById("title"));
     }
     else {
         document.getElementById("title").appendChild(titlelogo);
