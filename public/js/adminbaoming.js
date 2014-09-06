@@ -12,6 +12,7 @@ $(document).ready(function () {
         $('#addform').css('height', maxheight + 130 + "px");
         $('#sidebar').height($('#main').outerHeight(true));
     }
+
     function configExtraForm() {
         //每次绑定事件前首先释放所有的click以免造成过度绑定
         $(".delete").off("click");
@@ -198,9 +199,9 @@ $(document).ready(function () {
             var IsStopTimeBeforeStartTime = IsTimeLater(dateStartTime, dateStopTime);
             if (IsStopTimeBeforeStartTime && IsTimeOutOfBound) {
                 //获得报名终止时间
-                createActivityJson.start_time = dateStartTime.getFullYear() + "-" + (dateStartTime.getMonth()+1) + "-" + dateStartTime.getDate() + " " + dateStartTime.getHours() + ":" + dateStartTime.getMinutes() + ":" + dateStartTime.getSeconds();
+                createActivityJson.start_time = dateStartTime.getFullYear() + "-" + (dateStartTime.getMonth() + 1) + "-" + dateStartTime.getDate() + " " + dateStartTime.getHours() + ":" + dateStartTime.getMinutes() + ":" + dateStartTime.getSeconds();
                 //获得报名终止时间
-                createActivityJson.stop_time = dateStopTime.getFullYear() + "-" + (dateStopTime.getMonth()+1) + "-" + dateStopTime.getDate() + " " + dateStopTime.getHours() + ":" + dateStopTime.getMinutes() + ":" + dateStopTime.getSeconds();
+                createActivityJson.stop_time = dateStopTime.getFullYear() + "-" + (dateStopTime.getMonth() + 1) + "-" + dateStopTime.getDate() + " " + dateStopTime.getHours() + ":" + dateStopTime.getMinutes() + ":" + dateStopTime.getSeconds();
             }
             else if (!IsTimeOutOfBound) {
                 alert("选择的开始时间太早了哦");
@@ -272,7 +273,7 @@ $(document).ready(function () {
             $("#preview").prop("disabled", true);
             $("#submit").prop("disabled", true);
             //dev阶段采用alert形式表示数据
-            //console.log(sendJson);
+            console.log(sendJson);
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
