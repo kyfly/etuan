@@ -11,11 +11,6 @@ class UserController extends BaseController
      $this->oss = new oss;
  }
 
- public function getChangepassword()
- {
-     return View::make('changepassword');
- }
-
  public function getSetOrganization()
  {
     $organization =  Organization::where('org_uid',$this->org_uid)
@@ -133,40 +128,6 @@ public function postChangeDepartment()
         'btn' => 'true',
         );
     return View::make('showmessage')->with('messageArr', $msgArr);    
-}
-
-public function postChangepassword()
-{
- $values = array(
-    'oldPassword' => Input::get('oldPassword'),
-    'newPassword' => Input::get('newPassword'),
-    'newPassword_confirmation' => Input::get('newPassword_confirmation')
-    );
- $rules = array(
-    'oldPassword' => 'old_password:'.Auth::user()->password,
-    'newPassword' => 'confirmed'
-    );
- $messages = array(
-    'old_password' => '旧密码错误',
-    'confirmed' => '两次密码输入不一致'
-    );
- $validator = Validator::make($values, $rules, $messages);
- if($validator->fails())
- {
-    $messages = '';
-    foreach ($validator->messages()->all() as $message)
-    {
-        $messages.=$message.';';
-    }
-    $msgArr = array(
-        'title' => '失败',
-        'content' => $messages,
-        'status' => 'error', 
-        'action' => 'back',
-        'btn' => 'true',
-        );
-    return View::make('showmessage')->with('messageArr', $msgArr);
-}
 }
 
 public function postMessage()

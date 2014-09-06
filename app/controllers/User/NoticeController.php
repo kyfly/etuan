@@ -2,13 +2,23 @@
 
 class NoticeController extends \BaseController
 {
+    public function __construct()
+    {
+        $this->beforeFilter('auth',array(
+            'only'=>array(
+                'postCreateNotice',
+                'postUpdateNotice',
+                'postNoticeContent')
+        ));
+    }
+
     public function getIndex()
     {
         $notices = Notice::select('notice_id', 'title', 'created_at')->get();
         return $notices;
     }
 
-    public function getCreateNotice()
+    public function postCreateNotice()
     {
         try {
             $noticeInfo = json_decode(Input::get("noticeInfo"));
@@ -26,7 +36,7 @@ class NoticeController extends \BaseController
         }
     }
 
-    public function getUpdateNotice()
+    public function postUpdateNotice()
     {
         try {
             $noticeInfo = json_decode(Input::get("noticeInfo"));
@@ -44,7 +54,7 @@ class NoticeController extends \BaseController
         }
     }
 
-    public function getNoticeContent()
+    public function postNoticeContent()
     {
         $notice_id = Input::get('noticeId');
         return Notice::where('notice_id', $notice_id)->select('notice_id', 'title', 'content')->first();

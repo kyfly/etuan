@@ -4,6 +4,7 @@
 Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
+
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
     Route::get("jiang/get/{lottery_id}", "choujiangController@get");
@@ -21,20 +22,36 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     });
 });
 
-Route::controller('auth', 'AuthController');
+//无需登录验证的控制器
+Route::group(array(),function(){
 
-Route::controller('notice', 'NoticeController');
+    //用户注册登录登出操作的控制器,无需auth验证.
+    Route::controller('auth', 'AuthController');
 
-Route::group(array('before' => 'auth'), function () {
-    Route::controller('user', 'UserController');
+});
+
+//部分接口需要登录验证的控制器
+Route::group(array(),function(){
+
+    Route::controller('notice', 'NoticeController');
 
     Route::controller('activity', 'ActivityController');
 
-    Route::controller('lottery', 'LotteryController');
-
     Route::controller('registration', 'RegistrationController');
 
-    Route::controller('vote', 'VoteController');
+});
+
+//全部需要登录验证的控制器
+Route::group(array('before'=>'auth'),function(){
+
+    //修改用户信息,发送消息控制器
+    Route::controller('user', 'UserController');
+
+
+});
+
+Route::group(array('before' => 'auth'), function () {
+
 
     Route::get("admin/register/viewreg", 'RegistrationController@reg_list');
 
@@ -81,15 +98,7 @@ Route::controller('organization', "organizationController");
 Route::get('baoming/{id}', 'RegistrationController@reg_info');
 
 
-include('Crypt/RSA.php');
 
-Route::get('rsa', function () {
-    $rsa = new Crypt_RSA();
-    $password = User::find(34)->login_token;
-    $rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
-    $rsa->loadKey(PRIVATEKEY);
-    echo $rsa->decrypt($password);
-});
 
 
 
