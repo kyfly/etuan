@@ -127,7 +127,7 @@ public function postRegister()
         'type' => $userInfo['type'],
         'school' => $userInfo['school'],
         'internal_order' => 2147483647,
-        'wx' => isset($userinfo['wx'])?$userInfo['wx']:'',
+        'wx' => $userInfo['wx'],
         'logo_url' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/logo/'.$org_uid.'.'.explode('/', $userInfo['logo']->getMimeType())[1],
         'pic_url1' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/jianjie/'.$org_uid.'_1.'.explode('/', $userInfo['logo']->getMimeType())[1],
         'pic_url2' => 'http://'.Config::get('oss.imgHost').'/etuan/shetuan/jianjie/'.$org_uid.'_2.'.explode('/', $userInfo['logo']->getMimeType())[1],
@@ -157,7 +157,7 @@ public function postRegister()
     $msgArr = array(
         'title' => '注册失败',
         'body' => '对不起，您的注册提交失败，请检查信息填写是否正确。如有必要，请与网站管理员联系。',
-        'status' => 'error', 
+        'status' => 'error',
         'action' => 'back',
         'btn' => 'true',
         );

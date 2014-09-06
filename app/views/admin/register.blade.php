@@ -152,7 +152,7 @@
         <label for="inputWeixin" class="col-sm-2 control-label">微信公众号</label>
 
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="inputWeixin">
+            <input type="text" class="form-control" id="inputWeixin" name="wx">
             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">（选填）</span>
         </div>
