@@ -16,11 +16,11 @@
 <div class="main">
     <div id="outercont">
         <div id="outer-cont">
-            <div id="outer" style="-webkit-transform: rotate(0deg);"><img src="/img/activity-lottery-1.png"
+            <div id="outer" style="-webkit-transform: rotate(0deg);"><img src="/img/choujiang/activity-lottery-1.png"
                                                                           width="310px"></div>
         </div>
         <div id="inner-cont">
-            <div id="inner"><img src="/img/activity-lottery-2.png"></div>
+            <div id="inner"><img src="/img/choujiang/activity-lottery-2.png"></div>
         </div>
     </div>
     <div class="content">
