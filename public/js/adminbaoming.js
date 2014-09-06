@@ -149,6 +149,43 @@ $(document).ready(function () {
         }
         return typeback;
     };
+    var IsWishPriorityRight = function () {
+        var l = $("#extraform").children().children("label.baomingitem");
+        var IsExist = [false, false, false];//first second third
+        var IsRight = [4, 4, 4, 4];
+        var IndexRight = 0;
+        for (var i = 0; i < l.length; i++) {
+            if (l[i].innerText === "第一志愿部门") {
+                IsExist[0] = true;
+                IsRight[IndexRight] = 1;
+                IndexRight++;
+            }
+            else if (l[i].innerText === "第二志愿部门") {
+                IsExist[1] = true;
+                IsRight[IndexRight] = 2;
+                IndexRight++;
+            }
+            else if (l[i].innerText === "第三志愿部门") {
+                IsExist[2] = true;
+                IsRight[IndexRight] = 3;
+                IndexRight++;
+            }
+        }
+        for (var j = 0; j < l.length; j++) {
+            if (IsRight[j] > IsRight[j + 1]) {
+                return false;
+            }
+        }
+        if (IsExist[2]) {
+            return IsExist[0] && IsExist[1];
+        }
+        else if (IsExist[1]) {
+            return IsExist[0];
+        }
+        else {
+            return true;
+        }
+    };
     $("#preview").click(function () {
         var previewWindow = window.open("about:blank");
         previewWindow.document.title = $("#regname").val();
@@ -245,6 +282,13 @@ $(document).ready(function () {
         else {
             createActivityJson.theme = themeval;
         }
+        //检查志愿选择是否存在逻辑错误
+        if (IsWishPriorityRight()) {
+        }
+        else {
+            alert("亲，看起来你的志愿部门排列顺序有点问题啊喂~");
+            IsAllowSend = false;
+        }
         //将问题依次添加进其中
         var objQuestion = document.getElementsByClassName("baomingitem");
         for (var j = 0; j < objQuestion.length; j++) {
@@ -273,7 +317,7 @@ $(document).ready(function () {
             $("#preview").prop("disabled", true);
             $("#submit").prop("disabled", true);
             //dev阶段采用alert形式表示数据
-            console.log(sendJson);
+            //console.log(sendJson);
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
