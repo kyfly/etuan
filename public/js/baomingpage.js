@@ -6,15 +6,13 @@ $(document).ready(function () {
         if (typeof(newActivityId) === "number") {
             activityId = newActivityId;
         }
-        ;
-        var activityId = 22;
+
         var pageJSON;
         $.ajax({
             async: false,
             type: "get",
             dataType: "json",
-            //url: "http://www.etuan.local/js/activityInfo.json",
-            url:"registration/activityinfo?activityId="+activityId.toString(),
+            url: "registration/activityinfo?activityId=" + activityId.toString(),
             success: function (msg) {
                 if (pageJSON === undefined) {
                     pageJSON = msg;
@@ -161,22 +159,22 @@ $(document).ready(function () {
                 break;
             case 112:
                 elementFilling = document.createElement("select");
-                for(var department1 in questionItem.content){
-                    elementFilling.options.add(new Option(department1,questionItem.content[department1]));
+                for (var department1 in questionItem.content) {
+                    elementFilling.options.add(new Option(department1, questionItem.content[department1]));
                 }
                 introText = document.createTextNode("第一意向部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
-                for(var department2 in questionItem.content){
-                    elementFilling.options.add(new Option(department2,questionItem.content[department2]));
+                for (var department2 in questionItem.content) {
+                    elementFilling.options.add(new Option(department2, questionItem.content[department2]));
                 }
                 introText = document.createTextNode("第二意向部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
-                for(var department3 in questionItem.content){
-                    elementFilling.options.add(new Option(department3,questionItem.content[department3]));
+                for (var department3 in questionItem.content) {
+                    elementFilling.options.add(new Option(department3, questionItem.content[department3]));
                 }
                 introText = document.createTextNode("第三意向部门");
                 break;
@@ -233,17 +231,50 @@ $(document).ready(function () {
     //创建报名列表
     createCommonList(activityPageJson);
     //判断微信环境并且决定是否保留退出按钮
-    function is_weixn(){
+    function is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
             return true;
         } else {
             return false;
         }
     }
-    if(is_weixn()){
+
+    if (is_weixn()) {
         $("#logout").remove();
     }
+
+    //添加标题区域
+    var orgJSON;
+    $.ajax({
+        async: false,
+        type: "get",
+        dataType: "json",
+        url: "organization/org-info?activityId=" + activityId.toString(),
+        success: function (msg) {
+            if (orgJSON === undefined) {
+                orgJSON = msg;
+            }
+        },
+        error: function () {
+            alert("当前网络不佳，暂时无法获取社团信息");
+        }
+    });
+    var titletext = document.createTextNode(" "+activityPageJson.name);
+    var titlelogo = document.createElement("img");
+    titlelogo.setAttribute("id","titlelogo");
+    titlelogo.setAttribute("class","img-rounded");
+    titlelogo.setAttribute("src",logo_url);
+    titlelogo.setAttribute("alt",activityPageJson.name);
+    if(activityPageJson.theme === "1"){
+        document.getElementById("titlearea").appendChild(titlelogo);
+    }
+    else{
+        document.getElementById("title").appendChild(titlelogo);
+    }
+    document.getElementById("title").appendChild(titletext);
+    //给社团链接添加链接
+    $("#orginfo").prop("href","/shetuan/"+ orgJSON.org_id);
     //时间变量准备
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
@@ -367,14 +398,13 @@ $(document).ready(function () {
                 answer: ""
             };
             questionItemResult.question_id = activityPageJson.questions[i - 1].question_id.toString();
-            //未考虑复选框CHECKBOX的情况，谁让那是个异类呢。
             var inputString = document.getElementById("answer" + i.toString()).value;
             if (isMatchFormat(inputString, activityPageJson.questions[i - 1].type)) {
                 questionItemResult.answer = inputString;
             }
             else {
-                alert(activityPageJson.questions[i - 1].label + "，这一项你的输入有误哦！");
-                questionItemResult.answer = "这里有错->" + inputString;
+                alert("【" + activityPageJson.questions[i - 1].label + "】这一项你的输入有误哦！");
+                IsAllowSend = false;
             }
 
             participatorInfoJson.result[i - 1] = questionItemResult;
@@ -385,7 +415,7 @@ $(document).ready(function () {
             //打包好所需数据
             var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
             //dev阶段采用alert形式表示数据
-            //console.log(sendJson);
+            console.log(sendJson);
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
