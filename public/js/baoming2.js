@@ -19,15 +19,6 @@ $(document).ready(function(){
     }
 
     //控制css样式生成
-    //$("#title")[0].innerText = document.title;
-    var titletext = document.createTextNode(" "+document.title);
-    var titlelogo = document.createElement("img");
-    titlelogo.setAttribute("id","titlelogo");
-    titlelogo.setAttribute("class","img-rounded");
-    titlelogo.setAttribute("src","../img/avatar.jpg");
-    titlelogo.setAttribute("alt",document.title);
-    document.getElementById("title").appendChild(titlelogo);
-    document.getElementById("title").appendChild(titletext);
     $("#regform").addClass("clearfix");
     var n = $("#regform").children().length;
     for(var i = 1; i <= n; i++){
