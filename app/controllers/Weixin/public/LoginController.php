@@ -18,7 +18,7 @@
 			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
-			QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
+		 	QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
 		}
 		public function getIndex(){
 			if(!$this->is_weixin){
@@ -42,7 +42,7 @@
 			//通过唯一token值获取登录信息，（当微信端进入时会保存，否者为空）
 	    	$userinfo = $this->cache->get($state);
 			if(time()-Session::get('start_time') >= 60){
-				$this->cache->delete($token);
+				$this->cache->delete($state);
 			}
 	    	//取得token时 把 check_id值为一；并再次放入缓存
 	        if($userinfo['token']== $state)
