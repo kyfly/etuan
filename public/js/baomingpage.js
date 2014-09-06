@@ -238,21 +238,21 @@ $(document).ready(function () {
             alert("当前网络不佳，暂时无法获取社团信息");
         }
     });
-    var titletext = document.createTextNode(" "+activityPageJson.name);
+    var titletext = document.createTextNode(" " + activityPageJson.name);
     var titlelogo = document.createElement("img");
-    titlelogo.setAttribute("id","titlelogo");
-    titlelogo.setAttribute("class","img-rounded");
-    titlelogo.setAttribute("src",orgJSON.logo_url);
-    titlelogo.setAttribute("alt",activityPageJson.name);
-    if(activityPageJson.theme === "1"){
-        document.getElementById("titlearea").appendChild(titlelogo);
+    titlelogo.setAttribute("id", "titlelogo");
+    titlelogo.setAttribute("class", "img-rounded");
+    titlelogo.setAttribute("src", orgJSON.logo_url);
+    titlelogo.setAttribute("alt", activityPageJson.name);
+    if (activityPageJson.theme === 1) {
+        document.getElementById("titlearea").insertBefore(titlelogo,document.getElementById("title"));
     }
-    else{
+    else {
         document.getElementById("title").appendChild(titlelogo);
     }
     document.getElementById("title").appendChild(titletext);
     //给社团链接添加链接
-    $("#orginfo").prop("href","/shetuan/"+ orgJSON.org_id);
+    $("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
     //时间变量准备
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
