@@ -60,6 +60,24 @@ $(function () {
                 $('#inputbox2').addClass("has-success");
                 $('#span2').addClass("hidespan");
                 flag[1] = 1;
+            };
+			if ($("#inputPassword2").val() != "") {
+                if (!$("#inputPassword").val || $(this).val() != $("#inputPassword2").val()) {
+                $('#span3').removeClass("hidespan");
+                $('#span3-2').removeClass("hidespan");
+                $('#inputbox3').addClass("has-error");
+                $('#inputbox3').removeClass("has-success");
+                $('#span3-1').addClass("hidespan");
+                flag[2] = 0;
+            }
+            else {
+                $('#span3-1').removeClass("hidespan");
+                $('#span3-2').addClass("hidespan");
+                $('#inputbox3').removeClass("has-error");
+                $('#inputbox3').addClass("has-success");
+                $('#span3').addClass("hidespan");
+                flag[2] = 1;
+            }
             }
         });
         //验证密码一致
