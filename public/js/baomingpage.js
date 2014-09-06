@@ -153,21 +153,21 @@ $(document).ready(function () {
                 for (var department1 in questionItem.content) {
                     elementFilling.options.add(new Option(department1, questionItem.content[department1]));
                 }
-                introText = document.createTextNode("第一意向部门");
+                introText = document.createTextNode("第一志愿部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
                 for (var department2 in questionItem.content) {
                     elementFilling.options.add(new Option(department2, questionItem.content[department2]));
                 }
-                introText = document.createTextNode("第二意向部门");
+                introText = document.createTextNode("第二志愿部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
                 for (var department3 in questionItem.content) {
                     elementFilling.options.add(new Option(department3, questionItem.content[department3]));
                 }
-                introText = document.createTextNode("第三意向部门");
+                introText = document.createTextNode("第三志愿部门");
                 break;
             case 115:
                 elementFilling = document.createElement("select");

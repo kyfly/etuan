@@ -125,13 +125,13 @@ $(document).ready(function () {
             case "籍贯":
                 typeback = 111;
                 break;
-            case "第一意向部门":
+            case "第一志愿部门":
                 typeback = 112;
                 break;
-            case "第二意向部门":
+            case "第二志愿部门":
                 typeback = 113;
                 break;
-            case "第三意向部门":
+            case "第三志愿部门":
                 typeback = 114;
                 break;
             case "是否服从调剂":
