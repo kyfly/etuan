@@ -1,36 +1,39 @@
-$(document).ready(function(){
+$(document).ready(function () {
     //随机颜色生成器
-    function randomColorPick(num){
-        var pickPool = ["rgb(204, 204, 102)","rgb(204, 102, 102)","rgb(204, 102, 204)","rgb(102, 102, 204)","rgb(102, 204, 204)","rgb(102, 204, 102)"];
-        var rdm = parseInt(Math.random()*1000);
-        var a = pickPool[rdm%6];
-        if(num !== 1){
-            var c = $("#type"+(num-1).toString()).css("background-color");
-            if(a===c){
-                a = pickPool[(rdm+1)%6];
+    function randomColorPick(num) {
+        var pickPool = ["rgb(204, 204, 102)", "rgb(204, 102, 102)", "rgb(204, 102, 204)", "rgb(102, 102, 204)", "rgb(102, 204, 204)", "rgb(102, 204, 102)"];
+        var rdm = parseInt(Math.random() * 1000);
+        var a = pickPool[rdm % 6];
+        if (num !== 1) {
+            var c = $("#type" + (num - 1).toString()).css("background-color");
+            if (a === c) {
+                a = pickPool[(rdm + 1) % 6];
             }
         }
         return a;
     }
+
     //奇偶行判断
-    function IsLight(num){
-        return (num%2 === 0);
+    function IsLight(num) {
+        return (num % 2 === 0);
     }
+
     //单双行判断
-    function IsSingle(tn){
+    function IsSingle(tn) {
         return (tn !== "textarea");
     }
+
     $("#regform").addClass("clearfix");
     var n = $("#regform").children().length;
-    if(IsLight(n+1)){
+    if (IsLight(n + 1)) {
         $("#regbutton").addClass("light-blank");
         $("#regfooter").addClass("dark-blank")
     }
-    else{
+    else {
         $("#regbutton").addClass("dark-blank");
         $("#regfooter").addClass("light-blank");
     }
-    for(var i = 1; i <= n; i++){
+    for (var i = 1; i <= n; i++) {
         var questionid = "#question" + i.toString();
         var typeid = "#type" + i.toString();
         var introid = "#intro" + i.toString();
@@ -41,24 +44,24 @@ $(document).ready(function(){
         $(typeid).addClass("col-xs-3").addClass("no-padding");
         $(answerid).addClass("transparent-div").addClass("form-control");
         $(introid).addClass("left-tag");
-        if(IsSingle($(answerid)[0].tagName.toLowerCase())){
+        if (IsSingle($(answerid)[0].tagName.toLowerCase())) {
             $(questionid).addClass("single-line");
             $(typeid).addClass("single-line");
             $(answerid).addClass("intro-single-input");
         }
-        else{
+        else {
             $(questionid).addClass("double-line");
             $(typeid).addClass("double-line");
             $(answerid).addClass("intro-double-input");
         }
-        if(IsLight(i)){
+        if (IsLight(i)) {
             $(questionid).addClass("light-blank");
         }
-        else{
+        else {
             $(questionid).addClass("dark-blank");
         }
-        $(typeid).css("background-color",randomColor);
-        var triangleContent = "<div class=\"triangle\" style=\"border-left-color: "+randomColor+"\"></div>";
+        $(typeid).css("background-color", randomColor);
+        var triangleContent = "<div class=\"triangle\" style=\"border-left-color: " + randomColor + "\"></div>";
         $(contentid).prepend(triangleContent);
     }
 
