@@ -13,6 +13,9 @@
         .bold-label {
             font-weight: bold;
         }
+        #titlelogo{
+            width:120px; height:120px; margin-top:20px;
+        }
     </style>
 </head>
 <body>
@@ -20,9 +23,6 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12 text-center"
          style="background-color: rgba(255,255,255,0.5)">
         <div id="titlearea">
-            <img id="titlelogo" src="/img/avatar.jpg" class="img-rounded"
-                 style="width:100px; height:100px; margin-top:20px;">
-
             <h2 id="title"></h2>
         </div>
         <hr>
@@ -36,7 +36,7 @@
                 </a>
             </p>
             <p id="timeinfo"></p>
-            <a href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
+            <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
         </div>
         <hr>
     </div>
@@ -64,10 +64,12 @@
     </div>
 </div>
 
+<script>_activityId=0;</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/baomingpage.js"></script>
 <script src="/js/baoming1.js"></script>
-<script>_activityId = 0;</script>
+<script></script>
+
 </body>
 </html>

@@ -154,7 +154,7 @@
             </a>
         </p>
         <p id="timeinfo"></p>
-        <a href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
+        <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
 
     </div>
     <div id="regform">
@@ -174,10 +174,11 @@
     </div>
 </div>
 
+<script>_activityId=0;</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/baomingpage.js"></script>
 <script src="/js/baoming2.js"></script>
-<script>_activityId=0;</script>
+
 </body>
 </html>
