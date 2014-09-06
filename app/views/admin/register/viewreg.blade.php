@@ -49,12 +49,12 @@
                     @for ($i = 0; $i < count($reglist); $i++)
                     <div class="col-md-3">
                         <div class="thumbnail">
-                            <img src="http://img.kyfly.net/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg">
+                            <img src="http://{{{Config::get('oss.imgHost')}}}/etuan/weixin/qrcode/baoming/{{{$reglist[$i]['reg_id']}}}.jpg">
                         </div>
                     </div>
                     <div class="col-md-3" style="margin-top: 20px">
                         <p class="listhead">{{$reglist[$i]['name']}}</p>
-                        <a href="http://img.kyfly.net/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg"
+                        <a href="http://{{{Config::get('oss.imgHost')}}}/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg"
                            class="btn btn-warning">下载二维码</a>
                         <button class="btn btn-success btnShare"> 分享</button>
                         <div class="bdsharebuttonbox divShare" data-tag="share_{{$i}}">
@@ -96,7 +96,7 @@
                     bdText: '微信扫码参与报名：{{$reglist[$i]['name']}} - 团团一家',
                     bdDesc: '微信扫描，参与报名，还有大礼送，快来吧！',
                     bdUrl: 'http://www.etuan.org/baoming/{{$reglist[$i]['reg_id']}}',
-                    bdPic: 'http://img.kyfly.net/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg'
+                    bdPic: 'http://{{{Config::get('oss.imgHost')}}}/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg'
                 } @if($i < count($reglist) - 1) , @endif
         @endfor
 
