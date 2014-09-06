@@ -38,8 +38,18 @@ class organizationController extends BaseController
         return $infos;
     }    
 
+    //获取所有社团的信息
     public function getOrganizationInfo()
     {
         return Organization::select('org_id','name','logo_url','type','school','internal_order')->get();
+    }
+
+    public function getOrgInfo()
+    {
+        $org_uid = Registration::where('reg_id',Input::get('activityId'))
+                        ->pluck('org_uid');
+        return Organization::where('org_uid',$org_uid)
+                ->select('org_id','logo_url')
+                ->first();
     }
 }
