@@ -7,13 +7,14 @@ $(document).ready(function () {
             activityId = newActivityId;
         }
         ;
+        var activityId = 22;
         var pageJSON;
         $.ajax({
             async: false,
             type: "get",
             dataType: "json",
-            url: "http://www.etuan.local/js/activityInfo.json",
-            //url:"registration/activityinfo?activityId="+activityId.toString(),
+            //url: "http://www.etuan.local/js/activityInfo.json",
+            url:"registration/activityinfo?activityId="+activityId.toString(),
             success: function (msg) {
                 if (pageJSON === undefined) {
                     pageJSON = msg;
@@ -351,6 +352,8 @@ $(document).ready(function () {
     };
     //点击提交按钮时停止计时，并且打包数据，发送数据
     $("#submit").click(function () {
+        //设立发送标志
+        var IsAllowSend = true;
         //完成用时的记录和格式的转换
         var finalTime = usedTime;
         participatorInfoJson.used_time += parseInt(finalTime / 3600).toString() + ":";
@@ -376,14 +379,46 @@ $(document).ready(function () {
 
             participatorInfoJson.result[i - 1] = questionItemResult;
         }
-        var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
-        //dev阶段采用alert形式表示数据
-        console.log(sendJson);
-        //利用Ajax把Json用POST上去
-        $.ajax({
-            type: "POST",
-            url: "registration/participateinactivity",
-            data: sendJson
-        });
+        if (IsAllowSend) {
+            //禁用按钮防止错误提交
+            $("#submit").prop("disabled", true);
+            //打包好所需数据
+            var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
+            //dev阶段采用alert形式表示数据
+            //console.log(sendJson);
+            //利用Ajax把Json用POST上去
+            $.ajax({
+                type: "POST",
+                url: "registration/participateinactivity",
+                data: sendJson,
+                dataType: "json",
+                success: function (e) {
+                    if (e.status === "success") {
+                        //创建成功提示
+                        alert(e.content);
+                        //跳转至成功页面
+                        window.location.href = "/baoming/success";
+                    }
+                    else if (e.status === "fail") {
+                        //成功发送到后台，但是失败了
+                        alert(e.content);
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                },
+                error: function (xhr, ts, e) {
+                    if (ts === "timeout") {
+                        alert("连接超时，请检查网络");
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                    else if (ts === "error" || ts === "parseerror") {
+                        alert("提交失败：" + ts + e.toString());
+                        //解除对按钮的限制
+                        $("#submit").prop("disabled", false);
+                    }
+                }
+            });
+        }
     });
 });

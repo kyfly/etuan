@@ -198,9 +198,9 @@ $(document).ready(function () {
             var IsStopTimeBeforeStartTime = IsTimeLater(dateStartTime, dateStopTime);
             if (IsStopTimeBeforeStartTime && IsTimeOutOfBound) {
                 //获得报名终止时间
-                createActivityJson.start_time = dateStartTime.getFullYear() + "-" + dateStartTime.getMonth() + "-" + dateStartTime.getDate() + " " + dateStartTime.getHours() + ":" + dateStartTime.getMinutes() + ":" + dateStartTime.getSeconds();
+                createActivityJson.start_time = dateStartTime.getFullYear() + "-" + (dateStartTime.getMonth()+1) + "-" + dateStartTime.getDate() + " " + dateStartTime.getHours() + ":" + dateStartTime.getMinutes() + ":" + dateStartTime.getSeconds();
                 //获得报名终止时间
-                createActivityJson.stop_time = dateStopTime.getFullYear() + "-" + dateStopTime.getMonth() + "-" + dateStopTime.getDate() + " " + dateStopTime.getHours() + ":" + dateStopTime.getMinutes() + ":" + dateStopTime.getSeconds();
+                createActivityJson.stop_time = dateStopTime.getFullYear() + "-" + (dateStopTime.getMonth()+1) + "-" + dateStopTime.getDate() + " " + dateStopTime.getHours() + ":" + dateStopTime.getMinutes() + ":" + dateStopTime.getSeconds();
             }
             else if (!IsTimeOutOfBound) {
                 alert("选择的开始时间太早了哦");
@@ -293,7 +293,6 @@ $(document).ready(function () {
                         $("#preview").prop("disabled", false);
                         $("#submit").prop("disabled", false);
                     }
-
                 },
                 error: function (xhr, ts, e) {
                     if (ts === "timeout") {
