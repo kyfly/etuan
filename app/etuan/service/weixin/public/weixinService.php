@@ -2,6 +2,16 @@
 class WS
 {
 	public static function getToken($appid,$appsecret){
+        $connect= App::make('memcached');
+        if($connect->get('access_token')){
+            return $connect->get('access_token');
+        }else{
+            $token = WS::getAccessToken($appid,$appsecret);
+            $connect->set('access_token',$token,0,7100);
+            return $token;
+        }
+    }
+    public static function getAccessToken($appid,$appsecret){
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
         $json = file_get_contents($url);
         $jsoninfo = json_decode($json, true);
@@ -33,14 +43,5 @@ class WS
         }else{
             return false;
         }
-    }
-    public static function sendCustomMsg($type,$content,$touser){
-        $appsecret = Config::get('etuan.wxAppSecret');
-        $appid = Config::get('etuan.wxAppId');
-        $token = self::getToken($appid,$appsecret);
-        $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>urlencode($content)]];
-        $data = urldecode(json_encode($arr));
-        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
-        return BS::https_request($url,$data);
     }
 }
