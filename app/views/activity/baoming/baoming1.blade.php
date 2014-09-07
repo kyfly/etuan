@@ -28,9 +28,9 @@
         <hr>
         <div id="infoarea">
             <p id="userinfo">
-                <img id="useravatar" src="/img/avatar.jpg" class="img-circle"/>
-                &ensp;团团一家&ensp;12345678&ensp;
-                <a id="logout" class="btn btn-default" href="javascript:void(0)">
+                <img id="useravatar" src="{{{Weixin::info()->headimgurl}}}" class="img-circle"/>
+                &ensp;{{{Weixin::info()->nick_name}}}&ensp;
+                <a id="logout" class="btn btn-default" href="/weixin/login/quit">
                     <span class="glyphicon glyphicon-log-out" style="vertical-align: middle"></span>
                     退出
                 </a>
@@ -64,7 +64,11 @@
     </div>
 </div>
 
-<script>_activityId={{$activityId }};</script>
+<script>
+    _activityId = {{$activityId }};
+    _stuId = {{Weixin::info()->stu_name}};
+    _stuName = {{Weixin::info()->stu_id}};
+</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/baomingpage.js"></script>

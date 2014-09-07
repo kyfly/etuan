@@ -421,7 +421,7 @@ $(document).ready(function () {
                         $("#submit").prop("disabled", false);
                     }
                     else if (ts === "error" || ts === "parseerror") {
-                        alert("提交失败：" + ts + e.toString());
+                        alert("提交失败：" + ts +" " + e.toString());
                         //解除对按钮的限制
                         $("#submit").prop("disabled", false);
                     }

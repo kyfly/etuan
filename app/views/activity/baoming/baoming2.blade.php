@@ -146,8 +146,8 @@
     <div id="infoarea" class="col-xs-12 no-padding double-line cover" style="background-color: #fff;color:#000">
 
         <p id="userinfo">
-            <img id="useravatar" src="/img/avatar.jpg" class="img-circle"/>
-            &ensp;团团一家&ensp;12345678&ensp;
+            <img id="useravatar" src="{{{Weixin::info()->headimgurl}}}" class="img-circle"/>
+            &ensp;{{{Weixin::info()->nick_name}}}}&ensp;
             <a id="logout" href="javascript:void(0)">
                 <span class="glyphicon glyphicon-log-out" style="vertical-align: middle"></span>
                 退出
@@ -174,7 +174,11 @@
     </div>
 </div>
 
-<script>_activityId={{$activityId }};</script>
+<script>
+    _activityId = {{$activityId }};
+    _stuId = {{Weixin::info()->stu_name}};
+    _stuName = {{Weixin::info()->stu_id}};
+</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/baomingpage.js"></script>
