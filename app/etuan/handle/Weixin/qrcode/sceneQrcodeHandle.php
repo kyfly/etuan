@@ -22,7 +22,7 @@ class QR
             return 0;
         }
 	}
-	public static function getDestory($id,$type){
+	public static function destory($id,$type){
         $scene_id = Etuan::where('act_type',$type)->where('act_id',$id)->pluck('scene_id');
         $oss = new oss;
         $bucket = QRIMGBUCKET;
