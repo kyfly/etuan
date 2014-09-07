@@ -73,10 +73,10 @@ $(document).ready(function () {
             var school = [];
             for (var i = 0; i < data.length; i++) {
                 var logoUrl = data[i].logo_url.split('.');
-                var regUrl = 'http://www.etuan.org/baoming/' + data[i].reg_id;
+                var regUrl = '/baoming/' + data[i].reg_id;
                 data[i].logo_url += '@300w.' + logoUrl[logoUrl.length - 1];
                 var regDiv = String.format(regDivTpl,
-                    regUrl, data[i].name, data[i].logo_url, data[i].statusClass, data[i].statusWords);
+                    regUrl, data[i].reg_name, data[i].logo_url, data[i].statusClass, data[i].statusWords);
                 if (data[i].type == '校级组织') {
                     $('#universityLevel').append(regDiv);
                 }
