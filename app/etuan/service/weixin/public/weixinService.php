@@ -38,8 +38,8 @@ class WS
         $appsecret = Config::get('etuan.wxAppSecret');
         $appid = Config::get('etuan.wxAppId');
         $token = self::getToken($appid,$appsecret);
-        $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>$content]];
-        $data = json_encode($arr);
+        $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>urlencode($content)]];
+        $data = urldecode(json_encode($arr));
         $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
         return BS::https_request($url,$data);
     }

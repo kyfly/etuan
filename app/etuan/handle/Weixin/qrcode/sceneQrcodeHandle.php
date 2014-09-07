@@ -22,4 +22,17 @@ class QR
             return 0;
         }
 	}
+	public static function destory($id,$type){
+        $scene_id = Etuan::where('act_type',$type)->where('act_id',$id)->pluck('scene_id');
+        $oss = new oss;
+        $bucket = QRIMGBUCKET;
+        $object = 'etuan/weixin/qrcode/'.$type.'/'.$id.'.jpg';
+        $oss->delete_object($bucket,$object);
+        $inre = Etuan::where("scene_id",$scene)->delete();
+        if($inre){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

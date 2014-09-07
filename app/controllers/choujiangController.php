@@ -20,4 +20,13 @@ class choujiangController extends BaseController
 		}
 		return urldecode(json_encode($result));
 	}
+	public function sendmsg(){
+		$wx_uid = Weixin::user();
+		$time = Lottery_item::where('lottery_item_id',$this->lottery_id)->pluck('create_at');
+		$time = strtotime($time);
+		if(time()-$time < 120 && $wx_uid){
+			$content = "哇啊~~恭喜您抽中了{$lotname}！我们将在近期统一发放奖品，凭一卡通领取，具体时间请留意本公众号通知。";
+			WS::sendCustomMsg('text',$content,$wx_uid);
+		}
+	}
 }

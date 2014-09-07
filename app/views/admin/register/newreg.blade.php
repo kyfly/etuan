@@ -2,14 +2,20 @@
 <html>
 @include('admin.layout.head')
 <style>
-    @media(max-width: 1199px){.theme{width:180px}};
+    @media (max-width: 1199px) {
+        .theme {
+            width: 180px
+        }
+    }
+
+    ;
 </style>
 <body>
 @include('admin.layout.nav')
 <div class="container">
     <div class="adminField clearfix">
         <!--侧边栏-->
-@include('admin.layout.sidebar')
+        @include('admin.layout.sidebar')
 
         <div id="main" class="col-lg-9 col-md-9">
             <div class="tab-content">
@@ -17,7 +23,7 @@
                 <div class="tab-pane active in" id="newreg">
                     <form role="form">
                         <fieldset>
-                            <legend><h2>新建/修改报名表</h2></legend>
+                            <legend><h2>新建报名表<!--编辑报名表--></h2></legend>
                             <div class="form-group">
                                 <label for="regname">报名标题</label>
                                 <input id="regname" type="text" class="form-control" placeholder="请自定义该报名表的标题">
@@ -85,6 +91,7 @@
                         </fieldset>
                     </form>
                     <br>
+
                     <div id="addform" class="target">
                         <div class="col-md-9">
                             <h3>添加更多表单</h3>
@@ -182,11 +189,18 @@
 </div>
 @include('admin.layout.footer')
 
+
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/admin.js"></script>
+<!--新建报名表模式-->
 <script src="/js/adminbaoming.js"></script>
+<!--编辑报名表模式
+<script>_activityId = 0;</script>
+<script src="/js/admineditbaoming.js"></script>
+-->
+
 <script>
     $('.form_datetime').datetimepicker({
         language: 'en',
@@ -200,10 +214,6 @@
         showMeridian: 1
     });
 </script>
-<!--
-<script>
-    _activityId = 0;
-</script>
--->
+
 </body>
 </html>

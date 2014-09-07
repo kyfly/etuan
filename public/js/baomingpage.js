@@ -153,21 +153,21 @@ $(document).ready(function () {
                 for (var department1 in questionItem.content) {
                     elementFilling.options.add(new Option(department1, questionItem.content[department1]));
                 }
-                introText = document.createTextNode("第一意向部门");
+                introText = document.createTextNode("第一志愿部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
                 for (var department2 in questionItem.content) {
                     elementFilling.options.add(new Option(department2, questionItem.content[department2]));
                 }
-                introText = document.createTextNode("第二意向部门");
+                introText = document.createTextNode("第二志愿部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
                 for (var department3 in questionItem.content) {
                     elementFilling.options.add(new Option(department3, questionItem.content[department3]));
                 }
-                introText = document.createTextNode("第三意向部门");
+                introText = document.createTextNode("第三志愿部门");
                 break;
             case 115:
                 elementFilling = document.createElement("select");
@@ -238,21 +238,21 @@ $(document).ready(function () {
             alert("当前网络不佳，暂时无法获取社团信息");
         }
     });
-    var titletext = document.createTextNode(" "+activityPageJson.name);
+    var titletext = document.createTextNode(" " + activityPageJson.name);
     var titlelogo = document.createElement("img");
-    titlelogo.setAttribute("id","titlelogo");
-    titlelogo.setAttribute("class","img-rounded");
-    titlelogo.setAttribute("src",orgJSON.logo_url);
-    titlelogo.setAttribute("alt",activityPageJson.name);
-    if(activityPageJson.theme === "1"){
-        document.getElementById("titlearea").appendChild(titlelogo);
+    titlelogo.setAttribute("id", "titlelogo");
+    titlelogo.setAttribute("class", "img-rounded");
+    titlelogo.setAttribute("src", orgJSON.logo_url);
+    titlelogo.setAttribute("alt", activityPageJson.name);
+    if (activityPageJson.theme === 1) {
+        document.getElementById("titlearea").insertBefore(titlelogo,document.getElementById("title"));
     }
-    else{
+    else {
         document.getElementById("title").appendChild(titlelogo);
     }
     document.getElementById("title").appendChild(titletext);
     //给社团链接添加链接
-    $("#orginfo").prop("href","/shetuan/"+ orgJSON.org_id);
+    $("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
     //时间变量准备
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
@@ -393,7 +393,7 @@ $(document).ready(function () {
             //打包好所需数据
             var sendJson = {activityId: activityPageJson.activityId, participatorInfo: JSON.stringify(participatorInfoJson)};
             //dev阶段采用alert形式表示数据
-            console.log(sendJson);
+            //console.log(sendJson);
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
@@ -421,7 +421,7 @@ $(document).ready(function () {
                         $("#submit").prop("disabled", false);
                     }
                     else if (ts === "error" || ts === "parseerror") {
-                        alert("提交失败：" + ts + e.toString());
+                        alert("提交失败：" + ts +" " + e.toString());
                         //解除对按钮的限制
                         $("#submit").prop("disabled", false);
                     }

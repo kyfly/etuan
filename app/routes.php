@@ -17,6 +17,9 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     Route::get('/baoming/success', function(){
         return View::make('activity.baoming.success');
     });
+    Route::get('baoming/{id}', 'RegistrationController@reg_info');
+    //微信登录后，进行学号和姓名的绑定。
+    Route::resource("weixin/stuinfo", "Stu_infoController");
 });
 
 //无需登录验证的控制器
@@ -35,8 +38,9 @@ Route::group(array(),function(){
     Route::controller("oauth", "WxauthController");
     //得到中奖名单的控制器,无需auth验证.
     Route::get("jiang/result/{lottery_id}", "choujiangController@result");
-    //微信登录后，进行学号和姓名的绑定。
-    Route::resource("weixin/stuinfo", "Stu_infoController");
+    Route::get("jiang/sendmsg/{lottery_id}", "choujiangController@sendmsg");
+    Route::get("shetuan/{id}", "organizationController@orgIntroduce");
+    Route::controller('organization', "organizationController");
 });
 
 //部分接口需要登录验证的控制器
@@ -75,11 +79,6 @@ Route::group(array('before' => 'auth'), function () {
         return View::make('admin.' . $dir . '.' . $page);
     });
 });
-Route::get("shetuan/{id}", "organizationController@orgIntroduce");
-
-Route::controller('organization', "organizationController");
-
-Route::get('baoming/{id}', 'RegistrationController@reg_info');
 
 
 
