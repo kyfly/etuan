@@ -16,6 +16,11 @@
         #titlelogo{
             width:120px; height:120px; margin-top:20px;
         }
+        #useravatar {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
