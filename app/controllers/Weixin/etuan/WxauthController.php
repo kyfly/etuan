@@ -37,7 +37,7 @@ class WxauthController extends BaseController
         $connect= App::make('memcached');
         if($user == 'etuanadmin'){
             $key = BS::getRandStr(32);
-            $connect->set('send_msg_key',$key,0,300);
+            $connect->set('send_msg_key',$key,0,60);
             return $key;
         }else{
             $msgArr = array('title' => '请求错误', 'body' => '该请求为非法请求,请联系管理员',
