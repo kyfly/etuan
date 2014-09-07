@@ -11,9 +11,10 @@ class organizationController extends BaseController
         }
         $department = Department::where("org_id", $id)->get();
         $regId = Registration::where("org_uid", $orgInfo->org_uid)->pluck('reg_id');
-        $regUrl = '/baoming/';
         if ($regId)
-            $regUrl .= $regId;
+            $regUrl = '/baoming/'. $regId;
+        else
+            $regUrl = '/baoming.html';
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
         ->with('regUrl', $regUrl);
     }
