@@ -13,3 +13,9 @@ App::singleton('memcached', function()
     $connect->setSaslAuthData($id,$key);
     return $connect;
 });
+App::singleton('memcache', function()
+{
+    $connect= new Memcache;
+    $connect->connect("localhost",11211);
+    return $connect;
+});

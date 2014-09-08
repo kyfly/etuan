@@ -6,8 +6,6 @@
 		private $cache;
 		public function __construct(){
             $connect= App::make('memcached');
-            //$connect = new Memcache;
-       		//$connect->connect("localhost",11211);
        		$this->cache = $connect;
 			$this->is_weixin = strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger');
 		}
