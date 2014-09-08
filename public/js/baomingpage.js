@@ -228,7 +228,7 @@ $(document).ready(function () {
         async: false,
         type: "get",
         dataType: "json",
-        url: "/organization/org-info?activityId=" + activityPageJson.activityId,
+        url: "/organization/org-info?activityId=" + _activityId,
         success: function (msg) {
             if (orgJSON === undefined) {
                 orgJSON = msg;
