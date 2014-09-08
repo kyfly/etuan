@@ -17,7 +17,7 @@
         <div class="panel1 panel">
           <div class="panel-body">
             <p class="p1"><span class="glyphicon glyphicon-user"></span>&nbsp;参与人数</p>
-            <p class="p2">100</p>
+            <p class="p2" id="reg_user_number">--</p>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="panel2 panel">
           <div class="panel-body">
             <p class="p1"><span class="glyphicon glyphicon-calendar"></span>&nbsp;进行活动</p>
-            <p class="p2">15</p>
+            <p class="p2" id="reg_number">--</p>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="panel3 panel">
           <div class="panel-body">
             <p class="p1"><span class="glyphicon glyphicon-globe"></span>&nbsp;浏览量</p>
-            <p class="p2">2</p>
+            <p class="p2" id="reg_page_view">--</p>
             </div>
           </div>
         </div>
@@ -68,5 +68,16 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON('/user/home-info', function(data, status) {
+            if (status == 'success') {
+                $('#reg_user_number').text(data.reg_user_number);
+                $('#reg_number').text(data.reg_number);
+                $('#reg_page_view').text(data.reg_page_view);
+            }
+        })
+    })
+</script>
 </body>
 </html>
