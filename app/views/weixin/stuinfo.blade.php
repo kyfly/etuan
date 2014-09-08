@@ -23,7 +23,7 @@
         .field {
             margin: 30px;
             padding: 30px;
-            padding-top: 70px;
+            padding-top: 20px;
             border: 1px solid #e5e5e5;
             background-color: #fff;
             min-height: 500px;
@@ -67,6 +67,10 @@
         .btn-xsmall{
             width: 100%;
         }
+
+        .logout {
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +78,9 @@
 @include('layout.nav')
 <div class="container mainHeight hidden-xs">
     <div class="field clearfix">
+        <div class="text-right col-md-12 logout">
+            <a href="/weixin/login/quit"><span class="glyphicon glyphicon-off"></span>&nbsp;退出</a>
+        </div>
         <div class="centerclass">
             <span class="glyphicon glyphicon-user col-md-5 img-md"></span>
         </div>
@@ -83,7 +90,7 @@
                 <div class="form-group">
                     <label for="inputSno" class="col-sm-2 control-label">学号</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="inputSno" name="stu_id" placeholder="请输入您的学号">
+                        <input type="text" class="form-control" id="inputSno" name="stu_id" placeholder="请输入您的学号">
                     </div>
                 </div>
                 <div class="form-group">
