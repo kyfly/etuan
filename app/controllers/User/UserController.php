@@ -168,8 +168,8 @@ public function getMessages()
 public function getHomeInfo()
 {
     $reg_list = Registration::where('org_uid',$this->org_uid)->lists('reg_id');
-    $reg_user_number = Registration_user::whereIn('reg_id',
-        Registration::where('org_uid',$this->org_uid)->lists('reg_id'))->count();
+    $reg_list = array_add($reg_list,'hello','abc'); //此处为防止数组为空,whereIn报错
+    $reg_user_number = Registration_user::whereIn('reg_id',$reg_list)->count();
     $reg_number = Registration::whereRaw('org_uid = ? and stop_time > ?',array($this->org_uid,date('Y-m-d H:i:s',time())))
                     ->count();
     $reg_page_view = Registration::where('org_uid',$this->org_uid)->sum('page_view');
