@@ -31,8 +31,11 @@
                                 <td>{{$reglist[$i]['name']}}</td>
                                 <td>{{$reglist[$i]['start_time']}}</td>
                                 <td>{{$reglist[$i]['stop_time']}}</td>
-                                <td><img class="editbtn" src="/img/editor.png"><img class="deletebtn"
-                                                                                            src="/img/close.png">
+                                <td id="reg{{$reglist[$i]['reg_id']}}">
+                                    <img class="editbtn" data-toggle="tooltip" data-placement="bottom"
+                                         title="编辑报名表" src="/img/editor.png">
+                                    <img class="deletebtn" data-toggle="tooltip" data-placement="bottom"
+                                         title="删除报名表"  src="/img/close.png">
                                 </td>
                             </tr>
                         @endfor
@@ -55,7 +58,7 @@
                     <div class="col-md-3" style="margin-top: 20px">
                         <p class="listhead">{{$reglist[$i]['name']}}</p>
                         <a href="http://{{{Config::get('oss.imgHost')}}}/etuan/weixin/qrcode/baoming/{{$reglist[$i]['reg_id']}}.jpg"
-                           class="btn btn-warning">下载二维码</a>
+                           target="_blank" class="btn btn-warning">下载二维码</a>
                         <button class="btn btn-success btnShare"> 分享</button>
                         <div class="bdsharebuttonbox divShare" data-tag="share_{{$i}}">
                             <a class="bds_qzone" data-cmd="qzone" href="#"></a>
@@ -85,6 +88,21 @@
         $('.btnShare').click(function () {
             $(this).next().slideToggle();
         });
+
+        $('.editbtn').click(function () {
+            var id = $(this).parent().attr('id');
+            id = id.substring(3);
+            window.location.href = '/admin/register/newreg?type=1&activityId=' + id;
+        });
+
+        $('.deletebtn').click(function () {
+            if (window.confirm('删除后所有报名数据（包括结果）将被清空，且不可恢复，您确定要删除？'))
+            {
+                var id = $(this).parent().attr('id');
+                id = id.substring(3);
+                window.location.href = '/registration/deleteactivity?activityId=' + id;
+            }
+        })
     });
 
     window._bd_share_config = {
