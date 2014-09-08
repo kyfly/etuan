@@ -67,6 +67,17 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="item active">
+                            <a href="/baoming.html">
+                                <img src="/img/index/1.jpg" alt="“十佳歌手”十强争霸赛" style="width:100%;height:100%">
+
+                                <div class="carousel-caption">
+                                    <h3>让你在招新季如鱼得水！</h3>
+
+                                    <p>想怎么报就怎么报！点击进入>></p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item">
                             <a href="http://i.kyfly.net/ticket/sjgsHDU">
                                 <img src="http://i.kyfly.net/pic/sqzbs_min.jpg" alt="“十佳歌手”十强争霸赛" style="width:100%;height:100%">
 
@@ -77,24 +88,13 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="item">
-                            <a href="http://i.kyfly.net//ticket/sgzsNew">
-                                <img src="http://i.kyfly.net/pic/sgzs_min.jpg" alt="“时光之书”晚会" style="width:100%;height:100%">
-
-                                <div class="carousel-caption">
-                                    <h3>“时光之书”晚会抢票</h3>
-
-                                    <p>来自计算机学院的“时光之书”晚会！点击进入>></p>
-                                </div>
-                            </a>
-                        </div>
                     </div>
 
                     <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel" data-slide="prev">
+                    <a class="left carousel-control" style="opacity: 0" href="#carousel" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </a>
-                    <a class="right carousel-control" href="#carousel" data-slide="next">
+                    <a class="right carousel-control" style="opacity: 0" href="#carousel" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                 </div>
@@ -158,7 +158,7 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script>
     var count = 0;
-    var color = new Array("rgb(18,0,0)","rgb(141,112,89)");
+    var color = new Array("#088ec0", "rgb(18,0,0)");
     $(document).ready(function () {
         $("#background").css('background-color', color[0]);
         $('#btnLogin').click(function() {
@@ -183,7 +183,7 @@
     });
     $('#carousel').bind('slide.bs.carousel', function () {
         count++;
-        if (count > 1)  count = 0;
+        if (count >= color.length)  count = 0;
         $("#background").css('background-color', color[count]);
     });
 </script>
