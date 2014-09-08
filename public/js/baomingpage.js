@@ -41,7 +41,7 @@ $(document).ready(function () {
         var divContent = document.createElement("div");
         divContent.setAttribute("id", "content" + questionItem.question_id.toString());
 
-        var elementsFilling;
+        var elementFilling;
         switch (questionItem.type) {
             case 1:
                 elementFilling = document.createElement("input");
@@ -66,12 +66,16 @@ $(document).ready(function () {
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "number");
                 elementFilling.setAttribute("placeholder", "请输入您的学号");
+                elementFilling.setAttribute("disabled",true);
+                elementFilling.value = _stuId;
                 introText = document.createTextNode("学号");
                 break;
             case 102:
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "text");
                 elementFilling.setAttribute("placeholder", "请输入您的姓名");
+                elementFilling.setAttribute("disabled",true);
+                elementFilling.value = _stuName;
                 introText = document.createTextNode("姓名");
                 break;
             case 103:
