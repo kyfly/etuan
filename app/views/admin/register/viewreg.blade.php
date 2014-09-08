@@ -100,7 +100,21 @@
             {
                 var id = $(this).parent().attr('id');
                 id = id.substring(3);
-                window.location.href = '/registration/deleteactivity?activityId=' + id;
+                $.getJSON('/registration/deleteactivity',
+                    { activityId : id },
+                    function (data, status){
+                       if (status = 'success'){
+                           if (data.status = 'success')
+                           {
+                               alert('删除成功');
+                               document.location.reload(true);
+                           }
+                           else
+                           {
+                               alert(data.content);
+                           }
+                       }
+                    });
             }
         })
     });
