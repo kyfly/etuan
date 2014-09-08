@@ -451,7 +451,7 @@ $(document).ready(function () {
                 createActivityJson.questions[j] = questionItem;
             }
             //打包好发送格式的Json
-            var sendJson = {activityId: 1, activityInfo: JSON.stringify(createActivityJson)};
+            var sendJson = {activityId: _activityId, activityInfo: JSON.stringify(createActivityJson)};
             //禁用按钮防止错误提交
             $("#preview").prop("disabled", true);
             $("#submit").prop("disabled", true);

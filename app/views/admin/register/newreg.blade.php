@@ -23,7 +23,13 @@
                 <div class="tab-pane active in" id="newreg">
                     <form role="form">
                         <fieldset>
-                            <legend><h2>新建报名表<!--编辑报名表--></h2></legend>
+
+                            @if(Input::get('type')==1)
+                            <legend><h2>编辑报名表</h2></legend>
+                            @else
+                            <legend><h2>新建报名表</h2></legend>
+                            @endif
+
                             <div class="form-group">
                                 <label for="regname">报名标题</label>
                                 <input id="regname" type="text" class="form-control" placeholder="请自定义该报名表的标题">
@@ -193,13 +199,25 @@
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/admin.js"></script>
 <!--当前页面的社团号-->
-<script>_orgId = {{Session::get('org_id')}};</script>
+<script>_orgId = {
+    {
+        Session::
+        get('org_id')
+    }
+    }
+    ;</script>
 
 @if(Input::get('type')==1)
-    <script>_activityId = {{Input::get('activityId')}};</script>
-    <script src="/js/admineditbaoming.js"></script>
+<script>_activityId = {
+    {
+        Input::
+        get('activityId')
+    }
+    }
+    ;</script>
+<script src="/js/admineditbaoming.js"></script>
 @else
-    <script src="/js/adminbaoming.js"></script>
+<script src="/js/adminbaoming.js"></script>
 @endif
 
 <script>
