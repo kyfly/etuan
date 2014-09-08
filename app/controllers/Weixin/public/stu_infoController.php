@@ -13,7 +13,7 @@ class Stu_infoController extends BaseController
 			$msg = '学号和姓名不能为空';
 		}
 		//添加判断学号方法
-		if (!preg_match('/^(((0[8-9])|(1[0-4]))\d{7})|(14\d{6})$/', $stu_id) && $stu_name ){
+		if (preg_match('/^(((0[8-9])|(1[0-4]))\d{7})|(14\d{6})$/', $stu_id) && $stu_name ){
 		  	$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 			if($re){
 				return Redirect::to($url);

@@ -21,7 +21,6 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //微信登录后，进行学号和姓名的绑定。
     Route::resource("weixin/stuinfo", "Stu_infoController");
 });
-
 //无需登录验证的控制器
 Route::group(array(),function(){
 
