@@ -78,6 +78,8 @@
 <script src="/js/jQueryRotate.2.2.js"></script>
 <script>
 $(function () {
+    var lotteryId = 1;
+
     function random(min, max) {
         return Math.floor(min + Math.random() * (max - min));
     }
@@ -98,7 +100,7 @@ $(function () {
     itemToDeg.push(thanks);
     $("#inner").click(function () {
         $('#inner').unbind('click');
-        $.getJSON('/jiang/get/1', function(data, status) {
+        $.getJSON('/jiang/get/' + lotteryId, function(data, status) {
             if (status == 'success')
             {
                 if (data.status == 'fail')
@@ -122,6 +124,7 @@ $(function () {
                             if (data.item_name != '谢谢惠顾')
                             {
                                 alert("恭喜您中奖了！您获得了" + data.item_name + "!");
+                                $.get('/jiang/sendmsg/'+lotteryId);
                             }
                             else
                             {
