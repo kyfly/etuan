@@ -114,11 +114,16 @@ class AuthController extends BaseController
                 'login_token' => $login_token
             ));
 
+            $logoFileName = BS::getRandStr('50');
+            $pic1FileName = BS::getRandStr('50');
+            $pic2FileName = BS::getRandStr('50');
+            $pic3FileName = BS::getRandStr('50');
+
             //上传图片
-            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/logo/' . $org_uid . '.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['logo']);
-            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $org_uid . '_1.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic1']);
-            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $org_uid . '_2.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic2']);
-            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $org_uid . '_3.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic3']);
+            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/logo/' . $logoFileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['logo']);
+            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic1FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic1']);
+            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic2FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic2']);
+            $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic3FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1], $userInfo['pic3']);
 
             //插入社团信息
             $org_id = Organization::insertGetId(array(
@@ -127,10 +132,10 @@ class AuthController extends BaseController
                 'school' => $userInfo['school'],
                 'internal_order' => 2147483647,
                 'wx' => $userInfo['wx'],
-                'logo_url' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/logo/' . $org_uid . '.' . explode('/', $userInfo['logo']->getMimeType())[1],
-                'pic_url1' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $org_uid . '_1.' . explode('/', $userInfo['logo']->getMimeType())[1],
-                'pic_url2' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $org_uid . '_2.' . explode('/', $userInfo['logo']->getMimeType())[1],
-                'pic_url3' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $org_uid . '_3.' . explode('/', $userInfo['logo']->getMimeType())[1],
+                'logo_url' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/logo/' . $logoFileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1],
+                'pic_url1' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic1FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1],
+                'pic_url2' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic2FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1],
+                'pic_url3' => 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic3FileName . '.' . explode('/', $userInfo['logo']->getMimeType())[1],
                 'description' => $userInfo['description'],
                 'org_uid' => $org_uid
             ));

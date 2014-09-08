@@ -40,27 +40,43 @@ public function getSetDepartment()
 public function postChangeOrganization()
 {
     $oss = new oss;
+    $objectName = Organization::where('org_uid',$this->org_uid)
+        ->select('logo_url','pic_url1','pic_url2','pic_url3')
+        ->first()
+        ->toArray();
+    foreach($objectName as $key=>$value)
+    {
+        $objectName[$key] = strstr($value,'etuan/shetuan');
+    }
+    $info = array();
     if(Input::file('logo')!=null)
     {
-        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/logo/'.$this->org_uid.'.jpg');
-        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/logo/'.$this->org_uid.'.jpg',Input::get('logo'));
+        $oss->delete_object(Config::get('oss.imgBucket'),$objectName['logo_url']);
+        $logoFileName = BS::getRandStr('50');
+        $oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/logo/' . $logoFileName . '.' . explode('/', Input::file('logo')->getMimeType())[1],Input::file('logo'));
+        $info['logo_url'] ='http://' . Config::get('oss.imgHost') . '/etuan/shetuan/logo/' . $logoFileName . '.' . explode('/', Input::file('logo')->getMimeType())[1];
     }
     if(Input::file('pic1')!=null)
     {
-        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg');
-        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_1.jpg',Input::get('pic1'));
+        $oss->delete_object(Config::get('oss.imgBucket'),$objectName['pic_url1']);
+        $pic_url1 = BS::getRandStr('50');
+        $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic_url1 . '.' . explode('/', Input::file('pic1')->getMimeType())[1], Input::file('pic1'));
+        $info['pic_url1'] = 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic_url1 . '.' . explode('/', Input::file('pic1')->getMimeType())[1];
     }
     if(Input::file('pic2')!=null)
     {
-        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg');
-        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_2.jpg',Input::get('pic2'));
+        $oss->delete_object(Config::get('oss.imgBucket'),$objectName['pic_url2']);
+        $pic_url2 = BS::getRandStr('50');
+        $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic_url2 . '.' . explode('/', Input::file('pic2')->getMimeType())[1], Input::file('pic2'));
+        $info['pic_url2'] = 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic_url2 . '.' . explode('/', Input::file('pic2')->getMimeType())[1];
     }
     if(Input::file('pic3')!=null)
     {
-        $oss->delete_object(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg');
-        $oss->upload_file_by_file(Config::get('oss.imgBucket'),'etuan/shetuan/jianjie/'.$this->org_uid.'_3.jpg',Input::get('pic3'));
+        $oss->delete_object(Config::get('oss.imgBucket'),$objectName['pic_url3']);
+        $pic_url3 = BS::getRandStr('50');
+        $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic_url3 . '.' . explode('/', Input::file('pic3')->getMimeType())[1], Input::file('pic3'));
+        $info['pic_url3'] = 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic_url3 . '.' . explode('/', Input::file('pic3')->getMimeType())[1];
     }
-    $info = array();
     if(Input::get('description')!='')
         $info['description'] = strip_tags(Input::get('description'));
     if(Input::get('wx')!='')

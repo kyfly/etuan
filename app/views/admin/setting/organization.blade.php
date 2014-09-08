@@ -11,7 +11,7 @@
 
         <div id="main" class="col-lg-9 col-md-9">
             <div class="tab-content">
-                <form method="post" class="form-horizontal" action="change-organization">
+                <form method="post" class="form-horizontal" action="change-organization" enctype="multipart/form-data">
                     <div class="form-group has-feedback" id="inputbox6">
                         <label for="inputShetuan" class="col-sm-2 control-label">社团名称</label>
 

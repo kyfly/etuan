@@ -28,7 +28,7 @@ class QR
         $bucket = QRIMGBUCKET;
         $object = 'etuan/weixin/qrcode/'.$type.'/'.$id.'.jpg';
         $oss->delete_object($bucket,$object);
-        $inre = Etuan::where("scene_id",$scene)->delete();
+        $inre = Etuan::where("scene_id",$scene_id)->delete();
         if($inre){
             return 1;
         }else{

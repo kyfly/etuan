@@ -11,6 +11,7 @@ class RegistrationHandle extends  ActivityHandle
             Reg_question::where('reg_id',$activityId)->delete();
             Registration_user::where('reg_id',$activityId)->delete();
             Registration::where('reg_id',$activityId)->delete();
+            QR::destory($activityId,'registration');
             DB::commit();
             return true;
         } catch (Exception $e) {

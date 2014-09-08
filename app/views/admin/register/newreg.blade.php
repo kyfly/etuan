@@ -194,12 +194,13 @@
 <script src="/js/admin.js"></script>
 <!--当前页面的社团号-->
 <script>_orgId = {{Session::get('org_id')}};</script>
-<!--新建报名表模式-->
-<script src="/js/adminbaoming.js"></script>
-<!--编辑报名表模式
-<script>_activityId = 0;</script>
-<script src="/js/admineditbaoming.js"></script>
--->
+
+@if(Input::get('type')==1)
+    <script>_activityId = {{Input::get('activityId')}};</script>
+    <script src="/js/admineditbaoming.js"></script>
+@else
+    <script src="/js/adminbaoming.js"></script>
+@endif
 
 <script>
     $('.form_datetime').datetimepicker({
