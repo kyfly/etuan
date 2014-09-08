@@ -31,7 +31,7 @@ class QrcodeHandle
         $object = 'etuan/weixin/qrcode/'.$filedir.'/'.$id.'.jpg';
         $options = ['content'=>$body,
                 'length'=>strlen($body),
-                'content_type'=>'image/jpeg'];
+                ALIOSS::OSS_CONTENT_TYPE =>'application/octet-stream'];
         $result = $oss->upload_file_by_content($bucket,$object,$options);
         if($result->status == 200)
         {
