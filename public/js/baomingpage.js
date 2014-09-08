@@ -283,7 +283,6 @@ $(document).ready(function () {
         $("#regbutton").append(contentbefore);
         alert("客官稍安勿躁，还没开门~");
     }
-
     //开始整个报名表的运作部分
     //检查是否属于允许报名的学号
     var isAtRightGrade = function (newStuId, newLimitGrade) {

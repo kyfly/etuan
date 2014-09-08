@@ -18,8 +18,6 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
         return View::make('activity.baoming.success');
     });
     Route::get('baoming/{id}', 'RegistrationController@reg_info');
-    //微信登录后，进行学号和姓名的绑定。
-    Route::resource("weixin/stuinfo", "Stu_infoController");
 });
 
 //无需登录验证的控制器
@@ -41,6 +39,8 @@ Route::group(array(),function(){
     Route::get("jiang/sendmsg/{lottery_id}", "choujiangController@sendmsg");
     Route::get("shetuan/{id}", "organizationController@orgIntroduce");
     Route::controller('organization', "organizationController");
+    //微信登录后，进行学号和姓名的绑定。
+    Route::resource("weixin/stuinfo", "Stu_infoController");
 });
 
 //部分接口需要登录验证的控制器

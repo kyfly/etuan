@@ -148,7 +148,7 @@
         <p id="userinfo">
             <img id="useravatar" src="{{{Weixin::info()->headimgurl}}}" class="img-circle"/>
             &ensp;{{{Weixin::info()->nick_name}}}}&ensp;
-            <a id="logout" href="javascript:void(0)">
+            <a id="logout" href="/weixin/login/quit">
                 <span class="glyphicon glyphicon-log-out" style="vertical-align: middle"></span>
                 退出
             </a>
@@ -176,8 +176,8 @@
 
 <script>
     _activityId = {{$activityId }};
-    _stuId = {{Weixin::info()->stu_name}};
-    _stuName = '{{Weixin::info()->stu_id}}';
+    _stuId = {{Weixin::info()->stu_id}};
+    _stuName = '{{Weixin::info()->stu_name}}';
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
