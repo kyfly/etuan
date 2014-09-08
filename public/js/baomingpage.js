@@ -150,22 +150,22 @@ $(document).ready(function () {
                 break;
             case 112:
                 elementFilling = document.createElement("select");
-                for (var department1 in questionItem.content) {
-                    elementFilling.options.add(new Option(department1, questionItem.content[department1]));
+                for (var l = 0; l < questionItem.content.length; l++) {
+                    elementFilling.options.add(new Option(questionItem.content[l], questionItem.content[l]));
                 }
                 introText = document.createTextNode("第一志愿部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
-                for (var department2 in questionItem.content) {
-                    elementFilling.options.add(new Option(department2, questionItem.content[department2]));
+                for (var m = 0; m < questionItem.content.length; m++) {
+                    elementFilling.options.add(new Option(questionItem.content[m], questionItem.content[m]));
                 }
                 introText = document.createTextNode("第二志愿部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
-                for (var department3 in questionItem.content) {
-                    elementFilling.options.add(new Option(department3, questionItem.content[department3]));
+                for (var n = 0; n < questionItem.content.length; n++) {
+                    elementFilling.options.add(new Option(questionItem.content[n], questionItem.content[n]));
                 }
                 introText = document.createTextNode("第三志愿部门");
                 break;

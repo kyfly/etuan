@@ -195,7 +195,7 @@ $(document).ready(function () {
         async: false,
         type: "get",
         dataType: "json",
-        url: "../../registration/activityinfo?activityId=" + _activityId.toString(),
+        url: "/registration/activityinfo?activityId=" + _activityId.toString(),
         success: function (msg) {
             if (pageJSON === undefined) {
                 pageJSON = msg;
@@ -412,28 +412,44 @@ $(document).ready(function () {
             alert("亲，看起来你的志愿部门排列顺序有点问题啊喂~");
             IsAllowSend = false;
         }
-        //将问题依次添加进其中
-        var objQuestion = document.getElementsByClassName("baomingitem");
-        for (var j = 0; j < objQuestion.length; j++) {
-            var questionItem = {
-                question_id: "",
-                type: "",
-                label: "",
-                content: ""
-            };
-            questionItem.question_id = j + 1;
-            var thisType = label2type(objQuestion[j].innerText);
-            questionItem.type = thisType;
-            if (thisType === 1 || thisType === 2 || thisType === 3) {
-                questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
-            }
-            else {
-                questionItem.label = objQuestion[j].innerText;
-            }
-            questionItem.content = "";
-            createActivityJson.questions[j] = questionItem;
-        }
         if (IsAllowSend) {
+            //将问题依次添加进其中
+            var objQuestion = document.getElementsByClassName("baomingitem");
+            var departmentInfo;
+            $.ajax({
+                async: false,
+                type: "get",
+                url: "/organization/department?org_uid=" + _orgId,
+                success: function (msg) {
+                    departmentInfo = msg;
+                },
+                error: function () {
+                    alert("当前网络不佳，暂时无法获得部门信息");
+                }
+            });
+            for (var j = 0; j < objQuestion.length; j++) {
+                var questionItem = {
+                    question_id: "",
+                    type: "",
+                    label: "",
+                    content: []
+                };
+                questionItem.question_id = j + 1;
+                var thisType = label2type(objQuestion[j].innerText);
+                questionItem.type = thisType;
+                if (thisType === 1 || thisType === 2 || thisType === 3) {
+                    questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
+                }
+                else if(thisType === 112 || thisType === 113 ||thisType === 114){
+                    questionItem.label = objQuestion[j].innerText;
+                    questionItem.content = departmentInfo;
+                }
+                else {
+                    questionItem.label = objQuestion[j].innerText;
+                }
+                questionItem.content = "";
+                createActivityJson.questions[j] = questionItem;
+            }
             //打包好发送格式的Json
             var sendJson = {activityId: 1, activityInfo: JSON.stringify(createActivityJson)};
             //禁用按钮防止错误提交
