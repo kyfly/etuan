@@ -42,7 +42,8 @@ class organizationController extends BaseController
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
-        return Organization::select('org_id','name','logo_url','type','school','internal_order')->get();
+        return Organization::where('hidden','!=',1)
+            ->select('org_id','name','logo_url','type','school','internal_order')->get();
     }
 
     public function getOrgInfo()

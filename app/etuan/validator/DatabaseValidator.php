@@ -16,7 +16,7 @@ class DatabaseValidator extends Validator {
         $primaryKey = $parameters[1];
         $activityId = $parameters[2];
         return DB::table($tableName)->where($primaryKey,'<>',$activityId)
-        		->where($attribute,$value)->count();
+        		->where($attribute,$value)->count()==0;
     }
 
     public function ValidateOldPassword($attribute, $value , $parameters)
