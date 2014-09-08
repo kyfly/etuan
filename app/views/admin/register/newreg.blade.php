@@ -199,22 +199,10 @@
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/admin.js"></script>
 <!--当前页面的社团号-->
-<script>_orgId = {
-    {
-        Session::
-        get('org_id')
-    }
-    }
-    ;</script>
+<script>_orgId = {{Session::get('org_id')}};</script>
 
 @if(Input::get('type')==1)
-<script>_activityId = {
-    {
-        Input::
-        get('activityId')
-    }
-    }
-    ;</script>
+<script>_activityId = {{Input::get('activityId')}};</script>
 <script src="/js/admineditbaoming.js"></script>
 @else
 <script src="/js/adminbaoming.js"></script>
