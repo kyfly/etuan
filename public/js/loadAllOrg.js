@@ -33,7 +33,7 @@ $(document).ready(function () {
                 '<a href="{0}">' +
                 '<div class="thumbnail borderDiv">' +
                 '<p class="listhead">{1}</p>' +
-                '<img width="150px" height="150px" src="{2}">' +
+                '<img style="width: 150px; height: 150px" src="{2}">' +
                 '<p class="status text-view-more">查看介绍'+
                 '<span class="glyphicon glyphicon-chevron-right"></span></p>' +
                 '</div>' +
