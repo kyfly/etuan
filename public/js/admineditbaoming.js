@@ -369,6 +369,14 @@ $(document).ready(function () {
                 alert("结束时间怎么能比开始时间早呢");
                 IsAllowSend = false;
             }
+            if(IsTimeLater(dateStartTime,new Date())){
+                var r = confirm("温馨提示：如果开始时间早于当前时间，那么报名表将不可修改\n点击\"确定\"继续提交，点击\"取消\"终止提交返回修改");
+                if (r==true){}
+                else
+                {
+                    IsAllowSend = false;
+                }
+            }
         }
         //获得年纪限制并且转换为五位二进制数
         var objLimit = document.getElementsByName("grade");
