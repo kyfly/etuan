@@ -370,7 +370,7 @@ $(document).ready(function () {
                 IsAllowSend = false;
             }
             if(IsTimeLater(dateStartTime,new Date())){
-                var r = confirm("温馨提示：如果开始时间早于当前时间，那么报名表将不可修改\n点击\"确定\"继续提交，点击\"取消\"终止提交返回修改");
+                var r = confirm("温馨提示：如果开始时间早于当前时间，那么报名表一旦生成将不可修改！点击【确定】继续提交，点击【取消】终止提交返回修改");
                 if (r==true){}
                 else
                 {
