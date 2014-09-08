@@ -2,145 +2,6 @@ $(document).ready(function () {
     $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
 });
 
-function check() {
-		var flag = new Array(5);
-    	var flag2 = ["1", "1", "1", "1", "1"];
-		//验证邮箱
-            if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/.+@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
-                $('#span1').removeClass("hidespan");
-                $('#span1-2').removeClass("hidespan");
-                $('#inputbox1').addClass("has-error");
-                $('#inputbox1').removeClass("has-success");
-                $('#span1-1').addClass("hidespan");
-                flag[0] = 0;
-            } else {
-                $('#span1-1').removeClass("hidespan");
-                $('#span1-2').addClass("hidespan");
-                $('#inputbox1').removeClass("has-error");
-                $('#inputbox1').addClass("has-success");
-                $('#span1').addClass("hidespan");
-                flag[0] = 1;
-            }
-            //验证密码
-            if ($("#inputPassword").val() == '' || ($("#inputPassword").val() != '' && !/^[^\s]{6,16}$/.test($("#inputPassword").val()))) {
-                $('#span2').removeClass("hidespan");
-                $('#span2-2').removeClass("hidespan");
-                $('#inputbox2').addClass("has-error");
-                $('#inputbox2').removeClass("has-success");
-                $('#span2-1').addClass("hidespan");
-                flag[1] = 0;
-            } else {
-                $('#span2-1').removeClass("hidespan");
-                $('#span2-2').addClass("hidespan");
-                $('#inputbox2').removeClass("has-error");
-                $('#inputbox2').addClass("has-success");
-                $('#span2').addClass("hidespan");
-                flag[1] = 1;
-            }
-            //验证密码一致
-            if (!$("#inputPassword2").val() || $("#inputPassword2").val() != $("#inputPassword2").val()) {
-                $('#span3').removeClass("hidespan");
-                $('#span3-2').removeClass("hidespan");
-                $('#inputbox3').addClass("has-error");
-                $('#inputbox3').removeClass("has-success");
-                $('#span3-1').addClass("hidespan");
-                flag[2] = 0;
-            }
-            else {
-                $('#span3-1').removeClass("hidespan");
-                $('#span3-2').addClass("hidespan");
-                $('#inputbox3').removeClass("has-error");
-                $('#inputbox3').addClass("has-success");
-                $('#span3').addClass("hidespan");
-                flag[2] = 1;
-            }
-            //验证手机号
-            if ($("#inputPhone").val() == '' || ($("#inputPhone").val() != '' && !/^0{0,1}[0-9]{11}$/.test($("#inputPhone").val()))) {
-                $('#span4').removeClass("hidespan");
-                $('#span4-2').removeClass("hidespan");
-                $('#inputbox4').addClass("has-error");
-                $('#inputbox4').addClass("has-feedback");
-                $('#span4-1').addClass("hidespan");
-                flag[3] = 0;
-            } else {
-                $('#span4-1').removeClass("hidespan");
-                $('#span4-2').addClass("hidespan");
-                $('#inputbox4').removeClass("has-error");
-                $('#inputbox4').addClass("has-success");
-                $('#span4').addClass("hidespan");
-                flag[3] = 1;
-            }
-            //验证手机短号
-            if ($("#inputPhone2").val() == '' || ($("#inputPhone2").val() != '' && !/^0{0,1}[0-9]{6}$/.test($("#inputPhone2").val()))) {
-                $('#span5').removeClass("hidespan");
-                $('#span5-2').removeClass("hidespan");
-                $('#inputbox5').removeClass("has-success");
-                $('#inputbox5').addClass("has-error");
-                $('#span5-1').addClass("hidespan");
-                flag[4] = 0;
-            } else {
-                $('#span5-1').removeClass("hidespan");
-                $('#span5-2').addClass("hidespan");
-                $('#inputbox5').removeClass("has-error");
-                $('#inputbox5').addClass("has-success");
-                $('#span5').addClass("hidespan");
-                flag[4] = 1;
-            }
-
-            var sig = true;
-            for (var i = 0; i < 4; i++) {
-                if (flag[i] != flag2[i]) {
-                    sig = false;
-                }
-            }
-            if (sig != true) {
-                alert("对不起，请确认帐号信息填写正确！");
-				$('#next1-1').trigger("click");
-				return false;
-            }
-			
-			if ($("input[name='name']").val() == "") {
-                alert("对不起，请填写社团名称！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("#inputXueyuan").find("option:selected").val() == "1") {
-                alert("对不起，请选择所属学院！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("textarea[name='description']").val() == "") {
-                alert("对不起，请填写社团介绍！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("textarea[name='description']").val().length > 200) {
-                alert("对不起，社团介绍超过200个字符限制！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("input[name='logo']").val() == "") {
-                alert("对不起，请上传logo！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("input[name='pic1']").val() == "") {
-                alert("对不起，请上传展示照片1！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("input[name='pic2']").val() == "") {
-                alert("对不起，请上传展示照片2！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-            if ($("input[name='pic3']").val() == "") {
-                alert("对不起，请上传展示照片3！");
-				$('#next1-2').trigger("click");
-                return false;
-            }
-    }
-	
 $(function () {
     var flag = new Array(5);
     var flag2 = ["1", "1", "1", "1", "1"];
@@ -365,7 +226,7 @@ $(function () {
             $('#next1-2').trigger("click");
         });
 		
-/*		$('#submit').click(function () {
+		$('#btnSubmit').click(function () {
             //验证邮箱
             if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/.+@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
                 $('#span1').removeClass("hidespan");
@@ -500,7 +361,7 @@ $(function () {
 				$('#next1-2').trigger("click");
                 return false;
             }
-        });*/
+        });
 
         $('#addelement').click(function () {
             var createSelect = '<div class="addedbox"><div class="form-group">' +
