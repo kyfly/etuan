@@ -105,44 +105,23 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
 
 public function getActivityResult($activityId)
 {
+    $questions = Reg_question::where('reg_id',$activityId)
+        ->orderBy('question_id','asc')
+        ->lists('label');
     $reg_serial = Registration_user::where('reg_id',$activityId)
     ->lists('reg_serial');
-
-    $answers = Reg_result::where('reg_id',$activityId)
-    ->whereIn('reg_serial',$reg_serial)
-    ->select('question_id','reg_serial','answer')
-    ->orderBy('reg_serial','asc')
-    ->orderBy('question_id','asc')
-    ->get();
-
-    $questions = Reg_question::where('reg_id',$activityId)
-    ->orderBy('question_id','asc')
-    ->lists('label');
-
-    $results = array();
-    $result = array();
-    $j = 0;
-    $i = 0;
-    $reg_serial = $answers[0]->reg_serial;
-    foreach($answers as $key=>$answer)
+    $answers = array();
+    foreach($reg_serial as $key=>$serial)
     {
-        if($reg_serial==$answer->reg_serial)
-        {
-            $result[$i++] = $answer->answer;
-            if($key==(count($answers)-1))
-                $results[$j++] = $result;
-        }
-        else
-        {
-            $results[$j++] = $result;
-            $result = array();
-            $i = 0;
-            $reg_serial = $answer->reg_serial;
-            $result[$i++] = $answer->answer;
-        }
+        $answer = Reg_result::where('reg_serial',$serial)
+            ->orderBy('question_id','asc')
+            ->lists('answer');
+        $answers[$key] = $answer;
     }
-
-    return array($questions,$results);
+    return array(
+        'questions'=>$questions,
+        'answers'=>$answers
+    );
 }
 
 

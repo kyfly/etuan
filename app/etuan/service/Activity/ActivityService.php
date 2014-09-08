@@ -135,11 +135,11 @@ public function getActivityResult($org_uid ,$activityId)
 
 public function getActivityInfo($org_uid ,$activityId)
 {
-    if(!$this->handle->checkActivityExist($org_uid, $this->tableName, $this->primaryKey, $activityId))
-        return Response::json(array(
-            'status' => 'fail',
-            'content' => '活动不存在'
-            ));
+//    if(!$this->handle->checkActivityExist($org_uid, $this->tableName, $this->primaryKey, $activityId))
+//        return Response::json(array(
+//            'status' => 'fail',
+//            'content' => '活动不存在'
+//            ));
 
     return $this->handle->getActivityInfo($activityId);
 }

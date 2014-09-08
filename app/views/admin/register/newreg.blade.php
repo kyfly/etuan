@@ -188,14 +188,12 @@
 
 </div>
 @include('admin.layout.footer')
-
-
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/admin.js"></script>
 <!--当前页面的社团号-->
-<script>_orgId = 0;</script>
+<script>_orgId = {{Session::get('org_id')}};</script>
 <!--新建报名表模式-->
 <script src="/js/adminbaoming.js"></script>
 <!--编辑报名表模式

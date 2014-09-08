@@ -5,8 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"thujohn/pdf": "dev-master",
-		"phpseclib/phpseclib": "0.3.*@dev"
+		"haska/laravel-pdf": "dev-master",
+		"phpseclib/phpseclib": "0.3.*@dev",
+		"maatwebsite/excel": "1.*"
 	},
 	"autoload": {
 		"classmap": [

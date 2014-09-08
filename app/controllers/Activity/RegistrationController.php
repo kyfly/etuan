@@ -71,23 +71,30 @@ class RegistrationController extends ActivityController
     public function getDownloadpdf()
     {
         $html = "";
-        $results = $this->registrationHandle->getActivityResult($this->activityId);
-        foreach($results[1] as $result)
-        {
-            $html .= "
-            <html>
-            <head>
-            </head>
-            <body>";
-            foreach($result as $key=>$answer)
-            {
-                $html .= "<strong>".$results[0][$key]."</strong>:<br/>".$answer."<hr/>";
-            }
-            $html .= "
-            </body>
-            ";
-        }
-        return PDF::load($html, 'A4', 'portrait')->show();
+//        $results = $this->registrationHandle->getActivityResult($this->activityId);
+//        foreach($results['answers'] as $answers)
+//        {
+//            $html .= "
+//            <html>
+//            <head>
+//            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+//            </head>
+//            <body>";
+//            foreach($answers as $key=>$answer)
+//            {
+//                $html .= "<strong>".$results['questions'][$key]."</strong>:<br/>".$answer."<hr/>";
+//            }
+//            $html .= "
+//            </body>
+//            ";
+//        }
+//        $html = '
+//        sadsa我是谁
+//
+//        ';
+//        $pdf = App::make('dompdf');
+//        $pdf->loadHTML($html);
+//        return $pdf->download('invoice.pdf');
     }
 
     public function getDownloadxls()
@@ -95,14 +102,11 @@ class RegistrationController extends ActivityController
         $results = $this->registrationHandle->getActivityResult($this->activityId);
         Excel::create('Filename', function($excel) use($results) {
 
-//            $excel->row(1,$results[0]);
-
             $excel->sheet('Sheetname', function($sheet) use($results){
 
-                $sheet->fromArray($results[1]);
+                $sheet->fromArray($results['answers']);
 
-                $sheet->row(1,$results[0]);
-
+                $sheet->row(1,$results['questions']);
             });
 
         })->export('xls');

@@ -68,6 +68,11 @@ Route::group(array('before'=>'auth'),function(){
 
 Route::group(array('before' => 'auth'), function () {
 
+    Route::get('admin/register/regresult',function(){
+       $registrationHanlde = new RegistrationHandle();
+       $results = $registrationHanlde->getActivityResult(Input::get('activityId'));
+       return View::make('admin.register.regresult')->with('results',$results);
+    });
 
     Route::get("admin/register/viewreg", 'RegistrationController@reg_list');
 
