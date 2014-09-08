@@ -316,6 +316,7 @@ $(document).ready(function () {
                 questionItem.type = thisType;
                 if (thisType === 1 || thisType === 2 || thisType === 3) {
                     questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
+                    questionItem.content = "";
                 }
                 else if(thisType === 112 || thisType === 113 ||thisType === 114){
                     questionItem.label = objQuestion[j].innerText;
@@ -323,8 +324,8 @@ $(document).ready(function () {
                 }
                 else {
                     questionItem.label = objQuestion[j].innerText;
+                    questionItem.content = "";
                 }
-                questionItem.content = "";
                 createActivityJson.questions[j] = questionItem;
             }
             //打包好发送格式的Json
