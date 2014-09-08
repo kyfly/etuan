@@ -84,4 +84,33 @@ class BS
             $info = ['url'=>$url,'token'=>$token];
             return json_encode($info);
         }
+         /*上传图片
+     *@imgarr 所有上传的到的图片对象
+     *@type 保存在oss上 etuan/shetuan/type/文件名
+     *@pic_name 一个图片的url数组
+     */
+    public static function imgUpload($imgarr,$type){
+        $oss = new oss;
+        for($i = 0;$i <count($imgarr);$i++){
+
+            $fileName = BS::getRandStr('50');
+            $fileType = explode('/', $imgarr[$i]->getMimeType())[1];
+
+            $bucket = Config::get('oss.imgBucket');
+            $object = 'etuan/shetuan/'.$type[$i].'/'.$fileName.'.'.$fileType;
+
+            $options = ['content' => file_get_contents($imgarr[$i]->getRealPath()),
+                       'length' => $imgarr[$i]->getSize(),
+                       ALIOSS::OSS_CONTENT_TYPE =>$imgarr[$i]->getMimeType()];
+
+            $result = $oss->upload_file_by_content($bucket,$object,$options);
+            if($result->status == 200)
+            {
+                $pic_name[] =  'http://' . Config::get('oss.imgHost') .'/'. $object;
+            }else{
+                return false;
+            }
+        }
+        return $pic_name;
+    }
 }

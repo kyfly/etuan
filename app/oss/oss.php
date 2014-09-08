@@ -62,9 +62,6 @@
 		}
 		//content , length
 		public  function upload_file_by_content($bucket,$object,$options){
-			if(!isset($options[ALIOSS::OSS_CONTENT_TYPE])){
-				$options[ALIOSS::OSS_CONTENT_TYPE]='image/png';
-			}
 			$response = $this->oss->upload_file_by_content($bucket,$object,$options);
 			
 			return $response;

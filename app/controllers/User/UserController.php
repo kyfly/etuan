@@ -46,10 +46,44 @@ public function postChangeOrganization()
         ->toArray();
     foreach($objectName as $key=>$value)
     {
-        $objectName[$key] = strstr($value,'etuan/shetuan');
+        //$objectName[$key] = strstr($value,'etuan/shetuan');
+        $objectName[] = strstr($value,'etuan/shetuan');
     }
     $info = array();
-    if(Input::file('logo')!=null)
+    $inputImgs = [Input::file('logo'),Input::file('pic1'),Input::file('pic2'),Input::file('pic3')];
+    $types = ['logo','jianjie','jianjie','jianjie'];
+    for($i = 0;$i<count($inputImgs);$i++){
+        if($inputImgs[$i]){
+            if($objectName[$i]){
+                $oss->delete_object(Config::get('oss.imgBucket'),$objectName[$i]);
+            }
+            $imgFiles[] =  $inputImgs[$i];
+            $type[] = $types[$i];
+            $pic_id[] = $i;
+        }
+    }
+    if($imgFiles){
+        $pic_names = BS::imgUpload($imgFiles,$type);
+        for($i = 0;$i<count($pic_names);$i++)
+        {
+            switch ($pic_id[$i]) {
+                case '0':
+                    $info['logo_url'] = $pic_names[$i];
+                    break;
+                case '1':
+                    $info['pic_url1'] = $pic_names[$i];
+                    break;
+                case '2':
+                    $info['pic_url2'] = $pic_names[$i];
+                    break;   
+                case '3':
+                    $info['pic_url3'] = $pic_names[$i];
+                    break;
+            }
+
+        }
+    }
+    /*if(Input::file('logo')!=null)
     {
         $oss->delete_object(Config::get('oss.imgBucket'),$objectName['logo_url']);
         $logoFileName = BS::getRandStr('50');
@@ -76,7 +110,7 @@ public function postChangeOrganization()
         $pic_url3 = BS::getRandStr('50');
         $this->oss->upload_file_by_file(Config::get('oss.imgBucket'), 'etuan/shetuan/jianjie/' . $pic_url3 . '.' . explode('/', Input::file('pic3')->getMimeType())[1], Input::file('pic3'));
         $info['pic_url3'] = 'http://' . Config::get('oss.imgHost') . '/etuan/shetuan/jianjie/' . $pic_url3 . '.' . explode('/', Input::file('pic3')->getMimeType())[1];
-    }
+    }*/
     if(Input::get('description')!='')
         $info['description'] = strip_tags(Input::get('description'));
     if(Input::get('wx')!='')

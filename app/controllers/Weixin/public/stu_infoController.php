@@ -25,8 +25,10 @@ class Stu_infoController extends BaseController
 			}elseif($re == 'NoRealNumExist'){
 				$msg = '抱歉,暂时没有该学工号存在.可能是由于学校数据库中暂无您的学号数据.我们将在近期联系学校增加您的个人信息.';
 			}elseif ($re != 'OK') {
+
 				$msg = '请填入正确的学号和姓名';
 			}elseif($re == 'OK'){
+				$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 				return Redirect::to($url);
 			}
 		}
