@@ -326,7 +326,7 @@ $(function () {
 				$('#next1-2').trigger("click");
                 return false;
             }
-            if ($("#inputXueyuan").find("option:selected").text() == "") {
+            if ($("#inputXueyuan").find("option:selected").val() == "1") {
                 alert("对不起，请选择所属学院！");
 				$('#next1-2').trigger("click");
                 return false;
