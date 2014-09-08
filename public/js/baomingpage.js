@@ -268,20 +268,20 @@ $(document).ready(function () {
         " ~ " + checkStopTime[1] + "月" + checkStopTime[2] + "日 " + checkStopTime[3] + ":" + checkStopTime[4];
     //检查时间
     if (nowDate > stopDate) {
-        $("div").attr("disabled", "true");
-        $("input").attr("disabled", "true");
-        $("textarea").attr("disabled", "true");
-        $("select").attr("disabled", "true");
+        $("div").prop("disabled", "true");
+        $("input").prop("disabled", "true");
+        $("textarea").prop("disabled", "true");
+        $("select").prop("disabled", "true");
         $("#submit").remove();
         var contentafter = "<p>报名已经结束</p>";
         $("#regbutton").append(contentafter);
         alert("对不起，你来晚了哦(T_T)");
     }
     else if (nowDate < startDate) {
-        $("div").attr("disabled", "true");
-        $("input").attr("disabled", "true");
-        $("textarea").attr("disabled", "true");
-        $("select").attr("disabled", "true");
+        $("div").prop("disabled", "true");
+        $("input").prop("disabled", "true");
+        $("textarea").prop("disabled", "true");
+        $("select").prop("disabled", "true");
         $("#submit").remove();
         var contentbefore = "<p>报名还未开始</p>";
         $("#regbutton").append(contentbefore);
@@ -328,7 +328,7 @@ $(document).ready(function () {
         var matchResult = true;
         switch (type) {
             case 101:
-                matchResult = patternStuId.test(matchString) && isAtRightGrade(matchString, activityPageJson.limit_grade);
+                matchResult = patternStuId.test(matchString);
                 break;
             case 107:
                 matchResult = patternEMail.test(matchString);
@@ -345,25 +345,30 @@ $(document).ready(function () {
             default:
                 break;
         }
-
         return matchResult;
     };
+    if (isAtRightGrade(_stuId, activityPageJson.limit_grade)) {
+    }
+    else {
+        $("body").prop("disabled", "true");
+        alert("不好意思哦，你不在社团规定的年级范围内，点击确定退出。");
+        windows.location.href = "/weixin/login/quit";
+    }
+
     //页面开始计时
     var usedTime = 0;
-
     function timedCount() {
         usedTime++;
     }
-
     setInterval(timedCount, 1000);
     //提交内容
-    //用户表单数据格式
-    var participatorInfoJson = {
-        used_time: "",
-        result: []
-    };
     //点击提交按钮时停止计时，并且打包数据，发送数据
     $("#submit").click(function () {
+        //用户表单数据格式
+        var participatorInfoJson = {
+            used_time: "",
+            result: []
+        };
         //设立发送标志
         var IsAllowSend = true;
         //完成用时的记录和格式的转换
