@@ -118,7 +118,7 @@
         <form class="form-horizontal" role="form" action="stuinfo" method="post">
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input type="number" class="form-control" name="stu_id" placeholder="学号">
+                    <input type="text" class="form-control" name="stu_id" placeholder="学号">
                 </div>
             </div>
             <div class="form-group">
