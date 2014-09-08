@@ -19,7 +19,6 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     });
     Route::get('baoming/{id}', 'RegistrationController@reg_info');
 });
-
 //无需登录验证的控制器
 Route::group(array(),function(){
 
