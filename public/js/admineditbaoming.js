@@ -84,9 +84,7 @@ $(document).ready(function () {
     $(".theme").mouseout(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("1.png", "0.png"));
     });
-});
 
-$(document).ready(function () {
     //函数将标签转化为类型
     var type2label = function (typenum) {
         var labelback = "";
