@@ -4,7 +4,7 @@
 Route::get('/wxuser', function () {
     return Weixin::user('nick_name');
 });
-//需要微信登录且绑定学号的路由。
+//需要微信登录的路由。
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
     Route::get("jiang/get/{lottery_id}", "choujiangController@get");
