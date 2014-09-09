@@ -24,7 +24,7 @@ $(function () {
                             flag[0] = 0;
                         }
                         else if ($('#inputEmail').val() == ''
-                            || ($('#inputEmail').val() != '' && !/.+@.+\.[a-zA-z]{2,4}$/.test($('#inputEmail').val()))) {
+                            || ($('#inputEmail').val() != '' && !/^[a-zA-Z0-9][a-zA-Z0-9-._]*@.+\.[a-zA-z]{2,4}$/.test($('#inputEmail').val()))) {
                             $('#span1-2').text('邮箱格式不正确');
                             $('#span1').removeClass("hidespan");
                             $('#span1-2').removeClass("hidespan");
@@ -101,7 +101,7 @@ $(function () {
         });
         //验证手机号
         $('#inputPhone').change(function () {
-            if (this.value == '' || (this.value != '' && !/^0{0,1}[0-9]{11}$/.test(this.value))) {
+            if (this.value == '' || (this.value != '' && !/^((1[358][0-9])|(17[0678]))[0-9]{8}$/.test(this.value))) {
                 $('#span4').removeClass("hidespan");
                 $('#span4-2').removeClass("hidespan");
                 $('#inputbox4').addClass("has-error");
@@ -118,23 +118,32 @@ $(function () {
             }
         });
 
-        //验证手机短号
+        //验证手机短号    
         $('#inputPhone2').change(function () {
-            if (this.value == '' || (this.value != '' && !/^0{0,1}[0-9]{6}$/.test(this.value))) {
-                $('#span5').removeClass("hidespan");
-                $('#span5-2').removeClass("hidespan");
-                $('#inputbox5').removeClass("has-success");
-                $('#inputbox5').addClass("has-error");
-                $('#span5-1').addClass("hidespan");
-                flag[4] = 0;
-            } else {
-                $('#span5-1').removeClass("hidespan");
-                $('#span5-2').addClass("hidespan");
-                $('#inputbox5').removeClass("has-error");
-                $('#inputbox5').addClass("has-success");
-                $('#span5').addClass("hidespan");
-                flag[4] = 1;
-            }
+			if (this.value != '' && !/^0{0,1}[0-9]{6}$/.test(this.value)) {
+				$('#span5').removeClass("hidespan");
+				$('#span5-2').removeClass("hidespan");
+				$('#inputbox5').removeClass("has-success");
+				$('#inputbox5').addClass("has-error");
+				$('#span5-1').addClass("hidespan");
+				flag[4] = 0;
+			} else {
+				if ($('#inputPhone2').val() == '') {
+					$('#inputbox5').removeClass("has-error");
+					$('#inputbox5').removeClass("has-success");
+					$('#span5-1').addClass("hidespan");
+					$('#span5-2').addClass("hidespan");
+					$('#span5').addClass("hidespan");
+					flag[4] = 1;
+				}else{$('#span5-1').removeClass("hidespan");
+					$('#span5-2').addClass("hidespan");
+					$('#inputbox5').removeClass("has-error");
+					$('#inputbox5').addClass("has-success");
+					$('#span5').addClass("hidespan");
+					flag[4] = 1;
+					
+				}
+			}
         });
 
         //第二个页面的验证
@@ -228,7 +237,7 @@ $(function () {
 		
 		$('#btnSubmit').click(function () {
             //验证邮箱
-            if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/.+@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
+            if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/^[a-zA-Z0-9][a-zA-Z0-9-._]*@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
                 $('#span1').removeClass("hidespan");
                 $('#span1-2').removeClass("hidespan");
                 $('#inputbox1').addClass("has-error");
@@ -277,7 +286,7 @@ $(function () {
                 flag[2] = 1;
             }
             //验证手机号
-            if ($("#inputPhone").val() == '' || ($("#inputPhone").val() != '' && !/^0{0,1}[0-9]{11}$/.test($("#inputPhone").val()))) {
+            if ($("#inputPhone").val() == '' || ($("#inputPhone").val() != '' && !/^((1[358][0-9])|(17[0678]))[0-9]{8}$/.test($("#inputPhone").val()))) {
                 $('#span4').removeClass("hidespan");
                 $('#span4-2').removeClass("hidespan");
                 $('#inputbox4').addClass("has-error");
@@ -293,21 +302,30 @@ $(function () {
                 flag[3] = 1;
             }
             //验证手机短号
-            if ($("#inputPhone2").val() == '' || ($("#inputPhone2").val() != '' && !/^0{0,1}[0-9]{6}$/.test($("#inputPhone2").val()))) {
-                $('#span5').removeClass("hidespan");
-                $('#span5-2').removeClass("hidespan");
-                $('#inputbox5').removeClass("has-success");
-                $('#inputbox5').addClass("has-error");
-                $('#span5-1').addClass("hidespan");
-                flag[4] = 0;
-            } else {
-                $('#span5-1').removeClass("hidespan");
-                $('#span5-2').addClass("hidespan");
-                $('#inputbox5').removeClass("has-error");
-                $('#inputbox5').addClass("has-success");
-                $('#span5').addClass("hidespan");
-                flag[4] = 1;
-            }
+			if($("#inputPhone2").val() != ''){
+				if ($("#inputPhone2").val() == '' || ($("#inputPhone2").val() !=  '' && !/^0{0,1}[0-9]{6}$/.test($("#inputPhone2").val()))) {
+					$('#span5').removeClass("hidespan");
+					$('#span5-2').removeClass("hidespan");
+					$('#inputbox5').removeClass("has-success");
+					$('#inputbox5').addClass("has-error");
+					$('#span5-1').addClass("hidespan");
+					flag[4] = 0;
+				} else {
+					$('#span5-1').removeClass("hidespan");
+					$('#span5-2').addClass("hidespan");
+					$('#inputbox5').removeClass("has-error");
+					$('#inputbox5').addClass("has-success");
+					$('#span5').addClass("hidespan");
+					flag[4] = 1;
+				}
+			}else{
+				$('#inputbox5').removeClass("has-error");
+				$('#inputbox5').removeClass("has-success");
+				$('#span5-1').addClass("hidespan");
+				$('#span5-2').addClass("hidespan");
+				$('#span5').addClass("hidespan");
+				flag[4] = 1;
+				}
 
             var sig = true;
             for (var i = 0; i < 4; i++) {
