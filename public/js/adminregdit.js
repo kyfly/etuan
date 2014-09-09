@@ -117,7 +117,6 @@ $(function () {
                 flag[3] = 1;
             }
         });
-
         //验证手机短号    
         $('#inputPhone2').change(function () {
 			if (this.value != '' && !/^0{0,1}[0-9]{6}$/.test(this.value)) {
@@ -141,7 +140,6 @@ $(function () {
 					$('#inputbox5').addClass("has-success");
 					$('#span5').addClass("hidespan");
 					flag[4] = 1;
-					
 				}
 			}
         });
@@ -328,9 +326,10 @@ $(function () {
 				}
 
             var sig = true;
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 5; i++) {
                 if (flag[i] != flag2[i]) {
                     sig = false;
+					break;
                 }
             }
             if (sig != true) {
