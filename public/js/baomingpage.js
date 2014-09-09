@@ -171,7 +171,7 @@ $(document).ready(function () {
             case 114:
                 elementFilling = document.createElement("select");
                 var department3Arr = JSON.parse(questionItem.content);
-                for (var n = 0; n < departmentArr.length; n++) {
+                for (var n = 0; n < department3Arr.length; n++) {
                     elementFilling.options.add(new Option(department3Arr[n], department3Arr[n]));
                 }
                 introText = document.createTextNode("第三志愿部门");
