@@ -117,9 +117,7 @@ class RegistrationController extends ActivityController
     //通过activity获得theme返回到相应页面
     public function reg_info($id)
     {
-        Registration::where('reg_id',$id)->update(array(
-            'page_view' => 'page_view' + 1
-             ));
+        Registration::where('reg_id',$id)->increment('page_view');
         $theme = Registration::where('reg_id',$id)->pluck('theme');
         return View::make('activity.baoming.baoming'.$theme)->with('activityId',$id);
     }
