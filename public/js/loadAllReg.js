@@ -8,8 +8,8 @@ function setStatus(data)
 {
     for (var i = 0; i < data.length; i++)
     {
-        var startTime = new Date(data[i].start_time);
-        var stopTime = new Date(data[i].stop_time);
+        var startTime = new Date(data[i].start_time * 1000);
+        var stopTime = new Date(data[i].stop_time * 1000);
         var now = new Date();
         if (now < startTime) {
             data[i].statusWords = "即将开始";
