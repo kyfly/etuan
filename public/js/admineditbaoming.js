@@ -117,7 +117,7 @@ $(document).ready(function () {
                 labelback = "手机长号";
                 break;
             case 110:
-                labelback = "手机短号";
+                labelback = "移动短号";
                 break;
             case 111:
                 labelback = "籍贯";
@@ -240,7 +240,7 @@ $(document).ready(function () {
             case "手机长号":
                 typeback = 109;
                 break;
-            case "手机短号":
+            case "移动短号":
                 typeback = 110;
                 break;
             case "籍贯":

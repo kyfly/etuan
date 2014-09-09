@@ -157,7 +157,7 @@
                                     <h4>手机长号</h4>
                                 </div>
                                 <div id="phonenumshort2" class="form-group">
-                                    <h4>手机短号</h4>
+                                    <h4>移动短号</h4>
                                 </div>
                                 <div id="origin2" class="form-group">
                                     <h4>籍贯</h4>
