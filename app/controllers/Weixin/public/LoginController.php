@@ -13,7 +13,7 @@
 			header('Content-Type: image/png');
 		    $appid = Config::get('etuan.wxAppId');
 			$time = Session::get('start_time');
-			$callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time);
+			$callbackUrl = 'http://'.$_SERVER['HTTP_HOST'].'/weixin/login/oauth?time='.$time;
 			$state = Session::get('state');
 			$url = WS::getauthurl($appid,$callbackUrl,'snsapi_userinfo',$state);
 		 	QRcode::png($url,false, $errorCorrectionLevel='L',$matrixPointSize = 4);
