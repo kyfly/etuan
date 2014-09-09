@@ -15,19 +15,15 @@ $(document).ready(function () {
 
     function configExtraForm() {
         //每次绑定事件前首先释放所有的click以免造成过度绑定
-        $(".delete").off("click");
-        $(".moveup").off("click");
-        $(".movedown").off("click");
-        $(".delete").off("mouseover");
-        $(".moveup").off("mouseover");
-        $(".movedown").off("mouseover");
+        $(".delete").off("click").off("mouseover");
+        $(".moveup").off("click").off("mouseover");
+        $(".movedown").off("click").off("mouseover");
         //删除按钮
         $(".delete").on('click', function () {
             var content0;
             content0 = $(this).parent();
             content0.remove();
-        });
-        $(".delete").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
         //上移按钮
@@ -35,8 +31,7 @@ $(document).ready(function () {
             var content1;
             content1 = $(this).parent();
             content1.insertBefore(content1.prev());
-        });
-        $(".moveup").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
         //下移按钮
@@ -44,8 +39,7 @@ $(document).ready(function () {
             var content2;
             content2 = $(this).parent();
             content2.insertAfter(content2.next());
-        });
-        $(".movedown").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
     }
@@ -80,8 +74,7 @@ $(document).ready(function () {
     //主题选择动画
     $(".theme").mouseover(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("0.png", "1.png"));
-    });
-    $(".theme").mouseout(function () {
+    }).mouseout(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("1.png", "0.png"));
     });
 
@@ -205,6 +198,33 @@ $(document).ready(function () {
         }
     });
 
+    //检验时间，选择是加载已开始模式还是未开始模式
+    var IsTimeValid;
+    var tmpTimeArray = pageJSON.start_time.split(/[\s:-]/);
+    IsTimeValid = new Date(parseInt(tmpTimeArray[0]), parseInt(tmpTimeArray[1]) - 1, parseInt(tmpTimeArray[2]), parseInt(tmpTimeArray[3]), parseInt(tmpTimeArray[4]), 0) < new Date();
+    if (IsTimeValid) {
+        //调整指针
+        $("#starttime").css("cursor", "pointer");
+        $("#stoptime").css("cursor", "pointer");
+    }
+    else {
+        //锁定不可修改部分
+        document.getElementsByClassName("datetimepicker")[0].remove();
+        document.getElementById("starttime").parentNode.lastElementChild.remove();
+        document.getElementById("starttime").parentNode.lastElementChild.remove();
+        document.getElementById("starttime").parentNode.removeAttribute("class");
+        document.getElementById("starttime").parentNode.removeAttribute("data-date");
+        document.getElementById("starttime").parentNode.removeAttribute("data-link-field");
+        $("#starttime").prop("disabled", true);
+        var dis0 = document.createElement("iframe");
+        dis0.setAttribute("style", "border-width:0px;height:100%;width:100%;z-index:99;background-color:rgba(0,0,0,0);position:absolute;top:0;left:0;");
+        var dis1 = document.createElement("iframe");
+        dis1.setAttribute("style", "border-width:0px;height:100%;width:100%;z-index:99;background-color:rgba(0,0,0,0);position:absolute;top:0;left:0");
+        document.getElementById("extraform").appendChild(dis0);
+        document.getElementsByClassName("extralist")[0].appendChild(dis1);
+        $("iframe").contents().find("body").css("cursor", "not-allowed");
+        $("#stoptime").css("cursor", "pointer");
+    }
 });
 
 //获得创建报名的各项参数数据
@@ -370,7 +390,7 @@ $(document).ready(function () {
                 IsAllowSend = false;
             }
             if(IsTimeLater(dateStartTime,new Date())){
-                var r = confirm("温馨提示：如果开始时间早于当前时间，那么报名表一旦生成将不可修改！点击【确定】继续提交，点击【取消】终止提交返回修改。");
+                var r = confirm("温馨提示：如果选择开始时间早于当前时间，默认报名即刻开始，那么“开始时间”和“表格项目”将不能修改。点击【确定】继续提交，点击【取消】暂停提交。");
                 if (r===true){}
                 else
                 {

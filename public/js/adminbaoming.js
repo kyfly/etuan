@@ -15,19 +15,15 @@ $(document).ready(function () {
 
     function configExtraForm() {
         //每次绑定事件前首先释放所有的click以免造成过度绑定
-        $(".delete").off("click");
-        $(".moveup").off("click");
-        $(".movedown").off("click");
-        $(".delete").off("mouseover");
-        $(".moveup").off("mouseover");
-        $(".movedown").off("mouseover");
+        $(".delete").off("click").off("mouseover");
+        $(".moveup").off("click").off("mouseover");
+        $(".movedown").off("click").off("mouseover");
         //删除按钮
         $(".delete").on('click', function () {
             var content0;
             content0 = $(this).parent();
             content0.remove();
-        });
-        $(".delete").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
         //上移按钮
@@ -35,8 +31,7 @@ $(document).ready(function () {
             var content1;
             content1 = $(this).parent();
             content1.insertBefore(content1.prev());
-        });
-        $(".moveup").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
         //下移按钮
@@ -44,8 +39,7 @@ $(document).ready(function () {
             var content2;
             content2 = $(this).parent();
             content2.insertAfter(content2.next());
-        });
-        $(".movedown").on("mouseover", function () {
+        }).on("mouseover", function () {
             $(this).tooltip("show");
         });
     }
@@ -80,10 +74,13 @@ $(document).ready(function () {
     //主题选择动画
     $(".theme").mouseover(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("0.png", "1.png"));
-    });
-    $(".theme").mouseout(function () {
+    }).mouseout(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("1.png", "0.png"));
     });
+
+    //调整指针
+    $("#starttime").css("cursor", "pointer");
+    $("#stoptime").css("cursor", "pointer");
 });
 
 //获得创建报名的各项参数数据
@@ -249,7 +246,7 @@ $(document).ready(function () {
                 IsAllowSend = false;
             }
             if(IsTimeLater(dateStartTime,new Date())){
-                var r = confirm("温馨提示：如果开始时间早于当前时间，那么报名表一旦生成将不可修改！点击【确定】继续提交，点击【取消】终止提交返回修改。");
+                var r = confirm("温馨提示：如果选择开始时间早于当前时间，默认报名即刻开始，那么“开始时间”和“表格项目”将不能修改。点击【确定】继续提交，点击【取消】暂停提交。");
                 if (r===true){}
                 else
                 {
