@@ -1,7 +1,7 @@
 <?php
 namespace etuan\provider;
 use \Illuminate\Support\ServiceProvider;
-use UserfulTool;
+use \etuan\tool\UsefulTool;
 class MyToolServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +13,7 @@ class MyToolServiceProvider extends ServiceProvider
     {
        $this->app->bind('UsefulTool',function()
        {
-           return new UserfulTool;
+           return new UsefulTool;
        });
     }
 

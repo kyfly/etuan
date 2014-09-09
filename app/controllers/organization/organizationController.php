@@ -36,6 +36,10 @@ class organizationController extends BaseController
         $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
         ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
         ->get();
+        foreach ($infos as $key => $info) {
+           $infos[$key]->start_time = UsefulTool::myMktime($infos[$key]->start_time);
+           $infos[$key]->stop_time = UsefulTool::myMktime($infos[$key]->stop_time);
+        }
         return $infos;
     }    
 

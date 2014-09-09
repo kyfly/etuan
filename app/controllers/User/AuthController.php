@@ -148,6 +148,7 @@ class AuthController extends BaseController
             Auth::loginUsingId($org_uid);
             wxInfoHandle::createWx();
             DB::commit();
+            Session::put('org_id',$org_id);
             return View::make('admin.regsuccess')->with('org_id',
                 Organization::where('org_uid', Auth::user()->org_uid)->pluck('org_id'));
         } catch (Exception $e) {

@@ -121,7 +121,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'etuan\provider\MyValidatorServiceProvider'
+		'etuan\provider\MyValidatorServiceProvider',
+		'etuan\provider\MyToolServiceProvider'
 
 	),
 
@@ -189,7 +190,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'UserfulTool'     => 'etuan\facade\UsefulTool'
+		'UsefulTool'     => 'etuan\facade\UsefulTool'
 	),
 
 );
