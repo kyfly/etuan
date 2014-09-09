@@ -163,9 +163,9 @@
     <div class="col-xs-12 no-padding single-line" style="background-color: #fff">
     </div>
     <div id="regbutton" class="col-xs-12 no-padding single-line cover" style="background-color: #66f;color:#fff">
-        <div id="submit">
+        <button id="submit" style="height:100%;width:100%;background-color:rgba(0,0,0,0);border-width:0px">
             【&ensp;<span class="glyphicon glyphicon-envelope" style="vertical-align: middle"></span>&ensp;提交！&ensp;】
-        </div>
+        </button>
     </div>
     <div class="col-xs-12 no-padding single-line" style="background-color: #fff">
     </div>
