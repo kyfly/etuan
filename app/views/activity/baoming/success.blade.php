@@ -132,7 +132,9 @@
 
         <p class="msg-body">
             关注“团团一家”微信号（e-tuan），<br>赢取奖品，报名更多社团！
-            <a>立即关注>></a>
+            <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd">
+                立即关注>>
+            </a>
         </p>
         <br>
 
@@ -178,7 +180,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <a type="button" class="btn btn-primary visible-xs-inline">立即关注</a>
+                <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd"
+                   type="button" class="btn btn-primary visible-xs-inline">立即关注</a>
             </div>
         </div>
     </div>
