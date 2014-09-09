@@ -33,7 +33,8 @@ class organizationController extends BaseController
     //获取所有用户的报名活动信息
     public function getOrganizationRegistration()
     {
-        $infos = Registration::join('organization','registration.org_uid','=','organization.org_uid')
+        $infos = Registration::where('registration.hidden','<>',1)
+        ->join('organization','registration.org_uid','=','organization.org_uid')
         ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
         ->get();
         foreach ($infos as $key => $info) {
