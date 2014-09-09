@@ -176,14 +176,38 @@ $(function () {
                 $('#inputbox8').addClass("has-success");
             }
         });
+		
+		var check = new Array(4);
         //logo
         $('#inputLogo').change(function () {
             if (this.value == '') {
                 $('#span9-1').addClass("hidespan");
                 $('#inputbox9').removeClass("has-success");
             } else {
+				var filepath=$("input[name='logo']").val();
+				var extStart=filepath.lastIndexOf(".");
+				var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+				if(ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+					alert("对不起，logo图片限于png,gif,jpeg,jpg格式");
+					$('#span9-1').addClass("hidespan");
+               	    $('#inputbox9').removeClass("has-success");
+					check[0] = 0;
+					$('#inputLogo').focus();
+					return false;
+				}else{
+					var filesize = document.getElementById("inputLogo").files;       
+					if(filesize[0].size/1024 > 1024){      
+						alert("对不起，请选择不大于1MB的图片。");
+						$('#span9-1').addClass("hidespan");
+                		$('#inputbox9').removeClass("has-success");
+						check[0] = 0;
+						$('#inputLogo').focus();
+						return false;
+					}
+				}
                 $('#span9-1').removeClass("hidespan");
                 $('#inputbox9').addClass("has-success");
+				check[0] = 1;
             }
         });
         //pic1
@@ -192,8 +216,30 @@ $(function () {
                 $('#span10-1').addClass("hidespan");
                 $('#inputbox10').removeClass("has-success");
             } else {
+				var filepath=$("input[name='pic1']").val();
+				var extStart=filepath.lastIndexOf(".");
+				var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+				if(ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+					alert("对不起，图片限于png,gif,jpeg,jpg格式");
+					$('#span10-1').addClass("hidespan");
+               	    $('#inputbox10').removeClass("has-success");
+					check[1] = 0;
+					$('#inputPic1').focus();
+					return false;
+				}else{
+					var filesize = document.getElementById("inputPic1").files;       
+					if(filesize[0].size/1024 > 1024){      
+						alert("对不起，请选择不大于1MB的图片。");
+						$('#span10-1').addClass("hidespan");
+                		$('#inputbox10').removeClass("has-success");
+						check[1] = 0;
+						$('#inputPic1').focus();
+						return false;
+					}
+				}
                 $('#span10-1').removeClass("hidespan");
                 $('#inputbox10').addClass("has-success");
+				check[1] = 1;
             }
         });
         //pic2
@@ -202,8 +248,30 @@ $(function () {
                 $('#span11-1').addClass("hidespan");
                 $('#inputbox11').removeClass("has-success");
             } else {
+				var filepath=$("input[name='pic2']").val();
+				var extStart=filepath.lastIndexOf(".");
+				var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+				if(ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+					alert("对不起，图片限于png,gif,jpeg,jpg格式");
+					$('#span9-1').addClass("hidespan");
+               	    $('#inputbox9').removeClass("has-success");
+					check[2] = 0;
+					$('#inputPic2').focus();
+					return false;
+				}else{
+					var filesize = document.getElementById("inputPic2").files;       
+					if(filesize[0].size/1024 > 1024){      
+						alert("对不起，请选择不大于1MB的图片。");
+						$('#span11-1').addClass("hidespan");
+                		$('#inputbox11').removeClass("has-success");
+						check[2] = 0;
+						$('#inputPic2').focus();
+						return false;
+					}
+				}
                 $('#span11-1').removeClass("hidespan");
                 $('#inputbox11').addClass("has-success");
+				check[2] = 1;
             }
         });
         //pic3
@@ -212,8 +280,30 @@ $(function () {
                 $('#span12-1').addClass("hidespan");
                 $('#inputbox12').removeClass("has-success");
             } else {
+				var filepath=$("input[name='pic3']").val();
+				var extStart=filepath.lastIndexOf(".");
+				var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+				if(ext!=".PNG"&&ext!=".GIF"&&ext!=".JPG"&&ext!=".JPEG"){
+					alert("对不起，图片限于png,gif,jpeg,jpg格式");
+					$('#span12-1').addClass("hidespan");
+               	    $('#inputbox12').removeClass("has-success");
+					check[3] = 0;
+					$('#inputPic3').focus();
+					return false;
+				}else{
+					var filesize = document.getElementById("inputPic3").files;       
+					if(filesize[0].size/1024 > 1024){      
+						alert("对不起，请选择不大于1MB的图片。");
+						$('#span12-1').addClass("hidespan");
+                		$('#inputbox12').removeClass("has-success");
+						check[3] = 0;
+						$('#inputPic3').focus();
+						return false;
+					}
+				}
                 $('#span12-1').removeClass("hidespan");
                 $('#inputbox12').addClass("has-success");
+				check[3] = 1;
             }
         });
 
@@ -358,23 +448,23 @@ $(function () {
 				$('#next1-2').trigger("click");
                 return false;
             }
-            if ($("input[name='logo']").val() == "") {
-                alert("对不起，请上传logo！");
+            if ($("input[name='logo']").val() == "" || check[0] == 0) {
+                alert("对不起，请上传小于1MB的logo！");
 				$('#next1-2').trigger("click");
                 return false;
             }
-            if ($("input[name='pic1']").val() == "") {
-                alert("对不起，请上传展示照片1！");
+            if ($("input[name='pic1']").val() == ""|| check[1] == 0) {
+                alert("对不起，请上传小于1MB的展示照片1！");
 				$('#next1-2').trigger("click");
                 return false;
             }
-            if ($("input[name='pic2']").val() == "") {
-                alert("对不起，请上传展示照片2！");
+            if ($("input[name='pic2']").val() == ""|| check[2] == 0) {
+                alert("对不起，请上传小于1MB的展示照片2！");
 				$('#next1-2').trigger("click");
                 return false;
             }
-            if ($("input[name='pic3']").val() == "") {
-                alert("对不起，请上传展示照片3！");
+            if ($("input[name='pic3']").val() == ""|| check[3] == 0) {
+                alert("对不起，请上传小于1MB的展示照片3！");
 				$('#next1-2').trigger("click");
                 return false;
             }
@@ -418,7 +508,7 @@ $(function () {
         $('form').bind("keypress", function(e) {
             e = e || event;
             var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
-            return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+            return txtArea || (e.keyCode || e.which || e.charCode || 0) != 13;
         });
     });
 });
