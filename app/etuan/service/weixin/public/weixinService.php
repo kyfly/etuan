@@ -1,24 +1,21 @@
 <?php
 class WS
 {
-	public static function setToken($appid,$appsecret){
+	public static function getToken($appid,$appsecret){
         $connect= App::make('memcached');
         if($connect->get('access_token')){
             return $connect->get('access_token');
         }else{
+            if($connect->get('access_token')){
+                $connect->delete('access_token');
+            }
             $token = WS::getAccessToken($appid,$appsecret);
-            $connect->set('access_token',$token,0,7100);
+            while(!$token){
+                $token = WS::getAccessToken($appid,$appsecret);
+            }
+            $connect->set('access_token',$token,0,1800);
             return $token;
         }
-    }
-    public static function getToken($appid,$appsecret){
-        $connect= App::make('memcached');
-        $token = self::setToken($appid,$appsecret);
-        while($token == 'false'){
-            $connect->delete('access_token');
-            $token = self::setToken($appid,$appsecret);
-        }
-        return $token;
     }
     public static function getAccessToken($appid,$appsecret){
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
@@ -27,7 +24,7 @@ class WS
         if(isset($jsoninfo["access_token"])){
             $access_token = $jsoninfo["access_token"];
         }else{
-            return 'false';
+            return false;
         }
         return $access_token;
     }
