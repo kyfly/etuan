@@ -48,7 +48,7 @@
 	        	
 	            $userinfo['check_id'] = 1 ;
 
-	            $this->cache->set($state,$userinfo,0,60);
+	            $this->cache->set($state,$userinfo,60);
 	            
 	            Weixin::login($userinfo['user']);
 
@@ -87,7 +87,7 @@
 		            {
 	            		$userinfo=['user'=>$user,'token'=>$state,'start_time'=>time(),'check_id'=>''];
 	            		//把该次登录信息放入缓存，
-	              		$this->cache->set($state,$userinfo,0,60);
+	              		$this->cache->set($state,$userinfo,60);
 		                $info = $this->cache->get($state);
 		                $check = $info['check_id'];
 		                if($check!=1){

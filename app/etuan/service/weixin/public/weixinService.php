@@ -13,7 +13,7 @@ class WS
             while(!$token){
                 $token = WS::getAccessToken($appid,$appsecret);
             }
-            $connect->set('access_token',$token,0,1800);
+            $connect->set('access_token',$token,1800);
             return $token;
         }
     }
