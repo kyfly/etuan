@@ -72,7 +72,9 @@ Route::group(array('before' => 'auth'), function () {
 
     Route::get('admin/register/regresult',function(){
        $registrationHanlde = new RegistrationHandle();
-       $results = $registrationHanlde->getActivityResult(Input::get('activityId'));
+       $activityId = Registration::where('org_uid',Auth::user()->org_uid)
+                        ->min('reg_id');
+       $results = $registrationHanlde->getActivityResult($activityId);
        return View::make('admin.register.regresult')->with('results',$results);
     });
 

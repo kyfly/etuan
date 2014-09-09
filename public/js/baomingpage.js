@@ -352,7 +352,7 @@ $(document).ready(function () {
     else {
         $("body").prop("disabled", "true");
         alert("不好意思哦，你不在社团规定的年级范围内，点击确定退出。");
-        windows.location.href = "/weixin/login/quit";
+        window.location.href = "/weixin/login/quit";
     }
 
     //页面开始计时
@@ -429,7 +429,7 @@ $(document).ready(function () {
                         $("#submit").prop("disabled", false);
                     }
                     else if (ts === "error" || ts === "parseerror") {
-                        alert("提交失败：" + ts +" " + e.toString());
+                        alert("提交失败：" + ts + " " + e.toString());
                         //解除对按钮的限制
                         $("#submit").prop("disabled", false);
                     }

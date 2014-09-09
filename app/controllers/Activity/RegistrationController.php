@@ -99,7 +99,9 @@ class RegistrationController extends ActivityController
 
     public function getDownloadxls()
     {
-        $results = $this->registrationHandle->getActivityResult($this->activityId);
+       $activityId = Registration::where('org_uid',$this->org_uid)
+                ->min('reg_id');
+        $results = $this->registrationHandle->getActivityResult($activityId);
         Excel::create('Filename', function($excel) use($results) {
 
             $excel->sheet('Sheetname', function($sheet) use($results){
