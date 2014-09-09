@@ -93,6 +93,10 @@ Route::group(array('before' => 'auth'), function () {
 });
 
 
+Route::get('qiang/shanxun1', function() {
+    return View::make('activity.qiang.shanxun1');
+});
+
 
 
 
