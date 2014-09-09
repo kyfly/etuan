@@ -6,7 +6,7 @@ class Reg_result extends Eloquent{
 	 *
 	 * @var string
 	 */
-	protected $table = 'Reg_result';
+	protected $table = 'reg_result';
 
 		/**
 	*The primary key in the database;

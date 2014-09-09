@@ -82,7 +82,7 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
             ));
 
     $timeInfo = $this->handle->
-    getTimeInfo($org_uid, $this->tableName, $this->primaryKey, $activityId);
+    getTimeInfo($this->tableName, $this->primaryKey, $activityId);
     $values = array(
         'time' => date('Y-m-d H:i:s',time()),
         'name' => $activityInfo->name
@@ -144,7 +144,7 @@ public function getActivityInfo($org_uid ,$activityId)
     return $this->handle->getActivityInfo($activityId);
 }
 
-public function participateInActivity($org_uid, $activityId, $participatorInfo){}
+public function participateInActivity($activityId, $participatorInfo){}
 
 public function getAllParticipatorCount($org_uid)
 {

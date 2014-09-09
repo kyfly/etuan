@@ -10,13 +10,13 @@ class RegistrationService extends ActivityService
         parent::__construct();
     }
 
-    public function participateInActivity($org_uid, $activityId, $participatorInfo)
+    public function participateInActivity($activityId, $participatorInfo)
     {
         $timeInfo = $this->handle->
-        getTimeInfo($this->org_uid, $this->tableName, $this->primaryKey, $activityId);
+            getTimeInfo($this->tableName, $this->primaryKey, $activityId);
         $values = array(
             'time' => date('Y-m-d H:i:s',time()),
-            'wx_uid'=>$participatorInfo->wx_uid);
+            'wx_uid'=>Weixin::user());
         $rules = array(
             'time' =>array('after:'.$timeInfo->start_time,
                 'before:'.$timeInfo->stop_time),
@@ -39,7 +39,7 @@ class RegistrationService extends ActivityService
         }
 
         if(Registration_user::where('reg_id',$activityId)->
-            where('wx_uid',$participatorInfo->wx_uid)->count()>0)
+            where('wx_uid',Weixin::user())->count()>0)
             return Response::json(array(
                 'status' => 'fail',
                 'content' => '已经参与过本次活动'

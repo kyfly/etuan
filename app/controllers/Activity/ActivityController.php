@@ -65,7 +65,7 @@ class ActivityController extends BaseController
     public function postParticipateinactivity()
     {
         $participatorInfo = json_decode(Input::get('participatorInfo'));
-        return $this->service->participateInActivity($this->org_uid, $this->activityId, $participatorInfo);
+        return $this->service->participateInActivity($this->activityId, $participatorInfo);
     }
 
     //返回当前类所用到的service类的名称

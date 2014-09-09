@@ -30,6 +30,6 @@ interface ActivityHandleInterface
 
     public function getAllParticipatorCount($org_uid); //获取一个用户各个活动的参与者数量
 
-    public function getTimeInfo($org_uid, $tableName, $primartKey, $activityId); //用来获取一个活动的开始时间结束时间
+    public function getTimeInfo($tableName, $primartKey, $activityId); //用来获取一个活动的开始时间结束时间
 
 }

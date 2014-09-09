@@ -49,9 +49,9 @@ class ActivityHandle implements ActivityHandleInterface
     		return false;
     }
 
-    public function getTimeInfo($org_uid, $tableName, $primaryKey, $activityId)
+    public function getTimeInfo($tableName, $primaryKey, $activityId)
     {
-        return $tableName::where('org_uid',$org_uid)->where($primaryKey, $activityId)->
+        return $tableName::where($primaryKey, $activityId)->
             select('start_time','stop_time')->first();
     }
 

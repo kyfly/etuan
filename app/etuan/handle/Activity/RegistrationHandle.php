@@ -148,13 +148,15 @@ public function participateInActivity($activityId, $participatorInfo)
 {
   try {
     DB::beginTransaction();
-    $results = $participatorInfo->results;
+    $results = $participatorInfo->result;
     $reg_serial = Registration_user::insertGetId(array(
         'used_time' => $participatorInfo->used_time,
-        'ip' => $participatorInfo->ip,
+        'ip' => UsefulTool::getIp(),
         'reg_id' => $activityId,
-        'wx_uid' => $participatorInfo->wx_uid
-        ));
+        'wx_uid' => Weixin::user()
+        )); 
+    $results[0]->answer = Weixin::info()->stu_id;
+    $results[1]->answer = Weixin::info()->stu_name; 
     foreach($results as $result)
     {
         Reg_result::insert(array(
