@@ -154,22 +154,25 @@ $(document).ready(function () {
                 break;
             case 112:
                 elementFilling = document.createElement("select");
-                for (var l = 0; l < questionItem.content.length; l++) {
-                    elementFilling.options.add(new Option(questionItem.content[l], questionItem.content[l]));
+                var department1Arr = JSON.parse(questionItem.content);
+                for (var l = 0; l < department1Arr.length; l++) {
+                    elementFilling.options.add(new Option(department1Arr[l], department1Arr[l]));
                 }
                 introText = document.createTextNode("第一志愿部门");
                 break;
             case 113:
                 elementFilling = document.createElement("select");
-                for (var m = 0; m < questionItem.content.length; m++) {
-                    elementFilling.options.add(new Option(questionItem.content[m], questionItem.content[m]));
+                var department2Arr = JSON.parse(questionItem.content);
+                for (var m = 0; m < department2Arr.length; m++) {
+                    elementFilling.options.add(new Option(department2Arr[m], department2Arr[m]));
                 }
                 introText = document.createTextNode("第二志愿部门");
                 break;
             case 114:
                 elementFilling = document.createElement("select");
-                for (var n = 0; n < questionItem.content.length; n++) {
-                    elementFilling.options.add(new Option(questionItem.content[n], questionItem.content[n]));
+                var department3Arr = JSON.parse(questionItem.content);
+                for (var n = 0; n < departmentArr.length; n++) {
+                    elementFilling.options.add(new Option(department3Arr[n], department3Arr[n]));
                 }
                 introText = document.createTextNode("第三志愿部门");
                 break;
@@ -194,14 +197,13 @@ $(document).ready(function () {
     };
     //通用的表单创建的调用函数createCommonList
     var createCommonList = function (newPageJson) {
-        var pageJson = newPageJson;
+        var localPageJson = newPageJson;
         //顺次添加各个项目
-        for (var questionItem in pageJson.questions) {
-            createCommonListItem(pageJson.questions[questionItem]);
+        for (var questionItem in localPageJson.questions) {
+            createCommonListItem(localPageJson.questions[questionItem]);
         }
-
         //添加页面标题
-        document.title = pageJson.name;
+        document.title = localPageJson.name;
     };
     //获得json，绘制页面
     //此行仅作测试使用，实际应用请替换成下行

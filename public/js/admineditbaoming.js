@@ -438,7 +438,7 @@ $(document).ready(function () {
                     question_id: "",
                     type: "",
                     label: "",
-                    content: []
+                    content: ""
                 };
                 questionItem.question_id = j + 1;
                 var thisType = label2type(objQuestion[j].innerText);
@@ -447,9 +447,9 @@ $(document).ready(function () {
                     questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
                     questionItem.content = "";
                 }
-                else if(thisType === 112 || thisType === 113 ||thisType === 114){
+                else if(thisType === 112 || thisType === 113 || thisType === 114){
                     questionItem.label = objQuestion[j].innerText;
-                    questionItem.content = departmentInfo;
+                    questionItem.content = JSON.stringify(departmentInfo);
                 }
                 else {
                     questionItem.label = objQuestion[j].innerText;
