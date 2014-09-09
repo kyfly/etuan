@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/admin/home"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@30h.png" id="brandpic"></a>
+                <a href="/" target="_blank"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@30h.png" id="brandpic"></a>
             </div>
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">

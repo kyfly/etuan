@@ -21,105 +21,18 @@
             </ul>
           <!-- Tab panes -->
           <div class="tab-content">
-<!--            <div class="tab-pane active" id="tongji">-->
-<!--              <div class="margintop">-->
-<!---->
-<!---->
-<!--              </div>-->
-<!--              <div class="margintop">-->
-<!---->
-<!---->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="tab-pane" id="dantiao">-->
-<!--                <ul class="pager">-->
-<!--                  <li><a href="#">&larr; 上一个</a></li>-->
-<!--                  <li><a href="#">下一个 &rarr;</a></li>-->
-<!--                </ul>-->
-<!--                <dl>-->
-<!--                  <dt><h3>&nbsp;姓名<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">徐敏菊</dd><hr>-->
-<!--                  <dt><h3>&nbsp;性别<small>（必填，单选）</small></h3></dt>-->
-<!--                  <dd class="margintop">女</dd><hr>-->
-<!--                  <dt><h3>&nbsp;籍贯<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">浙江</dd><hr>-->
-<!--                  <dt><h3>&nbsp;学院及专业<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">信息工程学院工业设计</dd><hr>-->
-<!--                  <dt><h3>&nbsp;特长<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">交际沟通能力</dd><hr>-->
-<!--                  <dt><h3>&nbsp;手机号码<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">13777889782</dd><hr>-->
-<!--                  <dt><h3>&nbsp;部门志愿<small>（必填，单选）</small></h3></dt>-->
-<!--                  <dd class="margintop">-->
-<!--                    <table class="table table-striped table-bordered">-->
-<!--                      <thead>-->
-<!--                        <tr>-->
-<!--                          <th>&nbsp;</th>-->
-<!--                          <th>组织部</th>-->
-<!--                          <th>办公室</th>-->
-<!--                          <th>公关部</th>-->
-<!--                          <th>学习部</th>-->
-<!--                          <th>宣传部</th>-->
-<!--                          <th>网络部</th>-->
-<!--                          <th>国际交流部</th>-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                      <tbody>-->
-<!--                        <tr>-->
-<!--                          <td>第一志愿部门</td>-->
-<!--                          <td>√</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                          <td>第二志愿部门</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>√</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                          <td>&nbsp;</td>-->
-<!--                        </tr>-->
-<!--                        </tbody>-->
-<!--                      </table>-->
-<!--                    </dd><hr>-->
-<!--                  <dt><h3>&nbsp;是否服从调剂<small>（必填，单选）</small></h3></dt>-->
-<!--                  <dd class="margintop">是</dd><hr>-->
-<!--                  <dt><h3>&nbsp;简答题：你觉得为什么要选择你？<small>（必填）</small></h3></dt>-->
-<!--                  <dd class="margintop">我觉得我需要一个能锻炼自己胆量的平台，我不想过每天一下课就回寝室的大学生活，正因为我有这份诚意，我觉得总队也需要有着类似诚意的队员的加入。</dd>-->
-<!--                  </dl>-->
-<!--            </div>-->
-            <div class="tab-pane active" id="biaoge">
-                <div class="pages">
-                  <ul class="pagination">
-                    <li class="disabled"><a href="#">«</a></li>
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                  </ul>
-                </div>
-                <div class="table-responsive">
-                  <table class="table table-bordered">
+            <div class="tab-pane active" id="biaoge" style="padding-top: 10px">
+                  <table class="table table-striped table-hover">
                     <thead>
                       <tr>
-                          <th class="td1">&nbsp;</th>
                           @foreach ($results['questions'] as $question)
                           <th>{{$question}}</th>
                           @endforeach
                       </tr>
-                      </thead>
+                    </thead>
                     <tbody>
                     @foreach ($results['answers'] as $answers)
                     <tr>
-                        <td class="td1"><a href="#">查看</a>&nbsp;<a href="#">删除</a></td>
                         @foreach($answers as $answer)
                         <td>{{$answer}}</td>
                         @endforeach
@@ -128,10 +41,10 @@
                       </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="tab-pane" id="xiazai">
-               <button type="button" class="btn btn-primary btn-lg btn-block">导出为xls格式</button>
-               <button type="button" class="btn btn-info btn-lg btn-block">导出为pdf格式</button>
+            <div class="tab-pane text-center" id="xiazai" style="padding-top: 60px">
+               <div class="col-md-12"><img src="/img/excel.png"> </div>
+               <button type="button" id="downloadXls" class="btn btn-primary btn-lg btn-block" style="width: 200px">导出为Excel电子表格</button>
+               <!--<button type="button" class="btn btn-info btn-lg btn-block">导出为pdf格式</button>-->
             </div>
           </div>
         </div>
@@ -144,5 +57,12 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#downloadXls').click(function () {
+            window.location.href = '/registration/downloadxls';
+        })
+    })
+</script>
 </body>
 </html>
