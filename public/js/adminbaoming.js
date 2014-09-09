@@ -189,7 +189,7 @@ $(document).ready(function () {
     $("#preview").click(function () {
         var previewWindow = window.open("about:blank");
         previewWindow.document.title = $("#regname").val();
-        previewWindow.document.write("预览功能正在开发中~");
+        previewWindow.document.write("即时预览功能正在开发中，敬请期待~");
     });
     $("#submit").click(function () {
         var IsAllowSend = true;
