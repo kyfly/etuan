@@ -74,7 +74,7 @@ class choujiangService
 		$time = Lottery::where('lottery_id',$this->lottery_id)->pluck('stop_time');
 		$time = strtotime($time);
 		if(time()>$time){
-			return "抽奖已于date('Y-m-d H-i-s',$time)结束,您来晚了亲!";
+			return "抽奖已于{date('Y-m-d H-i-s',$time)}结束,您来晚了亲!";
 		}
 		return true;
 	}
