@@ -268,24 +268,20 @@ $(document).ready(function () {
         " ~ " + checkStopTime[1] + "月" + checkStopTime[2] + "日 " + checkStopTime[3] + ":" + checkStopTime[4];
     //检查时间
     if (nowDate > stopDate) {
-        $("div").prop("disabled", "true");
-        $("input").prop("disabled", "true");
-        $("textarea").prop("disabled", "true");
-        $("select").prop("disabled", "true");
-        $("#submit").remove();
-        var contentafter = "<p>报名已经结束</p>";
-        $("#regbutton").append(contentafter);
-        alert("对不起，你来晚了哦(T_T)");
+        $("div").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("#submit").prop("disabled", true);
+        alert("对不起，亲，你来晚了哟(T_T)");
     }
     else if (nowDate < startDate) {
-        $("div").prop("disabled", "true");
-        $("input").prop("disabled", "true");
-        $("textarea").prop("disabled", "true");
-        $("select").prop("disabled", "true");
-        $("#submit").remove();
-        var contentbefore = "<p>报名还未开始</p>";
-        $("#regbutton").append(contentbefore);
-        alert("客官稍安勿躁，还没开门~");
+        $("div").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("#submit").prop("disabled", true);
+        alert("客官稍安勿躁，还没开始报名~");
     }
     //开始整个报名表的运作部分
     //检查是否属于允许报名的学号
@@ -345,9 +341,12 @@ $(document).ready(function () {
     if (isAtRightGrade(_stuId.toString(), activityPageJson.limit_grade)) {
     }
     else {
-        $("body").prop("disabled", "true");
-        alert("不好意思哦，你不在社团规定的年级范围内，点击确定退出。");
-        window.location.href = "/baoming.html";
+        $("div").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("#submit").prop("disabled", true);
+        alert("不好意思哦，你不在社团规定的年级范围内。");
     }
 
     //页面开始计时
