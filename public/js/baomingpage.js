@@ -143,8 +143,8 @@ $(document).ready(function () {
             case 110:
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "number");
-                elementFilling.setAttribute("placeholder", "请输入您的校园网手机短号");
-                introText = document.createTextNode("手机短号");
+                elementFilling.setAttribute("placeholder", "请输入您的移动短号");
+                introText = document.createTextNode("移动短号");
                 break;
             case 111:
                 elementFilling = document.createElement("input");
@@ -319,10 +319,8 @@ $(document).ready(function () {
         else {
             return false;
         }
-
         var patternStuId = new RegExp("^1[1-4][0-9]{6,7}$");
         var patternFullCellphoneNumber = new RegExp("^((1[358][0-9])|(17[0678]))[0-9]{8}$");
-        var patternShortCellphoneNumber = new RegExp("^[0-9]{6}$");
         var patternQQNumber = new RegExp("^[0-9]{6,10}$");
         var patternEMail = new RegExp("^[a-zA-Z0-9][a-zA-Z0-9-._]*@.+\.[a-zA-z]{2,4}$");
         var matchResult = true;
@@ -339,20 +337,17 @@ $(document).ready(function () {
             case 109:
                 matchResult = patternFullCellphoneNumber.test(matchString);
                 break;
-            case 110:
-                matchResult = patternShortCellphoneNumber.test(matchString);
-                break;
             default:
                 break;
         }
         return matchResult;
     };
-    if (isAtRightGrade(_stuId, activityPageJson.limit_grade)) {
+    if (isAtRightGrade(_stuId.toString(), activityPageJson.limit_grade)) {
     }
     else {
         $("body").prop("disabled", "true");
         alert("不好意思哦，你不在社团规定的年级范围内，点击确定退出。");
-        window.location.href = "/weixin/login/quit";
+        window.location.href = "/baoming.html";
     }
 
     //页面开始计时
