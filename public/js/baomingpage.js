@@ -399,7 +399,7 @@ $(document).ready(function () {
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
-                url: "registration/participateinactivity",
+                url: "/registration/participateinactivity",
                 data: sendJson,
                 dataType: "json",
                 success: function (e) {
