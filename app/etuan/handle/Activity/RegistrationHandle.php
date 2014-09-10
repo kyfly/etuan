@@ -65,10 +65,31 @@ class RegistrationHandle extends  ActivityHandle
 
 public function updateActivity($org_uid, $activityId, $activityInfo)
 {
-    try {
+    $start_time = Registration::where('reg_id',$activityId)->pluck('start_time');
+    if(UsefulTool::myMktime($start_time)<time())
+    {
+        try {
+            DB::beginTransaction();
+            Registration::where('reg_id',$activityId)->update(
+                array(
+                    'stop_time' => $activityInfo->stop_time,
+                    'limit_grade' => $activityInfo->limit_grade,
+                    'name' => $activityInfo->name,
+                    'theme' => $activityInfo->theme,
+                    ));  
+            DB::commit();
+            return true;
+        } catch (Exception $e) {
+            DB::rollback();
+            return false;
+        }       
+    }
+    else
+    {
+       try {
         DB::beginTransaction();
 
-            //删除活动结果,报名问题,和参与报名的人的信息。更新活动之后,之前的结果自动作废.
+        //删除活动结果,报名问题,和参与报名的人的信息。更新活动之后,之前的结果自动作废.
         Reg_result::where('reg_id',$activityId)->delete();
         Reg_question::where('reg_id',$activityId)->delete();
         Registration_user::where('reg_id',$activityId)->delete();
@@ -103,26 +124,27 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
         return false;
     }
 }
+}
 
 public function getActivityResult($activityId)
 {
     $questions = Reg_question::where('reg_id',$activityId)
-        ->orderBy('question_id','asc')
-        ->lists('label');
+    ->orderBy('question_id','asc')
+    ->lists('label');
     $reg_serial = Registration_user::where('reg_id',$activityId)
     ->lists('reg_serial');
     $answers = array();
     foreach($reg_serial as $key=>$serial)
     {
         $answer = Reg_result::where('reg_serial',$serial)
-            ->orderBy('question_id','asc')
-            ->lists('answer');
+        ->orderBy('question_id','asc')
+        ->lists('answer');
         $answers[$key] = $answer;
     }
     return array(
         'questions'=>$questions,
         'answers'=>$answers
-    );
+        );
 }
 
 
