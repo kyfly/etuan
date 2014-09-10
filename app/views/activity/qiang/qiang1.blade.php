@@ -64,7 +64,6 @@
     <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12"
          style="margin-top:1%">
         <form class="form-horizontal" style="margin-top: 100px">
-            <?php echo Form::token()?>
             <div class="form-group">
                 <div class="text-center"><img src="/img/qiang/shanxun.png" alt="时光之书LOGO" class="img-circle"/></div>
             </div>
@@ -105,11 +104,13 @@
     </div>
 </div>
 <script>
-    var ticketId = 10;
+    <?php $sxInfo = DB::table('ticket_1')->where('wx_uid', Weixin::user())->first(); ?>
+    var ticketId = 1;
     var wordSorry = "9月12日和13日还有哦~~";
-    var wordGet = "请留意客服消息";
+    var wordGet = "帐号：{{$sxInfo->shanxun_id}} 密码：{{$sxInfo->shanxun_pwd}}";
+    var stuId = {{Weixin::info()->stu_id}};
 </script>
-<script src="http://cdn.kyfly.net/lib/js/zepto.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="/js/getTicket.js"></script>
 </body>
 </html>
