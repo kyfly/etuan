@@ -39,7 +39,7 @@ class grabController extends \BaseController
 
     private function setStartTime()
     {
-        $time = DB::table("activity_test")->where("ticket_id", $this->ticketId)->pluck("start_time");
+        $time = DB::table("ticket_old")->where("ticket_id", $this->ticketId)->pluck("start_time");
         $temp = explode(' ', $time);
         $temp1 = explode('-', $temp[0]);
         $temp2 = explode('-', $temp[1]);
@@ -77,7 +77,7 @@ class grabController extends \BaseController
 
     public function isGotten($Sno)
     {
-        $exclude = DB::table("activity_test")->where("ticket_id", $this->ticketId)->pluck('exclude_id');
+        $exclude = DB::table("ticket_old")->where("ticket_id", $this->ticketId)->pluck('exclude_id');
         if ($exclude != "")
         {
             $exclude = explode('|', $exclude);
