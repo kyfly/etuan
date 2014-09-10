@@ -213,7 +213,7 @@
                 if (isWeiXin())
                     window.location.href = '/jiang/1';
                 else
-                    alert("您已关注团团一家，请在微信中打开并抽奖！");
+                    alert("您已关注团团一家，请在微信中点击“招新季”菜单抽奖！");
             }
         });
 

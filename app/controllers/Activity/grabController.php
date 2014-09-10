@@ -26,7 +26,6 @@ class grabController extends \BaseController
      */
     private $tableName;
     private $startTime;
-    private $ticketTotal;
     private $ticketId;
 
     public function __construct()
@@ -48,11 +47,6 @@ class grabController extends \BaseController
         return $this->startTime;
     }
 
-    private  function setTicketTotal()
-    {
-        $this->ticketTotal = DB::table("activity_test")->where("ticket_id", $this->ticketId)->pluck("ticket_total");
-        return $this->ticketTotal;
-    }
 
     private  function ticketRemain()
     {
@@ -108,7 +102,6 @@ class grabController extends \BaseController
         $uid = Weixin::user();
         if (!$uid) return 5;
         $this->setStartTime();
-        $this->setTicketTotal();
         Session::put('_token',md5(rand(0,200).Session::get('_token').rand(200,400)));
         if (time() >= $this->startTime) {
             if (!$this->isGotten($Sno)) {

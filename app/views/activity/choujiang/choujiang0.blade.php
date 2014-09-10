@@ -78,6 +78,29 @@
 <script src="/js/jQueryRotate.2.2.js"></script>
 <script>
 $(function () {
+
+    function isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i) == 'micromessenger';
+    }
+
+    if (!isWeiXin())
+    {
+        alert("请在团团一家微信服务号上进行抽奖！");
+        window.location.href
+            = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+    }
+
+
+    $.get('/oauth/checksub', function (data, status) {
+        if (status == 'success') {
+            if (data != '1')
+                alert('您必须关注团团一家服务号才能参加！微信号：e-tuan');
+            window.location.href
+                = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+        }
+    });
+
     var lotteryId = 1;
 
     function random(min, max) {
