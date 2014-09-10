@@ -12,7 +12,7 @@
             <div id="main" class="col-lg-9 col-md-9">
                 <div class="tab-content">
                     <form method="post" class="form-horizontal" action="change-department">
-                        <?php 
+                        <?php
                         foreach ($departments as $department) {
                             echo '
                             <div id="addablebox">
@@ -28,7 +28,7 @@
 
                             <div class="col-sm-6">
                             <textarea class="form-control" name="department_description[]" rows="3">'.$department->description.'</textarea>
-                            <span class="help-block">50字以内</span>
+                            <span class="help-block">请保持在50字以内</span>
                             </div>
                             </div>
                             </div>

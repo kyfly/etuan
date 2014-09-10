@@ -28,7 +28,11 @@
                         @for ($i = 0; $i < count($reglist); $i++)
                             <tr>
                                 <td>{{$i+1}}</td>
-                                <td>{{$reglist[$i]['name']}}</td>
+                                <td>
+                                <a href="/baoming/{{$reglist[$i]['reg_id']}}" target="_blank">
+                                    {{$reglist[$i]['name']}}
+                                </a>
+                                </td>
                                 <td>{{$reglist[$i]['start_time']}}</td>
                                 <td>{{$reglist[$i]['stop_time']}}</td>
                                 <td id="reg{{$reglist[$i]['reg_id']}}">

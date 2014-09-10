@@ -47,14 +47,12 @@
             </thead>
           <tbody>
             <tr>
-              <td>欢迎使用“团团一家”社团活动服务平台！</td>
-              <td>2014-07-08</td>
+              <td>
+              <a href="http://mp.weixin.qq.com/s?__biz=MzA3NTI4MjQwOA==&mid=201107644&idx=2&sn=19d78187b0d38fba685e9634d8eea710#rd" target="_blank">
+                 团团一家招新报名系统介绍
+              </a></td>
+              <td>2014-09-10</td>
               </tr>
-            <tr>
-              <td>报名系统全新上线，新学期招新必备神器！</td>
-              <td>2014-07-15</td>
-              </tr>
-            </tbody>
           </table>
         </div>
       </div>

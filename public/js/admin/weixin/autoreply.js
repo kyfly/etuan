@@ -361,9 +361,8 @@ $('#addNews').click(function () {
         var editor = $('#msgEditor');
         editor.attr('contenteditable', 'false');
         var newsHtml = '<label class="control-label" for="news1">图文素材网址：</label>' +
-            '<textarea class="form-control" rows="4" id="newsText"></textarea>' +
-            '<p class="help-block">输入回车可添加多条图文网址</p>' +
-            '<a>如何获得图文网址 <span class="glyphicon glyphicon-question-sign"></span></a>';
+            '<textarea class="form-control" rows="5" id="newsText"></textarea>' +
+            '<p class="help-block">输入回车可添加多条图文网址</p>';
         editor.html(newsHtml);
     }
 });
