@@ -209,9 +209,12 @@ $(document).ready(function () {
     }
     else {
         //锁定不可修改部分
-        document.getElementsByClassName("datetimepicker")[0].remove();
-        document.getElementById("starttime").parentNode.lastElementChild.remove();
-        document.getElementById("starttime").parentNode.lastElementChild.remove();
+        var dtp1 = document.getElementsByClassName("datetimepicker")[0];
+        dtp1.parentNode.removeChild(dtp1);
+        var st1 = document.getElementById("starttime").parentNode.lastElementChild;
+        st1.parentNode.removeChild(st1);
+        var st2 = document.getElementById("starttime").parentNode.lastElementChild;
+        st2.parentNode.removeChild(st2);
         document.getElementById("starttime").parentNode.removeAttribute("class");
         document.getElementById("starttime").parentNode.removeAttribute("data-date");
         document.getElementById("starttime").parentNode.removeAttribute("data-link-field");
@@ -223,6 +226,7 @@ $(document).ready(function () {
         document.getElementById("extraform").appendChild(dis0);
         document.getElementsByClassName("extralist")[0].appendChild(dis1);
         $("iframe").contents().find("body").css("cursor", "not-allowed");
+        $("#starttime").css("cursor", "not-allowed");
         $("#stoptime").css("cursor", "pointer");
     }
 });
