@@ -14,6 +14,13 @@ class Stu_infoController extends BaseController
 		}
 		//添加判断学号方法
 		if (preg_match('/^(((0[8-9])|(1[0-4]))\d{7})|(14\d{6})$/', $stu_id) && $stu_name ){
+			$re =WxUser::where('wx_uid','!=',$wx_uid)->where('stu_id',$stu_id)->pluck('stu_id');
+			if($re)
+			{
+				$msgArr = array('title' => '用户信息错误', 'body' => '这个学号已经被绑定,请检查是否输入错误或者联系管理员',
+        'status' => 'error', 'btn' => 'true','action'=>'back');
+				return View::make('showmessage')->with('messageArr', $msgArr);
+			}
 		  	$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 			if($re){
 				return Redirect::to($url);
@@ -28,6 +35,13 @@ class Stu_infoController extends BaseController
 
 				$msg = '请填入正确的学号和姓名';
 			}elseif($re == 'OK'){
+				$re =WxUser::where('wx_uid','!=',$wx_uid)->where('stu_id',$stu_id)->pluck('stu_id');
+				if($re)
+				{
+					$msgArr = array('title' => '用户信息错误', 'body' => '这个学号已经被绑定,请检查是否输入错误或者联系管理员',
+            'status' => 'error', 'btn' => 'true','action'=>'back');
+					return View::make('showmessage')->with('messageArr', $msgArr);
+				}
 				$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 				return Redirect::to($url);
 			}
