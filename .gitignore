@@ -10,3 +10,4 @@ Thumbs.db
 /app/config/development
 /app/config/production
 /app/database/etuan.mwb.bak
+/public/robots.txt
