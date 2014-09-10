@@ -95,6 +95,7 @@
         <div class="col-sm-6">
             <input name="name" type="text" class="form-control" id="inputShetuan">
             <span id="span6-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
+            <span class="help-block">请输入社团名称，注册以后不能更改</span>
         </div>
     </div>
     <div class="form-group">
@@ -145,7 +146,7 @@
         <div class="col-sm-6">
             <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">200字以内</span>
+            <span class="help-block">请保持在200字以内</span>
         </div>
     </div>
     <div class="form-group has-feedback" id="inputbox8">
@@ -154,15 +155,17 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="inputWeixin" name="wx">
             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">（选填）</span>
+            <span class="help-block">您的社团公众号，数字与字母（选填）</span>
         </div>
     </div>
+    <div class="help-block" style="padding-left: 120px">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>
     <div class="form-group has-feedback" id="inputbox9">
         <label for="inputLogo" class="col-sm-2 control-label">上传logo</label>
 
         <div class="col-sm-6">
             <input name="logo" type="file" id="inputLogo">
             <span id="span9-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
+            <span class="help-block">建议上传1:1比例的高清不带文字logo图</span>
         </div>
     </div>
     <div class="form-group has-feedback" id="inputbox10">
@@ -211,7 +214,7 @@
 
             <div class="col-sm-6">
                 <textarea class="form-control"  name="department_description[]" rows="3"></textarea>
-                <span class="help-block">50字以内</span>
+                <span class="help-block">请保持在50字以内</span>
             </div>
         </div>
     </div>
