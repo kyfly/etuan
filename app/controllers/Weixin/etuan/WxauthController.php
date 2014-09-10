@@ -32,7 +32,7 @@ class WxauthController extends BaseController
         }
         return 1;
     }
-    public function getKey(){
+    /*public function getKey(){
         $user = Input::get('user');
         $connect= App::make('memcached');
         if($user == 'etuanadmin'){
@@ -64,5 +64,5 @@ class WxauthController extends BaseController
             'status' => 'error', 'btn' => 'false','url'=>'/');
             return View::make('showmessage')->with('messageArr', $msgArr);
         }
-    }
+    }*/
 }
