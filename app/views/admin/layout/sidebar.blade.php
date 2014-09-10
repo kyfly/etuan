@@ -24,9 +24,9 @@
             </li>
             <li class="menu-list"><a>帮助</a>
                 <ul class="sub-menu-list">
-                    <li id="sidebar5-1"><a>帮助中心</a></li>
+                    <!--<li id="sidebar5-1"><a>帮助中心</a></li>-->
                     <li id="sidebar5-2"><a>联系我们</a></li>
-                    <li id="sidebar5-3"><a>关于团团</a></li>
+                    <!--<li id="sidebar5-3"><a>关于团团</a></li>-->
                 </ul>
             </li>
         </ul>
@@ -44,7 +44,7 @@
         'sidebar4-2': '/user/set-organization',
         'sidebar4-3': '/user/set-department',
         'sidebar5-1': 'javascript:void(0)',
-        'sidebar5-2': 'javascript:void(0)',
+        'sidebar5-2': '/admin/help/contact',
         'sidebar5-3': 'javascript:void(0)'
     }
 </script>
