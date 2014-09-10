@@ -96,6 +96,10 @@
                 height: 40px;
                 vertical-align: middle
             }
+
+            #regform {
+                margin-top: 400px;
+            }
         }
 
         @media (max-width: 1365px) {
@@ -138,6 +142,10 @@
                 width: 30px;
                 height: 30px;
                 vertical-align: middle;
+            }
+
+            #regform {
+                margin-top: 200px;
             }
         }
 
