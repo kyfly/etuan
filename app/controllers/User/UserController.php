@@ -62,7 +62,7 @@ public function postChangeOrganization()
             $pic_id[] = $i;
         }
     }
-    if($imgFiles){
+    if(isset($imgFiles) && $imgFiles){
         $pic_names = BS::imgUpload($imgFiles,$type);
         for($i = 0;$i<count($pic_names);$i++)
         {
