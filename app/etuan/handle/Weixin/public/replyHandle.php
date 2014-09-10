@@ -107,13 +107,15 @@ class replyHandle
             if(!$reply_id){
                 $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
             }
+           
             if(!$reply_id){
                 $content = "mp_default_autoreply_message";
                 $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
                 if($re){
-                    $this->reply($postObj,$content);
+                    return $this->reply($postObj,$content);
                 }elseif($content == 'mp_welcome_autoreply_message'){
-                    return $this->toAndroid($postObj);
+                    $content = '';
+            return $this->TextMessage($postObj,$content);
                 }else{
                     $content = '';
                     return $this->TextMessage($postObj,$content);
