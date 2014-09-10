@@ -64,7 +64,6 @@
     <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12"
          style="margin-top:1%">
         <form class="form-horizontal" style="margin-top: 100px">
-            <?php echo Form::token()?>
             <div class="form-group">
                 <div class="text-center"><img src="/img/qiang/shanxun.png" alt="时光之书LOGO" class="img-circle"/></div>
             </div>
@@ -76,7 +75,7 @@
                     <h3 class="text-center" style="color:white;">9月10日 21:00 开抢</h3>
                 </div>
                 <div class="form-group" id="msgSmall">
-                    <h5 class="text-center" style="color: #ffffff;">当前学号：-------- <a href="javascript:void(0)">更改</a>
+                    <h5 class="text-center" style="color: #ffffff;">当前学号：-------- 
                     </h5>
                 </div>
                 <div class="form-group" id="btnDiv">
@@ -84,7 +83,7 @@
                         <button type="button" class="btn btn-block btn-warning" disabled="disabled" id="btnGetTicket">即将开始</button>
                     </div>
                 </div>
-                <div class="form-group" id="divReg">
+                <div class="form-group" id="divReg" style="display: none">
                     <div class="input-group col-xs-10 col-xs-offset-1">
                         <input type="text" class="form-control" id="inputStuId" placeholder="请输入您的学号"
                                style="background-color: transparent; color: #ffffff">
@@ -105,11 +104,40 @@
     </div>
 </div>
 <script>
-    var ticketId = 10;
+    <?php $sxInfo = DB::table('ticket_1')->where('wx_uid', Weixin::user())->first(); ?>
+    var ticketId = 1;
     var wordSorry = "9月12日和13日还有哦~~";
-    var wordGet = "请留意客服消息";
+    @if ($sxInfo)
+    var wordGet = "帐号：{{$sxInfo->shanxun_id}} 密码：{{$sxInfo->shanxun_pwd}}";
+    @else
+    var wordGet = "";
+    @endif
+    var stuId = {{Weixin::info()->stu_id}};
+
+    function isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i) == 'micromessenger';
+    }
+
+    if (!isWeiXin())
+    {
+        alert("请在团团一家微信服务号上进行秒杀！");
+        window.location.href
+            = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+    }
+
+
+    $.get('/oauth/checksub', function (data, status) {
+        if (status == 'success') {
+            if (data != '1')
+                alert('您必须关注团团一家服务号才能参加！微信号：e-tuan');
+                window.location.href
+                = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+        }
+    });
+
 </script>
-<script src="http://cdn.kyfly.net/lib/js/zepto.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="/js/getTicket.js"></script>
 </body>
 </html>

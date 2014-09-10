@@ -18,6 +18,15 @@ Array.prototype.indexOf = function (val) {
     return -1;
 };
 
+(function ($) {
+    $.getUrlParam = function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURIComponent(r[2]);
+        return null;
+    }
+})(jQuery);
+
 $(document).ready(function () {
     $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
     $('.borderDiv').mouseover(function () {
@@ -26,6 +35,10 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
+    if ($.getUrlParam('from') == 'e-tuan' || $.getUrlParam('from') =='e-hduhdu' )
+    {
+        $('#nav').hide();
+    }
 
     $.get('/organization/organization-info', function (data, status) {
         if (status == 'success') {

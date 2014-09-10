@@ -74,15 +74,17 @@
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="inputWeixin" name="wx" value="<?php echo $organization->wx; ?>">
                             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-                            <span class="help-block">（选填）</span>
+                            <span class="help-block">您的社团公众号，数字与字母（选填）</span>
                         </div>
                     </div>
+                    <div class="help-block" style="padding-left: 140px">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>
                     <div class="form-group has-feedback" id="inputbox9">
                         <label for="inputLogo" class="col-sm-2 control-label">上传logo</label>
 
                         <div class="col-sm-6">
                             <input name="logo" type="file" id="inputLogo">
                             <span id="span9-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
+                            <span class="help-block">建议上传1:1比例的高清不带文字logo图</span>
                         </div>
                     </div>
                     <div class="form-group has-feedback" id="inputbox10">

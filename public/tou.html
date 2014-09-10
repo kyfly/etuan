@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>投票中心</title>
+    <title>投票中心 - 团团一家 - 杭电社团服务平台</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/staticList.css" rel="stylesheet">
 </head>
@@ -93,6 +93,15 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script>
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]);
+            return null;
+        }
+    })(jQuery);
+
     $(document).ready(function () {
         $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
         $('.borderDiv').mouseover(function () {
@@ -101,6 +110,10 @@
         $('.borderDiv').mouseout(function () {
             $(this).css('border', '1px solid #ddd');
         });
+        if ($.getUrlParam('from') == 'e-tuan' || $.getUrlParam('from') =='e-hduhdu' )
+        {
+            $('#nav').hide();
+        }
     });
 </script>
 </body>

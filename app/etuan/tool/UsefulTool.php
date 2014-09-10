@@ -13,13 +13,14 @@ class UsefulTool
      */
     public function getIp()
     {
-        $cip = null;
-        if(!empty($_SERVER["REMOTE_ADDR"])){
-            $cip = $_SERVER["REMOTE_ADDR"];
-        }
-        elseif(!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+        $cip = null;        
+        if(!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
             $cip = $_SERVER["HTTP_X_FORWARDED_FOR"];
         }
+        elseif(!empty($_SERVER["REMOTE_ADDR"])){
+            $cip = $_SERVER["REMOTE_ADDR"];
+        }
+
         elseif(!empty($_SERVER["HTTP_CLIENT_IP"])){
             $cip = $_SERVER["HTTP_CLIENT_IP"];
         }
