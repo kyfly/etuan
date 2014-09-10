@@ -75,7 +75,7 @@
                     <h3 class="text-center" style="color:white;">9月10日 21:00 开抢</h3>
                 </div>
                 <div class="form-group" id="msgSmall">
-                    <h5 class="text-center" style="color: #ffffff;">当前学号：-------- <a href="javascript:void(0)">更改</a>
+                    <h5 class="text-center" style="color: #ffffff;">当前学号：-------- 
                     </h5>
                 </div>
                 <div class="form-group" id="btnDiv">
@@ -83,7 +83,7 @@
                         <button type="button" class="btn btn-block btn-warning" disabled="disabled" id="btnGetTicket">即将开始</button>
                     </div>
                 </div>
-                <div class="form-group" id="divReg">
+                <div class="form-group" id="divReg" style="display: none">
                     <div class="input-group col-xs-10 col-xs-offset-1">
                         <input type="text" class="form-control" id="inputStuId" placeholder="请输入您的学号"
                                style="background-color: transparent; color: #ffffff">
@@ -107,7 +107,11 @@
     <?php $sxInfo = DB::table('ticket_1')->where('wx_uid', Weixin::user())->first(); ?>
     var ticketId = 1;
     var wordSorry = "9月12日和13日还有哦~~";
+    @if ($sxInfo)
     var wordGet = "帐号：{{$sxInfo->shanxun_id}} 密码：{{$sxInfo->shanxun_pwd}}";
+    @else
+    var wordGet = "";
+    @endif
     var stuId = {{Weixin::info()->stu_id}};
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>

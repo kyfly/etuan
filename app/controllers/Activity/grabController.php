@@ -116,15 +116,15 @@ class grabController extends \BaseController
                 if ($sxInfo) {
                     DB::table($this->tableName)->where('shanxun_id', $sxInfo->shanxun_id)
                         ->update(array('Sno' => $Sno, 'wx_uid' => $uid));
-                    WB::sendCustomMsg('text', '恭喜您抢到了！帐号：'. $sxInfo->shanxun_id. " 密码:". $sxInfo->shangxun_pwd.
+                    WB::sendCustomMsg('text', '恭喜您抢到了！帐号：'. $sxInfo->shanxun_id. " 密码:". $sxInfo->shanxun_pwd.
                         " 请妥善保管，请勿泄露给他人。9月26日过期。\n".
-                        "过期后可以<a href=\"http://www.kyfly.net/wx/buy.html\">点击此处</a>优惠购买。",
+                        "过期后可以<a href='http://www.kyfly.net/wx/buy.html'>点击此处</a>优惠购买。",
                         $uid);
                     return 1;
                 } else
                 {
                     WB::sendCustomMsg('text', "啊哦，你下手不够快啊亲！没事，接下来还能抢！\n".
-                        "如果你等不及了，可以<a href=\"http://www.kyfly.net/wx/buy.html\">点击此处</a>优惠购买。",
+                        "如果你等不及了，可以<a href='http://www.kyfly.net/wx/buy.html'>点击此处</a>优惠购买。",
                         $uid);
                      return 2;
                 }

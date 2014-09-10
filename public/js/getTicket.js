@@ -111,7 +111,7 @@ var setMsgSmall = {
 
 var ajaxControl = {
     getTime: function () {
-        $.getJSON("../../getticket/time",
+        $.getJSON("/getticket/time",
             {ticketId: ticketId},
             function (time, status) {
                 if (status == "success") {
@@ -129,7 +129,7 @@ var ajaxControl = {
         if (remainTime > 0)
             setTimeout("ajaxControl.getSnoList()", 2000);
         else
-            $.getJSON("../../getticket/snolist",
+            $.getJSON("/getticket/snolist",
                 {ticketId: ticketId},
                 function (data, status) {
                     if (status == "success") {
@@ -151,7 +151,7 @@ var ajaxControl = {
     },
     postSubmit: function () {
         setBtn.disabled();
-        $.post("../../getticket/get-ticket",
+        $.post("/getticket/get-ticket",
             {
                 "ticketId": ticketId
             },
@@ -165,6 +165,7 @@ var ajaxControl = {
                             setMsgSmall.showOk();
                             setBtn.gotten();
                             cookieControl.setGotten();
+			    document.location.reload(true);
                             break;
                         case '2':
                             alert("对不起，抢完了！~>_<~");
