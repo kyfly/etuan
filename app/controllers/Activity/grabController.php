@@ -102,7 +102,7 @@ class grabController extends \BaseController
         $uid = Weixin::user();
         if (!$uid) return 5;
         $this->setStartTime();
-        Session::put('_token',md5(rand(0,200).Session::get('_token').rand(200,400)));
+        //Session::put('_token',md5(rand(0,200).Session::get('_token').rand(200,400)));
         if (time() >= $this->startTime) {
             if (!$this->isGotten($Sno)) {
                 $sxInfo = DB::table($this->tableName)->whereNull('Sno')->first();
@@ -116,7 +116,7 @@ class grabController extends \BaseController
                     return 1;
                 } else
                 {
-                    WB::sendCustomMsg('text', "啊哦，你下手不够快啊亲！没事，接下来还能抢！\n".
+                    WB::sendCustomMsg('text', "啊哦，下手不够快啊亲！没事，接下来还能抢！\n".
                         "如果你等不及了，可以<a href='http://www.kyfly.net/wx/buy.html'>点击此处</a>优惠购买。",
                         $uid);
                      return 2;
