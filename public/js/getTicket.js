@@ -97,10 +97,7 @@ var setMsgSmall = {
     },
     showId: function () {
         this.msg.show();
-        if (ticketId != 5)
-            this.setHtml("当前学号：" + stuId + " <a href=\"javascript:void(0)\" id=\"changeId\">更改</a>");
-        else
-            this.setHtml("当前手机号：" + stuId + " <a href=\"javascript:void(0)\" id=\"changeId\">更改</a>");
+        this.setHtml("当前学号：" + stuId );
     },
     showOk: function () {
         this.msg.show();
@@ -156,9 +153,7 @@ var ajaxControl = {
         setBtn.disabled();
         $.post("../../getticket/get-ticket",
             {
-                "Sno": stuId,
-                "ticketId": ticketId,
-                "_token": $("input[name='_token']").val()
+                "ticketId": ticketId
             },
             function (data, status) {
                 if (status == "success") {
@@ -250,65 +245,22 @@ var cookieControl = {
     isGotten: function () {
         return (this.getCookie("gotten" + ticketId) == "true");
     },
-    isRegistered: function () {
-        stuId = this.getCookie("stuId" + ticketId);
-        return (stuId != "");
-    },
-    setStuId: function () {
-        this.setCookie("stuId" + ticketId, stuId, 3)
-    },
-    delStuId: function () {
-        this.setCookie("stuId" + ticketId, stuId, -1)
-    },
     setGotten: function () {
         this.setCookie("gotten" + ticketId, "true", 7)
     }
 };
 
 $(document).ready(function () {
-    setBtn.reg();
-    setMsgSmall.msgHide();
     setSnoBar.changeWidth();
     setSnoBar.barHide();
-    if (cookieControl.isRegistered()) {
-        setMsgSmall.showId();
-        setBtn.wait();
-    }
+    setMsgSmall.showId();
+    setBtn.wait();
     if (cookieControl.isGotten()) {
         isGotten = true;
         setMsgBig.statusCong();
         setMsgSmall.showOk();
         setBtn.gotten();
     }
-    $(document).keydown(function (event) {
-        if (event.keyCode == 13)
-            $("#btnReg").click();
-    });
-    $("#btnReg").click(function () {
-        stuId = $("#inputStuId").val();
-        var exp = new RegExp("^((0[8-9])|(1[0-4]))(\\d{6}|\\d{7})$");
-        if (ticketId == 5)  exp = new RegExp("^1[3-8]\\d{9}$");
-        if (!exp.test(stuId)) {
-            stuId = "";
-            if (ticketId != 5)  alert("亲，您的学号输错啦！");
-                else
-                    alert("亲，您的手机号输错了！");
-            return;
-        }
-        cookieControl.setStuId();
-        setMsgSmall.showId();
-        if (remainTime > 0)
-            setBtn.wait();
-        else
-            setBtn.started();
-    });
-    $("#changeId").live("click", function () {
-        stuId = "";
-        $("#inputStuId").val("");
-        cookieControl.delStuId();
-        setBtn.reg();
-        setMsgSmall.msgHide();
-    });
     $("#btnGetTicket").click(function () {
         ajaxControl.postSubmit();
     });
@@ -321,5 +273,5 @@ $(window).resize(
 var startTime = new Date();
 var serverTime = new Date();
 //var days = hours = minutes = seconds = 0;
-var stuId, deltaTime, isGotten = false;
+var deltaTime, isGotten = false;
 ajaxControl.getTime();

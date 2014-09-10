@@ -18,6 +18,12 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
         return View::make('activity.baoming.success');
     });
     Route::get('baoming/{id}', 'RegistrationController@reg_info');
+
+    Route::get('qiang/{id}', function($id) {
+        return View::make('activity.qiang.qiang'.$id);
+    });
+
+    Route::controller('/getticket','grabController');
 });
 //需要微信登录但不要求绑定学号的路由
 Route::group(array('before' => 'wxauth'), function () {
@@ -90,9 +96,6 @@ Route::group(array('before' => 'auth'), function () {
 });
 
 
-Route::get('qiang/shanxun1', function() {
-    return View::make('activity.qiang.shanxun1');
-});
 
 Route::get('ip', function() {
     return Registration_user::lists('ip');
