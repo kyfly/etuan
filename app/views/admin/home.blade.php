@@ -48,7 +48,7 @@
           <tbody>
             <tr>
               <td>
-              <a href="http://mp.weixin.qq.com/s?__biz=MzA3NTI4MjQwOA==&mid=201107644&idx=2&sn=19d78187b0d38fba685e9634d8eea710#rd" target="_blank">
+              <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202264970&idx=1&sn=318a1f020d0e18c5379e5b3501e08fdd#rd" target="_blank">
                  团团一家招新报名系统介绍
               </a></td>
               <td>2014-09-10</td>
