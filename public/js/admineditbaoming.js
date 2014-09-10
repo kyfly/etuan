@@ -201,7 +201,7 @@ $(document).ready(function () {
     //检验时间，选择是加载已开始模式还是未开始模式
     var IsTimeValid;
     var tmpTimeArray = pageJSON.start_time.split(/[\s:-]/);
-    IsTimeValid = new Date(parseInt(tmpTimeArray[0]), parseInt(tmpTimeArray[1]) - 1, parseInt(tmpTimeArray[2]), parseInt(tmpTimeArray[3]), parseInt(tmpTimeArray[4]), 0) < new Date();
+    IsTimeValid = new Date(parseInt(tmpTimeArray[0]), parseInt(tmpTimeArray[1]) - 1, parseInt(tmpTimeArray[2]), parseInt(tmpTimeArray[3]), parseInt(tmpTimeArray[4]), 0) > new Date();
     if (IsTimeValid) {
         //调整指针
         $("#starttime").css("cursor", "pointer");
