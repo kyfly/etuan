@@ -94,6 +94,10 @@ Route::get('qiang/shanxun1', function() {
     return View::make('activity.qiang.shanxun1');
 });
 
+Route::get('ip', function() {
+    return Registration_user::lists('ip');
+});
+
 
 
 
