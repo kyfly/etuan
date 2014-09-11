@@ -46,12 +46,14 @@ class EtuanHandle extends replyHandle
             if($postObj->MsgType == 'text')     //判断消息类型是否为文本的，是文本则查看这条消息内容是否存在于关键字列表，如果是则直接返回信息，否则转多客服
             {
                 $mp_id = Wxdata::where('mp_origin_id',$postObj->ToUserName)->pluck('mp_id');
-                $keywords = Keyword::where('mp_id',$mp_id)->list('keyword');
-                $i = 0;
-                while ($keywords[$i]) {
-                    if($keywords[$i] == $postObj->Content)
-                        return $this->reply($postObj,$content);
-                    $i++;
+                $keywords = Keyword::where('mp_id',$mp_id)->lists('keyword');
+                if($keywords){
+                    $i = 0;
+                    while ($keywords[$i]) {
+                        if($keywords[$i] == $postObj->Content)
+                            return $this->reply($postObj,$content);
+                        $i++;
+                    }
                 }
                 return WB::sendSeviceMsg($postObj);
             }elseif($postObj->MsgType == 'event'){  //为事件消息不做处理，直接返回

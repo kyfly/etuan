@@ -22,8 +22,8 @@ class EtuanController extends BaseController{
 		    	$content = '好像哪里出错了';
             	return $this->etuan->TextMessage($postObj,$content);
 		    }
-		    //检查是否为团团一家服务号，并选择是否发送客服消息；
-		    $msg = check_what_send($postObj);
+		    //检查是否为团团一家服务号，并选择是否发送客服消息；		    
+		    $msg = $this->etuan->check_what_send($postObj);
 		    if(!is_bool($msg)){
 		    	return $msg;
 		    }

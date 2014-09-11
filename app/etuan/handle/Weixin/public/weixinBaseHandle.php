@@ -1,11 +1,12 @@
 <?php
 class WB
-{//转发多客服
+{
+    //转发多客服
     public static function sendSeviceMsg($postObj){
         $xml = "<xml>
         <ToUserName><![CDATA[$postObj->FromUserName]]></ToUserName>
         <FromUserName><![CDATA[$postObj->ToUserName]]></FromUserName>
-        <CreateTime>time()</CreateTime>
+        <CreateTime>".time()."</CreateTime>
         <MsgType><![CDATA[transfer_customer_service]]></MsgType>
         </xml>";
     return $xml;
