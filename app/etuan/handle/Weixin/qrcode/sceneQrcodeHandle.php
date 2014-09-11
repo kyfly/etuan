@@ -2,6 +2,7 @@
 <?php
 class QR
 {
+
 	public static function create($id,$type){
 		$appid = Config::get('etuan.wxAppId');
 		$secrect = Config::get('etuan.wxAppSecret');
@@ -26,7 +27,14 @@ class QR
         $scene_id = Etuan::where('act_type',$type)->where('act_id',$id)->pluck('scene_id');
         $oss = new oss;
         $bucket = QRIMGBUCKET;
-        $object = 'etuan/weixin/qrcode/'.$type.'/'.$id.'.jpg';
+        $activity = ['lottery','registration','ticket','vote'];
+        $route = ['jiang','baoming','qiang','tou'];
+        for($i=0;$i<count($activity);$i++){
+            if($activity[$i] == $type){
+                $filedir = $route[$i];
+            }
+        }
+        $object = 'etuan/weixin/qrcode/'.$filedir.'/'.$id.'.jpg';
         $oss->delete_object($bucket,$object);
         $inre = Etuan::where("scene_id",$scene_id)->delete();
         if($inre){
