@@ -1,12 +1,22 @@
 <?php
 class WB
-{
+{//转发多客服
+    public static function sendSeviceMsg($postObj){
+        $xml = "<xml>
+        <ToUserName><![CDATA[$postObj->FromUserName]]></ToUserName>
+        <FromUserName><![CDATA[$postObj->ToUserName]]></FromUserName>
+        <CreateTime>time()</CreateTime>
+        <MsgType><![CDATA[transfer_customer_service]]></MsgType>
+        </xml>";
+    return $xml;
+    }
 	public static function getToken(){
 		$appsecret = Config::get('etuan.wxAppSecret');
         $appid = Config::get('etuan.wxAppId');
         $token = WS::getToken($appid,$appsecret);
         return $token;
 	}
+    //发送客服消息
     public static function sendCustomMsg($type,$content,$touser){
         $token = self::getToken();
         $arr = ['touser'=>$touser,'msgtype'=>$type,"$type"=>['content'=>urlencode($content)]];
@@ -14,6 +24,7 @@ class WB
         $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
         return BS::https_request($url,$data);
     }
+    //
     public static function sendAll($type,$content){
         $token = self::getToken();
         $url = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$token";
