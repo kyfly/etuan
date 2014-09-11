@@ -67,12 +67,12 @@ class EtuanHandle extends replyHandle
          $activity = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
          $obj =new $activity;
          $key = $obj->primaryKey;
-         $url = $activity::where($key,$result->act_id)->select("name")->first();
-         $org_uid = Wxdata::where('mp_origin_id',$mp_origin_id)->pluck('org_uid');
+         $url = $activity::where($key,$result->act_id)->select("name", "org_uid")->first();
+         //$org_uid = Wxdata::where('mp_origin_id',$mp_origin_id)->pluck('org_uid');
          $actObj = new actNewHandle;
          $acturl = $actObj->getactUrl($activity,$result->act_id);
          $arr =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
-                "pic_url"=>Organization::where("org_uid",$org_uid)->pluck('logo_url'),"url"=>$acturl];
+                "pic_url"=>Organization::where("org_uid",$url->org_uid)->pluck('logo_url'),"url"=>$acturl];
          return $this->ArticlesMessage($postObj, $arr);
     }
     public function Click($postObj)
