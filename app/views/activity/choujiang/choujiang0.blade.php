@@ -70,9 +70,9 @@
 
                     <p>二等奖：按键水杯。奖品数量：40 </p>
 
-                    <p>三等奖：团团一家鼠标垫。奖品数量：1000 </p>
+                    <p>三等奖：团团一家鼠标垫。奖品数量：300 </p>
                     <br>
-                    <p>说明：只有参与过社团在线报名的新生才能参加，每人仅限参加一次！</p>
+                    <p>说明：只有参与过社团在线报名的14级新生才能参加，每人仅限参加一次！</p>
                 </div>
             </div>
         </div>
@@ -110,9 +110,11 @@ $(function () {
     $.get('/oauth/checksub', function (data, status) {
         if (status == 'success') {
             if (data != '1')
+            {
                 alert('您必须关注团团一家服务号才能参加！微信号：e-tuan');
-            window.location.href
-                = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+                window.location.href
+                    = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+            }
         }
     });
 
