@@ -266,7 +266,7 @@ $(document).ready(function () {
     var startDate = new Date(checkStartTime[0], parseInt(checkStartTime[1]) - 1, checkStartTime[2], checkStartTime[3], checkStartTime[4], 0);
     var stopDate = new Date(checkStopTime[0], parseInt(checkStopTime[1]) - 1, checkStopTime[2], checkStopTime[3], checkStopTime[4], 0);
     //输入具体时间
-    $("#timeinfo")[0].innerText = "报名时间： " + checkStartTime[1] + "月" + checkStartTime[2] + "日 " + checkStartTime[3] + ":" + checkStartTime[4] +
+    $("#timeinfo")[0].textContent = "报名时间： " + checkStartTime[1] + "月" + checkStartTime[2] + "日 " + checkStartTime[3] + ":" + checkStartTime[4] +
         " ~ " + checkStopTime[1] + "月" + checkStopTime[2] + "日 " + checkStopTime[3] + ":" + checkStopTime[4];
     //检查时间
     if (nowDate > stopDate) {

@@ -80,19 +80,13 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
             'status' => 'fail',
             'content' => '活动不存在'
             ));
-
-    $timeInfo = $this->handle->
-    getTimeInfo($this->tableName, $this->primaryKey, $activityId);
     $values = array(
-        'time' => date('Y-m-d H:i:s',time()),
         'name' => $activityInfo->name
         );
     $rules = array(
-        'time' => array('before:'.$timeInfo->start_time),
         'name' => 'special_not_exist:'.$this->tableName.','.$this->primaryKey.','.$activityId
         );
     $messages = array(
-        'before' => '活动已经开始了,不得更改.',
         'special_not_exist' => '该活动名已经存在了'
         );
     $validator = Validator::make($values,$rules,$messages);

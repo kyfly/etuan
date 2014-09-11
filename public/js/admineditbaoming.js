@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     function checkDuplicate(o) {
         for (var i = 0; i < $("#extraform").children().length; i++) {
-            if ($("#extraform").find("label")[i].innerText === o) {
+            if ($("#extraform").find("label")[i].textContent === o) {
                 alert("已经包含项目【" + o + "】，请勿重复添加。");
                 return false;
             }
@@ -58,15 +58,15 @@ $(document).ready(function () {
     configExtraForm();
     //添加元素到左边
     $(".target .extralist h4:not(:contains(\"自定义\"))").click(function (e) {
-        if (checkDuplicate(e.target.innerText)) {
-            var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+        if (checkDuplicate(e.target.textContent)) {
+            var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.textContent + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
             $("#extraform").append(content);
             setHeight();
             configExtraForm();
         }
     });
     $("#zidingyishort2,#zidingyilong2").click(function (e) {
-        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.innerText + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
+        var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + e.target.textContent + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
         $("#extraform").append(content);
         setHeight();
         configExtraForm();
@@ -209,9 +209,12 @@ $(document).ready(function () {
     }
     else {
         //锁定不可修改部分
-        document.getElementsByClassName("datetimepicker")[0].remove();
-        document.getElementById("starttime").parentNode.lastElementChild.remove();
-        document.getElementById("starttime").parentNode.lastElementChild.remove();
+        var dtp1 = document.getElementsByClassName("datetimepicker")[0];
+        dtp1.parentNode.removeChild(dtp1);
+        var st1 = document.getElementById("starttime").parentNode.lastElementChild;
+        st1.parentNode.removeChild(st1);
+        var st2 = document.getElementById("starttime").parentNode.lastElementChild;
+        st2.parentNode.removeChild(st2);
         document.getElementById("starttime").parentNode.removeAttribute("class");
         document.getElementById("starttime").parentNode.removeAttribute("data-date");
         document.getElementById("starttime").parentNode.removeAttribute("data-link-field");
@@ -223,6 +226,7 @@ $(document).ready(function () {
         document.getElementById("extraform").appendChild(dis0);
         document.getElementsByClassName("extralist")[0].appendChild(dis1);
         $("iframe").contents().find("body").css("cursor", "not-allowed");
+        $("#starttime").css("cursor", "not-allowed");
         $("#stoptime").css("cursor", "pointer");
     }
 });
@@ -296,17 +300,17 @@ $(document).ready(function () {
         var IsRight = [4, 4, 4, 4];
         var IndexRight = 0;
         for (var i = 0; i < l.length; i++) {
-            if (l[i].innerText === "第一志愿部门") {
+            if (l[i].textContent === "第一志愿部门") {
                 IsExist[0] = true;
                 IsRight[IndexRight] = 1;
                 IndexRight++;
             }
-            else if (l[i].innerText === "第二志愿部门") {
+            else if (l[i].textContent === "第二志愿部门") {
                 IsExist[1] = true;
                 IsRight[IndexRight] = 2;
                 IndexRight++;
             }
-            else if (l[i].innerText === "第三志愿部门") {
+            else if (l[i].textContent === "第三志愿部门") {
                 IsExist[2] = true;
                 IsRight[IndexRight] = 3;
                 IndexRight++;
@@ -461,18 +465,18 @@ $(document).ready(function () {
                     content: ""
                 };
                 questionItem.question_id = j + 1;
-                var thisType = label2type(objQuestion[j].innerText);
+                var thisType = label2type(objQuestion[j].textContent);
                 questionItem.type = thisType;
                 if (thisType === 1 || thisType === 2 || thisType === 3) {
                     questionItem.label = objQuestion[j].parentNode.childNodes[2].value;
                     questionItem.content = "";
                 }
                 else if(thisType === 112 || thisType === 113 || thisType === 114){
-                    questionItem.label = objQuestion[j].innerText;
+                    questionItem.label = objQuestion[j].textContent;
                     questionItem.content = JSON.stringify(departmentInfo);
                 }
                 else {
-                    questionItem.label = objQuestion[j].innerText;
+                    questionItem.label = objQuestion[j].textContent;
                     questionItem.content = "";
                 }
                 createActivityJson.questions[j] = questionItem;

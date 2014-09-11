@@ -109,7 +109,7 @@ class AuthController extends BaseController
                 'email' => $userInfo['email'],
                 'password' => Hash::make($userInfo['password']),
                 'phone_long' => $userInfo['phone_long'],
-                'phone_short' => $userInfo['phone_short'],
+                'phone_short' => $userInfo['phone_short']==''?NULL:$userInfo['phone_short'],
                 'user_group' => 'org',
                 'login_token' => $login_token
             ));
