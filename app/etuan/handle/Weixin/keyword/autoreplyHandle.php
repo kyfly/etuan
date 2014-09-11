@@ -158,13 +158,13 @@ class autoreplyHandle
     public static function show($org_uid){
         $mp_ids = Wxdata::where("org_uid",$org_uid)->lists("mp_id");
         for($i = 0;$i<count($mp_ids);$i++){
-            $keyreply_id = clickEvent::where('mp_id',$mp_ids[$i])->lists('mp_reply_id');
+            //$keyreply_id = clickEvent::where('mp_id',$mp_ids[$i])->lists('mp_reply_id');
             //判断是否属于菜单事件
-            if($keyreply_id){
-                $msgs = Autoreply::whereNotIn('mp_reply_id',$keyreply_id)->select('mp_reply_id','msg_type','msg_id')->get();
-            }else{
+            //if($keyreply_id){
+              //  $msgs = Autoreply::whereNotIn('mp_reply_id',$keyreply_id)->select('mp_reply_id','msg_type','msg_id')->get();
+           // }else{
                 $msgs = Autoreply::where("mp_id",$mp_ids[$i])->select("mp_reply_id","msg_type","msg_id")->get();
-            }
+          //  }
             //对不是菜单事件的自动回复进行处理
             for($j = 0;$j<count($msgs);$j++){
                 if($msgs[$j]->msg_type == "text"){

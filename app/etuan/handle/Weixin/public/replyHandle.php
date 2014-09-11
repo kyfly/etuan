@@ -103,10 +103,10 @@ class replyHandle
     public function reply($postObj,$content){
         try{
             $mp_id = Wxdata::where("mp_origin_id",$postObj->ToUserName)->pluck("mp_id");
-            $reply_id = clickEvent::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');
-            if(!$reply_id){
+            //$reply_id = clickEvent::where("mp_id",$mp_id)->where('key',$content)->pluck('mp_reply_id');
+            //if(!$reply_id){
                 $reply_id = Keyword::where("mp_id",$mp_id)->where("keyword",$content)->pluck("mp_reply_id");
-            }
+            //}
            
             if(!$reply_id){
                 $content = "mp_default_autoreply_message";

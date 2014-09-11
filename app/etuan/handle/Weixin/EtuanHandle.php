@@ -4,29 +4,7 @@ class EtuanHandle extends replyHandle
 {
     public function EtuanTextHandle($postObj)
     {
-
-        switch($postObj->Content){
-            case "info":
-                $info = Wxdata::lists('mp_origin_id');
-                $user = "";
-                foreach($info as $val){
-                    $uid = Wxdata::pluck('org_uid');
-                    $orgname = Organization::where("org_uid",$uid)->pluck('name');
-                    $url = "weixin://contacts/profile/$val";
-                    $user = $user."<a href=\"$url\">点击关注$orgname</a>";
-                    $user = $user."\n";
-                }
-                $user = substr($user,0, strlen($user)-2);
-                $content = $user;
-                return $this->TextMessage($postObj,$content);
-                break;   
-           case "hh":
-                $content = "<a href=\"http://linkew.net/x\">dd</a>";
-                return $this->TextMessage($postObj,$content);
-           default:
-               return $this->Autoreply($postObj);
-                break;
-        }
+        return $this->Autoreply($postObj);
     }
 
     public function EtuaneventHandle($postObj){
@@ -36,9 +14,11 @@ class EtuanHandle extends replyHandle
             case "subscribe":
                 $content = "mp_welcome_autoreply_message";
                 if(isset($postObj->EventKey)){
-                    $eventkey = $postObj->EventKey;
-                    $scene_id = substr($eventkey,8);
-                    return $this->sceneReply($postObj,$scene_id);
+                    if($postObj->EventKey!=''){
+                        $eventkey = $postObj->EventKey;
+                        $scene_id = substr($eventkey,8);
+                        return $this->sceneReply($postObj,$scene_id);
+                    }
                 }
                 return $this->reply($postObj,$content);
                 break;
