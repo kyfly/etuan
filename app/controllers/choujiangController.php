@@ -12,9 +12,7 @@ class choujiangController extends BaseController
 		$wx_uid = Weixin::user();
 		$stu_id = WxUser::where('wx_uid',$wx_uid)->pluck('stu_id');
         if(substr($stu_id, 0,2) != '14'){
-            $msgArr = array('title' => '错误', 'body' => '真遗憾,这次抽奖活动是为新生准备的,你不能参与',
-            'status' => 'error', 'btn' => 'true','action'=>'close');
-            return View::make('showmessage')->with('messageArr', $msgArr);
+            return '{"status": "fail", "message": "对不起，只有新生才能参加抽奖哦，不要跟学弟学妹抢奖品！"}';
         }
 		$result = $this->lot->getInfo();
 		return urldecode(json_encode($result));
