@@ -108,19 +108,19 @@ class autoreplyHandle
                         {
                              Newsmsg::where('news_id',$result->msg_id)->delete();
                         }
-                        if(isset($arr['content'][0])){
-                            for($i=0;$i<count($arr['content']);$i++){
-                                $arr['content'][$i]['mp_id'] = $arr["mp_id"];
-                                $arr['content'][$i]['news_from'] =  $arr['news_from'];
-                            }
-                        }else{
-                            $arr['content']['mp_id'] = $arr["mp_id"];
-                            $arr['content']['news_from'] =  $arr['news_from'];
+                    }
+                    if(isset($arr['content'][0])){
+                        for($i=0;$i<count($arr['content']);$i++){
+                            $arr['content'][$i]['mp_id'] = $arr["mp_id"];
+                            $arr['content'][$i]['news_from'] =  $arr['news_from'];
                         }
-                        $news_id = $news->create($arr['content']);
-                        if(!is_numeric($news_id)){
-                            return $news_id;
-                        }
+                    }else{
+                        $arr['content']['mp_id'] = $arr["mp_id"];
+                        $arr['content']['news_from'] =  $arr['news_from'];
+                    }
+                    $news_id = $news->create($arr['content']);
+                    if(!is_numeric($news_id)){
+                        return $news_id;
                     }
                     Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->update(["msg_id"=>$news_id,"msg_type"=>$arr["type"]]);
                 }else{
@@ -140,7 +140,7 @@ class autoreplyHandle
             }
             $msg = $replyObj->successMsg($arr['mp_reply_id']);
             return $msg;
-        }catch (Exception $e) {
+       }catch (Exception $e) {
             DB::rollback();
             return '更新消息失败';
         }
