@@ -72,7 +72,7 @@
             </div>
             <div>
                 <div class="form-group" id="msgBig">
-                    <h3 class="text-center" style="color:white;">9月10日 21:00 开抢</h3>
+                    <h3 class="text-center" style="color:white;">正在加载开始时间</h3>
                 </div>
                 <div class="form-group" id="msgSmall">
                     <h5 class="text-center" style="color: #ffffff;">当前学号：-------- 
@@ -106,7 +106,7 @@
 <script>
     <?php $sxInfo = DB::table('ticket_1')->where('wx_uid', Weixin::user())->first(); ?>
     var ticketId = 1;
-    var wordSorry = "9月12日和13日还有哦~~";
+    var wordSorry = "13日和14日21点还有两场哦";
     @if ($sxInfo)
     var wordGet = "帐号：{{$sxInfo->shanxun_id}} 密码：{{$sxInfo->shanxun_pwd}}";
     @else
