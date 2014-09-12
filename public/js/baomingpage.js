@@ -263,8 +263,8 @@ $(document).ready(function () {
     var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
     var checkStopTime = activityPageJson.stop_time.split(/[\s:-]/);
-    var startDate = new Date(checkStartTime[0], parseInt(checkStartTime[1]) - 1, checkStartTime[2], checkStartTime[3], checkStartTime[4], 0);
-    var stopDate = new Date(checkStopTime[0], parseInt(checkStopTime[1]) - 1, checkStopTime[2], checkStopTime[3], checkStopTime[4], 0);
+    var startDate = new Date(parseInt(checkStartTime[0]), parseInt(checkStartTime[1]) - 1, parseInt(checkStartTime[2]), parseInt(checkStartTime[3]), parseInt(checkStartTime[4]), 0);
+    var stopDate = new Date(parseInt(checkStopTime[0]), parseInt(checkStopTime[1]) - 1, parseInt(checkStopTime[2]), parseInt(checkStopTime[3]), parseInt(checkStopTime[4]), 0);
     //输入具体时间
     $("#timeinfo")[0].textContent = "报名时间： " + checkStartTime[1] + "月" + checkStartTime[2] + "日 " + checkStartTime[3] + ":" + checkStartTime[4] +
         " ~ " + checkStopTime[1] + "月" + checkStopTime[2] + "日 " + checkStopTime[3] + ":" + checkStopTime[4];
@@ -288,15 +288,8 @@ $(document).ready(function () {
     //开始整个报名表的运作部分
     //检查是否属于允许报名的学号
     var isAtRightGrade = function (newStuId, newLimitGrade) {
-        var stuId, limitGrade;
-        if (typeof(newLimitGrade) === "string" && typeof(parseInt(newLimitGrade)) === "number" && newLimitGrade.length === 5
-            && typeof(newStuId) === "string" && newStuId.length === 8 || newStuId.length === 9 && typeof(parseInt(newStuId)) === "number") {
-            limitGrade = parseInt(newLimitGrade);
-            stuId = newStuId;
-        }
-        else {
-            return false;
-        }
+        var stuId = newStuId;
+        var limitGrade = parseInt(newLimitGrade);
 
         //表示获得学号前两位
         var gradePattern = new RegExp("^..");
