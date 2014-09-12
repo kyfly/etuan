@@ -169,7 +169,7 @@
     window._bd_share_config = {
         common: {
             bdText: '{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台',
-            bdDesc: '{{{str_replace(["\n", \r"], " ", $orgInfo->description)}}}',
+            bdDesc: '{{{str_replace(["\n", "\r"], " ", $orgInfo->description)}}}',
             bdUrl: 'http://www.etuan.org/shetuan/{{{$orgInfo->org_id}}}',
             bdPic: '{{{$orgInfo->logo_url}}}',
             bdMiniList: ['tsina', 'qzone', 'weixin', 'sqq', 'tqq', 'renren', 'tieba', 'hi', 'mail', 'copy']
