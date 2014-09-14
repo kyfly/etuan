@@ -15,7 +15,7 @@ class DatabaseValidator extends Validator {
         $tableName = $parameters[0];
         $primaryKey = $parameters[1];
         $activityId = $parameters[2];
-        return DB::table($tableName)->where($primaryKey,'<>',$activityId)
+        return DB::table(strtolower($tableName))->where($primaryKey,'<>',$activityId)
         		->where($attribute,$value)->count()==0;
     }
 

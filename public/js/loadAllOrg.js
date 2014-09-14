@@ -43,7 +43,7 @@ $(document).ready(function () {
     $.get('/organization/organization-info', function (data, status) {
         if (status == 'success') {
             var regDivTpl = ' <div class="col-xs-12 col-sm-4 col-md-3">' +
-                '<a href="{0}">' +
+                '<a href="{0}" target="_blank">' +
                 '<div class="thumbnail borderDiv">' +
                 '<p class="listhead">{1}</p>' +
                 '<img style="width: 150px; height: 150px" src="{2}">' +

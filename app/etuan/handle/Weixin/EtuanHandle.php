@@ -34,9 +34,9 @@ class EtuanHandle extends replyHandle
             case "CLICK":
                 return $this->Click($postObj);
                 break;
+
             default:
-                    return "";
-                break;
+                return;
         }
         return $this->reply($postObj,$content);
 
@@ -48,12 +48,10 @@ class EtuanHandle extends replyHandle
                 $mp_id = Wxdata::where('mp_origin_id',$postObj->ToUserName)->pluck('mp_id');
                 $keywords = Keyword::where('mp_id',$mp_id)->lists('keyword');
                 if($keywords){
-                    $i = 0;
-                    while ($keywords[$i]) {
-                        if($keywords[$i] == $postObj->Content)
-                            return $this->reply($postObj,$content);
-                        $i++;
-                    }
+                    foreach ($keywords as $keyword) {
+                        if($keyword == $postObj->Content)
+                            return $this->reply($postObj,$keyword);
+                     }
                 }
                 return WB::sendSeviceMsg($postObj);
             }elseif($postObj->MsgType == 'event'){  //为事件消息不做处理，直接返回

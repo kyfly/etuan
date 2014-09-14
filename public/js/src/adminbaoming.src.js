@@ -78,157 +78,9 @@ $(document).ready(function () {
         $(this).prop("src", $(this).prop("src").toString().replace("1.png", "0.png"));
     });
 
-    //函数将标签转化为类型
-    var type2label = function (typenum) {
-        var labelback = "";
-        switch (typenum) {
-            case 101:
-                labelback = "学号";
-                break;
-            case 102:
-                labelback = "姓名";
-                break;
-            case 103:
-                labelback = "性别";
-                break;
-            case 104:
-                labelback = "学院";
-                break;
-            case 105:
-                labelback = "专业";
-                break;
-            case 106:
-                labelback = "特长";
-                break;
-            case 107:
-                labelback = "电子邮箱";
-                break;
-            case 108:
-                labelback = "QQ";
-                break;
-            case 109:
-                labelback = "手机长号";
-                break;
-            case 110:
-                labelback = "移动短号";
-                break;
-            case 111:
-                labelback = "籍贯";
-                break;
-            case 112:
-                labelback = "第一志愿部门";
-                break;
-            case 113:
-                labelback = "第二志愿部门";
-                break;
-            case 114:
-                labelback = "第三志愿部门";
-                break;
-            case 115:
-                labelback = "是否服从调剂";
-                break;
-            case 1:
-                labelback = "自定义短问题";
-                break;
-            case 2:
-                labelback = "自定义长问题";
-                break;
-            default:
-                labelback = "";
-                break;
-        }
-        ;
-        return labelback;
-    };
-
-    function loadExistContent(activityInfoJson) {
-        document.getElementById("starttime").value = activityInfoJson.start_time.replace(/\:00$/, "");
-        document.getElementById("stoptime").value = activityInfoJson.stop_time.replace(/\:00$/, "");
-        document.getElementById("regname").value = activityInfoJson.name;
-        var objLimit = document.getElementsByName("grade");
-        var limitGrade = activityInfoJson.limit_grade.split("");
-        for (var i = 0; i < objLimit.length; i++) {
-            if (limitGrade[i] === "1") {
-                objLimit[objLimit.length - 1 - i].checked = true;
-            }
-            else {
-                objLimit[objLimit.length - 1 - i].checked = false;
-            }
-        }
-        document.getElementsByName("theme")[activityInfoJson.theme].checked = true;
-        for (var j = 0; j < activityInfoJson.questions.length; j++) {
-            var e = activityInfoJson.questions[j];
-            if (e.type === 101 || e.type === 102) {
-            }
-            else if (e.type === 1 || e.type === 2) {
-                var zdylabel = "";
-                if (e.type === 1) {
-                    zdylabel = "自定义短问题";
-                }
-                else {
-                    zdylabel = "自定义长问题";
-                }
-                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + zdylabel + "</label>&ensp;<input type=\"text\" placeholder=\"请输入问题描述\" value=\"" + e.label + "\">&emsp;&emsp;&emsp;&emsp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
-                $("#extraform").append(content);
-                setHeight();
-                configExtraForm();
-            }
-            else {
-                var content = "<div style=\"display: inline\" class=\"form-group\"><label class=\"baomingitem\">" + type2label(e.type) + "</label>&emsp;&emsp;&emsp;&emsp;&ensp;<a class=\"moveup\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向上移动\"><span class=\"glyphicon glyphicon-arrow-up\"></span></a>&ensp;<a class=\"movedown\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"向下移动\"><span class=\"glyphicon glyphicon-arrow-down\"></span></a>&ensp;<a class=\"delete\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"删除项目\"><span class=\"glyphicon glyphicon-trash\"></span></a><hr></div>";
-                $("#extraform").append(content);
-                setHeight();
-                configExtraForm();
-            }
-        }
-    }
-    var pageJSON;
-    $.ajax({
-        async: false,
-        type: "get",
-        dataType: "json",
-        url: "/registration/activityinfo?activityId=" + _activityId.toString(),
-        success: function (msg) {
-            if (pageJSON === undefined) {
-                pageJSON = msg;
-                loadExistContent(pageJSON);
-            }
-        },
-        error: function () {
-            alert("当前网络不佳，暂时无法加载报名表信息");
-        }
-    });
-
-    //检验时间，选择是加载已开始模式还是未开始模式
-    var IsTimeValid;
-    var tmpTimeArray = pageJSON.start_time.split(/[\s:-]/);
-    IsTimeValid = new Date(parseInt(tmpTimeArray[0]), parseInt(tmpTimeArray[1]) - 1, parseInt(tmpTimeArray[2]), parseInt(tmpTimeArray[3]), parseInt(tmpTimeArray[4]), 0) > new Date();
-    if (IsTimeValid) {
-        //调整指针
-        $("#starttime").css("cursor", "pointer");
-        $("#stoptime").css("cursor", "pointer");
-    }
-    else {
-        //锁定不可修改部分
-        var dtp1 = document.getElementsByClassName("datetimepicker")[0];
-        dtp1.parentNode.removeChild(dtp1);
-        var st1 = document.getElementById("starttime").parentNode.lastElementChild;
-        st1.parentNode.removeChild(st1);
-        var st2 = document.getElementById("starttime").parentNode.lastElementChild;
-        st2.parentNode.removeChild(st2);
-        document.getElementById("starttime").parentNode.removeAttribute("class");
-        document.getElementById("starttime").parentNode.removeAttribute("data-date");
-        document.getElementById("starttime").parentNode.removeAttribute("data-link-field");
-        $("#starttime").prop("disabled", true);
-        var dis0 = document.createElement("iframe");
-        dis0.setAttribute("style", "border-width:0px;height:100%;width:100%;z-index:99;background-color:rgba(0,0,0,0);position:absolute;top:0;left:0;");
-        var dis1 = document.createElement("iframe");
-        dis1.setAttribute("style", "border-width:0px;height:100%;width:100%;z-index:99;background-color:rgba(0,0,0,0);position:absolute;top:0;left:0");
-        document.getElementById("extraform").appendChild(dis0);
-        document.getElementsByClassName("extralist")[0].appendChild(dis1);
-        $("iframe").contents().find("body").css("cursor", "not-allowed");
-        $("#starttime").css("cursor", "not-allowed");
-        $("#stoptime").css("cursor", "pointer");
-    }
+    //调整指针
+    $("#starttime").css("cursor", "pointer");
+    $("#stoptime").css("cursor", "pointer");
 });
 
 //获得创建报名的各项参数数据
@@ -477,7 +329,7 @@ $(document).ready(function () {
                 createActivityJson.questions[j] = questionItem;
             }
             //打包好发送格式的Json
-            var sendJson = {activityId: _activityId, activityInfo: JSON.stringify(createActivityJson)};
+            var sendJson = {activityInfo: JSON.stringify(createActivityJson)};
             //禁用按钮防止错误提交
             $("#preview").prop("disabled", true);
             $("#submit").prop("disabled", true);
@@ -486,7 +338,7 @@ $(document).ready(function () {
             //利用Ajax把Json用POST上去
             $.ajax({
                 type: "POST",
-                url: "/registration/updateactivity",
+                url: "/registration/createactivity",
                 data: sendJson,
                 dataType: "json",
                 success: function (e) {

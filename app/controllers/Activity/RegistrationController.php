@@ -118,8 +118,26 @@ class RegistrationController extends ActivityController
     public function reg_info($id)
     {
         Registration::where('reg_id',$id)->increment('page_view');
-        $theme = Registration::where('reg_id',$id)->pluck('theme');
-        return View::make('activity.baoming.baoming'.$theme)->with('activityId',$id);
+        $info = Registration::where('reg_id',$id)->select('theme','limit_grade')
+                    ->first();
+        $isGrade = 0;
+        $stu_id =  Weixin::info()->stu_id;
+        if(strlen($stu_id)==9){
+            if($info->limit_grade[0] == 1)
+                $isGrade = 1;
+        }else{
+            $stu_id = 15 - (int)substr($stu_id, 0 , 2);
+            if($info->limit_grade[5-$stu_id]==1)
+                $isGrade = 1;
+        }
+        $isTime = 0;
+        $timeInfo = $this->registrationHandle->getTimeInfo('registration','reg_id',$id);
+        if($timeInfo->start_time<date('Y-m-d H:i:s',time())&&$timeInfo->stop_time>date('Y-m-d H:i:s',time()))
+            $isTime = 1;
+        return View::make('activity.baoming.baoming'.$info->theme)->with(array(
+                                'activityId'=>$id,
+                                'isGrade'=>$isGrade,
+                                'isTime'=>$isTime));
     }
 
     public function reg_list()

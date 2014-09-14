@@ -209,10 +209,12 @@
     _activityId = {{$activityId }};
     _stuId = {{Weixin::info()->stu_id}};
     _stuName = '{{Weixin::info()->stu_name}}';
+    _IsTime = {{$isTime}};
+    _IsGrade = {{$isGrade}};
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="/js/baomingpage.js"></script>
+<script src="/js/baomingpage1.js"></script>
 <script src="/js/baoming0.js"></script>
 
 </body>
