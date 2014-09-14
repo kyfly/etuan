@@ -132,7 +132,7 @@ class RegistrationController extends ActivityController
         }
         $isTime = 0;
         $timeInfo = $this->registrationHandle->getTimeInfo('registration','reg_id',$id);
-        if($timeInfo->start_time<date('Y-m-d H:i:s',time())&&$timeInfo->stop_time>time())
+        if($timeInfo->start_time<date('Y-m-d H:i:s',time())&&$timeInfo->stop_time>date('Y-m-d H:i:s',time()))
             $isTime = 1;
         return View::make('activity.baoming.baoming'.$info->theme)->with(array(
                                 'activityId'=>$id,
