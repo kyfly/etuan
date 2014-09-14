@@ -311,19 +311,6 @@ $(document).ready(function () {
         alert("不好意思哦，你不在社团规定的年级范围内。");
     }
     */
-    alert("judge before");
-    alert("_IsGrade "+_IsGrade);
-    alert("_IsGrade "+ typeof(_IsGrade));
-    alert("_IsTime "+ _IsTime);
-    alert("_IsTime "+ typeof(_IsTime));
-    alert(_IsGrade === 1);
-    alert(_IsGrade == 1);
-    alert(_IsGrade === 0);
-    alert(_IsGrade == 0);
-    alert(_IsTime === 1);
-    alert(_IsTime == 1);
-    alert(_IsTime === 0);
-    alert(_IsTime == 0);
     //根据blade输出的信息来做判断提示
     if (_IsGrade === 1) {
         if (_IsTime === 1) {
@@ -352,7 +339,6 @@ $(document).ready(function () {
             alert("对不起，您的年级不在报名范围内且当前不是报名时间。");
         }
     }
-    alert("judge after");
 
     //开始整个报名表的运作部分
     //设置内容逻辑分析：学号、手机号等正则表达式
