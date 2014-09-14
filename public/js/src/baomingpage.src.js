@@ -313,8 +313,8 @@ $(document).ready(function () {
     */
 
     //根据blade输出的信息来做判断提示
-    if (IsGrade) {
-        if (IsTime) {
+    if (_IsGrade === 1) {
+        if (_IsTime === 1) {
         }
         else {
             $("input").prop("disabled", true);
@@ -325,7 +325,7 @@ $(document).ready(function () {
         }
     }
     else {
-        if (IsTime) {
+        if (_IsTime === 1) {
             $("input").prop("disabled", true);
             $("textarea").prop("disabled", true);
             $("select").prop("disabled", true);
@@ -376,7 +376,6 @@ $(document).ready(function () {
         }
         return matchResult;
     };
-
 
     //页面开始计时
     var usedTime = 0;
