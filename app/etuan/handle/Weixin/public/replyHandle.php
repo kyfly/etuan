@@ -110,12 +110,12 @@ class replyHandle
            
             if(!$reply_id){
                 $content = "mp_default_autoreply_message";
-                $re = Keyword::where('keyword',$content)->pluck('mp_reply_id');
+                $re = Keyword::where('keyword',$content)->where("mp_id",$mp_id)->pluck('mp_reply_id');
                 if($re){
                     return $this->reply($postObj,$content);
                 }elseif($content == 'mp_welcome_autoreply_message'){
                     $content = '';
-            return $this->TextMessage($postObj,$content);
+                    return $this->TextMessage($postObj,$content);
                 }else{
                     $content = '';
                     return $this->TextMessage($postObj,$content);

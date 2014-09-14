@@ -17,8 +17,8 @@ class UniversalHandle extends replyHandle
             break;
 
             default:
-            $content = "mp_default_autoreply_message";
-            return $this->reply($postObj,$content);
+            
+            return "";
             break;
          }
         return 0;

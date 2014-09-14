@@ -35,7 +35,7 @@ class EtuanHandle extends replyHandle
                 return $this->Click($postObj);
                 break;
             default:
-                    $content = "mp_default_autoreply_message";
+                    return "";
                 break;
         }
         return $this->reply($postObj,$content);
