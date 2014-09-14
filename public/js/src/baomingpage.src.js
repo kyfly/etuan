@@ -223,7 +223,6 @@ $(document).ready(function () {
             return false;
         }
     }
-
     if (is_weixn()) {
         $("#logout").remove();
     }
@@ -260,14 +259,16 @@ $(document).ready(function () {
     //给社团链接添加链接
     $("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
     //时间变量准备
-    var nowDate = new Date();
+    //var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);
     var checkStopTime = activityPageJson.stop_time.split(/[\s:-]/);
-    var startDate = new Date(parseInt(checkStartTime[0]), parseInt(checkStartTime[1]) - 1, parseInt(checkStartTime[2]), parseInt(checkStartTime[3]), parseInt(checkStartTime[4]), 0);
-    var stopDate = new Date(parseInt(checkStopTime[0]), parseInt(checkStopTime[1]) - 1, parseInt(checkStopTime[2]), parseInt(checkStopTime[3]), parseInt(checkStopTime[4]), 0);
+    //var startDate = new Date(parseInt(checkStartTime[0]), parseInt(checkStartTime[1]) - 1, parseInt(checkStartTime[2]), parseInt(checkStartTime[3]), parseInt(checkStartTime[4]), 0);
+    //var stopDate = new Date(parseInt(checkStopTime[0]), parseInt(checkStopTime[1]) - 1, parseInt(checkStopTime[2]), parseInt(checkStopTime[3]), parseInt(checkStopTime[4]), 0);
     //输入具体时间
     $("#timeinfo")[0].textContent = "报名时间： " + checkStartTime[1] + "月" + checkStartTime[2] + "日 " + checkStartTime[3] + ":" + checkStartTime[4] +
         " ~ " + checkStopTime[1] + "月" + checkStopTime[2] + "日 " + checkStopTime[3] + ":" + checkStopTime[4];
+
+    /*
     //检查时间
     if (nowDate > stopDate) {
         $("div").prop("disabled", true);
@@ -285,7 +286,6 @@ $(document).ready(function () {
         $("#submit").prop("disabled", true);
         alert("客官稍安勿躁，还没开始报名~");
     }
-    //开始整个报名表的运作部分
     //检查是否属于允许报名的学号
     var isAtRightGrade = function (newStuId, newLimitGrade) {
         var stuId = newStuId;
@@ -300,6 +300,49 @@ $(document).ready(function () {
         var benResult = stuId.length === 8 && parseInt(limitGrade % parseInt(Math.pow(10, 15 - stuGrade)) / parseInt(Math.pow(10, 14 - stuGrade))) === 1;
         return (yanResult || benResult);
     };
+    if (isAtRightGrade(_stuId.toString(), activityPageJson.limit_grade)) {
+    }
+    else {
+        $("div").prop("disabled", true);
+        $("input").prop("disabled", true);
+        $("textarea").prop("disabled", true);
+        $("select").prop("disabled", true);
+        $("#submit").prop("disabled", true);
+        alert("不好意思哦，你不在社团规定的年级范围内。");
+    }
+    */
+
+    //根据blade输出的信息来做判断提示
+    if (IsGrade) {
+        if (IsTime) {
+        }
+        else {
+            $("input").prop("disabled", true);
+            $("textarea").prop("disabled", true);
+            $("select").prop("disabled", true);
+            $("#submit").prop("disabled", true);
+            alert("对不起，现在还不是报名时间。");
+        }
+    }
+    else {
+        if (IsTime) {
+            $("input").prop("disabled", true);
+            $("textarea").prop("disabled", true);
+            $("select").prop("disabled", true);
+            $("#submit").prop("disabled", true);
+            alert("对不起，您的年级不在报名范围内。");
+        }
+        else {
+            $("input").prop("disabled", true);
+            $("textarea").prop("disabled", true);
+            $("select").prop("disabled", true);
+            $("#submit").prop("disabled", true);
+            alert("对不起，您的年级不在报名范围内且当前不是报名时间。");
+        }
+    }
+
+
+    //开始整个报名表的运作部分
     //设置内容逻辑分析：学号、手机号等正则表达式
     var isMatchFormat = function (newMatchString, newType) {
         var matchString, type;
@@ -333,16 +376,7 @@ $(document).ready(function () {
         }
         return matchResult;
     };
-    if (isAtRightGrade(_stuId.toString(), activityPageJson.limit_grade)) {
-    }
-    else {
-        $("div").prop("disabled", true);
-        $("input").prop("disabled", true);
-        $("textarea").prop("disabled", true);
-        $("select").prop("disabled", true);
-        $("#submit").prop("disabled", true);
-        alert("不好意思哦，你不在社团规定的年级范围内。");
-    }
+
 
     //页面开始计时
     var usedTime = 0;
