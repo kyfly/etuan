@@ -106,7 +106,7 @@
 <script>
     <?php $sxInfo = DB::table('ticket_1')->where('wx_uid', Weixin::user())->first(); ?>
     var ticketId = 1;
-    var wordSorry = "13日和14日21点还有两场哦";
+    var wordSorry = "点击底下的赞助商链接可以优惠购买哦";
     @if ($sxInfo)
     var wordGet = "帐号：{{$sxInfo->shanxun_id}} 密码：{{$sxInfo->shanxun_pwd}}";
     @else
