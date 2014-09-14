@@ -184,7 +184,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button id="preview" type="button" class="btn btn-warning">预览</button>
                         <button id="submit" type="button" class="btn btn-success">提交</button>
                     </div>
                 </div>

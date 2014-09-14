@@ -183,11 +183,6 @@ $(document).ready(function () {
             return true;
         }
     };
-    $("#preview").click(function () {
-        var previewWindow = window.open("about:blank");
-        previewWindow.document.title = $("#regname").val();
-        previewWindow.document.write("即时预览功能正在开发中，敬请期待~");
-    });
     $("#submit").click(function () {
         var IsAllowSend = true;
         //检查时间前后的对比
