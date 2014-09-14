@@ -35,12 +35,8 @@ class EtuanHandle extends replyHandle
                 return $this->Click($postObj);
                 break;
 
-	    case "VIEW":
-		return;
-
             default:
-                    $content = "mp_default_autoreply_message";
-                break;
+                return;
         }
         return $this->reply($postObj,$content);
 
