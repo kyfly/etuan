@@ -25,7 +25,11 @@ class Weixin
 	public static function user($val=""){
 		$user = Session::get("wx_uid");
 		if($val){
-			return WxUser::where('wx_uid',$user)->pluck($val);
+			if($val != "nick_name"){
+				return WxUser::where('wx_uid',$user)->pluck($val);
+			}else{
+				return urldecode(WxUser::where('wx_uid',$user)->pluck('nick_name'));
+			}
 		}else{
 			if(!$user){
 				return 'false';
