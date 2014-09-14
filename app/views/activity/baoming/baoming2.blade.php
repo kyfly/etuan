@@ -192,7 +192,9 @@
 <script>
     _activityId = {{$activityId }};
     _stuId = {{Weixin::info()->stu_id}};
-    _stuName = '{{Weixin::info()->stu_name}}';
+    _stuName = '{{Weixin::info()->stu_name}}'
+    _IsTime = {{}};
+    _IsGrade = {{}};
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
