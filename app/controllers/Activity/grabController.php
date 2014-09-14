@@ -62,17 +62,23 @@ class grabController extends \BaseController
 
     public function getSnolist()
     {
-        $snoList = array("remain" => $this->ticketRemain(), "list" => array());
-        $snoList["list"] = DB::table($this->tableName)->whereNotNull('Sno')->lists('Sno');
-        foreach ($snoList["list"] as &$value)
+        if (time() >= $this->startTime)
         {
-            if ($value < 10000000)
-                $str = sprintf("0%d", $value);
-            else
-                $str = sprintf("%d", $value);
-            $value = substr_replace($str, "**", 2, 2);
+            $snoList = array("remain" => $this->ticketRemain(), "list" => array());
+            $snoList["list"] = DB::table($this->tableName)->whereNotNull('Sno')->lists('Sno');
+            foreach ($snoList["list"] as &$value)
+            {
+                if ($value < 10000000)
+                    $str = sprintf("0%d", $value);
+                else
+                    $str = sprintf("%d", $value);
+                $value = substr_replace($str, "**", 2, 2);
+            }
+            array_push($snoList["list"], '...');
+            return json_encode($snoList);
         }
-        return json_encode($snoList);
+        else
+            return 'not started';
     }
 
     public function isGotten($Sno)
