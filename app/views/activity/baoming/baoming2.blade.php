@@ -198,7 +198,7 @@
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="/js/baomingpage.js"></script>
+<script src="/js/baomingpage1.js"></script>
 <script src="/js/baoming2.js"></script>
 
 </body>
