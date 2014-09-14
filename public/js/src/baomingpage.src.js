@@ -312,18 +312,18 @@ $(document).ready(function () {
     }
     */
     alert("judge before");
-    alert("_IsGrade"+_IsGrade);
-    alert("_IsTime"+ typeof(_IsGrade));
-    alert("_IsTime"+ _IsTime);
-    alert("_IsTime"+ typeof(_IsTime));
-    alert("_IsGrade === 1"+_IsGrade === 1);
-    alert("_IsGrade == 1"+_IsGrade == 1);
-    alert("_IsGrade === 0"+_IsGrade === 0);
-    alert("_IsGrade == 0"+_IsGrade == 0);
-    alert("_IsTime === 1"+_IsTime === 1);
-    alert("_IsTime == 1"+_IsTime == 1);
-    alert("_IsTime === 0"+_IsTime === 0);
-    alert("_IsTime == 0"+_IsTime == 0);
+    alert("_IsGrade "+_IsGrade);
+    alert("_IsGrade "+ typeof(_IsGrade));
+    alert("_IsTime "+ _IsTime);
+    alert("_IsTime "+ typeof(_IsTime));
+    alert(_IsGrade === 1);
+    alert(_IsGrade == 1);
+    alert(_IsGrade === 0);
+    alert(_IsGrade == 0);
+    alert(_IsTime === 1);
+    alert(_IsTime == 1);
+    alert(_IsTime === 0);
+    alert(_IsTime == 0);
     //根据blade输出的信息来做判断提示
     if (_IsGrade == 1) {
         if (_IsTime == 1) {
