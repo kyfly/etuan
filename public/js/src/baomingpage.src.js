@@ -325,8 +325,8 @@ $(document).ready(function () {
     alert(_IsTime === 0);
     alert(_IsTime == 0);
     //根据blade输出的信息来做判断提示
-    if (_IsGrade == 1) {
-        if (_IsTime == 1) {
+    if (_IsGrade === 1) {
+        if (_IsTime === 1) {
         }
         else {
             $("input").prop("disabled", true);
@@ -337,7 +337,7 @@ $(document).ready(function () {
         }
     }
     else {
-        if (_IsTime == 1) {
+        if (_IsTime === 1) {
             $("input").prop("disabled", true);
             $("textarea").prop("disabled", true);
             $("select").prop("disabled", true);
