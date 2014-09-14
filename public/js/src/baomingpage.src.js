@@ -312,6 +312,10 @@ $(document).ready(function () {
     }
     */
     alert("judge before");
+    alert(_IsGrade);
+    alert(typeof(_IsGrade));
+    alert(_IsTime);
+    alert(typeof(_IsTime));
     //根据blade输出的信息来做判断提示
     if (_IsGrade == 1) {
         if (_IsTime == 1) {
