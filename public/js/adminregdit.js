@@ -518,7 +518,7 @@ function delspan(delbtn) {
 };
 
 $("#addablebox").on('change','.wordlimit',function(){
-　　if ($(this).val().length > 50) {
+    if ($(this).val().length > 50) {
 		alert("对不起，部门介绍请勿超过50个字符限制！");
 		return false;
 	}
