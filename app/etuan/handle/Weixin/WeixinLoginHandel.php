@@ -28,7 +28,7 @@ class Weixin
 			if($val != "nick_name"){
 				return WxUser::where('wx_uid',$user)->pluck($val);
 			}else{
-				return urldecode(WxUser::where('wx_uid',$user)->pluck('nick_name'));
+				return WxUser::where('wx_uid',$user)->pluck('nick_name');
 			}
 		}else{
 			if(!$user){
@@ -42,6 +42,7 @@ class Weixin
 		$user = Session::get("wx_uid");
 		if($user){
             $info = WxUser::where('wx_uid',$user)->select('headimgurl','stu_id','stu_name','nick_name')->first();
+            
             return $info;
         }else{
             return 'false';

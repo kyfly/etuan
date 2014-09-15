@@ -162,7 +162,7 @@
 
         <p id="userinfo">
             <img id="useravatar" src="{{{Weixin::info()->headimgurl}}}" class="img-circle"/>
-            &ensp;{{{urldncode(Weixin::info()->nick_name)}}}&ensp;
+            &ensp;{{{Weixin::info()->nick_name}}}&ensp;
             <a id="logout" href="/weixin/login/quit">
                 <span class="glyphicon glyphicon-log-out" style="vertical-align: middle"></span>
                 退出

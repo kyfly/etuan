@@ -14,13 +14,11 @@ class wxUserHandle
             $userinfo =$this->getUserinfo($token,$userid);
            
             $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
-            
-               dd($userinfo);
             if($result==NULL)
             {
                 $user = new WxUser;
                 $user->wx_uid = $userinfo["openid"];
-                $user->nick_name = urlencode($userinfo["nickname"]);
+                $user->nick_name = preg_replace('~\xEE[\x80-\xBF][\x80-\xBF]|\xEF[\x81-\x83][\x80-\xBF]~', '',$userinfo["nickname"]);
                 $user->sex = $userinfo["sex"];
                 $user->province = $userinfo["province"];
                 $user->city = $userinfo["city"];
