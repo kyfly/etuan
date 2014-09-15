@@ -1,6 +1,15 @@
 <?php
 class BS
 {
+    public static function cleanEmoji($str){
+        $str = urlencode($str);
+        while(stripos($str,'%F0',0) !==false){
+            $num = stripos($str,'%F0',0);
+            BS::dump($num);
+            $str = substr($str,0,$num).substr($str,$num+12);
+        }
+        return urldecode($str);
+    }
     public static function getImagePathFormat(){
         $org_uid = Auth::user()->org_uid;
         return '/image/'.date('Y-m-d',time()).'/'.$org_uid.'/'.time().rand(10000,99999);

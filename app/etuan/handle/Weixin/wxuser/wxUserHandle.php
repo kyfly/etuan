@@ -10,15 +10,15 @@ class wxUserHandle
             }
             $userid =$json["openid"];
             $token = $json["access_token"];
-            
             $userinfo =$this->getUserinfo($token,$userid);
-           
             $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
+
             if($result==NULL)
             {
                 $user = new WxUser;
                 $user->wx_uid = $userinfo["openid"];
-                $user->nick_name = preg_replace('~\xEE[\x80-\xBF][\x80-\xBF]|\xEF[\x81-\x83][\x80-\xBF]~', '',$userinfo["nickname"]);
+                $user->nick_name = BS::cleanEmoji($userinfo["nickname"]);
+
                 $user->sex = $userinfo["sex"];
                 $user->province = $userinfo["province"];
                 $user->city = $userinfo["city"];
