@@ -72,7 +72,10 @@
 
                     <p>三等奖：团团一家鼠标垫。奖品数量：300 </p>
                     <br>
-                    <p>说明：只有参与过社团在线报名的14级新生才能参加，每人仅限参加一次！</p>
+                    <img src="/img/choujiang/prize_vertical.jpg">
+                    <p>说明：<br>
+                        1. 只有参与过社团在线报名的14级新生才能参加，每人仅限参加一次！<br>
+                        2. 我们将在10月安排发放奖品，请留意团团一家微信号通知。</p>
                 </div>
             </div>
         </div>
@@ -105,7 +108,6 @@ $(function () {
         window.location.href
             = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
     }
-
 
     $.get('/oauth/checksub', function (data, status) {
         if (status == 'success') {
