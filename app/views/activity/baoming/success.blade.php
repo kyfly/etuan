@@ -49,8 +49,7 @@
 
         .texts-xs {
             text-align: center;
-            margin-top: 10px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .p1 {
@@ -59,7 +58,7 @@
 
         .visible-in-xs {
             background-color: #ffffff !important;
-            padding-top: 50px;
+            padding-top: 20px;
         }
 
         .img-md {
@@ -68,6 +67,16 @@
 
         .img-xs {
             margin-bottom: 40px;
+        }
+
+        .img-prize {
+            margin-top: 40px;
+        }
+
+        .img-prize-xs {
+            margin-bottom: 20px;
+            width: 100%;
+            height: 100%;
         }
 
         h3 {
@@ -120,6 +129,10 @@
             &nbsp;&nbsp;&nbsp;
             <button class="btn btn-info btn-lg btn-more">报名更多社团</button>
         </div>
+        <div class="clearfix"></div>
+        <div class="col-md-10 col-md-offset-1">
+            <img class="img-prize" src="/img/choujiang/prize_horizontal.jpg">
+        </div>
     </div>
 </div>
 
@@ -136,7 +149,6 @@
                 立即关注>>
             </a>
         </p>
-        <br>
 
         <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-warning btn-lg btn-xsmall btn-lottery">点击抽奖</button>
@@ -147,8 +159,9 @@
             <button class="btn btn-info btn-lg btn-xsmall btn-more">报名更多社团</button>
         </div>
     </div>
-    <br>
-
+    <div class="col-xs-12">
+        <img class="img-prize-xs" src="/img/choujiang/prize_vertical.jpg">
+    </div>
     <div class="centerclass col-xs-12 img-xs">
         <img src="http://img.kyfly.net/common/qrcode/wx-etuan.jpg@220w_220h.jpg" width="220px" height="220px">
         <h4 class="text-center">扫码关注 微信号e-tuan</h4>
