@@ -125,7 +125,7 @@ $(document).ready(function () {
             case 107:
                 elementFilling = document.createElement("input");
                 elementFilling.setAttribute("type", "email");
-                elementFilling.setAttribute("placeholder", "其输入您的电子邮箱地址");
+                elementFilling.setAttribute("placeholder", "请输入您的电子邮箱地址");
                 introText = document.createTextNode("电子邮箱");
                 break;
             case 108:
