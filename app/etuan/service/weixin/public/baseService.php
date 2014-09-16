@@ -5,7 +5,7 @@ class BS
         $str = urlencode($str);
         while(stripos($str,'%F0',0) !==false){
             $num = stripos($str,'%F0',0);
-            $str = substr($str,0,$num).'口'.substr($str,$num+12);
+            $str = substr($str,0,$num).'□'.substr($str,$num+12);
         }
         return urldecode($str);
     }

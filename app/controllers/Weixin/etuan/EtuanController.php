@@ -19,7 +19,7 @@ class EtuanController extends BaseController{
 		    $url = substr($_SERVER["REQUEST_URI"], 4,32);
 		    $result= $this->etuan->check($postObj,$url);
 		    if(!$result){
-		    	$content = '好像哪里出错了';
+		    	$content = '该微信号接口被占用,请提示社团管理员尽快联系<a href="weixin://contacts/profile/gh_255607335c38">团团一家</a>解决';
             	return $this->etuan->TextMessage($postObj,$content);
 		    }
 		    //检查是否为团团一家服务号，并选择是否发送客服消息；		    

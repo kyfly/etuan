@@ -40,6 +40,9 @@ Route::filter('auth', function()
 });
 Route::filter('wxauth', function()
 {
+    require_once '/mobile/Mobile_Detect.php';
+    $detect = new Mobile_Detect;
+    $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
     $requesturl = "http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
     Session::put('requesturl',$requesturl);
     $name = Session::get('nick_name');
@@ -50,14 +53,21 @@ Route::filter('wxauth', function()
         $re = '';
     }
     if(!$re){
-        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')){
-            $appid= Config::get('etuan.wxAppId');
-            $callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
-            $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
-            return Redirect::to($url);
+        if($deviceType != 'computer'){
+            if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')){
+                $appid= Config::get('etuan.wxAppId');
+                $callbackUrl = urlencode('http://'.$_SERVER['HTTP_HOST'].'/oauth');
+                $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
+                return Redirect::to($url);
+            }else{
+                $msgArr = array('title' => '登录失败', 'body' => '这个链接只有在微信和电脑上才能打开额,快复制过去参与活动吧',
+            'status' => 'error', 'btn' => 'false','action'=>'close');
+                return View::make('showmessage')->with('messageArr', $msgArr);
+            }
         }else{
             return Redirect::to('weixin/login');
         }
+        
     }
 });
 
