@@ -7,7 +7,8 @@
 		"laravel/framework": "4.1.*",
 		"haska/laravel-pdf": "dev-master",
 		"phpseclib/phpseclib": "0.3.*@dev",
-		"maatwebsite/excel": "1.*"
+		"maatwebsite/excel": "1.*",
+        "mobiledetect/mobiledetectlib": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -19,8 +20,7 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php",
-			"app/oss/oss.php",
-			"app/mobile/Mobile_Detect.php"
+			"app/oss/oss.php"
 		]
 	},
 	"scripts": {
