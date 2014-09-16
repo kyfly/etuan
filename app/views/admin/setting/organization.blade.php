@@ -34,28 +34,7 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="1"><?php echo $organization->school;?></option>
-<!--                            <option value="全校">全校</option>
-                                <option value="机械工程学院">机械工程学院</option>
-                                <option value="电子信息学院">电子信息学院</option>
-                                <option value="通信工程学院">通信工程学院</option>
-                                <option value="自动化学院">自动化学院</option>
-                                <option value="计算机学院">计算机学院</option>
-                                <option value="生命信息与仪器工程学院">生命信息与仪器工程学院</option>
-                                <option value="材料与环境工程学院">材料与环境工程学院</option>
-                                <option value="软件工程学院">软件工程学院</option>
-                                <option value="理学院">理学院</option>
-                                <option value="经济学院">经济学院</option>
-                                <option value="管理学院">管理学院</option>
-                                <option value="会计学院">会计学院</option>
-                                <option value="外国语学院">外国语学院</option>
-                                <option value="数字媒体与艺术设计学院">数字媒体与艺术设计学院</option>
-                                <option value="人文与法学院">人文与法学院</option>
-                                <option value="马克思主义学院">马克思主义学院</option>
-                                <option value="卓越学院">卓越学院</option>
-                                <option value="信息工程学院">信息工程学院</option>
-                                <option value="国际教育学院">国际教育学院</option>
-                                <option value="继续教育学院">继续教育学院</option>  -->
+                                <option value="0"><?php echo $organization->school;?></option>
                             </select>
                         </div>
                     </div>
@@ -127,6 +106,9 @@
 </div>
 @include('admin.layout.footer')
 
+<script>
+
+</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
