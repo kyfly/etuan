@@ -1,7 +1,7 @@
 function sortOrg(a, b) {
-    return (a.statusWords == b.statusWords) ?
+    return (a.statusInt == b.statusInt) ?
         a.internal_order - b.internal_order :
-        a.statusWords - b.statusWords;
+        a.statusInt - b.statusInt;
 }
 
 function setStatus(data)
