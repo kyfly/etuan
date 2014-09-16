@@ -25,7 +25,11 @@
 
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
-                                <option id="xiaojioption" value="1"><?php echo $organization->type;?></option>
+                                <option value="<?php echo $organization->type;?>" selected>(原设定)<?php echo $organization->type;?></option>
+                                <option value="1">校级组织</option>
+                                <option value="2">院级组织</option>
+                                <option value="3">校级社团</option>
+                                <option value="4">院级社团</option>
                             </select>
                         </div>
                     </div>
@@ -34,7 +38,7 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="0"><?php echo $organization->school;?></option>
+                                <option value="<?php echo $organization->school;?>">(原设定)<?php echo $organization->school;?></option>
                             </select>
                         </div>
                     </div>
@@ -106,9 +110,6 @@
 </div>
 @include('admin.layout.footer')
 
-<script>
-
-</script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
