@@ -40,7 +40,6 @@ Route::filter('auth', function()
 });
 Route::filter('wxauth', function()
 {
-    require_once '/mobile/Mobile_Detect.php';
     $detect = new Mobile_Detect;
     $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
     $requesturl = "http://".$_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
