@@ -60,7 +60,7 @@ $(function () {
                 $('#inputbox2').addClass("has-success");
                 $('#span2').addClass("hidespan");
                 flag[1] = 1;
-            };
+            }
 			if ($("#inputPassword2").val() != "") {
                 if (!$("#inputPassword").val || $(this).val() != $("#inputPassword2").val()) {
                 $('#span3').removeClass("hidespan");
@@ -480,7 +480,7 @@ $(function () {
                 '<div class="col-sm-6"><textarea class="form-control wordlimit" name="department_description[]" rows="3"></textarea>' +
                 '<span class="help-block">50字以内</span></div></div></div>';
             $('#addablebox').append(createSelect);
-        })
+        });
 
         $("#inputXueyuan").empty();
         $("#inputXueyuan").prepend("<option value='全校' selected>全校</option>");
@@ -515,7 +515,7 @@ $(function () {
 
 function delspan(delbtn) {
     $(delbtn).parents(".addedbox").remove();
-};
+}
 
 $("#addablebox").on('change','.wordlimit',function(){
     if ($(this).val().length > 50) {
