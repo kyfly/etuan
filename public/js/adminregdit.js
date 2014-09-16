@@ -15,28 +15,23 @@ $(function () {
                 function (data, status) {
                     if (status == 'success') {
                         if (data == '0') {
-                            $('#span1-2').text('该邮箱已被注册');
+                            $('#span1-2').text('该邮箱已被注册').removeClass("hidespan");
                             $('#span1').removeClass("hidespan");
-                            $('#span1-2').removeClass("hidespan");
-                            $('#inputbox1').addClass("has-error");
-                            $('#inputbox1').removeClass("has-success");
+                            $('#inputbox1').addClass("has-error").removeClass("has-success");
                             $('#span1-1').addClass("hidespan");
                             flag[0] = 0;
                         }
                         else if ($('#inputEmail').val() == ''
                             || ($('#inputEmail').val() != '' && !/^[a-zA-Z0-9][a-zA-Z0-9-._]*@.+\.[a-zA-z]{2,4}$/.test($('#inputEmail').val()))) {
-                            $('#span1-2').text('邮箱格式不正确');
+                            $('#span1-2').text('邮箱格式不正确').removeClass("hidespan");
                             $('#span1').removeClass("hidespan");
-                            $('#span1-2').removeClass("hidespan");
-                            $('#inputbox1').addClass("has-error");
-                            $('#inputbox1').removeClass("has-success");
+                            $('#inputbox1').addClass("has-error").removeClass("has-success");
                             $('#span1-1').addClass("hidespan");
                             flag[0] = 0;
                         } else {
                             $('#span1-1').removeClass("hidespan");
                             $('#span1-2').addClass("hidespan");
-                            $('#inputbox1').removeClass("has-error");
-                            $('#inputbox1').addClass("has-success");
+                            $('#inputbox1').removeClass("has-error").addClass("has-success");
                             $('#span1').addClass("hidespan");
                             flag[0] = 1;
                         }
@@ -49,15 +44,13 @@ $(function () {
             if (this.value == '' || (this.value != '' && !/^[^\s]{6,16}$/.test(this.value))) {
                 $('#span2').removeClass("hidespan");
                 $('#span2-2').removeClass("hidespan");
-                $('#inputbox2').addClass("has-error");
-                $('#inputbox2').removeClass("has-success");
+                $('#inputbox2').addClass("has-error").removeClass("has-success");
                 $('#span2-1').addClass("hidespan");
                 flag[1] = 0;
             } else {
                 $('#span2-1').removeClass("hidespan");
                 $('#span2-2').addClass("hidespan");
-                $('#inputbox2').removeClass("has-error");
-                $('#inputbox2').addClass("has-success");
+                $('#inputbox2').removeClass("has-error").addClass("has-success");
                 $('#span2').addClass("hidespan");
                 flag[1] = 1;
             }
@@ -65,16 +58,14 @@ $(function () {
                 if (!$("#inputPassword").val || $(this).val() != $("#inputPassword2").val()) {
                 $('#span3').removeClass("hidespan");
                 $('#span3-2').removeClass("hidespan");
-                $('#inputbox3').addClass("has-error");
-                $('#inputbox3').removeClass("has-success");
+                $('#inputbox3').addClass("has-error").removeClass("has-success");
                 $('#span3-1').addClass("hidespan");
                 flag[2] = 0;
             }
             else {
                 $('#span3-1').removeClass("hidespan");
                 $('#span3-2').addClass("hidespan");
-                $('#inputbox3').removeClass("has-error");
-                $('#inputbox3').addClass("has-success");
+                $('#inputbox3').removeClass("has-error").addClass("has-success");
                 $('#span3').addClass("hidespan");
                 flag[2] = 1;
             }
@@ -85,16 +76,14 @@ $(function () {
             if (!$(this).val || $(this).val() != $("#inputPassword").val()) {
                 $('#span3').removeClass("hidespan");
                 $('#span3-2').removeClass("hidespan");
-                $('#inputbox3').addClass("has-error");
-                $('#inputbox3').removeClass("has-success");
+                $('#inputbox3').addClass("has-error").removeClass("has-success");
                 $('#span3-1').addClass("hidespan");
                 flag[2] = 0;
             }
             else {
                 $('#span3-1').removeClass("hidespan");
                 $('#span3-2').addClass("hidespan");
-                $('#inputbox3').removeClass("has-error");
-                $('#inputbox3').addClass("has-success");
+                $('#inputbox3').removeClass("has-error").addClass("has-success");
                 $('#span3').addClass("hidespan");
                 flag[2] = 1;
             }
@@ -104,15 +93,13 @@ $(function () {
             if (this.value == '' || (this.value != '' && !/^((1[358][0-9])|(17[0678]))[0-9]{8}$/.test(this.value))) {
                 $('#span4').removeClass("hidespan");
                 $('#span4-2').removeClass("hidespan");
-                $('#inputbox4').addClass("has-error");
-                $('#inputbox4').addClass("has-feedback");
+                $('#inputbox4').addClass("has-error").addClass("has-feedback");
                 $('#span4-1').addClass("hidespan");
                 flag[3] = 0;
             } else {
                 $('#span4-1').removeClass("hidespan");
                 $('#span4-2').addClass("hidespan");
-                $('#inputbox4').removeClass("has-error");
-                $('#inputbox4').addClass("has-success");
+                $('#inputbox4').removeClass("has-error").addClass("has-success");
                 $('#span4').addClass("hidespan");
                 flag[3] = 1;
             }
@@ -122,22 +109,19 @@ $(function () {
 			if (this.value != '' && !/^0{0,1}[0-9]{6}$/.test(this.value)) {
 				$('#span5').removeClass("hidespan");
 				$('#span5-2').removeClass("hidespan");
-				$('#inputbox5').removeClass("has-success");
-				$('#inputbox5').addClass("has-error");
+				$('#inputbox5').removeClass("has-success").addClass("has-error");
 				$('#span5-1').addClass("hidespan");
 				flag[4] = 0;
 			} else {
 				if ($('#inputPhone2').val() == '') {
-					$('#inputbox5').removeClass("has-error");
-					$('#inputbox5').removeClass("has-success");
+					$('#inputbox5').removeClass("has-error").removeClass("has-success");
 					$('#span5-1').addClass("hidespan");
 					$('#span5-2').addClass("hidespan");
 					$('#span5').addClass("hidespan");
 					flag[4] = 1;
 				}else{$('#span5-1').removeClass("hidespan");
 					$('#span5-2').addClass("hidespan");
-					$('#inputbox5').removeClass("has-error");
-					$('#inputbox5').addClass("has-success");
+					$('#inputbox5').removeClass("has-error").addClass("has-success");
 					$('#span5').addClass("hidespan");
 					flag[4] = 1;
 				}
@@ -328,15 +312,13 @@ $(function () {
             if ($("#inputEmail").val() == '' || ($("#inputEmail").val() != '' && !/^[a-zA-Z0-9][a-zA-Z0-9-._]*@.+\.[a-zA-z]{2,4}$/.test($("#inputEmail").val()))) {
                 $('#span1').removeClass("hidespan");
                 $('#span1-2').removeClass("hidespan");
-                $('#inputbox1').addClass("has-error");
-                $('#inputbox1').removeClass("has-success");
+                $('#inputbox1').addClass("has-error").removeClass("has-success");
                 $('#span1-1').addClass("hidespan");
                 flag[0] = 0;
             } else {
                 $('#span1-1').removeClass("hidespan");
                 $('#span1-2').addClass("hidespan");
-                $('#inputbox1').removeClass("has-error");
-                $('#inputbox1').addClass("has-success");
+                $('#inputbox1').removeClass("has-error").addClass("has-success");
                 $('#span1').addClass("hidespan");
                 flag[0] = 1;
             }
@@ -344,15 +326,13 @@ $(function () {
             if ($("#inputPassword").val() == '' || ($("#inputPassword").val() != '' && !/^[^\s]{6,16}$/.test($("#inputPassword").val()))) {
                 $('#span2').removeClass("hidespan");
                 $('#span2-2').removeClass("hidespan");
-                $('#inputbox2').addClass("has-error");
-                $('#inputbox2').removeClass("has-success");
+                $('#inputbox2').addClass("has-error").removeClass("has-success");
                 $('#span2-1').addClass("hidespan");
                 flag[1] = 0;
             } else {
                 $('#span2-1').removeClass("hidespan");
                 $('#span2-2').addClass("hidespan");
-                $('#inputbox2').removeClass("has-error");
-                $('#inputbox2').addClass("has-success");
+                $('#inputbox2').removeClass("has-error").addClass("has-success");
                 $('#span2').addClass("hidespan");
                 flag[1] = 1;
             }
@@ -360,16 +340,14 @@ $(function () {
             if (!$("#inputPassword2").val() || $("#inputPassword2").val() != $("#inputPassword2").val()) {
                 $('#span3').removeClass("hidespan");
                 $('#span3-2').removeClass("hidespan");
-                $('#inputbox3').addClass("has-error");
-                $('#inputbox3').removeClass("has-success");
+                $('#inputbox3').addClass("has-error").removeClass("has-success");
                 $('#span3-1').addClass("hidespan");
                 flag[2] = 0;
             }
             else {
                 $('#span3-1').removeClass("hidespan");
                 $('#span3-2').addClass("hidespan");
-                $('#inputbox3').removeClass("has-error");
-                $('#inputbox3').addClass("has-success");
+                $('#inputbox3').removeClass("has-error").addClass("has-success");
                 $('#span3').addClass("hidespan");
                 flag[2] = 1;
             }
@@ -377,15 +355,13 @@ $(function () {
             if ($("#inputPhone").val() == '' || ($("#inputPhone").val() != '' && !/^((1[358][0-9])|(17[0678]))[0-9]{8}$/.test($("#inputPhone").val()))) {
                 $('#span4').removeClass("hidespan");
                 $('#span4-2').removeClass("hidespan");
-                $('#inputbox4').addClass("has-error");
-                $('#inputbox4').addClass("has-feedback");
+                $('#inputbox4').addClass("has-error").addClass("has-feedback");
                 $('#span4-1').addClass("hidespan");
                 flag[3] = 0;
             } else {
                 $('#span4-1').removeClass("hidespan");
                 $('#span4-2').addClass("hidespan");
-                $('#inputbox4').removeClass("has-error");
-                $('#inputbox4').addClass("has-success");
+                $('#inputbox4').removeClass("has-error").addClass("has-success");
                 $('#span4').addClass("hidespan");
                 flag[3] = 1;
             }
@@ -394,21 +370,19 @@ $(function () {
 				if ($("#inputPhone2").val() == '' || ($("#inputPhone2").val() !=  '' && !/^0{0,1}[0-9]{6}$/.test($("#inputPhone2").val()))) {
 					$('#span5').removeClass("hidespan");
 					$('#span5-2').removeClass("hidespan");
-					$('#inputbox5').removeClass("has-success");
-					$('#inputbox5').addClass("has-error");
+					$('#inputbox5').removeClass("has-success").addClass("has-error");
 					$('#span5-1').addClass("hidespan");
 					flag[4] = 0;
 				} else {
 					$('#span5-1').removeClass("hidespan");
 					$('#span5-2').addClass("hidespan");
-					$('#inputbox5').removeClass("has-error");
-					$('#inputbox5').addClass("has-success");
+					$('#inputbox5').removeClass("has-error").addClass("has-success");
 					$('#span5').addClass("hidespan");
 					flag[4] = 1;
 				}
-			}else{
-				$('#inputbox5').removeClass("has-error");
-				$('#inputbox5').removeClass("has-success");
+			}
+            else{
+				$('#inputbox5').removeClass("has-error").removeClass("has-success");
 				$('#span5-1').addClass("hidespan");
 				$('#span5-2').addClass("hidespan");
 				$('#span5').addClass("hidespan");
@@ -482,14 +456,12 @@ $(function () {
             $('#addablebox').append(createSelect);
         });
 
-        $("#inputXueyuan").empty();
-        $("#inputXueyuan").prepend("<option value='全校' selected>全校</option>");
+        $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
         $("#inputType").change(function () {
             var checkText = $("#inputType").find("option:selected").text();
             var schoolArr = ['机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
             if (checkText == "校级组织" || checkText == "校级社团") {
-                $("#inputXueyuan").empty();
-                $("#inputXueyuan").prepend("<option value='2' selected>全校</option>");
+                $("#inputXueyuan").empty().prepend("<option value='2' selected>全校</option>");
             }
             else {
                 $("#inputXueyuan").empty();
