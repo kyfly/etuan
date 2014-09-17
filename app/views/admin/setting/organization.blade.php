@@ -25,7 +25,6 @@
 
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
-                                <option value="<?php echo $organization->type;?>" selected>(原设定)<?php echo $organization->type;?></option>
                                 <option value="校级组织">校级组织</option>
                                 <option value="院级组织">院级组织</option>
                                 <option value="校级社团">校级社团</option>
