@@ -115,8 +115,12 @@ public function postChangeOrganization()
         $info['description'] = strip_tags(Input::get('description'));
     if(Input::get('wx')!='')
         $info['wx'] = strip_tags(Input::get('wx'));
+    if(Input::get('type')!='')
+        $info['type'] = strip_tags(Input::get('type'));
+    if(Input::get('school')!='')
+        $info['school'] = strip_tags(Input::get('school'));    
     Organization::where('org_uid',$this->org_uid)
-    ->update($info);
+        ->update($info);
     $msgArr = array(
         'title' => '修改成功啦!',
         'status' => 'ok', 
