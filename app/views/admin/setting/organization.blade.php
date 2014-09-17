@@ -114,7 +114,7 @@
 <script src="/js/adminregdit.js"></script>
 <script>
 $(document).ready(function(){
-    var ls = "option[value=" + {{$organization->type}} + "]";
+    var ls = "option[value=" + "{{$organization->type}}" + "]";
     $(ls).first().prop("selected",true);
     var ct = $("#inputType").find("option:selected").text();
     var sa = ['','','机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
@@ -127,7 +127,7 @@ $(document).ready(function(){
             $("#inputXueyuan").append("<option value=" + sa[i] + ">" + sa[i] + "</option>");
         }
     }
-    var xs = "option[value="+ {{$organization->school}} +"]";
+    var xs = "option[value="+ "{{$organization->school}}" +"]";
     $(xs).first().prop("selected",true); 
 });
 </script>
