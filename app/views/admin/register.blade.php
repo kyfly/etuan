@@ -118,10 +118,10 @@
 
         <div class="col-sm-6">
             <select class="form-control" id="inputType" name="type">
-                <option value="1" selected>校级组织</option>
-                <option value="2">院级组织</option>
-                <option value="3">校级社团</option>
-                <option value="4">院级社团</option>
+                <option value="校级组织" selected>校级组织</option>
+                <option value="院级组织">院级组织</option>
+                <option value="校级社团">校级社团</option>
+                <option value="院级社团">院级社团</option>
             </select>
         </div>
     </div>
@@ -130,7 +130,7 @@
 
         <div class="col-sm-6">
             <select name="school" class="form-control" id="inputXueyuan">
-                <option value="1">全校</option>
+                <option value="全校">全校</option>
             </select>
         </div>
     </div>

@@ -26,10 +26,10 @@
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
                                 <option value="<?php echo $organization->type;?>" selected>(原设定)<?php echo $organization->type;?></option>
-                                <option value="1">校级组织</option>
-                                <option value="2">院级组织</option>
-                                <option value="3">校级社团</option>
-                                <option value="4">院级社团</option>
+                                <option value="校级组织">校级组织</option>
+                                <option value="院级组织">院级组织</option>
+                                <option value="校级社团">校级社团</option>
+                                <option value="院级社团">院级社团</option>
                             </select>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="<?php echo $organization->school;?>">(原设定)<?php echo $organization->school;?></option>
+                                <option value="<?php echo $organization->school;?>"><?php echo $organization->school;?></option>
                             </select>
                         </div>
                     </div>
@@ -114,5 +114,24 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/adminregdit.js"></script>
+<script>
+document.ready(function(){
+    var ls = "option[value=" + {{$organization->type}} + "]";
+    $(ls).first().prop("selected",true);
+    var ct = $("#inputType").find("option:selected").text();
+    var sa = ['','','机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
+    if (ct === "校级组织" || ct === "校级社团") {
+        $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
+    }
+    else {
+        $("#inputXueyuan").empty();
+        for (var i = 2; i < sa.length; i++) {
+            $("#inputXueyuan").append("<option value=" + sa[i] + ">" + sa[i] + "</option>");
+        }
+    }
+    var xs = "option[value="+ {{$organization->school}} +"]";
+    $(xs).first().prop("selected",true); 
+});
+</script>
 </body>
 </html>
