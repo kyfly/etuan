@@ -37,7 +37,6 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="<?php echo $organization->school;?>"><?php echo $organization->school;?></option>
                             </select>
                         </div>
                     </div>
@@ -114,7 +113,7 @@
 <script src="/js/admin.js"></script>
 <script src="/js/adminregdit.js"></script>
 <script>
-document.ready(function(){
+$(document).ready(function(){
     var ls = "option[value=" + {{$organization->type}} + "]";
     $(ls).first().prop("selected",true);
     var ct = $("#inputType").find("option:selected").text();
