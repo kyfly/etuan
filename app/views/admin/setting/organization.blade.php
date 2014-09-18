@@ -25,7 +25,10 @@
 
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
-                                <option id="xiaojioption" value="1"><?php echo $organization->type;?></option>
+                                <option value="校级组织">校级组织</option>
+                                <option value="院级组织">院级组织</option>
+                                <option value="校级社团">校级社团</option>
+                                <option value="院级社团">院级社团</option>
                             </select>
                         </div>
                     </div>
@@ -34,28 +37,6 @@
 
                         <div class="col-sm-6">
                             <select name="school" class="form-control" id="inputXueyuan">
-                                <option value="1"><?php echo $organization->school;?></option>
-<!--                            <option value="全校">全校</option>
-                                <option value="机械工程学院">机械工程学院</option>
-                                <option value="电子信息学院">电子信息学院</option>
-                                <option value="通信工程学院">通信工程学院</option>
-                                <option value="自动化学院">自动化学院</option>
-                                <option value="计算机学院">计算机学院</option>
-                                <option value="生命信息与仪器工程学院">生命信息与仪器工程学院</option>
-                                <option value="材料与环境工程学院">材料与环境工程学院</option>
-                                <option value="软件工程学院">软件工程学院</option>
-                                <option value="理学院">理学院</option>
-                                <option value="经济学院">经济学院</option>
-                                <option value="管理学院">管理学院</option>
-                                <option value="会计学院">会计学院</option>
-                                <option value="外国语学院">外国语学院</option>
-                                <option value="数字媒体与艺术设计学院">数字媒体与艺术设计学院</option>
-                                <option value="人文与法学院">人文与法学院</option>
-                                <option value="马克思主义学院">马克思主义学院</option>
-                                <option value="卓越学院">卓越学院</option>
-                                <option value="信息工程学院">信息工程学院</option>
-                                <option value="国际教育学院">国际教育学院</option>
-                                <option value="继续教育学院">继续教育学院</option>  -->
                             </select>
                         </div>
                     </div>
@@ -131,5 +112,24 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
 <script src="/js/adminregdit.js"></script>
+<script>
+$(document).ready(function(){
+    var ls = "option[value=" + "{{$organization->type}}" + "]";
+    $(ls).first().prop("selected",true);
+    var ct = $("#inputType").find("option:selected").text();
+    var sa = ['','','机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
+    if (ct === "校级组织" || ct === "校级社团") {
+        $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
+    }
+    else {
+        $("#inputXueyuan").empty();
+        for (var i = 2; i < sa.length; i++) {
+            $("#inputXueyuan").append("<option value=" + sa[i] + ">" + sa[i] + "</option>");
+        }
+    }
+    var xs = "option[value="+ "{{$organization->school}}" +"]";
+    $(xs).first().prop("selected",true); 
+});
+</script>
 </body>
 </html>

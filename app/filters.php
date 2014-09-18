@@ -59,7 +59,7 @@ Route::filter('wxauth', function()
                 $url = WS::getauthurl($appid,$callbackUrl,$scope="snsapi_userinfo",$state=0);
                 return Redirect::to($url);
             }else{
-                $msgArr = array('title' => '登录失败', 'body' => '这个链接只有在微信和电脑上才能打开额,快复制过去参与活动吧',
+                $msgArr = array('title' => '请使用微信打开', 'body' => '请关注团团一家（微信号e-tuan），点击下方菜单进入。',
             'status' => 'error', 'btn' => 'false','action'=>'close');
                 return View::make('showmessage')->with('messageArr', $msgArr);
             }

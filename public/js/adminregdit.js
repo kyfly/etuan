@@ -456,19 +456,17 @@ $(function () {
             $('#addablebox').append(createSelect);
         });
 
-        $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
         $("#inputType").change(function () {
             var checkText = $("#inputType").find("option:selected").text();
-            var schoolArr = ['机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
-            if (checkText == "校级组织" || checkText == "校级社团") {
-                $("#inputXueyuan").empty().prepend("<option value='2' selected>全校</option>");
+            var schoolArr = ['','','机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
+            if (checkText === "校级组织" || checkText === "校级社团") {
+                $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
             }
             else {
                 $("#inputXueyuan").empty();
-                for (var i = 0; i < schoolArr.length; i++) {
+                for (var i = 2; i < schoolArr.length; i++) {
                     $("#inputXueyuan").append("<option value=" + schoolArr[i] + ">" + schoolArr[i] + "</option>");
                 }
-                $("#inputXueyuan").prepend("<option value='1' selected></option>");
             }
         });
 
