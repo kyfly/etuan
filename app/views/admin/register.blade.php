@@ -207,7 +207,7 @@
             <label class="col-sm-2 control-label">部门介绍</label>
 
             <div class="col-sm-6">
-                <textarea class="form-control"  name="department_description[]" rows="3"></textarea>
+                <textarea class="form-control" name="department_description[]" maxlength="50" rows="3"></textarea>
                 <span class="help-block">请保持在50字以内</span>
             </div>
         </div>
