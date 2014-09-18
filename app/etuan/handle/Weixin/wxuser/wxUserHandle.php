@@ -15,7 +15,6 @@ class wxUserHandle
                 return false;
             }
             $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
-
             if($result==NULL)
             {
                 $user = new WxUser;
@@ -38,9 +37,9 @@ class wxUserHandle
                 return false;
                }
            }elseif(isset($result->wx_uid)){
-                if($result->nick_name != BS::cleanEmoji($userinfo["nickname"])){
+                /*if($result->nick_name != BS::cleanEmoji($userinfo["nickname"])){
                     WxUser::where("wx_uid",$userinfo["openid"])->update(['nick_name'=>BS::cleanEmoji($userinfo["nickname"])]);
-                }
+                }*/
                 return $userinfo["openid"];
            }
            return false;
