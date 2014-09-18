@@ -38,14 +38,17 @@ class organizationController extends BaseController
             ->select(DB::raw('registration.name as reg_name'),'organization.internal_order','registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
             ->get()
             ->toArray();
-        foreach($regArr as $key=>$value)
-        {
-            $regArr[$key]['start_time'] = UsefulTool::myMktime($regArr[$key]['start_time']);
-            $regArr[$key]['stop_time'] = UsefulTool::myMktime($regArr[$key]['stop_time']);
-        }
+        header('Content-type:text/html;charset=utf-8');
         $regArr = $this->setStatus($regArr);
         uasort($regArr, 'regCmp');
         $regArr = array_values($regArr);
+        foreach($regArr as $key=>$value)
+        {
+            unset($regArr[$key]['start_time']);
+            unset($regArr[$key]['stop_time']);
+            unset($regArr[$key]['statusInt']);
+            unset($regArr[$key]['internal_order']);
+        }
         return $regArr;
     }
 
@@ -63,7 +66,7 @@ class organizationController extends BaseController
             elseif($reg['start_time']>$curTime)
             {
                 $regArr[$key]['statusInt'] = 2;
-                $regArr[$key]['status'] = '即将进行';
+                $regArr[$key]['status'] = '即将开始';
             }
             else
             {
