@@ -452,7 +452,7 @@ $(function () {
                 '<div class="form-group">' +
                 '<label class="col-sm-2 control-label">部门介绍</label>' +
                 '<div class="col-sm-6"><textarea class="form-control wordlimit" name="department_description[]" rows="3"></textarea>' +
-                '<span class="help-block">50字以内</span></div></div></div>';
+                '<span class="help-block">请保持在50字以内</span></div></div></div>';
             $('#addablebox').append(createSelect);
         });
 
@@ -487,10 +487,4 @@ function delspan(delbtn) {
     $(delbtn).parents(".addedbox").remove();
 }
 
-$("#addablebox").on('change','.wordlimit',function(){
-    if ($(this).val().length > 50) {
-		alert("对不起，部门介绍请勿超过50个字符限制！");
-		return false;
-	}
-});
 

@@ -20,4 +20,10 @@ class Registration extends Eloquent{
      * @var bool
      */
     public $incrementing = true;
+
+    public static function getRegister($para)
+    {
+    	// return Registration::get();
+    	echo $para;
+    }
 }

@@ -33,22 +33,54 @@ class organizationController extends BaseController
     //获取所有用户的报名活动信息
     public function getOrganizationRegistration()
     {
-        $infos = Registration::where('registration.hidden','<>',1)
-        ->join('organization','registration.org_uid','=','organization.org_uid')
-        ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
-        ->get();
-        foreach ($infos as $key => $info) {
-           $infos[$key]->start_time = UsefulTool::myMktime($infos[$key]->start_time);
-           $infos[$key]->stop_time = UsefulTool::myMktime($infos[$key]->stop_time);
+        $regArr = Registration::where('registration.hidden', '<>','1')
+            ->join('organization','registration.org_uid','=','organization.org_uid')
+            ->select(DB::raw('registration.name as reg_name'),'organization.internal_order','registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->get()
+            ->toArray();
+        foreach($regArr as $key=>$value)
+        {
+            $regArr[$key]['start_time'] = UsefulTool::myMktime($regArr[$key]['start_time']);
+            $regArr[$key]['stop_time'] = UsefulTool::myMktime($regArr[$key]['stop_time']);
         }
-        return $infos;
-    }    
+        $regArr = $this->setStatus($regArr);
+        uasort($regArr, 'regCmp');
+        $regArr = array_values($regArr);
+        return $regArr;
+    }
+
+    //为报名表设定status,有正在进行,即将进行,已经结束.
+    function setStatus($regArr)
+    {
+        $curTime = date('Y-m-d H:i:s',time());
+        foreach($regArr as $key=>$reg)
+        {
+            if($reg['start_time']<$curTime && $reg['stop_time']>$curTime)
+            {
+                $regArr[$key]['statusInt'] = 1;
+                $regArr[$key]['status'] = '正在进行';
+            }
+            elseif($reg['start_time']>$curTime)
+            {
+                $regArr[$key]['statusInt'] = 2;
+                $regArr[$key]['status'] = '即将进行';
+            }
+            else
+            {
+                $regArr[$key]['statusInt'] = 3;
+                $regArr[$key]['status'] = '已经结束';
+            }
+        }
+        return $regArr;
+    }
 
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
         return Organization::where('hidden','!=',1)
-            ->select('org_id','name','logo_url','type','school','internal_order')->get();
+            ->orderBy('internal_order')
+            ->orderBy('org_id')
+            ->select('org_id','name','logo_url','type','school')->get();
     }
 
     public function getOrgInfo()
@@ -60,3 +92,16 @@ class organizationController extends BaseController
                 ->first();
     }
 }
+
+//getOrganizationRegistration的自定义比较函数
+function regCmp($a, $b)
+{
+    return $a['statusInt'] == $b['statusInt']?($a['internal_order'] == $b['internal_order']?$a['reg_id'] - $b['reg_id']:$a['internal_order'] - $b['internal_order']):
+        $a['statusInt'] - $b['statusInt'];
+}
+
+function cmp($a, $b)
+{
+    return $a['value']<$b['value'];
+}
+

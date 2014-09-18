@@ -1,34 +1,3 @@
-function sortOrg(a, b) {
-    return (a.statusInt == b.statusInt) ?
-        a.internal_order - b.internal_order :
-        a.statusInt - b.statusInt;
-}
-
-function setStatus(data)
-{
-    for (var i = 0; i < data.length; i++)
-    {
-        var startTime = new Date(Number(data[i].start_time) * 1000);
-        var stopTime = new Date(Number(data[i].stop_time) * 1000);
-        var now = new Date();
-        if (now < startTime) {
-            data[i].statusWords = "即将开始";
-            data[i].statusInt = 2;
-            data[i].statusClass = 'text-coming';
-        }
-        else if (now >= startTime && now <= stopTime) {
-            data[i].statusWords = "正在进行";
-            data[i].statusInt = 1;
-            data[i].statusClass = 'text-on';
-        }
-        else {
-            data[i].statusWords = "已经结束";
-            data[i].statusInt = 3;
-            data[i].statusClass = 'text-over';
-        }
-    }
-    return data;
-}
 
 if (!String.format) {
     String.format = function (format) {
@@ -80,15 +49,18 @@ $(document).ready(function () {
                 '</a>' +
                 '</div>';
             eval(data);
-            data = setStatus(data);
-            data.sort(sortOrg);
             var school = [];
             for (var i = 0; i < data.length; i++) {
+                data[i].statusWords == "即将开始" ?
+                    data[i].statusClass = 'text-coming':
+                    (data[i].statusWords == "正在进行" ?
+                        data[i].statusClass = 'text-on':
+                        data[i].statusClass = 'text-over');
                 var logoUrl = data[i].logo_url.split('.');
                 var regUrl = '/baoming/' + data[i].reg_id;
                 data[i].logo_url += '@300w.' + logoUrl[logoUrl.length - 1];
                 var regDiv = String.format(regDivTpl,
-                    regUrl, data[i].reg_name, data[i].logo_url, data[i].statusClass, data[i].statusWords);
+                    regUrl, data[i].reg_name, data[i].logo_url, data[i].statusClass, data[i].status);
                 if (data[i].type == '校级组织') {
                     $('#universityLevel').append(regDiv);
                 }

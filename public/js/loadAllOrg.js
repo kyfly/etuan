@@ -1,7 +1,3 @@
-function sortOrg(a, b) {
-    return a.internal_order - b.internal_order;
-}
-
 if (!String.format) {
     String.format = function (format) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -53,7 +49,6 @@ $(document).ready(function () {
                 '</a>' +
                 '</div>';
             eval(data);
-            data.sort(sortOrg);
             var school = [];
             for (var i = 0; i < data.length; i++) {
                 var logoUrl = data[i].logo_url.split('.');
