@@ -45,6 +45,7 @@ class organizationController extends BaseController
         }
         $regArr = $this->setStatus($regArr);
         uasort($regArr, 'regCmp');
+        $regArr = array_values($regArr);
         return $regArr;
     }
 
@@ -97,5 +98,10 @@ function regCmp($a, $b)
 {
     return $a['statusInt'] == $b['statusInt']?($a['internal_order'] == $b['internal_order']?$a['reg_id'] - $b['reg_id']:$a['internal_order'] - $b['internal_order']):
         $a['statusInt'] - $b['statusInt'];
+}
+
+function cmp($a, $b)
+{
+    return $a['value']<$b['value'];
 }
 
