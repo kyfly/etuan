@@ -33,22 +33,37 @@ class organizationController extends BaseController
     //获取所有用户的报名活动信息
     public function getOrganizationRegistration()
     {
-        $infos = Registration::where('registration.hidden','<>',1)
-        ->join('organization','registration.org_uid','=','organization.org_uid')
-        ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school','organization.internal_order')
-        ->get();
-        foreach ($infos as $key => $info) {
-           $infos[$key]->start_time = UsefulTool::myMktime($infos[$key]->start_time);
-           $infos[$key]->stop_time = UsefulTool::myMktime($infos[$key]->stop_time);
+        $curTime = date('Y-m-d H:i:s',time());
+        $regArr1 = Registration::whereRaw('registration.hidden <> 1 and registration.start_time < ? and registration.stop_time > ?',array($curTime,$curTime))
+            ->join('organization','registration.org_uid','=','organization.org_uid')
+            ->orderBy('organization.internal_order')
+            ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->get();
+        $regArr2 = Registration::whereRaw('registration.hidden <> 1 and registration.start_time > ? ',array($curTime))
+            ->join('organization','registration.org_uid','=','organization.org_uid')
+            ->orderBy('organization.internal_order')
+            ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->get();
+        $regArr3 = Registration::whereRaw('registration.hidden <> 1 and registration.stop_time < ?',array($curTime))
+            ->join('organization','registration.org_uid','=','organization.org_uid')
+            ->orderBy('organization.internal_order')
+            ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->get();    
+        $regArr = array_merge($regArr1,$regArr2,$regArr3);
+
+        foreach ($regArr as $key => $value) {
+           $regArr[$key]->start_time = UsefulTool::myMktime($regArr[$key]->start_time);
+           $regArr[$key]->stop_time = UsefulTool::myMktime($regArr[$key]->stop_time);
         }
-        return $infos;
+        return $regArr;
     }    
 
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
         return Organization::where('hidden','!=',1)
-            ->select('org_id','name','logo_url','type','school','internal_order')->get();
+            ->orderBy('internal_order')
+            ->select('org_id','name','logo_url','type','school')->get();
     }
 
     public function getOrgInfo()
