@@ -51,9 +51,9 @@ $(document).ready(function () {
             eval(data);
             var school = [];
             for (var i = 0; i < data.length; i++) {
-                data[i].statusWords == "即将开始" ?
+                data[i].status == "即将开始" ?
                     data[i].statusClass = 'text-coming':
-                    (data[i].statusWords == "正在进行" ?
+                    (data[i].status == "正在进行" ?
                         data[i].statusClass = 'text-on':
                         data[i].statusClass = 'text-over');
                 var logoUrl = data[i].logo_url.split('.');
