@@ -11,6 +11,9 @@ class wxUserHandle
             $userid =$json["openid"];
             $token = $json["access_token"];
             $userinfo =$this->getUserinfo($token,$userid);
+            if(!isset($userinfo["openid"])){
+                return false;
+            }
             $result = WxUser::where("wx_uid",$userinfo["openid"])->first();
 
             if($result==NULL)
@@ -35,6 +38,9 @@ class wxUserHandle
                 return false;
                }
            }elseif(isset($result->wx_uid)){
+                if($result->nick_name != BS::cleanEmoji($userinfo["nickname"])){
+                    WxUser::where("wx_uid",$userinfo["openid"])->update(['nick_name'=>BS::cleanEmoji($userinfo["nickname"])]);
+                }
                 return $userinfo["openid"];
            }
            return false;
