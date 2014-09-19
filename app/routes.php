@@ -1,4 +1,9 @@
 <?php
+Route::get('/', function() {
+    $pdf = PDF::make();
+    $pdf->addPage('<html><head></head><body><b>Hello World</b></body></html>');
+    $pdf->send();
+});
 //需要微信登录的路由。
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果

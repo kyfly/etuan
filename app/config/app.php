@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'etuan\provider\MyValidatorServiceProvider',
 		'etuan\provider\MyToolServiceProvider',
+		'Ignited\Pdf\PdfServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider'
 
 	),
@@ -192,7 +193,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'UsefulTool'     => 'etuan\facade\UsefulTool',
-		'Excel' => 'Maatwebsite\Excel\Facades\Excel'
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'PDF'             => 'Ignited\Pdf\Facades\Pdf'
 	),
 
 );
