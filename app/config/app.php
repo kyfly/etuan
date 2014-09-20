@@ -123,9 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'etuan\provider\MyValidatorServiceProvider',
 		'etuan\provider\MyToolServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Ignited\Pdf\PdfServiceProvider',
-		'Maatwebsite\Excel\ExcelServiceProvider'
-
 	),
 
 	/*
