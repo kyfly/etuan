@@ -1,5 +1,5 @@
 <?php
-Route::get('/', function() {
+Route::get('/test', function() {
     $pdf = PDF::make();
     $pdf->addPage('<html><head></head><body><b>Hello World</b></body></html>');
     $pdf->send();
