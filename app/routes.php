@@ -1,6 +1,8 @@
-<?php
+<?php namespace Ignited\Pdf;
+
+use WkHtmlToPdf;
 Route::get('/test', function() {
-    $pdf = PDF::make();
+    $pdf = new WkHtmlToPdf($this->config);
     $pdf->addPage('<html><head></head><body><b>Hello World你好世界</b></body></html>');
     $pdf->send();
 });
