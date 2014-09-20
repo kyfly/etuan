@@ -1,10 +1,8 @@
-<?php namespace Ignited\Pdf;
-
-use WkHtmlToPdf;
+<?php
 Route::get('/test', function() {
-    $pdf = new WkHtmlToPdf($this->config);
-    $pdf->addPage('<html><head></head><body><b>Hello World你好世界</b></body></html>');
-    $pdf->send();
+   $pdf = PDF::make();
+    $pdf->addPage('<html><head></head><body><b>Hello World</b></body></html>');
+    return $pdf->send();
 });
 //需要微信登录的路由。
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
