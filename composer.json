@@ -5,8 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"ignited/laravel-pdf": "1.*",
-		"h4cc/wkhtmltopdf-i386": "*",
+		"slam/tcpdf": "dev-master",
 		"phpseclib/phpseclib": "0.3.*@dev",
 		"maatwebsite/excel": "1.*",
         "mobiledetect/mobiledetectlib": "dev-master"
