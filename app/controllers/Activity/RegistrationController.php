@@ -71,30 +71,29 @@ class RegistrationController extends ActivityController
     public function getDownloadpdf()
     {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetFont('helvetica', '', 20);
+        $pdf->SetFont('helvetica', '', 10);
         $html = "";
        $results = $this->registrationHandle->getActivityResult($this->activityId);
        foreach($results['answers'] as $answers)
        {
-           $html = "
+           $html = '
            <html>
            <head>
-           <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
            </head>
-           <body>";
+           <body>';
            foreach($answers as $key=>$answer)
            {
-               $html .= "<strong>".$results['questions'][$key]."</strong>:<br/>".$answer."<hr/>";
+               $html .= '<strong>'.$results['questions'][$key].'</strong>:<br/>'.$answer.'<hr/>';
            }
-           $html .= "
+           $html .= '
            </body>
            </html>
-           ";
+           ';
             $pdf->AddPage();
-            $pdf->SetFont('cid0jp', '', 40);
+            $pdf->SetFont('cid0cs', '', 20);
             $pdf->writeHTML($html, true, false, true, false, '');
        }
-        $pdf->Output('example_038.pdf', 'I');
+       $pdf->Output('example_038.pdf', 'D');
     }
 
     public function getDownloadxls()
