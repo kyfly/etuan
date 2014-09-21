@@ -134,11 +134,20 @@ public function getActivityResult($activityId)
     $reg_serial = Registration_user::where('reg_id',$activityId)
     ->lists('reg_serial');
     $answers = array();
+    header("content-type:text/html;charset=utf-8");
+    foreach ($questions as $key => $value) {
+        if($value=="性别")
+        {
+            $position = $key;
+            break;
+        }
+    }
     foreach($reg_serial as $key=>$serial)
     {
         $answer = Reg_result::where('reg_serial',$serial)
         ->orderBy('question_id','asc')
         ->lists('answer');
+        $answer[$position] = $answer[$position]==1?"男":"女";
         $answer = array_add($answer,count($answer),Registration_user::where('reg_serial',$serial)
                 ->pluck('used_time'));        
         $answers[$key] = $answer;
