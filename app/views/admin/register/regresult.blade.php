@@ -41,9 +41,25 @@
                       </tbody>
                     </table>
                 </div>
-            <div class="tab-pane text-center" id="xiazai" style="padding-top: 60px">
-               <div class="col-md-12"><img src="/img/excel.png"> </div>
-               <button type="button" id="downloadXls" class="btn btn-primary btn-lg btn-block" style="width: 200px">导出为Excel电子表格</button>
+            <div class="tab-pane" id="xiazai" style="padding-top: 40px">
+                <div class="col-md-12">
+                    <div class="col-md-offset-1 col-md-4 text-center">
+                        <img src="/img/icon/pdf.png">
+                    </div>
+                    <div class="col-md-5">
+                        <p><br>导出为PDF文档，可以打印为单张报名表，适用于面试等场合。</p>
+                        <a href="/registration/downloadpdf" type="button" class="btn btn-info btn-lg btn-block">下载pdf文件</a>
+                    </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 30px">
+                    <div class="col-md-offset-1 col-md-4 text-center">
+                        <img src="/img/icon/excel.png">
+                    </div>
+                    <div class="col-md-5">
+                        <p><br>导出为Excel电子表格，在一张表格中查看全部报名结果，适用于数据分析、总体统计。</p>
+                        <a href="/registration/downloadxls" type="button" class="btn btn-info btn-lg btn-block">下载xls文件</a>
+                    </div>
+                </div>
                <!--<button type="button" class="btn btn-info btn-lg btn-block">导出为pdf格式</button>-->
             </div>
           </div>
@@ -57,12 +73,5 @@
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/admin.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#downloadXls').click(function () {
-            window.location.href = '/registration/downloadxls';
-        })
-    })
-</script>
 </body>
 </html>
