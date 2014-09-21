@@ -96,7 +96,7 @@ class RegistrationController extends ActivityController
             $pdf->SetFont('cid0cs', '', 20);
             $pdf->writeHTML($html, true, false, true, false, '');
        }
-       $pdf->Output('example_038.pdf', 'D');
+       $pdf->Output('报名结果.pdf', 'D');
     }
 
     public function getDownloadxls()
@@ -114,7 +114,7 @@ class RegistrationController extends ActivityController
                 $sheet->row(1,$results['questions']);
             });
 
-        })->export('xls');
+        })->export('报名结果.xls');
     }
 
     //通过activity获得theme返回到相应页面
