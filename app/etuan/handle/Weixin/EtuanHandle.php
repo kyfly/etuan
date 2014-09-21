@@ -79,19 +79,19 @@ class EtuanHandle extends replyHandle
                                 "description": null,
                                 "pic_url": "http://www.kyfly.net/wx/img/reg.png",
                                 "url": "http://www.etuan.org/baoming.html?from=e-tuan"
-                            }');
+                            }',true);
          $arr[] = json_decode('{
                                 "title": "查看社团大全",
                                 "description": null,
                                 "pic_url": "http://www.kyfly.net/wx/img/all.png",
                                 "url": "http://www.etuan.org/shetuan.html?from=e-tuan"
-                            }');
+                            }',true);
          $arr[] = json_decode('{
                             "title": "参加招新抽奖",
                             "description": null,
                             "pic_url": "http://www.kyfly.net/wx/img/prize.png",
                             "url": "http://www.etuan.org/jiang/1"
-                        }');
+                        }',true);
          return $this->ArticlesMessage($postObj, $arr);
     }
     public function Click($postObj)

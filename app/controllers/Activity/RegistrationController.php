@@ -71,38 +71,30 @@ class RegistrationController extends ActivityController
     public function getDownloadpdf()
     {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetFont('helvetica', '', 20);
+        $pdf->SetFont('helvetica', '', 14);
         $html = "";
+        // if(!Input::has('activityId'))
+            $this->activityId = Registration::where('org_uid',$this->org_uid)
+                ->min('reg_id');
        $results = $this->registrationHandle->getActivityResult($this->activityId);
        foreach($results['answers'] as $answers)
        {
-           $html = "
-           <html>
-           <head>
-           <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-           </head>
-           <body>";
-           foreach($answers as $key=>$answer)
-           {
-               $html .= "<strong>".$results['questions'][$key]."</strong>:<br/>".$answer."<hr/>";
-           }
-           $html .= "
-           </body>
-           </html>
-           ";
+            $html = View::make('admin.register.outputpdf')->with('results', $results)
+                ->with('answers', $answers)->with('title', '报名表');
             $pdf->AddPage();
-            $pdf->SetFont('cid0jp', '', 40);
+            $pdf->SetFont('cid0cs', '', 14);
             $pdf->writeHTML($html, true, false, true, false, '');
        }
-        $pdf->Output('example_038.pdf', 'I');
+       $pdf->Output('报名结果.pdf', 'D');
     }
 
     public function getDownloadxls()
     {
-       $activityId = Registration::where('org_uid',$this->org_uid)
+        // if(!Input::has('activityId'))
+            $this->activityId = Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
-        $results = $this->registrationHandle->getActivityResult($activityId);
-        Excel::create('Filename', function($excel) use($results) {
+        $results = $this->registrationHandle->getActivityResult($this->activityId);
+        Excel::create('报名结果', function($excel) use($results) {
 
             $excel->sheet('Sheetname', function($sheet) use($results){
 
