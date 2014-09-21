@@ -105,7 +105,7 @@ class RegistrationController extends ActivityController
             $this->activityId = Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
         $results = $this->registrationHandle->getActivityResult($this->activityId);
-        Excel::create('Filename', function($excel) use($results) {
+        Excel::create('报名结果', function($excel) use($results) {
 
             $excel->sheet('Sheetname', function($sheet) use($results){
 
@@ -114,7 +114,7 @@ class RegistrationController extends ActivityController
                 $sheet->row(1,$results['questions']);
             });
 
-        })->export('报名结果.xls');
+        })->export('xls');
     }
 
     //通过activity获得theme返回到相应页面
