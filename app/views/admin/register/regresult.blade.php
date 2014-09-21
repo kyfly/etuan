@@ -22,7 +22,8 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="biaoge" style="padding-top: 10px">
-                  <table class="table table-striped table-hover">
+                  <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
                           @foreach ($results['questions'] as $question)
@@ -40,6 +41,7 @@
                     @endforeach
                       </tbody>
                     </table>
+                    </div>
                 </div>
             <div class="tab-pane" id="xiazai" style="padding-top: 40px">
                 <div class="col-md-12">
