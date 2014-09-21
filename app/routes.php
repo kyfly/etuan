@@ -1,7 +1,4 @@
 <?php
-Route::get('/test', function() {
-   
-});
 //需要微信登录的路由。
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
