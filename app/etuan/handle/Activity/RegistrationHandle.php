@@ -143,7 +143,7 @@ public function getActivityResult($activityId)
                 ->pluck('used_time'));        
         $answers[$key] = $answer;
     }
-    $questions = array_add($questions,count($questions),'花费时间');
+    $questions = array_add($questions,count($questions),'填写用时');
     return array(
         'questions'=>$questions,
         'answers'=>$answers
