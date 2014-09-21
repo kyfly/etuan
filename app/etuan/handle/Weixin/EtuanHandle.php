@@ -72,8 +72,26 @@ class EtuanHandle extends replyHandle
          $url = $activity::where($key,$result->act_id)->select("name", "org_uid")->first();
          $actObj = new actNewHandle;
          $acturl = $actObj->getactUrl($activity,$result->act_id);
-         $arr =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
+         $arr[] =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
                 "pic_url"=>Organization::where("org_uid",$url->org_uid)->pluck('logo_url'),"url"=>$acturl];
+         $arr[] = json_decode('{
+                                "title": "报名更多社团",
+                                "description": null,
+                                "pic_url": "http://www.kyfly.net/wx/img/reg.png",
+                                "url": "http://www.etuan.org/baoming.html?from=e-tuan"
+                            }');
+         $arr[] = json_decode('{
+                                "title": "查看社团大全",
+                                "description": null,
+                                "pic_url": "http://www.kyfly.net/wx/img/all.png",
+                                "url": "http://www.etuan.org/shetuan.html?from=e-tuan"
+                            }');
+         $arr[] = json_decode('{
+                            "title": "参加招新抽奖",
+                            "description": null,
+                            "pic_url": "http://www.kyfly.net/wx/img/prize.png",
+                            "url": "http://www.etuan.org/jiang/1"
+                        }');
          return $this->ArticlesMessage($postObj, $arr);
     }
     public function Click($postObj)
