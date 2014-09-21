@@ -73,6 +73,9 @@ class RegistrationController extends ActivityController
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetFont('helvetica', '', 10);
         $html = "";
+        // if(!Input::has('activityId'))
+            $this->activityId = Registration::where('org_uid',$this->org_uid)
+                ->min('reg_id');
        $results = $this->registrationHandle->getActivityResult($this->activityId);
        foreach($results['answers'] as $answers)
        {
@@ -98,9 +101,10 @@ class RegistrationController extends ActivityController
 
     public function getDownloadxls()
     {
-       $activityId = Registration::where('org_uid',$this->org_uid)
+        // if(!Input::has('activityId'))
+            $this->activityId = Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
-        $results = $this->registrationHandle->getActivityResult($activityId);
+        $results = $this->registrationHandle->getActivityResult($this->activityId);
         Excel::create('Filename', function($excel) use($results) {
 
             $excel->sheet('Sheetname', function($sheet) use($results){
