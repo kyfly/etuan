@@ -139,8 +139,11 @@ public function getActivityResult($activityId)
         $answer = Reg_result::where('reg_serial',$serial)
         ->orderBy('question_id','asc')
         ->lists('answer');
+        $answer = array_add($answer,count($answer),Registration_user::where('reg_serial',$serial)
+                ->pluck('used_time'));        
         $answers[$key] = $answer;
     }
+    $questions = array_add($questions,count($questions),'花费时间');
     return array(
         'questions'=>$questions,
         'answers'=>$answers
