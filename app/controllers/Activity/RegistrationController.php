@@ -70,11 +70,13 @@ class RegistrationController extends ActivityController
 
     public function getDownloadpdf()
     {
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetFont('helvetica', '', 20);
         $html = "";
        $results = $this->registrationHandle->getActivityResult($this->activityId);
        foreach($results['answers'] as $answers)
        {
-           $html .= "
+           $html = "
            <html>
            <head>
            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
@@ -86,15 +88,13 @@ class RegistrationController extends ActivityController
            }
            $html .= "
            </body>
+           </html>
            ";
+            $pdf->AddPage();
+            $pdf->SetFont('cid0jp', '', 40);
+            $pdf->writeHTML($html, true, false, true, false, '');
        }
-       $html = '
-       sadsa我是谁
-
-       ';
-       // $pdf = App::make('dompdf');
-       // $pdf->loadHTML($html);
-       // return $pdf->download('invoice.pdf');
+        $pdf->Output('example_038.pdf', 'I');
     }
 
     public function getDownloadxls()
