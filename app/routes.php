@@ -116,6 +116,16 @@ Route::get('modeltest', function() {
     return Registration::getRegister();
 });
 
+Route::post('pullHook',function()
+{
+    system('git pull');
+});
+
+Route::get('pullHook',function()
+{
+    system('git pull');
+});
+
 
 
 
