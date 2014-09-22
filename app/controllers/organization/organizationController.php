@@ -38,7 +38,10 @@ class organizationController extends BaseController
             ->select(DB::raw('registration.name as reg_name'),'organization.internal_order','registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
             ->get()
             ->toArray();
-        header('Content-type:text/html;charset=utf-8');
+        foreach($regArr as $key=>$value)
+        {
+            $regArr[$key]['internal_order'] = rand(0,100);
+        }
         $regArr = $this->setStatus($regArr);
         uasort($regArr, 'regCmp');
         $regArr = array_values($regArr);
@@ -80,10 +83,22 @@ class organizationController extends BaseController
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
-        return Organization::where('hidden','!=',1)
-            ->orderBy('internal_order')
+        $org_info = Organization::where('hidden','!=',1)
             ->orderBy('org_id')
-            ->select('org_id','name','logo_url','type','school')->get();
+            ->select('org_id','name','logo_url','type','school','internal_order')
+            ->get()
+            ->toArray();
+        foreach($org_info as $key=>$value)
+        {
+            $org_info[$key]['internal_order'] = rand(0,100);
+        }
+        uasort($org_info, 'orgCmp');
+        $org_info = array_values($org_info);
+        foreach($org_info as $key=>$value)
+        {
+            unset($org_info[$key]['internal_order']);
+        }        
+        return $org_info;
     }
 
     public function getOrgInfo()
@@ -103,8 +118,7 @@ function regCmp($a, $b)
         $a['statusInt'] - $b['statusInt'];
 }
 
-function cmp($a, $b)
+function orgCmp($a, $b)
 {
-    return $a['value']<$b['value'];
+    return $a['internal_order']<$b['internal_order'];
 }
-
