@@ -123,11 +123,11 @@
         <div class="texts col-md-8">
             <h1>报名成功！</h1>
 
-            <h3>关注“团团一家”微信号（e-tuan），<br>即可赢取奖品和报名更多社团！</h3>
+            <h3>关注“团团一家”微信号（e-tuan），<br>即可赢取奖品还有更多报名！</h3>
             <br>
             <button class="btn btn-warning btn-lg btn-lottery">点击抽奖</button>
             &nbsp;&nbsp;&nbsp;
-            <button class="btn btn-info btn-lg btn-more">报名更多社团</button>
+            <button class="btn btn-info btn-lg btn-more">更多报名</button>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-10 col-md-offset-1">
@@ -144,7 +144,7 @@
         <h2>报名成功！</h2>
 
         <p class="msg-body">
-            关注“团团一家”微信号（e-tuan），<br>赢取奖品，报名更多社团！
+            关注“团团一家”微信号（e-tuan），<br>赢取奖品，更多报名等着你！
             <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd">
                 立即关注>>
             </a>
@@ -156,7 +156,7 @@
         <br>
 
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-info btn-lg btn-xsmall btn-more">报名更多社团</button>
+            <button class="btn btn-info btn-lg btn-xsmall btn-more">更多报名</button>
         </div>
     </div>
     <div class="col-xs-12">
