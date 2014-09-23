@@ -80,10 +80,17 @@ class organizationController extends BaseController
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
-        return Organization::where('hidden','!=',1)
+        $orgArr = Organization::where('hidden','!=',1)
             ->orderBy('internal_order')
             ->orderBy('org_id')
-            ->select('org_id','name','logo_url')->get();
+            ->select('org_id','name','logo_url','type','school')
+            ->get()
+            ->toArray();
+        foreach ($orgArr as $key => $value) {
+            $orgArr[$key]['school'] = ""; 
+            $orgArr[$key]['type'] = ""; 
+        }
+        return $orgArr;
     }
 
     public function getOrgInfo()
