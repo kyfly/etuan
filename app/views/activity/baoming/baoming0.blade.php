@@ -190,7 +190,7 @@
             </a>
         </p>
         <p id="timeinfo" class="left-tag"></p>
-        <p class="text-center"><a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a></p>
+        <p class="text-center"><a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多信息？请点击这里</a></p>
     </div>
     <div id="regform" class="clearfix">
     <!--表项-->

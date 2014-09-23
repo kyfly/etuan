@@ -169,7 +169,7 @@
             </a>
         </p>
         <p id="timeinfo"></p>
-        <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
+        <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多信息？请点击这里</a>
 
     </div>
     <div id="regform">

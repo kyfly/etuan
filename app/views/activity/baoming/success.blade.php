@@ -180,7 +180,7 @@
                 <h4 class="modal-title" id="myModalLabel">您未关注团团一家</h4>
             </div>
             <div class="modal-body">
-                <p>您需要关注团团一家（微信号：e-tuan)，才可以参与抽奖和报名更多社团！</p>
+                <p>您需要关注团团一家（微信号：e-tuan)，才可以参与抽奖和更多报名！</p>
 
                 <p class="visible-xs">点击“立即关注”，进入关注页面。</p>
 

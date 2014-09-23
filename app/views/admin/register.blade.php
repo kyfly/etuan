@@ -30,12 +30,12 @@
 <div class="alert alert-info" role="alert" style="display: none" id="topAlert">
     <img src="/img/waiting.gif">&nbsp;&nbsp;正在上传图片并创建帐号，请稍等...
 </div>
-<h2 class="text-center">社团管理员注册</h2>
+<h2 class="text-center">管理员注册</h2>
 <hr>
 <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked" role="tablist">
         <li class="active"><a href="#newid" role="pill" data-toggle="pill" id="next1-1">1. 创建账号</a></li>
-        <li><a href="#shetuaninfo" role="pill" data-toggle="pill" id="next1-2">2. 社团信息</a></li>
+        <li><a href="#shetuaninfo" role="pill" data-toggle="pill" id="next1-2">2. 填写信息</a></li>
         <li><a href="#bumeninfo" role="pill" data-toggle="pill" id="next1-3">3. 部门简介</a></li>
     </ul>
 </div>
@@ -105,12 +105,12 @@
 <!--社团介绍-->
 <div class="tab-pane fade" id="shetuaninfo">
     <div class="form-group has-feedback" id="inputbox6">
-        <label for="inputShetuan" class="col-sm-2 control-label">社团名称</label>
+        <label for="inputShetuan" class="col-sm-2 control-label">名称</label>
 
         <div class="col-sm-6">
             <input name="name" type="text" class="form-control" id="inputShetuan">
             <span id="span6-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">请输入社团名称，注册以后不能更改</span>
+            <span class="help-block">请输入名称，注册以后不能更改</span>
         </div>
     </div>
     <div class="form-group">
@@ -135,7 +135,7 @@
         </div>
     </div>
     <div class="form-group has-feedback" id="inputbox7">
-        <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
+        <label for="inputIntro" class="col-sm-2 control-label">介绍</label>
 
         <div class="col-sm-6">
             <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
@@ -149,7 +149,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="inputWeixin" name="wx">
             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">您的社团公众号，数字与字母（选填）</span>
+            <span class="help-block">您的微信公众号，数字与字母（选填）</span>
         </div>
     </div>
     <div class="help-block" style="padding-left: 120px">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>

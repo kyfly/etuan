@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>社团管理员注册</title>
+    <title>管理员注册</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -75,8 +75,8 @@
   		<br class="visible-xs-block">
    	    <h1 class="hidden-xs">恭喜您，注册成功！</h1>
         <p class="visible-xs-block p1">恭喜您<br>注册成功！</p>
-		<h4 class="hidden-xs"><br>我们已经为您的社团自动生成了美美的介绍页面</h4>
-        <p class="visible-xs-block">我们已经为您的社团自动生成了美美的介绍页面</p>
+		<h4 class="hidden-xs"><br>我们已经为您自动生成了美美的介绍页面</h4>
+        <p class="visible-xs-block">我们已经为您自动生成了美美的介绍页面</p>
 		<a href="/shetuan/{{$org_id}}" target="_blank" class="hidden-xs"><h4>快来看看吧>></h4></a><br>
         <a href="/shetuan/{{$org_id}}" target="_blank" class="visible-xs-block p2">快来看看吧>></a><br>
         <a href="/admin/home" class="btn btn-primary btn-lg">进入管理后台</a>
