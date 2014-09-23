@@ -83,12 +83,16 @@ class organizationController extends BaseController
         $orgArr = Organization::where('hidden','!=',1)
             ->orderBy('internal_order')
             ->orderBy('org_id')
-            ->select('org_id','name','logo_url','type','school')
+            ->select('org_id','name','logo_url','type','school','internal_order')
             ->get()
             ->toArray();
         foreach ($orgArr as $key => $value) {
+            if($orgArr[$key]['internal_order']<=7)
+                $orgArr[$key]['type'] = "校级组织";
+            else if($orgArr[$key]['internal_order']>7&&$orgArr[$key]['internal_order']<=25)
+                $orgArr[$key]['type'] = "职属学社";
             $orgArr[$key]['school'] = ""; 
-            $orgArr[$key]['type'] = ""; 
+            unset($orgArr[$key]['internal_order']);
         }
         return $orgArr;
     }
