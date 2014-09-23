@@ -240,7 +240,7 @@ $(document).ready(function () {
             }
         },
         error: function () {
-            alert("当前网络不佳，暂时无法获取社团信息");
+            alert("当前网络不佳，暂时无法获取报名信息");
         }
     });
     var titletext = document.createTextNode(" " + activityPageJson.name);
@@ -308,7 +308,7 @@ $(document).ready(function () {
         $("textarea").prop("disabled", true);
         $("select").prop("disabled", true);
         $("#submit").prop("disabled", true);
-        alert("不好意思哦，你不在社团规定的年级范围内。");
+        alert("不好意思哦，你不在规定的年级范围内。");
     }
     */
     //根据blade输出的信息来做判断提示
