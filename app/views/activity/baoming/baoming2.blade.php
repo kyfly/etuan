@@ -185,7 +185,7 @@
     <div class="col-xs-12 no-padding single-line" style="background-color: #fff">
     </div>
     <div id="regfooter" class="col-xs-12 no-padding cover" style="height: 100px;background-color: #fff;color:#000">
-        <p style="text-align: center"><img src="/img/footer.png" alt="团团一家|红色家园 联合出品"></p>
+        <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
     </div>
 </div>
 

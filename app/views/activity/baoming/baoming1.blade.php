@@ -77,7 +77,7 @@
             <div class="form-group">
                 <hr>
                 <div id="regfooter">
-                    <p style="text-align: center"><img src="/img/footer.png" alt="团团一家|红色家园 联合出品"></p>
+                    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
                 </div>
             </div>
         </form>

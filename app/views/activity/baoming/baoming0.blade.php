@@ -200,8 +200,8 @@
             <h4><span class="glyphicon glyphicon-envelope" style="vertical-align: middle"></span>&ensp;提交</h4>
         </button>
     </div>
-    <div id="regfooter" class="col-xs-12 single-line no-padding" style="background-color: #fff">
-        <p style="text-align: center"><img src="../img/footer.png" alt="团团一家|红色家园 联合出品"></p>
+    <div id="regfooter" class="col-xs-12 single-line no-padding" style="color: #fff">
+        <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
     </div>
 </div>
 
