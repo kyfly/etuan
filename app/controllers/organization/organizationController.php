@@ -83,7 +83,7 @@ class organizationController extends BaseController
         return Organization::where('hidden','!=',1)
             ->orderBy('internal_order')
             ->orderBy('org_id')
-            ->select('org_id','name','logo_url','type','school')->get();
+            ->select('org_id','name','logo_url')->get();
     }
 
     public function getOrgInfo()
