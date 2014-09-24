@@ -22,7 +22,7 @@ class organizationController extends BaseController
     //获取一个用户的所有部门信息
     public function getDepartment()
     {
-        $org_uid = Input::get('org_uid');
+        $org_uid = Auth::user()->org_uid;
         $org_id = Organization::where('org_uid',$org_uid)
         ->pluck('org_id');
         $deparment = Department::where('org_id',$org_id)
