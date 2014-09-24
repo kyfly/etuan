@@ -444,7 +444,7 @@ $(document).ready(function () {
             $.ajax({
                 async: false,
                 type: "get",
-                url: "/organization/department?org_uid=" + _orgId,
+                url: "/organization/department",
                 success: function (msg) {
                     departmentInfo = msg;
                 },

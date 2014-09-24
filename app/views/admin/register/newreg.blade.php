@@ -197,8 +197,6 @@
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/admin.js"></script>
-<!--当前页面的社团号-->
-<script>_orgId = {{Session::get('org_id')}};</script>
 
 @if(Input::get('type')==1)
 <script>_activityId = {{Input::get('activityId')}};</script>
