@@ -89,7 +89,7 @@ class organizationController extends BaseController
         foreach ($orgArr as $key => $value) {
             if($orgArr[$key]['internal_order']<=7)
                 $orgArr[$key]['type'] = "校级组织";
-            else if($orgArr[$key]['internal_order']>7&&$orgArr[$key]['internal_order']<=25)
+            else if($orgArr[$key]['internal_order']>7&&$orgArr[$key]['internal_order']<=27)
                 $orgArr[$key]['type'] = "职属学社";
             $orgArr[$key]['school'] = ""; 
             unset($orgArr[$key]['internal_order']);
