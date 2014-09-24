@@ -72,6 +72,8 @@ class RegistrationController extends ActivityController
     {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetFont('helvetica', '', 14);
+        $pdf->setPrintHeader(false);
+        $pdf->setCellHeightRatio(0.9); 
         $html = "";
         // if(!Input::has('activityId'))
             $this->activityId = Registration::where('org_uid',$this->org_uid)
@@ -82,7 +84,7 @@ class RegistrationController extends ActivityController
             $html = View::make('admin.register.outputpdf')->with('results', $results)
                 ->with('answers', $answers)->with('title', '报名表');
             $pdf->AddPage();
-            $pdf->SetFont('cid0cs', '', 14);
+            $pdf->SetFont('cid0cs', '', 10);
             $pdf->writeHTML($html, true, false, true, false, '');
        }
        $pdf->Output('报名结果.pdf', 'D');
