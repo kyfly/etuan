@@ -75,14 +75,15 @@ class RegistrationController extends ActivityController
         $pdf->setPrintHeader(false);
         $pdf->setCellHeightRatio(0.9); 
         $html = "";
-        // if(!Input::has('activityId'))
-            $this->activityId = Registration::where('org_uid',$this->org_uid)
-                ->min('reg_id');
-       $results = $this->registrationHandle->getActivityResult($this->activityId);
+        $reg_info = Registration::where('org_uid',$this->org_uid)
+            ->orderBy('reg_id')
+            ->select('reg_id','name')
+            ->first();
+       $results = $this->registrationHandle->getActivityResult($reg_info->reg_id);
        foreach($results['answers'] as $answers)
        {
             $html = View::make('admin.register.outputpdf')->with('results', $results)
-                ->with('answers', $answers)->with('title', '报名表');
+                ->with('answers', $answers)->with('title', $reg_info->name);
             $pdf->AddPage();
             $pdf->SetFont('cid0cs', '', 10);
             $pdf->writeHTML($html, true, false, true, false, '');
