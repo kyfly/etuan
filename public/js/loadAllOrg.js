@@ -31,9 +31,14 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    if ($.getUrlParam('from') == 'e-tuan' || $.getUrlParam('from') =='e-hduhdu' )
+    var from = ['e-tuan', 'e-hduhdu', 'hduleague', 'hduxsh'];
+    if (from.indexOf($.getUrlParam('from') > -1))
     {
         $('#nav').hide();
+    }
+    if ($.getUrlParam('from') == 'e-hduhdu')
+    {
+        $('#orgList a[href="#club"]').tab('show');
     }
 
     $.get('/organization/organization-info', function (data, status) {

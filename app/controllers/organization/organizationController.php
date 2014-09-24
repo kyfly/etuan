@@ -14,7 +14,7 @@ class organizationController extends BaseController
         if ($regId)
             $regUrl = '/baoming/'. $regId;
         else
-            $regUrl = '/baoming.html';
+            $regUrl = '/shetuan.html';
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
         ->with('regUrl', $regUrl);
     }

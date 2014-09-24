@@ -185,7 +185,8 @@
     <div class="col-xs-12 no-padding single-line" style="background-color: #fff">
     </div>
     <div id="regfooter" class="col-xs-12 no-padding cover" style="height: 100px;background-color: #fff;color:#000">
-        <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+        <h4 class="text-center"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+                        &nbsp;提供技术支持</h4>
     </div>
 </div>
 

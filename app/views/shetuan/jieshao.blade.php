@@ -155,7 +155,8 @@
 </a>
 
 <div class="box1 text-center">
-    <h4 style="color: #ffffff">杭州电子科技大学麒飞软件开发团队©2014</h4>
+    <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+        &nbsp;提供技术支持</h4>
 </div>
 <script>
     window._bd_share_config = {

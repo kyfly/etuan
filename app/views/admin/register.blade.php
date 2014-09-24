@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>社团管理员注册</title>
+    <title>组织管理员注册</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{URL::to('/css/adminreg.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
 <div class="alert alert-info" role="alert" style="display: none" id="topAlert">
     <img src="/img/waiting.gif">&nbsp;&nbsp;正在上传图片并创建帐号，请稍等...
 </div>
-<h2 class="text-center">管理员注册</h2>
+<h2 class="text-center">组织管理员注册</h2>
 <hr>
 <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked" role="tablist">
