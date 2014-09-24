@@ -193,7 +193,7 @@
 <script>
     _activityId = {{$activityId }};
     _stuId = {{Weixin::info()->stu_id}};
-    _stuName = '{{Weixin::info()->stu_name}}'
+    _stuName = '{{Weixin::info()->stu_name}}';
     _IsTime = {{$isTime}};
     _IsGrade = {{$isGrade}};
 </script>
