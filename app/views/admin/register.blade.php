@@ -138,7 +138,7 @@
         <label for="inputIntro" class="col-sm-2 control-label">介绍</label>
 
         <div class="col-sm-6">
-            <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
+            <textarea id="inputIntro" name="description" class="form-control" maxlength="200" style="resize:none" rows="7"></textarea>
             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">请保持在200字以内</span>
         </div>
@@ -207,7 +207,7 @@
             <label class="col-sm-2 control-label">部门介绍</label>
 
             <div class="col-sm-6">
-                <textarea class="form-control" name="department_description[]" maxlength="50" rows="3"></textarea>
+                <textarea class="form-control" name="department_description[]" maxlength="50" style="resize:none" rows="3"></textarea>
                 <span class="help-block">请保持在50字以内</span>
             </div>
         </div>

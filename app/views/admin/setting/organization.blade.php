@@ -44,7 +44,7 @@
                         <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
 
                         <div class="col-sm-6">
-                            <textarea id="inputIntro" name="description" class="form-control" rows="7"><?php echo $organization->description; ?></textarea>
+                            <textarea id="inputIntro" name="description" class="form-control" maxlength="200" style="resize:none" rows="7"><?php echo $organization->description; ?></textarea>
                             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
                             <span class="help-block">200字以内</span>
                         </div>
