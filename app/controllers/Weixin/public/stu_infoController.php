@@ -44,6 +44,8 @@ class Stu_infoController extends BaseController
 				}
 				$re = WxUser::where('wx_uid',$wx_uid)->update(['stu_name'=>$stu_name,'stu_id'=>$stu_id]);
 				return Redirect::to($url);
+			}else{
+				return $msg = '请检查是否输入错误';
 			}
 		}
 		$msgArr = array('title' => '用户信息错误', 'body' => $msg,
