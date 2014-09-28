@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-md-5 text-left">
                         <h3>有问题请联系我们！</h3>
-                        <h4>加入团团一家社团中心群，解答问题，交流经验！</h4>
-                        <h4>群号：198204936</h4>
+                        <h4>加入团团一家用户群，解答问题，交流经验！</h4>
+                        <h4>QQ群号：198204936</h4>
                         <a href="http://jq.qq.com/?_wv=1027&k=VO8jjj" class="btn btn-primary btn-lg" target="_blank">
                             点击加群
                         </a>

@@ -31,9 +31,14 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    if ($.getUrlParam('from') == 'e-tuan' || $.getUrlParam('from') =='e-hduhdu' )
+    var from = ['e-tuan', 'e-hduhdu', 'hduleague', 'hduxsh'];
+    if (from.indexOf($.getUrlParam('from')) > -1)
     {
         $('#nav').hide();
+    }
+    if ($.getUrlParam('from') == 'e-hduhdu')
+    {
+        $('#orgList a[href="#club"]').tab('show');
     }
 
     $.get('/organization/organization-info', function (data, status) {
@@ -43,7 +48,7 @@ $(document).ready(function () {
                 '<div class="thumbnail borderDiv">' +
                 '<p class="listhead">{1}</p>' +
                 '<img style="width: 150px; height: 150px" src="{2}">' +
-                '<p class="status text-view-more">查看介绍'+
+                '<p class="status text-view-more">在线报名'+
                 '<span class="glyphicon glyphicon-chevron-right"></span></p>' +
                 '</div>' +
                 '</a>' +
@@ -58,16 +63,6 @@ $(document).ready(function () {
                     orgUrl, data[i].name, data[i].logo_url);
                 if (data[i].type == '校级组织') {
                     $('#universityLevel').append(regDiv);
-                }
-                else if (data[i].type == '院级组织') {
-                    var schoolIndex = school.indexOf(data[i].school);
-                    if (schoolIndex < 0) {
-                        schoolIndex = school.length;
-                        $('#schoolLevel').append('<div id="school' + schoolIndex +
-                            '"><div class="clearfix"></div><h3>' + data[i].school + '</h3><hr></div>');
-                        school.push(data[i].school);
-                    }
-                    $('#school' + schoolIndex).append(regDiv);
                 }
                 else {
                     $('#club').append(regDiv);

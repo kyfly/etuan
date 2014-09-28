@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台 </title>
+    <title>{{{$orgInfo->name}}} 介绍 - 团团一家</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script>
@@ -120,15 +120,8 @@
 
 <div class="box2">
     <div class="container">
-        <h3>社团介绍</h3>
-
+        <h3>介绍</h3>
         <p>{{{$orgInfo->description}}}</p>
-
-        <h3>社团属性</h3>
-
-        <p class="intro">类别：{{{$orgInfo->type}}}</p>
-
-        <p class="intro">所属学院：{{{$orgInfo->school}}}</p>
     </div>
 </div>
 
@@ -163,12 +156,12 @@
 
 <div class="box1 text-center">
     <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
-    &nbsp;提供技术支持</h4>
+        &nbsp;提供技术支持</h4>
 </div>
 <script>
     window._bd_share_config = {
         common: {
-            bdText: '{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台',
+            bdText: '{{{$orgInfo->name}}} 介绍 - 团团一家',
             bdDesc: '{{{str_replace(["\n", "\r"], " ", $orgInfo->description)}}}',
             bdUrl: 'http://www.etuan.org/shetuan/{{{$orgInfo->org_id}}}',
             bdPic: '{{{$orgInfo->logo_url}}}',

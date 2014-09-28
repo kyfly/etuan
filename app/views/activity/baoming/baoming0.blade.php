@@ -190,7 +190,7 @@
             </a>
         </p>
         <p id="timeinfo" class="left-tag"></p>
-        <p class="text-center"><a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a></p>
+        <p class="text-center"><a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多信息？请点击这里</a></p>
     </div>
     <div id="regform" class="clearfix">
     <!--表项-->
@@ -200,8 +200,9 @@
             <h4><span class="glyphicon glyphicon-envelope" style="vertical-align: middle"></span>&ensp;提交</h4>
         </button>
     </div>
-    <div id="regfooter" class="col-xs-12 single-line no-padding" style="background-color: #fff">
-        <p style="text-align: center"><img src="../img/footer.png" alt="团团一家|红色家园 联合出品"></p>
+    <div id="regfooter" class="col-xs-12 single-line no-padding" style="color: #fff">
+        <h4 class="text-center"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+                &nbsp;提供技术支持</h4>
     </div>
 </div>
 
