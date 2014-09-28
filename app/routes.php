@@ -112,11 +112,6 @@ $rsa->loadKey('...'); // private key
 echo $rsa->decrypt($ciphertext);
 });
 
-Route::get('modeltest', function() {
-    return Registration::getRegister();
-});
-
-
 
 
 

@@ -135,6 +135,7 @@ public function getActivityResult($activityId)
     ->lists('reg_serial');
     $answers = array();
     header("content-type:text/html;charset=utf-8");
+    $position = 99;//如果没变的话代表不存在性别这个问题
     foreach ($questions as $key => $value) {
         if($value=="性别")
         {
@@ -147,7 +148,10 @@ public function getActivityResult($activityId)
         $answer = Reg_result::where('reg_serial',$serial)
         ->orderBy('question_id','asc')
         ->lists('answer');
-        $answer[$position] = $answer[$position]==1?"男":"女";
+        if($position!=99)
+        {
+            $answer[$position] = $answer[$position]==1?"男":"女";
+        }
         $answer = array_add($answer,count($answer),Registration_user::where('reg_serial',$serial)
                 ->pluck('used_time'));        
         $answers[$key] = $answer;
