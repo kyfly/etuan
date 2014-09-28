@@ -91,35 +91,3 @@ Route::group(array('before' => 'auth'), function () {
 });
 
 
-
-Route::get('ip', function() {
-    return Registration_user::lists('ip');
-});
-
-
-include('Crypt/RSA.php');
-Route::get('rsa',function(){
-
-$rsa = new Crypt_RSA();
-$rsa->loadKey(PUBLICKEY); // public key
-
-$plaintext = Organization_user::where('org_uid',40)->pluck('login_token');
-
-$rsa->setEncryptionMode(CRYPT_RSA_ENCRYPTION_PKCS1);
-$ciphertext = $rsa->encrypt($plaintext);
-
-$rsa->loadKey('...'); // private key
-echo $rsa->decrypt($ciphertext);
-});
-
-Route::get('modeltest', function() {
-    return Registration::getRegister();
-});
-
-
-
-
-
-
-
-
