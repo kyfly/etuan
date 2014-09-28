@@ -44,7 +44,15 @@
                     </div>
                 </div>
             <div class="tab-pane" id="xiazai" style="padding-top: 40px">
-               
+                <div class="col-md-12">
+                    <div class="col-md-offset-1 col-md-4 text-center">
+                        <img src="/img/icon/pdf.png">
+                    </div>
+                    <div class="col-md-5">
+                        <p><br>导出为PDF文档，可以打印为单张报名表，适用于面试等场合。</p>
+                        <a href="/registration/downloadpdf" type="button" class="btn btn-info btn-lg btn-block">下载pdf文件</a>
+                    </div>
+                </div>
                 <div class="col-md-12" style="margin-top: 30px">
                     <div class="col-md-offset-1 col-md-4 text-center">
                         <img src="/img/icon/excel.png">
