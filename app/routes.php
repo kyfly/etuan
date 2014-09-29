@@ -105,27 +105,3 @@ $ciphertext = $rsa->encrypt($plaintext);
 $rsa->loadKey('...'); // private key
 echo $rsa->decrypt($ciphertext);
 });
-
-Route::get('set',function()
-{
-    $reg_serial = Registration_user::where('reg_id',55)
-                    ->orderBy('reg_serial')
-                    ->lists('reg_serial');
-    foreach ($reg_serial as $key => $value) {
-        $wx_uid = Registration_user::where('reg_serial',$value)->pluck('wx_uid');
-        $wx_user_info =WxUser::where('wx_uid',$wx_uid)->select('stu_name','sex')->first();
-        Reg_result::where('reg_serial',$value)->where('reg_id',55)->where('question_id',1)
-                        ->update(array('answer'=>$wx_user_info->stu_name));
-        if($wx_user_info->sex==2)
-        {
-            $wx_user_info->sex = 0;
-        }
-        else if($wx_user_info->sex==0)
-        {
-            $wx_user_info->sex=null;
-        }
-        Reg_result::where('reg_serial',$value)->where('reg_id',55)->where('question_id',2)
-                ->update(array('answer'=>$wx_user_info->sex));
-
-    }
-});
