@@ -150,7 +150,7 @@ public function getActivityResult($activityId)
         ->lists('answer');
         if($position!=99)
         {
-            $answer[$position] = $answer[$position]==1?"男":"女";
+            $answer[$position] = $answer[$position]==1?"男":$answer[$position]==0?"女":"";
         }
         $answer = array_add($answer,count($answer),Registration_user::where('reg_serial',$serial)
                 ->pluck('used_time'));        
