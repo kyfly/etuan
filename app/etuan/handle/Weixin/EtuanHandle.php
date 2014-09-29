@@ -71,7 +71,7 @@ class EtuanHandle extends replyHandle
          $key = $obj->primaryKey;
          $url = $activity::where($key,$result->act_id)->select("name", "org_uid")->first();
          $actObj = new actNewHandle;
-         $acturl = $actObj->getactUrl($activity,$result->act_id);
+         $acturl = $actObj->getactUrl($activity,$result->act_id). '?from=qrcode';
          $arr[] =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
                 "pic_url"=>Organization::where("org_uid",$url->org_uid)->pluck('logo_url'),"url"=>$acturl];
          $arr[] = json_decode('{
