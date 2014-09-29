@@ -193,10 +193,10 @@ public function participateInActivity($activityId, $participatorInfo)
         'reg_id' => $activityId,
         'wx_uid' => Weixin::user()
         )); 
-    $stu_id_req_id = Req_question::where('reg_id',$activityId)
+    $stu_id_req_id = Reg_question::where('reg_id',$activityId)
                         ->where('label','学号')
                         ->pluck('question_id');
-    $stu_name_req_id = Req_question::where('reg_id',$activityId)
+    $stu_name_req_id = Reg_question::where('reg_id',$activityId)
                         ->where('label','姓名')
                         ->pluck('question_id');
     $results[$stu_id_req_id-1]->answer = Weixin::info()->stu_id;
