@@ -66,6 +66,9 @@ class EtuanHandle extends replyHandle
     private function sceneReply($postObj,$scene_id){
          $mp_origin_id = $postObj->ToUserName;
          $result = Etuan::where("scene_id",$scene_id)->select("act_type","act_id")->first();
+         if(! $result){
+             return;
+         }
          $activity = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
          $obj =new $activity;
          $key = $obj->primaryKey;
