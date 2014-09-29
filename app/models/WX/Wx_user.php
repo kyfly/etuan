@@ -20,4 +20,6 @@ class WxUser extends Eloquent{
      * @var bool
      */
     public $incrementing = false;
+
+    public $timestamps = false;
 }

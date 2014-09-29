@@ -18,4 +18,6 @@ class Reg_result extends Eloquent{
      * @var bool
      */
     public $incrementing = false;
+
+    public $timestamps = false;
 }
