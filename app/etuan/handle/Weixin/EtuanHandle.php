@@ -67,7 +67,8 @@ class EtuanHandle extends replyHandle
          $mp_origin_id = $postObj->ToUserName;
          $result = Etuan::where("scene_id",$scene_id)->select("act_type","act_id")->first();
          if(! $result){
-             return;
+            $content = "对不起，二维码解析失败，该活动可能已被删除!";
+            return $this->TextMessage($postObj,$content);
          }
          $activity = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
          $obj =new $activity;
