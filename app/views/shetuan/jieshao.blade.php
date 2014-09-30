@@ -148,7 +148,7 @@
     </div>
 </div>
 
-<a href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
+<a id="goReg" href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
     <div class="box5 text-center">
         <h2>我要报名！<img src="/img/arrow.png"></h2>
     </div>
@@ -158,6 +158,7 @@
     <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
         &nbsp;提供技术支持</h4>
 </div>
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script>
     window._bd_share_config = {
         common: {
@@ -193,6 +194,13 @@
         }]
     }
     with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+    $(document).ready(function(){
+        $('#goReg').click(function(){
+            if ($('#goReg').attr('href') == '/shetuan.html')
+                alert('该社团还未创建报名表，请再等等哦~');
+        })
+    })
 </script>
 
 </body>
