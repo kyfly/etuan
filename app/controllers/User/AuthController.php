@@ -133,7 +133,7 @@ class AuthController extends BaseController
                 'pic_url3' => $imgUrls[3],
                 'description' => $userInfo['description'],
                 'org_uid' => $org_uid,
-                'hidden' => 1
+                'hidden' => 0
             ));
 
             //插入部门信息
