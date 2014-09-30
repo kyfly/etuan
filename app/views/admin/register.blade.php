@@ -120,6 +120,7 @@
             <select class="form-control" id="inputType" name="type">
                 <option value="校级组织" selected>校级组织</option>
                 <option value="院级组织">院级组织</option>
+                <option value="职能社团">职能社团</option>
                 <option value="校级社团">校级社团</option>
                 <option value="院级社团">院级社团</option>
             </select>
