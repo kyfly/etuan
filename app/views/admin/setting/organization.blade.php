@@ -26,6 +26,7 @@
                         <div class="col-sm-6">
                             <select class="form-control" id="inputType" name="type">
                                 <option value="校级组织">校级组织</option>
+                                <option value="职能社团">职能社团</option>
                                 <option value="院级组织">院级组织</option>
                                 <option value="校级社团">校级社团</option>
                                 <option value="院级社团">院级社团</option>
@@ -44,7 +45,7 @@
                         <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
 
                         <div class="col-sm-6">
-                            <textarea id="inputIntro" name="description" class="form-control" rows="7"><?php echo $organization->description; ?></textarea>
+                            <textarea id="inputIntro" name="description" class="form-control" maxlength="200" style="resize:none" rows="7"><?php echo $organization->description; ?></textarea>
                             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
                             <span class="help-block">200字以内</span>
                         </div>
@@ -118,7 +119,7 @@ $(document).ready(function(){
     $(ls).first().prop("selected",true);
     var ct = $("#inputType").find("option:selected").text();
     var sa = ['','','机械工程学院', '电子信息学院', '通信工程学院', '自动化学院', '计算机学院', '生命信息与仪器工程学院', '材料与环境工程学院', '软件工程学院', '理学院', '经济学院', '管理学院', '会计学院', '外国语学院', '数字媒体与艺术设计学院', '人文与法学院', '马克思主义学院', '卓越学院', '信息工程学院', '国际教育学院', '继续教育学院'];
-    if (ct === "校级组织" || ct === "校级社团") {
+    if (ct === "校级组织" || ct === "校级社团" || ct === "职能社团") {
         $("#inputXueyuan").empty().prepend("<option value='全校' selected>全校</option>");
     }
     else {

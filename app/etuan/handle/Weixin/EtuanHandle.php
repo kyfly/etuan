@@ -66,24 +66,22 @@ class EtuanHandle extends replyHandle
     private function sceneReply($postObj,$scene_id){
          $mp_origin_id = $postObj->ToUserName;
          $result = Etuan::where("scene_id",$scene_id)->select("act_type","act_id")->first();
+         if(! $result){
+            $content = "对不起，二维码解析失败，该活动可能已被删除!";
+            return $this->TextMessage($postObj,$content);
+         }
          $activity = strtoupper(substr($result->act_type,0,1)).substr($result->act_type,1,strlen($result->act_type));
          $obj =new $activity;
          $key = $obj->primaryKey;
          $url = $activity::where($key,$result->act_id)->select("name", "org_uid")->first();
          $actObj = new actNewHandle;
-         $acturl = $actObj->getactUrl($activity,$result->act_id);
+         $acturl = $actObj->getactUrl($activity,$result->act_id). '?from=qrcode';
          $arr[] =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
                 "pic_url"=>Organization::where("org_uid",$url->org_uid)->pluck('logo_url'),"url"=>$acturl];
          $arr[] = json_decode('{
-                                "title": "报名更多社团",
+                                "title": "报名更多组织",
                                 "description": null,
                                 "pic_url": "http://www.kyfly.net/wx/img/reg.png",
-                                "url": "http://www.etuan.org/baoming.html?from=e-tuan"
-                            }',true);
-         $arr[] = json_decode('{
-                                "title": "查看社团大全",
-                                "description": null,
-                                "pic_url": "http://www.kyfly.net/wx/img/all.png",
                                 "url": "http://www.etuan.org/shetuan.html?from=e-tuan"
                             }',true);
          $arr[] = json_decode('{

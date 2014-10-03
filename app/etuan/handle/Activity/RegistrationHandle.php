@@ -135,6 +135,7 @@ public function getActivityResult($activityId)
     ->lists('reg_serial');
     $answers = array();
     header("content-type:text/html;charset=utf-8");
+    $position = 99;//如果没变的话代表不存在性别这个问题
     foreach ($questions as $key => $value) {
         if($value=="性别")
         {
@@ -147,7 +148,10 @@ public function getActivityResult($activityId)
         $answer = Reg_result::where('reg_serial',$serial)
         ->orderBy('question_id','asc')
         ->lists('answer');
-        $answer[$position] = $answer[$position]==1?"男":"女";
+        if($position!=99)
+        {
+            $answer[$position] = $answer[$position]=='1'?"男":($answer[$position]=='0'?"女":"");
+        }
         $answer = array_add($answer,count($answer),Registration_user::where('reg_serial',$serial)
                 ->pluck('used_time'));        
         $answers[$key] = $answer;
@@ -189,8 +193,14 @@ public function participateInActivity($activityId, $participatorInfo)
         'reg_id' => $activityId,
         'wx_uid' => Weixin::user()
         )); 
-    $results[0]->answer = Weixin::info()->stu_id;
-    $results[1]->answer = Weixin::info()->stu_name; 
+    $stu_id_req_id = Reg_question::where('reg_id',$activityId)
+                        ->where('label','学号')
+                        ->pluck('question_id');
+    $stu_name_req_id = Reg_question::where('reg_id',$activityId)
+                        ->where('label','姓名')
+                        ->pluck('question_id');
+    $results[$stu_id_req_id-1]->answer = Weixin::info()->stu_id;
+    $results[$stu_name_req_id-1]->answer = Weixin::info()->stu_name; 
     foreach($results as $result)
     {
         Reg_result::insert(array(

@@ -14,7 +14,7 @@ class organizationController extends BaseController
         if ($regId)
             $regUrl = '/baoming/'. $regId;
         else
-            $regUrl = '/baoming.html';
+            $regUrl = '/shetuan.html';
         return View::make('shetuan.jieshao')->with('orgInfo', $orgInfo)->with('department', $department)
         ->with('regUrl', $regUrl);
     }
@@ -22,7 +22,7 @@ class organizationController extends BaseController
     //获取一个用户的所有部门信息
     public function getDepartment()
     {
-        $org_uid = Input::get('org_uid');
+        $org_uid = Auth::user()->org_uid;
         $org_id = Organization::where('org_uid',$org_uid)
         ->pluck('org_id');
         $deparment = Department::where('org_id',$org_id)
@@ -83,22 +83,13 @@ class organizationController extends BaseController
     //获取所有社团的信息
     public function getOrganizationInfo()
     {
-        $org_info = Organization::where('hidden','!=',1)
+        $orgArr = Organization::where('hidden','!=',1)
+            ->orderBy('internal_order')
             ->orderBy('org_id')
-            ->select('org_id','name','logo_url','type','school','internal_order')
+            ->select('org_id','name','logo_url','type','school')
             ->get()
             ->toArray();
-        foreach($org_info as $key=>$value)
-        {
-            $org_info[$key]['internal_order'] = rand(0,100);
-        }
-        uasort($org_info, 'orgCmp');
-        $org_info = array_values($org_info);
-        foreach($org_info as $key=>$value)
-        {
-            unset($org_info[$key]['internal_order']);
-        }        
-        return $org_info;
+        return $orgArr;
     }
 
     public function getOrgInfo()

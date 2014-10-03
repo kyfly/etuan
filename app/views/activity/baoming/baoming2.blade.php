@@ -169,7 +169,7 @@
             </a>
         </p>
         <p id="timeinfo"></p>
-        <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多关于社团的信息？请点击这里</a>
+        <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多信息？请点击这里</a>
 
     </div>
     <div id="regform">
@@ -185,14 +185,15 @@
     <div class="col-xs-12 no-padding single-line" style="background-color: #fff">
     </div>
     <div id="regfooter" class="col-xs-12 no-padding cover" style="height: 100px;background-color: #fff;color:#000">
-        <p style="text-align: center"><img src="/img/footer.png" alt="团团一家|红色家园 联合出品"></p>
+        <h4 class="text-center"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+                        &nbsp;提供技术支持</h4>
     </div>
 </div>
 
 <script>
     _activityId = {{$activityId }};
     _stuId = {{Weixin::info()->stu_id}};
-    _stuName = '{{Weixin::info()->stu_name}}'
+    _stuName = '{{Weixin::info()->stu_name}}';
     _IsTime = {{$isTime}};
     _IsGrade = {{$isGrade}};
 </script>

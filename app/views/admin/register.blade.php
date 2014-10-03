@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>社团管理员注册</title>
+    <title>组织管理员注册</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{URL::to('/css/adminreg.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -30,12 +30,12 @@
 <div class="alert alert-info" role="alert" style="display: none" id="topAlert">
     <img src="/img/waiting.gif">&nbsp;&nbsp;正在上传图片并创建帐号，请稍等...
 </div>
-<h2 class="text-center">社团管理员注册</h2>
+<h2 class="text-center">组织管理员注册</h2>
 <hr>
 <div class="col-sm-3">
     <ul class="nav nav-pills nav-stacked" role="tablist">
         <li class="active"><a href="#newid" role="pill" data-toggle="pill" id="next1-1">1. 创建账号</a></li>
-        <li><a href="#shetuaninfo" role="pill" data-toggle="pill" id="next1-2">2. 社团信息</a></li>
+        <li><a href="#shetuaninfo" role="pill" data-toggle="pill" id="next1-2">2. 填写信息</a></li>
         <li><a href="#bumeninfo" role="pill" data-toggle="pill" id="next1-3">3. 部门简介</a></li>
     </ul>
 </div>
@@ -105,12 +105,12 @@
 <!--社团介绍-->
 <div class="tab-pane fade" id="shetuaninfo">
     <div class="form-group has-feedback" id="inputbox6">
-        <label for="inputShetuan" class="col-sm-2 control-label">社团名称</label>
+        <label for="inputShetuan" class="col-sm-2 control-label">名称</label>
 
         <div class="col-sm-6">
             <input name="name" type="text" class="form-control" id="inputShetuan">
             <span id="span6-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">请输入社团名称，注册以后不能更改</span>
+            <span class="help-block">请输入名称，注册以后不能更改</span>
         </div>
     </div>
     <div class="form-group">
@@ -118,9 +118,8 @@
 
         <div class="col-sm-6">
             <select class="form-control" id="inputType" name="type">
-                <option value="校级组织" selected>校级组织</option>
                 <option value="院级组织">院级组织</option>
-                <option value="校级社团">校级社团</option>
+                <option value="校级社团" selected>校级社团</option>
                 <option value="院级社团">院级社团</option>
             </select>
         </div>
@@ -135,10 +134,10 @@
         </div>
     </div>
     <div class="form-group has-feedback" id="inputbox7">
-        <label for="inputIntro" class="col-sm-2 control-label">社团介绍</label>
+        <label for="inputIntro" class="col-sm-2 control-label">介绍</label>
 
         <div class="col-sm-6">
-            <textarea id="inputIntro" name="description" class="form-control" rows="7"></textarea>
+            <textarea id="inputIntro" name="description" class="form-control" maxlength="200" style="resize:none" rows="7"></textarea>
             <span id="span7-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
             <span class="help-block">请保持在200字以内</span>
         </div>
@@ -149,7 +148,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="inputWeixin" name="wx">
             <span id="span8-1" class="glyphicon glyphicon-ok form-control-feedback hidespan"></span>
-            <span class="help-block">您的社团公众号，数字与字母（选填）</span>
+            <span class="help-block">您的微信公众号，数字与字母（选填）</span>
         </div>
     </div>
     <div class="help-block" style="padding-left: 120px">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>
@@ -207,7 +206,7 @@
             <label class="col-sm-2 control-label">部门介绍</label>
 
             <div class="col-sm-6">
-                <textarea class="form-control" name="department_description[]" maxlength="50" rows="3"></textarea>
+                <textarea class="form-control" name="department_description[]" maxlength="50" style="resize:none" rows="3"></textarea>
                 <span class="help-block">请保持在50字以内</span>
             </div>
         </div>

@@ -17,7 +17,7 @@
     .question {
         margin: 0;
         padding: 0;
-        background-color: #d4d4d4
+        background-color: #ebebeb
     }
 
     .answer {
@@ -31,11 +31,11 @@
 </style>
 </head>
 <body>
-<div class="title">{{$title}}</div>
 <div class="logo">
-    <img src="http://img.kyfly.net/common/logo/etuan-logo-word.jpg@90h_100Q.jpg">
-    <span class="support">提供技术支持</span>
+    <img src="{{URL::to('img/support.png')}}">
 </div>
+<div class="title">{{$title}}</div>
+<br>
 @foreach($answers as $key=>$answer)
    <div class="question">{{$results['questions'][$key]}}</div>
    <div class="answer">{{$answer}}</div>

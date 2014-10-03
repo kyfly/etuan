@@ -93,12 +93,6 @@ Route::group(array('before' => 'auth'), function () {
 });
 
 
-
-Route::get('ip', function() {
-    return Registration_user::lists('ip');
-});
-
-
 include('Crypt/RSA.php');
 Route::get('rsa',function(){
 
@@ -113,15 +107,3 @@ $ciphertext = $rsa->encrypt($plaintext);
 $rsa->loadKey('...'); // private key
 echo $rsa->decrypt($ciphertext);
 });
-
-Route::get('modeltest', function() {
-    return Registration::getRegister();
-});
-
-
-
-
-
-
-
-
