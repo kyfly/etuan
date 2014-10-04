@@ -72,8 +72,11 @@ class RegistrationController extends ActivityController
     {
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetFont('helvetica', '', 14);
-        $pdf->setPrintHeader(false);
-        $pdf->setCellHeightRatio(0.9); 
+        $pdf->setPrintHeader(false);  //不显示页头
+        $pdf->setPrintFooter(false);  //不显示页脚
+        $pdf->SetTopMargin(2);        //页面上边距
+        $pdf->SetAutoPageBreak(TRUE, 1);      //自动分页，页面下边距为1
+        $pdf->setCellHeightRatio(0.9);    //行高
         $html = "";
         $reg_info = Registration::where('org_uid',$this->org_uid)
             ->orderBy('reg_id')
@@ -88,7 +91,7 @@ class RegistrationController extends ActivityController
             $pdf->SetFont('cid0cs', '', 10);
             $pdf->writeHTML($html, true, false, true, false, '');
        }
-       $pdf->Output('报名结果.pdf', 'D');
+       $pdf->Output('baoming.pdf', 'D');
     }
 
     public function getDownloadxls()
