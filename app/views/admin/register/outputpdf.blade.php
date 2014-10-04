@@ -2,18 +2,9 @@
 <head>
 <title>报名结果</title>
 <style>
-
-    .logo {
-        text-align: right;
-    }
-
-    .logo > img {
-        height: 15px;
-    }
-
     .question {
         text-align: right;
-        width: 25%;
+        width: 30%;
     }
 
     .space {
@@ -23,7 +14,7 @@
     }
 
     .answer {
-        width: 73%;
+        width: 68%;
     }
 
     .colorGray {
@@ -37,9 +28,6 @@
 </style>
 </head>
 <body>
-<div class="logo">
-    <img src="{{URL::to('img/support.png')}}">
-</div>
 <div class="title">{{$title}}</div>
 <br>
 <table>
