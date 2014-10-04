@@ -68,7 +68,8 @@ $(document).ready(function () {
                 var orgUrl = '/shetuan/' + data[i].org_id;
                 if (data[i].org_id == 7)
                     orgUrl = 'http://go.redhome.cc/waitU/';
-                data[i].logo_url += '@300w.' + logoUrl[logoUrl.length - 1];
+                var logoType = logoUrl[logoUrl.length - 1] == 'gif' ? 'png' : logoUrl[logoUrl.length - 1];
+                data[i].logo_url += '@300w.' + logoType;
                 var regDiv = String.format(regDivTpl,
                     orgUrl, data[i].name, data[i].logo_url);
                 switch (data[i].type)
