@@ -74,9 +74,9 @@ class RegistrationController extends ActivityController
         $pdf->SetFont('helvetica', '', 14);
         $pdf->setPrintHeader(false);  //不显示页头
         $pdf->setPrintFooter(false);  //不显示页脚
-        $pdf->SetTopMargin(2);        //页面上边距
-        $pdf->SetAutoPageBreak(TRUE, 1);      //自动分页，页面下边距为1
-        $pdf->setCellHeightRatio(0.9);    //行高
+        $pdf->SetTopMargin(3);        //页面上边距
+        $pdf->SetAutoPageBreak(TRUE, 2);      //自动分页，页面下边距为1
+        $pdf->setCellHeightRatio(1.8);    //行高
         $html = "";
         $reg_info = Registration::where('org_uid',$this->org_uid)
             ->orderBy('reg_id')
