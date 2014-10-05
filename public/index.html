@@ -3,12 +3,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票，杭电投票，社团服务" >
-    <meta name="description" content=" 团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！" >
+    <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票，杭电投票，社团服务">
+    <meta name="description" content=" 团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css"/>
     <title>首页 - 团团一家</title>
-    <link rel="icon" href="etuan_logo.ico" type="image/x-icon" >
-    <link rel="shortcut icon" href="etuan_logo.ico" type="image/x-icon" >
+    <link rel="icon" href="etuan_logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="etuan_logo.ico" type="image/x-icon">
     <style>
         .myft {
             font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
@@ -22,7 +22,7 @@
     <![endif]-->
     <script>
         var _hmt = _hmt || [];
-        (function() {
+        (function () {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?18a33d5e0bee3d92c20e7173809e5cb4";
             var s = document.getElementsByTagName("script")[0];
@@ -37,7 +37,8 @@
         <div class="container">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse"
+                            type="button">
                         <span class="sr-only">导航</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -95,7 +96,8 @@
                         </div>
                         <div class="item">
                             <a href="http://i.kyfly.net/ticket/sjgsHDU">
-                                <img src="http://i.kyfly.net/pic/sqzbs_min.jpg" alt="“十佳歌手”十强争霸赛" style="width:100%;height:100%">
+                                <img src="http://i.kyfly.net/pic/sqzbs_min.jpg" alt="“十佳歌手”十强争霸赛"
+                                     style="width:100%;height:100%">
 
                                 <div class="carousel-caption">
                                     <h3>“十佳歌手”总决赛抢票</h3>
@@ -134,7 +136,7 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-user"></span>
                                     </div>
-                                    <input type="text" id="email"  name="email" class="form-control" placeholder="用户名"/>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="用户名"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -142,7 +144,8 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-lock"></span>
                                     </div>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="密码"/>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                           placeholder="密码"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -175,32 +178,37 @@
 <script>
     var count = 0;
     var color = new Array("#088ec0", "rgb(18,0,0)");
-    $(document).ready(function () {
-        $("#background").css('background-color', color[0]);
-        $('#btnLogin').click(function() {
-            $.post('/auth/login',
-                    {
-                        email: $('#email').val(),
-                        password: $('#password').val()
-                    },
-                function(data, status) {
-                    if (status == "success")
-                    {
+
+    function login() {
+        $.post('/auth/login',
+                {
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                },
+                function (data, status) {
+                    if (status == "success") {
                         if (data.login_status == "success")
                             window.location.href = "/admin/home";
                         else
                             $('#failAlert').slideDown();
                     }
                 });
+    }
+
+    $(document).ready(function () {
+        $("#background").css('background-color', color[0]);
+        $('#btnLogin').click(login);
+        $('#loginDiv').keypress(function (event) {
+            if (event.keyCode == 13)  login()
         });
-        $('#failAlertClose').click(function() {
+        $('#failAlertClose').click(function () {
             $('#failAlert').slideUp();
         })
-    });
-    $('#carousel').bind('slide.bs.carousel', function () {
-        count++;
-        if (count >= color.length)  count = 0;
-        $("#background").css('background-color', color[count]);
+        $('#carousel').bind('slide.bs.carousel', function () {
+            count++;
+            if (count >= color.length)  count = 0;
+            $("#background").css('background-color', color[count]);
+        });
     });
 </script>
 </body>
