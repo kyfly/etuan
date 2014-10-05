@@ -168,7 +168,7 @@
     </div>
 </div>
 <footer id="footer" class="panel-footer">
-    <p class="text-center">杭州电子科技大学麒飞软件开发团队©2014</p>
+    <p class="text-center">©2014&nbsp;杭电麒飞软件团队&nbsp;Kyfly&nbsp;Team</p>
 </footer>
 
 <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
