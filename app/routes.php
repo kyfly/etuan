@@ -8,8 +8,8 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     Route::get("jiang/{id}", function($id) {
        return View::make('activity.choujiang.choujiang0')->with('lotteryId', $id);
     });
-    Route::get('hello', function () {
-        return View::make('hello');
+    Route::get('jiang/toshare/{id}', function ($id) {
+        return View::make('activity.choujiang.share')->with('lotteryId', $id);
     });
     Route::get('/baoming/success', function(){
         return View::make('activity.baoming.success');

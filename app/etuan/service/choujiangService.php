@@ -11,7 +11,7 @@ class choujiangService
 	}
 	public function myresult(){
 		$item_id = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->pluck('lottery_item_id');
-		$shared = $item_id = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->pluck('shared');
+		$shared = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->pluck('shared');
 		$lot_name = Lottery_item::where('Lottery_item_id',$item_id)->pluck('name');
 		if($lot_name){
 			return json_encode(["gotten"=>1,"item_name"=>$lot_name,"shared"=>$shared]);
@@ -20,23 +20,17 @@ class choujiangService
 		}
 	}
 	public function shared(){
-		$re = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->update(["shared"=>1]);
-		if($re){
+        try {
+            $re = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->update(["shared"=>1]);
+        }
+        catch (Exception $e) {
+            Log:error($e->getMessage());
+            return json_encode(["status"=>"fail","message"=>$e->getMessage()]);
+        }
+		if($re)
 			return json_encode(["status"=>"success"]);
-		}
-		$content1 = $this->checkReg();
-		$content2 = $this->checkLot();
-		$content3 = $this->checkSub();
-		$content4 = $this->checkStart();
-		$content5 = $this->checkStop();
-		$content6 = $this->checkShared();
-		$content = [$content1,$content2,$content3,$content4,$content5];
-		for($i = 0;$i < count($content);$i++){
-			if(!is_bool($content[$i])){
-				$content[$i] = urlencode($content[$i]);
-				return urldecode(json_encode(["status"=>"fail","message"=>$content[$i]));
-			}
-		}
+        else
+            return json_encode(["status"=>"fail","message"=>'更新数据出错']);
 	}
 	//获取某用户参与抽奖结果
 	public function getInfo(){
@@ -71,13 +65,6 @@ class choujiangService
 		$result = Registration_user::where('wx_uid',$this->wx_uid)->pluck('reg_id');
 		if(!$result){
 			return "你还没参加过报名活动";
-		}
-		return true;
-	}
-	private function checkShared(){
-		$shared = $item_id = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->pluck('shared');
-		if(!$shared){
-			return "你还没有分享呢";
 		}
 		return true;
 	}
