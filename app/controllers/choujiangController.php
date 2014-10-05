@@ -7,7 +7,7 @@ class choujiangController extends BaseController
 		$this->lottery_id = Route::input('lottery_id');
 		$this->lot = new choujiangService($this->lottery_id);
 	}
-	//获取某用户参与抽奖活动结果
+	//用户参与抽奖活动
 	public function get(){
 		$wx_uid = Weixin::user();
 		$stu_id = WxUser::where('wx_uid',$wx_uid)->pluck('stu_id');
@@ -24,6 +24,14 @@ class choujiangController extends BaseController
 			return '';
 		}
 		return urldecode(json_encode($result));
+	}
+	//获取某用户参与抽奖活动结果
+	public function myresult(){
+		return $this->lot->myresult();
+	}
+	//用户分享抽奖到朋友圈；
+	public function shared(){
+		return $this->lot->shared();
 	}
 	public function sendmsg(){
 		$wx_uid = Weixin::user();
