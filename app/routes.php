@@ -3,8 +3,8 @@
 Route::group(array('before' => 'wxauth|stuinfo'), function () {
     //抽奖，获取某次抽奖结果
     Route::get("jiang/get/{lottery_id}", "choujiangController@get");
-    Route::get("jiang/shared/{lottery_id}", "choujiangController@get");
-    Route::get("jiang/myresult/{lottery_id}", "choujiangController@get");
+    Route::get("jiang/shared/{lottery_id}", "choujiangController@shared");
+    Route::get("jiang/myresult/{lottery_id}", "choujiangController@myresult");
     Route::get("jiang/{id}", function($id) {
        return View::make('activity.choujiang.choujiang0')->with('lotteryId', $id);
     });

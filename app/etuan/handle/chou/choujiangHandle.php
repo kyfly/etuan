@@ -11,10 +11,13 @@ class choujiangHandle
 		$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
 		while($result){
 			$item_name = Lottery_item::where('lottery_item_id',$result->lottery_item_id)->pluck('name');
-			$stu_name = $this->getStu_name($result->wx_uid);
-			$item_name = urlencode($item_name);
-			$stu_name = urlencode($stu_name);
-			$info[] = ['name'=>$stu_name,'item_name'=>$item_name];
+            if ($item_name != '谢谢惠顾')
+            {
+                $stu_name = $this->getStu_name($result->wx_uid);
+                $item_name = urlencode($item_name);
+                $stu_name = urlencode($stu_name);
+                $info[] = ['name'=>$stu_name,'item_name'=>$item_name];
+            }
 			$i++;
 			$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
 		}

@@ -1,17 +1,16 @@
-$(function () {
+function isWeiXin() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    return ua.match(/MicroMessenger/i) == 'micromessenger';
+}
 
-    function isWeiXin() {
-        var ua = window.navigator.userAgent.toLowerCase();
-        return ua.match(/MicroMessenger/i) == 'micromessenger';
-    }
+if (!isWeiXin())
+{
+    alert("请在团团一家微信服务号上进行抽奖！");
+    window.location.href
+        = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+}
 
-    if (!isWeiXin())
-    {
-        alert("请在团团一家微信服务号上进行抽奖！");
-        window.location.href
-            = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
-    }
-
+$(document).ready(function() {
     $.get('/oauth/checksub', function (data, status) {
         if (status == 'success') {
             if (data != '1')
@@ -22,16 +21,14 @@ $(function () {
             }
         }
     });
-
-
     $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
         if (status == 'success')
         {
-            if (!data.shared && data.gotten)
+            if (!data.shared && data.gotten && data.item_name != '谢谢惠顾')
             {
                 location.href = '/jiang/toshare/' + lotteryId;
             }
-            else if (data.item_name != '谢谢惠顾')
+            else
             {
                 $('#myResultName').text(data.item_name);
                 $('#myResult').show();
