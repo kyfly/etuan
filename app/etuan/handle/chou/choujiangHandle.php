@@ -6,7 +6,7 @@ class choujiangHandle
 		$this->wx_uid = $this->getWx_uid();
 	}
 	//获取该抽奖活动已经中奖用户，
-	public function allLotteryer($lottery_id){
+	/*public function allLotteryer($lottery_id){
 		$i = 0;
 		$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
 		while($result){
@@ -20,6 +20,26 @@ class choujiangHandle
             }
 			$i++;
 			$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
+		}
+		if(!isset($info)){
+			return '';
+		}
+		return $info;
+	}*/
+	public function allLotteryer($lottery_id){
+		$i = 0;
+		$wx_uids = Lottery_user::where('lottery_id',$lottery_id)->lists('wx_uid');
+		$item_ids = Lottery_user::where('lottery_id',$lottery_id)->lists('lottery_item_id');
+		while($i < count($wx_uids)){
+			$item_name = Lottery_item::where('lottery_item_id',$item_ids[$i])->pluck('name');
+            if ($item_name != '谢谢惠顾')
+            {
+                $stu_name = $this->getStu_name($wx_uid[$i]);
+                $item_name = urlencode($item_name);
+                $stu_name = urlencode($stu_name);
+                $info[] = ['name'=>$stu_name,'item_name'=>$item_name];
+            }
+			$i++;
 		}
 		if(!isset($info)){
 			return '';
