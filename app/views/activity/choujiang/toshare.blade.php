@@ -49,10 +49,7 @@
         }
 
         .text-share {
-        }
-        .text-share img {
-            width: 20px;
-            height: 20px;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -64,7 +61,7 @@
         <img src="/img/choujiang/gift.png">
     </div>
     <div class="text-get">
-        <h2>恭喜您，获得了<span id="itemName">----</span>！</h2>
+        <h3>恭喜您，获得了<span id="itemName">----</span>！</h3>
     </div>
     <div class="text-share">
         <p>独乐乐不如众乐乐，<br>
@@ -75,16 +72,32 @@
 <script>
 
     var lotteryId = {{$lotteryId}};
+    var itemName = '';
+
+    $(document).ready(function() {
+        $('body').css('background-size', $(window).width() + 'px ' + $(window).height() + 'px');
+
+        $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
+            if (status == 'success')
+            {
+                if (data.item_name != '谢谢惠顾' && data.gotten){
+                    $('#itemName').text(data.item_name);
+                    itemName = '我抽中了' + data.item_name + '!';
+                }
+            }
+        });
+
+    });
 
     WeixinApi.ready(function(Api) {
 
         // 微信分享的数据
-        wxData = {
+        var wxData = {
             "appId": "", // 服务号可以填写appId
             "imgUrl" : 'http://img.kyfly.net/etuan/weixin/icon/prize.png',
             "link" : 'http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202367217&idx=2&sn=87544f6e384cf217da89a235f282bbf4#rd',
-            "desc" : "在线报名杭电组织和社团，还有神秘大奖！",
-            "title" : "在线报名杭电组织和社团，还有神秘大奖！"
+            "desc" : "在线报名杭电组织和社团，还有神秘大奖！" + itemName,
+            "title" : "在线报名杭电组织和社团，还有神秘大奖！" + itemName
         };
 
         // 分享的回调
@@ -112,20 +125,6 @@
         };
         // 点击分享到朋友圈，会执行下面这个代码
         Api.shareToTimeline(wxData, wxCallbacks);
-    });
-
-    $(document).ready(function() {
-        $('body').css('background-size', $(window).width() + 'px ' + $(window).height() + 'px');
-
-        $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
-            if (status == 'success')
-            {
-                if (data.item_name != '谢谢惠顾' && data.gotten)
-                    $('#itemName').text(data.item_name);
-                    wxData.title += '我抽中了' + data.item_name + '!';
-            }
-        });
-
     });
 </script>
 </body>
