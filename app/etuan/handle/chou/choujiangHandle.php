@@ -7,8 +7,8 @@ class choujiangHandle
 	}
 	public function allLotteryer($lottery_id){
 		$infos = WxUser::join('lottery_user','lottery_user.wx_uid','=','wx_user.wx_uid')
-		->join('lottery_item','lottery_item.lottery_item_id','=','Lottery_user.lottery_item_id')
-		->where('Lottery_user.lottery_id',$lottery_id)->where('lottery_item.name','!=','谢谢惠顾')->select('wx_user.stu_name','lottery_item.name')->get();
+		->join('lottery_item','lottery_item.lottery_item_id','=','lottery_user.lottery_item_id')
+		->where('lottery_user.lottery_id',$lottery_id)->where('lottery_item.name','!=','谢谢惠顾')->select('wx_user.stu_name','lottery_item.name')->get();
 		$i = 0;
 		while($i < count($infos)){
                 $info[] = ['name'=>urlencode($infos[$i]->stu_name),'item_name'=>urlencode($infos[$i]->name)];
