@@ -24,7 +24,7 @@ class choujiangService
             $re = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->update(["shared"=>1]);
         }
         catch (Exception $e) {
-            Log::error($e->getMessage());
+            Log::error($e);
             return json_encode(["status"=>"fail","message"=>'更新数据库发生异常！']);
         }
 		if($re)

@@ -60,7 +60,7 @@ class RegistrationHandle extends  ActivityHandle
         return true;
     } catch (Exception $e) {
         DB::rollback();
-        Log::error($e->getMessage());
+        Log::error($e);
         return false;
     }
 }
@@ -83,7 +83,7 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
             return true;
         } catch (Exception $e) {
             DB::rollback();
-            Log::error($e->getMessage());
+            Log::error($e);
             return false;
         }       
     }
@@ -124,7 +124,7 @@ public function updateActivity($org_uid, $activityId, $activityInfo)
         return true;
     } catch (Exception $e) {
         DB::rollback();
-        Log::error($e->getMessage());
+        Log::error($e);
         return false;
     }
 }
@@ -218,7 +218,7 @@ public function participateInActivity($activityId, $participatorInfo)
     return true;        
 } catch (Exception $e) {
     DB::rollback();
-    Log::error($e->getMessage());
+    Log::error($e);
     return false;
 }
 }
