@@ -34,7 +34,7 @@ class choujiangHandle
 			$item_name = Lottery_item::where('lottery_item_id',$item_ids[$i])->pluck('name');
             if ($item_name != '谢谢惠顾')
             {
-                $stu_name = $this->getStu_name($wx_uid[$i]);
+                $stu_name = $this->getStu_name($wx_uids[$i]);
                 $item_name = urlencode($item_name);
                 $stu_name = urlencode($stu_name);
                 $info[] = ['name'=>$stu_name,'item_name'=>$item_name];
