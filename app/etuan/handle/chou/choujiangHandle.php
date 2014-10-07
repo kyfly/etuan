@@ -5,40 +5,13 @@ class choujiangHandle
 	public function __construct(){
 		$this->wx_uid = $this->getWx_uid();
 	}
-	//获取该抽奖活动已经中奖用户，
-	/*public function allLotteryer($lottery_id){
-		$i = 0;
-		$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
-		while($result){
-			$item_name = Lottery_item::where('lottery_item_id',$result->lottery_item_id)->pluck('name');
-            if ($item_name != '谢谢惠顾')
-            {
-                $stu_name = $this->getStu_name($result->wx_uid);
-                $item_name = urlencode($item_name);
-                $stu_name = urlencode($stu_name);
-                $info[] = ['name'=>$stu_name,'item_name'=>$item_name];
-            }
-			$i++;
-			$result = Lottery_user::where('lottery_id',$lottery_id)->skip($i)->take(1)->select('wx_uid','lottery_item_id')->first();
-		}
-		if(!isset($info)){
-			return '';
-		}
-		return $info;
-	}*/
 	public function allLotteryer($lottery_id){
+		$infos = WxUser::join('lottery_user','lottery_user.wx_uid','=','wx_user.wx_uid')
+		->join('lottery_item','lottery_item.lottery_item_id','=','Lottery_user.lottery_item_id')
+		->where('Lottery_user.lottery_id',$lottery_id)->where('lottery_item.name','!=','谢谢惠顾')->select('wx_user.stu_name','lottery_item.name')->get();
 		$i = 0;
-		$wx_uids = Lottery_user::where('lottery_id',$lottery_id)->lists('wx_uid');
-		$item_ids = Lottery_user::where('lottery_id',$lottery_id)->lists('lottery_item_id');
-		while($i < count($wx_uids)){
-			$item_name = Lottery_item::where('lottery_item_id',$item_ids[$i])->pluck('name');
-            if ($item_name != '谢谢惠顾')
-            {
-                $stu_name = $this->getStu_name($wx_uids[$i]);
-                $item_name = urlencode($item_name);
-                $stu_name = urlencode($stu_name);
-                $info[] = ['name'=>$stu_name,'item_name'=>$item_name];
-            }
+		while($i < count($infos)){
+                $info[] = ['name'=>urlencode($infos[$i]->stu_name),'item_name'=>urlencode($infos[$i]->name)];
 			$i++;
 		}
 		if(!isset($info)){
@@ -46,7 +19,6 @@ class choujiangHandle
 		}
 		return $info;
 	}
-	//
 	public function LotteryInfo($lottery_id){
 		$item_id = $this->lotteryRand($lottery_id);
 		if(!is_numeric($item_id)){
