@@ -24,15 +24,14 @@ $(document).ready(function() {
     $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
         if (status == 'success')
         {
-            if (!data.shared && data.gotten && data.item_name != '谢谢惠顾')
-            {
-                location.href = '/jiang/toshare/' + lotteryId;
-            }
-            else
-            {
-                $('#myResultName').text(data.item_name);
-                $('#myResult').show();
-            }
+            if (data.gotten && data.item_name != '谢谢惠顾')
+                if (!data.shared)
+                    location.href = '/jiang/toshare/' + lotteryId;
+                else
+                {
+                    $('#myResultName').text(data.item_name);
+                    $('#myResult').show();
+                }
         }
     });
 

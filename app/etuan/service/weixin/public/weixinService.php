@@ -44,7 +44,7 @@ class WS
             return "something wrong";
         }
         $jsoninfo = json_decode($json,true);
-        if($jsoninfo["subscribe"] = 1){
+        if($jsoninfo["subscribe"] == 1){
             return true;
         }else{
             return false;

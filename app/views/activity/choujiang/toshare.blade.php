@@ -76,20 +76,6 @@
 
     var lotteryId = {{$lotteryId}};
 
-    $(document).ready(function() {
-        $('body').css('background-size', $(window).width() + 'px ' + $(window).height() + 'px');
-
-        $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
-            if (status == 'success')
-            {
-                if (data.item_name != '谢谢惠顾' && data.gotten)
-                    $('#itemName').text(data.item_name);
-                    wxData.title += '我抽中了' + data.item_name + '!';
-            }
-        });
-
-    });
-
     WeixinApi.ready(function(Api) {
 
         // 微信分享的数据
@@ -110,7 +96,7 @@
                 alert("啊哦，分享失败了，再试一次吧！");
             },
             confirm : function() {
-                $.getJSON('www.etuan.org/jiang/shared/' + lotteryId, function(data, status) {
+                $.getJSON('/jiang/shared/' + lotteryId, function(data, status) {
                     if (status == 'success')
                     {
                         if (data.status == 'success')
@@ -126,6 +112,20 @@
         };
         // 点击分享到朋友圈，会执行下面这个代码
         Api.shareToTimeline(wxData, wxCallbacks);
+    });
+
+    $(document).ready(function() {
+        $('body').css('background-size', $(window).width() + 'px ' + $(window).height() + 'px');
+
+        $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
+            if (status == 'success')
+            {
+                if (data.item_name != '谢谢惠顾' && data.gotten)
+                    $('#itemName').text(data.item_name);
+                    wxData.title += '我抽中了' + data.item_name + '!';
+            }
+        });
+
     });
 </script>
 </body>
