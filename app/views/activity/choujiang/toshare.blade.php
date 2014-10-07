@@ -80,9 +80,12 @@
         $.getJSON('/jiang/myresult/'+lotteryId, function(data, status) {
             if (status == 'success')
             {
-                if (data.item_name != '谢谢惠顾' && data.gotten){
+                if (data.gotten && data.item_name != '谢谢惠顾'){
                     $('#itemName').text(data.item_name);
-                    itemName = '我抽中了' + data.item_name + '!';
+                    itemName = '我抽中了' + data.item_name + '，你也来吧！';
+                }
+                else {
+                    location.href = '/jiang/' + lotteryId;
                 }
             }
         });
@@ -94,7 +97,7 @@
         // 微信分享的数据
         var wxData = {
             "appId": "", // 服务号可以填写appId
-            "imgUrl" : 'http://img.kyfly.net/etuan/weixin/icon/prize.png',
+            "imgUrl" : 'http://img.kyfly.net/etuan/weixin/icon/prize-orange.png',
             "link" : 'http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202367217&idx=2&sn=87544f6e384cf217da89a235f282bbf4#rd',
             "desc" : "在线报名杭电组织和社团，还有神秘大奖！" + itemName,
             "title" : "在线报名杭电组织和社团，还有神秘大奖！" + itemName
@@ -125,6 +128,8 @@
         };
         // 点击分享到朋友圈，会执行下面这个代码
         Api.shareToTimeline(wxData, wxCallbacks);
+        // iOS上，可以直接调用这个API进行分享，一句话搞定
+        Api.generalShare(wxData,wxCallbacks);
     });
 </script>
 </body>
