@@ -24,8 +24,8 @@ class choujiangService
             $re = Lottery_user::where('wx_uid',$this->wx_uid)->where('lottery_id',$this->lottery_id)->update(["shared"=>1]);
         }
         catch (Exception $e) {
-            Log:error($e->getMessage());
-            return json_encode(["status"=>"fail","message"=>$e->getMessage()]);
+            Log::error($e->getMessage());
+            return json_encode(["status"=>"fail","message"=>'更新数据库发生异常！']);
         }
 		if($re)
 			return json_encode(["status"=>"success"]);
@@ -81,7 +81,7 @@ class choujiangService
 		$token = WS::getToken($appid,$appsecret);
 		$result = WS::checkSubscribe($token,$this->wx_uid);
 		if(!$result){
-			return "扫二维码关注团团一家后抽奖";
+			return "请关注团团一家（微信号：e-tuan）后抽奖";
 		}
 		return true;
 	}

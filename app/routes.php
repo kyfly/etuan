@@ -9,7 +9,7 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
        return View::make('activity.choujiang.choujiang0')->with('lotteryId', $id);
     });
     Route::get('jiang/toshare/{id}', function ($id) {
-        return View::make('activity.choujiang.share')->with('lotteryId', $id);
+        return View::make('activity.choujiang.toshare')->with('lotteryId', $id);
     });
     Route::get('/baoming/success', function(){
         return View::make('activity.baoming.success');

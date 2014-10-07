@@ -62,7 +62,7 @@ class grabController extends \BaseController
 
     public function getSnolist()
     {
-        if (time() >= $this->startTime)
+        if (time() >= $this->setStartTime())
         {
             $snoList = array("remain" => $this->ticketRemain(), "list" => array());
             $snoList["list"] = DB::table($this->tableName)->whereNotNull('Sno')->lists('Sno');
