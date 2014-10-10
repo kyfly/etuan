@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票,杭电投票,社团服务,微信登录">
+    <meta name="description" content="团团一家微信登录页面">
     <title>团团一家 - 用户登录</title>
     <link rel="stylesheet" href="/css/ewmlogin.css">
     <!--[if lt IE 9]>

@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票,杭电投票,社团服务,{{{$orgInfo->name}}}">
+    <meta name="description" content="{{{str_replace(["\n", "\r"], " ", $orgInfo->description)}}}">
     <title>{{{$orgInfo->name}}} 介绍 - 团团一家</title>
     <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -114,7 +116,8 @@
 <body>
 <div class="box1">
     <div class="container" style="padding: 20px 10px">
-        <p><img src="{{{$orgInfo->logo_url}}}@50w_50h.png" height="50px" width="50px">&nbsp;{{{$orgInfo->name}}}</p>
+        <p><img src="{{{$orgInfo->logo_url}}}@50w_50h.png" height="50px" width="50px" alt="{{{$orgInfo->name}}}LOGO">
+        &nbsp;{{{$orgInfo->name}}}</p>
     </div>
 </div>
 
@@ -142,20 +145,29 @@
 <div class="box4">
     <div class="container">
         <h3>个性展区</h3>
-        <a href="{{{$orgInfo->pic_url1}}}"><img src="{{{$orgInfo->pic_url1}}}@1000w_80Q.jpg"></a>
-        <a href="{{{$orgInfo->pic_url2}}}"><img src="{{{$orgInfo->pic_url2}}}@1000w_80Q.jpg"></a>
-        <a href="{{{$orgInfo->pic_url3}}}"><img src="{{{$orgInfo->pic_url3}}}@1000w_80Q.jpg"></a>
+        <a href="{{{$orgInfo->pic_url1}}}">
+            <img src="{{{$orgInfo->pic_url1}}}@1000w_80Q.jpg" alt="{{{$orgInfo->name}}}展示照片1">
+        </a>
+        <a href="{{{$orgInfo->pic_url2}}}">
+            <img src="{{{$orgInfo->pic_url2}}}@1000w_80Q.jpg" alt="{{{$orgInfo->name}}}展示照片2">
+        </a>
+        <a href="{{{$orgInfo->pic_url3}}}">
+            <img src="{{{$orgInfo->pic_url3}}}@1000w_80Q.jpg" alt="{{{$orgInfo->name}}}展示照片3">
+        </a>
     </div>
 </div>
 
 <a id="goReg" href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
     <div class="box5 text-center">
-        <h2>我要报名！<img src="/img/arrow.png"></h2>
+        <h2>我要报名！<img src="/img/arrow.png" alt="我要报名"></h2>
     </div>
 </a>
 
 <div class="box1 text-center">
-    <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+    <h4 style="color: #ffffff">
+    <a href="http://www.etuan.org/">
+        <img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px" alt="团团一家LOGO">
+    </a>
         &nbsp;提供技术支持</h4>
 </div>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>

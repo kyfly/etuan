@@ -43,8 +43,8 @@ $(document).ready(function () {
                 '<a href="{0}" target="_blank">' +
                 '<div class="thumbnail borderDiv">' +
                 '<p class="listhead">{1}</p>' +
-                '<img style="width: 150px; height: 150px" src="{2}">' +
-                '<p class="status {3}">{4}</p>' +
+                '<img style="width: 150px; height: 150px" src="{2}" alt="{3}">' +
+                '<p class="status {4}">{5}</p>' +
                 '</div>' +
                 '</a>' +
                 '</div>';
@@ -61,7 +61,7 @@ $(document).ready(function () {
                 var logoType = logoUrl[logoUrl.length - 1] == 'gif' ? 'png' : logoUrl[logoUrl.length - 1];
                 data[i].logo_url += '@300w.' + logoType;
                 var regDiv = String.format(regDivTpl,
-                    regUrl, data[i].reg_name, data[i].logo_url, data[i].statusClass, data[i].status);
+                    regUrl, data[i].reg_name, data[i].logo_url, data[i].reg_name, data[i].statusClass, data[i].status);
                 if (data[i].type == '校级组织') {
                     $('#universityLevel').append(regDiv);
                 }
