@@ -33,7 +33,7 @@
             <div class="waiting panelContent">
                 <div class="qrcodeContent" style="position:relative;">
                     <div id="guideTrigger" style="position:absolute;z-index:9999;width:260px;height:100%;left:46%;top:0px;margin-left:-130px;">
-                        <img src="/weixin/login/code" style="height: 301px; width: 301px;"></div>
+                        <img src="/weixin/login/code" style="height: 301px; width: 301px;" alt="二维码"></div>
                 </div>
                 <div class="info">
                     <div class="normlDesc loginTip pngBackground" style="position:relative;">
@@ -42,7 +42,7 @@
                         <p>请使用微信扫描二维码以登录</p>
                         <div id="tipTrigger" style="position:absolute;z-index:9999;width:100%;height:100%;left:0px;top:0px;"></div>
                     </div>
-                    <img class="guide pngImg" style="z-index:9999;" src="/img/login_guide.png">
+                    <img class="guide pngImg" style="z-index:9999;" src="/img/login_guide.png" alt="微信扫一扫" >
                 </div>
             </div>
             <div id="mask" class="mask" style="display:none;width:100%;height:100%;" ></div>
