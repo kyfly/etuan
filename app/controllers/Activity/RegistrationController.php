@@ -83,7 +83,7 @@ class RegistrationController extends ActivityController
             $pdf->setCellHeightRatio(1.6);    //行高
             $html = "";
             $reg_info = Registration::where('org_uid',$this->org_uid)
-                ->orderBy('reg_id')
+                ->where('reg_id',$this->activityId)
                 ->select('reg_id','name')
                 ->first();
            $results = $this->registrationHandle->getActivityResult($reg_info->reg_id);
