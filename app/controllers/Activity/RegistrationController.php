@@ -99,20 +99,22 @@ class RegistrationController extends ActivityController
 
     public function getDownloadxls()
     {
-        // if(!Input::has('activityId'))
-            $this->activityId = Registration::where('org_uid',$this->org_uid)
+        $this->activityId = Input::has('activityId')?Input::has('activityId'):Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
-        $results = $this->registrationHandle->getActivityResult($this->activityId);
-        Excel::create('报名结果', function($excel) use($results) {
+        if(Registration::where('org_uid',$this->org_uid)->where('reg_id',$this->activityId)->count()==1)
+        {
+            $results = $this->registrationHandle->getActivityResult($this->activityId);
+            Excel::create('报名结果', function($excel) use($results) {
 
-            $excel->sheet('Sheetname', function($sheet) use($results){
+                $excel->sheet('Sheetname', function($sheet) use($results){
 
-                $sheet->fromArray($results['answers']);
+                    $sheet->fromArray($results['answers']);
 
-                $sheet->row(1,$results['questions']);
-            });
+                    $sheet->row(1,$results['questions']);
+                });
 
-        })->export('xls');
+            })->export('xls');
+        }
     }
 
     //通过activity获得theme返回到相应页面
