@@ -99,7 +99,7 @@ class RegistrationController extends ActivityController
 
     public function getDownloadxls()
     {
-        $this->activityId = Input::has('activityId')?Input::has('activityId'):Registration::where('org_uid',$this->org_uid)
+        $this->activityId = Input::has('activityId')?Input::get('activityId'):Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
         if(Registration::where('org_uid',$this->org_uid)->where('reg_id',$this->activityId)->count()==1)
         {
