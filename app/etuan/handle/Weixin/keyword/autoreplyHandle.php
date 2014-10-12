@@ -7,7 +7,7 @@ class autoreplyHandle
         try {
             DB::beginTransaction();
             if($arr["type"]=="text"){
-                    $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>$arr["content"]]);
+                    $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>strip_tags($arr["content"]]));//过滤
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$text_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
             }elseif($arr["type"]=="news"){
                 if($arr['news_from']=="sucai"){
@@ -38,7 +38,7 @@ class autoreplyHandle
             if($reply_id){
                 for($i = 0;$i<count($arr["keyword"]);$i++)
                 {
-                    Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$reply_id,"mp_id"=>$arr["mp_id"]]);
+                    Keyword::insert(["keyword"=>strip_tags($arr["keyword"][$i]),"mp_reply_id"=>$reply_id,"mp_id"=>$arr["mp_id"]]);//过滤
                 }
             }
             DB::commit();
@@ -82,7 +82,7 @@ class autoreplyHandle
             $mp_id = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->pluck("mp_id");
             $result = Autoreply::where("mp_reply_id",$arr["mp_reply_id"])->select("msg_type","msg_id")->first();
             if($arr["type"]=="text"){
-                $re = $replyObj->ChangeToText($arr['mp_reply_id'],$arr['content']);
+                $re = $replyObj->ChangeToText($arr['mp_reply_id'],strip_tags($arr['content']));//过滤
                 if(!$re){
                     return "更新为文本信息失败";
                 }
@@ -132,7 +132,7 @@ class autoreplyHandle
             Keyword::where("mp_reply_id",$arr["mp_reply_id"])->delete();
             for($i = 0;$i<count($arr["keyword"]);$i++)
             {
-                Keyword::insert(["keyword"=>$arr["keyword"][$i],"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
+                Keyword::insert(["keyword"=>strip_tags($arr["keyword"][$i]),"mp_reply_id"=>$arr["mp_reply_id"],"mp_id"=>$mp_id]);
             }
             DB::commit();
             if(isset($arr['news_from'])&&$arr['news_from']=="registration"){

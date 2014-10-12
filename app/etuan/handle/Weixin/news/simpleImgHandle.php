@@ -7,9 +7,9 @@ class simpleImgHandle extends newsHandle
             DB::beginTransaction();
             
     		$news_id = DB::table('mp_msg_news')->insertGetId(
-                        ["title" => $arr["title"],
+                        ["title" => strip_tags($arr["title"]),
                             "article_id" => 1,
-                            "description" => $arr["description"],
+                            "description" => strip_tags($arr["description"]),
                             "pic_url" => $arr["pic_url"],
                             "url" => $arr["url"],
                             "news_from"=>$arr['news_from'],
@@ -39,14 +39,14 @@ class simpleImgHandle extends newsHandle
             return false;
         }
 	}
-	public static function updateNews($arr){
+public static function updateNews($arr){
          try{
             DB::beginTransaction();
     		if(isset($arr["news_id"])){
                 Newsmsg::where("news_id",$arr["news_id"])->where("article_id",$arr["article_id"])->update(
-                    ["title" => $arr["title"],
+                    ["title" => strip_tags($arr["title"]),
                     "article_id" => 1,
-                    "description" => $arr["description"],
+                    "description" => strip_tags($arr["description"]),
                     "pic_url" => $arr["pic_url"],
                     "url" => $arr["url"],
                     "news_from"=>$arr["news_from"]]
@@ -76,10 +76,10 @@ class simpleImgHandle extends newsHandle
             }else{
                 //该方法原本可以作为活动图文消息创建的第二种方法，现在不在有效。
                 $result = Newsmsg::insert(
-                    ["title" => $arr["title"],
+                    ["title" => strip_tags($arr["title"]),
                     'mp_id'=>$arr['mp_id'],
                     "article_id" => 1,
-                    "description" => $arr["description"],
+                    "description" => strip_tags($arr["description"]),
                     "pic_url" => $arr["pic_url"],
                     "url" => $arr["url"],
                     "news_from"=>$arr["news_from"],

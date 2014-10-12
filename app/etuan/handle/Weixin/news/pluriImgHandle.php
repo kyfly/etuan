@@ -13,9 +13,9 @@ class pluriImgHandle extends newsHandle
                 if(isset($news_id)){
                     Newsmsg::insert(
                         [ "news_id" => $news_id,
-                            "title" => $arr[$i]["title"],
+                            "title" =>strip_tags($arr[$i]["title"]),//
                             "article_id" => $i+1,
-                            "description" => $arr[$i]["description"],
+                            "description" => strip_tags($arr[$i]["description"]),//
                             "pic_url" => $arr[$i]["pic_url"],
                             "url" => $arr[$i]["url"],
                             "news_from"=>$arr[$i]["news_from"],
@@ -28,9 +28,9 @@ class pluriImgHandle extends newsHandle
                 }else{
                     //创建图文消息，得到news_id;
                     $news_id = DB::table('mp_msg_news')->insertGetId(
-                                                    ["title" => $arr[$i]["title"],
+                                                    ["title" => strip_tags($arr[$i]["title"]),
                                                     "article_id" => $i+1,
-                                                    "description" => $arr[$i]["description"],
+                                                    "description" => strip_tags($arr[$i]["description"]),
                                                     "pic_url" => $arr[$i]["pic_url"],
                                                     "url" => $arr[$i]["url"],
                                                     "news_from"=>$arr[$i]['news_from'],
@@ -66,8 +66,8 @@ class pluriImgHandle extends newsHandle
                 //有则更新，
                 if($re){
                     Newsmsg::where("news_id",$arr[$i]["news_id"])->where("article_id",$arr[$i]["article_id"])->update(
-                                                                                            ["title" => $arr[$i]["title"],
-                                                                                                "description" => $arr[$i]["description"],
+                                                                                            ["title" => strip_tags($arr[$i]["title"]),
+                                                                                                "description" => strip_tags($arr[$i]["description"]),
                                                                                                 "pic_url" => $arr[$i]["pic_url"],
                                                                                                 "url" => $arr[$i]["url"],
                                                                                                 "news_from"=>$arr[$i]["news_from"]]
@@ -84,8 +84,8 @@ class pluriImgHandle extends newsHandle
                                         ["news_id" =>$arr[$i]["news_id"],
                                         "article_id"=>$arr[$i]["article_id"],
                                         'mp_id'=>$mp_id,
-                                        "title" => $arr[$i]["title"],
-                                        "description" => $arr[$i]["description"],
+                                        "title" => strip_tags($arr[$i]["title"]),
+                                        "description" => strip_tags($arr[$i]["description"]),
                                         "pic_url" => $arr[$i]["pic_url"],
                                         "url" => $arr[$i]["url"],
                                         "news_from"=>$arr[$i]["news_from"]]
