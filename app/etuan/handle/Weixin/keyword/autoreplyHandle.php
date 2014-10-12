@@ -7,7 +7,7 @@ class autoreplyHandle
         try {
             DB::beginTransaction();
             if($arr["type"]=="text"){
-                    $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>strip_tags($arr["content"]]));//过滤
+                    $text_id = DB::table("mp_msg_text")->insertGetid(["content"=>strip_tags($arr["content"])]);//过滤
                     $reply_id = DB::table("mp_auto_reply")->insertGetid(["msg_id"=>$text_id,"msg_type"=>$arr["type"],"mp_id"=>$arr["mp_id"]]);
             }elseif($arr["type"]=="news"){
                 if($arr['news_from']=="sucai"){
