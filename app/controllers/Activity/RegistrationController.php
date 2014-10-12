@@ -70,49 +70,56 @@ class RegistrationController extends ActivityController
 
     public function getDownloadpdf()
     {
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->SetFont('helvetica', '', 14);
-        $pdf->setPrintHeader(false);  //不显示页头
-        $pdf->setPrintFooter(false);  //不显示页脚
-        $pdf->SetTopMargin(5);        //页面上边距
-        $pdf->SetAutoPageBreak(TRUE, 3);      //自动分页，页面下边距为1
-        $pdf->setCellHeightRatio(1.6);    //行高
-        $html = "";
-        $reg_info = Registration::where('org_uid',$this->org_uid)
-            ->orderBy('reg_id')
-            ->select('reg_id','name')
-            ->first();
-       $results = $this->registrationHandle->getActivityResult($reg_info->reg_id);
-       foreach($results['answers'] as $answers)
-       {
-            $html = View::make('admin.register.outputpdf')->with('results', $results)
-                ->with('answers', $answers)->with('title', $reg_info->name);
-            $pdf->AddPage();
-            $pdf->SetFont('cid0cs', '', 10);
-            $pdf->writeHTML($html, true, false, true, false, '');
-            $pdf->setY(-25);
-            $pdf->writeHTML('<img src="/img/pdf-footer.png">', 'C');
+        $this->activityId = Input::has('activityId')?Input::get('activityId'):Registration::where('org_uid',$this->org_uid)
+                ->min('reg_id');
+        if(Registration::where('org_uid',$this->org_uid)->where('reg_id',$this->activityId)->count()==1)
+        {
+            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf->SetFont('helvetica', '', 14);
+            $pdf->setPrintHeader(false);  //不显示页头
+            $pdf->setPrintFooter(false);  //不显示页脚
+            $pdf->SetTopMargin(5);        //页面上边距
+            $pdf->SetAutoPageBreak(TRUE, 3);      //自动分页，页面下边距为1
+            $pdf->setCellHeightRatio(1.6);    //行高
+            $html = "";
+            $reg_info = Registration::where('org_uid',$this->org_uid)
+                ->where('reg_id',$this->activityId)
+                ->select('reg_id','name')
+                ->first();
+           $results = $this->registrationHandle->getActivityResult($reg_info->reg_id);
+           foreach($results['answers'] as $answers)
+           {
+                $html = View::make('admin.register.outputpdf')->with('results', $results)
+                    ->with('answers', $answers)->with('title', $reg_info->name);
+                $pdf->AddPage();
+                $pdf->SetFont('cid0cs', '', 10);
+                $pdf->writeHTML($html, true, false, true, false, '');
+                $pdf->setY(-25);
+                $pdf->writeHTML('<img src="/img/pdf-footer.png">', 'C');
 
-       }
-       $pdf->Output('baoming.pdf', 'D');
+           }
+           $pdf->Output('baoming.pdf', 'D');
+        }        
     }
 
     public function getDownloadxls()
     {
-        // if(!Input::has('activityId'))
-            $this->activityId = Registration::where('org_uid',$this->org_uid)
+        $this->activityId = Input::has('activityId')?Input::get('activityId'):Registration::where('org_uid',$this->org_uid)
                 ->min('reg_id');
-        $results = $this->registrationHandle->getActivityResult($this->activityId);
-        Excel::create('报名结果', function($excel) use($results) {
+        if(Registration::where('org_uid',$this->org_uid)->where('reg_id',$this->activityId)->count()==1)
+        {
+            $results = $this->registrationHandle->getActivityResult($this->activityId);
+            Excel::create('报名结果', function($excel) use($results) {
 
-            $excel->sheet('Sheetname', function($sheet) use($results){
+                $excel->sheet('Sheetname', function($sheet) use($results){
 
-                $sheet->fromArray($results['answers']);
+                    $sheet->fromArray($results['answers']);
 
-                $sheet->row(1,$results['questions']);
-            });
+                    $sheet->row(1,$results['questions']);
+                });
 
-        })->export('xls');
+            })->export('xls');
+        }
     }
 
     //通过activity获得theme返回到相应页面

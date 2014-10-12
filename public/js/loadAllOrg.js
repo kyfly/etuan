@@ -36,18 +36,6 @@ $(document).ready(function () {
     {
         $('#nav').hide();
     }
-    switch ($.getUrlParam('from'))
-    {
-        case 'e-hduhdu':
-            $('#orgList a[href="#otherOrg"]').tab('show');
-            break;
-        case 'hduleague' :
-        case 'hduxsh' :
-            $('#orgList a[href="#universityLevel"]').tab('show');
-            break;
-        default :
-            $('#orgList a[href="#club"]').tab('show');
-    }
 
     $.get('/organization/organization-info', function (data, status) {
         if (status == 'success') {
@@ -55,7 +43,7 @@ $(document).ready(function () {
                 '<a href="{0}" target="_blank">' +
                 '<div class="thumbnail borderDiv">' +
                 '<p class="listhead">{1}</p>' +
-                '<img style="width: 150px; height: 150px" src="{2}">' +
+                '<img style="width: 150px; height: 150px" src="{2}" alt="{3}">' +
                 '<p class="status text-view-more">在线报名'+
                 '<span class="glyphicon glyphicon-chevron-right"></span></p>' +
                 '</div>' +
@@ -71,7 +59,7 @@ $(document).ready(function () {
                 var logoType = logoUrl[logoUrl.length - 1] == 'gif' ? 'png' : logoUrl[logoUrl.length - 1];
                 data[i].logo_url += '@300w.' + logoType;
                 var regDiv = String.format(regDivTpl,
-                    orgUrl, data[i].name, data[i].logo_url);
+                    orgUrl, data[i].name, data[i].logo_url, data[i].name + 'LOGO');
                 switch (data[i].type)
                 {
                     case '校级组织':
@@ -93,22 +81,6 @@ $(document).ready(function () {
                     default:
                         $('#club').append(regDiv);
                 }
-                /*if (data[i].type == '校级组织') {
-                    $('#universityLevel').append(regDiv);
-                }
-                else if (data[i].type == '院级组织') {
-                    var schoolIndex = school.indexOf(data[i].school);
-                    if (schoolIndex < 0) {
-                        schoolIndex = school.length;
-                        $('#schoolLevel').append('<div id="school' + schoolIndex +
-                            '"><div class="clearfix"></div><h3>' + data[i].school + '</h3><hr></div>');
-                        school.push(data[i].school);
-                    }
-                    $('#school' + schoolIndex).append(regDiv);
-                }
-                else {
-                    $('#club').append(regDiv);
-                }*/
             }
         }
     })
