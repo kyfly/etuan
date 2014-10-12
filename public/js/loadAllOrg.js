@@ -36,18 +36,6 @@ $(document).ready(function () {
     {
         $('#nav').hide();
     }
-    switch ($.getUrlParam('from'))
-    {
-        case 'e-hduhdu':
-            $('#orgList a[href="#otherOrg"]').tab('show');
-            break;
-        case 'hduleague' :
-        case 'hduxsh' :
-            $('#orgList a[href="#universityLevel"]').tab('show');
-            break;
-        default :
-            $('#orgList a[href="#club"]').tab('show');
-    }
 
     $.get('/organization/organization-info', function (data, status) {
         if (status == 'success') {
@@ -93,22 +81,6 @@ $(document).ready(function () {
                     default:
                         $('#club').append(regDiv);
                 }
-                /*if (data[i].type == '校级组织') {
-                    $('#universityLevel').append(regDiv);
-                }
-                else if (data[i].type == '院级组织') {
-                    var schoolIndex = school.indexOf(data[i].school);
-                    if (schoolIndex < 0) {
-                        schoolIndex = school.length;
-                        $('#schoolLevel').append('<div id="school' + schoolIndex +
-                            '"><div class="clearfix"></div><h3>' + data[i].school + '</h3><hr></div>');
-                        school.push(data[i].school);
-                    }
-                    $('#school' + schoolIndex).append(regDiv);
-                }
-                else {
-                    $('#club').append(regDiv);
-                }*/
             }
         }
     })
