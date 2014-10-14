@@ -151,7 +151,7 @@
             <span class="help-block">您的微信公众号，数字与字母（选填）</span>
         </div>
     </div>
-    <div class="help-block" style="padding-left: 120px">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>
+    <div class="help-block col-md-offset-2">以下图片单张大小请不要超过<strong>1MB</strong>，否则无法上传。</div>
     <div class="form-group has-feedback" id="inputbox9">
         <label for="inputLogo" class="col-sm-2 control-label">上传logo</label>
 
@@ -226,6 +226,11 @@
             <button id="next4" type="button" class="btn btn-primary btn-lg">上一步</button>
             <button type="submit" class="btn btn-warning btn-lg col-sm-offset-1" id="btnSubmit">完成注册</button>
         </div>
+    </div>
+    <div>
+        <p class="help-block col-md-offset-2">
+            我们承诺保护用户的个人信息，详见<a href="/privacy.html" target="_blank">隐私声明。</a>
+        </p>
     </div>
 </div>
 </div>

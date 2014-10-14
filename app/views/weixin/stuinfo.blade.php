@@ -141,6 +141,11 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-xsmall">提交</button>
                 </div>
             </div>
+            <div>
+                <p class="help-block">
+                    我们承诺保护您的个人信息，详见<a href="/privacy.html" target="_blank">隐私声明。</a>
+                </p>
+            </div>
         </form>
     </div>
 </div>
