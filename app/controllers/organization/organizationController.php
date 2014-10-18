@@ -35,22 +35,17 @@ class organizationController extends BaseController
     {
         $regArr = Registration::where('registration.hidden', '<>','1')
             ->join('organization','registration.org_uid','=','organization.org_uid')
-            ->select(DB::raw('registration.name as reg_name'),'organization.internal_order','registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->select(DB::raw('registration.name as reg_name'),'registration.reg_id','registration.start_time','registration.stop_time',DB::raw('organization.name as org_name'),'organization.logo_url','organization.type','organization.school')
+            ->orderBy('registration.reg_id','DESC')
             ->get()
             ->toArray();
-        foreach($regArr as $key=>$value)
-        {
-            $regArr[$key]['internal_order'] = rand(0,100);
-        }
         $regArr = $this->setStatus($regArr);
-        uasort($regArr, 'regCmp');
         $regArr = array_values($regArr);
         foreach($regArr as $key=>$value)
         {
             unset($regArr[$key]['start_time']);
             unset($regArr[$key]['stop_time']);
             unset($regArr[$key]['statusInt']);
-            unset($regArr[$key]['internal_order']);
         }
         return $regArr;
     }
@@ -100,13 +95,6 @@ class organizationController extends BaseController
                 ->select('org_id','logo_url')
                 ->first();
     }
-}
-
-//getOrganizationRegistration的自定义比较函数
-function regCmp($a, $b)
-{
-    return $a['statusInt'] == $b['statusInt']?($a['internal_order'] == $b['internal_order']?$a['reg_id'] - $b['reg_id']:$a['internal_order'] - $b['internal_order']):
-        $a['statusInt'] - $b['statusInt'];
 }
 
 function orgCmp($a, $b)

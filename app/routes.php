@@ -75,8 +75,10 @@ Route::group(array('before' => 'auth'), function () {
 
     Route::get('admin/register/regresult',function(){
        $registrationHanlde = new RegistrationHandle();
-       $activityId = Registration::where('org_uid',Auth::user()->org_uid)
-                        ->min('reg_id');
+       $activityCount =  Registration::where('org_uid',Auth::user()->org_uid)
+                            ->where('reg_id',Input::get('activityId'))
+                            ->count();
+        $activityId = $activityCount == 1 ?Input::get('activityId'):Registration::where('org_uid',Auth::user()->org_uid)->min('reg_id');
        $results = $registrationHanlde->getActivityResult($activityId);
        return View::make('admin.register.regresult')->with('results',$results);
     });
