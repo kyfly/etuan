@@ -22,7 +22,10 @@
                             <a href="/">首页</a>
                         </li>
                         <li>
-                            <a href="/shetuan.html">招新</a>
+                            <a href="/shetuan.html">组织</a>
+                        </li>
+                        <li>
+                            <a href="/baoming.html">报名</a>
                         </li>
                         <li>
                             <a href="/qiang.html">疯抢</a>

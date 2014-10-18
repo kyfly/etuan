@@ -42,7 +42,7 @@ $(document).ready(function () {
             var regDivTpl = ' <div class="col-xs-12 col-sm-4 col-md-3">' +
                 '<a href="{0}" target="_blank">' +
                 '<div class="thumbnail borderDiv">' +
-                '<p class="listhead">{1}</p>' +
+                '<p class="listhead_org">{1}</p>' +
                 '<img style="width: 150px; height: 150px" src="{2}" alt="{3}">' +
                 '<p class="status text-view-more">在线报名'+
                 '<span class="glyphicon glyphicon-chevron-right"></span></p>' +

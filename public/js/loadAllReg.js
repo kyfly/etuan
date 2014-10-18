@@ -32,7 +32,8 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    if ($.getUrlParam('from') == 'e-tuan' || $.getUrlParam('from') =='e-hduhdu' )
+    var from = ['e-tuan', 'e-hduhdu', 'hduleague', 'hduxsh'];
+    if (from.indexOf($.getUrlParam('from')) > -1)
     {
         $('#nav').hide();
     }
@@ -62,22 +63,11 @@ $(document).ready(function () {
                 data[i].logo_url += '@300w.' + logoType;
                 var regDiv = String.format(regDivTpl,
                     regUrl, data[i].reg_name, data[i].logo_url, data[i].reg_name, data[i].statusClass, data[i].status);
-                if (data[i].type == '校级组织') {
-                    $('#universityLevel').append(regDiv);
-                }
-                else if (data[i].type == '院级组织') {
-                    var schoolIndex = school.indexOf(data[i].school);
-                    if (schoolIndex < 0) {
-                        schoolIndex = school.length;
-                        $('#schoolLevel').append('<div id="school' + schoolIndex +
-                            '"><div class="clearfix"></div><h3>' + data[i].school + '</h3><hr></div>');
-                        school.push(data[i].school);
-                    }
-                    $('#school' + schoolIndex).append(regDiv);
-                }
-                else {
-                    $('#club').append(regDiv);
-                }
+                data[i].status == "即将开始" ?
+                    $('#ready').apped(regDiv):
+                    (data[i].status == "正在进行" ?
+                        $('#started').append(regDiv):
+                        $('#ended').append(regDiv));
             }
         }
     })

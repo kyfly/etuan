@@ -27,7 +27,14 @@ body {
 .listhead {
     color: #666;
     font-size: 16px;
+    min-height: 69px;
+}
+
+.listhead_org{
+    color: #666;
+    font-size: 16px;
     min-height: 46px;
+
 }
 
 .thumbnail {
@@ -75,11 +82,5 @@ a:link {
 	
 	 .panel-footer {
 			margin-top: 50px;
-	}
-}
-
-@media screen and (min-width: 1200px) {
-	.navType > li > a {
-		font-size: 18px !important;
 	}
 }
