@@ -37,6 +37,9 @@ $(document).ready(function () {
     {
         $('#nav').hide();
     }
+    if ($.getUrlParam('from') == 'e-hduhdu') {
+        window.location.href = '/shetuan.html?from=e-hduhdu';
+    }
 
     $.get('/organization/organization-registration', function (data, status) {
         if (status == 'success') {
