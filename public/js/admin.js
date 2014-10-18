@@ -68,20 +68,27 @@ function loadSidebar() {
             }
     }
     //设定侧边栏高度
-            $('#sidebar').height($('#main').outerHeight(true));
+    setSidebarHeight();
     //点击转跳到对应的页面
     sidebarDiv.on('click', "li", function () {
         if ($(this).prop('id'))
             window.location = sidebarHref[$(this).prop('id')];
     })
 
-};
+}
+
+function setSidebarHeight()
+{
+    if ($(window).width() > 970)
+        $('#sidebar').height($('#main').outerHeight(true));
+
+}
 
 $(document).ready(function () {
     var minHeight = $(window).outerHeight(true) - $('#nav').outerHeight(true)
         - $('#footer').outerHeight(true) - 62 + "px";
     $('#main').css('min-height', minHeight);
-    $('#sidebar').height($('#main').outerHeight(true));
+    setSidebarHeight();
     loadSidebar();
     $("#remarkbox").hide();
     $("#originurlbox").hide();
@@ -90,7 +97,7 @@ $(document).ready(function () {
         var minHeight = $(window).outerHeight(true) - $('#nav').outerHeight(true)
             - $('#footer').outerHeight(true) - 62 + "px";
         $('#main').css('min-height', minHeight);
-        $('#sidebar').height($('#main').outerHeight(true));
+        setSidebarHeight();
     });
 });
 
