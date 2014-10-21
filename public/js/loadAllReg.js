@@ -67,7 +67,7 @@ $(document).ready(function () {
                 var regDiv = String.format(regDivTpl,
                     regUrl, data[i].reg_name, data[i].logo_url, data[i].reg_name, data[i].statusClass, data[i].status);
                 data[i].status == "即将开始" ?
-                    $('#ready').apped(regDiv):
+                    $('#ready').append(regDiv):
                     (data[i].status == "正在进行" ?
                         $('#started').append(regDiv):
                         $('#ended').append(regDiv));
