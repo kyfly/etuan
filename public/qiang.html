@@ -82,6 +82,17 @@
     </div>
     <!--内容-->
     <div id="main" class="container">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDEwODA5OQ==&mid=200838396&idx=2&sn=08bc611118e0bdbe153bfa632d55479c"
+               target="_blank">
+                <div class="thumbnail borderDiv">
+                    <p class="listhead">【抢现金券】美食广场，<br>与美食来个亲密接触吧</p>
+                    <img style="width: 200px; height: 200px" src="img/qiang/food.png">
+
+                    <p class="status text-coming" id="food-status">即将开始</p>
+                </div>
+            </a>
+        </div>
 
         <div class="col-xs-12 col-sm-4 col-md-3">
             <a href="http://www.etuan.org/qiang/1" target="_blank">
@@ -159,6 +170,15 @@
                 $('#nav').hide();
             }
         });
+        var now = new Date();
+        var foodStart = new Date(1414157400 * 1000);
+        if (now > foodStart)
+        {
+            var foodStatus =$('#food-status');
+            foodStatus.removeClass('text-coming');
+            foodStatus.addClass('text-on');
+            foodStatus.text('正在进行');
+        }
     });
 </script>
 </body>
