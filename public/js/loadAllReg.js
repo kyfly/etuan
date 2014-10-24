@@ -32,15 +32,10 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    var from = ['e-tuan', 'e-hduhdu', 'hduleague', 'hduxsh'];
-    if (from.indexOf($.getUrlParam('from')) > -1)
+    if ($.getUrlParam('from') == 'e-tuan')
     {
         $('#nav').hide();
     }
-    if ($.getUrlParam('from') == 'e-hduhdu') {
-        window.location.href = '/shetuan.html?from=e-hduhdu';
-    }
-
     $.get('/organization/organization-registration', function (data, status) {
         if (status == 'success') {
             var regDivTpl = ' <div class="col-xs-12 col-sm-4 col-md-3">' +

@@ -31,8 +31,7 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    var from = ['e-tuan', 'e-hduhdu', 'hduleague', 'hduxsh'];
-    if (from.indexOf($.getUrlParam('from')) > -1)
+    if ($.getUrlParam('from') == 'e-tuan')
     {
         $('#nav').hide();
     }
