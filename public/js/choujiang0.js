@@ -25,13 +25,10 @@ $(document).ready(function() {
         if (status == 'success')
         {
             if (data.gotten && data.item_name != '谢谢惠顾')
-                if (!data.shared)
-                    location.href = '/jiang/toshare/' + lotteryId;
-                else
-                {
-                    $('#myResultName').text(data.item_name);
-                    $('#myResult').show();
-                }
+            {
+                $('#myResultName').text(data.item_name);
+                $('#myResult').show();
+            }
         }
     });
 
@@ -81,7 +78,6 @@ $(document).ready(function() {
                             {
                                 alert("恭喜您中奖了！您获得了" + data.item_name + "!");
                                 $.get('/jiang/sendmsg/'+lotteryId);
-                                location.href = '/jiang/toshare/' + lotteryId;
                             }
                             else
                             {
