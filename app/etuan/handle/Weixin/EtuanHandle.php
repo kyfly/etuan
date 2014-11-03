@@ -78,18 +78,6 @@ class EtuanHandle extends replyHandle
          $acturl = $actObj->getactUrl($activity,$result->act_id). '?from=qrcode';
          $arr[] =["title"=>$url->name,"description"=>"点击进入".$url->name.">>",
                 "pic_url"=>Organization::where("org_uid",$url->org_uid)->pluck('logo_url'),"url"=>$acturl];
-         $arr[] = json_decode('{
-                                "title": "报名更多组织",
-                                "description": null,
-                                "pic_url": "http://www.kyfly.net/wx/img/reg.png",
-                                "url": "http://www.etuan.org/shetuan.html?from=e-tuan"
-                            }',true);
-         $arr[] = json_decode('{
-                            "title": "参加招新抽奖",
-                            "description": null,
-                            "pic_url": "http://www.kyfly.net/wx/img/prize.png",
-                            "url": "http://www.etuan.org/jiang/1"
-                        }',true);
          return $this->ArticlesMessage($postObj, $arr);
     }
     public function Click($postObj)
