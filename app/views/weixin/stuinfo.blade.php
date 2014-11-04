@@ -98,13 +98,21 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="inputName" name="stu_name" placeholder="请输入您的姓名">
                         <p class="help-block">
-                            请填写<strong>本人</strong>的学号和姓名，这是领取活动奖品的唯一依据，绑定后无法修改和解绑！
+                            请填写<strong>本人</strong>的学号和姓名，绑定后无法修改和解绑！
+                            <br>生僻字请用“?”代替。
                         </p>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary btn-lg">提交</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <p class="help-block">
+                            我们承诺保护您的个人信息，详见<a href="/privacy.html" target="_blank">隐私声明</a>。
+                        </p>
                     </div>
                 </div>
             </form>
@@ -132,7 +140,8 @@
                 <div class="col-sm-12">
                     <input type="text" class="form-control" name="stu_name" placeholder="姓名">
                     <p class="help-block">
-                        请填写<strong>本人</strong>的学号和姓名，这是领取活动奖品的唯一依据，绑定后无法修改和解绑！
+                        请填写<strong>本人</strong>的学号和姓名，绑定后无法修改和解绑！
+                        <br>生僻字请用“?”代替。
                     </p>
                 </div>
             </div>
@@ -143,7 +152,7 @@
             </div>
             <div>
                 <p class="help-block">
-                    我们承诺保护您的个人信息，详见<a href="/privacy.html" target="_blank">隐私声明。</a>
+                    我们承诺保护您的个人信息，详见<a href="/privacy.html" target="_blank">隐私声明</a>。
                 </p>
             </div>
         </form>
