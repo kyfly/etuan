@@ -256,8 +256,8 @@ $(document).ready(function () {
         document.getElementById("title").appendChild(titlelogo);
     }
     document.getElementById("title").appendChild(titletext);
-    //给社团链接添加链接
-    $("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
+    //给社团链接添加链接（选项已过期）
+    //$("#orginfo").prop("href", "/shetuan/" + orgJSON.org_id);
     //时间变量准备
     //var nowDate = new Date();
     var checkStartTime = activityPageJson.start_time.split(/[\s:-]/);

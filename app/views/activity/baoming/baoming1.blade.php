@@ -56,7 +56,6 @@
                 </a>
             </p>
             <p id="timeinfo"></p>
-            <a id="orginfo" href="javascript:void(0)" target="_blank">想了解更多信息？请点击这里</a>
         </div>
         <hr>
     </div>
@@ -94,7 +93,7 @@
 </script>
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="/js/baomingpage1.js"></script>
+<script src="/js/baomingpage2.js"></script>
 <script src="/js/baoming1.js"></script>
 <script></script>
 
