@@ -123,15 +123,9 @@
         <div class="texts col-md-8">
             <h1>报名成功！</h1>
 
-            <h3>关注“团团一家”微信号（e-tuan），<br>即可赢取奖品还有更多报名！</h3>
+            <h3>关注“团团一家”微信号（e-tuan），<br>还有更多内容！</h3>
             <br>
-            <button class="btn btn-warning btn-lg btn-lottery">点击抽奖</button>
-            &nbsp;&nbsp;&nbsp;
-            <button class="btn btn-info btn-lg btn-more">更多报名</button>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-10 col-md-offset-1">
-            <img class="img-prize" src="/img/choujiang/prize_horizontal.jpg">
+            <a class="btn btn-warning btn-lg btn-more">更多报名</a>
         </div>
     </div>
 </div>
@@ -144,28 +138,23 @@
         <h2>报名成功！</h2>
 
         <p class="msg-body">
-            关注“团团一家”微信号（e-tuan），<br>赢取奖品，更多报名等着你！
+            关注“团团一家”微信号（e-tuan），<br>更多活动等着你！
             <a href="http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd">
                 立即关注>>
             </a>
         </p>
 
+        <br>
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-warning btn-lg btn-xsmall btn-lottery">点击抽奖</button>
+            <button class="btn btn-warning btn-lg btn-xsmall btn-more">更多报名</button>
         </div>
         <br>
 
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-info btn-lg btn-xsmall btn-more">更多报名</button>
+            <button class="btn btn-info btn-lg btn-xsmall btn-close">关闭</button>
         </div>
     </div>
-    <div class="col-xs-12">
-        <img class="img-prize-xs" src="/img/choujiang/prize_vertical.jpg">
-    </div>
-    <div class="centerclass col-xs-12 img-xs">
-        <img src="http://img.kyfly.net/common/qrcode/wx-etuan.jpg@220w_220h.jpg" width="220px" height="220px">
-        <h4 class="text-center">扫码关注 微信号e-tuan</h4>
-    </div>
+
 </div>
 <footer id="footer" class="panel-footer">
     <p class="text-center">©2014&nbsp;杭电麒飞软件团队&nbsp;Kyfly&nbsp;Team</p>
@@ -180,7 +169,7 @@
                 <h4 class="modal-title" id="myModalLabel">您未关注团团一家</h4>
             </div>
             <div class="modal-body">
-                <p>您需要关注团团一家（微信号：e-tuan)，才可以参与抽奖和更多报名！</p>
+                <p>您需要关注团团一家（微信号：e-tuan)，才可以参与更多活动！</p>
 
                 <p class="visible-xs">点击“立即关注”，进入关注页面。</p>
 
@@ -218,18 +207,6 @@
             }
         });
 
-        $('.btn-lottery').click(function () {
-            if (!isSub) {
-                $('#msgModal').modal();
-            }
-            else {
-                if (isWeiXin())
-                    window.location.href = '/jiang/1';
-                else
-                    alert("您已关注团团一家，请在微信中点击“招新季”菜单抽奖！");
-            }
-        });
-
         $('.btn-more').click(function () {
             if (!isSub) {
                 $('#msgModal').modal();
@@ -240,6 +217,10 @@
                 else
                     window.location.href = '/baoming.html';
             }
+        });
+
+        $('.btn-close').click(function () {
+            WeixinJSBridge.call('closeWindow');
         });
 
     })
