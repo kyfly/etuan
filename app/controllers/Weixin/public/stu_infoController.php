@@ -13,7 +13,7 @@ class Stu_infoController extends BaseController
 			$msg = '学号和姓名不能为空';
 		}
 		//添加判断学号方法
-		if (preg_match('/^(((0[8-9])|(1[0-4]))\d{7})$/', $stu_id) && $stu_name && !preg_match("/[\x4e00-\x9fa5]+$/",$stu_name)){
+		if (preg_match('/^(((0[8-9])|(1[0-4]))\d{7})$/', $stu_id) && $stu_name && preg_match("/[\x4e00-\x9fa5]+$/",$stu_name)){
 			$re =WxUser::where('wx_uid','!=',$wx_uid)->where('stu_id',$stu_id)->pluck('stu_id');
 			if($re)
 			{
