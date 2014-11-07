@@ -25,9 +25,16 @@
         text-align: center;
         font-size: 18px;
     }
+
+    .etuanLogo {
+        height: 14px;
+    }
 </style>
 </head>
 <body>
+<div class="header">
+    <img class="etuanLogo" src="/img/support.png">
+</div>
 <div class="title">{{$title}}</div>
 <br>
 <table>

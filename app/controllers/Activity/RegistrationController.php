@@ -94,9 +94,6 @@ class RegistrationController extends ActivityController
                 $pdf->AddPage();
                 $pdf->SetFont('cid0cs', '', 10);
                 $pdf->writeHTML($html, true, false, true, false, '');
-                $pdf->setY(-25);
-                $pdf->writeHTML('<img src="/img/pdf-footer.png">', 'C');
-
            }
            $pdf->Output('baoming.pdf', 'D');
         }        
