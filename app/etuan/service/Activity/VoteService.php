@@ -10,36 +10,63 @@ class VoteService extends ActivityService
 		parent::__construct();
 	}
 
-    public function participateInActivity($org_uid, $activityId, $participatorInfo)
+    public function participateInActivity($activityId, $participatorInfo)
     {
         $timeInfo = $this->handle->
-            getTimeInfo($org_uid, $this->tableName, $this->primaryKey, $activityId);
+            getTimeInfo($this->tableName, $this->primaryKey, $activityId);
+
+        //从缓存中获取最大选择项数
+        $maxSelectCount = Cache::remember("vote{{$activityId}}maxSelectCount", 60, function() use($activityId){
+            return Vote::where('vote_id', $activityId)->pluck('choice_num');
+        });
+
         $values = array(
             'time' => date('Y-m-d H:i:s',time()),
-            'wx_uid'=>$participatorInfo->wx_uid);
+            'wx_uid'=>Weixin::user(),
+            'selectCount' => count($participatorInfo->choices));
         $rules = array(
             'time' =>array('after:'.$timeInfo->start_time,
                             'before:'.$timeInfo->stop_time),
-            'wx_uid'=>'exists:wx_user');
+            'wx_uid'=> array(
+                        'exists:wx_user'),
+            'selectCount' => "max:{{$maxSelectCount}}");
         $messages = array(
-            'exist'=>Lang::get('wx.qingguanzhu')
-            );
-        $validator = Validator::make($values,$rules,$messages);
+            'time.after' => '活动未开始',
+            'time.before' => '活动已经结束了',
+            'wx_uid.exist'=> '请先关注',
+            'selectCount.max' => '选得太多了亲~~~'
+        );
+        $validator = Validator::make($values,$rules,$messages); 
         if($validator->fails())
         {
-            return $validator->messages();
+            return Response::json(array(
+                'status' => 'fail',
+                'content' => $validator->messages()->first()
+            ));
         }
 
-        if(Vote_user::where('vote_id',$activityId)->
-            where('wx_uid',$participatorInfo->wx_uid)->count()>0)
-            return Lang::get('activity.already.participate');
+        if(Vote_result::whereRaw('vote_id = ? and wx_uid = ?',array($activityId, Weixin::user()))->count()!=0)
+        {
+            return Response::json(array(
+                'status' => 'fail',
+                'content' => "已经参与过活动"
+            ));
+        }
 
-        $participatorInfo->ip = '127.0.0.1';
+        $participatorInfo->ip = UsefulTool::getIp();
+
+        $participatorInfo->wx_uid = Weixin::user();
 
         if($this->handle->participateInActivity($activityId, $participatorInfo))
-            return Lang::get('activity.participate.success');
+            return Response::json(array(
+                'status' => 'success',
+                'content' => "参与活动成功"
+            ));
 
-        return Lang::get('activity.already.participate');
+        return Response::json(array(
+            'status' => 'fail',
+            'content' => "参与活动失败"
+        ));
     }
 
     public function addVoteItem($org_uid,$activityId, $vote_item)

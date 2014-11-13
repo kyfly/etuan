@@ -118,7 +118,6 @@ class VoteHandle extends  ActivityHandle
             DB::beginTransaction();
             $choices = $participatorInfo->choices;
             $vote_serial = Vote_user::insertGetId(array(
-                'used_time' => $participatorInfo->used_time,
                 'ip' => $participatorInfo->ip,
                 'vote_id' => $activityId,
                 'wx_uid' => $participatorInfo->wx_uid
