@@ -138,11 +138,11 @@
             <h4>当前已选：<strong id="current_choice">0</strong></h4>
         </div>
         <div class="col-xs-6 col-sm-3">
-            <h4>需要选择：<strong>3</strong></h4>
+            <h4>最多可选：<strong>3</strong></h4>
         </div>
         <div class="col-xs-12">
             <div class="form-group">
-                <button class="btn btn-primary btn-block" id='btn' disabled>提交</button>
+                <button class="btn btn-lg btn-primary btn-block" id='btn' disabled>提 交</button>
             </div>
         </div>
     </div>
@@ -159,40 +159,6 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function()
-    {
-        $(".checkbox").click(function(){
-            
-        });
-        $("#btn").click(function()
-        {
-            var participatorInfo = {
-                "choices":[]
-            };
-            var sendJson = {
-              activityId:1,
-              participatorInfo:JSON.stringify(participatorInfo)
-            };
-            $.ajax({
-                type: "POST",
-                url: "/vote/participateinactivity",
-                data: sendJson,
-                dataType: "json",
-                success: function (e) {
-                    alert(e.content);
-                }
-                error: function (xhr, ts, e) {
-                    if (ts === "timeout") {
-                        alert("连接超时，请检查网络");
-                    }
-                    else if (ts === "error" || ts === "parseerror") {
-                        alert("提交失败：" + ts + " " + e.toString());
-                    }
-                }
-            });    
-        });
-    }
-</script>
+<script src="/js/src/touparticipator.js"></script>
 </body>
 </html>
