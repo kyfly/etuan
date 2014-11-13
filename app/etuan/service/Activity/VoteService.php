@@ -29,7 +29,7 @@ class VoteService extends ActivityService
                             'before:'.$timeInfo->stop_time),
             'wx_uid'=> array(
                         'exists:wx_user'),
-            'selectCount' => "max:{{$maxSelectCount}}");
+            'selectCount' => "max:{$maxSelectCount}");
         $messages = array(
             'time.after' => '活动未开始',
             'time.before' => '活动已经结束了',
@@ -45,7 +45,7 @@ class VoteService extends ActivityService
             ));
         }
 
-        if(Vote_result::whereRaw('vote_id = ? and wx_uid = ?',array($activityId, Weixin::user()))->count()!=0)
+        if(Vote_user::whereRaw('vote_id = ? and wx_uid = ?',array($activityId, Weixin::user()))->count()!=0)
         {
             return Response::json(array(
                 'status' => 'fail',

@@ -116,3 +116,4 @@ Route::get('/root',function(){
     $user = User::find(1);
     Auth::login($user);
 });
+Weixin::login("oe615jg-7GRb-gw4lnVBNtmbaNhg");
