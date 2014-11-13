@@ -6,7 +6,7 @@
     <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票,杭电投票,社团服务">
     <meta name="description" content="团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css">
-    <title>标题标题标题</title>
+    <title>这是一个活动的标题</title>
     <link rel="icon" href="/etuan_logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/etuan_logo.ico" type="image/x-icon">
     <style>
@@ -36,12 +36,12 @@
     <div class="text-center">
         <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/KyMoIrVt4G5iYJogs2MC9FraipPeBgVouEd7WX8aOZu6p3Lt8V.jpeg@300w.jpeg" alt="杭电之声广播台LOGO">
     </div>
-    <h3><strong>标题标题标题</strong></h3>
+    <h3><strong>这是一个活动的标题</strong></h3>
     <ul class="text-left">
-        <li>投票时间：</li>
+        <li>投票时间：00月00日00:00~00月00日00:00</li>
         <li>每个微信号限投一次</li>
-        <li>必须选择3个学院，否则无法提交</li>
-        <li></li>
+        <li>最多选择3个学院，否则无法提交</li>
+        <li>最终投票结果将在投票截止后公布</li>
     </ul>
 </div>
 
@@ -142,7 +142,7 @@
         </div>
         <div class="col-xs-12">
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block" id='btn' disabled>提 交</button>
+                <button class="btn btn-lg btn-primary btn-block" id='submit'>提 交</button>
             </div>
         </div>
     </div>
@@ -159,6 +159,6 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
-<script src="/js/src/touparticipator.js"></script>
+<script src="/js/touparticipator.js"></script>
 </body>
 </html>
