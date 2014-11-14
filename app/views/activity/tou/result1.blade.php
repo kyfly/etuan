@@ -6,7 +6,7 @@
     <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票,杭电投票,社团服务">
     <meta name="description" content="团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css">
-    <title>这是一个活动的标题</title>
+    <title>第八届月牙弯朗诵比赛</title>
     <link rel="icon" href="/etuan_logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/etuan_logo.ico" type="image/x-icon">
     <style>
@@ -39,12 +39,12 @@
     <div class="text-center">
         <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/KyMoIrVt4G5iYJogs2MC9FraipPeBgVouEd7WX8aOZu6p3Lt8V.jpeg@300w.jpeg" alt="杭电之声广播台LOGO">
     </div>
-    <h3><strong>这是一个活动的标题</strong></h3>
+    <h3><strong>第八届月牙弯朗诵比赛</strong></h3>
     <ul class="text-left">
-        <li>投票时间：00月00日00:00~00月00日00:00</li>
+        <li>投票时间：11月15日00:00~11月27日00:00</li>
         <li>每个微信号限投一次</li>
         <li>最多选择3个学院，否则无法提交</li>
-        <li>最终投票结果将在投票截止后公布</li>
+        <li>最终投票结果将在晚会当场公布</li>
     </ul>
 </div>
 

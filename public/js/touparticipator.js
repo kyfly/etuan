@@ -1,4 +1,27 @@
 $(document).ready(function(){
+    $.ajax({
+        type:"GET",
+        url:"/vote/check-already-par?activityId="+1,
+        success:function (e) {
+            if (e === "0"){
+            }
+            else if (e === "1"){
+                alert("您已经投过票了");
+                window.location.href = "/tou/result/1";
+            }
+            else {
+                window.location.href = "/tou/result/1";
+            }
+        },
+        error: function (xhr, ts, e) {
+                if (ts === "timeout") {
+                    alert("连接超时，请检查网络");
+                }
+                else if (ts === "error" || ts === "parseerror") {
+                    alert("失败：" + ts + " " + e.toString());
+                }
+            }
+    });
     $('#current_choice').text($('input.checkbox:checked').length);
     $("input.checkbox").click(function(){
         if($('input.checkbox:checked').length > 3){

@@ -8,7 +8,7 @@ $(document).ready(function(){
 		};
 		$("div.progress-bar").each(function(key,val){
 			$(this).text(pj[key].vote_count);
-			$(this).css("width", pj[key].vote_count / max * 100 + "%");
+			$(this).css("width", ( 10 + pj[key].vote_count / max * 90 )+ "%");
 		});
 	};
 	$.ajax({
