@@ -69,6 +69,11 @@ class VoteService extends ActivityService
         ));
     }
 
+    public function getActivityResult($org_uid ,$activityId)
+    {
+        return $this->handle->getActivityResult($activityId);
+    }
+
     public function addVoteItem($org_uid,$activityId, $vote_item)
     {
         if(!$this->handle->checkActivityExist($org_uid, $this->tableName, $this->primaryKey, $activityId))

@@ -29,4 +29,15 @@ class VoteController extends ActivityController
         return 'voteService';
     }
 
+    public function getCheckAlreadyPar()
+    {
+    	if(Vote_user::whereRaw('vote_id = ? and wx_uid = ?',array($this->activityId, Weixin::user()))->count()!=0)
+        {
+        	return 1; //参与过活动
+        }
+        else
+        {
+        	return 0; //未参与活动
+        }
+    }
 }
