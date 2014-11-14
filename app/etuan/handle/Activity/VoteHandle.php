@@ -131,9 +131,7 @@ class VoteHandle extends  ActivityHandle
                         'vote_choice' => $choice,
                         ));
                 Vote_item::where('vote_id',$activityId)->where('vote_item_id',$choice)->
-                    update(array(
-                        'vote_count' => 'vote_count' + 1
-                        ));
+                            increment('vote_count', 1);
             }
             DB::commit();
             return true;
