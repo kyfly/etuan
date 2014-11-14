@@ -21,6 +21,14 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     });
 
     Route::controller('/getticket','grabController');
+
+    Route::get('tou/{id}', function($id) {
+        return View::make('activity.tou.tou'.$id);
+    });
+
+    Route::get('tou/result/{id}', function($id) {
+        return View::make('activity.tou.result'.$id);
+    });
 });
 //需要微信登录但不要求绑定学号的路由
 Route::group(array('before' => 'wxauth'), function () {

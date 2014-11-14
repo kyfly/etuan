@@ -28,7 +28,7 @@ $(document).ready(function(){
                 if (e.status === "success") {
                     alert(e.content);
                     //跳转至touresult,需要路由地址
-                    window.location.href = "";
+                    window.location.href = "/tou/result/1";
                 }
                 else if (e.status === "fail") {
                     alert(e.content);
