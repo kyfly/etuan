@@ -185,6 +185,14 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td class="firstTd">信息工程学院</td>
+                <td class="secondTd">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info"></div>
+                    </div>
+                </td>
+            </tr>
             </tbody>
     </table>
 </div>
