@@ -6,7 +6,7 @@
     <meta name="keywords" content="杭州电子科技大学,杭电,团团一家,杭电报名招新,杭电抢票,杭电投票,社团服务">
     <meta name="description" content="团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css">
-    <title>第八届月牙弯朗诵比赛</title>
+    <title>最佳人气学院评选</title>
     <link rel="icon" href="/etuan_logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/etuan_logo.ico" type="image/x-icon">
     <style>
