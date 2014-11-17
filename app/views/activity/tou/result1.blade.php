@@ -39,7 +39,7 @@
     <div class="text-center">
         <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/KyMoIrVt4G5iYJogs2MC9FraipPeBgVouEd7WX8aOZu6p3Lt8V.jpeg@300w.jpeg" alt="杭电之声广播台LOGO">
     </div>
-    <h3><strong>第八届月牙弯朗诵比赛</strong></h3>
+    <h3><strong>最佳人气学院评选</strong></h3>
     <ul class="text-left">
         <li>投票时间：11月15日00:00~11月27日00:00</li>
         <li>每个微信号限投一次</li>
