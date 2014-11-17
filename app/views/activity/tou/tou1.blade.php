@@ -129,7 +129,7 @@
             <td><input class="checkbox" type="checkbox" value="16"/></td>
         </tr>
         <tr>
-            <td>16</td>
+            <td>17</td>
             <td>信息工程学院</td>
             <td><input class="checkbox" type="checkbox" value="17"/></td>
         </tr>
