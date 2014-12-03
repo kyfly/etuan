@@ -7,7 +7,7 @@
     <meta name="description" content="团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/xianjintoupiao.css">
-    <title></title>
+    <title>先进班级评选</title>
     <link rel="icon" href="/etuan_logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/etuan_logo.ico" type="image/x-icon">
     <style>
@@ -52,7 +52,7 @@
                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                    <a href="/vote/xianjin/introduce.html#1"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                    
-                   <p>卓越学院13184211班</p>
+                   <p>卓越学院<br>13184211班</p>
                    <div class="chosen">
                       <div class="mask"></div>
                       <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -66,7 +66,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#2"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -80,7 +80,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#3"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -94,7 +94,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#4"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -108,7 +108,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#5"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -122,7 +122,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#6"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -136,7 +136,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#7"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -150,7 +150,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#8"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -164,7 +164,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#9"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -178,7 +178,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#10"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -192,7 +192,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#11"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -206,7 +206,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#12"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -220,7 +220,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#13"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -234,7 +234,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#14"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -248,7 +248,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#15"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -262,7 +262,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#16"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -276,7 +276,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#17"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -290,7 +290,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#18"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -304,7 +304,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#19"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -318,7 +318,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#20"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -332,7 +332,7 @@
                     <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#21"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院13184211班</p>
+                    <p>卓越学院<br>13184211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
