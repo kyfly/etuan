@@ -117,6 +117,25 @@
             vertical-align: middle;
             color: #000000
         }
+		
+		.box7 {
+            padding: 18px;
+            background-color: #99ccff;
+        }
+
+        .box7 > .container > h3 {
+            color: #99ccff;
+            margin-bottom: 18px;
+        }
+		
+		.box7 > .container > p {
+            font-size: 18px;
+        }
+
+        .box7 > .container > a > img {
+            width: 100%;
+            margin-bottom: 18px;
+        }
     </style>
 </head>
 <body>
@@ -126,10 +145,17 @@
     </div>
 </div>
 
+<div class="box7">
+    <div class="container">
+    	<h3>班级</h3>
+    	<p id="class"></p>
+    	<h3>照片展示</h3>
+        <a id="big_pic" href=""><img id="img" src=""></a>
+    </div>
+</div>
+
 <div class="box2">
     <div class="container">
-        <h3>班级</h3>
-        <p id="class"></p>
         <h3>班级故事</h3>
         <p id="story" class="intro"></p>
     </div>
@@ -156,7 +182,7 @@
     </div>
 </div>
 
-<a href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
+<a href="/tou/2" target="_blank" style="text-decoration: none">
     <div class="box5 text-center">
         <h2>我要投票！<img src="/img/arrow.png"></h2>
     </div>
@@ -166,16 +192,23 @@
     <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
     &nbsp;提供技术支持</h4>
 </div>
-<script src="js/jquery.min.js"></script>
+<script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script>
-    $.getJSON('http://localhost/1.json', function(data){
+$(document).ready(function() {
+	var num = window.location.hash;
+	var num2 = num.substr(1,1);
+	
+    $.getJSON('/vote/xianjin/intro_source/' + num2 + '.json', function(data){
       $('#title').html(data.title);
 	  $('#class').html(data.class);
 	  $('#story').html(data.story);
 	  $('#atmosphere').html(data.atmosphere);
 	  $('#competition').html(data.competition);
 	  $('#other').html(data.other);
-	  
+	});
+	
+	$('#img').attr('src', '/vote/xianjin/intro_source/img/' + num2 + '.jpg');
+	$('#big_pic').attr('href', '/vote/xianjin/intro_source/img/' + num2 + '.jpg');
 });
 </script>
 

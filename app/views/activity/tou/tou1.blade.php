@@ -164,6 +164,12 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script>
+	var _activityId = 1;
+	var _type = "text";
+	var _total_item = 17; 
+	var _limit_choice = 3;
+</script>
 <script src="/js/touparticipator.js"></script>
 </body>
 </html>

@@ -5,14 +5,18 @@ body {
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
 .thumbnail {
+	padding: 0;
 	position: relative;
-	padding: 13px;
 	border-radius: 0;
 	transition: all 0.1s ease-in-out !important;
 }
-.thumbnail > h4, .thumbnail > p {
+.thumbnail > p {
 	text-align: center;
 	color: #666;
+	margin: 5px;
+}
+.logo_img {
+	margin: 15px 5px 5px 5px;
 }
 .backtop {
 	cursor: pointer;
@@ -38,7 +42,7 @@ body {
 	border: medium none;
 	z-index: 99;
 }
-.mask2 {
+.mask {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -53,6 +57,7 @@ body {
 .choosebtn{
 	position :relative;
 	z-index: 120;
+	border-radius: 0;
 }
 .chooseimg {
 	z-index: 90;
@@ -68,9 +73,12 @@ body {
 .viewintro {
 	position: absolute;
 	right: -2%;
-	top: -2%;
+	top: -4%;
 	width: 35%;
 	height: 35%;
+}
+.col-xs-6 {
+	padding: 0 12px;
 }
 
 @media screen and (min-width: 430px) and (max-width: 767px) {
@@ -84,5 +92,15 @@ body {
 .chooseimg {
 	top: 10%;
 	height: 80%;
+}
+}
+
+@media screen and (max-width: 600px) {
+.viewintro {
+	position: absolute;
+	right: -4%;
+	top: -4%;
+	width: 55%;
+	height: 55%;
 }
 }

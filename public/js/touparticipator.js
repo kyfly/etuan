@@ -9,47 +9,62 @@ $(document).ready(function () {
 	});
 
 	var flag = new Array();
-	var checkeditem = 0;
+	var _checked_item = 0;
 
-	for(var i = 0; i < 30;i++){
+	for(var i = 0; i < _total_item;i++){
 		flag[i] = 0;
 	}
 
-	$(".choosebtn").click(function () {
-		var idval = $(this).attr("id");
-		var num = idval.substr(6,2);
-		if (flag[num-1] == 0) {
-			flag[num-1] = 1;
-			$(this).parent(".thumbnail").css('border', '1px solid #a8d154');
-			$(this).prev(".chosen").css('display', 'block');
-			var x = document.getElementById(idval);
-			x.innerHTML = "点击取消选定";
-			checkeditem ++;
-			$('#current_choice').text(checkeditem);
-		} else {
-			flag[num-1] = 0;
-			$(this).parent(".thumbnail").css('border', '1px solid #ddd');
-			$(this).prev(".chosen").css('display', 'none');
-			var x = document.getElementById(idval);
-			x.innerHTML = "点击选定";
-			checkeditem --;
-			$('#current_choice').text(checkeditem);
-		}
-	});
+	if(_type == "pic"){
+		$(".choosebtn").click(function () {
+			var idval = $(this).attr("id");
+			var num = idval.substr(6,2);
+			if (flag[num-1] == 0) {
+				flag[num-1] = 1;
+				$(this).parent(".thumbnail").css('border', '1px solid #a8d154');
+				$(this).prev(".chosen").css('display', 'block');
+				var x = document.getElementById(idval);
+				x.innerHTML = "点击取消";
+				_checked_item ++;
+				$('#current_choice').text(_checked_item);
+			} else {
+				flag[num-1] = 0;
+				$(this).parent(".thumbnail").css('border', '1px solid #ddd');
+				$(this).prev(".chosen").css('display', 'none');
+				var x = document.getElementById(idval);
+				x.innerHTML = "点击选定";
+				_checked_item --;
+				$('#current_choice').text(_checked_item);
+			}
+		});
+	}else if (_type == "text"){
+		$("input.checkbox").click(function(){
+			_checked_item ++;
+			$('#current_choice').text(_checked_item);
+		});
+	}
 	
 	$("#submit").click(function()
     {   
-        if(checkeditem === 0){
+        if(_checked_item == 0){
             alert("你还没有做出自己的选择呢");
-        }else if(checkeditem > 3){
-            alert("当前所选已经超过三个");
+        }else if(_checked_item > _limit_choice){
+            alert("当前所选已经超过" + _limit_choice + "个");
         }else{
             var participatorInfo = {
                 choices:[]
             };
-            $('input.checkbox:checked').each(function(key,valu){
-                participatorInfo.choices[key] = $(this).val();
-            });
+			if(_type == "text"){
+				$('input.checkbox:checked').each(function(key,valu){
+					participatorInfo.choices[key] = $(this).val();
+				});
+			}else if(_type == "pic"){
+				for(var i = 0; i < _total_item;i++){
+					if(flag[i] == 1){
+						participatorInfo.choices.push(i+1);
+					}
+				}
+			}
             var sendJson = {
                 activityId:_activityId,
                 participatorInfo:JSON.stringify(participatorInfo)

@@ -208,6 +208,9 @@
 
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
+<script>
+	var _activityId = 1;
+</script>
 <script src="/js/touresult.js"></script>
 </body>
 </html>
