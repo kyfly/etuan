@@ -341,6 +341,20 @@
                 </div>
             </div>
             
+            <div class="col-xs-6 col-sm-4 col-md-3">
+                <div class="thumbnail" id="box22">
+                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <a href="/vote/xianjin/introduce.html#21"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
+                    
+                    <p>卓越学院<br>13184211班</p>
+                    <div class="chosen">
+                       <div class="mask"></div>
+                       <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
+                    </div>
+                    <button id="option22" class="btn btn-warning btn-block choosebtn">点击选定</button>
+                </div>
+            </div>
+            
             <div class="clearfix"></div>
           <div class="row">
                 <div class="col-xs-6 col-sm-3">
