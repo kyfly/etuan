@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{{$orgInfo->name}}} 社团介绍 - 团团一家 - 杭电社团服务平台 </title>
+    <link href="http://cdn.kyfly.net/lib/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script>
+        document.write('<h2>您的浏览器版本过低</h2><p>本网站不支持IE8及以下版本，请更换浏览器！</p><p>若已使用高版本浏览器，请关闭兼容模式。</p>');
+        document.execCommand("stop");
+    </script>
+    <![endif]-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?76a5edb5c9902d7c2e38f7a723060cff";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        body {
+            font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
+        }
+
+        .box1 {
+            padding: 15px;
+            background-color: #ff9933;
+        }
+
+        .box1 > .container {
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            height: 100%;
+            padding: 10px 30px;
+        }
+
+        .box1 > .container > p {
+            color: #ff9933;
+            display: inline;
+            line-height: 28px;
+            font-size: 28px;
+        }
+
+        .box2 {
+            padding: 15px;
+            background-color: #ffcc33;
+        }
+
+        .box2 > .container > h3 {
+            color: #ffcc33;
+        }
+
+        .box2 > .container > p {
+            text-indent: 2em;
+            font-size: 18px;
+        }
+
+        .box3 {
+            padding: 18px;
+            background-color: #eded00;
+        }
+
+        .box3 > .container > h3 {
+            color: #eded00;
+        }
+		
+		.box3 > .container > p {
+            font-size: 18px;
+        }
+
+        .box4 {
+            padding: 18px;
+            background-color: #99ccff;
+        }
+
+        .box4 > .container > h3 {
+            color: #99ccff;
+            margin-bottom: 18px;
+        }
+		
+		.box4 > .container > p {
+            font-size: 18px;
+        }
+
+        .box4 > .container > a > img {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+		
+		.box6 {
+            padding: 18px;
+            background-color: #ff6666;
+        }
+
+        .box6 > .container > h3 {
+            color: #ff6666;
+            margin-bottom: 18px;
+        }
+
+        .box6 > .container > p {
+            font-size: 18px;
+        }
+
+        .box5 {
+            background-color: #ffcc33;
+            padding: 25px 0;
+        }
+
+        .box5 > h2 {
+            display: inline;
+            vertical-align: middle;
+            color: #000000
+        }
+    </style>
+</head>
+<body>
+<div class="box1">
+    <div class="container" style="padding: 20px 10px">
+        <p id="title"></p>
+    </div>
+</div>
+
+<div class="box2">
+    <div class="container">
+        <h3>班级</h3>
+        <p id="class"></p>
+        <h3>班级故事</h3>
+        <p id="story" class="intro"></p>
+    </div>
+</div>
+
+<div class="box3">
+    <div class="container">
+        <h3>学风建设</h3>
+        <p id="atmosphere"></p>
+    </div>
+</div>
+
+<div class="box4">
+    <div class="container">
+        <h3>学科竞赛</h3>
+        <p id="competition"></p>
+    </div>
+</div>
+
+<div class="box6">
+    <div class="container">
+        <h3>其他活动、荣誉</h3>
+        <p id="other"></p>
+    </div>
+</div>
+
+<a href="{{{$regUrl}}}" target="_blank" style="text-decoration: none">
+    <div class="box5 text-center">
+        <h2>我要投票！<img src="/img/arrow.png"></h2>
+    </div>
+</a>
+
+<div class="box1 text-center">
+    <h4 style="color: #ffffff"><a href="http://www.etuan.org/"><img src="http://img.kyfly.net/common/logo/etuan-logo-word.png@40h.png" height="20px"></a>
+    &nbsp;提供技术支持</h4>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    $.getJSON('http://localhost/1.json', function(data){
+      $('#title').html(data.title);
+	  $('#class').html(data.class);
+	  $('#story').html(data.story);
+	  $('#atmosphere').html(data.atmosphere);
+	  $('#competition').html(data.competition);
+	  $('#other').html(data.other);
+	  
+});
+</script>
+
+</body>
+</html>
