@@ -37,14 +37,13 @@
 <body class="myft">
 <div class="text-center well well-sm">
         <div class="text-center">
-            <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" alt="">
+            <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/82WBiX0jpeVFrNcQ3wAFqzdrBeaoFCPYaPZJ1PA4q622EnWkCE.jpeg@300w.jpeg" alt="先锋总队LOGO">
         </div>
-        <h3><strong>*****投票</strong></h3>
+        <h3><strong>先进班级投票</strong></h3>
         <ul class="text-left">
             <li>投票时间：**月**日00:00~**月**日00:00</li>
             <li>每个微信号限投一次</li>
-            <li>最多选择****，否则无法提交</li>
-            <li>最终投票结果将在****公布</li>
+            <li>最多选择10票，否则无法提交</li>
         </ul>
     </div>
 
