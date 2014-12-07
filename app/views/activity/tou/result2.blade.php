@@ -39,7 +39,7 @@
         <div class="text-center">
             <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/82WBiX0jpeVFrNcQ3wAFqzdrBeaoFCPYaPZJ1PA4q622EnWkCE.jpeg@300w.jpeg" alt="先锋总队LOGO">
         </div>
-        <h3><strong>先进班级投票</strong></h3>
+        <h3><strong>先进班集体评选</strong></h3>
         <ul class="text-left">
             <li>投票时间：12月10号00：00 - 16号的00:00</li>
             <li>每个微信号限投一次</li>

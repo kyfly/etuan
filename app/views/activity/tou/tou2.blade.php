@@ -7,7 +7,7 @@
     <meta name="description" content="团团一家是杭电活动服务平台，这里有最新全的组织招新报名、最新的组织活动入口，还有令学校沸腾的抢票、投票活动！">
     <link rel="stylesheet" href="http://cdn.kyfly.net/lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/xianjintoupiao.css">
-    <title>先进班级评选</title>
+    <title>先进班集体评选</title>
     <link rel="icon" href="/etuan_logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/etuan_logo.ico" type="image/x-icon">
     <style>
@@ -37,7 +37,7 @@
         <div class="text-center">
             <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/82WBiX0jpeVFrNcQ3wAFqzdrBeaoFCPYaPZJ1PA4q622EnWkCE.jpeg@300w.jpeg" alt="先锋总队LOGO">
         </div>
-        <h3><strong>先进班级投票</strong></h3>
+        <h3><strong>先进班集体评选</strong></h3>
         <ul class="text-left">
             <li>投票时间：12月10号00：00 - 16号的00:00</li>
             <li>每个微信号限投一次</li>
@@ -343,7 +343,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box22">
                     <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/22.jpg" height="70px" width="70px">
-                    <a href="/vote/xianjin/introduce.html#21"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
+                    <a href="/vote/xianjin/introduce.html#22"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
                     <p>材环学院<br>12208811班</p>
                     <div class="chosen">
@@ -388,7 +388,7 @@
 <script>
 	var _activityId = 2;
 	var _type = "pic";
-	var _total_item = 21; 
+	var _total_item = 22; 
 	var _limit_choice = 10;
 </script>
 <script src="/js/touparticipator.js"></script>
