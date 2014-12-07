@@ -196,7 +196,7 @@
 <script>
 $(document).ready(function() {
 	var num = window.location.hash;
-	var num2 = num.substr(1,1);
+	var num2 = num.substr(1,2);
 	
     $.getJSON('/vote/xianjin/intro_source/' + num2 + '.json', function(data){
       $('#title').html(data.title);
