@@ -51,13 +51,13 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th class="firstTd">姓名</th>
+            <th class="firstTd">学院</th>
             <th class="secondTd">票数</th>
         </tr>
         </thead>
             <tbody>
             <tr>
-                <td class="firstTd">张三1</td>
+                <td class="firstTd">卓越学院13184211班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -65,7 +65,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">李四2</td>
+                <td class="firstTd">外国语学院12113711班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -73,7 +73,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五3</td>
+                <td class="firstTd">经济学院12150812班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -81,7 +81,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五4</td>
+                <td class="firstTd">人文与法学院12124011班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -89,7 +89,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五5</td>
+                <td class="firstTd">会计学院12140611班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -97,7 +97,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五6</td>
+                <td class="firstTd">数艺学院12220211班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -105,7 +105,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五7</td>
+                <td class="firstTd">管理学院12031211班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -113,7 +113,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五8</td>
+                <td class="firstTd">管理学院12031311班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -121,7 +121,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五9</td>
+                <td class="firstTd">通信学院12089511班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -129,7 +129,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五10</td>
+                <td class="firstTd">机械学院12010113班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -137,7 +137,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五11</td>
+                <td class="firstTd">电子学院12047515班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -145,7 +145,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五12</td>
+                <td class="firstTd">生仪学院12192912班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -153,7 +153,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五13</td>
+                <td class="firstTd">计算机学院12052311班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -161,7 +161,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五14</td>
+                <td class="firstTd">自动化学院12062814班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -169,7 +169,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五15</td>
+                <td class="firstTd">通信学院12080211班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -177,7 +177,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五16</td>
+                <td class="firstTd">理学院12073111班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -185,7 +185,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五17</td>
+                <td class="firstTd">软件工程学院12108412班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -193,7 +193,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五18</td>
+                <td class="firstTd">卓越学院12184111班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -201,7 +201,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五19</td>
+                <td class="firstTd">机械学院11010112班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -209,7 +209,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五20</td>
+                <td class="firstTd">电子学院12047513班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -217,7 +217,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五21</td>
+                <td class="firstTd">计算机学院12052312班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
@@ -225,7 +225,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="firstTd">王五22</td>
+                <td class="firstTd">材环学院12208811班</td>
                 <td class="secondTd">
                     <div class="progress">
                         <div class="progress-bar progress-bar-info"></div>
