@@ -39,7 +39,13 @@ $(document).ready(function () {
 		});
 	}else if (_type == "text"){
 		$("input.checkbox").click(function(){
-			_checked_item ++;
+			if (flag[num-1] == 0) {
+				flag[num-1] = 1;
+				_checked_item ++;
+			}else {
+				flag[num-1] = 0;
+				_checked_item --;
+			}
 			$('#current_choice').text(_checked_item);
 		});
 	}
