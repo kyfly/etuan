@@ -37,11 +37,11 @@
         <div class="text-center">
             <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" alt="">
         </div>
-        <h3><strong>*****投票</strong></h3>
+        <h3><strong>先进班级投票</strong></h3>
         <ul class="text-left">
             <li>投票时间：**月**日00:00~**月**日00:00</li>
             <li>每个微信号限投一次</li>
-            <li>最多选择****，否则无法提交</li>
+            <li>最多选择10票，否则无法提交</li>
             <li>最终投票结果将在****公布</li>
         </ul>
     </div>
@@ -49,7 +49,7 @@
     <div id="main" class="container">
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box1">
-                   <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                   <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/1.png" height="70px" width="70px">
                    <a href="/vote/xianjin/introduce.html#1"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                    
                    <p>卓越学院<br>13184211班</p>
@@ -63,10 +63,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box2">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/2.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#2"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>外国语学院<br>12113711班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -77,10 +77,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box3">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/3.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#3"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>经济学院<br>12150812班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -91,10 +91,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box4">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/4.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#4"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>人文与法学院<br>12124011班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -105,10 +105,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box5">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/5.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#5"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>会计学院<br>12140611班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -119,10 +119,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box6">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/6.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#6"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>数艺学院<br>12220211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -133,10 +133,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box7">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/7.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#7"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>管理学院<br>12031211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -147,10 +147,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box8">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/8.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#8"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>管理学院<br>12031311班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -161,10 +161,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box9">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/9.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#9"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>通信学院<br>12089511班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -175,10 +175,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box10">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/10.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#10"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>机械学院<br>12010113班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -189,10 +189,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box11">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/11.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#11"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>电子学院<br>12047515班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -203,10 +203,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box12">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/12.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#12"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>生仪学院<br>12192912班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -217,10 +217,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box13">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/13.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#13"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>计算机学院<br>12052311班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -231,10 +231,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box14">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/14.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#14"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>自动化学院<br>12062814班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -245,10 +245,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box15">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/15.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#15"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>通信学院<br>12080211班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -259,10 +259,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box16">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/16.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#16"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>理学院<br>12073111班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -273,10 +273,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box17">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/17.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#17"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>软件工程学院<br>12108412班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -287,10 +287,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box18">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/18.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#18"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>卓越学院<br>12184111班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -301,10 +301,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box19">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/19.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#19"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>机械学院<br>11010112班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -315,10 +315,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box20">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/20.png" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#20"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>电子学院<br>12047513班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -329,10 +329,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box21">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/21.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#21"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>计算机学院<br>12052312班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
@@ -343,10 +343,10 @@
             
             <div class="col-xs-6 col-sm-4 col-md-3">
                 <div class="thumbnail" id="box22">
-                    <img class="logo_img" src="http://img.kyfly.net/common/logo/hdubadge.png@200w.png" height="70px" width="70px">
+                    <img class="logo_img" src="http://img.kyfly.net/etuan/vote/2/logo/22.jpg" height="70px" width="70px">
                     <a href="/vote/xianjin/introduce.html#21"><img class="viewintro" alt="查看简介" src="/img/toupiao/intro.png"></a>
                     
-                    <p>卓越学院<br>13184211班</p>
+                    <p>材环学院<br>12208811班</p>
                     <div class="chosen">
                        <div class="mask"></div>
                        <img class="chooseimg" alt="已选择" src="/img/toupiao/choose.png">
