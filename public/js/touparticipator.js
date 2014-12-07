@@ -61,17 +61,13 @@ $(document).ready(function () {
             var participatorInfo = {
                 choices:[]
             };
-			if(_type == "text"){
-				$('input.checkbox:checked').each(function(key,valu){
-					participatorInfo.choices[key] = $(this).val();
-				});
-			}else if(_type == "pic"){
-				for(var i = 0; i < _total_item;i++){
-					if(flag[i] == 1){
-						participatorInfo.choices.push(i+1);
-					}
+			
+			for(var i = 0; i < _total_item;i++){
+				if(flag[i] == 1){
+					participatorInfo.choices.push(i+1);
 				}
 			}
+			
             var sendJson = {
                 activityId:_activityId,
                 participatorInfo:JSON.stringify(participatorInfo)
