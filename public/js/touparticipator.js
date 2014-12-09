@@ -32,13 +32,13 @@ $(document).ready(function () {
 
 	if(_type === "pic"){
 		$(".choosebtn").click(function () {
-			if(_checked_item >= _limit_choice) {
-            	alert("当前所选已经超过" + _limit_choice + "个");
-            	return;
-        	}
 			var idval = $(this).attr("id");
 			var num = idval.substr(6,2);
 			if (flag[num - 1] === 0) {
+                if(_checked_item >= _limit_choice) {
+                    alert("当前所选已经超过" + _limit_choice + "个");
+                    return;
+                }
 				flag[num - 1] = 1;
 				$(this).parent(".thumbnail").css('border', '1px solid #a8d154');
 				$(this).prev(".chosen").css('display', 'block');
@@ -58,12 +58,12 @@ $(document).ready(function () {
 	}
 	else if (_type === "text"){
 		$("input.checkbox").click(function(){
-			if(_checked_item >= _limit_choice) {
-            	alert("当前所选已经超过" + _limit_choice + "个");
-            	return;
-        	}
 			var num2 = $(this).attr("value");
 			if (flag[num2 - 1] === 0) {
+                if(_checked_item >= _limit_choice) {
+                    alert("当前所选已经超过" + _limit_choice + "个");
+                    return;
+                }
 				flag[num2 - 1] = 1;
 				_checked_item ++;
 			}
