@@ -58,7 +58,7 @@ $(document).ready(function () {
 	}
 	else if (_type === "text"){
 		$("input.checkbox").click(function(){
-			if(_checked_item > _limit_choice) {
+			if(_checked_item >= _limit_choice) {
             	alert("当前所选已经超过" + _limit_choice + "个");
             	return;
         	}
@@ -80,7 +80,7 @@ $(document).ready(function () {
         if(_checked_item === 0){
             alert("你还没有做出自己的选择呢");
         }
-        else if(_checked_item > _limit_choice){
+        else if(_checked_item >= _limit_choice){
             alert("当前所选已经超过" + _limit_choice + "个");
         }
         else{
