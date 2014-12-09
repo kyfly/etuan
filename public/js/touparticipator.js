@@ -97,7 +97,16 @@ $(document).ready(function () {
             });
         }   
     });
-	
+
+    $.ajax({
+        type: 'GET',
+        url: '/oauth/checksub',
+        success: function (data) {
+            if (data !== '1')
+                window.location.href = "http://mp.weixin.qq.com/s?__biz=MjM5MDMzODkzOQ==&mid=202239029&idx=1&sn=b1cb7de21413986193491c008b0d5435#rd";
+        }
+    });
+
 	$.ajax({
         type:"GET",
         url:"/vote/check-already-par?activityId="+_activityId,
