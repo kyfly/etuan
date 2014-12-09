@@ -102,12 +102,7 @@ $(document).ready(function () {
         type:"GET",
         url:"/vote/check-already-par?activityId="+_activityId,
         success:function (e) {
-            if (e === "0"){
-            }
-            else if (e === "1"){
-                window.location.href = "/tou/result/"+_activityId;
-            }
-            else {
+            if (e !== "0") {
                 window.location.href = "/tou/result/"+_activityId;
             }
         },
