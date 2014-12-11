@@ -164,8 +164,13 @@
             $(this).css('border', '1px solid #ddd');
         });
 
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            return ua.match(/MicroMessenger/i) === 'micromessenger';
+        }
+
         $(document).ready(function () {
-            if ($.getUrlParam('from') == 'e-tuan')
+            if ($.getUrlParam('from') === 'e-tuan' && isWeiXin())
             {
                 $('#nav').hide();
             }

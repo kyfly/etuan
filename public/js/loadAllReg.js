@@ -24,6 +24,11 @@ Array.prototype.indexOf = function (val) {
     }
 })(jQuery);
 
+function isWeiXin() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    return ua.match(/MicroMessenger/i) === 'micromessenger';
+}
+
 $(document).ready(function () {
     $('#mainHeight').css('min-height', $(window).outerHeight(true) - $('#nav').outerHeight(true) - $('#footer').outerHeight(true) + "px");
     $('.borderDiv').mouseover(function () {
@@ -32,7 +37,7 @@ $(document).ready(function () {
     $('.borderDiv').mouseout(function () {
         $(this).css('border', '1px solid #ddd');
     });
-    if ($.getUrlParam('from') == 'e-tuan')
+    if ($.getUrlParam('from') === 'e-tuan' && isWeiXin())
     {
         $('#nav').hide();
     }
