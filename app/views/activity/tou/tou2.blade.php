@@ -38,7 +38,7 @@
             <img  class="img-thumbnail" style="width: 150px; height: 150px" src="http://img.kyfly.net/etuan/shetuan/logo/82WBiX0jpeVFrNcQ3wAFqzdrBeaoFCPYaPZJ1PA4q622EnWkCE.jpeg@300w.jpeg" alt="先锋总队LOGO">
         </div>
         <h3><strong>杭州电子科技大学<br>先进班集体评选投票</strong></h3>
-        <ul class="text-left">
+        <ul class="text-left col-md-offset-3">
             <li>投票时间：12月10日00:00-12月16日00:00</li>
             <li>每个微信号及学号限投一次</li>
             <li>最多选择10票，否则无法提交</li>
