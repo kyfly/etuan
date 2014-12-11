@@ -25,7 +25,7 @@ Array.prototype.indexOf = function (val) {
 
 function isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();
-    return ua.match(/MicroMessenger/i) === 'micromessenger';
+    return ua.match(/MicroMessenger/i) == 'micromessenger';
 }
 
 $(document).ready(function () {
