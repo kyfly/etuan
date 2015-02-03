@@ -21,6 +21,11 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     });
 
     Route::controller('/getticket','grabController');
+});
+//需要微信登录但不要求绑定学号的路由
+Route::group(array('before' => 'wxauth'), function () {
+    //微信登录后，进行学号和姓名的绑定。
+    Route::resource("weixin/stuinfo", "Stu_infoController");
 
     Route::get('tou/{id}', function($id) {
         return View::make('activity.tou.tou'.$id);
@@ -29,11 +34,6 @@ Route::group(array('before' => 'wxauth|stuinfo'), function () {
     Route::get('tou/result/{id}', function($id) {
         return View::make('activity.tou.result'.$id);
     });
-});
-//需要微信登录但不要求绑定学号的路由
-Route::group(array('before' => 'wxauth'), function () {
-    //微信登录后，进行学号和姓名的绑定。
-    Route::resource("weixin/stuinfo", "Stu_infoController");
 });
 //无需登录验证的控制器
 Route::group(array(),function(){
