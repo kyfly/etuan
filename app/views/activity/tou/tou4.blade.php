@@ -13,6 +13,34 @@
         .myft {
             font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
         }
+		.modalBtn {
+			border: none;
+			background-color: inherit;
+			color: #428BCA;
+		}
+		.modalBtn:hover {
+			text-decoration: underline;
+		}
+		.schoolName {
+			height: 60px;
+			line-height: 60px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.modal-footer {
+			clear: both;
+		}
+		.description {
+			margin-top: 15px;
+			font-size: 15px;
+		}
+		.description > p {
+			text-indent: 2em;
+		}
+		#big_pic > img {
+			width: 100%;
+			margin-top:15px;
+		}
     </style>
     <!--[if lt IE 9]>
     <script>
@@ -76,6 +104,27 @@
     </h4>
 </div>
 
+<!--模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">学校介绍</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-xs-3"><img id="sch-logo" src="" width="60px" height="60px"></div>
+        <div class="schoolName col-xs-9"><p id="title"></p></div>
+        <div class="col-xs-12 description"><p id="description" class="intro"></p></div>
+        <div id="big_pic"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="http://cdn.kyfly.net/lib/js/jquery.min.js"></script>
 <script src="http://cdn.kyfly.net/lib/js/bootstrap.min.js"></script>
 <script>
@@ -84,7 +133,7 @@
 	var _total_item = 88; 
 	var _limit_choice = 10;
 </script>
-<script src="/js/AlmaMater.js"></script>
+<script src="/js/vote4.js"></script>
 <script src="/js/touparticipator.js"></script>
 </body>
 </html>
