@@ -16,6 +16,12 @@
         .firstTd {
         	width: 40%;
         }
+		@media screen and (min-width: 768px){
+			.myft > .text-center {
+				padding: 35px 0;
+			}
+			
+		}
     </style>
     <!--[if lt IE 9]>
     <script>
@@ -36,19 +42,20 @@
 
 <body class="myft">
 <div class="text-center well well-sm">
-    <div class="text-center">
-        <img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@300w.png" alt="学校LOGO">
-    </div>
-    <h3><strong>“最美母校”图文网络评比</strong></h3>
-    <ul class="text-left">
+  <div class="container">
+    <div class="col-md-3 col-md-offset-2"><img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@300w.png" alt="学校LOGO"></div>
+    <div class="col-md-4">
+      <h3><strong>“最美母校”图文网络评比</strong></h3>
+      <ul class="text-left">
         <li>投票时间：2月8日00：00 - 3月26日00：00</li>
         <li>每个微信号限投一次</li>
         <li>最多选择10所学校，否则无法提交</li>
-        <li>点击学校名称查看图文</li>
-    </ul>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <table class="table table-striped">
         <thead>
         <tr>

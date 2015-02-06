@@ -61,7 +61,8 @@ $(document).ready(function () {
 			var num2 = $(this).attr("value");
 			if (flag[num2 - 1] === 0) {
                 if(_checked_item >= _limit_choice) {
-                    alert("当前所选已经超过" + _limit_choice + "个");
+                    alert("当前所选已经达到" + _limit_choice + "个");
+                    $(this).attr("checked",false);
                     return;
                 }
 				flag[num2 - 1] = 1;

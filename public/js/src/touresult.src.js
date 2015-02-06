@@ -5,7 +5,7 @@ $(document).ready(function(){
 			if(pj[i-1].vote_count > max){
 				max = pj[i-1].vote_count;
 			}
-		};
+		}
 		$("div.progress-bar").each(function(key,val){
 			$(this).text(pj[key].vote_count);
 			$(this).css("width", ( 10 + pj[key].vote_count / max * 90 )+ "%");
