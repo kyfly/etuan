@@ -44,8 +44,12 @@
 		@media screen and (min-width: 768px){
 			.myft > .text-center {
 				padding: 35px 0;
-			}
-			
+			}	
+		}
+		@media screen and (max-width: 768px){
+			.myft > .text-center {
+				margin: 0 -30px;
+			}	
 		}
     </style>
     <!--[if lt IE 9]>
@@ -72,7 +76,7 @@
     <div class="col-md-4">
       <h3><strong>“最美母校”图文网络评比</strong></h3>
       <ul class="text-left">
-        <li>投票时间：2月8日00：00 - 3月26日00：00</li>
+        <li>投票时间：2月8日00:00 - 3月26日00:00</li>
         <li>每个微信号限投一次</li>
         <li>最多选择10所学校，否则无法提交</li>
         <li>点击学校名称查看图文</li>
