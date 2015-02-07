@@ -47,8 +47,11 @@
 			}	
 		}
 		@media screen and (max-width: 768px){
-			.myft > .text-center {
-				margin: 0 -30px;
+			.myft > .text-center > .container {
+				padding: 0;
+			}
+			.myft > .text-center > .container > .col-md-4 {
+				padding: 0;
 			}	
 		}
     </style>
@@ -74,7 +77,7 @@
   <div class="container">
     <div class="col-md-3 col-md-offset-2"><img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@300w.png" alt="学校LOGO"></div>
     <div class="col-md-4">
-      <h3><strong>“最美母校”图文网络评比</strong></h3>
+      <h3><strong>“最美母校”图文网络评比</strong></h3><br>
       <ul class="text-left">
         <li>投票时间：2月8日00:00 - 3月26日00:00</li>
         <li>每个微信号限投一次</li>
@@ -87,6 +90,12 @@
 
 <div class="container">
     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>&nbsp;学校</th>
+            </tr>
+        </thead>
         <tbody id="school-list">
         </tbody>
     </table>
