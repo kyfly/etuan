@@ -14,7 +14,7 @@
             font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
         }
         .firstTd {
-        	width: 50%;
+        	width: 55%;
         }
 		.modalBtn {
 			border: none;
@@ -80,7 +80,7 @@
   <div class="container">
     <div class="col-md-3 col-md-offset-2"><img  class="img-circle" style="width: 150px; height: 150px" src="http://img.kyfly.net/common/logo/hdubadge.png@300w.png" alt="学校LOGO"></div>
     <div class="col-md-4">
-      <h3><strong>“最美母校”图文网络评比</strong></h3><br>
+      <h3><strong>“最美母校”图文网络评比<br>投票结果</strong></h3><br>
       <ul class="text-left">        
         <li>本次活动由杭电招生办主办</li>
         <li>投票时间：2月8日00:00 - 3月26日00:00</li>
@@ -103,6 +103,16 @@
             <tbody id="school-list">
             </tbody>
     </table>
+</div>
+
+<div class="well">
+    <div class="container">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <a href="/tou.html"><button class="btn btn-lg btn-primary btn-block">我要投票！</button></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
